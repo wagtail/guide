@@ -2,6 +2,8 @@
 
 from django.db import migrations, models
 import django.db.models.deletion
+import wagtail.blocks
+import wagtail.fields
 
 
 class Migration(migrations.Migration):
@@ -14,9 +16,10 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='HomePage',
+            name='ContentPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
+                ('body', wagtail.fields.StreamField([('content', wagtail.blocks.RichTextBlock(help_text='Rich-text block', required=True))], use_json_field=True)),
             ],
             options={
                 'abstract': False,

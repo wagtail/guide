@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+   {% for block in page.body %}
+        <p>{{ block.value|richtext }}</p>
+   {% endfor %}
+{% endblock %}
