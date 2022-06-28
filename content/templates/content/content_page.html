@@ -5,6 +5,6 @@
 
 {% block content %}
    {% for block in page.body %}
-        <p>{{ block.value|richtext }}</p>
+        {% include_block block %}
    {% endfor %}
 {% endblock %}

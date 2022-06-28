@@ -1,13 +1,11 @@
-from django.db import models
 from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import StreamField
-from wagtail.core import blocks
-
+from content.blocks import ContentBlock
 class ContentPage(Page):
     subpage_types = ['content.ContentPage']
     body = StreamField([
-        ('content', blocks.RichTextBlock(required=True, help_text='Rich-text block'))
+        ('content', ContentBlock())
     ], block_counts={
         'content': {
             'min_num': 1,
