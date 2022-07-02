@@ -2,6 +2,7 @@ from wagtail.models import Page
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import StreamField
 from content.blocks import ContentBlock
+
 class ContentPage(Page):
     subpage_types = ['content.ContentPage']
     body = StreamField([
