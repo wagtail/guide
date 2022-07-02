@@ -1,0 +1,6 @@
+-r base.txt
+
+black
+django-extensions
+flake8
+isort
