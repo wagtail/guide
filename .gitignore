@@ -1,4 +1,7 @@
 env/
 venv/
+node_modules/
 db.sqlite3
 *.pyc
+
+apps/frontend/static/
