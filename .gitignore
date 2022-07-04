@@ -5,3 +5,4 @@ db.sqlite3
 *.pyc
 
 apps/frontend/static/
+apps/guide/settings/local.py

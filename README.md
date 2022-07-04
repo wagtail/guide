@@ -64,3 +64,16 @@ This project is a part of Google Summer of Code 2022 under the organization [**W
 - Start the server
 
       python manage.py runserver
+
+
+# Gitpod
+
+Launch a ready-to-code Wagtail Guide development environment with a single click.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/wagtail/guide)
+
+Steps:
+
+1. Click the ``Open in Gitpod`` button.
+2. Relax: a development environment with an active Wagtail Guide site will be created for you.
+3. Login at `/admin/` with username `admin` and password `changeme`
