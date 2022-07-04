@@ -23,9 +23,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+    "apps.frontend",
     "apps.home",
     "apps.content",
     "apps.search",
+    "manifest_loader",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -63,9 +65,6 @@ ROOT_URLCONF = "apps.guide.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [
-            BASE_DIR / "apps" / "guide" / "templates",
-        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -160,3 +159,7 @@ WAGTAILSEARCH_BACKENDS = {
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
+
+MANIFEST_LOADER = {
+    "output_dir": BASE_DIR / "apps" / "frontend" / "static",
+}
