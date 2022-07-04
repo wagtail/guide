@@ -1,7 +1,17 @@
+run:
+	python manage.py runserver
+
+test:
+	flake8 apps
+	isort --check-only --diff apps
+	black --check --diff apps
+	python manage.py test
+
 format:
-	black --target-version py37 .
-	isort .
+	isort apps
+	black apps
 
 lint:
-	black --target-version py37 --check --diff .
-	isort --check-only --diff
+	flake8 apps
+	isort --check-only --diff apps
+	black --check --diff apps
