@@ -8,15 +8,17 @@ Wagtail guide brings you:
 - Reference 
 - Background information
 
+
 ## Google Summer of Code
 
 This project is a part of Google Summer of Code 2022 under the organization [**Wagtail**](https://wagtail.org/). Find more details about the project [here](https://summerofcode.withgoogle.com/programs/2022/projects/7nMw2hTq).
+
 
 ## Development
 
 ### Frontend
 
-- Setup the appropriate version of node.
+- Set up the appropriate version of node.
 
       nvm use
 
@@ -42,7 +44,7 @@ This project is a part of Google Summer of Code 2022 under the organization [**W
 
       python -V
 
-- Setup virtual environment
+- Set up virtual environment
 
     ``` bash
     python -m venv env
