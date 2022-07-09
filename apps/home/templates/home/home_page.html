@@ -1,11 +1,121 @@
 {% extends "base.html" %}
-{% load static %}
-
+{% load manifest wagtailimages_tags %}
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h1>{{ page.title }}</h1>
-    <p><a href="#" class="btn btn-primary">Action</a></p>
+  <div class="container-lg pt-4">
+    <div class="row pb-5">
+      <div class="col-4 d-flex align-items-center">
+        <div class="h3 mx-1">
+          <a href="#" style="text-decoration:none; color: black;">
+            <img src="{% manifest 'images/wagtail_logo.png' %}" width="45px">
+            <span style="font-weight:600 ;">wagtail</span>
+          </a>
+          <span> editor's guide</span>
+        </div>
+      </div>
+
+      <div class="col d-flex align-items-center">
+        <input type="text" placeholder="Search" style="width:300px; height:50px; border-radius:10px; padding: 10px;">
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-lg-9 display-1 mx-5" style="font-weight:600;">
+        Using Wagtail: an Editor's guide
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-lg-8 mx-5">
+        <p class="fs-5">
+          This section of the documentation is written for the users of a Wagtail-powered
+          site. That is, the content editors, moderators and admnistrators who will be
+          running things on a day-to-day basis.
+        </p>
+      </div>
+    </div>
+
+    <div class="row mt-5 mx-5">
+      <div class="col mx-2">
+        <a href="#" style="text-decoration:none; color: black;" class="d-flex">
+          <div>
+            {% image page.tutorial_image width-60 %}
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="h3 doc-links" style="font-weight:600 ;">Tutorials</div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p>This tutorial covers setting up a brand new Wagtail project</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+
+      <div class="col mx-2">
+        <a href="#" style="text-decoration:none; color: black;" class="d-flex">
+          <div>
+            {% image page.how_to_image width-60 %}
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="h3 doc-links" style="font-weight:600 ;">How-to</div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p>Wagtail development setup in literally just one click!</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+    <div class="row mt-5 mx-5">
+      <div class="col mx-2">
+        <a href="#" style="text-decoration:none; color: black;" class="d-flex">
+          <div>
+            {% image page.explanation_image width-60 %}
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="h3 doc-links" style="font-weight:600 ;">Explanation</div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p>Explore the features with example page types and models</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+
+      <div class="col mx-2">
+        <a href="#" style="text-decoration:none; color: black;" class="d-flex">
+          <div>
+            {% image page.reference_image width-60 %}
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="h3 doc-links" style="font-weight:600 ;">Reference</div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <p>Explore the features with example page types and models</p>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+
+
   </div>
 {% endblock content %}
