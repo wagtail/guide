@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from monkey_patches import *  # noqa
 import os
 import sys
 

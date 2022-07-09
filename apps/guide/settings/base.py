@@ -27,6 +27,8 @@ INSTALLED_APPS = [
     "apps.core",
     "apps.search",
     "manifest_loader",
+    "wagtail.locales",
+    "wagtail.contrib.simple_translation",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.embeds",
@@ -49,6 +51,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django.middleware.locale.LocaleMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -67,6 +70,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
+                "django.template.context_processors.i18n",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
@@ -112,15 +116,25 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "en-latest"
 
 TIME_ZONE = "UTC"
 
 USE_I18N = True
+WAGTAIL_I18N_ENABLED = True
 
 USE_L10N = True
 
 USE_TZ = True
+
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+    ("en-latest", "English latest"),
+    ("en-3.1.x", "English 3.0.x"),
+    ("nl-latest", "Dutch latest"),
+    ("nl-3.1.x", "Dutch 3.0.x"),
+    ("hi-latest", "Hindi latest"),
+    ("hi-3.1.x", "Hindi 3.0.x"),
+]
 
 
 # Static files (CSS, JavaScript, Images)

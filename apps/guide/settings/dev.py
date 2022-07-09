@@ -17,6 +17,17 @@ INSTALLED_APPS += [  # noqa
     "django_extensions",
 ]
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+}
+
+
 try:
     from .local import *  # noqa
 except ImportError:
