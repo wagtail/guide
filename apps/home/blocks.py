@@ -2,6 +2,11 @@ from django.utils.translation import gettext as _
 from wagtail.core import blocks
 
 
+class SectionStructValue(blocks.StructValue):
+    def icon(self):
+        return f"svg/{self.get('section')}.svg"
+
+
 class SectionBlock(blocks.StructBlock):
     section = blocks.ChoiceBlock(
         choices=[
@@ -17,6 +22,7 @@ class SectionBlock(blocks.StructBlock):
 
     class Meta:
         template = "home/section_block.html"
+        value_class = SectionStructValue
 
 
 class SectionGridBlock(blocks.ListBlock):
@@ -27,3 +33,4 @@ class SectionGridBlock(blocks.ListBlock):
     class Meta:
         label = _("Section grid")
         icon = "list-ul"
+        template = "home/section_grid_block.html"

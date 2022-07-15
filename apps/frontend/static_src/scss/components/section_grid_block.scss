@@ -1,0 +1,13 @@
+.section-grid:hover {
+    .section-grid__heading {
+        color: $primary;
+    }
+
+    .svg_icon {
+        .svg_icon__animated_path {
+            transform: rotate(8deg) scale(0.8, 0.8);
+            transform-origin: 50% 50%;
+            transition: transform 0.1s;
+        }
+    }
+}
