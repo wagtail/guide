@@ -2,8 +2,7 @@ from django.test import TestCase
 from wagtail.models import Page
 from wagtail.models.sites import Site
 
-from apps.content.models import ContentPage
-from apps.home.models import HomePage
+from apps.core.models import ContentPage, HomePage
 
 
 class TestPageResponseStatusCode(TestCase):
@@ -27,8 +26,8 @@ class TestPageResponseStatusCode(TestCase):
             title="Content Page",
             slug="content-page",
             body=[
-                {"type": "content", "value": "some test content"},
-                {"type": "content", "value": "some more test content"},
+                {"type": "text", "value": "some test content"},
+                {"type": "text", "value": "some more test content"},
             ],
         )
 
@@ -51,8 +50,8 @@ class TestPageResponseStatusCode(TestCase):
     def test_contentpage_template_used(self):
         self.assertTemplateUsed(self.contentPageRes, template_name="base.html", count=1)
         self.assertTemplateUsed(
-            self.contentPageRes, template_name="content/content_page.html", count=1
+            self.contentPageRes, template_name="core/content_page.html", count=1
         )
         self.assertTemplateUsed(
-            self.contentPageRes, template_name="content/content_block.html", count=2
+            self.contentPageRes, template_name="core/blocks/text.html", count=2
         )

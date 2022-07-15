@@ -1,10 +1,16 @@
 from django.utils.translation import gettext as _
 from wagtail.core import blocks
+from wagtail.core.blocks import RichTextBlock
+
+
+class TextBlock(RichTextBlock):
+    class Meta:
+        template = "core/blocks/text.html"
 
 
 class SectionStructValue(blocks.StructValue):
     def icon(self):
-        return f"svg/{self.get('section')}.svg"
+        return f"core/svg/{self.get('section')}.svg"
 
 
 class SectionBlock(blocks.StructBlock):
@@ -21,7 +27,7 @@ class SectionBlock(blocks.StructBlock):
     text = blocks.TextBlock(label=_("Text"))
 
     class Meta:
-        template = "home/section_block.html"
+        template = "core/blocks/section.html"
         value_class = SectionStructValue
 
 
@@ -33,4 +39,8 @@ class SectionGridBlock(blocks.ListBlock):
     class Meta:
         label = _("Section grid")
         icon = "list-ul"
-        template = "home/section_grid_block.html"
+        template = "core/blocks/section_grid.html"
+
+
+CONTENT_BLOCKS = [("text", TextBlock())]
+HOME_BLOCKS = [("section_grid", SectionGridBlock())]
