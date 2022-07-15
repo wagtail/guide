@@ -1,11 +1,53 @@
 {% extends "base.html" %}
-{% load static %}
-
+{% load manifest wagtailimages_tags wagtailcore_tags %}
 {% block body_class %}template-homepage{% endblock %}
 
 {% block content %}
-  <div class="container">
-    <h1>{{ page.title }}</h1>
-    <p><a href="#" class="btn btn-primary">Action</a></p>
+  <div class="container-lg pt-4">
+    <div class="row pb-5">
+      <div class="col-9">
+        <div class="h3 m-0 d-flex align-items-center">
+          <a href="#" class=" d-flex align-items-center me-2 text-decoration-none text-black">
+            <img src="{% manifest 'images/bird.svg' %}">
+            <div class="fw-bold">wagtail</div>
+          </a>
+          <div>editor's guide</div>
+          <button class="bg-transparent border-0 border-start border-1 border-dark ps-4 ms-4">
+            <img src="{% manifest 'images/search.svg' %}" >
+          </button>
+        </div>
+      </div>
+
+      <div class="col-2 d-flex align-items-center justify-content-end">
+        <div class="dropdown">
+          <button class="btn dropdown-toggle border border-1 border-dark rounded-3" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            English
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="container-lg px-md-5">
+
+    <div class="row mt-5">
+      <div class="col-lg-9 display-1 fw-bold">
+        Using Wagtail: an Editor's guide
+      </div>
+    </div>
+
+    <div class="row mt-5">
+      <div class="col-lg-8">
+        <p class="fs-5">
+          This section of the documentation is written for the users of a Wagtail-powered
+          site. That is, the content editors, moderators and administrators who will be
+          running things on a day-to-day basis.
+        </p>
+      </div>
+    </div>
+
+    {% include_block page.sections %}
+
   </div>
 {% endblock content %}
