@@ -24,8 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 
 INSTALLED_APPS = [
     "apps.frontend",
-    "apps.home",
-    "apps.content",
+    "apps.core",
     "apps.search",
     "manifest_loader",
     "wagtail.contrib.forms",

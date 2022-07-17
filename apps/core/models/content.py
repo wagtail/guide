@@ -2,13 +2,14 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.models import Page
 
-from .blocks import ContentBlock
+from ..blocks import CONTENT_BLOCKS
 
 
 class ContentPage(Page):
-    subpage_types = ["content.ContentPage"]
+    subpage_types = ["core.ContentPage"]
+
     body = StreamField(
-        [("content", ContentBlock())],
+        CONTENT_BLOCKS,
         block_counts={
             "content": {
                 "min_num": 1,
