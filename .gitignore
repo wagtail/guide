@@ -6,3 +6,6 @@ db.sqlite3
 
 apps/frontend/static/
 apps/guide/settings/local.py
+
+/media/
+/static/

@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     "apps.frontend",
     "apps.core",
     "apps.search",
+    "apps.custom_user",
+    "apps.custom_media",
     "manifest_loader",
     "wagtail.locales",
     "wagtail.contrib.simple_translation",
@@ -176,3 +178,9 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 MANIFEST_LOADER = {
     "output_dir": BASE_DIR / "apps" / "frontend" / "static",
 }
+
+AUTH_USER_MODEL = "custom_user.User"
+WAGTAILIMAGES_IMAGE_MODEL = "custom_media.CustomImage"
+WAGTAILDOCS_DOCUMENT_MODEL = "custom_media.CustomDocument"
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
