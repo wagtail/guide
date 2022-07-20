@@ -1,6 +1,9 @@
 run:
 	python manage.py runserver
 
+buildfixtures:
+	python manage.py buildfixtures
+
 test:
 	flake8 apps
 	isort --check-only --diff apps

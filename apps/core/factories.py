@@ -29,10 +29,24 @@ class HomePageFactory(wagtail_factories.PageFactory):
             home = HomePage(title="Home", slug="home-x")
             root.add_child(instance=home)
             site = Site.objects.first()
-            old_home = site.root_page
-            site.root_page = home
-            site.save()
-            old_home.delete()
+            if site:
+                old_home = site.root_page
+                site.root_page = home
+                site.save()
+                old_home.delete()
+            else:
+                if settings.DEBUG:
+                    hostname = "127.0.0.1"
+                    port = 8000
+                else:
+                    hostname = settings.ALLOWED_HOSTS[0]
+                    port = 443
+                Site.objects.create(
+                    hostname=hostname,
+                    is_default_site=True,
+                    root_page=home,
+                    port=port,
+                )
         return home
 
 

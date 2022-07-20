@@ -59,6 +59,10 @@ This project is a part of Google Summer of Code 2022 under the organization [**W
 
       python manage.py migrate
 
+- Build fixtures (sample data)
+
+      python manage.py buildfixtures
+
 - Create a super-user
 
       python manage.py createsuperuser
