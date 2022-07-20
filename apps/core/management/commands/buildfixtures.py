@@ -1,5 +1,4 @@
 import json
-import logging
 import uuid
 
 from django.conf import settings
@@ -10,8 +9,6 @@ from wagtail.images import get_image_model
 from wagtail.models import Collection, Locale, Page
 
 from apps.core.factories import ContentPageFactory, HomePageFactory
-
-logger = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):
@@ -85,6 +82,7 @@ class Command(BaseCommand):
                                     "section": slugify(page.title),
                                     "title": page.title,
                                     "text": "text",
+                                    "page": page.id,
                                 },
                                 "id": str(uuid.uuid4()),
                             }

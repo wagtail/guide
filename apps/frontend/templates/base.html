@@ -27,10 +27,11 @@
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
 
-        {% block content %}{% endblock %}
+        {% include "components/header.html" %}
 
-        {# TODO: refactor into the header language chooser #}
-        {% include "components/language_selector.html" %}
+        <div class="container-lg px-md-5">
+          {% block content %}{% endblock %}
+        </div>
 
         {# Global javascript #}
         <script src="{% manifest 'main.js' %}"></script>

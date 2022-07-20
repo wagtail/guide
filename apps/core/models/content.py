@@ -10,11 +10,6 @@ class ContentPage(Page):
 
     body = StreamField(
         CONTENT_BLOCKS,
-        block_counts={
-            "content": {
-                "min_num": 1,
-            }
-        },
         use_json_field=True,
     )
 
