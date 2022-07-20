@@ -1,0 +1,20 @@
+{% load i18n manifest %}
+
+<div class="container-lg pt-4">
+  <div class="row pb-5">
+    <div class="col-9">
+      <div class="h3 m-0 d-flex align-items-center">
+        {% get_current_language as LANGUAGE_CODE %}
+        <a href="/{{ LANGUAGE_CODE }}/" class=" d-flex align-items-center me-2 text-decoration-none text-black">
+          <img src="{% manifest 'images/bird.svg' %}">
+          <span class="fw-bold me-2">wagtail</span>
+          <span>editor's guide</span>
+        </a>
+        <a href="{% url 'search' %}" class="bg-transparent border-0 border-start border-1 border-dark ps-4 ms-4">
+          <img src="{% manifest 'images/search.svg' %}" >
+        </a>
+      </div>
+    </div>
+    {% include "components/language_selector.html" %}
+  </div>
+</div>

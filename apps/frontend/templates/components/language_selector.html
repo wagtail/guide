@@ -1,15 +1,24 @@
 {% load static wagtailcore_tags i18n %}
 
-<div class="container">
-  {# Demo of what localisation does to content #}
-  <h2>{% trans 'Language' %} / {% trans 'version' %}</h2>
-  <p>{% now "DATETIME_FORMAT" %}</p>
-  <ul>
-  {% for language_code, language_name in LANGUAGES %}
-    {% get_language_info for language_code as lang %}
-    {% language language_code %}
-      <li><a href="{% pageurl page.localized %}" rel="alternate" hreflang="{{ language_code }}">{{ lang.name_local }} {{ page.localized.locale.language_code|slice:'3:' }} {% if page == page.localized %}*{% endif %}</a></li>
-    {% endlanguage %}
-  {% endfor %}
-  </ul>
+<div class="col-2 d-flex align-items-center justify-content-end">
+  <div class="btn-group">
+    <button class="btn dropdown-toggle border border-1 border-dark rounded-3" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {% get_language_info for LANGUAGE_CODE as lang %}
+      {{ lang.name_translated }} {% if page %}{{ page.localized.locale.language_code|slice:'3:' }}{% endif %}
+    </button>
+    {% if page %}
+      {% spaceless %}
+        <ul class="dropdown-menu rounded-3">
+        {% for translation in page.get_translations.live %}
+          {% get_language_info for translation.locale.language_code as lang %}
+            <li>
+              <a href="{% pageurl translation %}" rel="alternate" hreflang="{{ language_code }}" class="dropdown-item">
+                  {{ lang.name_local }} {{ translation.locale.language_code|slice:'3:' }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endspaceless %}
+    {% endif %}
+  </div>
 </div>

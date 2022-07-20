@@ -25,6 +25,7 @@ class SectionBlock(blocks.StructBlock):
     )
     title = blocks.CharBlock(label=_("Title"))
     text = blocks.TextBlock(label=_("Text"))
+    page = blocks.PageChooserBlock(label=_("Page"))
 
     class Meta:
         template = "core/blocks/section.html"

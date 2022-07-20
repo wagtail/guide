@@ -1,5 +1,8 @@
+{% load wagtailcore_tags %}
+
+{% if self.page %}
 <div class="col mx-2">
-    <a href="#" class="d-flex text-decoration-none text-black section-grid">
+    <a href="{% pageurl self.page %}" class="d-flex text-decoration-none text-black section-grid">
         <div>
           {% include self.icon %}
         </div>
@@ -15,3 +18,4 @@
         </div>
     </a>
 </div>
+{% endif %}

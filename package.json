@@ -39,6 +39,7 @@
         "not ie 11"
     ],
     "dependencies": {
+        "@popperjs/core": "^2.11.5",
         "bootstrap": "^5.1.3"
     }
 }
