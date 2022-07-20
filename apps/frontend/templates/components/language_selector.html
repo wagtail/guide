@@ -1,0 +1,15 @@
+{% load static wagtailcore_tags i18n %}
+
+<div class="container">
+  {# Demo of what localisation does to content #}
+  <h2>{% trans 'Language' %} / {% trans 'version' %}</h2>
+  <p>{% now "DATETIME_FORMAT" %}</p>
+  <ul>
+  {% for language_code, language_name in LANGUAGES %}
+    {% get_language_info for language_code as lang %}
+    {% language language_code %}
+      <li><a href="{% pageurl page.localized %}" rel="alternate" hreflang="{{ language_code }}">{{ lang.name_local }} {{ page.localized.locale.language_code|slice:'3:' }} {% if page == page.localized %}*{% endif %}</a></li>
+    {% endlanguage %}
+  {% endfor %}
+  </ul>
+</div>
