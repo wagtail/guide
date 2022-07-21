@@ -95,7 +95,7 @@ class Command(BaseCommand):
             self.home.save_revision().publish()
 
     def handle(self, *args, **options):
-        self.stdout.write("Delete existing data.")
+        self.stdout.write("Deleting existing data.")
         self.cleanup_existing_data()
 
         self.stdout.write("Starting to build fixtures.")

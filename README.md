@@ -16,60 +16,37 @@ This project is a part of Google Summer of Code 2022 under the organization [**W
 
 ## Development
 
+We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/Wagtail.
+
 ### Frontend
 
-- Set up the appropriate version of node.
+Use `Node V16.*`. Run `make frontend`.
 
-      nvm use
+Often used commands for more control:  
 
-    Check the Node version number. It should be `V16.*`
+    nvm use
+    node -v
+    # V16.*
+    yarn
+    yarn start
+    yarn build
 
-      node -v
-
-- Install all the dependencies
-
-      yarn
-
-- Develop the frontend, run a file watcher
-
-      yarn start
-
-    Or, create a production build
-
-      yarn build
 
 ### Backend
 
-- Verify that your python version is `3.9.*`
+Use `Python 3.9.*` (virtual environment). Run `make backend` and `make run`.
 
-      python -V
+Often used commands for more control:
 
-- Set up virtual environment
-
-    ``` bash
+    python -V
+    # Python 3.9.*
     python -m venv env
     source env/bin/activate
-    ```
-
-- Install the required dependencies
-
-      python -m pip install requirements.txt
-
-- Apply migrations
-
-      python manage.py migrate
-
-- Build fixtures (sample data)
-
-      python manage.py buildfixtures
-
-- Create a super-user
-
-      python manage.py createsuperuser
-      
-- Start the server
-
-      python manage.py runserver
+    python -m pip install requirements.txt
+    python manage.py migrate
+    python manage.py createsuperuser
+    python manage.py buildfixtures
+    python manage.py runserver
 
 
 # Gitpod
