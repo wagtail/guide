@@ -1,6 +1,3 @@
-run:
-	python manage.py runserver
-
 buildfixtures:
 	python manage.py buildfixtures
 
@@ -18,3 +15,15 @@ lint:
 	flake8 apps
 	isort --check-only --diff apps
 	black --check --diff apps
+
+frontend:
+	yarn
+	yarn build
+
+backend:
+	python -m pip install requirements.txt
+	python manage.py migrate
+	python manage.py createsuperuser
+
+run:
+	python manage.py runserver
