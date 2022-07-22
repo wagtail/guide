@@ -8,25 +8,16 @@ The Wagtail guide will ultimately include:
 - Reference materials
 - Walkthroughs and visual learning materials
 
-# Document contents
+# Table of Contents
 
 - [Installation](#installation)
+- [Gitpod](#gitpod)
 - [Contributing](#contributing)
 - [Other Notes](#other-notes)
 
 # Installation
 
-## Development
-
-We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/Wagtail.
-
-- [Venv](#setup-with-venv)
-- [Gitpod](#setup-with-gitpod)
-
-
-## Setup with Venv
-
-You can run Wagtail Guide locally on your machine using Virtualenv.
+We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/Wagtail in these instructions. We recommend you develop Wagtail Guide locally on your machine using venv.
 
 #### Dependencies
 - Python 3.9
@@ -34,7 +25,7 @@ You can run Wagtail Guide locally on your machine using Virtualenv.
 - Node 16.*
 - [Yarn](https://yarnpkg.com/)
 
-### Installation
+### Setting up Wagtail guide in a virtual environment
 
 With [PIP](https://github.com/pypa/pip) installed, run:
 
@@ -64,9 +55,9 @@ If everything worked, [http://127.0.0.1:8000](http://127.0.0.1:8000) should show
 
 You can access the administrative area at [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and log in using the credentials you created during the backend setup. 
 
-## Setup with Gitpod
+## Gitpod
 
-Launch a ready-to-code Wagtail Guide development environment with a single click.
+With Gitpod you can deploy a ready-to-code Wagtail Guide development environment with a single click to evaluate the code in another environment.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/wagtail/guide)
 
@@ -79,11 +70,27 @@ Steps:
 
 # Contributing
 
-If you're a python or Django developer, fork the repo and join us. You'll find answers to many common new contributor questions in our [contributing guidelines](https://github.com/wagtail/bakerydemo/blob/master/contributing.md).
+If you're a Python or Django developer, fork the repo and join us. You'll find answers to many common new contributor questions in our [contributing guidelines](https://github.com/wagtail/bakerydemo/blob/master/contributing.md).
 
 # Other Notes
 
 ## Google Summer of Code
 
-This project is a part of Google Summer of Code 2022 under the organization [**Wagtail**](https://wagtail.org/). Find more details about the project [here](https://summerofcode.withgoogle.com/programs/2022/projects/7nMw2hTq).
+This project is one of three [Wagtail](https://wagtail.org/) projects being sponsored by Google as a part of [Google Summer of Code 2022](https://summerofcode.withgoogle.com/). The team for this project includes:
 
+### Contributor
+
+- [Hitansh Shah](https://github.com/Hitansh-Shah)
+
+### Mentors
+
+- [Phil Dexter](https://github.com/phildexter)
+- [Coen van der Kamp](https://github.com/allcaps)
+- [Meagen Voss](https://github.com/vossisboss)
+
+
+You can learn more about our Google Summer of Code projects in this [blog](https://wagtail.org/blog/wagtail-cms-projects-for-google-summer-of-code-2022/) or on our [wiki page]().
+
+## Additional documentation
+
+Documentation for Wagtail can be found at [docs.wagtail.org](https://docs.wagtail.org).
