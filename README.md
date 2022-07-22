@@ -55,9 +55,9 @@ If everything worked, [http://127.0.0.1:8000](http://127.0.0.1:8000) should show
 
 You can access the administrative area at [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and log in using the credentials you created during the backend setup. 
 
-## Gitpod
+# Gitpod
 
-With Gitpod you can deploy a ready-to-code Wagtail Guide development environment with a single click to evaluate the code in another environment.
+With Gitpod you can deploy a ready-to-code Wagtail Guide development environment with a single click to evaluate the code.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/wagtail/guide)
 
@@ -89,8 +89,4 @@ This project is one of three [Wagtail](https://wagtail.org/) projects being spon
 - [Meagen Voss](https://github.com/vossisboss)
 
 
-You can learn more about our Google Summer of Code projects in this [blog](https://wagtail.org/blog/wagtail-cms-projects-for-google-summer-of-code-2022/) or on our [wiki page]().
-
-## Additional documentation
-
-Documentation for Wagtail can be found at [docs.wagtail.org](https://docs.wagtail.org).
+You can learn more about our Google Summer of Code projects in this [blog](https://wagtail.org/blog/wagtail-cms-projects-for-google-summer-of-code-2022/) or on our [wiki page](https://github.com/wagtail/wagtail/wiki/Google-Summer-of-Code-2022).
