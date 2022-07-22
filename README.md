@@ -20,34 +20,32 @@ The Wagtail guide will ultimately include:
 
 We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/Wagtail.
 
-- [Virtualenv](#setup-with-virtualenv)
+- [Venv](#setup-with-venv)
 - [Gitpod](#setup-with-gitpod)
 
 
-## Setup with Virtualenv
+## Setup with Venv
 
 You can run Wagtail Guide locally on your machine using Virtualenv.
 
 #### Dependencies
 - Python 3.9
 - Git
-- [Virtualenv](https://virtualenv.pypa.io/en/latest/installation.html)
-- [VirtualenvWrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html) (optional)
+- Node 16.*
+- [Yarn](https://yarnpkg.com/)
 
 ### Installation
 
-With [PIP](https://github.com/pypa/pip) and [virtualenvwrapper](https://virtualenvwrapper.readthedocs.io/en/latest/)
-installed, run:
+With [PIP](https://github.com/pypa/pip) installed, run:
 
-    mkvirtualenv guide
-    python --version
+    python -V
 
-Confirm that the output is showing version Python 3.9. If not, you may have multiple versions of python installed on your system and will need to specify the appropriate version when creating the virtualenv:
+Confirm that the output is showing version Python 3.9. If not, you may have multiple versions of python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
 
-    deactivate
-    rmvirtualenv guide
-    mkvirtualenv guide --python=python3.9
-    python --version
+With the Python 3.9 output confirmed, run:
+
+    python -m venv env
+    source env/bin/activate
 
 Now we're ready to set up the guide project:
 
@@ -56,6 +54,7 @@ Now we're ready to set up the guide project:
     cd guide
     make backend
     make frontend
+    make buildfixtures
 
 Once the backend and frontend have been set up, you can run the development server with:
 
