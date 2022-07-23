@@ -6,6 +6,7 @@ from ..blocks import CONTENT_BLOCKS
 
 
 class ContentPage(Page):
+    show_in_menus_default = True
     subpage_types = ["core.ContentPage"]
 
     body = StreamField(

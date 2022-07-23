@@ -10,7 +10,6 @@ from wagtail.core.models import Locale, Page, Site
 from apps.core.models import ContentPage, HomePage
 
 fake = Faker()
-Faker.seed(0)
 
 
 class LocaleFactory(factory.django.DjangoModelFactory):

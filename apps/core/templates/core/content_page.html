@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 
-{% load static %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags core_tags %}
 
 {% block content %}
+<div class="d-none d-md-block col-md-4 col-lg-2">
+  {% navigation %}
+</div>
+
+<main class="col-md-8 col-lg-6">
   <h1>{{ page.title }}</h1>
   {% for block in page.body %}
     {% include_block block %}
   {% endfor %}
+</main>
+
 {% endblock %}

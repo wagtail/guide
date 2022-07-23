@@ -1,0 +1,18 @@
+{% load wagtailcore_tags %}
+
+<nav>
+{% for item, info in annotated_list %}
+    {% if info.open %}
+        <ul class="navigation">
+          <li class="navigation__item">
+    {% else %}
+          </li>
+          <li class="navigation__item">
+    {% endif %}
+    <a href="{% pageurl item %}" class="navigation__link{% if info.level == 0 %} navigation__link--large{% endif %}{% if item.id == current_page.id %} active{% endif %}">{{ item }}</a>
+    {% for close in info.close %}
+        </li>
+      </ul>
+    {% endfor %}
+{% endfor %}
+</nav>

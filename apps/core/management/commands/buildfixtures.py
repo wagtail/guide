@@ -4,11 +4,14 @@ import uuid
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.template.defaultfilters import slugify
+from faker import Faker
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Collection, Locale, Page
 
 from apps.core.factories import ContentPageFactory, HomePageFactory
+
+fake = Faker()
 
 
 class Command(BaseCommand):
@@ -39,9 +42,28 @@ class Command(BaseCommand):
         for title, subpage_titles in [
             [
                 "Tutorial",
-                ["Introduction", "Getting started", "Finding your way around"],
+                [
+                    "Getting started",
+                    "Dashboard",
+                    "Images",
+                    "Documents",
+                    "Page explorer",
+                    "Page editor",
+                    "Search",
+                ],
             ],
-            ["How-to", ["Add a user", "Assign permissions" "Tag content"]],
+            [
+                "How-to",
+                [
+                    "Add a user",
+                    "Assign permissions",
+                    "Create rich text",
+                    "Work with collections",
+                    "Tag content",
+                    "Add a focus area to an image",
+                    "Order pages",
+                ],
+            ],
             [
                 "Explanation",
                 [
@@ -53,8 +75,9 @@ class Command(BaseCommand):
             [
                 "Reference",
                 [
-                    "Dashboard",
-                    "Page editor",
+                    "Glossary",
+                    "Rich text shortcuts",
+                    "Groups and permissions",
                     "Workflows",
                 ],
             ],
@@ -70,7 +93,6 @@ class Command(BaseCommand):
                     title=subpage_title,
                     slug=slugify(subpage_title),
                 )
-
             self.home.sections = json.dumps(
                 [
                     {
