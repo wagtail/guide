@@ -21,7 +21,7 @@ frontend:
 	yarn build
 
 backend:
-	python -m pip install requirements.txt
+	python -m pip install -r requirements.txt
 	python manage.py migrate
 	python manage.py createsuperuser
 
