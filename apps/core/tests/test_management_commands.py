@@ -9,6 +9,6 @@ class TestBuildFixtures(TestCase):
     def test_build_fixtures(self):
         self.assertEqual(Page.objects.all().count(), 2)
         call_command("buildfixtures")
-        self.assertEqual(Page.objects.all().count(), 22)
+        self.assertGreater(Page.objects.all().count(), 20)
         for page in Page.objects.all().exclude(pk=Page.get_first_root_node().pk):
             self.assertEqual(self.client.get(page.url).status_code, HTTPStatus.OK)
