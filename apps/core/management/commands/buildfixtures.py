@@ -45,10 +45,9 @@ class Command(BaseCommand):
                 [
                     "Getting started",
                     "Dashboard",
+                    "Page",
                     "Images",
                     "Documents",
-                    "Page explorer",
-                    "Page editor",
                     "Search",
                 ],
             ],
@@ -93,28 +92,66 @@ class Command(BaseCommand):
                     title=subpage_title,
                     slug=slugify(subpage_title),
                 )
-            self.home.sections = json.dumps(
-                [
-                    {
-                        "type": "section_grid",
-                        "value": [
-                            {
-                                "type": "item",
-                                "value": {
-                                    "section": slugify(page.title),
-                                    "title": page.title,
-                                    "text": "text",
-                                    "page": page.id,
-                                },
-                                "id": str(uuid.uuid4()),
-                            }
-                            for page in self.home.get_children()
-                        ],
-                        "id": "c990ba5e-645b-4bd9-89e0-1185ef22acb9",
-                    }
-                ]
-            )
-            self.home.save_revision().publish()
+
+        tutorial, how_to, explanation, reference = self.home.get_children()
+        self.home.sections = json.dumps(
+            [
+                {
+                    "type": "section_grid",
+                    "value": [
+                        {
+                            "type": "item",
+                            "value": {
+                                "section": "tutorial",
+                                "title": "Tutorial",
+                                "text": "Our tutorials will help you learn and master "
+                                "the different ways of creating and managing "
+                                "content in Wagtail. It’s the best place to "
+                                "get started.",
+                                "page": tutorial.id,
+                            },
+                            "id": str(uuid.uuid4()),
+                        },
+                        {
+                            "type": "item",
+                            "value": {
+                                "section": "how-to",
+                                "title": "How-to",
+                                "text": "Our how-to guides explain the simplest ways "
+                                "to achieve common tasks.",
+                                "page": how_to.id,
+                            },
+                            "id": str(uuid.uuid4()),
+                        },
+                        {
+                            "type": "item",
+                            "value": {
+                                "section": "explanation",
+                                "title": "Explanation",
+                                "text": "Wagtail has strong opinions about CMS best "
+                                "practices. This section describes why Wagtail "
+                                "works how it does from a user’s perspective.",
+                                "page": explanation.id,
+                            },
+                            "id": str(uuid.uuid4()),
+                        },
+                        {
+                            "type": "item",
+                            "value": {
+                                "section": "reference",
+                                "title": "Reference",
+                                "text": "Our reference material gets to the point, "
+                                "giving the key information at a glance.",
+                                "page": reference.id,
+                            },
+                            "id": str(uuid.uuid4()),
+                        },
+                    ],
+                    "id": "c990ba5e-645b-4bd9-89e0-1185ef22acb9",
+                }
+            ]
+        )
+        self.home.save_revision().publish()
 
     def handle(self, *args, **options):
         self.stdout.write("Deleting existing data.")

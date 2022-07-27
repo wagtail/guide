@@ -10,7 +10,7 @@
     @extend .nav-link;
     @extend .small;
     &:hover {
-      background-color: darken(#edeaf3, 5);
+      background-color: darken($body-bg, 5);
     }
     &--large {
       @extend .mb-1;

@@ -29,7 +29,7 @@ class HomePageFactory(wagtail_factories.PageFactory):
         home = HomePage.objects.first()
         if not home:
             root = Page.get_first_root_node()
-            home = HomePage(title="Using Wagtail: an Editor's guide", slug="home-x")
+            home = HomePage(title="Wagtail user guide", slug="home-x")
             root.add_child(instance=home)
             site = Site.objects.first()
             if site:
