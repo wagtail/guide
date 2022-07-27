@@ -1,0 +1,15 @@
+.section-link {
+  display: none;
+  text-decoration: none;
+  margin-left: 0.25em;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  &:hover .section-link {
+    display: inline;
+  }
+}

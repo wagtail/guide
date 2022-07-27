@@ -1,5 +1,8 @@
 import { Dropdown } from 'bootstrap';
+import { initSectionLink } from "./section-link";
 import debounce from 'lodash.debounce';
+
+initSectionLink();
 
 const searchInput = document.querySelector('[data-search-input]')
 const searchIconButton = document.querySelector('[data-search-icon-button]')

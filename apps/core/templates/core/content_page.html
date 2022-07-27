@@ -9,6 +9,14 @@
 
 <main class="col-md-8 col-lg-7">
   <h1>{{ page.title }}</h1>
+
+  {% if page.table_of_contents %}
+  <div class="table_of_contents">
+    <h2 class="small fw-bold">On this page</h2>
+    {{ page.table_of_contents|richtext }}
+  </div>
+  {% endif %}
+
   {% for block in page.body %}
     {% include_block block %}
   {% endfor %}

@@ -59,6 +59,9 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",  # Must be before `django.contrib.staticfiles`
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
+    # `apps.richtext` must come after Wagtail apps,
+    # to load the richtext features last.
+    "apps.richtext",
 ]
 
 MIDDLEWARE = [
