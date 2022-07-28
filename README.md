@@ -1,57 +1,65 @@
 # Guide
 
-A website to teach Wagtail CMS to content editors, moderators and administrators.
+Guide is a website to help content editors, moderators, administrators, and other users learn how to user the Wagtail content management system (CMS).
 
-Wagtail guide brings you:
-- Tutorials, 
-- How-to, 
-- Reference 
-- Background information
+The Wagtail guide will ultimately include:
+- Tutorials 
+- How-to articles
+- Reference materials
+- Walkthroughs and visual learning materials
 
+You can learn more about the documentation system [here](https://documentation.divio.com/).
 
-## Google Summer of Code
+# Table of Contents
 
-This project is a part of Google Summer of Code 2022 under the organization [**Wagtail**](https://wagtail.org/). Find more details about the project [here](https://summerofcode.withgoogle.com/programs/2022/projects/7nMw2hTq).
+- [Installation](#installation)
+- [Gitpod](#gitpod)
+- [Contributing](#contributing)
+- [Other Notes](#other-notes)
 
+# Installation
 
-## Development
+We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/Wagtail in these instructions. We recommend you develop Wagtail Guide locally on your machine using venv.
 
-We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/Wagtail.
+#### Dependencies
+- Python 3.9
+- Git
+- Node 16.*
+- [Yarn](https://yarnpkg.com/)
 
-### Frontend
+### Setting up Wagtail guide in a virtual environment
 
-Use `Node V16.*`. Run `make frontend`.
-
-Often used commands for more control:  
-
-    nvm use
-    node -v
-    # V16.*
-    yarn
-    yarn start
-    yarn build
-
-
-### Backend
-
-Use `Python 3.9.*` (virtual environment). Run `make backend` and `make run`.
-
-Often used commands for more control:
+Run:
 
     python -V
-    # Python 3.9.*
+
+Confirm that the output is showing version Python 3.9. If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
+
+With the Python 3.9 output confirmed, run:
+
     python -m venv env
     source env/bin/activate
-    python -m pip install requirements.txt
-    python manage.py migrate
-    python manage.py createsuperuser
-    python manage.py buildfixtures
-    python manage.py runserver
 
+Now we're ready to set up the guide project:
+
+    cd ~/dev [or your preferred dev directory]
+    git clone https://github.com/wagtail/guide.git
+    cd guide
+    make backend
+    make frontend
+    make buildfixtures
+
+Once the backend and frontend have been set up, you can run the development server with:
+
+    make run
+
+If everything worked, [http://127.0.0.1:8000](http://127.0.0.1:8000) should show you a welcome page.
+
+You can access the administrative area at [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and log in using the credentials you created during the backend setup. 
 
 # Gitpod
 
-Launch a ready-to-code Wagtail Guide development environment with a single click.
+With Gitpod you can deploy a ready-to-code Wagtail Guide development environment with a single click to evaluate the code.
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/wagtail/guide)
 
@@ -60,3 +68,27 @@ Steps:
 1. Click the ``Open in Gitpod`` button.
 2. Relax: a development environment with an active Wagtail Guide site will be created for you.
 3. Login at `/admin/` with username `admin` and password `changeme`
+
+
+# Contributing
+
+If you're a Python or Django developer, fork the repo and join us. You'll find answers to many common new contributor questions in our [contributing guidelines](https://docs.wagtail.org/en/stable/contributing/index.html).
+
+# Other Notes
+
+## Google Summer of Code
+
+This project is one of three [Wagtail](https://wagtail.org/) projects being sponsored by Google as a part of [Google Summer of Code 2022](https://summerofcode.withgoogle.com/). The team for this project includes:
+
+### Contributor
+
+- [Hitansh Shah](https://github.com/Hitansh-Shah)
+
+### Mentors
+
+- [Phil Dexter](https://github.com/phildexter)
+- [Coen van der Kamp](https://github.com/allcaps)
+- [Meagen Voss](https://github.com/vossisboss)
+
+
+You can learn more about our Google Summer of Code projects in this [blog](https://wagtail.org/blog/wagtail-cms-projects-for-google-summer-of-code-2022/) or on our [wiki page](https://github.com/wagtail/wagtail/wiki/Google-Summer-of-Code-2022).
