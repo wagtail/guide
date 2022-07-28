@@ -72,7 +72,8 @@ Steps:
 
 # Contributing
 
-git st
+If you're a Python or Django developer, fork the repo and join us. You'll find answers to many common new contributor questions in our [contributing guidelines](https://docs.wagtail.org/en/stable/contributing/index.html).
+
 # Other Notes
 
 ## Google Summer of Code
