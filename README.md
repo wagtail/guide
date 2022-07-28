@@ -8,6 +8,8 @@ The Wagtail guide will ultimately include:
 - Reference materials
 - Walkthroughs and visual learning materials
 
+You can learn more about the documentation system [here](https://documentation.divio.com/).
+
 # Table of Contents
 
 - [Installation](#installation)
@@ -27,7 +29,7 @@ We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/W
 
 ### Setting up Wagtail guide in a virtual environment
 
-With [PIP](https://github.com/pypa/pip) installed, run:
+Run:
 
     python -V
 
@@ -70,7 +72,7 @@ Steps:
 
 # Contributing
 
-If you're a Python or Django developer, fork the repo and join us. You'll find answers to many common new contributor questions in our [contributing guidelines](https://github.com/wagtail/bakerydemo/blob/master/contributing.md).
+If you're a Python or Django developer, fork the repo and join us. You'll find answers to many common new contributor questions in our [contributing guidelines](https://docs.wagtail.org/en/stable/contributing/index.html).
 
 # Other Notes
 
