@@ -8,6 +8,7 @@ The Wagtail guide will ultimately include:
 - Reference materials
 - Walkthroughs and visual learning materials
 
+<<<<<<< HEAD
 You can learn more about the documentation system [here](https://documentation.divio.com/).
 
 # Table of Contents
@@ -51,6 +52,49 @@ Now we're ready to set up the guide project:
 
 Once the backend and frontend have been set up, you can run the development server with:
 
+=======
+# Table of Contents
+
+- [Installation](#installation)
+- [Gitpod](#gitpod)
+- [Contributing](#contributing)
+- [Other Notes](#other-notes)
+
+# Installation
+
+We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/Wagtail in these instructions. We recommend you develop Wagtail Guide locally on your machine using venv.
+
+#### Dependencies
+- Python 3.9
+- Git
+- Node 16.*
+- [Yarn](https://yarnpkg.com/)
+
+### Setting up Wagtail guide in a virtual environment
+
+With [PIP](https://github.com/pypa/pip) installed, run:
+
+    python -V
+
+Confirm that the output is showing version Python 3.9. If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
+
+With the Python 3.9 output confirmed, run:
+
+    python -m venv env
+    source env/bin/activate
+
+Now we're ready to set up the guide project:
+
+    cd ~/dev [or your preferred dev directory]
+    git clone https://github.com/wagtail/guide.git
+    cd guide
+    make backend
+    make frontend
+    make buildfixtures
+
+Once the backend and frontend have been set up, you can run the development server with:
+
+>>>>>>> 83f9f64d945a4af252bf313af6366310149c46cc
     make run
 
 If everything worked, [http://127.0.0.1:8000](http://127.0.0.1:8000) should show you a welcome page.
@@ -72,7 +116,11 @@ Steps:
 
 # Contributing
 
+<<<<<<< HEAD
 If you're a Python or Django developer, fork the repo and join us. You'll find answers to many common new contributor questions in our [contributing guidelines](https://docs.wagtail.org/en/stable/contributing/index.html).
+=======
+If you're a Python or Django developer, fork the repo and join us. You'll find answers to many common new contributor questions in our [contributing guidelines](https://github.com/wagtail/bakerydemo/blob/master/contributing.md).
+>>>>>>> 83f9f64d945a4af252bf313af6366310149c46cc
 
 # Other Notes
 
