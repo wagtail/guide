@@ -57,7 +57,7 @@ If everything worked, [http://127.0.0.1:8000](http://127.0.0.1:8000) should show
 
 You can access the administrative area at [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and log in using the credentials you created during the backend setup. 
 
-# Gitpod
+## Setup with Gitpod
 
 With Gitpod you can deploy a ready-to-code Wagtail Guide development environment with a single click to evaluate the code.
 
