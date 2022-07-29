@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # `apps.richtext` must come after Wagtail apps,
+    # to load the richtext features last.
+    "apps.richtext",
 ]
 
 MIDDLEWARE = [
