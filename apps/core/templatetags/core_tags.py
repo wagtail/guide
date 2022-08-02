@@ -20,3 +20,7 @@ def navigation(context):
         "current_page": context.get("page"),
         "annotated_list": Page.get_annotated_list_qs(pages),
     }
+
+@register.filter
+def canonical_url(value, arg):
+    return value.replace(arg, 'en-latest')
