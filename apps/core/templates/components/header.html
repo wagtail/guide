@@ -18,7 +18,7 @@
             <div class="modal-content rounded-3 fs-6">
               <form action="{% url 'search' %}" method="get">
                 <div class="modal-body p-4 d-flex align-items-center justify-content-center">
-                  <input type="text" name="query" placeholder="Search..." class="border border-1 border-dark bg-transparent form-control form-control-lg rounded-start w-75 ps-3">
+                  <input type="text" name="query" id="search_input" placeholder="Search..." class="border border-1 border-dark bg-transparent form-control form-control-lg rounded-start w-75 ps-3">
                   <button type="submit" class="w-10 btn-lg ps-3 border-0 rounded-end bg-dark text-white">
                     <div class="d-flex align-items-center">
                       Search
@@ -27,6 +27,12 @@
                   </button>
                 </div>
               </form>
+              <div>
+                <div id="results-count" class="m-3 mx-5">
+                </div>
+                <div id="results">
+                </div>
+              </div>
             </div>
           </div>
         </div>

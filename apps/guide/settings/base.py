@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "apps.custom_user",
     "apps.custom_media",
     "manifest_loader",
+    "rest_framework",
     "wagtail.locales",
     "wagtail.contrib.simple_translation",
     "wagtail.contrib.forms",
