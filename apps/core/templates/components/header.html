@@ -10,9 +10,26 @@
           <span class="fw-bold me-2">wagtail</span>
           <span>User guide</span>
         </a>
-        <a href="{% url 'search' %}" class="bg-transparent border-0 border-start border-1 border-dark ps-4 ms-4">
+        <button class="bg-transparent border-0 border-start border-1 border-dark ps-4 ms-4" data-bs-toggle="modal" data-bs-target="#searchModal">
           <img src="{% manifest 'images/search.svg' %}" >
-        </a>
+        </button>
+        <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content rounded-3 fs-6">
+              <form action="{% url 'search' %}" method="get">
+                <div class="modal-body p-4 d-flex align-items-center justify-content-center">
+                  <input type="text" name="query" placeholder="Search..." class="border border-1 border-dark bg-transparent form-control form-control-lg rounded-start w-75 ps-3">
+                  <button type="submit" class="w-10 btn-lg ps-3 border-0 rounded-end bg-dark text-white">
+                    <div class="d-flex align-items-center">
+                      Search
+                      <img src="{% manifest 'images/arrow.svg' %}" width="40px" height="33px">
+                    </div>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     {% include "components/language_selector.html" %}
