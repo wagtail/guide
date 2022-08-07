@@ -1,6 +1,7 @@
 import { Dropdown } from 'bootstrap';
 
 const search_input = document.getElementById("search_input")
+const searchIconButton = document.getElementById("searchIconButton")
 
 const onSearchInputChange = async (event) => {
     const query = event.target.value
@@ -16,15 +17,32 @@ const onSearchInputChange = async (event) => {
 search_input.addEventListener("keyup", onSearchInputChange)
 
 
-const injectResultsInHTML = (results) => {
-    const resultsDiv = document.getElementById("results")
-    const resultsCountDiv = document.getElementById("results-count")
-
-    const children = [...resultsDiv.children]
+const removeExistingChildren = (parent) => {
+    const children = [...parent.children]
     children.map((child) => {
         child.remove()
     })
-    resultsCountDiv.innerText = `${results.length} results found`
+}
+searchIconButton.addEventListener("click", () => {
+    const resultsDiv = document.getElementById("results")
+    const resultsCountContainer = document.getElementById("results-count-container")
+
+    removeExistingChildren(resultsDiv)
+    removeExistingChildren(resultsCountContainer)
+})
+
+const injectResultsInHTML = (results) => {
+    const resultsDiv = document.getElementById("results")
+    const resultsCountContainer = document.getElementById("results-count-container")
+
+    removeExistingChildren(resultsDiv)
+    removeExistingChildren(resultsCountContainer)
+
+    const resultsCountDiv = document.createElement("div")
+    const resultsCountData = document.createTextNode(`${results.length} ${results.length == 1 ? 'result' : 'results'} found`)
+    resultsCountDiv.appendChild(resultsCountData)
+    resultsCountDiv.classList.add('m-3', 'mx-5')
+    resultsCountContainer.appendChild(resultsCountDiv)
 
     results.map((result) => {
         const resultDiv = document.createElement("div")

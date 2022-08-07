@@ -10,7 +10,7 @@
           <span class="fw-bold me-2">wagtail</span>
           <span>User guide</span>
         </a>
-        <button class="bg-transparent border-0 border-start border-1 border-dark ps-4 ms-4" data-bs-toggle="modal" data-bs-target="#searchModal">
+        <button id="searchIconButton" class="bg-transparent border-0 border-start border-1 border-dark ps-4 ms-4" data-bs-toggle="modal" data-bs-target="#searchModal">
           <img src="{% manifest 'images/search.svg' %}" >
         </button>
         <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel" aria-hidden="true">
@@ -28,7 +28,7 @@
                 </div>
               </form>
               <div>
-                <div id="results-count" class="m-3 mx-5">
+                <div id="results-count-container">
                 </div>
                 <div id="results">
                 </div>
