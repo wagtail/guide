@@ -21,6 +21,7 @@ def navigation(context):
         "annotated_list": Page.get_annotated_list_qs(pages),
     }
 
+
 @register.filter
-def canonical_url(value, arg):
-    return value.replace(arg, 'en-latest')
+def hreflang_url(value, arg):
+    return value.replace(arg, "en-latest")
