@@ -41,9 +41,18 @@ def search(request):
 
 
 class PageSerializer(serializers.ModelSerializer):
+    parent_section = serializers.SerializerMethodField("get_parent_section")
+
     class Meta:
         model = Page
-        fields = ["id", "title", "search_description", "url_path"]
+        fields = ["id", "title", "search_description", "url_path", "parent_section"]
+
+    def get_parent_section(self, page):
+        ancestors = page.get_ancestors()
+        if len(ancestors) >= 3:
+            return ancestors[2].title
+        else:
+            return "Home"
 
 
 @api_view(["GET"])

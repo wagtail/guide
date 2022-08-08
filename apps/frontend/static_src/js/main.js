@@ -8,6 +8,7 @@ const onSearchInputChange = async (event) => {
     try {
         const res = await fetch(window.location.origin + '/search_json/?query=' + query)
         const data = await res.json()
+        console.log(data)
         injectResultsInHTML(data)
     } catch(err) {
         console.log(err)
@@ -47,12 +48,19 @@ const injectResultsInHTML = (results) => {
     results.map((result) => {
         const resultDiv = document.createElement("div")
         const resultLink = document.createElement("a")
-        const data = document.createTextNode(result.title)
-        resultLink.appendChild(data)
-        const link = result.url_path.replace('home-x/', '').replace('home-x-', '')
-        resultLink.href = link
+        const resultDescription = document.createElement("div")
+        const resultParentSection = document.createElement("div")
+        resultLink.appendChild(document.createTextNode(result.title))
+        resultDescription.appendChild(document.createTextNode(result.search_description))
+        resultParentSection.appendChild(document.createTextNode(result.parent_section))
+        resultLink.href = result.url_path.replace('home-x/', '').replace('home-x-', '')
+        resultDiv.appendChild(resultParentSection)
         resultDiv.appendChild(resultLink)
-        resultDiv.classList.add('mx-5', 'py-4', 'border-top', 'border-bottom', 'fw-bold', 'fs-5')
+        resultDiv.appendChild(resultDescription)
+        resultParentSection.classList.add('py-2')
+        resultLink.classList.add('fw-bold', 'fs-5', 'text-decoration-none', 'text-dark')
+        resultDescription.classList.add('text-muted', 'py-2')
+        resultDiv.classList.add('mx-5', 'py-4', 'border-top', 'border-bottom')
         resultsDiv.appendChild(resultDiv)
     })
     
