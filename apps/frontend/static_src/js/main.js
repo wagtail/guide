@@ -1,28 +1,27 @@
 import { Dropdown } from 'bootstrap';
 
-const search_input = document.getElementById("search_input")
-const searchIconButton = document.getElementById("searchIconButton")
+const searchInput = document.getElementById("search-input")
+const searchIconButton = document.getElementById("search-icon-button")
 
 const onSearchInputChange = async (event) => {
     const query = event.target.value
     try {
         const res = await fetch(window.location.origin + '/search_json/?query=' + query)
         const data = await res.json()
-        console.log(data)
         injectResultsInHTML(data)
     } catch(err) {
         console.log(err)
         return {"error": err}
     }
 }
-search_input.addEventListener("keyup", onSearchInputChange)
+searchInput.addEventListener("keyup", onSearchInputChange)
 
 
 const removeExistingChildren = (parent) => {
     const children = [...parent.children]
-    children.map((child) => {
+    for (const child of children) {
         child.remove()
-    })
+    }
 }
 searchIconButton.addEventListener("click", () => {
     const resultsDiv = document.getElementById("results")
@@ -45,7 +44,7 @@ const injectResultsInHTML = (results) => {
     resultsCountDiv.classList.add('m-3', 'mx-5')
     resultsCountContainer.appendChild(resultsCountDiv)
 
-    results.map((result) => {
+    for(const result of results) {
         const resultDiv = document.createElement("div")
         const resultLink = document.createElement("a")
         const resultDescription = document.createElement("div")
@@ -62,6 +61,6 @@ const injectResultsInHTML = (results) => {
         resultDescription.classList.add('text-muted', 'py-2')
         resultDiv.classList.add('mx-5', 'py-4', 'border-top', 'border-bottom')
         resultsDiv.appendChild(resultDiv)
-    })
+    }
     
 }
