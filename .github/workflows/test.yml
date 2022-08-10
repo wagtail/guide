@@ -35,3 +35,24 @@ jobs:
       - name: Test
         run: |
           make test
+          
+  run-linting:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - python:  '3.9'
+    
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python ${{ matrix.python }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install backend dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Lint
+        run: |
+          make lint
