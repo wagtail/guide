@@ -1,7 +1,7 @@
 import { Dropdown } from 'bootstrap';
 
-const searchInput = document.getElementById("search-input")
-const searchIconButton = document.getElementById("search-icon-button")
+const searchInput = document.querySelector('[data-search-input]')
+const searchIconButton = document.querySelector('[data-search-icon-button]')
 
 const onSearchInputChange = async (event) => {
     const query = event.target.value
@@ -24,16 +24,16 @@ const removeExistingChildren = (parent) => {
     }
 }
 searchIconButton.addEventListener("click", () => {
-    const resultsDiv = document.getElementById("results")
-    const resultsCountContainer = document.getElementById("results-count-container")
+    const resultsDiv = document.querySelector('[data-results]')
+    const resultsCountContainer = document.querySelector('[data-results-count-container]')
 
     removeExistingChildren(resultsDiv)
     removeExistingChildren(resultsCountContainer)
 })
 
 const injectResultsInHTML = (results) => {
-    const resultsDiv = document.getElementById("results")
-    const resultsCountContainer = document.getElementById("results-count-container")
+    const resultsDiv = document.querySelector('[data-results]')
+    const resultsCountContainer = document.querySelector('[data-results-count-container]')
 
     removeExistingChildren(resultsDiv)
     removeExistingChildren(resultsCountContainer)
