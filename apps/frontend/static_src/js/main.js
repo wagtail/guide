@@ -14,7 +14,11 @@ const onSearchInputChange = async (event) => {
         return {"error": err}
     }
 }
-searchInput.addEventListener("keyup", onSearchInputChange)
+searchInput.addEventListener("keyup", (event) => {
+    setTimeout(() => {
+        onSearchInputChange(event)
+    }, 1000)
+})
 
 
 const removeExistingChildren = (parent) => {
