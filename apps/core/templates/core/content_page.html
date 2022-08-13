@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags core_tags manifest %}
+{% load wagtailcore_tags core_tags %}
 
 {% block content %}
 <div class="d-none d-md-block col-md-4 col-lg-3 pe-md-5">
@@ -12,31 +12,7 @@
   {% for block in page.body %}
     {% include_block block %}
   {% endfor %}
-  <div class="d-flex mt-5 flex-wrap justify-content-between">
-    {% if page|previous_page != None %}
-      <a href="{% pageurl page|previous_page %}" class="text-decoration-none">
-        <button class="nav-button m-1 ms-0">
-          <div class="d-flex justify-content-center align-items-center">
-            <img src="{% manifest 'images/arrow.svg' %}" width="30px" height="25px" class="nav-button__left-arrow">
-            <div class="fw-bold px-2 pe-3">
-              {{ page|previous_page }}
-            </div>
-          </div>
-        </button>
-      </a>
-    {% endif %}
-    {% if page|next_page != None %}
-      <a href="{% pageurl page|next_page %}" class="text-decoration-none">
-        <button class="nav-button m-1 me-0">
-          <div class="d-flex justify-content-center align-items-center">
-            <div class="fw-bold px-2 ps-3">
-              {{ page|next_page }}
-            </div>
-            <img src="{% manifest 'images/arrow.svg' %}" width="30px" height="25px">
-          </div>
-        </button>
-      </a>
-    {% endif %}
+  {% include '../components/nav_buttons.html' %}
 </main>
 
 {% endblock %}
