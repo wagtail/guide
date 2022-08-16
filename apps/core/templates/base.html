@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailuserbar manifest %}
+{% load static core_tags wagtailcore_tags wagtailuserbar manifest %}
 
 <!DOCTYPE html>
 <html lang="{% block lang %}{{ self.locale.language_code }}{% endblock %}">
@@ -19,6 +19,11 @@
         <link rel="apple-touch-icon" sizes="180x180" href="{% manifest 'images/apple-touch-icon.png' %}">
         <link rel="icon" type="image/png" sizes="32x32" href="{% manifest 'images/favicon-32x32.png' %}">
         <link rel="icon" type="image/png" sizes="16x16" href="{% manifest 'images/favicon-16x16.png' %}">
+
+        {# alternate tag #}
+        {% if page.locale.language_code and not page.locale.language_code == "en-latest" %}
+            <link rel="alternate" hreflang="en" href="{{ page.full_url|hreflang_url:page.locale.language_code }}" >
+        {% endif %}
 
         {# Global stylesheets #}
         <link rel="stylesheet" href="{% manifest 'main.css' %}">
