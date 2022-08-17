@@ -1,4 +1,5 @@
 import { Dropdown } from 'bootstrap';
+require('./lodash_debounce/lodash.custom.min.js')
 
 const searchInput = document.querySelector('[data-search-input]')
 const searchIconButton = document.querySelector('[data-search-icon-button]')
@@ -6,26 +7,19 @@ const searchIconButton = document.querySelector('[data-search-icon-button]')
 const onSearchInputChange = async (event) => {
     const query = event.target.value
     try {
-        const res = await fetch(window.location.origin + '/search_json/?query=' + query)
+        const res = await fetch(`${window.location.origin}/search_json/?${(new URLSearchParams({ query })).toString()}`)
         const data = await res.json()
         injectResultsInHTML(data)
     } catch(err) {
         console.log(err)
-        return {"error": err}
+        window.alert(`Error: ${err}`)
     }
 }
-searchInput.addEventListener("keyup", (event) => {
-    setTimeout(() => {
-        onSearchInputChange(event)
-    }, 1000)
-})
+searchInput.addEventListener("keyup", _.debounce(onSearchInputChange, 500))
 
 
 const removeExistingChildren = (parent) => {
-    const children = [...parent.children]
-    for (const child of children) {
-        child.remove()
-    }
+    parent.innerHTML = ''
 }
 searchIconButton.addEventListener("click", () => {
     const resultsDiv = document.querySelector('[data-results]')
@@ -43,8 +37,7 @@ const injectResultsInHTML = (results) => {
     removeExistingChildren(resultsCountContainer)
 
     const resultsCountDiv = document.createElement("div")
-    const resultsCountData = document.createTextNode(`${results.length} ${results.length == 1 ? 'result' : 'results'} found`)
-    resultsCountDiv.appendChild(resultsCountData)
+    resultsCountDiv.innerText = `${results.length} ${results.length == 1 ? 'result' : 'results'} found`
     resultsCountDiv.classList.add('m-3', 'mx-5')
     resultsCountContainer.appendChild(resultsCountDiv)
 
@@ -53,9 +46,9 @@ const injectResultsInHTML = (results) => {
         const resultLink = document.createElement("a")
         const resultDescription = document.createElement("div")
         const resultParentSection = document.createElement("div")
-        resultLink.appendChild(document.createTextNode(result.title))
-        resultDescription.appendChild(document.createTextNode(result.search_description))
-        resultParentSection.appendChild(document.createTextNode(result.parent_section))
+        resultLink.innerText = result.title
+        resultDescription.innerText = result.search_description
+        resultParentSection.innerText = result.parent_section
         resultLink.href = result.url_path.replace('home-x/', '').replace('home-x-', '')
         resultDiv.appendChild(resultParentSection)
         resultDiv.appendChild(resultLink)
