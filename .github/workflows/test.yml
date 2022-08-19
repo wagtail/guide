@@ -34,7 +34,7 @@ jobs:
           yarn build
       - name: Test
         run: |
-          make test
+          make test-coverage
           
   run-linting:
     runs-on: ubuntu-latest
