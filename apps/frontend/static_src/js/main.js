@@ -1,5 +1,5 @@
 import { Dropdown } from 'bootstrap';
-require('./lodash_debounce/lodash.custom.min.js')
+import debounce from 'lodash.debounce';
 
 const searchInput = document.querySelector('[data-search-input]')
 const searchIconButton = document.querySelector('[data-search-icon-button]')
@@ -15,7 +15,7 @@ const onSearchInputChange = async (event) => {
         window.alert(`Error: ${err}`)
     }
 }
-searchInput.addEventListener("keyup", _.debounce(onSearchInputChange, 500))
+searchInput.addEventListener("keyup", debounce(onSearchInputChange, 350))
 
 
 const removeExistingChildren = (parent) => {
