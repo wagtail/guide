@@ -10,9 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 import dj_database_url
+
+env = os.environ.copy()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
@@ -96,6 +99,50 @@ DATABASES = {
         conn_max_age=600, default=f"sqlite:///{BASE_DIR}/db.sqlite3"
     )
 }
+
+# Server-side cache settings. Do not confuse with front-end cache.
+# https://docs.djangoproject.com/en/stable/topics/cache/
+# If the server has a Redis instance exposed via a URL string in the REDIS_URL
+# environment variable, prefer that. Otherwise use the database backend. We
+# usually use Redis in production and database backend on staging and dev. In
+# order to use database cache backend you need to run
+# "django-admin createcachetable" to create a table for the cache.
+#
+# Do not use the same Redis instance for other things like Celery!
+
+# Prefer the TLS connection URL over non
+REDIS_URL = env.get("REDIS_TLS_URL", env.get("REDIS_URL"))
+
+if REDIS_URL:
+    connection_pool_kwargs = {}
+
+    if REDIS_URL.startswith("rediss"):
+        # Heroku Redis uses self-signed certificates for secure redis conections. https://stackoverflow.com/a/66286068
+        # When using TLS, we need to disable certificate validation checks.
+        connection_pool_kwargs["ssl_cert_reqs"] = None
+
+    CACHES = {
+        "default": {
+            "BACKEND": "django_redis.cache.RedisCache",
+            "LOCATION": REDIS_URL,
+            "OPTIONS": {
+                "IGNORE_EXCEPTIONS": True,
+                "SOCKET_CONNECT_TIMEOUT": 2,  # seconds
+                "SOCKET_TIMEOUT": 2,  # seconds
+                "CONNECTION_POOL_KWARGS": connection_pool_kwargs,
+            },
+        }
+    }
+    DJANGO_REDIS_LOG_IGNORED_EXCEPTIONS = True
+else:
+    CACHES = {
+        "default": {
+            "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+            "LOCATION": "database_cache",
+        }
+    }
+
+
 
 
 # Password validation
