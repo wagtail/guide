@@ -43,7 +43,7 @@ WORKDIR /app
 #  * GUNICORN_CMD_ARGS - additional arguments to be passed to Gunicorn. This
 #    variable is read by Gunicorn
 ENV PATH=$VIRTUAL_ENV/bin:$PATH \
-    POETRY_INSTALL_ARGS=${POETRY_INSTALL_ARGS} \
+    PYTHONPATH=/app \
     PYTHONUNBUFFERED=1 \
     DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
     PORT=8000 \
