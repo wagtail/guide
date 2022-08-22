@@ -114,7 +114,7 @@ DATABASES = {
 # environment variable, prefer that. Otherwise use the database backend. We
 # usually use Redis in production and database backend on staging and dev. In
 # order to use database cache backend you need to run
-# "django-admin createcachetable" to create a table for the cache.
+# "./manage.py createcachetable" to create a table for the cache.
 #
 # Do not use the same Redis instance for other things like Celery!
 
