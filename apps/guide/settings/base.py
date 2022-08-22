@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 import os
+import sys
 from pathlib import Path
 
 import dj_database_url
@@ -291,3 +292,91 @@ if "AWS_STORAGE_BUCKET_NAME" in env:
     # the URLs to the files. Set https as default.
     # https://github.com/jschneier/django-storages/blob/10d1929de5e0318dbd63d715db4bebc9a42257b5/storages/backends/s3boto3.py#L217
     AWS_S3_URL_PROTOCOL = env.get("AWS_S3_URL_PROTOCOL", "https:")
+
+
+# Logging
+# This logging is configured to be used with Sentry and console logs. Console
+# logs are widely used by platforms offering Docker deployments, e.g. Heroku.
+# We use Sentry to only send error logs so we're notified about errors that are
+# not Python exceptions.
+# We do not use default mail or file handlers because they are of no use for
+# us.
+# https://docs.djangoproject.com/en/stable/topics/logging/
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        # Send logs with at least INFO level to the console.
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "verbose",
+        },
+    },
+    "formatters": {
+        "verbose": {
+            "format": "[%(asctime)s][%(process)d][%(levelname)s][%(name)s] %(message)s"
+        }
+    },
+    "loggers": {
+        "wagtailkit_repo_name": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "wagtail": {
+            "handlers": ["console"],
+            "level": "INFO",
+            "propagate": False,
+        },
+        "django.request": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+        "django.security": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": False,
+        },
+    },
+}
+
+
+# Sentry configuration.
+# See instructions on the intranet:
+# https://intranet.torchbox.com/delivering-projects/tech/starting-new-project/#sentry
+is_in_shell = len(sys.argv) > 1 and sys.argv[1] in ["shell", "shell_plus"]
+
+if "SENTRY_DSN" in env and not is_in_shell:
+
+    import sentry_sdk
+    from sentry_sdk.integrations.django import DjangoIntegration
+    from sentry_sdk.utils import get_default_release
+
+    sentry_kwargs = {
+        "dsn": env["SENTRY_DSN"],
+        "integrations": [DjangoIntegration()],
+    }
+
+    if "SENTRY_ENVIRONMENT" in env:
+        sentry_kwargs.update({"environment": env["SENTRY_ENVIRONMENT"]})
+
+    release = get_default_release()
+    if release is None:
+        try:
+            # But if it's not, we assume that the commit hash is available in
+            # the GIT_REV environment variable. It's a default environment
+            # variable used on Dokku:
+            # http://dokku.viewdocs.io/dokku/deployment/methods/git/#configuring-the-git_rev-environment-variable
+            release = env["GIT_REV"]
+        except KeyError:
+            try:
+                # This requires the "runtime-dyno-metadata" Heroku lab enabled
+                release = env["HEROKU_RELEASE_VERSION"]
+            except KeyError:
+                # If there's no commit hash, we do not set a specific release.
+                release = None
+
+    sentry_kwargs.update({"release": release})
+    sentry_sdk.init(**sentry_kwargs)
