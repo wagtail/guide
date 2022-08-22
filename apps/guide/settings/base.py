@@ -15,6 +15,7 @@ import sys
 from pathlib import Path
 
 import dj_database_url
+from django.core.exceptions import ImproperlyConfigured
 
 env = os.environ.copy()
 
@@ -295,6 +296,47 @@ if "AWS_STORAGE_BUCKET_NAME" in env:
     # the URLs to the files. Set https as default.
     # https://github.com/jschneier/django-storages/blob/10d1929de5e0318dbd63d715db4bebc9a42257b5/storages/backends/s3boto3.py#L217
     AWS_S3_URL_PROTOCOL = env.get("AWS_S3_URL_PROTOCOL", "https:")
+
+
+# Email settings
+# We use SMTP to send emails. We typically use transactional email services
+# that let us use SMTP.
+# https://docs.djangoproject.com/en/2.1/topics/email/
+
+# https://docs.djangoproject.com/en/stable/ref/settings/#email-host
+if "EMAIL_HOST" in env:
+    EMAIL_HOST = env["EMAIL_HOST"]
+
+# https://docs.djangoproject.com/en/stable/ref/settings/#email-port
+# Use a default port of 587, as many services now block 25
+try:
+    EMAIL_PORT = int(env.get("EMAIL_PORT", 587))
+except ValueError:
+    raise ImproperlyConfigured("The setting EMAIL_PORT should be an integer, e.g. 587")
+
+# https://docs.djangoproject.com/en/stable/ref/settings/#email-host-user
+if "EMAIL_HOST_USER" in env:
+    EMAIL_HOST_USER = env["EMAIL_HOST_USER"]
+
+# https://docs.djangoproject.com/en/stable/ref/settings/#email-host-password
+if "EMAIL_HOST_PASSWORD" in env:
+    EMAIL_HOST_PASSWORD = env["EMAIL_HOST_PASSWORD"]
+
+# https://docs.djangoproject.com/en/stable/ref/settings/#email-use-tls
+# We always want to use TLS
+EMAIL_USE_TLS = True
+
+# https://docs.djangoproject.com/en/stable/ref/settings/#email-subject-prefix
+if "EMAIL_SUBJECT_PREFIX" in env:
+    EMAIL_SUBJECT_PREFIX = env["EMAIL_SUBJECT_PREFIX"]
+
+# SERVER_EMAIL is used to send emails to administrators.
+# https://docs.djangoproject.com/en/stable/ref/settings/#server-email
+# DEFAULT_FROM_EMAIL is used as a default for any mail send from the website to
+# the users.
+# https://docs.djangoproject.com/en/stable/ref/settings/#default-from-email
+if "SERVER_EMAIL" in env:
+    SERVER_EMAIL = DEFAULT_FROM_EMAIL = env["SERVER_EMAIL"]
 
 
 # Logging
