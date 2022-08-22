@@ -2,7 +2,7 @@ buildfixtures:
 	python manage.py buildfixtures
 
 test:
-	python manage.py test
+	DJANGO_SETTINGS_MODULE=apps.guide.settings.test python manage.py test
 
 format:
 	isort apps

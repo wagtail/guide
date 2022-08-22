@@ -15,6 +15,12 @@ INSTALLED_APPS += [  # noqa
     "django_extensions",
 ]
 
+# Disable forcing HTTPS locally since development server supports HTTP only.
+SECURE_SSL_REDIRECT = False
+# For the same reason the HSTS header should not be sent.
+SECURE_HSTS_SECONDS = 0
+
+
 try:
     from .local import *  # noqa
 except ImportError:
