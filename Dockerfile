@@ -27,7 +27,7 @@ RUN useradd guide --create-home && mkdir /app $VIRTUAL_ENV && chown -R guide /ap
 WORKDIR /app
 
 # Set default environment variables. They are used at build time and runtime.
-# If you specify your own environment variables on Heroku or Dokku, they will
+# If you specify your own environment variables on Heroku, they will
 # override the ones set here. The ones below serve as sane defaults only.
 #  * PATH - Make sure that our venv is on the PATH
 #  * PYTHONUNBUFFERED - This is useful so Python does not hold any messages
@@ -35,7 +35,7 @@ WORKDIR /app
 #    https://docs.python.org/3.9/using/cmdline.html#envvar-PYTHONUNBUFFERED
 #    https://docs.python.org/3.9/using/cmdline.html#cmdoption-u
 #  * DJANGO_SETTINGS_MODULE - default settings used in the container.
-#  * PORT - default port used. Please match with EXPOSE so it works on Dokku.
+#  * PORT - default port used. Please match with EXPOSE.
 #    Heroku will ignore EXPOSE and only set PORT variable. PORT variable is
 #    read/used by Gunicorn.
 #  * WEB_CONCURRENCY - number of workers used by Gunicorn. The variable is

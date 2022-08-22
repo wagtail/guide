@@ -410,18 +410,11 @@ if "SENTRY_DSN" in env and not is_in_shell:
     release = get_default_release()
     if release is None:
         try:
-            # But if it's not, we assume that the commit hash is available in
-            # the GIT_REV environment variable. It's a default environment
-            # variable used on Dokku:
-            # http://dokku.viewdocs.io/dokku/deployment/methods/git/#configuring-the-git_rev-environment-variable
-            release = env["GIT_REV"]
+            # This requires the "runtime-dyno-metadata" Heroku lab enabled
+            release = env["HEROKU_RELEASE_VERSION"]
         except KeyError:
-            try:
-                # This requires the "runtime-dyno-metadata" Heroku lab enabled
-                release = env["HEROKU_RELEASE_VERSION"]
-            except KeyError:
-                # If there's no commit hash, we do not set a specific release.
-                release = None
+            # If there's no commit hash, we do not set a specific release.
+            release = None
 
     sentry_kwargs.update({"release": release})
     sentry_sdk.init(**sentry_kwargs)
