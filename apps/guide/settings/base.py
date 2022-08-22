@@ -380,3 +380,12 @@ if "SENTRY_DSN" in env and not is_in_shell:
 
     sentry_kwargs.update({"release": release})
     sentry_sdk.init(**sentry_kwargs)
+
+
+# Django REST framework settings
+# Change default settings that enable basic auth.
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework.authentication.SessionAuthentication",
+    )
+}
