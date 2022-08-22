@@ -117,7 +117,7 @@ if REDIS_URL:
     connection_pool_kwargs = {}
 
     if REDIS_URL.startswith("rediss"):
-        # Heroku Redis uses self-signed certificates for secure redis conections. https://stackoverflow.com/a/66286068
+        # Heroku Redis uses self-signed certificates for secure redis connections
         # When using TLS, we need to disable certificate validation checks.
         connection_pool_kwargs["ssl_cert_reqs"] = None
 
@@ -141,8 +141,6 @@ else:
             "LOCATION": "database_cache",
         }
     }
-
-
 
 
 # Password validation
