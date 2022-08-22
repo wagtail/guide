@@ -46,3 +46,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 REFERRER_POLICY = env.get(  # noqa
     "SECURE_REFERRER_POLICY", "no-referrer-when-downgrade"
 ).strip()
+
+# Allow the redirect importer to work in load-balanced / cloud environments.
+# https://docs.wagtail.io/en/v2.13/reference/settings.html#redirects
+WAGTAIL_REDIRECTS_FILE_STORAGE = "cache"
