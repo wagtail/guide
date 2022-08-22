@@ -237,6 +237,9 @@ AUTH_USER_MODEL = "custom_user.User"
 WAGTAILIMAGES_IMAGE_MODEL = "custom_media.CustomImage"
 WAGTAILDOCS_DOCUMENT_MODEL = "custom_media.CustomDocument"
 
+pixel_limit = env.get("WAGTAILIMAGES_MAX_IMAGE_PIXELS")
+WAGTAILIMAGES_MAX_IMAGE_PIXELS = int(pixel_limit) if pixel_limit else 10_000_000
+
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # AWS S3 buckets configuration
