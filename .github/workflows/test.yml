@@ -43,6 +43,8 @@ jobs:
         run: yarn build
       - name: System checks
         run: python manage.py check
+      - name: Collect static
+        run: python manage.py collectstatic --noinput --clear
       - name: Missing migrations
         run: python manage.py makemigrations --check
       - name: Test
