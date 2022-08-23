@@ -1,0 +1,17 @@
+.footer {
+    background-color: #2E1F5E;
+    margin-top: 200px;
+    
+    .link-block__description {
+        font-size: $font-size-sm;
+    }
+    .link-block:hover {
+        cursor: pointer;
+        .link-block__heading {
+            color: $secondary;
+        }
+        .footer-svg__path {
+            fill: $secondary;
+        }
+    }
+}
