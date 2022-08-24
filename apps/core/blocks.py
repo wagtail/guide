@@ -43,5 +43,24 @@ class SectionGridBlock(blocks.ListBlock):
         template = "core/blocks/section_grid.html"
 
 
-CONTENT_BLOCKS = [("text", TextBlock())]
+class AlertStructValue(blocks.StructValue):
+    def icon(self):
+        return f"core/svg/{self.get('alert_type').lower()}.svg"
+
+
+class AlertBlock(blocks.StructBlock):
+    alert_type = blocks.ChoiceBlock(
+        choices=[
+            ("Warning", _("Warning")),
+            ("Note", _("Note")),
+        ]
+    )
+    alert_body = blocks.TextBlock(label=_("Text"))
+
+    class Meta:
+        template = "core/blocks/alert.html"
+        value_class = AlertStructValue
+
+
+CONTENT_BLOCKS = [("text", TextBlock()), ("alert", AlertBlock())]
 HOME_BLOCKS = [("section_grid", SectionGridBlock())]
