@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% load wagtailcore_tags core_tags %}
+{% load wagtailcore_tags core_tags manifest i18n %}
 
 {% block content %}
 <div class="d-none d-md-block col-md-4 col-lg-3 pe-md-5">
@@ -12,7 +12,15 @@
   {% for block in page.body %}
     {% include_block block %}
   {% endfor %}
-  {% include '../components/nav_buttons.html' %}
+  <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-end">
+      <li class="page-item">
+        <a class="page-link" href="{% pageurl previous %}">{% trans 'Previous' %}</a>
+      </li>
+      <li class="page-item">
+          <a class="page-link" href="{% pageurl next %}">{% trans 'Next' %}</a>
+      </li>
+    </ul>
+  </nav>
 </main>
-
 {% endblock %}
