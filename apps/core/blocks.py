@@ -55,7 +55,7 @@ class AlertBlock(blocks.StructBlock):
             ("Note", _("Note")),
         ]
     )
-    alert_body = blocks.TextBlock(label=_("Text"))
+    alert_body = RichTextBlock(features=["bold", "italic", "link"])
 
     class Meta:
         template = "core/blocks/alert.html"
