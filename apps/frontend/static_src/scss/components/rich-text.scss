@@ -1,3 +1,5 @@
-.inline-code {
+code {
+    // Using Wagtail’s monospace font: 
+    // https://github.com/wagtail/wagtail/blob/849d4d71cae41de56e43832546429cbb8ad289d5/client/src/tokens/typography.js#L38
     font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", "Courier New", monospace, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
