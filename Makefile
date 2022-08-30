@@ -2,7 +2,7 @@ buildfixtures:
 	python manage.py buildfixtures
 
 test:
-	python manage.py test
+	DJANGO_SETTINGS_MODULE=apps.guide.settings.test python manage.py test
 
 format:
 	isort apps
@@ -20,6 +20,7 @@ frontend:
 backend:
 	python -m pip install -r requirements.txt
 	python manage.py migrate
+	python manage.py createcachetable
 	python manage.py createsuperuser
 
 run:

@@ -1,60 +1,83 @@
-# Use an official Python runtime based on Debian 10 "buster" as a parent image.
-FROM python:3.8.1-slim-buster
+# (Keep the version in sync with the node install below)
+FROM node:16 as frontend
 
-# Add user that will be used in the container.
-RUN useradd wagtail
+# Make build & post-install scripts behave as if we were in a CI environment (e.g. for logging verbosity purposes).
+ARG CI=true
 
-# Port used by this container to serve HTTP.
-EXPOSE 8000
+# Install front-end dependencies.
+COPY package.json yarn.lock webpack.config.js ./
+RUN yarn
 
-# Set environment variables.
-# 1. Force Python stdout and stderr streams to be unbuffered.
-# 2. Set PORT variable that is used by Gunicorn. This should match "EXPOSE"
-#    command.
-ENV PYTHONUNBUFFERED=1 \
-    PORT=8000
+# Compile static files
+COPY ./apps/frontend/static_src/ ./apps/frontend/static_src/
+RUN yarn build
 
-# Install system packages required by Wagtail and Django.
-RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
-    build-essential \
-    libpq-dev \
-    libmariadbclient-dev \
-    libjpeg62-turbo-dev \
-    zlib1g-dev \
-    libwebp-dev \
- && rm -rf /var/lib/apt/lists/*
 
-# Install the application server.
-RUN pip install "gunicorn==20.0.4"
+# We use Debian images because they are considered more stable than the alpine
+# ones becase they use a different C compiler. Debian images also come with
+# all useful packages required for image manipulation out of the box. They
+# however weigh a lot, approx. up to 1.5GiB per built image.
+FROM python:3.9 as production
 
-# Install the project requirements.
-COPY requirements.txt /
-RUN pip install -r /requirements.txt
+# Install dependencies in a virtualenv
+ENV VIRTUAL_ENV=/venv
 
-# Use /app folder as a directory where the source code is stored.
+RUN useradd guide --create-home && mkdir /app $VIRTUAL_ENV && chown -R guide /app $VIRTUAL_ENV
+
 WORKDIR /app
 
-# Set this directory to be owned by the "wagtail" user. This Wagtail project
-# uses SQLite, the folder needs to be owned by the user that
-# will be writing to the database file.
-RUN chown wagtail:wagtail /app
+# Set default environment variables. They are used at build time and runtime.
+# If you specify your own environment variables on Heroku, they will
+# override the ones set here. The ones below serve as sane defaults only.
+#  * PATH - Make sure that our venv is on the PATH
+#  * PYTHONUNBUFFERED - This is useful so Python does not hold any messages
+#    from being output.
+#    https://docs.python.org/3.9/using/cmdline.html#envvar-PYTHONUNBUFFERED
+#    https://docs.python.org/3.9/using/cmdline.html#cmdoption-u
+#  * DJANGO_SETTINGS_MODULE - default settings used in the container.
+#  * PORT - default port used. Please match with EXPOSE.
+#    Heroku will ignore EXPOSE and only set PORT variable. PORT variable is
+#    read/used by Gunicorn.
+#  * WEB_CONCURRENCY - number of workers used by Gunicorn. The variable is
+#    read by Gunicorn.
+#  * GUNICORN_CMD_ARGS - additional arguments to be passed to Gunicorn. This
+#    variable is read by Gunicorn
+ENV PATH=$VIRTUAL_ENV/bin:$PATH \
+    PYTHONPATH=/app \
+    PYTHONUNBUFFERED=1 \
+    DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
+    PORT=8000 \
+    WEB_CONCURRENCY=3 \
+    GUNICORN_CMD_ARGS="-c gunicorn-conf.py --max-requests 1200 --max-requests-jitter 50 --access-logfile - --timeout 25"
 
-# Copy the source code of the project into the container.
-COPY --chown=wagtail:wagtail . .
+# Make $BUILD_ENV available at runtime
+ARG BUILD_ENV
+ENV BUILD_ENV=${BUILD_ENV}
 
-# Use user "wagtail" to run the build commands below and the server itself.
-USER wagtail
+# Port exposed by this container. Should default to the port used by your WSGI
+# server (Gunicorn). Heroku will ignore this.
+EXPOSE 8000
 
-# Collect static files.
-RUN python manage.py collectstatic --noinput --clear
+# Don't use the root user as it's an anti-pattern and Heroku does not run
+# containers as root either.
+# https://devcenter.heroku.com/articles/container-registry-and-runtime#dockerfile-commands-and-runtime
+USER guide
 
-# Runtime command that executes when "docker run" is called, it does the
-# following:
-#   1. Migrate the database.
-#   2. Start the application server.
-# WARNING:
-#   Migrating database at the same time as starting the server IS NOT THE BEST
-#   PRACTICE. The database should be migrated manually or using the release
-#   phase facilities of your hosting platform. This is used only so the
-#   Wagtail instance can be started with a simple "docker run" command.
-CMD set -xe; python manage.py migrate --noinput; gunicorn guide.wsgi:application
+# Install your app's Python requirements.
+RUN python -m venv $VIRTUAL_ENV
+COPY --chown=guide ./requirements/ ./requirements/
+RUN pip install --upgrade pip && pip install -r ./requirements/production.txt
+
+COPY --chown=guide --from=frontend ./apps/frontend/static ./apps/frontend/static
+
+# Copy application code.
+COPY --chown=guide . .
+
+# Collect static. This command will move static files from application
+# directories and "static_compiled" folder to the main static directory that
+# will be served by the WSGI server.
+RUN SECRET_KEY=none python manage.py collectstatic --noinput --clear
+
+# Run the WSGI server. It reads GUNICORN_CMD_ARGS, PORT and WEB_CONCURRENCY
+# environment variable hence we don't specify a lot options below.
+CMD gunicorn apps.guide.wsgi:application
