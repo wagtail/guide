@@ -11,21 +11,14 @@ ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
-
 INSTALLED_APPS += [  # noqa
     "django_extensions",
 ]
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "handlers": {
-        "console": {
-            "class": "logging.StreamHandler",
-        },
-    },
-}
+# Disable forcing HTTPS locally since development server supports HTTP only.
+SECURE_SSL_REDIRECT = False
+# For the same reason the HSTS header should not be sent.
+SECURE_HSTS_SECONDS = 0
 
 
 try:

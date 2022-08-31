@@ -1,0 +1,14 @@
+{% load wagtailcore_tags %}
+<div class="alert my-4">
+    <div class="alert__type-{{self.alert_type}} p-2 px-3 text-white fw-bold rounded-top d-flex align-items-center">
+        <div class="me-2 d-flex align-items-center">
+            {% include self.icon %}
+        </div>
+        {{self.alert_type}}
+    </div>
+    <div class="alert__body-{{self.alert_type}} p-3 rounded-bottom">
+        {{self.alert_body|richtext}}
+    </div>
+
+
+</div>

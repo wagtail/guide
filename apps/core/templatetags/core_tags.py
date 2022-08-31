@@ -23,6 +23,11 @@ def navigation(context):
 
 
 @register.filter
+def hreflang_url(value, arg):
+    return value.replace(arg, "en-latest", 1)
+
+
+@register.filter
 def next_page(page):
     first_descendant = page.get_descendants().live().first()
     if first_descendant:
