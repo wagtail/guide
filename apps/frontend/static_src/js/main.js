@@ -49,7 +49,7 @@ const injectResultsInHTML = (results) => {
         resultLink.innerText = result.title
         resultDescription.innerText = result.search_description
         resultParentSection.innerText = result.parent_section
-        resultLink.href = result.url_path.replace('home-x/', '').replace('home-x-', '')
+        resultLink.href = result.full_url
         resultDiv.appendChild(resultParentSection)
         resultDiv.appendChild(resultLink)
         resultDiv.appendChild(resultDescription)

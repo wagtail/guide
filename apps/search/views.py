@@ -45,7 +45,7 @@ class PageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Page
-        fields = ["id", "title", "search_description", "url_path", "parent_section"]
+        fields = ["id", "title", "search_description", "full_url", "parent_section"]
 
     def get_parent_section(self, page):
         ancestors = page.get_ancestors()
