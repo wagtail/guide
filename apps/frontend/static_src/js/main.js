@@ -1,8 +1,10 @@
-import { Dropdown } from 'bootstrap';
+import { Dropdown, Tooltip } from 'bootstrap';
 import { initSectionLink } from "./section-link";
+import { handleFeedback } from './feedback';
 import debounce from 'lodash.debounce';
 
 initSectionLink();
+handleFeedback();
 
 const searchInput = document.querySelector('[data-search-input]')
 const searchIconButton = document.querySelector('[data-search-icon-button]')
