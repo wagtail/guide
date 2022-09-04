@@ -15,5 +15,9 @@ class Feedback(models.Model):
 
     feedback_text = models.TextField(blank=True)
 
+    class Meta:
+        verbose_name = "Feedback"
+        verbose_name_plural = "Feedback items"
+
     def __str__(self):
         return self.feedback

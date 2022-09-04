@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center my-5">
+<div class="d-flex justify-content-center my-5 flex-wrap">
     <div data-feedback-container>
         <div class="fw-bold">
             Was this page helpful?
@@ -7,35 +7,23 @@
             <button class="border border-0 bg-transparent" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page was helpful" data-bs-trigger="hover" data-happy-button>
                 {% include "./svg/happy.svg" %}
             </button>
-            <button class="border border-0 bg-transparent" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                <span data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page could be improved" data-bs-trigger="hover">
-                    {% include "./svg/unhappy.svg" %}
-                </span>
+            <button class="border border-0 bg-transparent" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page could be improved" data-bs-trigger="hover" data-unhappy-button>
+                {% include "./svg/unhappy.svg" %}
             </button>
         </div>
-    
-        <div class="modal fade" id="exampleModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="d-flex justify-content-center flex-wrap">
-                        <div class="fw-bold my-2">
-                            Thanks for your feedback!
-                        </div>
-                        <div class="d-flex justify-content-center flex-wrap my-2">
-                            Help us improve by telling what you missed
-                            <textarea data-feedback-text class="my-2 w-75" rows="3"></textarea>
-                        </div>
-                    </div>
-                    <div class="d-flex justify-content-end">
-                        <button data-finish-button data-bs-dismiss="modal" class="btn btn-primary">
-                            Finish
-                        </button>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </div>
+    </div>
 
+    <div data-additional-feedback-container class="d-none">
+        <div class="d-flex justify-content-center flex-wrap">
+            <div class="my-2">
+                Help us improve by telling what you missed
+            </div>
+            <textarea data-feedback-text class="my-2 w-75" rows="3"></textarea>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button data-submit-button class="btn btn-primary m-1">
+                Submit
+            </button>
+        </div>
     </div>
 </div>

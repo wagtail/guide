@@ -1,11 +1,16 @@
+import json
+
 from bs4 import BeautifulSoup
 from django.db import models
+from django.http import HttpResponse
 from django.template import Context, Template
 from django.template.defaultfilters import slugify
 from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.models import Page
+
+from apps.core.models.feedback import Feedback
 
 from ..blocks import CONTENT_BLOCKS
 
@@ -43,3 +48,23 @@ class ContentPage(Page):
 
     content_panels = Page.content_panels + [FieldPanel("body")]
     base_form_class = ContentPageForm
+
+    def serve(self, request):
+        if request.method == "POST":
+            data = json.loads(request.body)
+            if "pk" in data:
+                feedback = Feedback.objects.get(pk=data["pk"])
+                feedback.feedback_text = data["feedback_text"]
+                feedback.save()
+                data = {"pk": feedback.pk}
+            else:
+                new_feedback = Feedback(
+                    feedback=data["feedback"],
+                    page=self,
+                )
+                new_feedback.save()
+                data = {"pk": new_feedback.pk}
+
+            return HttpResponse(json.dumps(data))
+        else:
+            return super().serve(request)
