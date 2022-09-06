@@ -1,7 +1,6 @@
 from django.test import TestCase
 
 from apps.core.factories import ContentPageFactory, HomePageFactory
-from apps.core.templatetags.core_tags import next_page, previous_page
 
 
 class TestNavigationButtons(TestCase):
@@ -11,29 +10,25 @@ class TestNavigationButtons(TestCase):
         self.subchild1 = ContentPageFactory(parent=self.first_child)
         self.subchild2 = ContentPageFactory(parent=self.first_child)
         self.last_child = ContentPageFactory(parent=self.home)
+        self.res_first_child = self.client.get(self.first_child.url)
+        self.res_subchild1 = self.client.get(self.subchild1.url)
+        self.res_subchild2 = self.client.get(self.subchild2.url)
+        self.res_last_child = self.client.get(self.last_child.url)
 
-    def test_previous_page_filter(self):
+    def test_previous_page(self):
+        self.assertEqual(self.res_first_child.context["previous"], None)
+        self.assertEqual(
+            self.res_subchild1.context["previous"].specific, self.first_child
+        )
+        self.assertEqual(
+            self.res_subchild2.context["previous"].specific, self.subchild1
+        )
+        self.assertEqual(
+            self.res_last_child.context["previous"].specific, self.subchild2
+        )
 
-        # A page’s first child links to its parent as previous page.
-        self.assertEqual(previous_page(self.first_child).specific, self.home)
-        # A page’s first child links to its parent as previous page.
-        self.assertEqual(previous_page(self.subchild1).specific, self.first_child)
-        # If there is a previous sibling, we link to it.
-        self.assertEqual(previous_page(self.subchild2).specific, self.subchild1)
-        # If the previous sibling page has child pages,
-        # we link to the sibling’s last child.
-        self.assertEqual(previous_page(self.last_child).specific, self.subchild2)
-
-    def test_next_page_filter(self):
-        # A parent page links to its first child as next page.
-        self.assertEqual(next_page(self.home).specific, self.first_child)
-        # A parent page links to its first child as next page.
-        self.assertEqual(next_page(self.first_child).specific, self.subchild1)
-        # If there is next sibling, we link to it.
-        self.assertEqual(next_page(self.subchild1).specific, self.subchild2)
-        # If there is no next sibling and child, we link to the first
-        # next sibling of the parent page.
-        self.assertEqual(next_page(self.subchild2).specific, self.last_child)
-        # If the page does not have any next siblings, children and
-        # next sibling of the parent page, we return None.
-        self.assertEqual(next_page(self.last_child), None)
+    def test_next_page(self):
+        self.assertEqual(self.res_first_child.context["next"].specific, self.subchild1)
+        self.assertEqual(self.res_last_child.context["next"], None)
+        self.assertEqual(self.res_subchild1.context["next"].specific, self.subchild2)
+        self.assertEqual(self.res_subchild2.context["next"].specific, self.last_child)
