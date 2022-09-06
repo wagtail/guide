@@ -1,0 +1,29 @@
+<div class="d-flex justify-content-center my-5 flex-wrap">
+    <div data-feedback-container>
+        <div class="fw-bold">
+            Was this page helpful?
+        </div>
+        <div class="d-flex justify-content-center m-3">
+            <button class="border border-0 bg-transparent" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page was helpful" data-bs-trigger="hover" data-happy-button>
+                {% include "./svg/happy.svg" %}
+            </button>
+            <button class="border border-0 bg-transparent" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page could be improved" data-bs-trigger="hover" data-unhappy-button>
+                {% include "./svg/unhappy.svg" %}
+            </button>
+        </div>
+    </div>
+
+    <div data-additional-feedback-container class="d-none">
+        <div class="d-flex justify-content-center flex-wrap">
+            <div class="my-2">
+                Help us improve by telling what you missed
+            </div>
+            <textarea data-feedback-text class="my-2 w-75" rows="3"></textarea>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button data-submit-button class="btn btn-primary m-1">
+                Submit
+            </button>
+        </div>
+    </div>
+</div>
