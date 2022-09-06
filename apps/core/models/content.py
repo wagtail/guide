@@ -43,3 +43,13 @@ class ContentPage(Page):
 
     content_panels = Page.content_panels + [FieldPanel("body")]
     base_form_class = ContentPageForm
+
+    def get_context(self, request, *args, **kwargs):
+        if self.live and self.show_in_menus:
+            context = super().get_context(request, *args, **kwargs)
+            pages = Page.objects.live().in_menu()
+            context.update(
+                previous=pages.filter(path__lt=self.path).last(),
+                next=pages.filter(path__gt=self.path).first(),
+            )
+            return context
