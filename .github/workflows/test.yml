@@ -50,6 +50,6 @@ jobs:
       - name: Missing migrations
         run: python manage.py makemigrations --check
       - name: Test
-        run: make test
+        run: make test-coverage
       - name: Lint
         run: make lint

@@ -4,6 +4,9 @@ buildfixtures:
 test:
 	DJANGO_SETTINGS_MODULE=apps.guide.settings.test python manage.py test
 
+test-coverage:
+	coverage run manage.py test && coverage report
+
 format:
 	isort apps
 	black apps
