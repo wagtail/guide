@@ -1,11 +1,13 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from wagtail.documents.models import AbstractDocument
-from wagtail.images.models import AbstractImage, AbstractRendition
+from wagtail.documents.models import AbstractDocument, Document
+from wagtail.images.models import AbstractImage, AbstractRendition, Image
 
 
 class CustomImage(AbstractImage):
     """Custom Image model"""
+    
+    admin_form_fields = Image.admin_form_fields
 
 
 class CustomRendition(AbstractRendition):
@@ -22,3 +24,5 @@ class CustomRendition(AbstractRendition):
 
 class CustomDocument(AbstractDocument):
     """Custom Document model"""
+    
+    admin_form_fields = Document.admin_form_fields
