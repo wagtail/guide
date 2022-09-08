@@ -86,7 +86,7 @@ This project is one of three [Wagtail](https://wagtail.org/) projects being spon
 
 ### Mentors
 
-- [Phil Dexter](https://github.com/phildexter)
+- [Thibaud Colas](https://github.com/thibaudcolas)
 - [Coen van der Kamp](https://github.com/allcaps)
 - [Meagen Voss](https://github.com/vossisboss)
 
