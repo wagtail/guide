@@ -91,4 +91,4 @@ This project is one of three [Wagtail](https://wagtail.org/) projects being spon
 - [Meagen Voss](https://github.com/vossisboss)
 
 
-You can learn more about our Google Summer of Code projects in this [blog](https://wagtail.org/blog/wagtail-cms-projects-for-google-summer-of-code-2022/) or on our [wiki page](https://github.com/wagtail/wagtail/wiki/Google-Summer-of-Code-2022).
+You can learn more about our Google Summer of Code project in [Google Summer of Code: Wagtail Editor Guide](https://wagtail.org/blog/google-summer-of-code-wagtail-editor-guide/), [Wagtail CMS projects for Google Summer of Code 2022](https://wagtail.org/blog/wagtail-cms-projects-for-google-summer-of-code-2022/) or on our [wiki page](https://github.com/wagtail/wagtail/wiki/Google-Summer-of-Code-2022).
