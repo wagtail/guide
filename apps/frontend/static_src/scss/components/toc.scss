@@ -23,7 +23,7 @@
         li {
             display: flex;
             align-items: center;
-            margin-bottom: ($gutter / 4);
+            margin-bottom: ($gutter * 0.25);
 
             &::before {
                 content: "";

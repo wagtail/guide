@@ -1,28 +1,30 @@
 // Wagtail Guide Bootstrap defaults.
 
 // Color system
-$teal:   #007d7e;
+$teal: #007d7e;
 $primary: $teal;
-$secondary: #80D7D8;
+$secondary: #80d7d8;
 $body-bg: #f5f3f8;
 
+$color--off-black: #262626;
 $color--black: #000;
+
 // Typography
-$font-size-root:             null !default;
-$font-size-base:             1rem !default; // Assumes the browser default, typically `16px`
-$font-size-sm:               $font-size-base * .875 !default;
-$font-family-base:           Kumbh Sans, -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif, Apple Color Emoji, "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-base: Kumbh Sans, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    system-ui, Roboto, "Helvetica Neue", Arial, sans-serif, Apple Color Emoji,
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
 // scss-docs-start nav-variables
-$nav-link-padding-y:                .25rem;
-$nav-link-padding-x:                .5rem;
-$nav-link-font-size:                $font-size-sm;
-$nav-link-font-weight:              600;
-$nav-link-color:                    #262626;
-$nav-link-hover-color:              black;
-$nav-link-color:                    #262626 !default;
-$nav-link-hover-color:              black !default;
-$nav-pills-link-active-bg:          #2e1f5e;
+$nav-link-padding-y: 0.25rem;
+$nav-link-padding-x: 0.5rem;
+$nav-link-font-size: 16px;
+$nav-link-font-weight: 600;
+$nav-link-color: $color--off-black;
+$nav-link-hover-color: $color--black;
+$nav-link-color: $color--off-black !default;
+$nav-link-hover-color: $color--black !default;
+$nav-pills-link-active-bg: #2e1f5e;
+
 // Grid
 $gutter: 20px;
 
