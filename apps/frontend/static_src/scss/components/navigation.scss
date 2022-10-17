@@ -12,6 +12,8 @@
     }
 
     &__link {
+        position: relative;
+        left: -10px;
         display: block;
         padding: 5px 10px;
         border-radius: $border-radius;
