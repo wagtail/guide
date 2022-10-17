@@ -8,9 +8,7 @@
             </li>
             <li class="navigation__item">
         {% endif %}
-                <a href="{% pageurl item %}" class="navigation__link{% if info.level == 0 %} navigation__link--heading{% endif %}{% if item.id == current_page.id %} active{% endif %}">
-                    {{ item }}
-                </a>
+                <a href="{% pageurl item %}" class="navigation__link{% if info.level == 0 %} navigation__link--heading{% endif %}{% if item.id == current_page.id %} active{% endif %}">{{ item }}</a>
         {% for close in info.close %}
             </li>
         </ul>
