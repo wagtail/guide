@@ -6,7 +6,7 @@
         <button class="nav-button m-1 ms-0">
           <div class="d-flex justify-content-center align-items-center">
             <img src="{% manifest 'images/arrow.svg' %}" width="30px" height="25px" class="nav-button__left-arrow">
-            <div class="fw-bold px-2 pe-3">
+            <div class="nav-button__label px-2 pe-3">
               {{ previous }}
             </div>
           </div>
@@ -17,7 +17,7 @@
       <a href="{% pageurl next %}" class="text-decoration-none">
         <button class="nav-button m-1 me-0">
           <div class="d-flex justify-content-center align-items-center">
-            <div class="fw-bold px-2 ps-3">
+            <div class="nav-button__label px-2 ps-3">
               {{ next }}
             </div>
             <img src="{% manifest 'images/arrow.svg' %}" width="30px" height="25px">
