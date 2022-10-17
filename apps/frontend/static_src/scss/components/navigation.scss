@@ -20,7 +20,8 @@
         color: $color--off-black;
         transition: color $transition, background-color $transition;
 
-        &:hover {
+        &:hover,
+        &:focus {
             background-color: $color--light-grey;
         }
 
