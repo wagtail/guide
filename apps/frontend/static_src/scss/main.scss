@@ -2,7 +2,7 @@
 @import "~bootstrap/scss/functions";
 
 //custom font
-@import "./kumbh_sans.scss";
+@import "./kumbh-sans.scss";
 
 //custom variables
 @import "./variables.scss";
@@ -52,14 +52,14 @@
 @import "~bootstrap/scss/utilities/api";
 
 //custom component styles
-@import "./components/section_grid_block";
+@import "./components/section-grid-block";
 @import "./components/navigation";
-@import "./components/nav_button.scss";
+@import "./components/nav-button.scss";
 @import "./components/footer.scss";
 @import "./components/rich-text.scss";
 @import "./components/alert.scss";
-@import "./components/section_link";
-@import "./components/feedback_emoji.scss";
+@import "./components/section-link";
+@import "./components/feedback-emoji.scss";
 
 @import "./components/base.scss";
 @import "./components/headings.scss";
