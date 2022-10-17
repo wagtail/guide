@@ -3,25 +3,29 @@
 {% load wagtailcore_tags core_tags %}
 
 {% block content %}
-<div class="d-none d-md-block col-md-4 col-lg-3 pe-md-5">
-  {% navigation %}
-</div>
+    <div class="d-none d-md-block col-md-4 col-lg-3 pe-md-5">
+        {% navigation %}
+    </div>
 
-<main class="col-md-8 col-lg-7">
-  <h1>{{ page.title }}</h1>
+    <main class="col-md-8 col-lg-7 ps-md-5">
+        <h1 class="heading heading--one">{{ page.title }}</h1>
 
-  {% if page.table_of_contents %}
-  <div class="table_of_contents">
-    <h2 class="small fw-bold">On this page</h2>
-    {{ page.table_of_contents|richtext }}
-  </div>
-  {% endif %}
+        {% if page.table_of_contents %}
+            <div class="toc">
+                <h2 class="toc__heading small fw-bold">On this page</h2>
+                <div class="toc__content">
+                    {{ page.table_of_contents|richtext }}
+                </div>
+            </div>
+        {% endif %}
 
-  {% for block in page.body %}
-    {% include_block block %}
-  {% endfor %}
-  {% include '../components/nav_buttons.html' %}
-  {% include '../components/feedback.html' %}
-</main>
+        <div class="streamfield">
+            {% for block in page.body %}
+                {% include_block block %}
+            {% endfor %}
+        </div>
 
+        {% include '../components/nav_buttons.html' %}
+        {% include '../components/feedback.html' %}
+    </main>
 {% endblock %}
