@@ -1,0 +1,7 @@
+.language-selector {
+    position: relative;
+    z-index: 4;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: ($gutter * 2);
+}

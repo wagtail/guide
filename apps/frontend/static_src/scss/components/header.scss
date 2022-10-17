@@ -1,0 +1,8 @@
+.header {
+    position: sticky;
+    top: 0;
+
+    &__identity {
+        margin-bottom: ($gutter * 2);
+    }
+}

@@ -30,6 +30,7 @@
 @import "~bootstrap/scss/utilities/api";
 
 //custom component styles
+@import "./components/app";
 @import "./components/section-grid-block";
 @import "./components/navigation";
 @import "./components/nav-button.scss";
@@ -39,10 +40,13 @@
 @import "./components/section-link";
 @import "./components/feedback-emoji.scss";
 @import "./components/base.scss";
+@import "./components/header.scss";
 @import "./components/headings.scss";
 @import "./components/streamfield.scss";
 @import "./components/link-block.scss";
 @import "./components/toc.scss";
 @import "./components/dropdown-toggle.scss";
 @import "./components/search.scss";
+@import "./components/grid.scss";
+@import "./components/language-selector.scss";
 @import "./components/skip-link.scss";

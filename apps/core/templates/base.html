@@ -33,19 +33,38 @@
         {% endblock %}
     </head>
 
-    <body>
+    <body class="app">
         {% wagtailuserbar %}
 
-        {% include "components/header.html" %}
         {% include "components/skip-link.html" %}
 
-        <div class="container-lg px-md-5">
-          <div class="row">
-          {% block content %}{% endblock %}
-          </div>
+        <div class="grid">
+            <div class="grid__lines" aria-hidden="true">
+                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"></div>
+            </div>
+
+            <div class="app__header">
+                {% include "components/header.html" %}
+            </div>
+
+            <div class="app__content" id="main-content">
+                {% include "components/language_selector.html" %}
+                {% block content %}{% endblock %}
+            </div>
         </div>
 
-        {% include "components/footer.html" %}
+        <footer class="app__footer">
+            {% include "components/footer.html" %}
+        </footer>
 
         {# Global javascript #}
         <script src="{% manifest 'main.js' %}"></script>

@@ -8,6 +8,8 @@ $color--off-black: #262626;
 $color--black: #000;
 $color--blue: #2e1f5e;
 $color--white: #fff;
+$color--grid-line-light: rgba($color--white, 0.12);
+$color--grid-line-dark: rgba($color--black, 0.12);
 
 // Mapping colours
 $color--primary: $color--teal;
@@ -33,6 +35,7 @@ $nav-pills-link-active-bg: #2e1f5e;
 
 // Grid
 $gutter: 20px;
+$site-width: 1440px;
 
 // Border radius
 $border-radius: 4px;
