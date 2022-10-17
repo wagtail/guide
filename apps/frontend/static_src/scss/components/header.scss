@@ -5,4 +5,20 @@
     &__identity {
         margin-bottom: ($gutter * 2);
     }
+
+    &__logo-link {
+        display: block;
+        position: relative;
+        left: -48px;
+    }
+
+    &__strapline {
+        font-weight: 300;
+        font-size: 29px;
+    }
+
+    &__actions {
+        display: flex;
+        align-items: center;
+    }
 }
