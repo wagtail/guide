@@ -1,21 +1,30 @@
 .navigation {
-  @extend .nav;
-  @extend .nav-pills;
-  @extend .flex-column;
-  @extend .mb-3;
-  &__item {
-    @extend .nav-item;
-  }
-  &__link {
-    @extend .nav-link;
-    @extend .small;
-    &:hover {
-      background-color: darken($body-bg, 5);
+    @extend .nav;
+    @extend .nav-pills;
+    @extend .flex-column;
+    @extend .mb-3;
+
+    &__link {
+        display: block;
+        padding: 5px 10px;
+        border-radius: $border-radius;
+        font-size: 14px;
+        text-decoration: none;
+        color: $color--off-black;
+        transition: color $transition, background-color $transition;
+
+        &:hover {
+            background-color: $color--light-grey;
+        }
+
+        &--heading {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        &.active {
+            background-color: $color--active;
+            color: $color--white;
+        }
     }
-    &--large {
-      @extend .mb-1;
-      font-size: $font-size-sm * 1.6;
-      font-weight: 400;
-    }
-  }
 }

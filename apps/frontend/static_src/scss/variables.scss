@@ -1,13 +1,19 @@
 // Wagtail Guide Bootstrap defaults.
 
 // Color system
-$teal: #007d7e;
-$primary: $teal;
-$secondary: #80d7d8;
-$body-bg: #f5f3f8;
-
+$color--teal: #007d7e;
+$color--light-teal: #80d7d8;
+$color--light-grey: #f5f3f8;
 $color--off-black: #262626;
 $color--black: #000;
+$color--blue: #2e1f5e;
+$color--white: #fff;
+
+// Mapping colours
+$color--primary: $color--teal;
+$color--secondary: $color--light-teal;
+$color--active: $color--blue;
+$color--page-bg: $color--light-grey;
 
 // Typography
 $font-family-base: Kumbh Sans, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -28,5 +34,11 @@ $nav-pills-link-active-bg: #2e1f5e;
 // Grid
 $gutter: 20px;
 
+// Border radius
+$border-radius: 4px;
+
 // Breakpoints - should match bootstrap
 $breakpoints: ("medium" "(min-width: 599px)", "large" "(min-width: 1023px)");
+
+// Transitions
+$transition: 0.25ms ease-in-out;

@@ -5,3 +5,17 @@ html {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
+body {
+    background-color: $color--page-bg;
+}
+
+a {
+    color: $color--primary;
+    transition: color $transition;
+
+    &:hover,
+    &:focus {
+        color: $color--black;
+    }
+}
