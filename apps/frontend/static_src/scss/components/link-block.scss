@@ -1,7 +1,8 @@
 .link-block {
     $root: &;
 
-    &:hover {
+    &:hover,
+    &:focus {
         cursor: pointer;
 
         #{$root}__heading {

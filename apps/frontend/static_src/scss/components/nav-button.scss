@@ -5,7 +5,8 @@
     @extend .border;
     @extend .border-dark;
     @extend .rounded;
-    &:hover {
+    &:hover,
+    &:focus {
         @extend .bg-dark;
         @extend .text-light;
     }
