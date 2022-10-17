@@ -1,0 +1,17 @@
+@use "sass:list";
+
+// Media queries
+@mixin media-query($queries...) {
+    @each $query in $queries {
+        @each $breakpoint in $breakpoints {
+            $name: list.nth($breakpoint, 1);
+            $declaration: list.nth($breakpoint, 2);
+
+            @if $query == $name and $declaration {
+                @media only screen and #{$declaration} {
+                    @content;
+                }
+            }
+        }
+    }
+}

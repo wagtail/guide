@@ -1,0 +1,18 @@
+.heading {
+    font-weight: 700;
+
+    &--one {
+        font-size: 65px;
+        line-height: 1.1;
+        margin-bottom: ($gutter * 2);
+
+        &::after {
+            display: block;
+            content: "";
+            width: 70px;
+            height: 1px;
+            margin-top: ($gutter * 2);
+            background-color: $color--black;
+        }
+    }
+}

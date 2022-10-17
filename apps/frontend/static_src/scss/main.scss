@@ -6,6 +6,7 @@
 
 //custom variables
 @import "./variables.scss";
+@import "./mixins.scss";
 
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
@@ -59,4 +60,7 @@
 @import "./components/alert.scss";
 @import "./components/section_link";
 @import "./components/feedback_emoji.scss";
+
 @import "./components/base.scss";
+@import "./components/headings.scss";
+@import "./components/toc.scss";
