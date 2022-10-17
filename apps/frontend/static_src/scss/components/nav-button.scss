@@ -9,7 +9,12 @@
         @extend .bg-dark;
         @extend .text-light;
     }
-    .nav-button__left-arrow {
+    &__left-arrow {
         transform: rotateZ(180deg);
+    }
+
+    &__label {
+        font-size: 16px;
+        font-weight: 700;
     }
 }
