@@ -1,7 +1,12 @@
-/* latin and latin-ext */
 @font-face {
-  font-family: 'Kumbh Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: url(../fonts/KumbhSans-VariableFont_wght.woff2) format('woff2');
+    font-family: "Kumbh Sans";
+    src: url("../fonts/KumbhSans-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: block;
+}
+
+@font-face {
+    font-family: "Kumbh Sans";
+    src: url("../fonts/KumbhSans-Bold.woff2") format("woff2");
+    font-weight: 700;
 }
