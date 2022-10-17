@@ -1,4 +1,8 @@
 .footer {
     background-color: $color--blue;
     margin-top: 100px;
+
+    &__legal {
+        font-size: 14px;
+    }
 }
