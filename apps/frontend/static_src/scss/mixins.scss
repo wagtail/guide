@@ -15,3 +15,21 @@
         }
     }
 }
+
+// Layout
+@mixin grid-layout() {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0 $gutter;
+    max-width: $site-width;
+    margin: 0 auto;
+
+    @include media-query(medium) {
+        padding: 0 ($gutter * 3);
+    }
+
+    @include media-query(large) {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        margin: 0 auto;
+    }
+}

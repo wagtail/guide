@@ -1,0 +1,15 @@
+.app {
+    &__header {
+        position: relative;
+        z-index: 4;
+        grid-column: 1 / span 2;
+        margin-top: ($gutter * 2);
+    }
+
+    &__content {
+        position: relative;
+        z-index: 4;
+        grid-column: 4 / span 6;
+        margin-top: ($gutter * 2);
+    }
+}

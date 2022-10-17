@@ -1,0 +1,99 @@
+.grid {
+    @include grid-layout();
+
+    &__lines {
+        @include grid-layout();
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+
+        > div {
+            position: relative;
+            display: none;
+            height: 100vh;
+            padding-right: 4.28%;
+
+            @include media-query(medium) {
+                padding-right: 1.85%;
+            }
+
+            // Show all for large
+            @include media-query(large) {
+                display: block;
+                padding-right: 1.81%;
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                right: 0;
+                width: 1px;
+                height: 100%;
+                background-color: $color--grid-line-dark;
+                mix-blend-mode: multiply;
+            }
+
+            &::after {
+                content: "";
+                position: absolute;
+                right: 0;
+                width: 1px;
+                height: 100%;
+                background-color: $color--grid-line-light;
+                mix-blend-mode: screen;
+            }
+
+            // Only show first and last until large breakpoint
+            &:last-child,
+            &:first-child {
+                display: block;
+            }
+
+            // First item is only one to have a grid line on left side
+            &:first-child {
+                div {
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        width: 1px;
+                        height: 100%;
+                        background-color: $color--grid-line-dark;
+                        mix-blend-mode: multiply;
+
+                        @include media-query(large) {
+                            content: none;
+                        }
+                    }
+
+                    &::after {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        width: 1px;
+                        height: 100%;
+                        background-color: $color--grid-line-light;
+                        mix-blend-mode: screen;
+
+                        @include media-query(large) {
+                            content: none;
+                        }
+                    }
+                }
+            }
+
+            &:last-child {
+                &::before,
+                &::after {
+                    @include media-query(large) {
+                        content: none;
+                    }
+                }
+            }
+        }
+    }
+}
