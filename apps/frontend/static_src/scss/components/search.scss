@@ -1,0 +1,12 @@
+.search {
+    &__button {
+        color: $color--white;
+        background-color: $color--primary;
+        transition: background-color $transition;
+
+        &:hover,
+        &:focus {
+            background-color: $color--off-black;
+        }
+    }
+}
