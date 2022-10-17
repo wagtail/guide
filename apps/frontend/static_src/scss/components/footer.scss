@@ -1,17 +1,4 @@
 .footer {
-    background-color: #2e1f5e;
-    margin-top: 200px;
-
-    .link-block__description {
-        font-size: $font-size-sm;
-    }
-    .link-block:hover {
-        cursor: pointer;
-        .link-block__heading {
-            color: $color--secondary;
-        }
-        .footer-svg__path {
-            fill: $color--secondary;
-        }
-    }
+    background-color: $color--blue;
+    margin-top: 100px;
 }

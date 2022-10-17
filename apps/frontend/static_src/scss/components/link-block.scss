@@ -1,0 +1,19 @@
+.link-block {
+    $root: &;
+
+    &:hover {
+        cursor: pointer;
+
+        #{$root}__heading {
+            color: $color--secondary;
+        }
+
+        .footer-svg__path {
+            fill: $color--secondary;
+        }
+    }
+
+    &__description {
+        font-size: 14px;
+    }
+}
