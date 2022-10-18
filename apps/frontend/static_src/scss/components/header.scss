@@ -1,6 +1,6 @@
 .header {
     position: sticky;
-    top: 0;
+    top: ($gutter * 1.5);
 
     &__identity {
         margin-bottom: ($gutter * 2);
@@ -15,10 +15,48 @@
     &__strapline {
         font-weight: 300;
         font-size: 29px;
+        letter-spacing: -0.5px;
     }
 
     &__actions {
         display: flex;
         align-items: center;
+        position: relative;
+        top: -10px;
+    }
+
+    &__search-toggle {
+        position: relative;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background-color: transparent;
+        height: 42px;
+        width: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 20px;
+        transition: opacity $transition;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: -24px;
+            height: 30px;
+            width: 1px;
+            background-color: $color--off-black;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+
+        &:hover,
+        &:focus {
+            opacity: 0.6;
+        }
+    }
+
+    &__search-icon {
+        display: block;
     }
 }

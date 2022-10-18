@@ -4,7 +4,7 @@
     margin: 0;
 
     .navigation {
-        margin-bottom: ($gutter * 1.5);
+        margin-bottom: $gutter; // keep this as small as possible to prevent scroll in left col
     }
 
     &__item {
@@ -13,10 +13,11 @@
 
     &__link {
         position: relative;
-        left: -10px;
+        left: -10px; // ensure vertical reading line is aligned
+        width: calc(100% + 10px); // compensate for reading line adjustment
         display: block;
         padding: 5px 10px;
-        border-radius: $border-radius;
+        border-radius: $border-radius 0 0 $border-radius;
         font-size: 14px;
         text-decoration: none;
         color: $color--off-black;
