@@ -33,3 +33,23 @@
         margin: 0 auto;
     }
 }
+
+// Font sizes
+@mixin font-size($size) {
+    @if $size == null {
+        @warn 'Font size ‘#{$keyword}’ does not exist';
+    } @else {
+        $small-size: map-get($small-font-sizes, $size);
+        font-size: $small-size;
+
+        @include media-query(medium) {
+            $medium-size: map-get($medium-font-sizes, $size);
+            font-size: $medium-size;
+        }
+
+        @include media-query(large) {
+            $large-size: map-get($large-font-sizes, $size);
+            font-size: $large-size;
+        }
+    }
+}

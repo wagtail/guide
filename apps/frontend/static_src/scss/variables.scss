@@ -45,3 +45,46 @@ $breakpoints: ("medium" "(min-width: 599px)", "large" "(min-width: 1023px)");
 
 // Transitions
 $transition: 0.25ms ease-in;
+
+// Font sizes
+$base-font-size: 18px;
+
+$large-font-sizes: (
+    xxxxl: 90px,
+    xxxl: 76px,
+    xxl: 64px,
+    xl: 46px,
+    l: 32px,
+    m: 30px,
+    s: 24px,
+    xs: 18px,
+    xxs: 14px,
+    xxxs: 12px,
+);
+
+$medium-font-sizes: (
+    xxxxl: 78px,
+    xxxl: 68px,
+    xxl: 52px,
+    xl: 38px,
+    l: 28px,
+    m: 26px,
+    s: 20px,
+    xs: 16px,
+    xxs: 14px,
+    xxxs: 12px,
+);
+
+$small-font-sizes: (
+    xxxxl: 44px,
+    xxxl: 38px,
+    xxl: 32px,
+    xl: 28px,
+    l: 24px,
+    m: 22px,
+    s: 18px,
+    xs: 14px,
+    xxs: 14px,
+    // no value in styleguide
+    xxxs: 12px,
+);
