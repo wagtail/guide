@@ -1,0 +1,11 @@
+.primary-nav {
+    display: none;
+
+    &.is-visible {
+        display: block;
+    }
+
+    @include media-query(large) {
+        display: block;
+    }
+}

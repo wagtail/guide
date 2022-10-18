@@ -8,6 +8,10 @@ html {
 
 body {
     background-color: $color--page-bg;
+
+    &.no-scroll {
+        overflow-y: hidden;
+    }
 }
 
 a {

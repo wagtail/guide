@@ -12,10 +12,11 @@
     &__link-blocks {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-column: 1 / span 9;
+        grid-column: 1 / span 2;
         margin-bottom: ($gutter * 2);
 
         @include media-query(large) {
+            grid-column: 1 / span 9;
             grid-template-columns: 1fr 1fr 1fr;
         }
     }

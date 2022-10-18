@@ -9,8 +9,11 @@
     &__logo-link {
         display: block;
         position: relative;
-        inset-inline-start: -48px;
         transition: opacity $transition;
+
+        @include media-query(large) {
+            inset-inline-start: -48px;
+        }
 
         &:hover,
         &:focus {
@@ -29,6 +32,20 @@
         align-items: center;
         position: relative;
         top: -10px;
+        inset-inline-start: 48px;
+
+        @include media-query(large) {
+            inset-inline-start: 0;
+        }
+    }
+
+    &__burger {
+        position: absolute;
+        inset: 20px 12px auto auto;
+
+        @include media-query(large) {
+            display: none;
+        }
     }
 
     &__search-toggle {
