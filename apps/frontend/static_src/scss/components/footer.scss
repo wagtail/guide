@@ -1,7 +1,37 @@
 .footer {
     background-color: $color--blue;
+    padding: ($gutter * 2) 0 ($gutter * 3);
+    color: $color--white;
+
+    &__container {
+        @include grid-layout();
+    }
+
+    &__link-blocks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column: 1 / span 9;
+        margin-bottom: ($gutter * 2);
+
+        @include media-query(large) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+    }
 
     &__legal {
+        grid-column: 1 / span 4;
         font-size: 14px;
+    }
+
+    &__legal-link {
+        color: $color--light-teal;
+        text-decoration: none;
+        transition: color $transition;
+
+        &:hover,
+        &:focus {
+            text-decoration: underline;
+            color: $color--white;
+        }
     }
 }
