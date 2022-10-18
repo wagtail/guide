@@ -3,20 +3,6 @@
         position: relative;
         grid-column: 1 / span 2;
         padding-bottom: ($gutter * 2);
-        // background-color: $color--white;
-
-        // // Fill to the left with the same background colour
-        // &::before {
-        //     content: "";
-        //     position: absolute;
-        //     z-index: -1px;
-        //     left: 1px;
-        //     top: 0;
-        //     height: 100%;
-        //     width: 500%;
-        //     transform: translate3d(-100%, 0, 0);
-        //     background-color: $color--white;
-        // }
     }
 
     &__content {
