@@ -8,8 +8,8 @@ $color--off-black: #262626;
 $color--black: #000;
 $color--blue: #2e1f5e;
 $color--white: #fff;
-$color--grid-line-light: rgba($color--white, 0.12);
-$color--grid-line-dark: rgba($color--black, 0.12);
+$color--grid-line-light: rgba($color--white, 0.08);
+$color--grid-line-dark: rgba($color--black, 0.08);
 
 // Mapping colours
 $color--primary: $color--teal;
@@ -44,4 +44,4 @@ $border-radius: 4px;
 $breakpoints: ("medium" "(min-width: 599px)", "large" "(min-width: 1023px)");
 
 // Transitions
-$transition: 0.25ms ease-in-out;
+$transition: 0.25ms ease-in;
