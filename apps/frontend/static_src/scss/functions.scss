@@ -1,5 +1,3 @@
-@use "sass:map";
-
 // Strip the unit from the given value and return the value
 @function strip-unit($value) {
     @return $value / ($value * 0 + 1);
