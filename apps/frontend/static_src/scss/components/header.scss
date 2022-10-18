@@ -10,6 +10,12 @@
         display: block;
         position: relative;
         left: -48px;
+        transition: opacity $transition;
+
+        &:hover,
+        &:focus {
+            opacity: 0.8;
+        }
     }
 
     &__strapline {

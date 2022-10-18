@@ -1,0 +1,42 @@
+.section {
+    $root: &;
+    margin-bottom: ($gutter * 2);
+
+    &__container {
+        display: flex;
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+            #{$root}__heading {
+                color: $color--primary;
+            }
+
+            .svg_icon__animated_path {
+                transform: rotate(8deg) scale(0.8, 0.8);
+                transform-origin: 50% 50%;
+                transition: transform 0.1s;
+            }
+        }
+    }
+
+    &__icon {
+        padding-right: $gutter;
+        flex-basis: 16.665%;
+        min-width: 16.666%;
+        max-width: 16.666%;
+    }
+
+    &__heading {
+        color: $color--black;
+        font-size: 30px;
+        margin-bottom: ($gutter * 0.5);
+        font-weight: 700;
+        transition: color $transition;
+    }
+
+    &__description {
+        color: $color--grey;
+        font-size: 16px;
+    }
+}

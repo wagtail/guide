@@ -1,20 +1,14 @@
 {% load wagtailcore_tags %}
 
 {% if self.page %}
-<div class="col mx-2">
-    <a href="{% pageurl self.page %}" class="d-flex text-decoration-none text-black section-grid">
-        <div>
+<div class="section">
+    <a href="{% pageurl self.page %}" class="section__container">
+        <div class="section__icon">
           {% include self.icon %}
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="h3 fw-bold section-grid__heading">{{ self.title }}</div>
-          </div>
-          <div class="row">
-            <div class="col">
-              <p>{{ self.text }}</p>
-            </div>
-          </div>
+        <div class="section__content">
+            <h2 class="section__heading">{{ self.title }}</h2>
+            <p class="section__description">{{ self.text }}</p>
         </div>
     </a>
 </div>

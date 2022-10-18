@@ -1,17 +1,7 @@
 {% load wagtailcore_tags %}
 
-<div class="row mt-5 mx-5">
+<div class="section-grid">
     {% for block in self %}
-        {% if forloop.counter <= 2 %}
-            {% include_block block %}
-        {% endif %}
-    {% endfor %}
-</div>
-
-<div class="row mt-5 mx-5">
-    {% for block in self %}
-        {% if forloop.counter > 2 and forloop.counter <= 4 %}
-            {% include_block block %}
-        {% endif %}
+        {% include_block block %}
     {% endfor %}
 </div>
