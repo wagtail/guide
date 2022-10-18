@@ -65,6 +65,8 @@
 /* ============================================
     Font sizes
 */
+// @mixin font-size confllicting with BS so using fs
+
 @mixin fs($keyword) {
     $small-size: map.get($small-font-sizes, $keyword);
     $medium-size: map.get($medium-font-sizes, $keyword);
