@@ -3,15 +3,23 @@
     top: ($gutter * 1.5);
 
     &__identity {
+        display: flex;
         margin-bottom: ($gutter * 2);
+
+        @include media-query(large) {
+            flex-direction: column;
+        }
     }
 
     &__logo-link {
         display: block;
         position: relative;
         transition: opacity $transition;
+        width: 48px;
+        overflow: hidden;
 
         @include media-query(large) {
+            width: auto;
             inset-inline-start: -48px;
         }
 
