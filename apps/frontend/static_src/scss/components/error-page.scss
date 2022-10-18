@@ -1,0 +1,15 @@
+.error-page {
+    &__icon {
+        position: absolute;
+        width: 360px;
+        height: 430px;
+        transform: rotate(165deg);
+        z-index: -1;
+        inset: 30% 70%;
+        display: none;
+
+        @include media-query(large) {
+            display: block;
+        }
+    }
+}
