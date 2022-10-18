@@ -2,7 +2,7 @@
     position: absolute;
     z-index: 4;
     top: 0;
-    left: 0;
+    inset-inline-start: 0;
 
     &__container {
         padding: 0;
@@ -15,7 +15,7 @@
         position: absolute;
         top: -200px;
         font-size: 14px;
-        left: 0;
+        inset-inline-start: 0;
         color: $color--black;
         background-color: $color--white;
         padding: ($gutter * 0.5) $gutter;

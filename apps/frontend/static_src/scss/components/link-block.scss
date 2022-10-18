@@ -4,12 +4,12 @@
     &__container {
         display: flex;
         align-items: flex-end;
-        margin-right: ($gutter * 2);
+        margin-inline-end: ($gutter * 2);
     }
 
     &__icon {
         width: 50px;
-        margin-right: ($gutter * 0.5);
+        margin-inline-end: ($gutter * 0.5);
     }
 
     &__heading {

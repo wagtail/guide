@@ -9,7 +9,13 @@
     &__logo-link {
         display: block;
         position: relative;
-        left: -48px;
+        inset-inline-start: -48px;
+        transition: opacity $transition;
+
+        &:hover,
+        &:focus {
+            opacity: 0.8;
+        }
     }
 
     &__strapline {
@@ -36,18 +42,18 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-left: 20px;
+        margin-inline-start: 20px;
         transition: opacity $transition;
 
         &::before {
             content: "";
             position: absolute;
-            left: -24px;
+            inset-inline-start: -24px;
             height: 30px;
             width: 1px;
             background-color: $color--off-black;
-            margin-left: 20px;
-            margin-right: 20px;
+            margin-inline-start: 20px;
+            margin-inline-end: 20px;
         }
 
         &:hover,
