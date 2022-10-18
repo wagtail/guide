@@ -1,5 +1,6 @@
 html {
-    font-size: calc((#{$base-font-size} / 16px) * 100%);
+    font-family: $font-family-base;
+    font-size: calc(($base-font-size / 16px) * 100%);
     line-height: $base-line-height;
     color: $color--black;
     -webkit-font-smoothing: antialiased;

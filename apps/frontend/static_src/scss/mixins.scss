@@ -65,7 +65,7 @@
 /* ============================================
     Font sizes
 */
-@mixin font-size($keyword) {
+@mixin fs($keyword) {
     $small-size: map.get($small-font-sizes, $keyword);
     $medium-size: map.get($medium-font-sizes, $keyword);
     $large-size: map.get($large-font-sizes, $keyword);

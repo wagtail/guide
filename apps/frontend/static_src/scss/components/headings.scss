@@ -2,7 +2,7 @@
     font-weight: 700;
 
     &--one {
-        @include font-size(xxxl);
+        @include fs(xxxl);
         line-height: 1.1;
         margin-bottom: ($gutter * 2);
 
@@ -17,7 +17,7 @@
     }
 
     &--display {
-        @include font-size(xxxxl);
+        @include fs(xxxxl);
         line-height: 1.1;
         margin-bottom: ($gutter * 2);
     }

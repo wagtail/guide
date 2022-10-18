@@ -1,5 +1,4 @@
-// Configuration
-@import "~bootstrap/scss/functions";
+@import "./vendor/normalize";
 
 //custom font
 @import "./kumbh-sans.scss";
@@ -9,22 +8,25 @@
 @import "./functions.scss";
 @import "./mixins.scss";
 
+// Bootstrap Configuration
+@import "~bootstrap/scss/functions";
+
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
 
-// Layout & components
+// // Layout & components
 @import "~bootstrap/scss/root";
-@import "~bootstrap/scss/reboot";
-@import "~bootstrap/scss/type";
-@import "~bootstrap/scss/forms";
-@import "~bootstrap/scss/buttons";
-@import "~bootstrap/scss/transitions";
+// @import "~bootstrap/scss/reboot";
+// @import "~bootstrap/scss/type";
+// @import "~bootstrap/scss/forms";
+// @import "~bootstrap/scss/buttons";
+// @import "~bootstrap/scss/transitions";
 @import "~bootstrap/scss/dropdown";
 @import "~bootstrap/scss/modal";
 @import "~bootstrap/scss/tooltip";
 
-// Utilities
+// // Utilities
 @import "~bootstrap/scss/utilities/api";
 
 //custom component styles
