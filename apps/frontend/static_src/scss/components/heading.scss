@@ -1,0 +1,33 @@
+// Reset margins
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+}
+
+.heading {
+    font-weight: 700;
+
+    &--one {
+        @include fs(xxxl);
+        line-height: 1.1;
+        margin-bottom: ($gutter * 2);
+
+        &::after {
+            display: block;
+            content: "";
+            width: 70px;
+            height: 1px;
+            margin-top: ($gutter * 2);
+            background-color: $color--black;
+        }
+    }
+
+    &--display {
+        @include fs(xxxxl);
+        line-height: 1.1;
+        margin-bottom: ($gutter * 2);
+    }
+}
