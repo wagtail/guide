@@ -1,6 +1,6 @@
 # Guide
 
-Guide is a website to help content editors, moderators, administrators, and other users learn how to user the Wagtail content management system (CMS).
+Guide is a website to help content editors, moderators, administrators, and other users learn how to use the Wagtail content management system (CMS).
 
 The Wagtail guide will ultimately include:
 - Tutorials 
