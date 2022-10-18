@@ -1,62 +1,51 @@
 
-<div class="w-100 footer text-white">
-    <div class="container py-5">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-start justify-content-md-center">
-                <div class="link-block d-flex align-items-center justify-content-center mx-2 my-2">
-                    <div class="me-2">
+<div class="footer">
+    <div class="footer__container">
+        <div class="footer__link-blocks">
+            <div class="link-block">
+                <div class="link-block__container">
+                    <div class="link-block__icon">
                         {% include "./svg/info.svg" %}
                     </div>
-                    <div class="ms-2">
-                        <div class="link-block__heading fw-bold fs-5">
-                            About this guide
-                        </div>
+                    <div class="link-block__content">
+                        <h2 class="link-block__heading">About this guide</h2>
                         <div class="link-block__description">
                             Learn why we structured our documents like this
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-start justify-content-md-center">
-                <div class="link-block d-flex align-items-center justify-content-center mx-2 my-2">
-                    <div class="me-2">
+
+            <div class="link-block">
+                <div class="link-block__container">
+                    <div class="link-block__icon">
                         {% include "./svg/help.svg" %}
                     </div>
-                    <div class="ms-2">
-                        <div class="link-block__heading fw-bold fs-5">
-                            Help improve this guide
-                        </div>
+                    <div class="link-block__content">
+                        <h2 class="link-block__heading">Help improve this guide</h2>
                         <div class="link-block__description">
                             Contribute to open source with no coding experience needed
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-start justify-content-md-center">
-                <a href="https://wagtail.org/" class="text-decoration-none text-white">
-                    <div class="link-block d-flex align-items-center justify-content-center mx-2 my-2">
-                        <div class="me-2">
-                            {% include "./svg/wagtail.svg" %}
-                        </div>
-                        <div class="ms-2">
-                            <div class="link-block__heading fw-bold fs-5">
-                                Wagtail
-                            </div>
-                            <div class="link-block__description ">
-                                Visit Wagtail.org for more resources and Wagtail news
-                            </div>
+
+            <div class="link-block">
+                <div class="link-block__container">
+                    <div class="link-block__icon">
+                        {% include "./svg/wagtail.svg" %}
+                    </div>
+                    <div class="link-block__content">
+                        <h2 class="link-block__heading">Wagtail</h2>
+                        <div class="link-block__description">
+                            Visit Wagtail.org for more resources and Wagtail news
                         </div>
                     </div>
-                </a>
-            </div>
-        </div>
-        <div class="footer__legal accordion-body">
-            <div class="col">
-                <div class="mt-4 mb-3 mx-3">
-                    © Copyright {% now 'Y' %}, <a href="https://github.com/Hitansh-Shah" class="text-decoration-none text-secondary">Hitansh Shah</a> and contributors
                 </div>
             </div>
         </div>
+        <div class="footer__legal">
+            <p class="footer__legal-text">© Copyright {% now 'Y' %}, <a href="https://github.com/Hitansh-Shah" class="footer__legal-link">Hitansh Shah</a> and contributors</p>
+        </div>
     </div>
-
 </div>
