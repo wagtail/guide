@@ -1,5 +1,7 @@
 .footer {
     background-color: $color--blue;
+    // For High-contrast mode users
+    border-top: 1px solid $color--blue;
     padding: ($gutter * 2) 0 ($gutter * 3);
     color: $color--white;
 
