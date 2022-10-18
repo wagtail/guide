@@ -15,7 +15,7 @@
         @include fs(xxs);
         position: relative;
         inset-inline-start: -10px; // ensure vertical reading line is aligned
-        width: calc(100% + 10px); // compensate for reading line adjustment
+        width: calc(100% - 10px); // compensate for reading line adjustment
         display: block;
         padding: 5px 10px;
         border-radius: $border-radius 0 0 $border-radius;
