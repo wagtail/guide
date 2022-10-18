@@ -1,8 +1,17 @@
+// Reset margins
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0;
+}
+
 .heading {
     font-weight: 700;
 
     &--one {
-        font-size: 65px;
+        @include fs(xxxl);
         line-height: 1.1;
         margin-bottom: ($gutter * 2);
 
@@ -17,7 +26,7 @@
     }
 
     &--display {
-        font-size: 90px;
+        @include fs(xxxxl);
         line-height: 1.1;
         margin-bottom: ($gutter * 2);
     }

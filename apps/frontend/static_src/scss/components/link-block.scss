@@ -17,14 +17,14 @@
     }
 
     &__heading {
-        font-size: 20px;
+        font-size: $base-font-size;
         font-weight: 700;
         line-height: 1.2;
         margin-bottom: 5px;
     }
 
     &__description {
-        font-size: 14px;
+        @include fs(xxs);
         line-height: 1.2;
     }
 
@@ -39,9 +39,5 @@
         .footer-svg__path {
             fill: $color--secondary;
         }
-    }
-
-    &__description {
-        font-size: 14px;
     }
 }

@@ -22,8 +22,8 @@
     }
 
     &__legal {
+        @include fs(xxs);
         grid-column: 1 / span 4;
-        font-size: 14px;
     }
 
     &__legal-link {

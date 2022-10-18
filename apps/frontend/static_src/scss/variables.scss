@@ -41,8 +41,51 @@ $site-width: 1440px;
 // Border radius
 $border-radius: 4px;
 
-// Breakpoints - should match bootstrap
-$breakpoints: ("medium" "(min-width: 599px)", "large" "(min-width: 1023px)");
-
 // Transitions
 $transition: 0.25ms ease-in;
+
+// Font sizes
+$base-font-size: 20px;
+$base-line-height: 1.4;
+
+$large-font-sizes: (
+    xxxxl: 90px,
+    xxxl: 65px,
+    xxl: 40px,
+    xl: 30px,
+    l: 25px,
+    m: 22px,
+    s: 18px,
+    xs: 16px,
+    xxs: 14px,
+    xxxs: 12px,
+);
+
+$medium-font-sizes: (
+    xxxxl: 70px,
+    xxxl: 55px,
+    xxl: 35px,
+    xl: 28px,
+    l: 25px,
+    m: 22px,
+    s: 18px,
+    xs: 16px,
+    xxs: 14px,
+    xxxs: 12px,
+);
+
+$small-font-sizes: (
+    xxxxl: 40px,
+    xxxl: 35px,
+    xxl: 30px,
+    xl: 26px,
+    l: 24px,
+    m: 22px,
+    s: 18px,
+    xs: 16px,
+    xxs: 14px,
+    xxxs: 12px,
+);
+
+// Breakpoints - should match bootstrap
+$breakpoints: ("medium" "(min-width: 599px)", "large" "(min-width: 1023px)");
