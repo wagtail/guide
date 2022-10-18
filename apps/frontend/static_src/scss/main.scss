@@ -1,29 +1,32 @@
 // Configuration
-@import "~bootstrap/scss/functions";
+@import "./vendor/normalize";
 
 //custom font
 @import "./kumbh-sans.scss";
 
 //custom variables
 @import "./variables.scss";
+@import "./functions.scss";
 @import "./mixins.scss";
+
+@import "~bootstrap/scss/functions";
 
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
 
-// Layout & components
-@import "~bootstrap/scss/root";
-@import "~bootstrap/scss/reboot";
-@import "~bootstrap/scss/type";
+// // Layout & components
+// @import "~bootstrap/scss/root";
+// @import "~bootstrap/scss/reboot";
+// @import "~bootstrap/scss/type";
 @import "~bootstrap/scss/forms";
 @import "~bootstrap/scss/buttons";
-@import "~bootstrap/scss/transitions";
+// @import "~bootstrap/scss/transitions";
 @import "~bootstrap/scss/dropdown";
 @import "~bootstrap/scss/modal";
 @import "~bootstrap/scss/tooltip";
 
-// Utilities
+// // Utilities
 @import "~bootstrap/scss/utilities/api";
 
 //custom component styles
@@ -38,7 +41,7 @@
 @import "./components/feedback-emoji.scss";
 @import "./components/base.scss";
 @import "./components/header.scss";
-@import "./components/headings.scss";
+@import "./components/heading.scss";
 @import "./components/streamfield.scss";
 @import "./components/link-block.scss";
 @import "./components/toc.scss";

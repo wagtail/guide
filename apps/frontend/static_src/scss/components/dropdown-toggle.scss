@@ -1,5 +1,5 @@
 .dropdown-toggle {
-    font-size: 16px;
+    @include fs(xs);
     font-weight: 700;
 
     &::after {

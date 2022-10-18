@@ -19,8 +19,8 @@
     }
 
     &__strapline {
+        @include rem-font-size(29px); // one off font size
         font-weight: 300;
-        font-size: 29px;
         letter-spacing: -0.5px;
     }
 

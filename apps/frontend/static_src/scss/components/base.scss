@@ -1,7 +1,8 @@
 html {
-    font-size: calc((20px / 16px) * 100%);
-    line-height: 1.4;
-    color: $color--black;
+    font-family: $font-family-base;
+    font-size: calc(($base-font-size / 16px) * 100%);
+    line-height: $base-line-height;
+    color: $color--off-black;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

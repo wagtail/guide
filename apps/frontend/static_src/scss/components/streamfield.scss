@@ -1,19 +1,19 @@
 .streamfield {
     h2 {
-        font-size: 30px;
+        @include fs(xl);
         margin-top: ($gutter * 2);
         margin-bottom: $gutter;
         font-weight: 700;
     }
 
     h3 {
-        font-size: 24px;
+        @include fs(l);
         margin-bottom: $gutter;
         font-weight: 700;
     }
 
     h4 {
-        font-size: 18px;
+        font-size: $base-font-size;
         margin-bottom: $gutter;
         font-weight: 700;
     }

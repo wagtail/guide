@@ -1,4 +1,5 @@
 @use "sass:list";
+@use "sass:map";
 
 // Media queries
 @mixin media-query($queries...) {
@@ -31,5 +32,57 @@
     @include media-query(large) {
         grid-template-columns: repeat(10, 1fr);
         margin: 0 auto;
+    }
+}
+
+/* ============================================
+    Output a rem and px fallback value for the given property
+*/
+@mixin rem($property, $values) {
+    $px: ();
+    $rem: ();
+
+    @each $value in $values {
+        @if $value == 0 or $value == auto or $value == inherit {
+            $px: list.append($px, $value);
+            $rem: list.append($rem, $value);
+        } @else {
+            $px: list.append($px, $value);
+            $rem: list.append($rem, rem(strip-unit($value)));
+        }
+    }
+    #{$property}: $px;
+    #{$property}: $rem;
+}
+
+/* ============================================
+    Output a `font-size: [x]rem;` declaration for the given px value
+*/
+@mixin rem-font-size($font-size) {
+    @include rem(font-size, $font-size);
+}
+
+/* ============================================
+    Font sizes
+*/
+// @mixin font-size confllicting with BS so using fs
+
+@mixin fs($keyword) {
+    $small-size: map.get($small-font-sizes, $keyword);
+    $medium-size: map.get($medium-font-sizes, $keyword);
+    $large-size: map.get($large-font-sizes, $keyword);
+
+    @if $small-size == null or $medium-size == null or $large-size == null {
+        @warn 'Font size ‘#{$keyword}’ does not exist';
+    } @else {
+        @include rem-font-size($small-size);
+
+        @include media-query(medium) {
+            @include rem-font-size($medium-size);
+        }
+
+        @include media-query(large) {
+            @include rem-font-size($large-size);
+        }
     }
 }
