@@ -41,24 +41,22 @@ class TestNavigation(TestCase):
         result = template.render(Context({}))
         expected = """
             <nav>
-              <ul class="navigation">
-                <li class="navigation__item">
-                  <a href="/en-latest/a/"
-                     class="navigation__link navigation__link--heading">a</a>
-                  <ul class="navigation">
+                <ul class="navigation">
                     <li class="navigation__item">
-                      <a href="/en-latest/a/ab/" class="navigation__link">ab</a>
+                        <a href="/en-latest/a/" class="navigation__link navigation__link--heading">a</a>
+                        <ul class="navigation">
+                            <li class="navigation__item">
+                                <a href="/en-latest/a/ab/" class="navigation__link">ab</a>
+                            </li>
+                            <li class="navigation__item">
+                                <a href="/en-latest/a/ac/" class="navigation__link">ac</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="navigation__item">
-                      <a href="/en-latest/a/ac/" class="navigation__link">ac</a>
+                        <a href="/en-latest/b/" class="navigation__link navigation__link--heading">b</a>
                     </li>
-                  </ul>
-                </li>
-                <li class="navigation__item">
-                  <a href="/en-latest/b/"
-                     class="navigation__link navigation__link--heading">b</a>
-                </li>
-              </ul>
+                </ul>
             </nav>
         """
         self.assertHTMLEqual(result, expected)
