@@ -16,6 +16,11 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        {# Open links in a new tab if the page is rendered in the preview panel #}
+        {% if request.in_preview_panel %}
+            <base target="_blank">
+        {% endif %}
+
         <link rel="apple-touch-icon" sizes="180x180" href="{% manifest 'images/apple-touch-icon.png' %}">
         <link rel="icon" type="image/png" sizes="32x32" href="{% manifest 'images/favicon-32x32.png' %}">
         <link rel="icon" type="image/png" sizes="16x16" href="{% manifest 'images/favicon-16x16.png' %}">
