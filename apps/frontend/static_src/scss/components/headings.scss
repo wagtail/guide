@@ -15,4 +15,10 @@
             background-color: $color--black;
         }
     }
+
+    &--display {
+        font-size: 90px;
+        line-height: 1.1;
+        margin-bottom: ($gutter * 2);
+    }
 }
