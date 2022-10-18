@@ -47,7 +47,8 @@ $breakpoints: ("medium" "(min-width: 599px)", "large" "(min-width: 1023px)");
 $transition: 0.25ms ease-in;
 
 // Font sizes
-$base-font-size: 18px;
+$base-font-size: 20px;
+$base-line-height: 1.4;
 
 $large-font-sizes: (
     xxxxl: 90px,

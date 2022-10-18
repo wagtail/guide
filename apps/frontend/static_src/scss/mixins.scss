@@ -34,22 +34,52 @@
     }
 }
 
-// Font sizes
-@mixin font-size($size) {
-    @if $size == null {
+/* ============================================
+    Output a rem and px fallback value for the given property
+*/
+@mixin rem($property, $values) {
+    $px: ();
+    $rem: ();
+
+    @each $value in $values {
+        @if $value == 0 or $value == auto or $value == inherit {
+            $px: list.append($px, $value);
+            $rem: list.append($rem, $value);
+        } @else {
+            $px: list.append($px, $value);
+            $rem: list.append($rem, rem(strip-unit($value)));
+        }
+    }
+    #{$property}: $px;
+    #{$property}: $rem;
+}
+
+/* ============================================
+    Output a `font-size: [x]rem;` declaration for the given px value
+*/
+@mixin rem-font-size($font-size) {
+    @include rem(font-size, $font-size);
+}
+
+/* ============================================
+    Font sizes
+*/
+@mixin font-size($keyword) {
+    $small-size: map.get($small-font-sizes, $keyword);
+    $medium-size: map.get($medium-font-sizes, $keyword);
+    $large-size: map.get($large-font-sizes, $keyword);
+
+    @if $small-size == null or $medium-size == null or $large-size == null {
         @warn 'Font size ‘#{$keyword}’ does not exist';
     } @else {
-        $small-size: map-get($small-font-sizes, $size);
-        font-size: $small-size;
+        @include rem-font-size($small-size);
 
         @include media-query(medium) {
-            $medium-size: map-get($medium-font-sizes, $size);
-            font-size: $medium-size;
+            @include rem-font-size($medium-size);
         }
 
         @include media-query(large) {
-            $large-size: map-get($large-font-sizes, $size);
-            font-size: $large-size;
+            @include rem-font-size($large-size);
         }
     }
 }
