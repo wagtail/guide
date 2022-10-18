@@ -1,11 +1,29 @@
 .primary-nav {
     display: none;
+    position: absolute;
+    z-index: 5;
+    background-color: $color--page-bg;
+    padding: ($gutter * 6) $gutter ($gutter * 2);
+    width: 100%;
+    top: 0;
+    inset-inline-end: -$gutter;
+    max-height: 100vh;
+    overflow-x: scroll;
 
-    &.is-visible {
-        display: block;
+    @include media-query(medium) {
+        inset-inline-end: -($gutter * 3);
+        padding: $gutter ($gutter * 3);
     }
 
     @include media-query(large) {
+        position: static;
+        display: block;
+        padding: 0;
+        background-color: transparent;
+        max-height: 0;
+    }
+
+    &.is-visible {
         display: block;
     }
 }
