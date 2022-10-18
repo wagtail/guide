@@ -43,7 +43,8 @@ class TestNavigation(TestCase):
             <nav>
                 <ul class="navigation">
                     <li class="navigation__item">
-                        <a href="/en-latest/a/" class="navigation__link navigation__link--heading">a</a>
+                        <a href="/en-latest/a/"
+                            class="navigation__link navigation__link--large">a</a>
                         <ul class="navigation">
                             <li class="navigation__item">
                                 <a href="/en-latest/a/ab/" class="navigation__link">ab</a>
@@ -54,7 +55,8 @@ class TestNavigation(TestCase):
                         </ul>
                     </li>
                     <li class="navigation__item">
-                        <a href="/en-latest/b/" class="navigation__link navigation__link--heading">b</a>
+                        <a href="/en-latest/b/"
+                            class="navigation__link navigation__link--large">b</a>
                     </li>
                 </ul>
             </nav>
