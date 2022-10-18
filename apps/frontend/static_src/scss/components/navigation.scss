@@ -12,13 +12,13 @@
     }
 
     &__link {
+        @include fs(xxs);
         position: relative;
         inset-inline-start: -10px; // ensure vertical reading line is aligned
         width: calc(100% + 10px); // compensate for reading line adjustment
         display: block;
         padding: 5px 10px;
         border-radius: $border-radius 0 0 $border-radius;
-        font-size: 14px;
         text-decoration: none;
         color: $color--off-black;
         transition: color $transition, background-color $transition;
@@ -29,7 +29,7 @@
         }
 
         &--heading {
-            font-size: 16px;
+            @include fs(xs);
             font-weight: 700;
         }
 

@@ -11,10 +11,10 @@
     }
 
     &__link {
+        @include fs(xxs);
         display: block;
         position: absolute;
         top: -200px;
-        font-size: 14px;
         inset-inline-start: 0;
         color: $color--black;
         background-color: $color--white;

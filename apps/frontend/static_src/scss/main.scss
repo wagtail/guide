@@ -1,3 +1,4 @@
+// Configuration
 @import "./vendor/normalize";
 
 //custom font
@@ -8,14 +9,14 @@
 @import "./functions.scss";
 @import "./mixins.scss";
 
-// Bootstrap Configuration
 @import "~bootstrap/scss/functions";
+
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
 
 // // Layout & components
-@import "~bootstrap/scss/root";
+// @import "~bootstrap/scss/root";
 // @import "~bootstrap/scss/reboot";
 // @import "~bootstrap/scss/type";
 // @import "~bootstrap/scss/forms";
@@ -40,7 +41,7 @@
 @import "./components/feedback-emoji.scss";
 @import "./components/base.scss";
 @import "./components/header.scss";
-@import "./components/headings.scss";
+@import "./components/heading.scss";
 @import "./components/streamfield.scss";
 @import "./components/link-block.scss";
 @import "./components/toc.scss";

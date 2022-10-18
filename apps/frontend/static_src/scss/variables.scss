@@ -55,9 +55,10 @@ $large-font-sizes: (
     xl: 30px,
     l: 25px,
     m: 22px,
-    s: 16px,
-    xs: 14px,
+    s: 18px,
+    xs: 16px,
     xxs: 14px,
+    xxxs: 12px,
 );
 
 $medium-font-sizes: (
@@ -70,6 +71,7 @@ $medium-font-sizes: (
     s: 20px,
     xs: 16px,
     xxs: 14px,
+    xxxs: 12px,
 );
 
 $small-font-sizes: (
@@ -82,6 +84,7 @@ $small-font-sizes: (
     s: 18px,
     xs: 14px,
     xxs: 14px,
+    xxxs: 12px,
 );
 
 // Breakpoints - should match bootstrap

@@ -21,22 +21,21 @@
     }
 
     &__icon {
-        padding-right: $gutter;
-        flex-basis: 16.665%;
+        flex-basis: 16.666%;
         min-width: 16.666%;
         max-width: 16.666%;
     }
 
     &__heading {
+        @include fs(xl);
         color: $color--black;
-        font-size: 30px;
         margin-bottom: ($gutter * 0.5);
         font-weight: 700;
         transition: color $transition;
     }
 
     &__description {
+        @include fs(xs);
         color: $color--grey;
-        font-size: 16px;
     }
 }
