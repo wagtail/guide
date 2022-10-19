@@ -3,19 +3,20 @@
 Guide is a website to help content editors, moderators, administrators, and other users learn how to user the Wagtail content management system (CMS).
 
 The Wagtail guide will ultimately include:
-- Tutorials
-- How-to articles
-- Reference materials
-- Walkthroughs and visual learning materials
+
+-   Tutorials
+-   How-to articles
+-   Reference materials
+-   Walkthroughs and visual learning materials
 
 You can learn more about the documentation system [here](https://documentation.divio.com/).
 
 # Table of Contents
 
-- [Installation](#installation)
-- [Gitpod](#gitpod)
-- [Contributing](#contributing)
-- [Other Notes](#other-notes)
+-   [Installation](#installation)
+-   [Gitpod](#gitpod)
+-   [Contributing](#contributing)
+-   [Other Notes](#other-notes)
 
 # Installation
 
@@ -23,11 +24,11 @@ We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/W
 
 #### Dependencies
 
-- Python >= 3.9
-- Poetry
-- Git
-- Node 16.*
-- [Yarn](https://yarnpkg.com/)
+-   Python >= 3.9
+-   Poetry
+-   Git
+-   Node 16.\*
+-   [Yarn](https://yarnpkg.com/)
 
 ### Setting up Wagtail guide in a virtual environment
 
@@ -68,10 +69,9 @@ With Gitpod you can deploy a ready-to-code Wagtail Guide development environment
 
 Steps:
 
-1. Click the ``Open in Gitpod`` button.
+1. Click the `Open in Gitpod` button.
 2. Relax: a development environment with an active Wagtail Guide site will be created for you.
 3. Login at `/admin/` with username `admin` and password `changeme`
-
 
 # Contributing
 
@@ -91,13 +91,12 @@ This project is one of three [Wagtail](https://wagtail.org/) projects being spon
 
 ### Contributor
 
-- [Hitansh Shah](https://github.com/Hitansh-Shah)
+-   [Hitansh Shah](https://github.com/Hitansh-Shah)
 
 ### Mentors
 
-- [Thibaud Colas](https://github.com/thibaudcolas)
-- [Coen van der Kamp](https://github.com/allcaps)
-- [Meagen Voss](https://github.com/vossisboss)
-
+-   [Thibaud Colas](https://github.com/thibaudcolas)
+-   [Coen van der Kamp](https://github.com/allcaps)
+-   [Meagen Voss](https://github.com/vossisboss)
 
 You can learn more about our Google Summer of Code project in [Google Summer of Code: Wagtail Editor Guide](https://wagtail.org/blog/google-summer-of-code-wagtail-editor-guide/), [Wagtail CMS projects for Google Summer of Code 2022](https://wagtail.org/blog/wagtail-cms-projects-for-google-summer-of-code-2022/) or on our [wiki page](https://github.com/wagtail/wagtail/wiki/Google-Summer-of-Code-2022).

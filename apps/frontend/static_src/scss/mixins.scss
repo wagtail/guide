@@ -1,5 +1,5 @@
-@use "sass:list";
-@use "sass:map";
+@use 'sass:list';
+@use 'sass:map';
 
 // Media queries
 @mixin media-query($queries...) {

@@ -20,9 +20,9 @@ $color--active: $color--blue;
 $color--page-bg: $color--light-grey;
 
 // Typography
-$font-family-base: Kumbh Sans, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    system-ui, Roboto, "Helvetica Neue", Arial, sans-serif, Apple Color Emoji,
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+$font-family-base: Kumbh Sans, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    system-ui, Roboto, 'Helvetica Neue', Arial, sans-serif, Apple Color Emoji,
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
 // scss-docs-start nav-variables
 $nav-link-padding-y: 0.25rem;
@@ -95,4 +95,4 @@ $small-font-sizes: (
 );
 
 // Breakpoints - should match bootstrap
-$breakpoints: ("medium" "(min-width: 599px)", "large" "(min-width: 1023px)");
+$breakpoints: ('medium' '(min-width: 599px)', 'large' '(min-width: 1023px)');

@@ -2,12 +2,12 @@
 
 The Wagtail Guide is a Dockerized Django application running on Heroku:
 
-- Persistent data is stored in Heroku Postgres
-- Heroku Data for Redis is used as a cache
-- Logs are archived to Papertrail for historical analysis
-- User-uploaded files are stored in AWS S3
-- Email is handled by Mailgun
-- Sentry is used for error monitoring
+-   Persistent data is stored in Heroku Postgres
+-   Heroku Data for Redis is used as a cache
+-   Logs are archived to Papertrail for historical analysis
+-   User-uploaded files are stored in AWS S3
+-   Email is handled by Mailgun
+-   Sentry is used for error monitoring
 
 The application itself runs in Heroku's Europe region (`eu-west-1` (Dublin, Ireland)).
 
@@ -15,7 +15,7 @@ The application itself runs in Heroku's Europe region (`eu-west-1` (Dublin, Irel
 
 Deployment is handled automatically by Heroku. When commits are pushed to `main`, Heroku automatically begins building and deploying the site. This deployment only occurs _after_ CI has run and passed.
 
-Currently, only a staging environment exists, so `main` deploys to staging. Once a production environment exists, this will be updated. 
+Currently, only a staging environment exists, so `main` deploys to staging. Once a production environment exists, this will be updated.
 
 ## Access
 
@@ -27,4 +27,4 @@ Whilst Torchbox's sysadmin team maintain and monitor the application's infrastru
 
 ## Useful links
 
-- https://github.com/wagtail/guide/pull/47
+-   https://github.com/wagtail/guide/pull/47
