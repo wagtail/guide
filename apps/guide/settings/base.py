@@ -264,7 +264,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#environment-variables
 if "AWS_STORAGE_BUCKET_NAME" in env:
     # Add django-storages to the installed apps
-    INSTALLED_APPS = INSTALLED_APPS + ["storages", "wagtail_storages"]
+    INSTALLED_APPS = INSTALLED_APPS + ["storages"]
 
     # https://docs.djangoproject.com/en/stable/ref/settings/#default-file-storage
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
