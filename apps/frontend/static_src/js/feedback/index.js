@@ -1,28 +1,31 @@
 import { Tooltip } from 'bootstrap';
-// Function to fetch cookie according to django docs
-// https://docs.djangoproject.com/en/4.1/howto/csrf/#acquiring-the-token-if-csrf-use-sessions-and-csrf-cookie-httponly-are-false
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === name + '=') {
-                cookieValue = decodeURIComponent(
-                    cookie.substring(name.length + 1),
-                );
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
 
+/**
+ * Function to fetch cookie according to django docs
+ * https://docs.djangoproject.com/en/4.1/howto/csrf/#acquiring-the-token-if-csrf-use-sessions-and-csrf-cookie-httponly-are-false
+ *
+ * @param {string} name
+ * @returns {string?}
+ */
+function getCookie(name) {
+    const cookies = (document.cookie || '')
+        .split(';')
+        .map((cookie) => cookie.trim());
+
+    const foundCookie = cookies.find(
+        (cookie) => cookie.substring(0, name.length + 1) === name + '=',
+    );
+
+    return foundCookie
+        ? decodeURIComponent(foundCookie.substring(name.length + 1))
+        : null;
+}
+
+/**
+ * Code to enable tooltip according to
+ * https://getbootstrap.com/docs/5.2/components/tooltips/#enable-tooltips
+ */
 export const handleFeedback = () => {
-    //  Code to enable tooltip according to
-    //  https://getbootstrap.com/docs/5.2/components/tooltips/#enable-tooltips
     const tooltipTriggerList = document.querySelectorAll(
         '[data-bs-toggle="tooltip"]',
     );
@@ -43,7 +46,7 @@ export const handleFeedback = () => {
 
     let feedbackPk = null;
 
-    const post_feedback = async (feedback) => {
+    const postFeedback = async (feedback) => {
         try {
             const res = await fetch(window.location.pathname, {
                 method: 'POST',
@@ -51,7 +54,7 @@ export const handleFeedback = () => {
                     feedback,
                 }),
                 headers: {
-                    'X-CSRFToken': csrftoken,
+                    'X-CSRFToken': getCookie('csrftoken'),
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             });
@@ -60,16 +63,17 @@ export const handleFeedback = () => {
                 tooltip.dispose();
             });
             feedbackContainer.innerHTML = 'Thanks for your feedback!';
-            if (feedback == 'unhappy') {
-                feedbackPk = data['pk'];
+            if (feedback === 'unhappy') {
+                feedbackPk = data.pk;
                 additionalFeedbackContainer.classList.add('active');
             }
         } catch (err) {
+            // eslint-disable-next-line no-console
             console.log(err);
         }
     };
 
-    const update_feedback = async (pk) => {
+    const updateFeedback = async (pk) => {
         try {
             await fetch(window.location.pathname, {
                 method: 'POST',
@@ -78,24 +82,25 @@ export const handleFeedback = () => {
                     feedback_text: feedbackText.value,
                 }),
                 headers: {
-                    'X-CSRFToken': csrftoken,
+                    'X-CSRFToken': getCookie('csrftoken'),
                     'Content-type': 'application/json; charset=UTF-8',
                 },
             });
             additionalFeedbackContainer.innerHTML = '';
         } catch (err) {
+            // eslint-disable-next-line no-console
             console.log(err);
         }
     };
     if (happyButton) {
-        happyButton.addEventListener('click', () => post_feedback('happy'));
+        happyButton.addEventListener('click', () => postFeedback('happy'));
     }
     if (unhappyButton) {
-        unhappyButton.addEventListener('click', () => post_feedback('unhappy'));
+        unhappyButton.addEventListener('click', () => postFeedback('unhappy'));
     }
     if (submitButton) {
         submitButton.addEventListener('click', () =>
-            update_feedback(feedbackPk),
+            updateFeedback(feedbackPk),
         );
     }
 };
