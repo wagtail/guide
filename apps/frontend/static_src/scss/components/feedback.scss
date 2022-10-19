@@ -7,8 +7,9 @@
     }
 
     &__heading {
-        @include fs(m);
-        margin-bottom: $gutter;
+        @include fs(s);
+        font-weight: 500;
+        margin-bottom: ($gutter * 0.5);
     }
 
     &__options {
