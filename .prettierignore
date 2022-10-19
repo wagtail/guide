@@ -1,7 +1,16 @@
-*.html
-venv
-.venv
+# Irrelevant files ignored for performance reasons.
+*.min.js
+**/lib/
+**/vendor/
+_build
 .git
+.mypy_cache
+.venv
+coverage/
 media
 node_modules
+public/
 static
+venv
+# Files which contain incompatible syntax.
+*.html

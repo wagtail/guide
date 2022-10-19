@@ -10,11 +10,13 @@ test-coverage:
 format:
 	poetry run isort apps
 	poetry run black apps
+	yarn format
 
 lint:
 	poetry run flake8 apps
 	poetry run isort --check-only --diff apps
 	poetry run black --check --diff apps
+	yarn lint
 
 frontend:
 	yarn
