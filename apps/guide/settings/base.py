@@ -196,6 +196,7 @@ WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
     ("nl-3.1.x", "Dutch 3.0.x"),
     ("hi-latest", "Hindi latest"),
     ("hi-3.1.x", "Hindi 3.0.x"),
+    ("is-latest", "Icelandic latest"),
 ]
 
 
