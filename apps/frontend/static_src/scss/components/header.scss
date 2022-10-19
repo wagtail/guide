@@ -70,7 +70,7 @@
 
         @include media-query(large) {
             position: relative;
-            top: -10px;
+            top: -$gutter;
             inset-inline-start: 0;
         }
     }

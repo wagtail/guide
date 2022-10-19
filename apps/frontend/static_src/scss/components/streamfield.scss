@@ -1,4 +1,6 @@
 .streamfield {
+    margin-bottom: ($gutter * 3);
+
     h2 {
         @include fs(xl);
         margin-top: ($gutter * 2);
@@ -16,5 +18,10 @@
         font-size: $base-font-size;
         margin-bottom: $gutter;
         font-weight: 700;
+    }
+
+    ul,
+    ol {
+        margin-bottom: ($gutter * 2);
     }
 }
