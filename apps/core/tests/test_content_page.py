@@ -30,5 +30,5 @@ class TestContentPage(TestCase):
         assert form.is_valid()
         assert (
             form.instance.table_of_contents
-            == '<ul><li><a class="text-decoration-none fw-bold" href="#ekkie">ekkie</a></li></ul>'  # noqa
+            == '<ul><li><a href="#ekkie">ekkie</a></li></ul>'  # noqa
         )
