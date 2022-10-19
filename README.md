@@ -3,7 +3,7 @@
 Guide is a website to help content editors, moderators, administrators, and other users learn how to user the Wagtail content management system (CMS).
 
 The Wagtail guide will ultimately include:
-- Tutorials 
+- Tutorials
 - How-to articles
 - Reference materials
 - Walkthroughs and visual learning materials
@@ -22,7 +22,9 @@ You can learn more about the documentation system [here](https://documentation.d
 We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/Wagtail in these instructions. We recommend you develop Wagtail Guide locally on your machine using venv.
 
 #### Dependencies
-- Python 3.9
+
+- Python >= 3.9
+- Poetry
 - Git
 - Node 16.*
 - [Yarn](https://yarnpkg.com/)
@@ -33,12 +35,9 @@ Run:
 
     python -V
 
-Confirm that the output is showing version Python 3.9. If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
+Confirm that the output is showing version Python 3.9 (or higher). If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
 
-With the Python 3.9 output confirmed, run:
-
-    python -m venv env
-    source env/bin/activate
+With the Python version output confirmed, [install Poetry](https://python-poetry.org/docs).
 
 Now we're ready to set up the guide project:
 
@@ -55,7 +54,11 @@ Once the backend and frontend have been set up, you can run the development serv
 
 If everything worked, [http://127.0.0.1:8000](http://127.0.0.1:8000) should show you a welcome page.
 
-You can access the administrative area at [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and log in using the credentials you created during the backend setup. 
+You can access the administrative area at [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and log in using the credentials you created during the backend setup.
+
+To activate Poetry's virtual environment, run:
+
+    poetry shell
 
 # Gitpod
 

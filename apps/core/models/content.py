@@ -25,7 +25,7 @@ class ContentPageForm(WagtailAdminPageForm):
         if headings:
             toc += "<ul>"
             for heading in headings:
-                toc += f'<li><a class="text-decoration-none fw-bold" href="#{slugify(heading.text)}">{heading.text}</a></li>'  # noqa
+                toc += f'<li><a href="#{slugify(heading.text)}">{heading.text}</a></li>'  # noqa
             toc += "</ul>"
         self.instance.table_of_contents = toc
 

@@ -1,30 +1,30 @@
 buildfixtures:
-	python manage.py buildfixtures
+	poetry run python manage.py buildfixtures
 
 test:
-	DJANGO_SETTINGS_MODULE=apps.guide.settings.test python manage.py test
+	DJANGO_SETTINGS_MODULE=apps.guide.settings.test poetry run python manage.py test
 
 test-coverage:
-	coverage run manage.py test && coverage report
+	poetry run coverage run manage.py test && poetry run coverage report
 
 format:
-	isort apps
-	black apps
+	poetry run isort apps
+	poetry run black apps
 
 lint:
-	flake8 apps
-	isort --check-only --diff apps
-	black --check --diff apps
+	poetry run flake8 apps
+	poetry run isort --check-only --diff apps
+	poetry run black --check --diff apps
 
 frontend:
 	yarn
 	yarn build
 
 backend:
-	python -m pip install -r requirements.txt
-	python manage.py migrate
-	python manage.py createcachetable
-	python manage.py createsuperuser
+	poetry install
+	poetry run python manage.py migrate
+	poetry run python manage.py createcachetable
+	poetry run python manage.py createsuperuser
 
 run:
-	python manage.py runserver
+	poetry run python manage.py runserver

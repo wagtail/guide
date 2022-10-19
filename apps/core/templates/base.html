@@ -1,7 +1,7 @@
 {% load static core_tags wagtailcore_tags wagtailuserbar manifest %}
 
 <!DOCTYPE html>
-<html lang="{% block lang %}{{ self.locale.language_code }}{% endblock %}">
+<html lang="{% block lang %}{{ self.locale.language_code }}{% endblock %}" class="no-js">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -15,6 +15,11 @@
         </title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {# Open links in a new tab if the page is rendered in the preview panel #}
+        {% if request.in_preview_panel %}
+            <base target="_blank">
+        {% endif %}
 
         <link rel="apple-touch-icon" sizes="180x180" href="{% manifest 'images/apple-touch-icon.png' %}">
         <link rel="icon" type="image/png" sizes="32x32" href="{% manifest 'images/favicon-32x32.png' %}">
@@ -36,11 +41,11 @@
     <body class="app">
         {% wagtailuserbar %}
 
-        {% include "components/skip-link.html" %}
+        {% include "components/skip_link.html" %}
 
         <div class="grid">
             <div class="grid__lines" aria-hidden="true">
-                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"><div class="grid__grid-line--left"></div></div>
                 <div class="grid__grid-line"></div>
                 <div class="grid__grid-line"></div>
                 <div class="grid__grid-line"></div>
@@ -66,7 +71,7 @@
             {% include "components/footer.html" %}
         </footer>
 
-        {% include "components/search-modal.html" %}
+        {% include "components/search_modal.html" %}
 
         {# Global javascript #}
         <script src="{% manifest 'main.js' %}"></script>

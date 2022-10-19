@@ -1,6 +1,6 @@
 {% load wagtailcore_tags %}
 
-<nav>
+<nav class="primary-nav" data-mobile-menu>
     {% for item, info in annotated_list %}
         {% if info.open %}
             <ul class="navigation"><li class="navigation__item">

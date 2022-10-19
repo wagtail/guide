@@ -1,8 +1,32 @@
 .search {
+    &__container {
+        display: flex;
+        flex-direction: row;
+        justify-content: stretch;
+    }
+
+    &__input {
+        @include fs(m);
+        border: 1px solid $color--black;
+        width: 100%;
+        padding: $gutter;
+        border-radius: $border-radius--m 0 0 $border-radius--m;
+    }
+
     &__button {
         color: $color--white;
+        border-radius: 0 $border-radius--m $border-radius--m 0;
         background-color: $color--primary;
+        border: 0;
+        padding: 0 $gutter;
+        cursor: pointer;
         transition: background-color $transition;
+
+        svg {
+            width: 20px;
+            height: 20px;
+            fill: $color--white;
+        }
 
         &:hover,
         &:focus {

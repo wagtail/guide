@@ -1,28 +1,20 @@
 {% load wagtailcore_tags core_tags manifest %}
 
-<div class="d-flex mt-5 flex-wrap justify-content-between">
+<div class="nav-buttons">
     {% if previous %}
-      <a href="{% pageurl previous %}" class="text-decoration-none">
-        <button class="nav-button m-1 ms-0">
-          <div class="d-flex justify-content-center align-items-center">
-            <img src="{% manifest 'images/arrow.svg' %}" width="30px" height="25px" class="nav-button__left-arrow">
-            <div class="nav-button__label px-2 pe-3">
-              {{ previous }}
+        <a href="{% pageurl previous %}" class="nav-buttons__link">
+            <img src="{% manifest 'images/arrow.svg' %}" width="30px" height="25px" class="nav-buttons__arrow nav-buttons__arrow--prev" alt="">
+            <div class="nav-buttons__label">
+                {{ previous }}
             </div>
-          </div>
-        </button>
-      </a>
+        </a>
     {% endif %}
     {% if next %}
-      <a href="{% pageurl next %}" class="text-decoration-none">
-        <button class="nav-button m-1 me-0">
-          <div class="d-flex justify-content-center align-items-center">
-            <div class="nav-button__label px-2 ps-3">
-              {{ next }}
+        <a href="{% pageurl next %}" class="nav-buttons__link">
+            <div class="nav-buttons__label">
+                {{ next }}
             </div>
-            <img src="{% manifest 'images/arrow.svg' %}" width="30px" height="25px">
-          </div>
-        </button>
-      </a>
+            <img src="{% manifest 'images/arrow.svg' %}" width="30px" height="25px" class="nav-buttons__arrow nav-buttons__arrow--next" alt="">
+        </a>
     {% endif %}
 </div>
