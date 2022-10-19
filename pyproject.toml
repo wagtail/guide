@@ -1,3 +1,43 @@
+[tool.poetry]
+name = "guide"
+version = "0.1.0"
+description = "Wagtail User Guide"
+authors = [
+    "Guide contributors <no-reply@guide.wagtail.org>",
+]
+license = "BSD-3-Clause"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+django = ">=4.0,<4.1"
+wagtail = ">=3.0,<3.1"
+django-manifest-loader = "^1.0.0"
+lxml = ">=4.9,<5"
+djangorestframework = ">=3.13.1,<4.0"
+dj-database-url = "1.0.0"
+django-storages = "1.13.1"
+whitenoise = "6.2.0"
+psycopg2 = "2.9.3"
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+django-extensions = "^3.2.1"
+flake8 = "^5.0.4"
+isort = "^5.10.1"
+wagtail-factories = "^3.1.0"
+coverage = "^6.5.0"
+
+[tool.poetry.group.production.dependencies]
+gunicorn = "20.1.0"
+django-redis = "5.2.0"
+sentry-sdk = "1.9.5"
+django-basic-auth-ip-whitelist = "0.5a"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.black]
 target-version = ['py39']
 extend-exclude = '''

@@ -19,6 +19,12 @@ RUN yarn build
 # however weigh a lot, approx. up to 1.5GiB per built image.
 FROM python:3.9 as production
 
+ARG POETRY_HOME=/opt/poetry
+ARG POETRY_INSTALL_ARGS="--without dev"
+
+# IMPORTANT: Remember to review this when upgrading
+ARG POETRY_VERSION=1.2.2
+
 # Install dependencies in a virtualenv
 ENV VIRTUAL_ENV=/venv
 
@@ -29,7 +35,7 @@ WORKDIR /app
 # Set default environment variables. They are used at build time and runtime.
 # If you specify your own environment variables on Heroku, they will
 # override the ones set here. The ones below serve as sane defaults only.
-#  * PATH - Make sure that our venv is on the PATH
+#  * PATH - Make sure that Poetry is on the PATH, along with our venv
 #  * PYTHONUNBUFFERED - This is useful so Python does not hold any messages
 #    from being output.
 #    https://docs.python.org/3.9/using/cmdline.html#envvar-PYTHONUNBUFFERED
@@ -42,8 +48,8 @@ WORKDIR /app
 #    read by Gunicorn.
 #  * GUNICORN_CMD_ARGS - additional arguments to be passed to Gunicorn. This
 #    variable is read by Gunicorn
-ENV PATH=$VIRTUAL_ENV/bin:$PATH \
-    PYTHONPATH=/app \
+ENV PATH=${POETRY_HOME}/bin:$VIRTUAL_ENV/bin:$PATH \
+    POETRY_INSTALL_ARGS=${POETRY_INSTALL_ARGS} \
     PYTHONUNBUFFERED=1 \
     DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
     PORT=8000 \
@@ -58,6 +64,13 @@ ENV BUILD_ENV=${BUILD_ENV}
 # server (Gunicorn). Heroku will ignore this.
 EXPOSE 8000
 
+# Install poetry using the installer (keeps Poetry's dependencies isolated from the app's)
+# chown protects us against cases where files downloaded by poetry have invalid ownership
+# chmod ensures poetry dependencies are accessible when packages are installed
+RUN curl -sSL https://install.python-poetry.org | python3 -
+RUN chown -R root:root ${POETRY_HOME} && \
+    chmod -R 0755 ${POETRY_HOME}
+
 # Don't use the root user as it's an anti-pattern and Heroku does not run
 # containers as root either.
 # https://devcenter.heroku.com/articles/container-registry-and-runtime#dockerfile-commands-and-runtime
@@ -65,13 +78,15 @@ USER guide
 
 # Install your app's Python requirements.
 RUN python -m venv $VIRTUAL_ENV
-COPY --chown=guide ./requirements/ ./requirements/
-RUN pip install --upgrade pip && pip install -r ./requirements/production.txt
+COPY --chown=guide pyproject.toml poetry.lock ./
+RUN pip install --upgrade pip && poetry install ${POETRY_INSTALL_ARGS} --no-root
 
 COPY --chown=guide --from=frontend ./apps/frontend/static ./apps/frontend/static
 
 # Copy application code.
 COPY --chown=guide . .
+
+RUN poetry install ${POETRY_INSTALL_ARGS}
 
 # Collect static. This command will move static files from application
 # directories and "static_compiled" folder to the main static directory that
