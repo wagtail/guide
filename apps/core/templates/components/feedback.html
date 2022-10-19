@@ -1,29 +1,21 @@
-<div class="d-flex justify-content-center my-5 flex-wrap">
-    <div data-feedback-container>
-        <div class="fw-bold">
-            Was this page helpful?
-        </div>
-        <div class="d-flex justify-content-center m-3">
-            <button class="border border-0 bg-transparent" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page was helpful" data-bs-trigger="hover" data-happy-button>
+<div class="feedback">
+    <div class="feedback__container" data-feedback-container>
+        <h2 class="feedback__heading">Was this page helpful?</h2>
+        <div class="feedback__options">
+            <button class="feedback__button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page was helpful" data-bs-trigger="hover" data-happy-button aria-label="happy">
                 {% include "./svg/happy.svg" %}
             </button>
-            <button class="border border-0 bg-transparent" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page could be improved" data-bs-trigger="hover" data-unhappy-button>
+            <button class="feedback__button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page could be improved" data-bs-trigger="hover" data-unhappy-button aria-label="unhappy">
                 {% include "./svg/unhappy.svg" %}
             </button>
         </div>
     </div>
 
-    <div data-additional-feedback-container class="d-none">
-        <div class="d-flex justify-content-center flex-wrap">
-            <div class="my-2">
-                Help us improve by telling what you missed
-            </div>
-            <textarea data-feedback-text class="my-2 w-75" rows="3"></textarea>
-        </div>
-        <div class="d-flex justify-content-center">
-            <button data-submit-button class="btn btn-primary m-1">
-                Submit
-            </button>
+    <div class="feedback__form" data-additional-feedback-container>
+        <div class="feedback__form-container">
+            <h3 class="feedback__form-heading">Help us improve by telling what you missed</h3>
+            <textarea data-feedback-text class="feedback__form-textarea" rows="3"></textarea>
+            <button data-submit-button class="feedback__form-button">Submit</button>
         </div>
     </div>
 </div>

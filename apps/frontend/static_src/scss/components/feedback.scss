@@ -1,0 +1,77 @@
+.feedback {
+    margin-bottom: ($gutter * 3);
+
+    &__container {
+        text-align: center;
+        margin-bottom: $gutter;
+    }
+
+    &__heading {
+        @include fs(m);
+        margin-bottom: $gutter;
+    }
+
+    &__options {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: ($gutter * 2);
+    }
+
+    &__button {
+        display: flex;
+        border: 0;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        padding: 0;
+        margin: 0 ($gutter * 0.5);
+        // 42x42 to meet min touch device size
+        height: 42px;
+        width: 42px;
+    }
+
+    &__form {
+        display: none;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    &__form-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    &__form-heading {
+        color: $color--off-black;
+        margin-bottom: $gutter;
+        text-align: center;
+    }
+
+    &__form-textarea {
+        width: 100%;
+        border-radius: $border-radius--m;
+        border: 1px solid $color--off-black;
+        margin-bottom: ($gutter * 0.5);
+    }
+
+    &__form-button {
+        background-color: $color--primary;
+        color: $color--white;
+        border-radius: $border-radius--m;
+        padding: ($gutter * 0.5) $gutter;
+        font-weight: 700;
+        cursor: pointer;
+        border: 1px solid $color--off-black;
+        transition: background-color $transition;
+
+        &:hover,
+        &:focus {
+            background-color: $color--off-black;
+        }
+    }
+}
