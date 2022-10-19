@@ -1,12 +1,12 @@
 class MobileMenu {
     static selector() {
-        return "[data-mobile-menu-toggle]";
+        return '[data-mobile-menu-toggle]';
     }
 
     constructor(node) {
         this.node = node;
-        this.body = document.querySelector("body");
-        this.mobileMenu = document.querySelector("[data-mobile-menu]");
+        this.body = document.querySelector('body');
+        this.mobileMenu = document.querySelector('[data-mobile-menu]');
 
         this.state = {
             open: false,
@@ -16,7 +16,7 @@ class MobileMenu {
     }
 
     bindEventListeners() {
-        this.node.addEventListener("click", () => {
+        this.node.addEventListener('click', () => {
             this.toggle();
         });
     }
@@ -36,21 +36,21 @@ class MobileMenu {
         // document.addEventListener('onMenuOpen', () => {
         //     // do stuff here...;
         // });
-        const menuOpenEvent = new Event("onMenuOpen");
+        const menuOpenEvent = new Event('onMenuOpen');
         document.dispatchEvent(menuOpenEvent);
-        this.node.classList.add("is-open");
-        this.node.setAttribute("aria-expanded", "true");
-        this.body.classList.add("no-scroll");
-        this.mobileMenu.classList.add("is-visible");
+        this.node.classList.add('is-open');
+        this.node.setAttribute('aria-expanded', 'true');
+        this.body.classList.add('no-scroll');
+        this.mobileMenu.classList.add('is-visible');
 
         this.state.open = true;
     }
 
     close() {
-        this.node.classList.remove("is-open");
-        this.node.setAttribute("aria-expanded", "false");
-        this.body.classList.remove("no-scroll");
-        this.mobileMenu.classList.remove("is-visible");
+        this.node.classList.remove('is-open');
+        this.node.setAttribute('aria-expanded', 'false');
+        this.body.classList.remove('no-scroll');
+        this.mobileMenu.classList.remove('is-visible');
 
         this.state.open = false;
     }

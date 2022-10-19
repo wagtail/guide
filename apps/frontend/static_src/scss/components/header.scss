@@ -19,7 +19,7 @@
 
         // Mask off menu behind logo
         &::after {
-            content: "";
+            content: '';
             pointer-events: none;
             position: absolute;
             z-index: -1;
@@ -113,7 +113,7 @@
             inset: auto;
 
             &::before {
-                content: "";
+                content: '';
                 position: absolute;
                 inset-inline-start: -24px;
                 height: 30px;
