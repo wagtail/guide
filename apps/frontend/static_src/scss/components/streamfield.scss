@@ -19,4 +19,9 @@
         margin-bottom: $gutter;
         font-weight: 700;
     }
+
+    ul,
+    ol {
+        margin-bottom: ($gutter * 2);
+    }
 }

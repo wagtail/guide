@@ -1,16 +1,56 @@
 .alert {
-    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
-    .alert__type-Note {
-        background-color: $color--primary;
-    }
-    .alert__body-Note {
-        background-color: #e0eff0;
+    $root: &;
+    box-shadow: 0 2px 4px 0 rgba($color--black, 0.2);
+    border-radius: $border-radius--m;
+    margin-bottom: ($gutter * 3);
+    overflow: hidden;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        padding: ($gutter * 0.75) $gutter;
     }
 
-    .alert__type-Warning {
-        background-color: #2f128d;
+    &__heading {
+        color: $color--white;
     }
-    .alert__body-Warning {
-        background-color: #e6e3f1;
+
+    &__content {
+        padding: $gutter;
+    }
+
+    &__icon {
+        margin-inline-end: ($gutter * 0.5);
+        height: 20px;
+    }
+
+    &--note {
+        #{$root}__header {
+            background-color: $color--primary;
+        }
+
+        #{$root}__content {
+            background-color: $color--extra-light-teal;
+        }
+    }
+
+    &--warning {
+        #{$root}__header {
+            background-color: $color--blue;
+        }
+
+        #{$root}__content {
+            background-color: $color--extra-light-blue;
+        }
+    }
+
+    // Extra specificity to override default streamffield values
+    .streamfield & {
+        #{$root}__heading {
+            @include rem-font-size($base-font-size);
+            font-weight: 700;
+            margin: 0 !important;
+            line-height: 1;
+        }
     }
 }
