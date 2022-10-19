@@ -31,6 +31,7 @@
 
     @include media-query(large) {
         grid-template-columns: repeat(10, 1fr);
+        padding: 0 ($gutter * 5);
         margin: 0 auto;
     }
 }
