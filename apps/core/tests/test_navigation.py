@@ -39,7 +39,7 @@ class TestNavigation(TestCase):
         translation.activate(self.home.locale.language_code)
         template = Template("{% load core_tags %}{% navigation %}")
         result = template.render(Context({}))
-        self.assertIn("<nav>", result)
+        self.assertIn('<nav class="primary-nav" data-mobile-menu>', result)
         self.assertIn('href="/en-latest/a/"', result)
         self.assertIn('href="/en-latest/a/ab/"', result)
         self.assertIn('href="/en-latest/a/ac/"', result)
