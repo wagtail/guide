@@ -1,4 +1,6 @@
 .streamfield {
+    margin-bottom: ($gutter * 3);
+
     h2 {
         @include fs(xl);
         margin-top: ($gutter * 2);

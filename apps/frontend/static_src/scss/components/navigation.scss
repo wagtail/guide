@@ -18,14 +18,14 @@
         width: calc(100% - 10px); // compensate for reading line adjustment
         display: block;
         padding: 5px 10px;
-        border-radius: $border-radius 0 0 $border-radius;
+        border-radius: $border-radius--m 0 0 $border-radius--m;
         text-decoration: none;
         color: $color--off-black;
         transition: color $transition, background-color $transition;
 
         &:hover,
         &:focus {
-            background-color: $color--light-grey;
+            background-color: $color--white;
         }
 
         &--heading {

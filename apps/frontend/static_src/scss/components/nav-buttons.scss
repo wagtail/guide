@@ -1,0 +1,47 @@
+.nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: ($gutter * 3);
+    flex-direction: column;
+
+    @include media-query(medium) {
+        flex-direction: row;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        padding: ($gutter * 0.5) $gutter;
+        border: 1px solid $color--off-black;
+        border-radius: $border-radius--lg;
+        color: $color--off-black;
+        text-decoration: none;
+        transition: color $transition;
+        margin-bottom: ($gutter * 0.5);
+
+        @include media-query(medium) {
+            margin-bottom: 0;
+        }
+
+        &:hover,
+        &:focus {
+            color: $color--active;
+        }
+    }
+
+    &__arrow {
+        &--prev {
+            transform: rotateZ(180deg);
+            margin-inline-end: ($gutter * 0.25);
+        }
+
+        &--next {
+            margin-inline-start: ($gutter * 0.25);
+        }
+    }
+
+    &__label {
+        @include fs(xs);
+        font-weight: 700;
+    }
+}
