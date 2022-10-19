@@ -2,8 +2,12 @@
     position: relative;
     z-index: 4;
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: ($gutter * 4);
+    margin-bottom: ($gutter * 2);
+
+    @include media-query(large) {
+        justify-content: flex-end;
+        margin-bottom: ($gutter * 5);
+    }
 
     &__toggle {
         @include fs(xs);

@@ -10,6 +10,8 @@
     max-height: 100vh;
     height: 100vh;
     overflow-x: scroll;
+    inset-inline-start: -10px; // ensure vertical reading line is aligned
+    width: calc(100% - 10px); // compensate for reading line adjustment
 
     @include media-query(medium) {
         inset-inline-end: -($gutter * 3);
@@ -20,9 +22,15 @@
         position: static;
         display: block;
         padding: 0;
+        padding-right: $gutter;
         background-color: transparent;
         max-height: 100%;
-        overflow: auto;
+        max-height: 70vh;
+        overflow-y: auto;
+        overflow-x: visible;
+        position: relative;
+        inset-inline-start: -10px;
+        width: calc(100% - 10px);
     }
 
     &.is-visible {

@@ -1,10 +1,16 @@
 .section {
     $root: &;
     margin-bottom: ($gutter * 2);
+    max-width: $content-max-width;
 
     &__container {
         display: flex;
         text-decoration: none;
+        flex-direction: column;
+
+        @include media-query(large) {
+            flex-direction: row;
+        }
 
         &:hover,
         &:focus {
@@ -21,15 +27,16 @@
     }
 
     &__icon {
-        flex-basis: 16.666%;
-        min-width: 16.666%;
-        max-width: 16.666%;
+        flex-basis: 100px;
+        min-width: 100px;
+        max-width: 100px;
+        margin-right: ($gutter * 2);
     }
 
     &__heading {
         @include fs(xl);
         color: $color--black;
-        margin-bottom: ($gutter * 0.5);
+        margin-bottom: ($gutter * 0.25);
         font-weight: 700;
         transition: color $transition;
     }
@@ -37,5 +44,6 @@
     &__description {
         @include fs(xs);
         color: $color--grey;
+        margin: 0;
     }
 }

@@ -39,6 +39,7 @@ $nav-pills-link-active-bg: #2e1f5e;
 // Grid
 $gutter: 20px;
 $site-width: 1440px;
+$content-max-width: 900px; // for optimal reading length
 
 // Border radius
 $border-radius--m: 4px;
@@ -49,7 +50,7 @@ $transition: 0.25ms ease-in;
 
 // Font sizes
 $base-font-size: 20px;
-$base-line-height: 1.4;
+$base-line-height: 1.6;
 
 $large-font-sizes: (
     xxxxl: 90px,
