@@ -3,11 +3,7 @@ name = "guide"
 version = "0.1.0"
 description = "Wagtail User Guide"
 authors = [
-    "Hitansh Shah <shah.hitanshsanjay.mat20@itbhu.ac.in>",
-    "Thibaud Colas <thibaudcolas@gmail.com>",
-    "Coen van der Kamp <coen@fourdigits.nl>",
-    "Sage Abdullah <laymonage@gmail.com>",
-    "Nick Lee <nick@nicklee.co.uk>",
+    "Guide contributors <no-reply@guide.wagtail.org>",
 ]
 license = "BSD-3-Clause"
 readme = "README.md"
