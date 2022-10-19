@@ -1,7 +1,7 @@
 {% load static core_tags wagtailcore_tags wagtailuserbar manifest %}
 
 <!DOCTYPE html>
-<html lang="{% block lang %}{{ self.locale.language_code }}{% endblock %}">
+<html lang="{% block lang %}{{ self.locale.language_code }}{% endblock %}" class="no-js">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -45,7 +45,7 @@
 
         <div class="grid">
             <div class="grid__lines" aria-hidden="true">
-                <div class="grid__grid-line"></div>
+                <div class="grid__grid-line"><div class="grid__grid-line--left"></div></div>
                 <div class="grid__grid-line"></div>
                 <div class="grid__grid-line"></div>
                 <div class="grid__grid-line"></div>

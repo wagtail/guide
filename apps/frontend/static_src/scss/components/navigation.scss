@@ -18,10 +18,17 @@
         width: calc(100% - 10px); // compensate for reading line adjustment
         display: block;
         padding: 5px 10px;
-        border-radius: $border-radius 0 0 $border-radius;
+        border-radius: $border-radius;
         text-decoration: none;
         color: $color--off-black;
         transition: color $transition, background-color $transition;
+
+        @include media-query(large) {
+            position: relative;
+            inset-inline-start: -10px; // ensure vertical reading line is aligned
+            width: calc(100% - 10px); // compensate for reading line adjustment
+            border-radius: $border-radius 0 0 $border-radius;
+        }
 
         &:hover,
         &:focus {

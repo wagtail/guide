@@ -1,16 +1,55 @@
 .header {
-    position: sticky;
-    top: ($gutter * 1.5);
+    margin-top: $gutter;
+
+    @include media-query(large) {
+        position: sticky;
+        top: ($gutter * 1.5);
+    }
 
     &__identity {
+        position: relative;
+        z-index: 6; // sit above primary nav overlay
+        display: flex;
         margin-bottom: ($gutter * 2);
+
+        @include media-query(large) {
+            flex-direction: column;
+        }
+
+        // Mask off menu behind logo
+        &::after {
+            content: "";
+            pointer-events: none;
+            position: absolute;
+            z-index: -1;
+            inset: -20px;
+            background: linear-gradient(
+                180deg,
+                rgba($color--page-bg, 1) 0%,
+                rgba($color--page-bg, 1) 40%,
+                rgba($color--page-bg, 0) 100%
+            );
+            height: 160px;
+
+            @include media-query(large) {
+                content: none;
+            }
+        }
     }
 
     &__logo-link {
         display: block;
         position: relative;
-        inset-inline-start: -48px;
         transition: opacity $transition;
+        width: 48px;
+        margin-inline-end: ($gutter * 0.5);
+        overflow: hidden;
+
+        @include media-query(large) {
+            width: auto;
+            inset-inline-start: -48px;
+            margin-inline-end: 0;
+        }
 
         &:hover,
         &:focus {
@@ -27,12 +66,27 @@
     &__actions {
         display: flex;
         align-items: center;
-        position: relative;
-        top: -10px;
+        inset-inline-start: 48px;
+
+        @include media-query(large) {
+            position: relative;
+            top: -10px;
+            inset-inline-start: 0;
+        }
+    }
+
+    &__burger {
+        position: absolute;
+        inset: 17px 12px auto auto;
+
+        @include media-query(large) {
+            display: none;
+        }
     }
 
     &__search-toggle {
-        position: relative;
+        position: absolute;
+        inset: 17px 50px auto auto;
         padding: 0;
         margin: 0;
         border: 0;
@@ -45,15 +99,20 @@
         margin-inline-start: 20px;
         transition: opacity $transition;
 
-        &::before {
-            content: "";
-            position: absolute;
-            inset-inline-start: -24px;
-            height: 30px;
-            width: 1px;
-            background-color: $color--off-black;
-            margin-inline-start: 20px;
-            margin-inline-end: 20px;
+        @include media-query(large) {
+            position: relative;
+            inset: auto;
+
+            &::before {
+                content: "";
+                position: absolute;
+                inset-inline-start: -24px;
+                height: 30px;
+                width: 1px;
+                background-color: $color--off-black;
+                margin-inline-start: 20px;
+                margin-inline-end: 20px;
+            }
         }
 
         &:hover,
