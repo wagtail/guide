@@ -1,10 +1,6 @@
-// Configuration
+// Setup
 @import "./vendor/normalize";
-
-//custom font
 @import "./typography.scss";
-
-//custom variables
 @import "./variables.scss";
 @import "./functions.scss";
 @import "./mixins.scss";
@@ -19,7 +15,7 @@
 @import "~bootstrap/scss/tooltip";
 @import "~bootstrap/scss/utilities/api";
 
-//custom component styles
+// Custom component styles
 @import "./components/alert.scss";
 @import "./components/app";
 @import "./components/base.scss";
