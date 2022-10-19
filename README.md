@@ -77,6 +77,12 @@ Steps:
 
 If you're a Python or Django developer, fork the repo and join us. You'll find answers to many common new contributor questions in our [contributing guidelines](https://docs.wagtail.org/en/stable/contributing/index.html).
 
+## Development
+
+-   Run formatting (Black Prettier) `make format`
+-   Run linting (Flake8, isort, Black, Prettier) `make lint`
+-   Run tests `make test`
+
 # Other Notes
 
 ## Google Summer of Code
