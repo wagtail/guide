@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const postcssPresetEnv = require('postcss-preset-env');
 
 const source = path.resolve(path.join("apps", "frontend", "static_src"));
 const destination = path.resolve(path.join("apps", "frontend", "static"));
@@ -48,7 +49,7 @@ const config = {
               sourceMap: true,
               postcssOptions: {
                 plugins: [
-                  "postcss-preset-env"
+                  postcssPresetEnv({ enableClientSidePolyfills: false })
                 ]
               }
             },

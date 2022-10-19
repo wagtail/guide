@@ -1,5 +1,3 @@
-// Wagtail Guide Bootstrap defaults.
-
 // Color system
 $color--teal: #007d7e;
 $color--light-teal: #80d7d8;
@@ -9,6 +7,7 @@ $color--grey: #5c5c5c;
 $color--off-black: #262626;
 $color--black: #000;
 $color--blue: #2e1f5e;
+$color--light-blue: #3178fa;
 $color--extra-light-blue: #e6e3f1;
 $color--white: #fff;
 $color--grid-line-light: rgba($color--white, 0.05);
@@ -46,6 +45,10 @@ $border-radius--lg: 6px;
 
 // Transitions
 $transition: 0.25ms ease-in;
+
+// Accessibbility
+$focus-outline-width: 2px;
+$color-focus-outline: $color--light-blue;
 
 // Font sizes
 $base-font-size: 20px;
