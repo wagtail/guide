@@ -2,25 +2,21 @@
 @import "./vendor/normalize";
 
 //custom font
-@import "./kumbh-sans.scss";
+@import "./typography.scss";
 
 //custom variables
 @import "./variables.scss";
 @import "./functions.scss";
 @import "./mixins.scss";
 
+// Bootstrap components and config
 @import "~bootstrap/scss/functions";
-
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
-
-// // Layout & components
 @import "~bootstrap/scss/dropdown";
 @import "~bootstrap/scss/modal";
 @import "~bootstrap/scss/tooltip";
-
-// // Utilities
 @import "~bootstrap/scss/utilities/api";
 
 //custom component styles
