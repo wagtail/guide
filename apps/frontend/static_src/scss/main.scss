@@ -1,9 +1,9 @@
 // Setup
 @import "./vendor/normalize";
-@import "./typography.scss";
-@import "./variables.scss";
-@import "./functions.scss";
-@import "./mixins.scss";
+@import "./typography";
+@import "./variables";
+@import "./functions";
+@import "./mixins";
 
 // Bootstrap components and config
 @import "~bootstrap/scss/functions";
@@ -14,26 +14,26 @@
 @import "~bootstrap/scss/tooltip";
 
 // Custom component styles
-@import "./components/alert.scss";
+@import "./components/alert";
 @import "./components/app";
-@import "./components/base.scss";
-@import "./components/dropdown-toggle.scss";
+@import "./components/base";
+@import "./components/dropdown-toggle";
 @import "./components/error-page";
-@import "./components/feedback-emoji.scss";
-@import "./components/feedback.scss";
-@import "./components/footer.scss";
-@import "./components/grid.scss";
-@import "./components/header.scss";
-@import "./components/heading.scss";
+@import "./components/feedback-emoji";
+@import "./components/feedback";
+@import "./components/footer";
+@import "./components/grid";
+@import "./components/header";
+@import "./components/heading";
 @import "./components/introduction";
-@import "./components/language-selector.scss";
-@import "./components/link-block.scss";
-@import "./components/nav-buttons.scss";
+@import "./components/language-selector";
+@import "./components/link-block";
+@import "./components/nav-buttons";
 @import "./components/navigation";
-@import "./components/rich-text.scss";
-@import "./components/search.scss";
+@import "./components/rich-text";
+@import "./components/search";
 @import "./components/section";
 @import "./components/section-link";
-@import "./components/skip-link.scss";
-@import "./components/streamfield.scss";
-@import "./components/toc.scss";
+@import "./components/skip-link";
+@import "./components/streamfield";
+@import "./components/toc";
