@@ -8,6 +8,7 @@ $color--grey: #5c5c5c;
 $color--off-black: #262626;
 $color--black: #000;
 $color--blue: #2e1f5e;
+$color--light-blue: #3178fa;
 $color--white: #fff;
 $color--grid-line-light: rgba($color--white, 0.05);
 $color--grid-line-dark: rgba($color--black, 0.05);
@@ -43,6 +44,10 @@ $border-radius: 4px;
 
 // Transitions
 $transition: 0.25ms ease-in;
+
+// Accessibbility
+$focus-outline-width: 2px;
+$color-focus-outline: $color--light-blue;
 
 // Font sizes
 $base-font-size: 20px;
