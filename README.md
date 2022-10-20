@@ -61,7 +61,7 @@ To activate Poetry's virtual environment, run:
 
     poetry shell
 
-### Setting up Wagtail guide to develop on Docker
+### Setting up development with Docker
 
 1. Create a `.env` file in the project root containing these variables, you can adjust the values to your preferences:
 
