@@ -468,7 +468,7 @@ if env.get("BASIC_AUTH_ENABLED", "false").lower().strip() == "true":
 # These settings are usually used only on the production sites.
 # This is a configuration of the CDN/front-end cache that is used to cache the
 # production websites.
-# https://docs.wagtail.io/en/latest/reference/contrib/frontendcache.html
+# https://docs.wagtail.org/en/latest/reference/contrib/frontendcache.html
 # The backend can be configured to use an account-wide API key, or an API token with
 # restricted access.
 if (
