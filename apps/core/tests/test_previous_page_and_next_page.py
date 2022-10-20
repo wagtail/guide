@@ -16,7 +16,7 @@ class TestNavigationButtons(TestCase):
         self.res_last_child = self.client.get(self.last_child.url)
 
     def test_previous_page(self):
-        self.assertEqual(self.res_first_child.context["previous"], None)
+        self.assertIsNone(self.res_first_child.context["previous"])
         self.assertEqual(
             self.res_subchild1.context["previous"].specific, self.first_child
         )
@@ -29,6 +29,6 @@ class TestNavigationButtons(TestCase):
 
     def test_next_page(self):
         self.assertEqual(self.res_first_child.context["next"].specific, self.subchild1)
-        self.assertEqual(self.res_last_child.context["next"], None)
+        self.assertIsNone(self.res_last_child.context["next"])
         self.assertEqual(self.res_subchild1.context["next"].specific, self.subchild2)
         self.assertEqual(self.res_subchild2.context["next"].specific, self.last_child)
