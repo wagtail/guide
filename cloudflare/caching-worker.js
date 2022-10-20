@@ -25,7 +25,7 @@ const REPLACE_STRIPPED_QUERYSTRING_ON_REDIRECT_LOCATION = false;
 
 // If this is true, querystring key are stripped if they have no value eg. ?foo
 // Disabled by default, but highly recommended
-const STRIP_VALUELESS_QUERYSTRING_KEYS = false;
+const STRIP_VALUELESS_QUERYSTRING_KEYS = true;
 
 // Only these status codes should be considered cacheable
 // (from https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html#sec13.4)
