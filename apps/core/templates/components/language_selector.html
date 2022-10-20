@@ -1,10 +1,10 @@
-{% load static wagtailcore_tags i18n %}
+{% load static wagtailcore_tags i18n core_tags %}
 
 <div class="language-selector">
     <div class="language-selector__container">
         <button class="language-selector__toggle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             {% get_language_info for LANGUAGE_CODE as lang %}
-            <span class="language-selector__label">{{ lang.name_translated }} {% if page %}{{ page.localized.locale.language_code|slice:'3:' }}{% endif %}</span>
+            <span class="language-selector__label">{{ lang.name_translated }} {% if page %}({% get_version_from_language_code page.localized.locale.language_code %}){% endif %}</span>
         </button>
         {% if page %}
         {% spaceless %}
@@ -13,7 +13,7 @@
                 {% get_language_info for translation.locale.language_code as lang %}
                 <li>
                     <a href="{% pageurl translation %}" rel="alternate" hreflang="{{ language_code }}" class="language-selector__dropdown-item dropdown-item">
-                        {{ lang.name_local }} {{ translation.locale.language_code|slice:'3:' }}
+                        {{ lang.name_local }} ({% get_version_from_language_code translation.locale.language_code %})
                     </a>
                 </li>
             {% endfor %}
