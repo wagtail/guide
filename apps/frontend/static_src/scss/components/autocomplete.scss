@@ -4,6 +4,10 @@
 
     &__count {
         @include fs(s);
+        position: absolute;
+        top: $gutter;
+        right: 0;
+        color: $color--grey;
         font-weight: 500;
         padding: 0 $row-spacing;
         margin-bottom: $gutter;

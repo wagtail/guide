@@ -67,7 +67,7 @@ const onSearchInputChange = async (event) => {
         window.alert(`Error: ${err}`);
     }
 };
-searchInput.addEventListener('keyup', debounce(onSearchInputChange, 350));
+searchInput.addEventListener('keyup', debounce(onSearchInputChange, 150));
 
 searchIconButton.addEventListener('click', () => {
     const resultsDiv = document.querySelector('[data-results]');
