@@ -1,0 +1,11 @@
+**/vendor/
+/media/
+/static/
+apps/frontend/static/
+build
+coverage/
+docs/_build
+env/
+node_modules
+public/
+venv

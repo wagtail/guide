@@ -1,0 +1,37 @@
+{
+  "extends": ["@wagtail/stylelint-config-wagtail"],
+  "rules": {
+    "scale-unlimited/declaration-strict-value": [
+      ["/color/", "fill", "stroke"],
+      {
+        "ignoreValues": [
+          "currentColor",
+          "inherit",
+          "initial",
+          "none",
+          "unset",
+          "transparent",
+          "Canvas",
+          "CanvasText",
+          "LinkText",
+          "VisitedText",
+          "ActiveText",
+          "ButtonFace",
+          "ButtonText",
+          "ButtonBorder",
+          "Field",
+          "FieldText",
+          "Highlight",
+          "HighlightText",
+          "SelectedItem",
+          "SelectedItemText",
+          "Mark",
+          "MarkText",
+          "GrayText",
+          "AccentColor",
+          "AccentColorText"
+        ]
+      }
+    ]
+  }
+}

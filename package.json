@@ -10,15 +10,17 @@
     "build": "webpack --mode=production",
     "format": "prettier --write .",
     "fix:js": "eslint --fix .",
+    "lint:css": "stylelint **/*.scss",
     "lint:format": "prettier --check .",
     "lint:js": "eslint --report-unused-disable-directives .",
-    "lint": "yarn lint:js && yarn lint:format"
+    "lint": "yarn lint:js && yarn lint:css && yarn lint:format"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.3",
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
     "@wagtail/eslint-config-wagtail": "^0.4.0",
+    "@wagtail/stylelint-config-wagtail": "^0.5.0",
     "babel-loader": "^8.2.3",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.6.0",
@@ -37,6 +39,7 @@
     "prettier": "^2.7.1",
     "sass": "^1.49.8",
     "sass-loader": "^12.6.0",
+    "stylelint": "^14.14.0",
     "webpack": "^5.69.1",
     "webpack-cli": "^4.9.2",
     "webpack-manifest-plugin": "^4.1.1"
