@@ -1,0 +1,54 @@
+.autocomplete {
+    $root: &;
+    $row-spacing: ($gutter * 2);
+
+    &__count {
+        @include fs(s);
+        font-weight: 500;
+        padding: 0 $row-spacing;
+        margin-bottom: $gutter;
+        margin-top: $gutter;
+    }
+
+    &__row {
+        display: block;
+        padding: $gutter $row-spacing;
+        border-top: 1px solid $color--light-grey;
+        text-decoration: none;
+        transition: background-color $transition;
+
+        &:hover,
+        &:focus {
+            background-color: $color--light-grey;
+
+            #{$root}__heading {
+                color: $color--primary;
+                text-decoration: underline;
+            }
+        }
+
+        &:last-child {
+            margin-bottom: $gutter;
+        }
+    }
+
+    &__heading {
+        @include fs(s);
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: $color--off-black;
+        transition: color $transition;
+    }
+
+    &__meta {
+        @include fs(xxs);
+        text-transform: uppercase;
+        color: $color--grey;
+    }
+
+    &__description {
+        @include fs(xs);
+        color: $color--grey;
+        margin-bottom: 0;
+    }
+}

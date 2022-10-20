@@ -1,4 +1,6 @@
 .search {
+    $root: &;
+
     &__container {
         display: flex;
         flex-direction: row;
@@ -10,27 +12,38 @@
         border: 1px solid $color--black;
         width: 100%;
         padding: $gutter;
-        border-radius: $border-radius--m 0 0 $border-radius--m;
+        border-radius: $border-radius--m;
     }
 
     &__button {
-        color: $color--white;
-        border-radius: 0 $border-radius--m $border-radius--m 0;
-        background-color: $color--primary;
-        border: 0;
-        padding: 0 $gutter;
-        cursor: pointer;
-        transition: background-color $transition;
+        display: none; // only show if no js
+    }
 
-        svg {
-            width: 20px;
-            height: 20px;
-            fill: $color--white;
+    .no-js & {
+        #{$root}__input {
+            border-radius: $border-radius--m 0 0 $border-radius--m;
         }
 
-        &:hover,
-        &:focus {
-            background-color: $color--off-black;
+        #{$root}__button {
+            display: block;
+            color: $color--white;
+            border-radius: 0 $border-radius--m $border-radius--m 0;
+            background-color: $color--primary;
+            border: 0;
+            padding: 0 $gutter;
+            cursor: pointer;
+            transition: background-color $transition;
+
+            svg {
+                width: 20px;
+                height: 20px;
+                fill: $color--white;
+            }
+
+            &:hover,
+            &:focus {
+                background-color: $color--off-black;
+            }
         }
     }
 }

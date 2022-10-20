@@ -8,7 +8,7 @@
 
 <form action="{% url 'search' %}" method="get">
     <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-    <button class="button" aria-label="Search">
+    <button class="button">
         Search
     </button>
 </form>
