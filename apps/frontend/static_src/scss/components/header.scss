@@ -67,7 +67,7 @@
             @include rem-font-size(21px); // prevent wrapping
         }
 
-        @media only screen and (min-width: 1235px) {
+        @media only screen and (min-width: $header-large-width) {
             @include rem-font-size(29px); // one off font size
         }
     }

@@ -4,6 +4,7 @@
     max-width: 900px;
 
     @include media-query(large) {
+        /* stylelint-disable-next-line declaration-no-important */
         font-size: $base-font-size !important;
     }
 

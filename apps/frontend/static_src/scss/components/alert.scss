@@ -44,11 +44,12 @@
         }
     }
 
-    // Extra specificity to override default streamffield values
+    // Extra specificity to override default StreamField values
     .streamfield & {
         #{$root}__heading {
             @include rem-font-size($base-font-size);
             font-weight: 700;
+            /* stylelint-disable-next-line declaration-no-important */
             margin: 0 !important;
             line-height: 1;
         }

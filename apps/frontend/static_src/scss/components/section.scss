@@ -30,7 +30,7 @@
         flex-basis: 100px;
         min-width: 100px;
         max-width: 100px;
-        margin-right: ($gutter * 2);
+        margin-inline-end: ($gutter * 2);
     }
 
     &__heading {

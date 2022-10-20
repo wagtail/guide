@@ -4,7 +4,6 @@
     z-index: 5;
     background-color: $color--page-bg;
     padding: ($gutter * 6) $gutter ($gutter * 2);
-    width: 100%;
     top: 0;
     inset-inline-end: -$gutter;
     max-height: 100vh;
@@ -19,12 +18,10 @@
     }
 
     @include media-query(large) {
-        position: static;
         display: block;
         padding: 0;
-        padding-right: $gutter;
+        padding-inline-end: $gutter;
         background-color: transparent;
-        max-height: 100%;
         max-height: 70vh;
         overflow-y: auto;
         overflow-x: visible;
