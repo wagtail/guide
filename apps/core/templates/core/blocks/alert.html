@@ -4,7 +4,7 @@
         <div class="alert__icon">
             {% include self.icon %}
         </div>
-        <h2 class="alert__heading">{{ self.alert_type }}</h2>
+        <div class="alert__heading">{{ self.alert_type }}</div>
     </div>
     <div class="alert__content">
         {{ self.alert_body|richtext }}
