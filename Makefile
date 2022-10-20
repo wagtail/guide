@@ -37,7 +37,7 @@ docker-build:
 	docker build -t guide:latest --build-arg POETRY_INSTALL_ARGS="" -f Dockerfile .
 
 docker-run:
-	docker run --name guide_latest -p 8200:8200 --env-file .env guide:latest sh -c 'poetry run python manage.py runserver 0.0.0.0:${PORT}'
+	docker run --name guide_latest -p ${PORT}:${PORTs} --env-file .env guide:latest sh -c 'poetry run python manage.py runserver 0.0.0.0:${PORT}'
 
 docker-exec:
 	docker exec -it guide_latest /bin/bash
