@@ -4,6 +4,7 @@ node_modules/
 db.sqlite3
 *.pyc
 .DS_Store
+.env
 
 apps/frontend/static/
 apps/guide/settings/local.py

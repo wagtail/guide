@@ -61,6 +61,20 @@ To activate Poetry's virtual environment, run:
 
     poetry shell
 
+### Setting up Wagtail guide to develop on Docker
+
+1. Create a `.env` file in the project root containing these variables, you can adjust the values to your preferences:
+
+    ALLOWED_HOSTS=localhost
+    PORT=8000
+    SECRET_KEY=some-random-secret
+    DJANGO_SETTINGS_MODULE=apps.guide.settings.dev
+
+2. Build the image by running the `make docker-build` command.
+3. Run the container with `make docker-run`.
+4. Run the init script in the container: `make docker-init`
+5. You should now have access to the project in your browser at `http://localhost:8000`
+
 # Gitpod
 
 With Gitpod you can deploy a ready-to-code Wagtail Guide development environment with a single click to evaluate the code.
