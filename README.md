@@ -25,7 +25,7 @@ We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/W
 #### Dependencies
 
 -   Python >= 3.9
--   Poetry
+-   Poetry >= 1.2.2
 -   Git
 -   Node 16.\*
 -   [Yarn](https://yarnpkg.com/)
