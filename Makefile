@@ -1,4 +1,7 @@
-include .env
+ifneq (,$(wildcard ./.env))
+    include .env
+    export
+endif
 
 buildfixtures:
 	poetry run python manage.py buildfixtures
