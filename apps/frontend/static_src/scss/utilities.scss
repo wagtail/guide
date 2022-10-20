@@ -1,16 +1,17 @@
 // stylelint-disable declaration-no-important
-// Set global focus outline styles so they are consistent across the UI,
-// without individual components having to explicitly define focus styles.
 // Using !important because we want to enforce only one style is used across the UI.
 // Remove :focus selectors once we stop supporting Safari 15.4.
-*:focus {
-    outline: $focus-outline-width solid $color-focus-outline !important;
-}
 
-*:focus:not(:focus-visible) {
-    outline: none !important;
-}
-
+// Set global focus outline styles so they are consistent across the UI,
+// without individual components having to explicitly define focus styles.
 *:focus-visible {
     outline: $focus-outline-width solid $color-focus-outline !important;
+}
+
+*:focus {
+    outline: $focus-outline-width solid $color-focus-outline !important;
+
+    &:not(:focus-visible) {
+        outline: none !important;
+    }
 }
