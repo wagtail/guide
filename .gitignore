@@ -12,3 +12,4 @@ apps/guide/settings/local.py
 /media/
 /static/
 .coverage
+
