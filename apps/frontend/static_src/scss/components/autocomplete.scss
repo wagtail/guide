@@ -6,7 +6,7 @@
         @include fs(s);
         position: absolute;
         top: $gutter;
-        right: 0;
+        inset-inline-end: 0;
         color: $color--grey;
         font-weight: 500;
         padding: 0 $row-spacing;
@@ -46,6 +46,7 @@
 
     &__meta {
         @include fs(xxs);
+        // stylelint-disable-next-line property-disallowed-list
         text-transform: uppercase;
         color: $color--grey;
     }
