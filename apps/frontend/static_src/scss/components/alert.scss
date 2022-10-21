@@ -20,6 +20,8 @@
     }
 
     &__icon {
+        display: flex;
+        align-items: center;
         margin-inline-end: ($gutter * 0.5);
         height: 20px;
     }
