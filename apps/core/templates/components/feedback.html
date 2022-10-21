@@ -1,11 +1,13 @@
+{% load i18n %}
+
 <div class="feedback">
     <div class="feedback__container" data-feedback-container>
-        <h2 class="feedback__heading">Was this page helpful?</h2>
+        <h2 class="feedback__heading">{% trans 'Was this page helpful?' %}</h2>
         <div class="feedback__options">
-            <button class="feedback__button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page was helpful" data-bs-trigger="hover" data-happy-button aria-label="happy">
+            <button class="feedback__button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{% trans 'This page was helpful' %}" data-bs-trigger="hover" data-happy-button aria-label="{% trans 'Happy' %}">
                 {% include "./svg/happy.svg" %}
             </button>
-            <button class="feedback__button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="This page could be improved" data-bs-trigger="hover" data-unhappy-button aria-label="unhappy">
+            <button class="feedback__button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{% trans 'This page could be improved' %}" data-bs-trigger="hover" data-unhappy-button aria-label="{% trans 'Unhappy' %}">
                 {% include "./svg/unhappy.svg" %}
             </button>
         </div>
@@ -13,10 +15,10 @@
 
     <div class="feedback__form" data-additional-feedback-container>
         <div class="feedback__form-container">
-            <h2 class="feedback__form-heading">Help us improve by telling what you missed</h2>
-            <label for="feedback" class="u-sr-only">Your feedback</label>
+            <h2 class="feedback__form-heading">{% trans 'Help us improve by telling what you missed' %}</h2>
+            <label for="feedback" class="u-sr-only">{% trans 'Your feedback' %}</label>
             <textarea data-feedback-text id="feedback" class="feedback__form-textarea" rows="3"></textarea>
-            <button data-submit-button class="feedback__form-button">Submit</button>
+            <button data-submit-button class="feedback__form-button">{% trans 'Submit' %}</button>
         </div>
     </div>
 </div>
