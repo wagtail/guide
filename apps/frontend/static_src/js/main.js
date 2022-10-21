@@ -23,34 +23,29 @@ const injectResultsInHTML = (results) => {
     removeExistingChildren(resultsDiv);
     removeExistingChildren(resultsCountContainer);
 
-    const resultsCountDiv = document.createElement('div');
-    resultsCountDiv.innerText = `${results.length} ${
+    const resultsCountHeading = document.createElement('h2');
+    resultsCountHeading.innerText = `${results.length} ${
         results.length === 1 ? 'result' : 'results'
     } found`;
-    resultsCountDiv.classList.add('m-3', 'mx-5');
-    resultsCountContainer.appendChild(resultsCountDiv);
+    resultsCountHeading.classList.add('autocomplete__count');
+    resultsCountContainer.appendChild(resultsCountHeading);
 
     results.forEach((result) => {
-        const resultDiv = document.createElement('div');
-        const resultLink = document.createElement('a');
+        const resultDiv = document.createElement('a');
+        const resultHeading = document.createElement('h3');
         const resultDescription = document.createElement('div');
         const resultParentSection = document.createElement('div');
-        resultLink.innerText = result.title;
+        resultHeading.innerText = result.title;
         resultDescription.innerText = result.search_description;
         resultParentSection.innerText = result.parent_section;
-        resultLink.href = result.full_url;
+        resultDiv.href = result.full_url;
         resultDiv.appendChild(resultParentSection);
-        resultDiv.appendChild(resultLink);
+        resultDiv.appendChild(resultHeading);
         resultDiv.appendChild(resultDescription);
-        resultParentSection.classList.add('py-2');
-        resultLink.classList.add(
-            'fw-bold',
-            'fs-5',
-            'text-decoration-none',
-            'text-dark',
-        );
-        resultDescription.classList.add('text-muted', 'py-2');
-        resultDiv.classList.add('mx-5', 'py-4', 'border-top', 'border-bottom');
+        resultParentSection.classList.add('autocomplete__meta');
+        resultDescription.classList.add('autocomplete__description');
+        resultDiv.classList.add('autocomplete__row');
+        resultHeading.classList.add('autocomplete__heading');
         resultsDiv.appendChild(resultDiv);
     });
 };
@@ -72,7 +67,7 @@ const onSearchInputChange = async (event) => {
         window.alert(`Error: ${err}`);
     }
 };
-searchInput.addEventListener('keyup', debounce(onSearchInputChange, 350));
+searchInput.addEventListener('keyup', debounce(onSearchInputChange, 150));
 
 searchIconButton.addEventListener('click', () => {
     const resultsDiv = document.querySelector('[data-results]');
