@@ -36,8 +36,8 @@ INSTALLED_APPS = [
     "apps.custom_media",
     "manifest_loader",
     "rest_framework",
-    "wagtail.locales",
-    "wagtail.contrib.simple_translation",
+    "wagtail_localize",
+    "wagtail_localize.locales",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.modeladmin",
@@ -196,13 +196,75 @@ USE_L10N = True
 
 USE_TZ = True
 
+WAGTAIL_GUIDE_LANGUAGES = [
+    ("af", "Afrikaans"),
+    ("ar", "Arabic"),
+    ("az", "Azerbaijani"),
+    ("be", "Belarusian"),
+    ("bg", "Bulgarian"),
+    ("bn", "Bengali"),
+    ("ca", "Catalan"),
+    ("cs", "Czech"),
+    ("cy", "Welsh"),
+    ("da", "Danish"),
+    ("de", "German"),
+    ("el", "Greek"),
+    ("en", "English"),
+    ("es", "Spanish"),
+    ("et", "Estonian"),
+    ("eu", "Basque"),
+    ("fa", "Persian"),
+    ("fi", "Finnish"),
+    ("fr", "French"),
+    ("gl", "Galician"),
+    ("he", "Hebrew"),
+    ("hr", "Croatian"),
+    # Exists in Wagtail's Transifex, but not supported by Django
+    # ("ht", "Haitian (Haitian Creole)"),
+    ("hu", "Hungarian"),
+    ("hy", "Armenian"),
+    ("id", "Indonesian"),
+    ("is", "Icelandic"),
+    ("it", "Italian"),
+    ("ja", "Japanese"),
+    ("ka", "Georgian"),
+    ("ko", "Korean"),
+    ("lt", "Lithuanian"),
+    ("lv", "Latvian"),
+    # Exists in Wagtail's Transifex, but not supported by Django
+    # ("mi", "Maori"),
+    ("mn", "Mongolian"),
+    ("my", "Burmese"),
+    ("nb", "Norwegian Bokmål"),
+    ("nl", "Dutch"),
+    ("pl", "Polish"),
+    ("pt-br", "Portuguese (Brazil)"),
+    ("pt-pt", "Portuguese (Portugal)"),
+    ("ro", "Romanian"),
+    ("ru", "Russian"),
+    ("sk", "Slovak"),
+    ("sl", "Slovenian"),
+    ("sr", "Serbian"),
+    ("sv", "Swedish"),
+    ("ta", "Tamil"),
+    # Exists in Wagtail's Transifex, but not supported by Django
+    # ("tet", "Tetum (Tetun)"),
+    ("th", "Thai"),
+    ("tr", "Turkish"),
+    ("uk", "Ukrainian"),
+    ("vi", "Vietnamese"),
+    # Exists in Wagtail's Transifex, but not supported by Django
+    # ("zh", "Chinese"),
+    ("zh-hans", "Chinese Simplified"),
+    ("zh-hant", "Chinese Traditional"),
+]
+
+WAGTAIL_GUIDE_VERSIONS = ["latest", "4.1.x"]
+
 WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
-    ("en-latest", "English latest"),
-    ("en-3.1.x", "English 3.0.x"),
-    ("nl-latest", "Dutch latest"),
-    ("nl-3.1.x", "Dutch 3.0.x"),
-    ("hi-latest", "Hindi latest"),
-    ("hi-3.1.x", "Hindi 3.0.x"),
+    (f"{code}-{version}", f"{name} ({version})")
+    for code, name in WAGTAIL_GUIDE_LANGUAGES
+    for version in WAGTAIL_GUIDE_VERSIONS
 ]
 
 

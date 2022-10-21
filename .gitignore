@@ -5,6 +5,7 @@ db.sqlite3
 *.pyc
 .DS_Store
 .env
+.vscode
 
 apps/frontend/static/
 apps/guide/settings/local.py

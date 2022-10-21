@@ -24,4 +24,9 @@ def navigation(context):
 
 @register.filter
 def hreflang_url(value, arg):
-    return value.replace(arg, "en-latest", 1)
+    return value.replace(f"/{arg}/", "/en-latest/", 1)
+
+
+@register.simple_tag
+def get_version_from_language_code(language_code):
+    return language_code.rsplit("-", maxsplit=1)[1]
