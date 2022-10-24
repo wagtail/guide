@@ -5,4 +5,7 @@
         height: auto;
         margin-top: ($gutter * 2);
     }
+    &__shadow{
+        box-shadow: 0px 3px 13px;
+    }
 }
