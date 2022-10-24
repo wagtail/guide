@@ -8,7 +8,6 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
-from apps.guide.views import RobotsView
 from apps.search import views as search_views
 
 urlpatterns = [
@@ -18,7 +17,6 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path("search_json/", search_views.search_json, name="search_json"),
     path("sitemap.xml", sitemap),
-    path("robots.txt", RobotsView.as_view()),
 ]
 
 
