@@ -11,6 +11,7 @@ Valid examples:
 import re
 import logging
 
+from django.conf import settings
 from django.utils import translation
 from django.utils.translation import get_language_info as original_get_language_info
 from django.utils.translation import gettext_lazy, trans_real
@@ -31,37 +32,17 @@ trans_real.language_code_prefix_re = _lazy_re_compile(
 )
 
 
+def remove_version_number_from_language_code(lang_code):
+    # Make sure to remove the version only if it exists
+    if any((version in lang_code for version in settings.WAGTAIL_GUIDE_VERSIONS)):
+        return lang_code.rsplit("-", maxsplit=1)[0]
+    return lang_code
+
+
 def patched_get_language_info(lang_code):
-    from django.conf.locale import LANG_INFO
-
     # PATCH: remove version number before continuing with the original function
-    lang_code = lang_code.rsplit("-", maxsplit=1)[0]
-
-    # Need to copy the original code instead of calling the original function
-    # directly because there's a recursive call to `get_language_info` in the
-    # original function.
-
-    try:
-        lang_info = LANG_INFO[lang_code]
-        if "fallback" in lang_info and "name" not in lang_info:
-            # PATCH: recurse with original function
-            info = original_get_language_info(lang_info["fallback"][0])
-        else:
-            info = lang_info
-    except KeyError:
-        if "-" not in lang_code:
-            raise KeyError("Unknown language code %s." % lang_code)
-        generic_lang_code = lang_code.split("-")[0]
-        try:
-            info = LANG_INFO[generic_lang_code]
-        except KeyError:
-            raise KeyError(
-                "Unknown language code %s and %s." % (lang_code, generic_lang_code)
-            )
-
-    if info:
-        info["name_translated"] = gettext_lazy(info["name"])
-    return info
+    lang_code = remove_version_number_from_language_code(lang_code)
+    return original_get_language_info(lang_code)
 
 
 translation.get_language_info = patched_get_language_info
