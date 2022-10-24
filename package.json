@@ -13,7 +13,7 @@
     "lint:css": "stylelint **/*.scss",
     "lint:format": "prettier --check .",
     "lint:js": "eslint --report-unused-disable-directives .",
-    "lint": "yarn lint:js && yarn lint:css && yarn lint:format"
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:format"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.3",

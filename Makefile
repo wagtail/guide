@@ -10,17 +10,17 @@ test-coverage:
 format:
 	poetry run isort apps
 	poetry run black apps
-	yarn format
+	npm run format
 
 lint:
 	poetry run flake8 apps
 	poetry run isort --check-only --diff apps
 	poetry run black --check --diff apps
-	yarn lint
+	npm run lint
 
 frontend:
-	yarn
-	yarn build
+	npm ci
+	npm run build
 
 backend:
 	poetry install
