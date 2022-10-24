@@ -34,7 +34,7 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version-file: '.nvmrc'
       - name: Install Poetry
         run: curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.2.2 python -
       - name: Install Python dependencies
