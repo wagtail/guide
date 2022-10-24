@@ -20,14 +20,14 @@ You can learn more about the documentation system [here](https://documentation.d
 
 # Installation
 
-We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/Wagtail in these instructions. We recommend you develop Wagtail Guide locally on your machine using venv.
+We assume that you have basic knowledge of Node/Yarn/Webpack and Python/Django/Wagtail in these instructions. We recommend you develop Wagtail Guide locally on your machine using `venv` and [fnm](https://github.com/Schniz/fnm) to ensure you are on the correct Node version.
 
 #### Dependencies
 
+-   Git
 -   Python >= 3.9
 -   Poetry >= 1.2.2
--   Git
--   Node 16.\*
+-   Node (see `.nvmrc` for version)
 -   [Yarn](https://yarnpkg.com/)
 
 ### Setting up Wagtail guide in a virtual environment
