@@ -218,7 +218,7 @@ STATIC_URL = "/static/"
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 
-# Place static files that need a specific URL (such as robots.txt and favicon.ico) in the "public" folder
+# Place static files that need a specific URL (such as robots.txt and favicon.ico) in the "public" folder # noqa
 WHITENOISE_ROOT = os.path.join(BASE_DIR, "public")
 
 # Wagtail settings
