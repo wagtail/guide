@@ -13,7 +13,9 @@
                 {% if current_site and current_site.site_name %}- {{ current_site.site_name }}{% endif %}
             {% endblock %}
         </title>
-        <meta name="description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}" />
+        {% if page.search_description %}
+            <meta name="description" content="{% if page.search_description %}{{ page.search_description }}" />
+        {% endif %}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Open links in a new tab if the page is rendered in the preview panel #}
@@ -37,16 +39,15 @@
         <meta name="twitter:card" content="summary" />
         <meta name="twitter:site" content="@wagtailcms" />
         <meta name="twitter:title" content="{{ page.title }}" />
-        <meta name="twitter:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}">
+        <meta name="twitter:description" content="{% if page.search_description %}{{ page.search_description }}{% endif %}">
         <meta name="twitter:image" content="{{ current_site.root_url }}{% static 'images/social-image.png' %}">
 
         {# facebook opengraph tags #}
-        <meta property="fb:app_id" content="{{ settings.utils.SocialMediaSettings.facebook_app_id }}" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ site.root_url }}{{ page.url }}" />
         <meta property="og:title" content="{{ page.title }}" />
         <meta name="og:image" content="{{ current_site.root_url }}{% static 'images/social-image.png' %}">
-        <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% else %}{{ page.listing_summary }}{% endif %}" />
+        <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% endif %}" />
         <meta property="og:site_name" content="{{ current_site.site_name }}" />
 
         {# Global stylesheets #}
