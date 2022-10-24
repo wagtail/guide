@@ -5,8 +5,8 @@ ports:
     onOpen: open-preview
 tasks:
   - init: |
-      yarn
-      yarn build
+      npm ci
+      npm run build
       curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.2.2 python -
       poetry install
       poetry run python manage.py migrate

@@ -40,9 +40,9 @@ jobs:
       - name: Install Python dependencies
         run: poetry install
       - name: Install npm dependencies
-        run: yarn
+        run: npm ci
       - name: Build frontend
-        run: yarn build
+        run: npm run build
       - name: System checks
         run: poetry run python manage.py check
       - name: Collect static

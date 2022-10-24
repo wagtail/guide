@@ -5,12 +5,12 @@ FROM node:16 as frontend
 ARG CI=true
 
 # Install front-end dependencies.
-COPY package.json yarn.lock webpack.config.js ./
-RUN yarn
+COPY package.json package-lock.json webpack.config.js ./
+RUN npm ci
 
 # Compile static files
 COPY ./apps/frontend/static_src/ ./apps/frontend/static_src/
-RUN yarn build
+RUN npm run build
 
 
 # We use Debian images because they are considered more stable than the alpine
