@@ -36,6 +36,7 @@
                 );
                 height: 160px;
 
+                // stylelint-disable-next-line max-nesting-depth
                 @include media-query(large) {
                     content: none;
                 }
@@ -174,7 +175,6 @@
 
     .theme-dark.no-scroll & {
         #{$root}__identity {
-            // stylelint-disable-next-line max-nesting-depth
             &::after {
                 background: linear-gradient(
                     180deg,
