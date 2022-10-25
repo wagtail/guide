@@ -3,7 +3,7 @@
     margin-bottom: ($gutter * 3);
     color: $color--off-black;
 
-    .theme-dark {
+    .theme-dark & {
         color: $color--light-grey;
     }
 }
