@@ -2,6 +2,7 @@
     position: relative;
     z-index: 4;
     display: flex;
+    justify-content: space-between;
     margin-bottom: ($gutter * 2);
 
     @include media-query(large) {

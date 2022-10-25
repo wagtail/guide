@@ -76,4 +76,17 @@
             }
         }
     }
+
+    .theme-dark & {
+        #{$root}__line {
+            background-color: $color--white;
+        }
+
+        &:hover,
+        &:focus {
+            #{$root}__line {
+                background-color: $color--light-teal;
+            }
+        }
+    }
 }

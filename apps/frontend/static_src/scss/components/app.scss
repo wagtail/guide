@@ -1,11 +1,12 @@
 .app {
     &__header {
         position: relative;
-        padding-bottom: ($gutter * 2);
+        padding-bottom: $gutter;
         grid-column: 1 / span 2;
 
         @include media-query(large) {
             grid-column: 1 / span 2;
+            padding-bottom: ($gutter * 2);
         }
     }
 

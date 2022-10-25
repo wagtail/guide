@@ -2,8 +2,8 @@
     $root: &;
 
     &__toggle {
-        @include fs(xs);
-        font-weight: 700;
+        @include fs(xxs);
+        font-weight: 500;
         padding: 10px;
         background-color: $color--white;
         border: 1px solid rgba($color--grey, 0.4);
@@ -11,6 +11,11 @@
         color: $color--off-black;
         cursor: pointer;
         transition: color $transition;
+
+        @include media-query(large) {
+            @include fs(xs);
+            font-weight: 700;
+        }
 
         &:hover,
         &:focus {
