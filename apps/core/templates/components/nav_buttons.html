@@ -1,6 +1,6 @@
 {% load wagtailcore_tags core_tags manifest %}
 
-<div class="nav-buttons">
+<nav class="nav-buttons">
     {% if previous %}
         <a href="{% pageurl previous %}" class="nav-buttons__link">
             <img src="{% manifest 'images/arrow.svg' %}" width="30px" height="25px" class="nav-buttons__arrow nav-buttons__arrow--prev" alt="">
@@ -17,4 +17,4 @@
             <img src="{% manifest 'images/arrow.svg' %}" width="30px" height="25px" class="nav-buttons__arrow nav-buttons__arrow--next" alt="">
         </a>
     {% endif %}
-</div>
+    </nav>
