@@ -69,7 +69,10 @@
             </div>
 
             <div class="app__content" id="main-content">
-                {% include "components/language_selector.html" %}
+                <div class="page-tools">
+                    {% include "components/theme_toggle.html" %}
+                    {% include "components/language_selector.html" %}
+                </div>
                 {% block content %}{% endblock %}
             </div>
         </div>

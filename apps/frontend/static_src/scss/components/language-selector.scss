@@ -1,13 +1,5 @@
 .language-selector {
-    position: relative;
-    z-index: 4;
-    display: flex;
-    margin-bottom: ($gutter * 2);
-
-    @include media-query(large) {
-        justify-content: flex-end;
-        margin-bottom: ($gutter * 5);
-    }
+    $root: &;
 
     &__toggle {
         @include fs(xs);
@@ -23,6 +15,18 @@
         &:hover,
         &:focus {
             color: $color--primary;
+        }
+    }
+
+    &__dropdown {
+        overflow: hidden;
+    }
+
+    .theme-dark & {
+        #{$root}__toggle,
+        #{$root}__dropdown {
+            background-color: $color--black;
+            color: $color--light-grey;
         }
     }
 }

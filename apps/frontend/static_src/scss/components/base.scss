@@ -2,16 +2,22 @@ html {
     font-family: $font-family-base;
     font-size: calc(($base-font-size / 16px) * 100%);
     line-height: $base-line-height;
-    color: $color--off-black;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 body {
     background-color: $color--page-bg;
+    color: $color--off-black;
+    transition: background-color $transition;
 
     &.no-scroll {
         overflow-y: hidden;
+    }
+
+    &.theme-dark {
+        background-color: $color--off-black;
+        color: $color--light-grey;
     }
 }
 
@@ -22,5 +28,14 @@ a {
     &:hover,
     &:focus {
         color: $color--black;
+    }
+
+    .theme-dark & {
+        color: $color--light-teal;
+
+        &:hover,
+        &:focus {
+            color: $color--white;
+        }
     }
 }

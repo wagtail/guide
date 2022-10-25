@@ -1,4 +1,5 @@
 .header {
+    $root: &;
     margin-top: $gutter;
 
     @include media-query(large) {
@@ -35,6 +36,16 @@
             @include media-query(large) {
                 content: none;
             }
+        }
+    }
+
+    &__logo {
+        .light {
+            fill: $color--white;
+        }
+
+        .dark {
+            fill: $color--black;
         }
     }
 
@@ -132,5 +143,28 @@
 
     &__search-icon {
         display: block;
+        fill: $color--black;
+    }
+
+    .theme-dark & {
+        #{$root}__logo {
+            .light {
+                fill: $color--black;
+            }
+
+            .dark {
+                fill: $color--white;
+            }
+        }
+
+        #{$root}__search-toggle {
+            &::before {
+                background-color: $color--light-grey;
+            }
+        }
+
+        #{$root}__search-icon {
+            fill: $color--white;
+        }
     }
 }

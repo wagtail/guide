@@ -56,4 +56,13 @@
             line-height: 1;
         }
     }
+
+    .theme-dark & {
+        &--note,
+        &--warning {
+            #{$root}__content {
+                background-color: $color--black;
+            }
+        }
+    }
 }

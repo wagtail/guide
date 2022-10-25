@@ -37,4 +37,8 @@
             color: $color--white;
         }
     }
+
+    .theme-dark & {
+        background-color: $color--black;
+    }
 }
