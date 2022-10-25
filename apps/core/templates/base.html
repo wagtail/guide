@@ -70,7 +70,9 @@
 
             <main class="app__content" id="main-content">
                 {% include "components/language_selector.html" %}
-                {% block content %}{% endblock %}
+                <div id="main-content">
+                    {% block content %}{% endblock %}
+                </div>
             </main>
         </div>
 
