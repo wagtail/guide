@@ -6,7 +6,7 @@ from wagtail.core.models import Page
 from apps.core.factories import HomePageFactory
 
 
-class TestNavigation(TestCase):
+class TestHeader(TestCase):
     def setUp(self):
         self.home = HomePageFactory()
         self.a = Page(title="a", slug="a", show_in_menus=True)
@@ -34,11 +34,12 @@ class TestNavigation(TestCase):
         ]
         self.assertEqual(result, expected)
 
-    def test_navigation_inclusion_tag(self):
+    def test_header_inclusion_tag(self):
         # A normal request will go through LocaleMiddleware to activate the locale.
         translation.activate(self.home.locale.language_code)
-        template = Template("{% load core_tags %}{% navigation %}")
+        template = Template("{% load core_tags %}{% header %}")
         result = template.render(Context({}))
+        self.assertIn('aria-label="Wagtail User Guide"', result)
         self.assertIn('<nav class="primary-nav" data-mobile-menu>', result)
         self.assertIn('href="/en-latest/a/"', result)
         self.assertIn('href="/en-latest/a/ab/"', result)
