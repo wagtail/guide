@@ -7,7 +7,8 @@
 <h1>Search</h1>
 
 <form action="{% url 'search' %}" method="get">
-    <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
+    <label for="search" class="u-sr-only">Search</label>
+    <input type="text" id="search" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
     <button class="button">
         Search
     </button>
