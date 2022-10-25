@@ -3,7 +3,7 @@
 
     @include media-query(large) {
         position: sticky;
-        top: ($gutter * 1.5);
+        top: ($gutter * 2.5);
         margin-top: ($gutter * 2.5);
     }
 
