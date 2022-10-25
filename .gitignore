@@ -4,6 +4,7 @@ node_modules/
 db.sqlite3
 *.pyc
 .DS_Store
+.env
 .vscode
 
 apps/frontend/static/
