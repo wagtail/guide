@@ -7,8 +7,8 @@ from apps.core.models import FooterContent, HomePage
 register = template.Library()
 
 
-@register.inclusion_tag("components/navigation.html", takes_context=True)
-def navigation(context):
+@register.inclusion_tag("components/header.html", takes_context=True)
+def header(context):
     home = HomePage.objects.filter(locale__language_code=get_language()).first()
     pages = (
         Page.objects.descendant_of(home)
@@ -17,6 +17,7 @@ def navigation(context):
         .in_menu()
     )
     return {
+        "site_title": home.title,
         "current_page": context.get("page"),
         "annotated_list": Page.get_annotated_list_qs(pages),
     }
