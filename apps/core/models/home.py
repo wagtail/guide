@@ -1,3 +1,4 @@
+from django.db import models
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.models import Page
@@ -8,6 +9,7 @@ from ..blocks import HOME_BLOCKS
 class HomePage(Page):
     subpage_types = ["core.ContentPage"]
     max_count = 1
+    introduction = models.TextField(blank=True)
 
     sections = StreamField(
         HOME_BLOCKS,
