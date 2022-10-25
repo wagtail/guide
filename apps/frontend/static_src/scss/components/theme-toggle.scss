@@ -1,8 +1,12 @@
 .theme-toggle {
     $root: &;
-    margin-right: $gutter;
+    margin-inline-end: $gutter;
     display: flex;
     align-items: center;
+
+    @include media-query(large) {
+        margin-inline-end: ($gutter * 1.5);
+    }
 
     &__label {
         @include fs(xxs);
@@ -10,11 +14,10 @@
     }
 
     &__button {
-        margin: 0;
         padding: 0;
         width: 48px;
         height: 28px;
-        border: none;
+        border: 0;
         outline: none;
         overflow: hidden;
         position: relative;
@@ -26,7 +29,7 @@
 
         &::before {
             top: 4px;
-            left: 24px;
+            inset-inline-start: 24px;
             content: '';
             width: 20px;
             height: 20px;
@@ -34,13 +37,13 @@
             position: absolute;
             border-radius: 12px;
             background-color: $color--light-grey;
-            transition: left $transition;
+            transition: inset-inline-start $transition;
         }
 
         &::after {
             content: '';
             top: 14px;
-            right: 2px;
+            inset-inline-end: 2px;
             width: 1px;
             height: 1px;
             display: block;
@@ -48,6 +51,10 @@
             border-radius: 0.5px;
             background: $color--off-black;
         }
+    }
+
+    .dark-only {
+        display: none;
     }
 
     .theme-dark & {
@@ -64,13 +71,13 @@
 
             &::before {
                 background: $color--black;
-                left: 4px;
+                inset-inline-start: 4px;
             }
 
             &::after {
                 background: $color--light-grey;
                 top: -2px;
-                right: 2px;
+                inset-inline-end: 2px;
                 width: 32px;
                 height: 32px;
                 border-radius: 16px;
@@ -80,9 +87,5 @@
         #{$root}__label {
             color: $color--light-grey;
         }
-    }
-
-    .dark-only {
-        display: none;
     }
 }
