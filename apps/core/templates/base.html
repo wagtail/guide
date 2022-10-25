@@ -2,7 +2,7 @@
 
 {% wagtail_site as current_site %}
 <!DOCTYPE html>
-<html lang="{% block lang %}{{ self.locale.language_code }}{% endblock %}" class="no-js">
+<html lang="{% block lang %}{% get_language_from_language_code self.locale.language_code %}{% endblock %}" class="no-js">
     <head>
         <meta charset="utf-8" />
         <title>
