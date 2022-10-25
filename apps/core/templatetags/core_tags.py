@@ -22,9 +22,37 @@ def navigation(context):
     }
 
 
-@register.filter
-def hreflang_url(value, arg):
-    return value.replace(f"/{arg}/", "/en-latest/", 1)
+@register.simple_tag
+def get_translation_url(page, language_code):
+    return page.full_url.replace(
+        f"/{page.locale.language_code}/",
+        f"/{language_code}/",
+        1,
+    )
+
+
+@register.inclusion_tag("components/hreflangs.html", takes_context=True)
+def hreflangs(context):
+    page = context.get("page")
+    if not page:
+        return {}
+
+    version = get_version_from_language_code(page.locale.language_code)
+
+    # Only get translations for the current version.
+    translation_language_codes = (
+        page.get_translations()
+        .live()
+        .filter(locale__language_code__endswith=version)
+        .values_list("locale__language_code", flat=True)
+    )
+
+    return {
+        "translations": [
+            (get_language_from_language_code(lc), get_translation_url(page, lc))
+            for lc in translation_language_codes
+        ]
+    }
 
 
 @register.simple_tag
