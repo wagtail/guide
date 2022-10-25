@@ -3,14 +3,10 @@
 
 {% block content %}
 
-    <h1 class="heading heading--display">{{ self.title }}</h1>
+    <h1 class="heading heading--display">{{ page.title }}</h1>
 
     <p class="introduction">
-        {% blocktrans trimmed %}
-        This documentation is written for anyone creating content or managing
-        content production in Wagtail. It covers everything you can expect when
-        using a standard Wagtail site.
-        {% endblocktrans %}
+        {{ page.introduction }}
     </p>
 
     {% include_block page.sections %}
