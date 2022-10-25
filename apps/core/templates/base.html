@@ -1,4 +1,4 @@
-{% load static core_tags wagtailcore_tags wagtailuserbar manifest %}
+{% load core_tags wagtailcore_tags wagtailuserbar manifest %}
 
 {% wagtail_site as current_site %}
 <!DOCTYPE html>
@@ -40,13 +40,13 @@
         <meta name="twitter:site" content="@wagtailcms" />
         <meta name="twitter:title" content="{{ page.title }}" />
         <meta name="twitter:description" content="{% if page.search_description %}{{ page.search_description }}{% endif %}">
-        <meta name="twitter:image" content="{{ current_site.root_url }}{% static 'images/social-image.png' %}">
+        <meta name="twitter:image" content="{{ current_site.root_url }}{% manifest 'images/social-image.png' %}">
 
         {# facebook opengraph tags #}
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{ site.root_url }}{{ page.url }}" />
         <meta property="og:title" content="{{ page.title }}" />
-        <meta name="og:image" content="{{ current_site.root_url }}{% static 'images/social-image.png' %}">
+        <meta name="og:image" content="{{ current_site.root_url }}{% manifest 'images/social-image.png' %}">
         <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% endif %}" />
         <meta property="og:site_name" content="{{ current_site.site_name }}" />
 

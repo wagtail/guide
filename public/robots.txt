@@ -2,5 +2,3 @@ User-Agent: *
 Disallow: /admin/
 Disallow: /search/
 Disallow: /search_json/
-
-Sitemap: {{ wagtail_site.root_url }}/sitemap.xml
