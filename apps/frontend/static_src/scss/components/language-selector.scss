@@ -25,4 +25,20 @@
             color: $color--primary;
         }
     }
+
+    &__dropdown {
+        max-width: 200px;
+        min-width: 200px;
+        width: 200px;
+        overflow: hidden;
+    }
+
+    &__dropdown-item {
+        @include fs(xxs);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 200px;
+        width: auto;
+    }
 }
