@@ -12,7 +12,7 @@
             {% for translation in page.get_translations.live %}
                 {% get_language_info for translation.locale.language_code as lang %}
                 <li>
-                    <a href="{% pageurl translation %}" rel="alternate" hreflang="{{ language_code }}" class="language-selector__dropdown-item dropdown-item">
+                    <a href="{% pageurl translation %}" rel="alternate" hreflang="{% get_language_from_language_code translation.locale.language_code %}" class="language-selector__dropdown-item dropdown-item">
                         {{ lang.name_local }} ({% get_version_from_language_code translation.locale.language_code %})
                     </a>
                 </li>
