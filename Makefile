@@ -12,16 +12,24 @@ test:
 test-coverage:
 	poetry run coverage run manage.py test && poetry run coverage report
 
-format:
+format-backend:
 	poetry run isort apps
 	poetry run black apps
+
+format-frontend:
 	npm run format
 
-lint:
+format: format-backend format-frontend
+
+lint-backend:
 	poetry run flake8 apps
 	poetry run isort --check-only --diff apps
 	poetry run black --check --diff apps
+
+lint-frontend:
 	npm run lint
+
+lint: lint-backend lint-frontend
 
 frontend:
 	npm ci
