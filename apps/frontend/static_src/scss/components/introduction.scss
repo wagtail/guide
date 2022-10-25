@@ -2,4 +2,8 @@
     font-size: $base-font-size;
     margin-bottom: ($gutter * 3);
     color: $color--off-black;
+
+    .theme-dark {
+        color: $color--light-grey;
+    }
 }
