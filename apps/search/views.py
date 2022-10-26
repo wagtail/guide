@@ -3,7 +3,7 @@ from django.template.response import TemplateResponse
 from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from wagtail.models import Page
+from wagtail.models import Page, Locale
 from wagtail.search.models import Query
 
 
@@ -13,7 +13,7 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = Page.objects.live().search(search_query)
+        search_results = Page.objects.live().filter(locale=Locale.get_active()).search(search_query)
         query = Query.get(search_query)
 
         # Record hit
@@ -62,7 +62,7 @@ def search_json(request):
 
     # Search
     if search_query:
-        search_results = Page.objects.live().search(search_query)
+        search_results = Page.objects.live().filter(locale=Locale.get_active()).search(search_query)
         query = Query.get(search_query)
 
         # Record hit
