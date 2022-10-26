@@ -13,7 +13,8 @@ def search(request):
 
     # Search
     if search_query:
-        search_results = Page.objects.live().filter(locale=Locale.get_active()).search(search_query)
+        search_results = Page.objects.live().filter(locale=Locale.get_active()) \
+            .search(search_query)
         query = Query.get(search_query)
 
         # Record hit
@@ -62,7 +63,8 @@ def search_json(request):
 
     # Search
     if search_query:
-        search_results = Page.objects.live().filter(locale=Locale.get_active()).search(search_query)
+        search_results = Page.objects.live().filter(locale=Locale.get_active()) \
+            .search(search_query)
         query = Query.get(search_query)
 
         # Record hit
