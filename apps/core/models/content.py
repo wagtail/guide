@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from django.db import models
 from django.http import HttpResponse
 from django.template import Context, Template
-from django.template.defaultfilters import slugify
+from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.models import Page
@@ -23,7 +23,8 @@ def create_table_of_contents(body):
     if headings:
         toc += "<ul>"
         for heading in headings:
-            toc += f'<li><a href="#{slugify(heading.text)}">{heading.text}</a></li>'  # noqa
+            anchor = heading.attrs.get("id", slugify(heading.text))
+            toc += f'<li><a href="#{anchor}">{heading.text}</a></li>'
         toc += "</ul>"
     return toc
 
