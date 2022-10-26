@@ -3,7 +3,7 @@ from django.template.response import TemplateResponse
 from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from wagtail.models import Page, Locale
+from wagtail.models import Locale, Page
 from wagtail.search.models import Query
 
 
