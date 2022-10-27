@@ -76,6 +76,14 @@ To activate Poetry's virtual environment, run:
 4. Run the init script in the container: `make docker-init`
 5. You should now have access to the project in your browser at `http://localhost:8000`
 
+To access the app container, run:
+
+`make docker-shell`
+
+To access the frontend container to run linting, etc:
+
+`make docker-shell-frontend`
+
 # Gitpod
 
 With Gitpod you can deploy a ready-to-code Wagtail Guide development environment with a single click to evaluate the code.

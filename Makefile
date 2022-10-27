@@ -50,8 +50,11 @@ docker-build:
 docker-run:
 	docker-compose up
 
-docker-exec:
+docker-shell:
 	docker-compose exec web bash
+
+docker-shell-frontend:
+	docker-compose exec frontend bash
 
 docker-init:
 	docker-compose exec web poetry install
