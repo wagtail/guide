@@ -60,6 +60,10 @@ To activate Poetry's virtual environment, run:
 
     poetry shell
 
+To generate and compile translation strings, run:
+
+    make translations
+
 ### Setting up development with Docker
 
 1. Create a `.env` file in the project root containing these variables, you can adjust the values to your preferences:
