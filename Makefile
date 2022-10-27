@@ -40,9 +40,14 @@ backend:
 	poetry run python manage.py migrate
 	poetry run python manage.py createcachetable
 	poetry run python manage.py createsuperuser
+	poetry run python manage.py compilemessages
 
 run:
 	poetry run python manage.py runserver
+
+translations:
+	poetry run python manage.py makemessages --all
+	poetry run python manage.py compilemessages
 
 docker-build:
 	docker build -t guide:latest --build-arg POETRY_INSTALL_ARGS="" -f Dockerfile .
