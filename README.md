@@ -62,6 +62,8 @@ To activate Poetry's virtual environment, run:
 
 ### Setting up development with Docker
 
+**Requirements:** [Docker](https://www.docker.com/) and Docker Compose (Docker Compose is included with Docker Desktop for Mac and Windows).
+
 1. Create a `.env` file in the project root containing these variables, you can adjust the values to your preferences:
     ```
     ALLOWED_HOSTS=localhost
