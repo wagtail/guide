@@ -11,6 +11,14 @@
         }
     }
 
+    &__link,
+    &__link:hover,
+    &__link:visited,
+    &__link:active {
+        text-decoration: none;
+        color: inherit;
+    }
+
     &__icon {
         width: 50px;
         margin-inline-end: ($gutter * 0.5);

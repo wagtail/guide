@@ -2,7 +2,7 @@ from django import template
 from django.utils.translation import get_language
 from wagtail.core.models import Page
 
-from apps.core.models import HomePage
+from apps.core.models import FooterContent, HomePage
 
 register = template.Library()
 
@@ -25,6 +25,15 @@ def navigation(context):
 @register.filter
 def hreflang_url(value, arg):
     return value.replace(f"/{arg}/", "/en-latest/", 1)
+
+
+@register.inclusion_tag("components/footer.html")
+def footer():
+    obj = FooterContent.objects.filter(locale__language_code=get_language()).first()
+    if not obj:
+        obj = FooterContent.objects.first()
+
+    return {"footer": obj}
 
 
 @register.simple_tag

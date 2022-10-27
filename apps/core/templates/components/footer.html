@@ -1,51 +1,30 @@
+{% load wagtailcore_tags %}
 
 <div class="footer">
     <div class="footer__container">
         <div class="footer__link-blocks">
+          {% for footer_item in footer.footer_items.all %}
             <div class="link-block">
-                <div class="link-block__container">
-                    <div class="link-block__icon">
-                        {% include "./svg/info.svg" %}
-                    </div>
-                    <div class="link-block__content">
-                        <h2 class="link-block__heading">About this guide</h2>
-                        <div class="link-block__description">
-                            Learn why we structured our documents like this
+                <a class="link-block__link" href="{{ footer_item.link }}">
+                    <div class="link-block__container">
+                        <div class="link-block__icon">
+                            {% with icon="./svg/"|add:footer_item.icon|add:".svg" %}
+                                {% include icon %}
+                            {% endwith %}
+                        </div>
+                        <div class="link-block__content">
+                            <h2 class="link-block__heading">{{ footer_item.title }}</h2>
+                            <div class="link-block__description">
+                                {{ footer_item.description }}
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
-
-            <div class="link-block">
-                <div class="link-block__container">
-                    <div class="link-block__icon">
-                        {% include "./svg/help.svg" %}
-                    </div>
-                    <div class="link-block__content">
-                        <h2 class="link-block__heading">Help improve this guide</h2>
-                        <div class="link-block__description">
-                            Contribute to open source with no coding experience needed
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="link-block">
-                <div class="link-block__container">
-                    <div class="link-block__icon">
-                        {% include "./svg/wagtail.svg" %}
-                    </div>
-                    <div class="link-block__content">
-                        <h2 class="link-block__heading">Wagtail</h2>
-                        <div class="link-block__description">
-                            Visit Wagtail.org for more resources and Wagtail news
-                        </div>
-                    </div>
-                </div>
-            </div>
+          {% endfor %}
         </div>
         <div class="footer__legal">
-            <p class="footer__legal-text">© Copyright {% now 'Y' %}, <a href="https://github.com/Hitansh-Shah" class="footer__legal-link">Hitansh Shah</a> and contributors</p>
+            {{ footer.copyright_text|richtext }}
         </div>
     </div>
 </div>
