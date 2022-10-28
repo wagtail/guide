@@ -1,7 +1,24 @@
-from django.template.defaultfilters import slugify
+from html import escape
+
+from django.utils.text import slugify
 from draftjs_exporter.dom import DOM
+from draftjs_exporter.engines.string import DOMString, Elt
 from wagtail import hooks
 from wagtail.admin.rich_text.converters.html_to_contentstate import BlockElementHandler
+
+
+class DOMText(DOMString):
+    """Like DOMString, but the element is rendered without any tags (text-only)."""
+
+    @staticmethod
+    def render_children(children):
+        return "".join(
+            DOMText.render(c) if isinstance(c, Elt) else escape(c) for c in children
+        )
+
+    @staticmethod
+    def render(elt):
+        return DOMText.render_children(elt.children) if elt.children else ""
 
 
 class AnchorBlockConverter:
@@ -14,9 +31,10 @@ class AnchorBlockConverter:
         self.tag = tag
 
     def __call__(self, props):
-        return DOM.create_element(
-            self.tag, {"id": slugify(props["children"])}, props["children"]
-        )
+        id = text = props["children"]
+        if isinstance(text, Elt):
+            id = DOMText.render(text)
+        return DOM.create_element(self.tag, {"id": slugify(id)}, text)
 
 
 @hooks.register("register_rich_text_features")
