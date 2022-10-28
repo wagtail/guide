@@ -56,63 +56,63 @@ msgstr ""
 
 #: apps/core/blocks.py:54
 msgid "Warning"
-msgstr ""
+msgstr "Viðvörun"
 
 #: apps/core/blocks.py:55
 msgid "Note"
-msgstr ""
+msgstr "Athugasemd"
 
 #: apps/core/templates/404.html:4 apps/core/templates/404.html:8
 msgid "Page not found"
-msgstr ""
+msgstr "Síða fannst ekki"
 
 #: apps/core/templates/404.html:10
 msgid "Sorry, this page could not be found."
-msgstr ""
+msgstr "Því miður fannst ekkert á þessari vefslóð."
 
 #: apps/core/templates/components/feedback.html:5
 msgid "Was this page helpful?"
-msgstr ""
+msgstr "Hjálpaði þessi síða þér?"
 
 #: apps/core/templates/components/feedback.html:7
 msgid "This page was helpful"
-msgstr ""
+msgstr "Þessi síða hjálpaði mér"
 
 #: apps/core/templates/components/feedback.html:7
 msgid "Happy"
-msgstr ""
+msgstr "Glaður broskall"
 
 #: apps/core/templates/components/feedback.html:10
 msgid "This page could be improved"
-msgstr ""
+msgstr "Það er hægt að bæta úr þessari síðu"
 
 #: apps/core/templates/components/feedback.html:10
 msgid "Unhappy"
-msgstr ""
+msgstr "Leiður broskall"
 
 #: apps/core/templates/components/feedback.html:18
 msgid "Help us improve by telling what you missed"
-msgstr ""
+msgstr "Hjálpaðu okkur að bæta úr efninu með því að segja okkur hvað vantar"
 
 #: apps/core/templates/components/feedback.html:19
 msgid "Your feedback"
-msgstr ""
+msgstr "Þitt álit"
 
 #: apps/core/templates/components/feedback.html:21
 msgid "Submit"
-msgstr ""
+msgstr "Senda"
 
 #: apps/core/templates/components/header.html:18
 msgid "User guide"
-msgstr ""
+msgstr "Handbókin"
 
 #: apps/core/templates/components/header.html:19
 msgid "Toggle the search form"
-msgstr ""
+msgstr "Sýna leitarform"
 
 #: apps/core/templates/components/header.html:24
 msgid "Mobile menu toggle"
-msgstr ""
+msgstr "Kveikja á valmynd fyrir snjalltæki"
 
 #: apps/core/templates/components/search_modal.html:8
 #: apps/core/templates/components/search_modal.html:9
@@ -121,15 +121,15 @@ msgstr ""
 #: apps/search/templates/search/search.html:7
 #: apps/search/templates/search/search.html:13
 msgid "Search"
-msgstr ""
+msgstr "Leita"
 
 #: apps/core/templates/components/skip_link.html:4
 msgid "Skip to main content"
-msgstr ""
+msgstr "Fara beint í meginmál"
 
 #: apps/core/templates/core/content_page.html:10
 msgid "On this page"
-msgstr ""
+msgstr "Á þessari síðu"
 
 #: apps/custom_media/models.py:18
 msgid "image"
@@ -137,12 +137,12 @@ msgstr ""
 
 #: apps/search/templates/search/search.html:30
 msgid "Previous"
-msgstr ""
+msgstr "Fyrri"
 
 #: apps/search/templates/search/search.html:34
 msgid "Next"
-msgstr ""
+msgstr "Næsta"
 
 #: apps/search/templates/search/search.html:37
 msgid "No results found"
-msgstr ""
+msgstr "Engar síður fundust"
