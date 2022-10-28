@@ -21,6 +21,7 @@ whitenoise = ">=6.6,<6.7"
 psycopg2 = "2.9.9"
 wagtail-localize = "1.7rc1"
 django-permissions-policy = "^4.13.0"
+django-csp = "^3.7"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.1.4"
