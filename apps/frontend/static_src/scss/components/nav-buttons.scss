@@ -1,3 +1,4 @@
+
 .nav-buttons {
     display: flex;
     justify-content: space-between;
@@ -33,10 +34,17 @@
         &--prev {
             transform: rotateZ(180deg);
             margin-inline-end: ($gutter * 0.25);
+            @include media-query(small)  {    
+                padding: 1px 1px 1px 2%;           
+            }
         }
 
         &--next {
             margin-inline-start: ($gutter * 0.25);
+            @include media-query(small)  {
+                position: absolute;    
+                padding: 1px 1px 1px 80%;           
+            }
         }
     }
 
@@ -44,4 +52,12 @@
         @include fs(xs);
         font-weight: 700;
     }
+
+    &__label:first-child{
+        @include media-query(small)  {    
+            padding: 1px 1px 1px 11%;           
+        }
+    }
+   
+   
 }
