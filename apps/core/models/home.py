@@ -19,4 +19,7 @@ class HomePage(Page):
         max_num=1,
     )
 
-    content_panels = Page.content_panels + [FieldPanel("sections")]
+    content_panels = Page.content_panels + [
+        FieldPanel("introduction"),
+        FieldPanel("sections"),
+    ]
