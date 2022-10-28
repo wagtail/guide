@@ -10,6 +10,11 @@ register = template.Library()
 @register.inclusion_tag("components/header.html", takes_context=True)
 def header(context):
     home = HomePage.objects.filter(locale__language_code=get_language()).first()
+
+    # Translation may not have been activated (e.g. accessing the root path)
+    if not home:
+        home = HomePage.objects.first()
+
     pages = (
         Page.objects.descendant_of(home)
         .filter(depth__gt=2, depth__lte=4)
