@@ -19,7 +19,7 @@ RUN npm run build
 FROM python:3.9 as production
 
 # Install dependency needed to run guide init script
-RUN apt-get install -y gettext 
+RUN apt-get update && apt-get install -y gettext  
 
 ARG POETRY_HOME=/opt/poetry
 ARG POETRY_INSTALL_ARGS="--without dev"
