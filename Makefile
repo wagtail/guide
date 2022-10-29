@@ -59,4 +59,4 @@ docker-exec:
 	docker exec -it guide_latest /bin/bash
 
 docker-init:
-	docker exec -it guide_latest /bin/bash -c "make backend"
+	docker exec -it guide_latest /bin/bash -c "make backend && make buildfixtures"
