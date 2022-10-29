@@ -12,12 +12,14 @@ RUN npm ci
 COPY ./apps/frontend/static_src/ ./apps/frontend/static_src/
 RUN npm run build
 
-
 # We use Debian images because they are considered more stable than the alpine
-# ones becase they use a different C compiler. Debian images also come with
+# ones because they use a different C compiler. Debian images also come with
 # all useful packages required for image manipulation out of the box. They
 # however weigh a lot, approx. up to 1.5GiB per built image.
 FROM python:3.9 as production
+
+# Install dependency needed to run guide init script
+RUN apt-get install -y gettext 
 
 ARG POETRY_HOME=/opt/poetry
 ARG POETRY_INSTALL_ARGS="--without dev"
