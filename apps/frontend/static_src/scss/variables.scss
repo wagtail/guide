@@ -94,4 +94,8 @@ $small-font-sizes: (
 );
 
 // Breakpoints - should match bootstrap
-$breakpoints: ('medium' '(min-width: 599px)', 'large' '(min-width: 1023px)');
+$breakpoints: (
+    'small' '(max-width: 598px)',
+    'medium' '(min-width: 599px)',
+    'large' '(min-width: 1023px)'
+);

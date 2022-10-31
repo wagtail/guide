@@ -11,9 +11,17 @@
 
     &__link-blocks {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-column: 1 / span 2;
         margin-bottom: ($gutter * 2);
+
+        @include media-query(small) {
+            grid-column: 1 / span 2;
+            padding: 1px 1px 30px 1px;
+        }
+
+        @include media-query(medium) {
+            grid-template-columns: 1fr 1fr;
+            grid-column: 1 / span 2;
+        }
 
         @include media-query(large) {
             grid-column: 1 / span 9;
@@ -23,6 +31,7 @@
 
     &__legal {
         @include fs(xxs);
+        text-align: center;
         grid-column: 1 / span 4;
 
         a {
@@ -36,5 +45,11 @@
                 color: $color--white;
             }
         }
+    }
+}
+
+.link-block {
+    @include media-query(small) {
+        padding: 10px;
     }
 }
