@@ -14,7 +14,7 @@
         margin-bottom: ($gutter * 2);
         @include media-query(small) {
             grid-column: 1 / span 2;
-            padding: 1px 1px 30px 1px;
+            padding: 1px 2px 30px 1px;
         }
         @include media-query(medium) {
             grid-template-columns: 1fr 1fr;
