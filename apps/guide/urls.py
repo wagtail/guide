@@ -42,6 +42,6 @@ if settings.DEBUG:
 urlpatterns += i18n_patterns(
     path("search/", search_views.search, name="search"),
     path("search_json/", search_views.search_json, name="search_json"),
-    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
     path("", include(wagtail_urls)),
 )
