@@ -18,6 +18,14 @@
         {% endif %}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+        {% comment %}
+        We don’t want older versions of the documentation to show up in search results.
+        So we block all non-latest pages indexing with the robots=noindex meta tag.
+        {% endcomment %}
+        {% if "latest" not in self.locale.language_code %}
+        <meta name="robots" content="noindex">
+        {% endif %}
+
         {# Open links in a new tab if the page is rendered in the preview panel #}
         {% if request.in_preview_panel %}
             <base target="_blank">
