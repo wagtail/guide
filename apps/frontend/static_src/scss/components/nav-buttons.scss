@@ -42,19 +42,19 @@
 
     &__label {
         @include fs(xs);
-        font-weight: 700;
-    }
+        font-weight: 700;    
 
-    &__label:nth-child(2) {
-        @include media-query(small) {
-            width: 230px;
+        &:nth-child(2) {
+            @include media-query(small) {
+                width: 230px;
+            }
         }
-    }
 
-    &__label:first-child {
-        @include media-query(small) {
-            padding: 1px 1px 1px 30px;
-            width: 230px;
+        &:first-child {
+            @include media-query(small) {
+                padding: 1px 1px 1px 30px;
+                width: 230px;
+            }
         }
     }
 }
