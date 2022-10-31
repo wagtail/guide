@@ -1,4 +1,8 @@
 /* stylelint-disable no-descending-specificity */
+.header__burger{
+    width: 42px;
+    height: 42px;
+}
 .burger {
     $root: &;
     display: inline-block;
