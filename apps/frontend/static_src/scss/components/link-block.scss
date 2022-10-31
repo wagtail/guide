@@ -6,12 +6,8 @@
 
     &__container {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         margin-inline-end: ($gutter * 2);
-
-        @include media-query(large) {
-            align-items: flex-end;
-        }
     }
 
     &__icon {
