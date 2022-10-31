@@ -1,3 +1,4 @@
+/* global gettext */
 import { Tooltip } from 'bootstrap';
 
 /**
@@ -62,7 +63,7 @@ export const handleFeedback = () => {
             tooltipList.forEach((tooltip) => {
                 tooltip.dispose();
             });
-            feedbackContainer.innerHTML = 'Thanks for your feedback!';
+            feedbackContainer.innerHTML = gettext('Thanks for your feedback!');
             if (feedback === 'unhappy') {
                 feedbackPk = data.pk;
                 additionalFeedbackContainer.classList.add('active');

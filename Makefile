@@ -47,6 +47,7 @@ run:
 
 translations:
 	poetry run python manage.py makemessages --all
+	poetry run python manage.py makemessages --all -e ".js" -d djangojs --ignore=apps/frontend/static/* --ignore=node_modules/* --ignore=static/*
 	poetry run python manage.py compilemessages
 
 docker-build:
