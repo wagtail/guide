@@ -10,6 +10,7 @@
 
     &__link {
         display: flex;
+        justify-content: space-between;
         align-items: center;
         padding: ($gutter * 0.5) $gutter;
         border: 1px solid $color--off-black;
@@ -43,18 +44,16 @@
     &__label {
         @include fs(xs);
         font-weight: 700;
-    }
 
-    &__label:nth-child(2) {
         @include media-query(small) {
-            width: 230px;
-        }
-    }
-
-    &__label:first-child {
-        @include media-query(small) {
-            padding: 1px 1px 1px 30px;
-            width: 230px;
+            &:first-child {
+                padding: 1px 1px 1px 50px;
+            }
+            
+            &:nth-child(2) {
+                position: absolute;
+                padding: 10px 1px 10px 50px;
+            }
         }
     }
 }
