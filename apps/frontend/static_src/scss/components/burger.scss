@@ -13,7 +13,7 @@
     background: transparent;
     border: 0;
     transform: rotate(0deg);
-    transition: transform 0.25s ease-out;
+    transition: transform $transition;
 
     &:hover,
     &:focus {
