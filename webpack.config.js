@@ -9,6 +9,7 @@ const destination = path.resolve(path.join('apps', 'frontend', 'static'));
 
 const config = {
     entry: {
+        blocking: path.resolve(source, 'js', 'blocking.js'),
         main: [
             path.join(source, 'js', 'main.js'),
             path.join(source, 'scss', 'main.scss'),

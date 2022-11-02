@@ -58,6 +58,9 @@
 
     <body class="app">
 
+        {# blocking js loaded first to ensure no flash of white on theme detection #}
+        <script src="{% manifest 'blocking.js' %}"></script>
+
         {% include "components/skip_link.html" %}
         {% wagtailuserbar %}
 
