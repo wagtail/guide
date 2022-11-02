@@ -9,7 +9,6 @@ html {
 body {
     background-color: $color--page-bg;
     color: $color--off-black;
-    transition: background-color $transition;
 
     &.no-scroll {
         overflow-y: hidden;
