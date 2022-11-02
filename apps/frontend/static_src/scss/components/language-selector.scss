@@ -1,5 +1,9 @@
 .language-selector {
     $root: &;
+    max-width: 200px;
+    min-width: 200px;
+    width: 200px;
+    overflow: hidden;
 
     &__toggle {
         @include fs(xxs);
@@ -37,11 +41,6 @@
     }
 
     .theme-dark & {
-        max-width: 200px;
-        min-width: 200px;
-        width: 200px;
-        overflow: hidden;
-
         #{$root}__toggle,
         #{$root}__dropdown {
             background-color: $color--black;
