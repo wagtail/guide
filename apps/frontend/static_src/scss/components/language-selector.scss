@@ -27,7 +27,21 @@
         overflow: hidden;
     }
 
+    &__dropdown-item {
+        @include fs(xxs);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        max-width: 200px;
+        width: auto;
+    }
+
     .theme-dark & {
+        max-width: 200px;
+        min-width: 200px;
+        width: 200px;
+        overflow: hidden;
+
         #{$root}__toggle,
         #{$root}__dropdown {
             background-color: $color--black;

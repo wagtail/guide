@@ -1,14 +1,13 @@
 .link-block {
     $root: &;
 
+    text-decoration: none;
+    color: inherit;
+
     &__container {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         margin-inline-end: ($gutter * 2);
-
-        @include media-query(large) {
-            align-items: flex-end;
-        }
     }
 
     &__icon {
@@ -31,6 +30,7 @@
     &:hover,
     &:focus {
         cursor: pointer;
+        color: inherit;
 
         #{$root}__heading {
             color: $color--secondary;

@@ -6,6 +6,7 @@ on:
 
 jobs:
   test:
+    name: 📋 Test
     runs-on: ubuntu-latest
 
     env:
@@ -31,18 +32,10 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: 3.9
-      - name: Set up node
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
       - name: Install Poetry
         run: curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.2.2 python -
       - name: Install Python dependencies
         run: poetry install
-      - name: Install npm dependencies
-        run: npm ci
-      - name: Build frontend
-        run: npm run build
       - name: System checks
         run: poetry run python manage.py check
       - name: Collect static
@@ -51,7 +44,39 @@ jobs:
         run: poetry run python manage.py createcachetable
       - name: Missing migrations
         run: poetry run python manage.py makemigrations --check
+      - name: Mock static
+        run: mkdir ./apps/frontend/static && echo "{}" > ./apps/frontend/static/manifest.json
       - name: Test
         run: make test-coverage
+
+  check_python:
+    name: 🐍 Check Python (backend)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install Poetry
+        run: curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.2.2 python -
+      - name: Install Python dependencies
+        run: poetry install
       - name: Lint
-        run: make lint
+        run: make lint-backend
+
+  check_node:
+    name: 👩‍🚀 Check Node (frontend)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install npm dependencies
+        run: npm ci
+      - name: Lint
+        run: npm run lint

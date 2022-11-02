@@ -2,7 +2,7 @@
 
 {% wagtail_site as current_site %}
 <!DOCTYPE html>
-<html lang="{% block lang %}{{ self.locale.language_code }}{% endblock %}" class="no-js">
+<html lang="{% block lang %}{% get_language_from_language_code self.locale.language_code %}{% endblock %}" class="no-js">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -27,10 +27,8 @@
         <link rel="icon" type="image/png" sizes="32x32" href="{% manifest 'images/favicon-32x32.png' %}">
         <link rel="icon" type="image/png" sizes="16x16" href="{% manifest 'images/favicon-16x16.png' %}">
 
-        {# alternate tag #}
-        {% if page.locale.language_code and not page.locale.language_code == "en-latest" %}
-            <link rel="alternate" hreflang="en" href="{{ page.full_url|hreflang_url:page.locale.language_code }}" >
-        {% endif %}
+        {# alternate tags #}
+        {% hreflangs %}
 
         {% comment %}
             Twitter summary card - see https://dev.twitter.com/cards/types/summary
@@ -59,31 +57,34 @@
     </head>
 
     <body class="app">
-        {% wagtailuserbar %}
 
         {% include "components/skip_link.html" %}
+        {% wagtailuserbar %}
 
         <div class="grid">
             <div class="app__header">
-                {% include "components/header.html" %}
+                {% header %}
             </div>
 
-            <div class="app__content" id="main-content">
+            <main class="app__content">
                 <div class="page-tools">
                     {% include "components/theme_toggle.html" %}
                     {% include "components/language_selector.html" %}
                 </div>
-                {% block content %}{% endblock %}
-            </div>
+                <div id="main-content">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
         </div>
 
         <footer class="app__footer">
-            {% include "components/footer.html" %}
+            {% footer %}
         </footer>
 
         {% include "components/search_modal.html" %}
 
         {# Global javascript #}
+        <script>var languageCode = '{{ self.locale.language_code }}';</script>
         <script src="{% manifest 'main.js' %}"></script>
 
         {% block extra_js %}

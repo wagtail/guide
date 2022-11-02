@@ -4,8 +4,7 @@ from bs4 import BeautifulSoup
 from django.db import models
 from django.http import HttpResponse
 from django.template import Context, Template
-from django.template.defaultfilters import slugify
-from wagtail.admin.forms import WagtailAdminPageForm
+from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
 from wagtail.core.fields import StreamField
 from wagtail.models import Page
@@ -15,25 +14,19 @@ from apps.core.models.feedback import Feedback
 from ..blocks import CONTENT_BLOCKS
 
 
-class ContentPageForm(WagtailAdminPageForm):
-    def create_table_of_contents(self, body):
-        template = Template("{% load wagtailcore_tags %}{% include_block body %}")
-        content = template.render(Context({"body": body}))
-        soup = BeautifulSoup(content, "lxml")
-        headings = soup.select("h2,h3")
-        toc = ""
-        if headings:
-            toc += "<ul>"
-            for heading in headings:
-                toc += f'<li><a href="#{slugify(heading.text)}">{heading.text}</a></li>'  # noqa
-            toc += "</ul>"
-        self.instance.table_of_contents = toc
-
-    def clean(self):
-        cleaned_data = super().clean()
-        body = cleaned_data["body"]
-        self.create_table_of_contents(body)
-        return cleaned_data
+def create_table_of_contents(body):
+    template = Template("{% load wagtailcore_tags %}{% include_block body %}")
+    content = template.render(Context({"body": body}))
+    soup = BeautifulSoup(content, "lxml")
+    headings = soup.select("h2,h3")
+    toc = ""
+    if headings:
+        toc += "<ul>"
+        for heading in headings:
+            anchor = heading.attrs.get("id", slugify(heading.text))
+            toc += f'<li><a href="#{anchor}">{heading.text}</a></li>'
+        toc += "</ul>"
+    return toc
 
 
 class ContentPage(Page):
@@ -47,7 +40,6 @@ class ContentPage(Page):
     table_of_contents = models.TextField(blank=True)
 
     content_panels = Page.content_panels + [FieldPanel("body")]
-    base_form_class = ContentPageForm
 
     def get_context(self, request, *args, **kwargs):
         if self.live and self.show_in_menus:
@@ -78,3 +70,7 @@ class ContentPage(Page):
             return HttpResponse(json.dumps(data))
         else:
             return super().serve(request)
+
+    def save_revision(self, *args, **kwargs):
+        self.table_of_contents = create_table_of_contents(self.body)
+        return super().save_revision(*args, **kwargs)

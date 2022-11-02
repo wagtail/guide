@@ -5,8 +5,8 @@
 
     @include media-query(large) {
         position: sticky;
-        top: ($gutter * 1.5);
         width: auto;
+        top: ($gutter * 2.5);
         margin-top: ($gutter * 2.5);
     }
 

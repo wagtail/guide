@@ -24,17 +24,17 @@
     &__legal {
         @include fs(xxs);
         grid-column: 1 / span 4;
-    }
 
-    &__legal-link {
-        color: $color--light-teal;
-        text-decoration: none;
-        transition: color $transition;
+        a {
+            color: $color--light-teal;
+            text-decoration: none;
+            transition: color $transition;
 
-        &:hover,
-        &:focus {
-            text-decoration: underline;
-            color: $color--white;
+            &:hover,
+            &:focus {
+                text-decoration: underline;
+                color: $color--white;
+            }
         }
     }
 

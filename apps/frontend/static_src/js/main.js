@@ -55,7 +55,9 @@ const onSearchInputChange = async (event) => {
     const query = event.target.value;
     try {
         const res = await fetch(
-            `${window.location.origin}/search_json/?${new URLSearchParams({
+            `${window.location.origin}${
+                window.languageCode ? `/${window.languageCode}` : ''
+            }/search_json/?${new URLSearchParams({
                 query,
             }).toString()}`,
         );

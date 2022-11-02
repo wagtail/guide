@@ -238,8 +238,8 @@ WAGTAIL_GUIDE_LANGUAGES = [
     ("nb", "Norwegian Bokmål"),
     ("nl", "Dutch"),
     ("pl", "Polish"),
+    ("pt", "Portuguese (Portugal)"),
     ("pt-br", "Portuguese (Brazil)"),
-    ("pt-pt", "Portuguese (Portugal)"),
     ("ro", "Romanian"),
     ("ru", "Russian"),
     ("sk", "Slovak"),
@@ -265,6 +265,10 @@ WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
     (f"{code}-{version}", f"{name} ({version})")
     for code, name in WAGTAIL_GUIDE_LANGUAGES
     for version in WAGTAIL_GUIDE_VERSIONS
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
 ]
 
 
