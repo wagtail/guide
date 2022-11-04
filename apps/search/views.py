@@ -1,5 +1,6 @@
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.template.response import TemplateResponse
+from django.utils.translation import gettext as _
 from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -54,7 +55,7 @@ class PageSerializer(serializers.ModelSerializer):
         if len(ancestors) >= 3:
             return ancestors[2].title
         else:
-            return "Home"
+            return _("Home")
 
 
 @api_view(["GET"])

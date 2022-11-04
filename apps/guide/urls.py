@@ -3,6 +3,7 @@ from django.conf.urls.i18n import i18n_patterns
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
+from django.views.i18n import JavaScriptCatalog
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
@@ -41,5 +42,6 @@ if settings.DEBUG:
 urlpatterns += i18n_patterns(
     path("search/", search_views.search, name="search"),
     path("search_json/", search_views.search_json, name="search_json"),
+    path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
     path("", include(wagtail_urls)),
 )

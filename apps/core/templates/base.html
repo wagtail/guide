@@ -82,6 +82,7 @@
 
         {# Global javascript #}
         <script>var languageCode = '{{ self.locale.language_code }}';</script>
+        <script src="{% url 'javascript-catalog' %}"></script>
         <script src="{% manifest 'main.js' %}"></script>
 
         {% block extra_js %}

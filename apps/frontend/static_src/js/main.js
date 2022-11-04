@@ -1,3 +1,4 @@
+/* global ngettext, interpolate */
 import debounce from 'lodash.debounce';
 import { initSectionLink } from './section-link';
 import { handleFeedback } from './feedback';
@@ -24,9 +25,14 @@ const injectResultsInHTML = (results) => {
     removeExistingChildren(resultsCountContainer);
 
     const resultsCountHeading = document.createElement('h2');
-    resultsCountHeading.innerText = `${results.length} ${
-        results.length === 1 ? 'result' : 'results'
-    } found`;
+    const resultHeadingString = ngettext(
+        '%s result found.',
+        '%s results found.',
+        results.length,
+    );
+    resultsCountHeading.innerText = interpolate(resultHeadingString, [
+        results.length,
+    ]);
     resultsCountHeading.classList.add('autocomplete__count');
     resultsCountContainer.appendChild(resultsCountHeading);
 
