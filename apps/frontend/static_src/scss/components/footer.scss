@@ -31,7 +31,6 @@
 
     &__legal {
         @include fs(xxs);
-        text-align: center;
         grid-column: 1 / span 4;
 
         a {
