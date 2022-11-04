@@ -62,6 +62,11 @@ To activate Poetry's virtual environment, run:
 
 To generate and compile translation strings, run:
 
+    make makemessages
+    make compilemessages
+
+Or both, in a single command:
+
     make translations
 
 ### Setting up development with Docker

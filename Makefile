@@ -45,10 +45,15 @@ backend:
 run:
 	poetry run python manage.py runserver
 
-translations:
-	poetry run python manage.py makemessages --all
-	poetry run python manage.py makemessages --all -e ".js" -d djangojs --ignore=apps/frontend/static/* --ignore=node_modules/* --ignore=static/*
-	poetry run python manage.py compilemessages
+
+translations: makemessages compilemessages
+
+makemessages:
+	cd apps && poetry run python ../manage.py makemessages --all --no-location
+	cd apps && poetry run python ../manage.py makemessages --all --no-location -e ".js" -d djangojs --ignore=frontend/static/*
+
+compilemessages:
+	cd apps && poetry run python ../manage.py compilemessages
 
 docker-build:
 	docker build -t guide:latest --build-arg POETRY_INSTALL_ARGS="" -f Dockerfile .
