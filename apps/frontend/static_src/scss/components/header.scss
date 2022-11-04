@@ -1,8 +1,11 @@
 .header {
+    $root: &;
     margin-top: $gutter;
+    width: calc(100% + 16px); // burger align with right edge of lang
 
     @include media-query(large) {
         position: sticky;
+        width: auto;
         top: ($gutter * 2.5);
         margin-top: ($gutter * 2.5);
     }
@@ -19,22 +22,35 @@
 
         // Mask off menu behind logo
         &::after {
-            content: '';
-            pointer-events: none;
-            position: absolute;
-            z-index: -1;
-            inset: -20px;
-            background: linear-gradient(
-                180deg,
-                rgba($color--page-bg, 1) 0%,
-                rgba($color--page-bg, 1) 40%,
-                rgba($color--page-bg, 0) 100%
-            );
-            height: 160px;
+            .no-scroll & {
+                content: '';
+                pointer-events: none;
+                position: absolute;
+                z-index: -1;
+                inset: -20px;
+                background: linear-gradient(
+                    180deg,
+                    rgba($color--page-bg, 1) 0%,
+                    rgba($color--page-bg, 1) 40%,
+                    rgba($color--page-bg, 0) 100%
+                );
+                height: 160px;
 
-            @include media-query(large) {
-                content: none;
+                // stylelint-disable-next-line max-nesting-depth
+                @include media-query(large) {
+                    content: none;
+                }
             }
+        }
+    }
+
+    &__logo {
+        .light {
+            fill: $color--white;
+        }
+
+        .dark {
+            fill: $color--black;
         }
     }
 
@@ -132,5 +148,41 @@
 
     &__search-icon {
         display: block;
+        fill: $color--black;
+    }
+
+    .theme-dark & {
+        #{$root}__logo {
+            .light {
+                fill: $color--black;
+            }
+
+            .dark {
+                fill: $color--white;
+            }
+        }
+
+        #{$root}__search-toggle {
+            &::before {
+                background-color: $color--light-grey;
+            }
+        }
+
+        #{$root}__search-icon {
+            fill: $color--white;
+        }
+    }
+
+    .theme-dark.no-scroll & {
+        #{$root}__identity {
+            &::after {
+                background: linear-gradient(
+                    180deg,
+                    rgba($color--off-black, 1) 0%,
+                    rgba($color--off-black, 1) 40%,
+                    rgba($color--off-black, 0) 100%
+                );
+            }
+        }
     }
 }

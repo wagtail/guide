@@ -31,4 +31,14 @@ h6 {
         line-height: 1.1;
         margin-bottom: ($gutter * 2);
     }
+
+    .theme-dark & {
+        &--one {
+            color: $color--white;
+
+            &::after {
+                background-color: $color--light-grey;
+            }
+        }
+    }
 }

@@ -1,8 +1,15 @@
 .dropdown-toggle {
+    $root: &;
     @include fs(xs);
     font-weight: 700;
 
     &::after {
         color: $color--primary;
+    }
+
+    .theme-dark & {
+        &::after {
+            color: $color--light-teal;
+        }
     }
 }

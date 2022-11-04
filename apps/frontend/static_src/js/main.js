@@ -1,5 +1,6 @@
 /* global ngettext, interpolate */
 import debounce from 'lodash.debounce';
+import './theme-detect';
 import { initSectionLink } from './section-link';
 import { handleFeedback } from './feedback';
 import MobileMenu from './mobile-menu';

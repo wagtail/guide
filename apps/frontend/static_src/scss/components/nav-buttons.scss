@@ -1,4 +1,5 @@
 .nav-buttons {
+    $root: &;
     display: flex;
     justify-content: space-between;
     margin-bottom: ($gutter * 3);
@@ -43,5 +44,11 @@
     &__label {
         @include fs(xs);
         font-weight: 700;
+    }
+
+    .theme-dark & {
+        #{$root}__link {
+            border-color: $color--light-grey;
+        }
     }
 }

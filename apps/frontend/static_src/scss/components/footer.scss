@@ -37,4 +37,8 @@
             }
         }
     }
+
+    .theme-dark & {
+        background-color: $color--black;
+    }
 }

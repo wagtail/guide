@@ -1,4 +1,5 @@
 .navigation {
+    $root: &;
     list-style: none;
     padding: 2px 0 2px 2px; // to prevent outline being cropped off
     margin: 0;
@@ -33,6 +34,22 @@
         &.active {
             background-color: $color--active;
             color: $color--white;
+        }
+    }
+
+    .theme-dark & {
+        #{$root}__link {
+            color: $color--light-grey;
+
+            &:hover,
+            &:focus {
+                background-color: $color--black;
+            }
+
+            &.active {
+                background-color: $color--light-teal;
+                color: $color--black;
+            }
         }
     }
 }

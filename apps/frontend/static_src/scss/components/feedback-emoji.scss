@@ -1,10 +1,22 @@
 .feedback-emoji {
     width: 35px;
+    transition: fill $transition;
 
     &:hover,
     &:focus {
         .feedback-emoji__path {
             fill: $color--primary;
+        }
+    }
+
+    .theme-dark & {
+        fill: $color--light-grey;
+
+        &:hover,
+        &:focus {
+            .feedback-emoji__path {
+                fill: $color--light-teal;
+            }
         }
     }
 }

@@ -46,4 +46,24 @@
         color: $color--grey;
         margin: 0;
     }
+
+    .theme-dark & {
+        #{$root}__heading {
+            color: $color--white;
+        }
+
+        #{$root}__description {
+            color: $color--light-grey;
+        }
+
+        #{$root}__icon {
+            .svg_icon__original_path {
+                fill: $color--white;
+            }
+
+            .svg_icon__animated_path {
+                opacity: 0.9;
+            }
+        }
+    }
 }

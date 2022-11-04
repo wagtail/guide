@@ -33,4 +33,12 @@
     &.is-visible {
         display: block;
     }
+
+    .theme-dark & {
+        background-color: $color--off-black;
+
+        @include media-query(large) {
+            background-color: transparent;
+        }
+    }
 }

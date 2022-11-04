@@ -66,6 +66,9 @@
 
     <body class="app">
 
+        {# blocking js loaded first to ensure no flash of white on theme detection #}
+        <script src="{% manifest 'blocking.js' %}"></script>
+
         {% include "components/skip_link.html" %}
         {% wagtailuserbar %}
 
@@ -74,8 +77,11 @@
                 {% header %}
             </div>
 
-            <main class="app__content" id="main-content">
-                {% include "components/language_selector.html" %}
+            <main class="app__content">
+                <div class="page-tools">
+                    {% include "components/theme_toggle.html" %}
+                    {% include "components/language_selector.html" %}
+                </div>
                 <div id="main-content">
                     {% block content %}{% endblock %}
                 </div>
