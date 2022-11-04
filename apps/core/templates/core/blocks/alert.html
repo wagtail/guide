@@ -1,10 +1,11 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags i18n %}
+
 <div class="alert alert--{{ self.alert_type|lower }}">
     <div class="alert__header">
         <div class="alert__icon">
             {% include self.icon %}
         </div>
-        <div class="alert__heading">{{ self.alert_type }}</div>
+        <div class="alert__heading">{% trans self.alert_type %}</div>
     </div>
     <div class="alert__content">
         {{ self.alert_body|richtext }}
