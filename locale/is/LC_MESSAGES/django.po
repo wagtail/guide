@@ -97,22 +97,22 @@ msgid "Skip to main content"
 msgstr "Fara beint í meginmál"
 
 msgid "JavaScript is required to toggle light/dark mode."
-msgstr ""
+msgstr "JavaScript er nauðsynlegt til þess að skipta á milli dökku og ljósu þemanna."
 
 msgid "Dark"
-msgstr ""
+msgstr "Dökkt"
 
 msgid "Toggle between dark and light theme"
-msgstr ""
+msgstr "Skipta á milli dökku og ljósu þemanna"
 
 msgid "Light mode"
-msgstr ""
+msgstr "Ljóst þema"
 
 msgid "Dark mode"
-msgstr ""
+msgstr "Dökkt þema"
 
 msgid "Light"
-msgstr ""
+msgstr "Ljóst"
 
 msgid "On this page"
 msgstr "Á þessari síðu"
