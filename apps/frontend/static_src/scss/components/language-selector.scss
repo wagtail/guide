@@ -49,5 +49,11 @@
             background-color: $color--black;
             color: $color--light-grey;
         }
+        #{$root}__dropdown-item {
+            &:hover,
+            &:focus {
+                background-color: $color--grey;
+            }
+        }
     }
 }
