@@ -19,10 +19,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Thanks for your feedback!"
-msgstr ""
+msgstr "Bedankt voor je feedback!"
 
 #, javascript-format
 msgid "%s result found."
 msgid_plural "%s results found."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s resultaat gevonden."
+msgstr[1] "%s resultaten gevonden."
