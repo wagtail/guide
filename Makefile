@@ -6,7 +6,7 @@ endif
 buildfixtures:
 	poetry run python manage.py buildfixtures
 
-test:
+test: lint
 	DJANGO_SETTINGS_MODULE=apps.guide.settings.test poetry run python manage.py test
 
 test-coverage:
