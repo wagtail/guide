@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-05 00:47+0000\n"
+"POT-Creation-Date: 2022-11-09 15:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,115 +19,115 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "Tutorial"
-msgstr ""
+msgstr "Tutorial"
 
 msgid "How-to"
-msgstr ""
+msgstr "How-to"
 
 msgid "Reference"
-msgstr ""
+msgstr "Referentie"
 
 msgid "Explanation"
-msgstr ""
+msgstr "Toelichting"
 
 msgid "Section"
-msgstr ""
+msgstr "Sectie"
 
 msgid "Title"
-msgstr ""
+msgstr "Titel"
 
 msgid "Text"
-msgstr ""
+msgstr "Tekst"
 
 msgid "Page"
-msgstr ""
+msgstr "Pagina"
 
 msgid "Section grid"
-msgstr ""
+msgstr "Sectie-grid"
 
 msgid "Warning"
-msgstr ""
+msgstr "Waarschuwing"
 
 msgid "Note"
-msgstr ""
+msgstr "Let op"
 
 msgid "Page not found"
-msgstr ""
+msgstr "Pagina niet gevonden"
 
 msgid "Sorry, this page could not be found."
-msgstr ""
+msgstr "Sorry, deze pagina kon niet worden gevonden."
 
 msgid "Was this page helpful?"
-msgstr ""
+msgstr "Is deze pagina nuttig?"
 
 msgid "This page was helpful"
-msgstr ""
+msgstr "Deze pagina is nuttig"
 
 msgid "Happy"
-msgstr ""
+msgstr "Blij"
 
 msgid "This page could be improved"
-msgstr ""
+msgstr "Deze pagina is voor verbetering vatbaar"
 
 msgid "Unhappy"
-msgstr ""
+msgstr "Niet blij"
 
 msgid "Help us improve by telling what you missed"
-msgstr ""
+msgstr "Help ons verbeteren door te vertellen wat je mist"
 
 msgid "Your feedback"
-msgstr ""
+msgstr "Jouw feedback"
 
 msgid "Submit"
-msgstr ""
+msgstr "Verzenden"
 
 msgid "User guide"
-msgstr ""
+msgstr "Gebruikersgids"
 
 msgid "Toggle the search form"
-msgstr ""
+msgstr "Zoekformulier-schakelaar"
 
 msgid "Mobile menu toggle"
-msgstr ""
+msgstr "Mobielmenu-schakelaar"
 
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 msgid "Skip to main content"
-msgstr ""
+msgstr "Ga naar de inhoud"
 
 msgid "JavaScript is required to toggle light/dark mode."
-msgstr ""
+msgstr "JavaScript is nodig om te schakelen tussen licht en donker."
 
 msgid "Dark"
-msgstr ""
+msgstr "Donker"
 
 msgid "Toggle between dark and light theme"
-msgstr ""
+msgstr "Schakel tussen licht en donker thema"
 
 msgid "Light mode"
-msgstr ""
+msgstr "Licht thema"
 
 msgid "Dark mode"
-msgstr ""
+msgstr "Donker thema"
 
 msgid "Light"
-msgstr ""
+msgstr "Licht"
 
 msgid "On this page"
-msgstr ""
+msgstr "Op deze pagina"
 
 msgid "image"
-msgstr ""
+msgstr "afbeelding"
 
 msgid "Previous"
-msgstr ""
+msgstr "Vorige"
 
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
 msgid "No results found"
-msgstr ""
+msgstr "Geen resultaten gevonden"
 
 msgid "Home"
-msgstr ""
+msgstr "Home"
