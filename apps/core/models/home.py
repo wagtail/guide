@@ -7,7 +7,7 @@ from ..blocks import HOME_BLOCKS
 
 
 class HomePage(Page):
-    subpage_types = ["core.ContentPage"]
+    subpage_types = ["core.SectionPage", "core.ContentPage"]
     max_count = 1
     introduction = models.TextField(blank=True)
 
