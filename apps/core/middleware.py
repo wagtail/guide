@@ -12,7 +12,7 @@ class ValidateLocaleMiddleware:
         try:
             HomePage.objects.get(locale__language_code=get_language(), live=True)
         except HomePage.DoesNotExist:
-            activate('en-latest')
+            activate("en-latest")
             raise Http404()
         response = self.get_response(request)
         return response
