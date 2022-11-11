@@ -18,7 +18,8 @@ class ValidateLocaleMiddleware:
             if pattern.match(request.resolver_match.route):
                 try:
                     HomePage.objects.get(
-                        locale__language_code=get_language(), live=True)
+                        locale__language_code=get_language(), live=True
+                    )
                 except HomePage.DoesNotExist:
                     # Activate English so that we have a site menu
                     activate("en-latest")
