@@ -102,7 +102,7 @@
 
     &__burger {
         position: absolute;
-        inset: 17px 12px auto auto;
+        inset: 15px 12px auto auto;
 
         @include media-query(large) {
             display: none;
@@ -116,7 +116,7 @@
         margin: 0;
         border: 0;
         background-color: transparent;
-        height: 42px;
+        height: 40px;
         width: 42px;
         display: flex;
         align-items: center;
