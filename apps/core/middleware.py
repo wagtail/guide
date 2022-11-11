@@ -14,10 +14,11 @@ class ValidateLocaleMiddleware:
     def __call__(self, request):
         response = self.get_response(request)
         if request.resolver_match:
-            # Check if the path is in the i18n_patterns 
+            # Check if the path is in the i18n_patterns
             if pattern.match(request.resolver_match.route):
                 try:
-                    HomePage.objects.get(locale__language_code=get_language(), live=True)
+                    HomePage.objects.get(
+                        locale__language_code=get_language(), live=True)
                 except HomePage.DoesNotExist:
                     # Activate English so that we have a site menu
                     activate("en-latest")
