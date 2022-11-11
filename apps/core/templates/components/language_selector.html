@@ -2,11 +2,11 @@
 
 <div class="language-selector">
     <div class="language-selector__container">
+        {% if page %}
         <button class="language-selector__toggle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             {% get_language_info for LANGUAGE_CODE as lang %}
             <span class="language-selector__label">{{ lang.name_translated }} {% if page %}({% get_version_from_language_code page.localized.locale.language_code %}){% endif %}</span>
         </button>
-        {% if page %}
         {% spaceless %}
             <ul class="language-selector__dropdown dropdown-menu">
             {% for translation in page.get_translations.live %}

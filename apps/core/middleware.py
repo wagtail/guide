@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404
-from django.utils.translation import get_language
+from django.http import Http404
+from django.utils.translation import activate, get_language
 
 from apps.core.models import HomePage
 
@@ -9,6 +9,10 @@ class ValidateLocaleMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        get_object_or_404(HomePage, locale__language_code=get_language(), live=True)
+        try:
+            HomePage.objects.get(locale__language_code=get_language(), live=True)
+        except HomePage.DoesNotExist:
+            activate("en-latest")
+            raise Http404()
         response = self.get_response(request)
         return response
