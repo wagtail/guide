@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.conf import settings
 from django.urls import LocalePrefixPattern
 from django.utils.translation import activate, get_language
 
@@ -12,16 +12,18 @@ class ValidateLocaleMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        response = self.get_response(request)
-        if request.resolver_match:
-            # Check if the path is in the i18n_patterns
-            if pattern.match(request.resolver_match.route):
-                try:
-                    HomePage.objects.get(
-                        locale__language_code=get_language(), live=True
-                    )
-                except HomePage.DoesNotExist:
-                    # Activate English so that we have a site menu
-                    activate("en-latest")
-                    raise Http404()
+        if (
+            request.path == "/"
+            or request.resolver_match
+            and pattern.match(request.resolver_match.route)
+        ):
+            try:
+                HomePage.objects.get(locale__language_code=get_language(), live=True)
+                response = self.get_response(request)
+            except HomePage.DoesNotExist:
+                # The requested language is not available, use the default
+                activate(settings.LANGUAGE_CODE)
+                response = self.get_response(request)
+        else:
+            response = self.get_response(request)
         return response
