@@ -64,10 +64,8 @@ export const handleFeedback = () => {
                 tooltip.dispose();
             });
             feedbackContainer.innerHTML = gettext('Thanks for your feedback!');
-            if (feedback === 'unhappy') {
-                feedbackPk = data.pk;
-                additionalFeedbackContainer.classList.add('active');
-            }
+            feedbackPk = data.pk;
+            additionalFeedbackContainer.classList.add('active');
         } catch (err) {
             // eslint-disable-next-line no-console
             console.log(err);
