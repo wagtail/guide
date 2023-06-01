@@ -1,6 +1,7 @@
 {% load i18n %}
 
 <div class="feedback">
+    {% csrf_token %}
     <div class="feedback__container" data-feedback-container>
         <h2 class="feedback__heading">{% trans 'Was this page helpful?' %}</h2>
         <div class="feedback__options">
