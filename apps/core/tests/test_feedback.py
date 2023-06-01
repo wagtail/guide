@@ -1,5 +1,6 @@
 import json
 
+from django.conf import settings
 from django.test import TestCase
 
 from apps.core.factories import ContentPageFactory, HomePageFactory
@@ -63,3 +64,13 @@ class TestFeedback(TestCase):
         self.assertEqual(feedback_obj.feedback_text, "some test feedback text")
         self.assertEqual(feedback_obj.feedback, "unhappy")
         self.assertEqual(feedback_obj.page.specific, self.target_page)
+
+    def test_csrf_token_exists(self):
+        cookie = self.client.cookies.get(settings.CSRF_COOKIE_NAME)
+        self.assertIsNone(cookie)
+
+        # After opening a page, a cookie containing the CSRF token must be set,
+        # as it is used in the JS when submitting feedback.
+        self.client.get(self.target_page.url)
+        cookie = self.client.cookies.get(settings.CSRF_COOKIE_NAME)
+        self.assertIsNotNone(cookie)
