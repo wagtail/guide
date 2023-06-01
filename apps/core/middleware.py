@@ -1,4 +1,5 @@
-from django.http import Http404
+from django.conf import settings
+from django.shortcuts import redirect
 from django.urls import LocalePrefixPattern
 from django.utils.translation import activate, get_language
 
@@ -16,12 +17,15 @@ class ValidateLocaleMiddleware:
         if request.resolver_match:
             # Check if the path is in the i18n_patterns
             if pattern.match(request.resolver_match.route):
-                try:
-                    HomePage.objects.get(
-                        locale__language_code=get_language(), live=True
+                is_available_for_user_lang = HomePage.objects.filter(
+                    locale__language_code=get_language(), live=True
+                ).exists()
+
+                if not is_available_for_user_lang:
+                    # fallback to default language where home page is available
+                    activate(settings.LANGUAGE_CODE)
+                    home = HomePage.objects.get(
+                        locale__language_code=settings.LANGUAGE_CODE, live=True
                     )
-                except HomePage.DoesNotExist:
-                    # Activate English so that we have a site menu
-                    activate("en-latest")
-                    raise Http404()
+                    return redirect(home.get_url(request))
         return response

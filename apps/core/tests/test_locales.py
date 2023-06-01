@@ -37,3 +37,9 @@ class TestPageLocales(TestCase):
         response = self.client.get(reverse("wagtailadmin_account"))
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertContains(response, "简体中文")
+
+    def test_redirect_to_default_language_if_no_translation_available(self):
+        language_code = "de-CH"
+        response = self.client.get("/", HTTP_ACCEPT_LANGUAGE=language_code, follow=True)
+        self.assertEqual(response.status_code, HTTPStatus.OK)
+        self.assertRedirects(response, "/en-latest/")
