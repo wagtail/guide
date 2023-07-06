@@ -24,6 +24,10 @@
         align-items: center;
         margin-inline-end: ($gutter * 0.5);
         height: 20px;
+
+        svg {
+            height: 100%;
+        }
     }
 
     &--note {
