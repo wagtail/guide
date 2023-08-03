@@ -3,7 +3,7 @@
     padding: ($gutter * 2) 0 ($gutter * 3);
     color: $color--white;
 
-    @media (prefers-contrast: more) {
+    @media (forced-colors: active) {
         // For High-contrast mode users
         border-top: 1px solid $color--blue;
     }
