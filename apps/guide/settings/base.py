@@ -260,7 +260,15 @@ WAGTAIL_GUIDE_LANGUAGES = [
     ("zh-hant", "Chinese Traditional"),
 ]
 
-WAGTAIL_GUIDE_VERSIONS = ["latest", "6.0.x", "5.1.x", "5.0.x", "4.2.x", "4.1.x"]
+WAGTAIL_GUIDE_VERSIONS = [
+    "latest",
+    "6.0.x",
+    "5.2.x",
+    "5.1.x",
+    "5.0.x",
+    "4.2.x",
+    "4.1.x",
+]
 
 WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
     (f"{code}-{version}", f"{name} ({version})")
