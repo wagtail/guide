@@ -249,6 +249,17 @@ files = [
 toml = ["tomli"]
 
 [[package]]
+name = "defusedxml"
+version = "0.7.1"
+description = "XML bomb protection for Python stdlib modules"
+optional = false
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+files = [
+    {file = "defusedxml-0.7.1-py2.py3-none-any.whl", hash = "sha256:a352e7e428770286cc899e2542b6cdaedb2b4953ff269a210103ec58f6198a61"},
+    {file = "defusedxml-0.7.1.tar.gz", hash = "sha256:1bb3032db185915b62d7c6209c5a8792be6a32ab2fedacc84e01b52c51aa3e69"},
+]
+
+[[package]]
 name = "deprecated"
 version = "1.2.13"
 description = "Python @deprecated decorator to deprecate old python classes, functions or methods."
@@ -534,6 +545,17 @@ files = [
 
 [package.dependencies]
 python-dateutil = ">=2.4"
+
+[[package]]
+name = "filetype"
+version = "1.2.0"
+description = "Infer file type and MIME type of any file/buffer. No external dependencies."
+optional = false
+python-versions = "*"
+files = [
+    {file = "filetype-1.2.0-py2.py3-none-any.whl", hash = "sha256:7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"},
+    {file = "filetype-1.2.0.tar.gz", hash = "sha256:66b56cd6474bf41d8c54660347d37afcc3f7d1970648de365c102ef77548aadb"},
+]
 
 [[package]]
 name = "flake8"
@@ -1177,19 +1199,19 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 
 [[package]]
 name = "wagtail"
-version = "4.2.4"
+version = "5.0.5"
 description = "A Django content management system."
 optional = false
 python-versions = ">=3.7"
 files = [
-    {file = "wagtail-4.2.4-py3-none-any.whl", hash = "sha256:93e8d39a14a44099ca620e46613a3a2319b1d10c622dc7f0ff8658807b18190c"},
-    {file = "wagtail-4.2.4.tar.gz", hash = "sha256:4bf146194e1725cd4305bf1998f507d46f587e207d609bc2ec73a6c5cce04410"},
+    {file = "wagtail-5.0.5-py3-none-any.whl", hash = "sha256:ec59a23013ef8cbc260d95ed73977010985edf5f8cb6097fdd740db6854babee"},
+    {file = "wagtail-5.0.5.tar.gz", hash = "sha256:cbdef3e08d87a949cb2a63afb73c112e8921bb91608711fa1a9608f5591a77e2"},
 ]
 
 [package.dependencies]
 anyascii = ">=0.1.5"
 beautifulsoup4 = ">=4.8,<4.12"
-Django = ">=3.2,<4.2"
+Django = ">=3.2,<4.3"
 django-filter = ">=2.2,<23"
 django-modelcluster = ">=6.0,<7.0"
 django-permissionedforms = ">=0.1,<1.0"
@@ -1200,14 +1222,14 @@ draftjs-exporter = ">=2.1.5,<3.0"
 html5lib = ">=0.999,<2"
 l18n = ">=2018.5"
 openpyxl = ">=3.0.10,<4.0"
-Pillow = ">=4.0.0,<10.0.0"
+Pillow = ">=9.1.0,<11.0.0"
 requests = ">=2.11.1,<3.0"
 telepath = ">=0.1.1,<1"
-Willow = ">=1.4,<1.5"
+Willow = ">=1.5,<1.7"
 
 [package.extras]
 docs = ["Sphinx (>=1.5.2)", "myst-parser (==0.18.1)", "pyenchant (>=3.1.1,<4)", "sphinx-autobuild (>=0.6.0)", "sphinx-copybutton (>=0.5,<1.0)", "sphinx-wagtail-theme (==6.0.0)", "sphinxcontrib-spelling (>=5.4.0,<6)"]
-testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-frontdoor (>=1.0,<1.1)", "black (==22.3.0)", "boto3 (>=1.16,<1.17)", "coverage (>=3.7.0)", "curlylint (==0.13.1)", "django-pattern-library (>=0.7,<0.8)", "djhtml (==1.4.13)", "doc8 (==0.8.1)", "elasticsearch (>=5.0,<6.0)", "flake8 (>=3.6.0)", "flake8-assertive (==2.0.0)", "flake8-blind-except (==0.1.1)", "flake8-comprehensions (==3.8.0)", "flake8-print (==5.0.0)", "freezegun (>=0.3.8)", "isort (==5.6.4)", "polib (>=1.1,<2.0)", "python-dateutil (>=2.7)", "pytz (>=2014.7)", "semgrep (==1.3.0)", "wagtail-factories (>=4.0,<5)"]
+testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-frontdoor (>=1.0,<1.1)", "black (==22.3.0)", "boto3 (>=1.16,<1.17)", "coverage (>=3.7.0)", "curlylint (==0.13.1)", "django-pattern-library (>=0.7,<0.8)", "djhtml (==1.5.2)", "doc8 (==0.8.1)", "elasticsearch (>=5.0,<6.0)", "factory-boy (>=3.2)", "flake8 (>=3.6.0,<6.1)", "flake8-assertive (==2.0.0)", "flake8-blind-except (==0.1.1)", "flake8-comprehensions (==3.8.0)", "flake8-print (==5.0.0)", "freezegun (>=0.3.8)", "isort (==5.6.4)", "polib (>=1.1,<2.0)", "python-dateutil (>=2.7)", "pytz (>=2014.7)", "semgrep (==1.3.0)"]
 
 [[package]]
 name = "wagtail-factories"
@@ -1277,17 +1299,23 @@ brotli = ["Brotli"]
 
 [[package]]
 name = "willow"
-version = "1.4.1"
+version = "1.6.2"
 description = "A Python image library that sits on top of Pillow, Wand and OpenCV"
 optional = false
-python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
+python-versions = ">=3.8"
 files = [
-    {file = "Willow-1.4.1-py2.py3-none-any.whl", hash = "sha256:fc4042696d090e75aef922fa1ed26d483c764f005b36cf523cf7c34e69d5dd7a"},
-    {file = "Willow-1.4.1.tar.gz", hash = "sha256:0df8ff528531e00b48d40bf72ed81beac1dc82f2d42e5bbed4aff0218bef8c0d"},
+    {file = "willow-1.6.2-py3-none-any.whl", hash = "sha256:957a4af8a7733e116a65eca34da11afe3fd52ffdb397494c8823901c25863787"},
+    {file = "willow-1.6.2.tar.gz", hash = "sha256:e2d0450fd78ab19052d0478b888ef163e3264e8dcd1af002dd691458db98056f"},
 ]
 
+[package.dependencies]
+defusedxml = ">=0.7,<1.0"
+filetype = ">=1.0.10,<1.1.0 || >1.1.0"
+
 [package.extras]
-testing = ["Pillow (>=6.0.0,<10.0.0)", "Wand (>=0.6,<1.0)", "mock (>=3.0,<4.0)"]
+docs = ["Sphinx (>=7.0)", "sphinx-wagtail-theme (==6.0.0)", "sphinx_copybutton (>=0.5)", "sphinxcontrib-spelling (>=8.0,<9.0)"]
+heif = ["pillow-heif (>=0.10.0,<1.0.0)"]
+testing = ["Pillow (>=9.1.0,<11.0.0)", "Wand (>=0.6,<1.0)", "black (==22.3.0)", "coverage[toml] (>=7.2.7,<8.0)", "mock (>=3.0,<4.0)", "pillow-heif (>=0.10.0,<1.0.0)", "ruff (==0.0.275)"]
 
 [[package]]
 name = "wrapt"
@@ -1375,4 +1403,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "847996f7f2e50ee5cbd7093e761a1d9038eb51495b6ccad36e76403ad6c39716"
+content-hash = "9178ec8c6b1021cf6e7df2129b43e5063dd564aee516850a1e9562126b496ec7"

@@ -4,8 +4,8 @@ from django.utils.translation import gettext as _
 from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from wagtail.contrib.search_promotions.models import Query
 from wagtail.models import Locale, Page
-from wagtail.search.models import Query
 
 
 def search(request):
