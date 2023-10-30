@@ -5,7 +5,7 @@ import wagtail_factories
 from django.conf import settings
 from django.utils import timezone
 from faker import Faker
-from wagtail.core.models import Locale, Page, Site
+from wagtail.models import Locale, Page, Site
 
 from apps.core.models import ContentPage, HomePage
 

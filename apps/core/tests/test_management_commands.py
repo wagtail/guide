@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from django.core.management import call_command
 from django.test import TestCase
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 
 class TestBuildFixtures(TestCase):

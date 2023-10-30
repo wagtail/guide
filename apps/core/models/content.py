@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.template import Context, Template
 from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
-from wagtail.core.fields import StreamField
+from wagtail.fields import StreamField
 from wagtail.models import Page
 
 from apps.core.models.feedback import Feedback

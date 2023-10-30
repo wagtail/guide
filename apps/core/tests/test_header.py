@@ -1,7 +1,7 @@
 from django.template import Context, Template
 from django.test import TestCase
 from django.utils import translation
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from apps.core.factories import HomePageFactory
 
