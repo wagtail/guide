@@ -17,8 +17,6 @@ from wagtail.coreutils import find_available_slug
 
 logger = logging.getLogger(__name__)
 
-logger.warning("Monkey patching `CopyPageForTranslationAction._copy_for_translation`")
-
 
 # flake8: noqa: C901
 @transaction.atomic
@@ -82,4 +80,9 @@ def _copy_for_translation(self, page, locale, copy_parents, alias, exclude_field
         )
 
 
-CopyPageForTranslationAction._copy_for_translation = _copy_for_translation
+def patch_copy_for_translation_action():
+    logger.warning(
+        "Monkey patching `CopyPageForTranslationAction._copy_for_translation`"
+    )
+
+    CopyPageForTranslationAction._copy_for_translation = _copy_for_translation
