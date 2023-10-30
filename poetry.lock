@@ -1230,25 +1230,25 @@ test = ["coverage (==6.0)", "flake8 (==4.0.0)", "flake8-blind-except (==0.1.1)",
 
 [[package]]
 name = "wagtail-localize"
-version = "1.3.1"
+version = "1.6"
 description = "Translation plugin for Wagtail CMS"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "wagtail-localize-1.3.1.tar.gz", hash = "sha256:016056c77f18c7f6049269feebe64e50efb894e5e6ed1b33288b004f7d9eb281"},
-    {file = "wagtail_localize-1.3.1-py3-none-any.whl", hash = "sha256:a9f699e8bf32c3cfa95330cdc214d36a0bcff007a8263dafe3a7a4ac21c39696"},
+    {file = "wagtail_localize-1.6-py3-none-any.whl", hash = "sha256:bc46941cd0dc287d8bca0fa15f50fca6ee7bb45f01af6161e75b0173b7af118f"},
+    {file = "wagtail_localize-1.6.tar.gz", hash = "sha256:b590d095ca0752a0247909ca8cea71fbaa54b173cd59aa63f460a4a6b0fc74d0"},
 ]
 
 [package.dependencies]
-Django = ">=3.2,<4.2"
+Django = ">=3.2,<5.0"
 polib = ">=1.1,<2.0"
 typing_extensions = ">=4.0"
-Wagtail = ">=2.15,<5.0"
+Wagtail = ">=4.1"
 
 [package.extras]
-documentation = ["mkdocs (==1.1.2)", "mkdocs-include-markdown-plugin (==2.8.0)", "mkdocs-material (==6.2.8)", "mkdocs-mermaid2-plugin (==0.5.1)", "mkdocstrings (==0.14.0)", "pygments (==2.11.2)"]
+documentation = ["mkdocs (==1.4.3)", "mkdocs-autorefs (>=0.4.0,<0.5)", "mkdocs-include-markdown-plugin (>=4.0.4,<5)", "mkdocs-material (>=9.1,<10)", "mkdocstrings[python] (==0.22.0)", "pygments (>=2.15,<2.16)"]
 google = ["google-cloud-translate (>=3.0.0)"]
-testing = ["dj-database-url (==0.5.0)", "django-rq (>=2.5,<3.0)", "freezegun (==1.1.0)"]
+testing = ["dj-database-url (>=2.1.0,<3)", "django-rq (>=2.5,<3.0)", "freezegun (>=1.2,<2)", "google-cloud-translate (>=3.0.0)", "pre-commit (>=3.4,<4)"]
 
 [[package]]
 name = "webencodings"
@@ -1375,4 +1375,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9"
-content-hash = "13642128fd7a75d688df14881a54dc03a466fce414802a636b7f669433a5f711"
+content-hash = "847996f7f2e50ee5cbd7093e761a1d9038eb51495b6ccad36e76403ad6c39716"
