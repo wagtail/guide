@@ -1,6 +1,6 @@
 from django.utils.translation import gettext as _
-from wagtail.core import blocks
-from wagtail.core.blocks import RichTextBlock
+from wagtail import blocks
+from wagtail.blocks import RichTextBlock
 
 
 class TextBlock(RichTextBlock):

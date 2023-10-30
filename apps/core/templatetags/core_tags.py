@@ -1,6 +1,6 @@
 from django import template
 from django.utils.translation import get_language
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from apps.core.models import FooterContent, HomePage
 

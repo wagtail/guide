@@ -21,7 +21,7 @@ from functools import wraps
 from django.db.migrations.operations import AlterModelOptions
 from django.db.models import Field, FileField
 from django.db.models.fields.related import RelatedField
-from wagtail.core.fields import StreamField
+from wagtail.fields import StreamField
 
 logger = logging.getLogger(__name__)
 
