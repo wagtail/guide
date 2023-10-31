@@ -15,7 +15,7 @@ The application itself runs in Heroku's Europe region (`eu-west-1` (Dublin, Irel
 
 Deployment is handled automatically by Heroku. When commits are pushed to `main`, Heroku automatically begins building and deploying the site. This deployment only occurs _after_ CI has run and passed.
 
-Currently, only a staging environment exists, so `main` deploys to staging. Once a production environment exists, this will be updated.
+Currently, only a production environment exists, so `main` deploys to production.
 
 ## Access
 
