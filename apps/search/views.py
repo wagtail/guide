@@ -39,6 +39,7 @@ def search(request):
         {
             "search_query": search_query,
             "search_results": search_results,
+            "SEO_NOINDEX": True,
         },
     )
 
