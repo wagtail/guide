@@ -40,6 +40,8 @@ class TestPageLocales(TestCase):
 
     def test_redirect_to_default_language_if_no_translation_available(self):
         language_code = "de-CH"
-        response = self.client.get("/", HTTP_ACCEPT_LANGUAGE=language_code, follow=True)
+        response = self.client.get(
+            "/", headers={"accept-language": language_code}, follow=True
+        )
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertRedirects(response, "/en-latest/")
