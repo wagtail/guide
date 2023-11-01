@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
 from wagtail.models import Page
+from wagtail.search import index
 
 from apps.core.models.feedback import Feedback
 
@@ -40,6 +41,8 @@ class ContentPage(Page):
     table_of_contents = models.TextField(blank=True)
 
     content_panels = Page.content_panels + [FieldPanel("body")]
+
+    search_fields = Page.search_fields + [index.SearchField("body")]
 
     def get_context(self, request, *args, **kwargs):
         if self.live and self.show_in_menus:
