@@ -61,13 +61,11 @@ class PageSerializer(serializers.ModelSerializer):
 
 @api_view(["GET"])
 def search_json(request):
-
-    search_query = request.GET.get("query", None)
-
-    # Search
-    if search_query:
+    if search_query := request.GET.get("query"):
         search_results = (
-            Page.objects.live().filter(locale=Locale.get_active()).search(search_query)
+            Page.objects.live()
+            .filter(locale=Locale.get_active())
+            .autocomplete(search_query)
         )
         query = Query.get(search_query)
 
