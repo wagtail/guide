@@ -31,7 +31,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: 3.11
       - name: Install Poetry
         run: curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.2.2 python -
       - name: Install Python dependencies
@@ -58,7 +58,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: 3.9
+          python-version: 3.11
       - name: Install Poetry
         run: curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.2.2 python -
       - name: Install Python dependencies
