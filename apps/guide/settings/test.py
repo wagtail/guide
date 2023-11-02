@@ -14,4 +14,6 @@ SECURE_HSTS_SECONDS = 0
 PASSWORD_HASHERS = ["django.contrib.auth.hashers.MD5PasswordHasher"]
 
 # Use non-manifest static files in tests, to avoid the need to run `collectstatic`
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+STORAGES["staticfiles"] = {  # noqa: F405
+    "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"
+}

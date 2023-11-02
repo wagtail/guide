@@ -25,7 +25,7 @@ We assume that you have basic knowledge of Node/Webpack and Python/Django/Wagtai
 #### Dependencies
 
 -   Git
--   Python >= 3.9
+-   Python >= 3.11
 -   Poetry >= 1.2.2
 -   Node (see `.nvmrc` for version)
 
@@ -35,7 +35,7 @@ Run:
 
     python -V
 
-Confirm that the output is showing version Python 3.9 (or higher). If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
+Confirm that the output is showing version Python 3.11 (or higher). If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
 
 With the Python version output confirmed, [install Poetry](https://python-poetry.org/docs).
 
