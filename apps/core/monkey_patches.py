@@ -18,7 +18,6 @@ from wagtail.coreutils import find_available_slug
 logger = logging.getLogger(__name__)
 
 
-# flake8: noqa: C901
 @transaction.atomic
 def _copy_for_translation(self, page, locale, copy_parents, alias, exclude_fields):
     # Find the translated version of the parent page to create the new page under

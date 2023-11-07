@@ -54,7 +54,7 @@ class HomePageFactory(wagtail_factories.PageFactory):
 
 
 class ContentPageFactory(wagtail_factories.PageFactory):
-    title = factory.Sequence(lambda n: "Page {}".format(n))
+    title = factory.Sequence(lambda n: f"Page {n}")
     locale = factory.SubFactory(LocaleFactory)
 
     class Meta:

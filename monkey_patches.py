@@ -8,15 +8,14 @@ Valid examples:
 - `/en-3.0/`
 - `/en-4.0.x/`
 """
-import re
 import logging
+import re
 
 from django.conf import settings
 from django.utils import translation
-from django.utils.translation import get_language_info as original_get_language_info
-from django.utils.translation import gettext_lazy, trans_real
 from django.utils.regex_helper import _lazy_re_compile
-
+from django.utils.translation import get_language_info as original_get_language_info
+from django.utils.translation import trans_real
 
 logger = logging.getLogger(__name__)
 logger.warning(
@@ -34,7 +33,7 @@ trans_real.language_code_prefix_re = _lazy_re_compile(
 
 def remove_version_number_from_language_code(lang_code):
     # Make sure to remove the version only if it exists
-    if any((version in lang_code for version in settings.WAGTAIL_GUIDE_VERSIONS)):
+    if any(version in lang_code for version in settings.WAGTAIL_GUIDE_VERSIONS):
         return lang_code.rsplit("-", maxsplit=1)[0]
     return lang_code
 
