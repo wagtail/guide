@@ -1292,13 +1292,13 @@ test = ["coverage (==6.0)", "flake8 (==4.0.0)", "flake8-blind-except (==0.1.1)",
 
 [[package]]
 name = "wagtail-localize"
-version = "1.6"
+version = "1.7rc1"
 description = "Translation plugin for Wagtail CMS"
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "wagtail_localize-1.6-py3-none-any.whl", hash = "sha256:bc46941cd0dc287d8bca0fa15f50fca6ee7bb45f01af6161e75b0173b7af118f"},
-    {file = "wagtail_localize-1.6.tar.gz", hash = "sha256:b590d095ca0752a0247909ca8cea71fbaa54b173cd59aa63f460a4a6b0fc74d0"},
+    {file = "wagtail_localize-1.7rc1-py3-none-any.whl", hash = "sha256:208df1729053bea7ec6eba548e3882ccd562b2cea08709f4008f22b1fc332d7b"},
+    {file = "wagtail_localize-1.7rc1.tar.gz", hash = "sha256:a0aecfeab1a43ddf4fc9cb988bc003ea7589e497e228000e473a3afd79632e1b"},
 ]
 
 [package.dependencies]
@@ -1360,4 +1360,4 @@ testing = ["Pillow (>=9.1.0,<11.0.0)", "Wand (>=0.6,<1.0)", "black (==22.3.0)", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11"
-content-hash = "c81a68dad07a772568360a95951ecfca39540d4373a5b71f7f48cf8e03fedd84"
+content-hash = "f3df1b62e1b6edaeed147a41e46118b3ad48ff77a92c3372af614ae1136d4c66"
