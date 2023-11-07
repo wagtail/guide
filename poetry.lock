@@ -1396,13 +1396,13 @@ files = [
 
 [[package]]
 name = "whitenoise"
-version = "6.2.0"
+version = "6.6.0"
 description = "Radically simplified static file serving for WSGI applications"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.8"
 files = [
-    {file = "whitenoise-6.2.0-py3-none-any.whl", hash = "sha256:8e9c600a5c18bd17655ef668ad55b5edf6c24ce9bdca5bf607649ca4b1e8e2c2"},
-    {file = "whitenoise-6.2.0.tar.gz", hash = "sha256:8fa943c6d4cd9e27673b70c21a07b0aa120873901e099cd46cab40f7cc96d567"},
+    {file = "whitenoise-6.6.0-py3-none-any.whl", hash = "sha256:b1f9db9bf67dc183484d760b99f4080185633136a273a03f6436034a41064146"},
+    {file = "whitenoise-6.6.0.tar.gz", hash = "sha256:8998f7370973447fac1e8ef6e8ded2c5209a7b1f67c1012866dbcd09681c3251"},
 ]
 
 [package.extras]
@@ -1432,4 +1432,4 @@ testing = ["Pillow (>=9.1.0,<11.0.0)", "Wand (>=0.6,<1.0)", "black (==22.3.0)", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11"
-content-hash = "6c3a86be4ce76ae5f14c7cfd25e6e2fd38a7b2f8ed42f0a7001a709eb7edab6e"
+content-hash = "d28014167081e6044580aaa52b477af40c35f2fbd1481b6113f075eb2a550c3a"

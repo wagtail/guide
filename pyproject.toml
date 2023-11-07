@@ -17,7 +17,7 @@ lxml = ">=4.9,<5"
 djangorestframework = ">=3.13.1,<4.0"
 dj-database-url = ">=2.1,<2.2"
 django-storages = ">=1.14,<1.15"
-whitenoise = "6.2.0"
+whitenoise = ">=6.6,<6.7"
 psycopg2 = "2.9.3"
 wagtail-localize = "1.7rc1"
 
