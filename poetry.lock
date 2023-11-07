@@ -1318,18 +1318,18 @@ testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-f
 
 [[package]]
 name = "wagtail-factories"
-version = "3.1.0"
+version = "4.1.0"
 description = "Factory boy classes for wagtail"
 optional = false
 python-versions = "*"
 files = [
-    {file = "wagtail_factories-3.1.0-py2.py3-none-any.whl", hash = "sha256:26b42998420005ab556f714e72e4a53427aac59ae595c66d1379a2c141f92be5"},
-    {file = "wagtail_factories-3.1.0.tar.gz", hash = "sha256:ea366dc1d399e9c24218366fc80a104f51c3f18469ed19c576e15023a226c942"},
+    {file = "wagtail_factories-4.1.0-py2.py3-none-any.whl", hash = "sha256:6abd435518fdf0cdd3d9920acb2abbd9005936d6fecfdf6fdde3e404834d4b0c"},
+    {file = "wagtail_factories-4.1.0.tar.gz", hash = "sha256:067e3e1a30721a90eaa1514c8214aae7a171490bbedf026eeaa904a2ed9abcd0"},
 ]
 
 [package.dependencies]
 factory-boy = ">=3.2"
-wagtail = ">=2.15"
+wagtail = ">=4.1"
 
 [package.extras]
 docs = ["sphinx (>=1.4.0)"]
@@ -1406,4 +1406,4 @@ testing = ["Pillow (>=9.1.0,<11.0.0)", "Wand (>=0.6,<1.0)", "black (==22.3.0)", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11"
-content-hash = "ebc4e796d6e51f7d1c9c0c781f3ffdc1c00e889e58ffd9de79095852a68175ea"
+content-hash = "35165ed7689c1bb66aea7554d33a6d2e50947b97e95f210950ab071c8259e50e"
