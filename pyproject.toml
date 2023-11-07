@@ -26,7 +26,7 @@ ruff = "^0.1.4"
 black = "^23.10.1"
 django-extensions = "^3.2.1"
 wagtail-factories = "^4.1.0"
-coverage = "^6.5.0"
+coverage = "^7.3.2"
 
 [tool.poetry.group.production.dependencies]
 gunicorn = "21.2.0"
