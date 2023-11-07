@@ -26,7 +26,7 @@ We assume that you have basic knowledge of Node/Webpack and Python/Django/Wagtai
 
 -   Git
 -   Python >= 3.11
--   Poetry >= 1.2.2
+-   Poetry >= 1.7.0
 -   Node (see `.nvmrc` for version)
 
 ### Setting up Wagtail guide in a virtual environment

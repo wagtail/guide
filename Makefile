@@ -36,7 +36,7 @@ frontend:
 	npm run build
 
 backend:
-	poetry install
+	poetry install --no-root
 	poetry run python manage.py migrate
 	poetry run python manage.py createcachetable
 	poetry run python manage.py createsuperuser
