@@ -370,13 +370,13 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-basic-auth-ip-whitelist"
-version = "0.5a0"
+version = "0.5"
 description = "Hide your Django site behind basic authentication mechanism with IP whitelisting support."
 optional = false
 python-versions = ">=3.4"
 files = [
-    {file = "django-basic-auth-ip-whitelist-0.5a0.tar.gz", hash = "sha256:06c2e3800d492781d88aeafdb57e418e30354cb0dbbfc01ac3ce59f67f50d31a"},
-    {file = "django_basic_auth_ip_whitelist-0.5a0-py3-none-any.whl", hash = "sha256:047bafc88c69f5aace60ca4a262d7e6e56f9767196e31623025743b08265ed22"},
+    {file = "django-basic-auth-ip-whitelist-0.5.tar.gz", hash = "sha256:8e859303a802574a121a1787bdf96ca2c16140bb9003da96e28323e7a80d99fc"},
+    {file = "django_basic_auth_ip_whitelist-0.5-py3-none-any.whl", hash = "sha256:c64cc3e1bbf736d5e6d6c3468c16003cfc4d01cdfb92cd9e7bbe9fbcd5bdf9be"},
 ]
 
 [package.dependencies]
@@ -1444,4 +1444,4 @@ testing = ["Pillow (>=9.1.0,<11.0.0)", "Wand (>=0.6,<1.0)", "black (==22.3.0)", 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.11"
-content-hash = "ee6193e04dbd2d51fbde0586b5c52d75ea4127e65bc2f51fd1e34c90172141af"
+content-hash = "75b6acb4ebf39c14c3e7c920c9d42e7655ff5dfbbe294707b0ad495f5f1e5b4f"
