@@ -1,13 +1,13 @@
-from .base import *  # noqa
+from .base import *  # noqa: F403
 
 DEBUG = False
 
-SECRET_KEY = env["SECRET_KEY"]  # noqa
+SECRET_KEY = env["SECRET_KEY"]  # noqa: F405
 
-if allowed_hosts := env.get("ALLOWED_HOSTS"):  # noqa
+if allowed_hosts := env.get("ALLOWED_HOSTS"):  # noqa: F405
     ALLOWED_HOSTS = allowed_hosts.split(",")
 
-MANIFEST_LOADER["cache"] = True  # noqa
+MANIFEST_LOADER["cache"] = True  # noqa: F405
 
 # Force HTTPS redirect (enabled by default!)
 # https://docs.djangoproject.com/en/stable/ref/settings/#secure-ssl-redirect
@@ -25,7 +25,9 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 # dev and testing settings.
 # https://docs.djangoproject.com/en/stable/ref/settings/#secure-hsts-seconds
 DEFAULT_HSTS_SECONDS = 30 * 24 * 60 * 60  # 30 days
-SECURE_HSTS_SECONDS = int(env.get("SECURE_HSTS_SECONDS", DEFAULT_HSTS_SECONDS))  # noqa
+SECURE_HSTS_SECONDS = int(
+    env.get("SECURE_HSTS_SECONDS", DEFAULT_HSTS_SECONDS)  # noqa: F405
+)
 
 # Do not use the `includeSubDomains` directive for HSTS. This needs to be prevented
 # because the apps are running on client domains (or our own for staging), that are
@@ -43,7 +45,7 @@ SECURE_CONTENT_TYPE_NOSNIFF = True
 # Referrer-policy header settings.
 # https://django-referrer-policy.readthedocs.io/en/1.0/
 
-REFERRER_POLICY = env.get(  # noqa
+REFERRER_POLICY = env.get(  # noqa: F405
     "SECURE_REFERRER_POLICY", "no-referrer-when-downgrade"
 ).strip()
 

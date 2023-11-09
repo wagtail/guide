@@ -1,7 +1,8 @@
 #!/usr/bin/env python
-from monkey_patches import *  # noqa
 import os
 import sys
+
+from monkey_patches import *  # noqa: F403
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "apps.guide.settings.dev")

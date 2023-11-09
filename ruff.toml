@@ -1,0 +1,24 @@
+target-version = "py311"
+
+exclude = ["migrations","node_modules","venv",".venv"]
+
+# E501: Line too long
+ignore = ["E501"]
+line-length = 88
+
+select = [
+    "BLE",      # flake8-blind-except
+    "C4",       # flake8-comprehensions
+    "DJ",       # flake8-django
+    "E",        # pycodestyle errors
+    "F",        # pyflakes
+    "I",        # isort
+    "PGH",      # pygrep-hooks
+    "RUF100",   # unused noqa
+    "T20",      # flake8-print
+    "UP",       # pyupgrade
+    "W",        # pycodestyle warnings
+    "YTT",      # flake8-2020
+]
+
+fixable = ["C4", "E", "F", "I", "UP"]
