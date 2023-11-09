@@ -13,8 +13,8 @@ test-coverage:
 	poetry run coverage run manage.py test && poetry run coverage report
 
 format-backend:
-	poetry run isort apps
-	poetry run black apps
+	poetry run ruff check . --fix
+	poetry run black .
 
 format-frontend:
 	npm run format
@@ -22,9 +22,8 @@ format-frontend:
 format: format-backend format-frontend
 
 lint-backend:
-	poetry run flake8 apps
-	poetry run isort --check-only --diff apps
-	poetry run black --check --diff apps
+	poetry run ruff check .
+	poetry run black --check --diff .
 
 lint-frontend:
 	npm run lint
@@ -36,7 +35,7 @@ frontend:
 	npm run build
 
 backend: compilemessages
-	poetry install
+	poetry install --no-root
 	poetry run python manage.py migrate
 	poetry run python manage.py createcachetable
 	poetry run python manage.py createsuperuser

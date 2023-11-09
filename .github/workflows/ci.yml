@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: 3.11
       - name: Install Poetry
-        run: curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.2.2 python -
+        run: curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.7.0 python -
       - name: Install Python dependencies
         run: poetry install
       - name: System checks
@@ -60,7 +60,7 @@ jobs:
         with:
           python-version: 3.11
       - name: Install Poetry
-        run: curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.2.2 python -
+        run: curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.7.0 python -
       - name: Install Python dependencies
         run: poetry install
       - name: Lint

@@ -3,21 +3,22 @@ from wagtail import hooks
 from wagtail.admin.rich_text.converters.html_to_contentstate import (
     InlineStyleElementHandler,
 )
-from wagtail.contrib.modeladmin.options import ModelAdmin, modeladmin_register
+from wagtail.snippets.models import register_snippet
+from wagtail.snippets.views.snippets import SnippetViewSet
 
 from apps.core.models.feedback import Feedback
 
 
-class FeedbackAdmin(ModelAdmin):
+class FeedbackViewSet(SnippetViewSet):
     model = Feedback
     base_url_path = "feedbackadmin"
-    menu_icon = "pilcrow"
+    icon = "pilcrow"
     list_display = ("feedback", "feedback_text", "page")
     list_filter = ("feedback", "page")
     search_fields = ("feedback_text", "page__title")
 
 
-modeladmin_register(FeedbackAdmin)
+register_snippet(FeedbackViewSet)
 
 
 @hooks.register("register_rich_text_features")
@@ -39,7 +40,7 @@ def register_keyboard_input_text_style(features):
             "background-color": "#eee",
             "border-radius": "3px",
             "border": "1px solid #b4b4b4",
-            "box-shadow": "0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset",  # noqa
+            "box-shadow": "0 1px 1px rgba(0, 0, 0, .2), 0 2px 0 0 rgba(255, 255, 255, .7) inset",
             "color": "#333",
             "display": "inline-block",
             "font-size": ".85em",
