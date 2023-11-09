@@ -35,12 +35,11 @@ frontend:
 	npm ci
 	npm run build
 
-backend:
+backend: compilemessages
 	poetry install
 	poetry run python manage.py migrate
 	poetry run python manage.py createcachetable
 	poetry run python manage.py createsuperuser
-	poetry run python manage.py compilemessages
 
 run:
 	poetry run python manage.py runserver
