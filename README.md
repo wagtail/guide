@@ -26,7 +26,7 @@ We assume that you have basic knowledge of Node/Webpack and Python/Django/Wagtai
 
 -   Git
 -   Python >= 3.11
--   Poetry >= 1.2.2
+-   Poetry >= 1.7.0
 -   Node (see `.nvmrc` for version)
 
 ### Setting up Wagtail guide in a virtual environment
@@ -102,7 +102,7 @@ If you're a Python or Django developer, fork the repo and join us. You'll find a
 ## Development
 
 -   Run formatting (Black & Prettier) `make format`
--   Run linting (Flake8, isort, Black, Prettier, Eslint) `make lint`
+-   Run linting (Ruff, Black, Prettier, Eslint) `make lint`
 -   Run tests `make test`
 
 # Other Notes
