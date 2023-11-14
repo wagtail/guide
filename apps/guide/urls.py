@@ -45,3 +45,6 @@ urlpatterns += i18n_patterns(
     path("jsi18n/", JavaScriptCatalog.as_view(), name="javascript-catalog"),
     path("", include(wagtail_urls)),
 )
+
+
+handler404 = "apps.core.views.page_not_found"
