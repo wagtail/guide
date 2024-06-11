@@ -1,11 +1,16 @@
 .richtext-image {
-    box-shadow: 2px 2px 8px 0 rgba($color--black, 0.3);
+    box-shadow: 2px 2px 50px 0 rgba($color--black, 0.05);
     border-radius: $border-radius--m;
 
     &.full-width {
         display: block;
         width: 100%;
         height: auto;
+        margin-top: ($gutter * 2);
+    }
+
+    + h3,
+    + h4 {
         margin-top: ($gutter * 2);
     }
 }
