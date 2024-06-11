@@ -59,6 +59,9 @@
         {# Global stylesheets #}
         <link rel="stylesheet" href="{% manifest 'main.css' %}">
 
+        {# Global iconography #}
+        {% include "patterns/includes/svg_sprites.html" %}
+
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
