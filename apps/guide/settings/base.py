@@ -310,6 +310,7 @@ WAGTAIL_GUIDE_LANGUAGES = [
 
 WAGTAIL_GUIDE_VERSIONS = [
     "latest",
+    "6.2.x",
     "6.1.x",
     "6.0.x",
     "5.2.x",
