@@ -1,0 +1,33 @@
+version: '3'
+
+volumes:
+  node_modules:
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.localdev
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    command: poetry run python manage.py runserver 0.0.0.0:${PORT:-8000}
+    volumes:
+      - .:/app:delegated,rw
+      - node_modules:/app/node_modules/
+    ports:
+      - '${PORT:-8000}:${PORT:-8000}'
+    environment:
+      SECRET_KEY: $SECRET_KEY
+      ALLOWED_HOSTS: $ALLOWED_HOSTS
+      PORT: ${PORT:-8000}
+      DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE:-apps.guide.settings.dev}
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.localdev
+      target: frontend
+    working_dir: /app
+    volumes:
+      - ./:/app:cached,rw
+      - node_modules:/code/node_modules/
+    command: tail -f /dev/null
+    restart: 'no'
