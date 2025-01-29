@@ -9,7 +9,7 @@ from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Collection, Locale, Page
 
-from apps.core.factories import ContentPageFactory, HomePageFactory
+from apps.core.factories import ContentPageFactory, HomePageFactory, SectionPageFactory
 
 fake = Faker()
 
@@ -94,7 +94,7 @@ class Command(BaseCommand):
                 ],
             ],
         ]:
-            page = ContentPageFactory(
+            page = SectionPageFactory(
                 parent=self.home,
                 title=title,
                 slug=slugify(title),
