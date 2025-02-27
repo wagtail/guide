@@ -212,6 +212,8 @@ PERMISSIONS_POLICY = {
 if "CSP_DEFAULT_SRC" in env:
     MIDDLEWARE.append("csp.middleware.CSPMiddleware")
 
+    CSP_REPORT_ONLY = env.get("CSP_REPORT_ONLY", "false").lower() == "true"
+
     # The “special” source values of
     # 'self', 'unsafe-inline', 'unsafe-eval', and 'none' must be quoted!
     # e.g.: CSP_DEFAULT_SRC = "'self'" Without quotes they will not work as intended.
@@ -231,6 +233,8 @@ if "CSP_DEFAULT_SRC" in env:
         CSP_BASE_URI = env.get("CSP_BASE_URI").split(",")
     if "CSP_OBJECT_SRC" in env:
         CSP_OBJECT_SRC = env.get("CSP_OBJECT_SRC").split(",")
+    if "CSP_REPORT_URI" in env:
+        CSP_REPORT_URI = env.get("CSP_REPORT_URI")
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
