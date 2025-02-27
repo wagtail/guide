@@ -214,6 +214,8 @@ if "CSP_DEFAULT_SRC" in env:
 
     CSP_REPORT_ONLY = env.get("CSP_REPORT_ONLY", "false").lower() == "true"
 
+    CSP_INCLUDE_NONCE_IN = ["script-src", "style-src"]
+
     # The “special” source values of
     # 'self', 'unsafe-inline', 'unsafe-eval', and 'none' must be quoted!
     # e.g.: CSP_DEFAULT_SRC = "'self'" Without quotes they will not work as intended.

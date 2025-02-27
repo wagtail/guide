@@ -95,7 +95,7 @@
         {% include "components/search_modal.html" %}
 
         {# Global javascript #}
-        <script>var languageCode = '{{ self.locale.language_code }}';</script>
+        <script nonce="{{ request.csp_nonce }}">var languageCode = '{{ self.locale.language_code }}';</script>
         <script src="{% url 'javascript-catalog' %}"></script>
         <script src="{% manifest 'main.js' %}"></script>
 
