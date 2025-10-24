@@ -390,21 +390,21 @@ bcrypt = ["bcrypt"]
 
 [[package]]
 name = "django-basic-auth-ip-whitelist"
-version = "0.5"
+version = "0.6.0"
 description = "Hide your Django site behind basic authentication mechanism with IP whitelisting support."
 optional = false
 python-versions = ">=3.4"
 groups = ["production"]
 files = [
-    {file = "django-basic-auth-ip-whitelist-0.5.tar.gz", hash = "sha256:8e859303a802574a121a1787bdf96ca2c16140bb9003da96e28323e7a80d99fc"},
-    {file = "django_basic_auth_ip_whitelist-0.5-py3-none-any.whl", hash = "sha256:c64cc3e1bbf736d5e6d6c3468c16003cfc4d01cdfb92cd9e7bbe9fbcd5bdf9be"},
+    {file = "django_basic_auth_ip_whitelist-0.6.0-py3-none-any.whl", hash = "sha256:f866c1822861ab6612efb9adec03b12279a82314783aa721c843acfbea04b0b7"},
+    {file = "django_basic_auth_ip_whitelist-0.6.0.tar.gz", hash = "sha256:51fbef4d483cfccb15d0c38605fd149fd307314ad8a9308580a6b693b94b3329"},
 ]
 
 [package.dependencies]
-Django = ">=1.8,<5"
+Django = ">=1.8,<6"
 
 [package.extras]
-lint = ["black (==20.8b1)", "flake8 (==3.8.4)", "isort (==5.7.0)"]
+lint = ["black (==24.4.2)", "flake8 (==7.0.0)", "isort (==5.13.2)"]
 
 [[package]]
 name = "django-csp"
@@ -1545,4 +1545,4 @@ testing = ["Pillow (>=9.1.0,<11.0.0)", "Wand (>=0.6,<1.0)", "black (==22.3.0)", 
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11"
-content-hash = "ed4352b95fd25965378fa377f02f9c38115fe25f5261720e01e341d8808f2460"
+content-hash = "920f4cd15f48873b212479b24860ccd93866fea621a384e7acb44edfb42ca27f"
