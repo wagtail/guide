@@ -375,14 +375,14 @@ typing-extensions = ">=3.10.0.0"
 
 [[package]]
 name = "django"
-version = "4.2.7"
+version = "4.2.25"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.8"
 groups = ["main", "dev", "production"]
 files = [
-    {file = "Django-4.2.7-py3-none-any.whl", hash = "sha256:e1d37c51ad26186de355cbcec16613ebdabfa9689bbade9c538835205a8abbe9"},
-    {file = "Django-4.2.7.tar.gz", hash = "sha256:8e0f1c2c2786b5c0e39fe1afce24c926040fad47c8ea8ad30aaf1188df29fc41"},
+    {file = "django-4.2.25-py3-none-any.whl", hash = "sha256:9584cf26b174b35620e53c2558b09d7eb180a655a3470474f513ff9acb494f8c"},
+    {file = "django-4.2.25.tar.gz", hash = "sha256:2391ab3d78191caaae2c963c19fd70b99e9751008da22a0adcc667c5a4f8d311"},
 ]
 
 [package.dependencies]
@@ -1383,20 +1383,20 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "wagtail"
-version = "5.2"
+version = "5.2.8"
 description = "A Django content management system."
 optional = false
 python-versions = ">=3.8"
 groups = ["main", "dev"]
 files = [
-    {file = "wagtail-5.2-py3-none-any.whl", hash = "sha256:a1d78f99d33ade5ac3ce7dca92f570f28513214d4e203421813ba544cd38eac2"},
-    {file = "wagtail-5.2.tar.gz", hash = "sha256:695b2af9c42ab7b293f489abc9e3dcaa2cbe28977fe0b730683c43b46e0f75d1"},
+    {file = "wagtail-5.2.8-py3-none-any.whl", hash = "sha256:dc2bfa1b7f434515182bc81c7a6e7a3b59c93f15f3ccd06c6389de2f26e4099d"},
+    {file = "wagtail-5.2.8.tar.gz", hash = "sha256:92262336a6744de1b3015ae3c04135edd5e4d7722fb2e99e1b6e9191686bc3f9"},
 ]
 
 [package.dependencies]
 anyascii = ">=0.1.5"
 beautifulsoup4 = ">=4.8,<4.12"
-Django = ">=3.2,<4.3"
+Django = ">=3.2,<5.1"
 django-filter = ">=23.3,<24"
 django-modelcluster = ">=6.1,<7.0"
 django-permissionedforms = ">=0.1,<1.0"
@@ -1409,12 +1409,12 @@ l18n = ">=2018.5"
 openpyxl = ">=3.0.10,<4.0"
 Pillow = ">=9.1.0,<11.0.0"
 requests = ">=2.11.1,<3.0"
-telepath = ">=0.1.1,<1"
+telepath = ">=0.3.1,<1"
 Willow = {version = ">=1.6.2,<1.7", extras = ["heif"]}
 
 [package.extras]
 docs = ["Sphinx (>=1.5.2)", "myst-parser (==0.18.1)", "pyenchant (>=3.1.1,<4)", "sphinx-autobuild (>=0.6.0)", "sphinx-copybutton (>=0.5,<1.0)", "sphinx-wagtail-theme (==6.1.1)", "sphinxcontrib-spelling (>=5.4.0,<6)"]
-testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-frontdoor (>=1.0,<1.1)", "black (==22.3.0)", "boto3 (>=1.28,<2)", "coverage (>=3.7.0)", "curlylint (==0.13.1)", "django-pattern-library (>=0.7,<0.8)", "djhtml (==1.5.2)", "doc8 (==0.8.1)", "factory-boy (>=3.2)", "freezegun (>=0.3.8)", "polib (>=1.1,<2.0)", "python-dateutil (>=2.7)", "pytz (>=2014.7)", "ruff (==0.0.290)", "semgrep (==1.40.0)", "tblib (>=2.0,<3.0)"]
+testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-frontdoor (>=1.0,<1.1)", "black (==22.3.0)", "boto3 (>=1.28,<2)", "coverage (>=3.7.0)", "curlylint (==0.13.1)", "django-pattern-library (>=0.7)", "djhtml (==1.5.2)", "doc8 (==0.8.1)", "factory-boy (>=3.2)", "freezegun (>=0.3.8)", "polib (>=1.1,<2.0)", "python-dateutil (>=2.7)", "pytz (>=2014.7)", "ruff (==0.0.290)", "semgrep (==1.40.0)", "tblib (>=2.0,<3.0)"]
 
 [[package]]
 name = "wagtail-factories"
@@ -1438,18 +1438,18 @@ test = ["coverage (==6.0)", "flake8 (==4.0.0)", "flake8-blind-except (==0.1.1)",
 
 [[package]]
 name = "wagtail-localize"
-version = "1.7"
+version = "1.8"
 description = "Translation plugin for Wagtail CMS"
 optional = false
 python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "wagtail_localize-1.7-py3-none-any.whl", hash = "sha256:4c4a5792abb1ce5b75c287801bc5abeb704390936569629bc8ea9b0f58235bad"},
-    {file = "wagtail_localize-1.7.tar.gz", hash = "sha256:313d887fbc60d9a535e1778473e0aab1069eb1a51f23b12b5e02750a0c1f6eb5"},
+    {file = "wagtail_localize-1.8-py3-none-any.whl", hash = "sha256:53f04de9bd0985b79c075c480572250fb65ba9f127d076c9e93d944e39b6ca47"},
+    {file = "wagtail_localize-1.8.tar.gz", hash = "sha256:66c3d86e994a6ac5acf1dd569cfd22f2661150abc6099cae2d6fa30a3495d0fc"},
 ]
 
 [package.dependencies]
-Django = ">=3.2,<5.0"
+Django = ">=3.2,<5.1"
 polib = ">=1.1,<2.0"
 typing_extensions = ">=4.0"
 Wagtail = ">=4.1"
@@ -1511,4 +1511,4 @@ testing = ["Pillow (>=9.1.0,<11.0.0)", "Wand (>=0.6,<1.0)", "black (==22.3.0)", 
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11"
-content-hash = "eedced5eec07faf37608261e1d6e35c8e84dbd0e65a64e615b5f9938ccb8befa"
+content-hash = "e26b5285f261f21ddd69d48b67b811c5f5dcba9a92ebefdd5c021081640b9ed9"
