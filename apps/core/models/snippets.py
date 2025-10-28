@@ -32,9 +32,7 @@ class FooterItem(TranslatableMixin, Orderable):
     title = models.CharField(max_length=50)
     description = models.TextField()
     link = models.URLField()
-    icon = models.CharField(
-        max_length=7, choices=IconChoice.choices, default=IconChoice.INFO
-    )
+    icon = models.CharField(max_length=7, choices=IconChoice, default=IconChoice.INFO)
 
     panels = [
         FieldPanel("title"),
