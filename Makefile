@@ -14,7 +14,7 @@ test-coverage:
 
 format-backend:
 	poetry run ruff check . --fix
-	poetry run black .
+	poetry run ruff format .
 
 format-frontend:
 	npm run format
@@ -23,7 +23,7 @@ format: format-backend format-frontend
 
 lint-backend:
 	poetry run ruff check .
-	poetry run black --check --diff .
+	poetry run ruff format --check .
 
 lint-frontend:
 	npm run lint
