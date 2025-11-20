@@ -1,12 +1,13 @@
 {% extends "base.html" %}
 {% load manifest wagtailimages_tags wagtailcore_tags i18n %}
+{% load wagtailcore_tags %}
 
 {% block content %}
 
     <h1 class="heading heading--display">{{ page.title }}</h1>
 
     <p class="introduction">
-        {{ page.introduction }}
+        {{ page.introduction|richtext }}
     </p>
 
     {# Simple events promotion, comment out or add back on as needed. #}
