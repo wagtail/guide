@@ -2,9 +2,7 @@
 name = "guide"
 version = "0.1.0"
 description = "Wagtail User Guide"
-authors = [
-    "Guide contributors <no-reply@guide.wagtail.org>",
-]
+authors = ["Guide contributors <no-reply@guide.wagtail.org>"]
 license = "BSD-3-Clause"
 readme = "README.md"
 
@@ -13,12 +11,12 @@ python = ">=3.11"
 django = ">=4.2,<5.0"
 wagtail = ">=5.2,<6.0"
 django-manifest-loader = "^1.0.0"
-lxml = ">=4.9,<5"
+lxml = ">=4.9,<7"
 djangorestframework = ">=3.13.1,<4.0"
 dj-database-url = ">=2.1,<2.2"
 django-storages = ">=1.14,<1.15"
 whitenoise = ">=6.6,<6.7"
-psycopg2 = "2.9.9"
+psycopg = "~3.2.10"
 wagtail-localize = "1.7rc1"
 django-permissions-policy = "^4.13.0"
 django-csp = "^3.7"
@@ -39,4 +37,3 @@ boto3 = "^1.24.93"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
