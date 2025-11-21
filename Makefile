@@ -34,7 +34,7 @@ frontend:
 	npm ci
 	npm run build
 
-backend: compilemessages
+backend:
 	poetry install --no-root
 	poetry run python manage.py migrate
 	poetry run python manage.py createcachetable
