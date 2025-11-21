@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='ContentPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
-                ('body', wagtail.fields.StreamField([('text', apps.core.blocks.TextBlock())], use_json_field=True)),
+                ('body', wagtail.fields.StreamField([('text', apps.core.blocks.TextBlock())])),
             ],
             options={
                 'abstract': False,
@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
             name='HomePage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.page')),
-                ('sections', wagtail.fields.StreamField([('section_grid', apps.core.blocks.SectionGridBlock())], null=True, use_json_field=True)),
+                ('sections', wagtail.fields.StreamField([('section_grid', apps.core.blocks.SectionGridBlock())], null=True)),
             ],
             options={
                 'abstract': False,

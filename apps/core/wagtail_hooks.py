@@ -16,6 +16,7 @@ class FeedbackViewSet(SnippetViewSet):
     list_display = ("feedback", "feedback_text", "page")
     list_filter = ("feedback", "page")
     search_fields = ("feedback_text", "page__title")
+    copy_view_enabled = False
 
 
 register_snippet(FeedbackViewSet)

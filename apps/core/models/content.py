@@ -34,10 +34,7 @@ class ContentPage(Page):
     show_in_menus_default = True
     subpage_types = ["core.ContentPage"]
 
-    body = StreamField(
-        CONTENT_BLOCKS,
-        use_json_field=True,
-    )
+    body = StreamField(CONTENT_BLOCKS)
     table_of_contents = models.TextField(blank=True)
 
     content_panels = Page.content_panels + [FieldPanel("body")]

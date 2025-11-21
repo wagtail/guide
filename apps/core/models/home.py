@@ -15,7 +15,6 @@ class HomePage(Page):
 
     sections = StreamField(
         HOME_BLOCKS,
-        use_json_field=True,
         null=True,
         min_num=1,
         max_num=1,

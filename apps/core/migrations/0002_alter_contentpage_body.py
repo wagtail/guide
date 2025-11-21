@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='contentpage',
             name='body',
-            field=wagtail.fields.StreamField([('text', apps.core.blocks.TextBlock()), ('alert', wagtail.blocks.StructBlock([('alert_type', wagtail.blocks.ChoiceBlock(choices=[('Warning', 'Warning'), ('Note', 'Note')])), ('alert_body', wagtail.blocks.RichTextBlock(features=['bold', 'italic', 'link']))]))], use_json_field=True),
+            field=wagtail.fields.StreamField([('text', apps.core.blocks.TextBlock()), ('alert', wagtail.blocks.StructBlock([('alert_type', wagtail.blocks.ChoiceBlock(choices=[('Warning', 'Warning'), ('Note', 'Note')])), ('alert_body', wagtail.blocks.RichTextBlock(features=['bold', 'italic', 'link']))]))]),
         ),
     ]
