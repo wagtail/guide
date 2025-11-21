@@ -1,8 +1,7 @@
 from django.conf import settings
-from django.db import models
 from django.http.response import Http404
 from wagtail.admin.panels import FieldPanel
-from wagtail.fields import StreamField
+from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
 
 from ..blocks import HOME_BLOCKS
@@ -12,7 +11,7 @@ from ..views import Custom404
 class HomePage(Page):
     subpage_types = ["core.ContentPage"]
     max_count = 1
-    introduction = models.TextField(blank=True)
+    introduction = RichTextField(blank=True)
 
     sections = StreamField(
         HOME_BLOCKS,

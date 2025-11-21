@@ -5,9 +5,9 @@
 
     <h1 class="heading heading--display">{{ page.title }}</h1>
 
-    <p class="introduction">
-        {{ page.introduction }}
-    </p>
+    <div class="introduction">
+        {{ page.introduction|richtext }}
+    </div>
 
     {# Simple events promotion, comment out or add back on as needed. #}
     {# <p class="introduction"><em>👉️ Want to learn more about Wagtail’s future?</em><br> Check out <a href="https://wagtail.org/wagtail-space-2025/">Wagtail Space 2025</a> 🚀 - free, online, October 8th - 10th.</p> #}
