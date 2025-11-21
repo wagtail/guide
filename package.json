@@ -2,8 +2,10 @@
   "name": "guide",
   "private": true,
   "author": "",
-  "engines": {
-    "node": "^20"
+  "devEngines": {
+    "packageManager": {
+      "name": "npm"
+    }
   },
   "scripts": {
     "start": "webpack --mode=development --watch --progress",
