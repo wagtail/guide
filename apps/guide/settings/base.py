@@ -585,6 +585,8 @@ REST_FRAMEWORK = {
     )
 }
 
+WAGTAILSNIPPETS_MENU_SHOW_ALL = True
+
 # The Django default for the maximum number of GET or POST parameters is 1000. For
 # especially large Wagtail pages with many fields, we need to override this. See
 # https://docs.wagtail.org/en/stable/releases/6.4.html#data-upload-max-number-fields-update
