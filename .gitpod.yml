@@ -8,7 +8,7 @@ tasks:
       npm ci
       npm run build
       curl -sSL https://install.python-poetry.org | POETRY_VERSION=2.2.1 python -
-      poetry install
+      poetry install --no-root
       poetry run python manage.py migrate
       poetry run python manage.py createcachetable
       poetry run python manage.py buildfixtures

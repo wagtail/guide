@@ -33,7 +33,7 @@ jobs:
         with:
           python-version: 3.11
           cache: poetry
-      - run: poetry install
+      - run: poetry install --no-root
       - run: poetry run python manage.py check
       - run: poetry run python manage.py collectstatic --noinput --clear
       - run: poetry run python manage.py createcachetable
@@ -52,7 +52,7 @@ jobs:
         with:
           python-version: 3.11
           cache: poetry
-      - run: poetry install
+      - run: poetry install --no-root
       - run: make lint-backend
 
   check_node:
