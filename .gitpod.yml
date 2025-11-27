@@ -7,7 +7,7 @@ tasks:
   - init: |
       npm ci
       npm run build
-      curl -sSL https://install.python-poetry.org | POETRY_VERSION=1.7.0 python -
+      curl -sSL https://install.python-poetry.org | POETRY_VERSION=2.2.1 python -
       poetry install
       poetry run python manage.py migrate
       poetry run python manage.py createcachetable
