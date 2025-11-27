@@ -86,7 +86,7 @@ COPY --chown=guide --from=frontend ./apps/frontend/static ./apps/frontend/static
 # Copy application code.
 COPY --chown=guide . .
 
-RUN poetry install ${POETRY_INSTALL_ARGS}
+RUN poetry install ${POETRY_INSTALL_ARGS} --no-root
 
 # Collect static. This command will move static files from application
 # directories and "static_compiled" folder to the main static directory that
