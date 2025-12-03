@@ -31,7 +31,7 @@ jobs:
       - run: pipx install "poetry>=2.2.1,<3"
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: 3.14
           cache: poetry
       - run: poetry install --no-root
       - run: poetry run python manage.py check
@@ -50,7 +50,7 @@ jobs:
       - run: pipx install "poetry>=2.2.1,<3"
       - uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: 3.14
           cache: poetry
       - run: poetry install --no-root
       - run: make lint-backend
