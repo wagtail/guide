@@ -44,13 +44,12 @@
         }
     }
 
-    &__logo {
-        .light {
-            fill: $color--white;
-        }
+    &__logo-link {
+        width: 100%;
+        height: 100%;
 
-        .dark {
-            fill: $color--black;
+        &--dark {
+            display: none;
         }
     }
 
@@ -153,12 +152,10 @@
 
     .theme-dark & {
         #{$root}__logo {
-            .light {
-                fill: $color--black;
-            }
+            display: none;
 
-            .dark {
-                fill: $color--white;
+            &--dark {
+                display: block;
             }
         }
 
