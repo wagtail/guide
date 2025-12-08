@@ -23,7 +23,7 @@ django-csp = "^3.7"
 sentry-sdk = { extras = ["django"], version = "^2.45.0" }
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.1.4"
+ruff = "^0.14.8"
 django-extensions = "^3.2.1"
 wagtail-factories = "^4.1.0"
 coverage = "^7.3.2"

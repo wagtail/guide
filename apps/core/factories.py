@@ -64,7 +64,7 @@ class ContentPageFactory(wagtail_factories.PageFactory):
     def body(self):
         return json.dumps(
             [
-                {"type": "text", "value": f"<p>{ fake.paragraph() }</p>"},
+                {"type": "text", "value": f"<p>{fake.paragraph()}</p>"},
             ],
         )
 
