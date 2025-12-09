@@ -54,13 +54,21 @@ compilemessages:
 	cd apps && poetry run python ../manage.py compilemessages
 
 docker-build:
-	docker build -t guide:latest --build-arg POETRY_INSTALL_ARGS="" -f Dockerfile .
+	docker-compose build
 
 docker-run:
-	docker run --name guide_latest -p ${PORT}:${PORT} --env-file .env guide:latest sh -c 'poetry run python manage.py runserver 0.0.0.0:${PORT}'
+	docker-compose up
 
-docker-exec:
-	docker exec -it guide_latest /bin/bash
+docker-shell:
+	docker-compose exec web bash
+
+docker-shell-frontend:
+	docker-compose exec frontend bash
 
 docker-init:
-	docker exec -it guide_latest /bin/bash -c "make backend"
+	docker-compose exec web poetry install
+	docker-compose exec web poetry run python manage.py migrate
+	docker-compose exec web poetry run python manage.py createcachetable
+	docker-compose exec web poetry run python manage.py createsuperuser
+	docker-compose exec web poetry run python manage.py buildfixtures
+
