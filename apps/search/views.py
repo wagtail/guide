@@ -52,11 +52,12 @@ class PageSerializer(serializers.ModelSerializer):
         fields = ["id", "title", "search_description", "full_url", "parent_section"]
 
     def get_parent_section(self, page):
+        # We might update this to search for the first SectionPage
         ancestors = page.get_ancestors()
         if len(ancestors) >= 3:
             return ancestors[2].title
         else:
-            return _("Home")
+            return _("Home")  # Shouldn't this be None? OR a dash?
 
 
 @api_view(["GET"])

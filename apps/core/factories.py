@@ -8,6 +8,7 @@ from faker import Faker
 from wagtail.models import Locale, Page, Site
 
 from apps.core.models import ContentPage, HomePage
+from apps.core.models.content import SectionPage
 
 fake = Faker()
 
@@ -75,3 +76,8 @@ class ContentPageFactory(wagtail_factories.PageFactory):
     @factory.lazy_attribute
     def parent(self):
         return HomePageFactory()
+
+
+class SectionPageFactory(ContentPageFactory):
+    class Meta:
+        model = SectionPage

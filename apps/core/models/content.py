@@ -53,7 +53,7 @@ class ContentPage(Page):
 
         return context
 
-    def serve(self, request):
+    def serve(self, request, *args, **kwargs):
         if request.method == "POST":
             data = json.loads(request.body)
             if "pk" in data:
@@ -71,8 +71,14 @@ class ContentPage(Page):
 
             return HttpResponse(json.dumps(data))
         else:
-            return super().serve(request)
+            return super().serve(request, *args, **kwargs)
 
     def save_revision(self, *args, **kwargs):
         self.table_of_contents = create_table_of_contents(self.body)
         return super().save_revision(*args, **kwargs)
+
+
+class SectionPage(ContentPage):
+    parent_page_types = ["core.HomePage"]
+
+    # Distinct section page features here.
