@@ -1,4 +1,4 @@
-{% load core_tags wagtailcore_tags wagtailuserbar manifest %}
+{% load core_tags wagtailcore_tags wagtailroutablepage_tags wagtailuserbar manifest %}
 
 {% wagtail_site as current_site %}
 <!DOCTYPE html>
@@ -39,7 +39,7 @@
         {% hreflangs %}
 
         {% if page.has_markdown_route %}
-            <link rel="alternate" type="text/markdown; charset=utf-8" href="{{ page.full_url }}markdown/" />
+            <link rel="alternate" type="text/markdown; charset=utf-8" href="{{ page.get_site.root_url }}{% routablepageurl page "markdown" %}" />
         {% endif %}
 
         {% comment %}
