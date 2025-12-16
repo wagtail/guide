@@ -21,6 +21,7 @@ wagtail-localize = "1.12.2"
 django-permissions-policy = "^4.13.0"
 django-csp = "^3.7"
 sentry-sdk = { extras = ["django"], version = "^2.45.0" }
+draftjs-exporter-markdown = "^0.2.4"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.14.8"

@@ -31,6 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 INSTALLED_APPS = [
     "apps.frontend",
     "apps.core",
+    "apps.llms_txt",
     "apps.search",
     "apps.custom_user",
     "apps.custom_media",
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     "wagtail_localize.locales",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.routable_page",
     "wagtail.contrib.search_promotions",
     "wagtail.embeds",
     "wagtail.sites",

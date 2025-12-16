@@ -4,11 +4,13 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
 
+from apps.llms_txt.mixins import MarkdownRouteMixin
+
 from ..blocks import HOME_BLOCKS
 from ..views import Custom404
 
 
-class HomePage(Page):
+class HomePage(MarkdownRouteMixin, Page):
     subpage_types = ["core.ContentPage"]
     max_count = 1
     introduction = RichTextField(blank=True)
