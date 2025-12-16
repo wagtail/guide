@@ -9,6 +9,7 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
+from apps.llms_txt import views as llms_txt_views
 from apps.search import views as search_views
 
 urlpatterns = [
@@ -16,6 +17,8 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("sitemap.xml", sitemap),
+    path("llms.txt", llms_txt_views.llms_txt_view, name="llms_txt"),
+    path("llms-full.txt", llms_txt_views.llms_full_txt_view, name="llms_full_txt"),
 ]
 
 

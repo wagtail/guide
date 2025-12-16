@@ -22,7 +22,7 @@ class TestAlternateLinkTagsHomePage(TestCase):
         response = self.client.get(self.page_en_latest.full_url)
         # Should not have the alternate tags
         # as there are no translations for the latest version
-        self.assertNotContains(response, '<link rel="alternate"')
+        self.assertNotContains(response, '<link rel="alternate" hreflang')
 
     def test_en_41x_alternate_tags(self):
         response = self.client.get(self.page_en_41x.full_url)
@@ -45,7 +45,7 @@ class TestAlternateLinkTagsHomePage(TestCase):
             response,
             f'<link rel="alternate" hreflang="en" href="{href}">',
         )
-        self.assertContains(response, '<link rel="alternate"', count=2)
+        self.assertContains(response, '<link rel="alternate" hreflang', count=2)
 
     def test_nl_41x_alternate_tags(self):
         response = self.client.get(self.page_nl_41x.full_url)
@@ -68,7 +68,7 @@ class TestAlternateLinkTagsHomePage(TestCase):
             response,
             f'<link rel="alternate" hreflang="en" href="{href}">',
         )
-        self.assertContains(response, '<link rel="alternate"', count=2)
+        self.assertContains(response, '<link rel="alternate" hreflang', count=2)
 
 
 class TestAlternateLinkTagsContentPage(TestAlternateLinkTagsHomePage):

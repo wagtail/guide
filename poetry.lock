@@ -645,6 +645,21 @@ html5lib = ["beautifulsoup4 (>=4.4.1,<5)", "html5lib (>=0.999,<2)"]
 lxml = ["lxml (>=4.2.0,<6)"]
 
 [[package]]
+name = "draftjs-exporter-markdown"
+version = "0.2.4"
+description = "Library to convert rich text from Draft.js raw ContentState to Markdown, based on draftjs_exporter"
+optional = false
+python-versions = "*"
+groups = ["main"]
+files = [
+    {file = "draftjs_exporter_markdown-0.2.4-py3-none-any.whl", hash = "sha256:85ef894a57a9d3f1d26572d8ecc2873d643d06cc0fbf41d80778c1e4d63954d9"},
+    {file = "draftjs_exporter_markdown-0.2.4.tar.gz", hash = "sha256:13d2d93f7e8d200e6f717b98352bf41cbbe730faeb9fa0a04decd28b888b4a98"},
+]
+
+[package.dependencies]
+draftjs-exporter = ">=2.1.0,<6"
+
+[[package]]
 name = "et-xmlfile"
 version = "2.0.0"
 description = "An implementation of lxml.xmlfile for the standard library"
@@ -1575,4 +1590,4 @@ wand = ["Wand (>=0.6,<1.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14"
-content-hash = "8eaf40eede417817ead67264680a4b8d7f11f41d374cce277ae6fcfc42f40359"
+content-hash = "4723c17da7d2dde3b25696f6142bc7cbd79692a740836f9374b555605fd019c1"

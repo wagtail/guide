@@ -38,6 +38,10 @@
         {# alternate tags #}
         {% hreflangs %}
 
+        {% if page.has_markdown_route %}
+            <link rel="alternate" type="text/markdown; charset=utf-8" href="{{ page.full_url }}markdown/" />
+        {% endif %}
+
         {% comment %}
             Twitter summary card - see https://dev.twitter.com/cards/types/summary
             and https://dev.twitter.com/cards/getting-started
