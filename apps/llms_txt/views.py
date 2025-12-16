@@ -5,7 +5,7 @@ from wagtail.contrib.sitemaps import Sitemap
 
 def llms_txt_view(request):
     pages = Sitemap().items()
-    template = loader.get_template("llms_txt/llms_txt.html")
+    template = loader.get_template("llms_txt/llms.txt.jinja")
     context = {
         "pages": pages,
         "request": request,
@@ -17,7 +17,7 @@ def llms_txt_view(request):
 
 def llms_full_txt_view(request):
     pages = Sitemap().items()
-    template = loader.get_template("llms_txt/llms_full_txt.html")
+    template = loader.get_template("llms_txt/llms-full.txt.jinja")
     context = {
         "pages": pages,
         "request": request,

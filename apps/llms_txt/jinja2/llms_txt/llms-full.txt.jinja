@@ -1,0 +1,14 @@
+{%- set current_site = wagtail_site() -%}
+
+# {{ current_site.root_page.title }}
+
+{% if current_site.root_page.search_description -%}
+> {{ current_site.root_page.search_description }}
+{%- endif %}
+
+{% for page in pages -%}
+{{ page.to_markdown()|safe }}
+{% if not loop.last -%}
+------------------------------------------------------------------------
+{% endif %}
+{% endfor -%}
