@@ -1,0 +1,15 @@
+{%- set current_site = wagtail_site() -%}
+
+# {{ current_site.root_page.title }}
+
+{% if current_site.root_page.search_description -%}
+> {{ current_site.root_page.search_description }}
+{%- endif %}
+
+View the full site contents: [llms-full.txt]({{ current_site.root_url }}/llms-full.txt)
+
+## Table of Contents
+
+{% for page in pages %}
+- [{{ page.seo_title if page.seo_title else page.title }}]({{ current_site.root_url }}{{ page.reverse_subpage("markdown") }}){%- if page.search_description -%}: {{ page.search_description }}{%- endif -%}
+{%- endfor -%}

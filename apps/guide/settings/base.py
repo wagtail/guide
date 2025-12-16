@@ -102,6 +102,16 @@ TEMPLATES = [
             ],
         },
     },
+    {
+        "BACKEND": "django.template.backends.jinja2.Jinja2",
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "extensions": [
+                "wagtail.jinja2tags.core",
+                "apps.llms_txt.jinja2tags.llms_txt",
+            ],
+        },
+    },
 ]
 
 WSGI_APPLICATION = "apps.guide.wsgi.application"

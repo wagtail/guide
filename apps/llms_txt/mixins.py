@@ -12,7 +12,7 @@ class MarkdownRouteMixin(RoutablePageMixin):
         return True
 
     def to_markdown(self, request=None):
-        template = loader.get_template("llms_txt/markdown.html")
+        template = loader.get_template("llms_txt/page.md.jinja")
         context = {
             "page": self,
             "request": request,

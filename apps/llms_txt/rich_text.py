@@ -1,3 +1,5 @@
+from django.utils.functional import Promise
+from django.utils.safestring import mark_safe
 from draftjs_exporter.html import HTML as HTMLExporter
 from draftjs_exporter_markdown import BLOCK_MAP, ENGINE, ENTITY_DECORATORS, STYLE_MAP
 from wagtail.admin.rich_text.converters.contentstate import (
@@ -6,6 +8,7 @@ from wagtail.admin.rich_text.converters.contentstate import (
     entity_fallback,
     style_fallback,
 )
+from wagtail.rich_text import RichText
 from wagtail.rich_text import features as feature_registry
 
 
@@ -36,3 +39,15 @@ class MarkdownContentstateConverter(ContentstateConverter):
     def to_markdown_format(self, html):
         json_str = self.from_database_format(html)
         return self.to_database_format(json_str)
+
+
+def richtext_markdown(value: RichText | Promise | str | None):
+    if isinstance(value, Promise):
+        value = str(value)
+    elif isinstance(value, RichText):
+        value = value.source
+    elif value is None:
+        return ""
+
+    html = MarkdownContentstateConverter().to_markdown_format(value)
+    return mark_safe(html)
