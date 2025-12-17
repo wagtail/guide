@@ -7,8 +7,7 @@
 {%- endif %}
 
 {% for page in pages -%}
-{{ page.to_markdown()|safe }}
-{% if not loop.last -%}
 ------------------------------------------------------------------------
-{% endif %}
+
+{{ page.to_markdown()|safe }}
 {% endfor -%}
