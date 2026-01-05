@@ -4,6 +4,7 @@ import './theme-detect';
 import { initSectionLink } from './section-link';
 import { handleFeedback } from './feedback';
 import MobileMenu from './mobile-menu';
+import CopyButton from './copy-button';
 
 initSectionLink();
 handleFeedback();
@@ -97,4 +98,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Remove no-js class if JS is enabled
     document.documentElement.classList.remove('no-js');
     initComponent(MobileMenu);
+    initComponent(CopyButton);
 });

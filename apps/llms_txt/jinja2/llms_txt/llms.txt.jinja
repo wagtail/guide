@@ -1,14 +1,12 @@
 {%- set current_site = wagtail_site() -%}
 
-{{ request.get_host() }}
-
 # {{ current_site.root_page.title }}
 
 {% if current_site.root_page.search_description -%}
 > {{ current_site.root_page.search_description }}
 {%- endif %}
 
-View the full site contents: [llms-full.txt]({{ current_site.root_url }}/llms-full.txt)
+View the full site contents: [llms-full.txt]({{ current_site.root_url }}{{ url('llms_full_txt') }})
 
 ## Table of Contents
 

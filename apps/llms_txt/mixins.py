@@ -22,5 +22,5 @@ class MarkdownRouteMixin(RoutablePageMixin):
     @route(r"^markdown/$", name="markdown")
     def markdown_view(self, request):
         return HttpResponse(
-            self.to_markdown(request), content_type="text/markdown; charset=utf-8"
+            self.to_markdown(request), content_type="text/markdown;charset=utf-8"
         )
