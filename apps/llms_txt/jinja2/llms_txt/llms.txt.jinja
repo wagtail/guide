@@ -13,5 +13,5 @@ View the full site contents: [llms-full.txt]({{ current_site.root_url }}/llms-fu
 ## Table of Contents
 
 {% for page in pages %}
-- [{{ page.seo_title if page.seo_title else page.title }}]({{ page.full_url }}{{ page.reverse_subpage("markdown") }}){%- if page.search_description -%}: {{ page.search_description }}{%- endif -%}
+- [{{ page.seo_title if page.seo_title else page.title }}]({{ page.full_url }}{{ page.reverse_subpage("markdown") }}){%- if page.search_description -%}: {{ page.search_description|safe }}{%- endif -%}
 {%- endfor -%}
