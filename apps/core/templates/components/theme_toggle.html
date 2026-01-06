@@ -1,9 +1,6 @@
 {% load i18n %}
 
 <div class="theme-toggle">
-    <noscript>
-        <p>{% trans 'JavaScript is required to toggle light/dark mode.' %}</p>
-    </noscript>
     <span class="theme-toggle__label">{% trans 'Dark' %}</span>
     <button id="wagtail-theme" class="theme-toggle__button" type="button" aria-label="{% trans 'Toggle between dark and light theme' %}">
         <span class="dark-only u-sr-only">{% trans 'Light mode' %}</span>
