@@ -106,6 +106,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.jinja2.Jinja2",
         "APP_DIRS": True,
         "OPTIONS": {
+            "environment": "apps.guide.jinja2.environment",
             "extensions": [
                 "wagtail.jinja2tags.core",
                 "apps.llms_txt.jinja2tags.llms_txt",

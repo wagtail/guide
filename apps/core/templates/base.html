@@ -39,7 +39,7 @@
         {% hreflangs %}
 
         {% if page.has_markdown_route %}
-            <link rel="alternate" type="text/markdown; charset=utf-8" href="{{ page.get_site.root_url }}{% routablepageurl page "markdown" %}" />
+            <link rel="alternate" type="text/markdown;charset=utf-8" href="{{ page.get_site.root_url }}{% routablepageurl page 'markdown' %}" />
         {% endif %}
 
         {% comment %}
@@ -84,6 +84,9 @@
             <main class="app__content">
                 <div class="page-tools">
                     {% include "components/theme_toggle.html" %}
+                    {% if page.has_markdown_route %}
+                        {% include "components/copy_button.html" %}
+                    {% endif %}
                     {% include "components/language_selector.html" %}
                 </div>
                 <div id="main-content">

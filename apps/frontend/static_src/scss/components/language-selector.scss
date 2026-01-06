@@ -2,12 +2,6 @@
     $root: &;
     overflow: hidden;
 
-    @include media-query(large) {
-        max-width: 200px;
-        min-width: 200px;
-        width: 200px;
-    }
-
     &__toggle {
         @include fs(xxs);
         font-weight: 500;
@@ -31,7 +25,12 @@
     }
 
     &__dropdown {
+        --bs-dropdown-bg: #{$color--white};
         overflow: hidden;
+        border-radius: $border-radius--m;
+        border: 1px solid rgba($color--off-black, 0.15);
+        box-shadow: 0 0.5rem 1rem rgba($color--black, 0.15);
+        padding: 0.5rem 0;
     }
 
     &__dropdown-item {

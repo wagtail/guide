@@ -1,0 +1,15 @@
+{% load wagtailroutablepage_tags i18n llms_txt_tags %}
+
+<div class="copy-button" role="group" aria-label="{% trans 'Content copy tools' %}" data-copy-widget data-success-text="{% trans 'Copied!' %}">
+    <button type="button" class="copy-button__btn" data-copy-page>
+        {% trans "Copy page" %}
+    </button>
+    <button type="button" class="copy-button__toggle dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="{% trans 'Toggle options' %}"></button>
+    <ul class="dropdown-menu dropdown-menu-end">
+        <li><button class="dropdown-item" type="button" data-copy-link>{% trans "Copy Markdown link" %}</button></li>
+        <li><a class="dropdown-item" rel="alternate" type="text/markdown;charset=utf-8" href="{% routablepageurl page 'markdown' %}" target="_blank">{% trans "View page Markdown" %}</a></li>
+        <li><a class="dropdown-item" type="text/markdown;charset=utf-8" href="{% url 'llms_txt' %}" target="_blank">{% trans "View llms.txt" %}</a></li>
+        <li><a class="dropdown-item" type="text/markdown;charset=utf-8" href="{% url 'llms_full_txt' %}" target="_blank">{% trans "View llms-full.txt" %}</a></li>
+        <li><button class="dropdown-item" type="button" data-copy-prompt="{% url 'llms_prompt' %}">{% trans "Copy prompt" %}</button></li>
+    </ul>
+</div>

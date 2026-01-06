@@ -1,0 +1,96 @@
+.copy-button {
+    display: inline-flex;
+    margin-inline-end: ($gutter * 0.5);
+    min-width: 130px;
+
+    &__btn {
+        // Prevent shift when changing text.
+        min-width: 95px;
+        border-radius: 0;
+        border-start-start-radius: $border-radius--m;
+        border-end-start-radius: $border-radius--m;
+        // Prevent double border
+        margin-inline-end: -1px;
+    }
+
+    &__toggle {
+        border-radius: 0;
+        border-start-end-radius: $border-radius--m;
+        border-end-end-radius: $border-radius--m;
+        padding-inline-start: ($gutter * 0.4);
+        padding-inline-end: ($gutter * 0.4);
+        height: 100%;
+    }
+
+    &__btn,
+    &__toggle {
+        display: flex;
+        align-items: center;
+        @include fs(xxs);
+        font-weight: 500;
+        padding: 10px;
+        background-color: $color--white;
+        border: 1px solid rgba($color--grey, 0.4);
+        color: $color--off-black;
+        cursor: pointer;
+        transition: color $transition;
+        position: relative;
+
+        @include media-query(large) {
+            @include fs(xs);
+            font-weight: 700;
+        }
+
+        &:hover,
+        &:focus {
+            color: $color--active;
+            border-color: $color--active;
+            // Show a full outline around the button.
+            z-index: 3;
+        }
+
+        .theme-dark & {
+            background-color: $color--black;
+            color: $color--light-grey;
+
+            &:hover,
+            &:focus {
+                color: $color--light-teal;
+                border-color: $color--light-teal;
+            }
+        }
+    }
+
+    .dropdown-menu {
+        --bs-dropdown-padding-y: 0.25rem;
+        --bs-dropdown-bg: #{$color--white};
+        --bs-dropdown-border-radius: #{$border-radius--m};
+        border: 1px solid rgba($color--off-black, 0.15);
+        box-shadow: 0 0.5rem 1rem rgba($color--black, 0.15);
+
+        .theme-dark & {
+            background-color: $color--black;
+            color: $color--white;
+        }
+    }
+
+    .dropdown-item {
+        @include fs(xs);
+        box-sizing: border-box;
+        cursor: pointer;
+        --bs-dropdown-item-padding-y: 0.35rem;
+
+        &:hover,
+        &:active {
+            color: $color--active;
+        }
+
+        .theme-dark & {
+            color: $color--light-grey;
+
+            &:hover {
+                background-color: rgba($color--white, 0.1);
+            }
+        }
+    }
+}

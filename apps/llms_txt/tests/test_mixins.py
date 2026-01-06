@@ -21,6 +21,6 @@ class TestMarkdownRouteMixin(TestCase):
             self.content_page.url + self.content_page.reverse_subpage("markdown")
         )
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response["Content-Type"], "text/markdown; charset=utf-8")
+        self.assertEqual(response["Content-Type"], "text/markdown;charset=utf-8")
         content = response.content.decode("utf-8")
         self.assertIn(self.content_page.title, content)
