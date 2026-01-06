@@ -81,7 +81,7 @@
                 {% header %}
             </div>
 
-            <main class="app__content">
+            <div class="app__content">
                 <div class="page-tools">
                     {% include "components/theme_toggle.html" %}
                     {% if page.has_markdown_route %}
@@ -89,10 +89,10 @@
                     {% endif %}
                     {% include "components/language_selector.html" %}
                 </div>
-                <div id="main-content">
+                <main id="main-content">
                     {% block content %}{% endblock %}
-                </div>
-            </main>
+                </main>
+            </div>
         </div>
 
         <footer class="app__footer">
