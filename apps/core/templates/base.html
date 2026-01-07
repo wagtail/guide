@@ -38,7 +38,9 @@
         {# alternate tags #}
         {% hreflangs %}
 
-        <link rel="canonical" href="{% get_translation_url page 'en-latest' %}">
+        {% if page %}
+            <link rel="canonical" href="{% get_translation_url page 'en-latest' %}">
+        {% endif %}
 
         {% if page.has_markdown_route %}
             <link rel="alternate" type="text/markdown;charset=utf-8" href="{{ page.get_site.root_url }}{% routablepageurl page 'markdown' %}" />
