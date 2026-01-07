@@ -66,6 +66,16 @@
         {% block extra_css %}
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
+
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          "headline": "{{ page.title|escapejs }}",
+          "datePublished": "{{ page.first_published_at|date:'c' }}",
+          "dateModified": "{{ page.last_published_at|date:'c' }}"
+        }
+        </script>
     </head>
 
     <body class="app">
