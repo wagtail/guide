@@ -20,7 +20,8 @@
 
         &:hover,
         &:focus {
-            color: $color--primary;
+            color: $color--active;
+            border-color: $color--active;
         }
     }
 
@@ -51,7 +52,8 @@
         #{$root}__dropdown-item {
             &:hover,
             &:focus {
-                background-color: $color--grey;
+                color: $color--light-teal;
+                border-color: $color--light-teal;
             }
         }
     }
