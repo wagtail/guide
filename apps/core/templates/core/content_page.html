@@ -20,6 +20,24 @@
         {% endfor %}
     </div>
 
+    {% with children=page.get_children.live %}
+        {% if children %}
+            <div class="toc">
+                <h2 class="toc__heading">{% trans 'In this section' %}</h2>
+                <div class="toc__content">
+                    <ul>
+                        {% for child in children %}
+                            <li>
+                                <a href="{% pageurl child %}">{{ child.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+
     <p class="byline">
         <em>{% blocktrans with last_updated=page.last_published_at|date:"F j, Y" trimmed %}Last updated: {{ last_updated }}{% endblocktrans %}</em>
     </p>
