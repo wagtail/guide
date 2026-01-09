@@ -1,5 +1,6 @@
 from django.utils.functional import Promise
 from django.utils.safestring import mark_safe
+from draftjs_exporter.dom import DOM
 from draftjs_exporter.html import HTML as HTMLExporter
 from draftjs_exporter_markdown import BLOCK_MAP, ENGINE, ENTITY_DECORATORS, STYLE_MAP
 from wagtail.admin.rich_text.converters.contentstate import (
@@ -31,14 +32,20 @@ class MarkdownContentstateConverter(ContentstateConverter):
                 **ENTITY_DECORATORS,
                 "FALLBACK": entity_fallback,
             },
-            "engine": ENGINE,
         }
+
+        # Avoid concurrency bug in the exporter.
+        # See https://github.com/springload/draftjs_exporter/issues/122
+        self.prev_engine = DOM.dom
 
         self.exporter = HTMLExporter(exporter_config)
 
     def to_markdown_format(self, html):
         json_str = self.from_database_format(html)
-        return self.to_database_format(json_str)
+        DOM.use(ENGINE)
+        markdown = self.to_database_format(json_str)
+        DOM.dom = self.prev_engine
+        return markdown
 
 
 def richtext_markdown(value: RichText | Promise | str | None):
