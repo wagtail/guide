@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "apps.custom_user",
     "apps.custom_media",
     "manifest_loader",
+    "wagtail_ai",
     "rest_framework",
     "wagtail_localize",
     "wagtail_localize.locales",
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.redirects",
     "wagtail.contrib.routable_page",
     "wagtail.contrib.search_promotions",
+    "wagtail.contrib.settings",
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",
@@ -652,3 +654,54 @@ if (
         WAGTAILFRONTENDCACHE["default"].update(
             {"BEARER_TOKEN": env["FRONTEND_CACHE_CLOUDFLARE_BEARER_TOKEN"]}
         )
+
+WAGTAIL_AI = {
+    "BACKENDS": {
+        "default": {
+            "CLASS": "wagtail_ai.ai.llm.LLMBackend",
+            "CONFIG": {
+                # Model ID recognizable by the "LLM" library.
+                "MODEL_ID": os.environ.get(
+                    "WAGTAIL_AI_DEFAULT_MODEL_ID", "gpt-4.1-mini"
+                ),
+                "TOKEN_LIMIT": int(
+                    os.environ.get("WAGTAIL_AI_DEFAULT_TOKEN_LIMIT", 32768)
+                ),
+            },
+        },
+        "vision": {
+            "CLASS": "wagtail_ai.ai.openai.OpenAIBackend",
+            "CONFIG": {
+                "MODEL_ID": os.environ.get(
+                    "WAGTAIL_AI_VISION_MODEL_ID", "gpt-4.1-mini"
+                ),
+                "TOKEN_LIMIT": int(
+                    os.environ.get("WAGTAIL_AI_VISION_TOKEN_LIMIT", 32768)
+                ),
+            },
+        },
+    },
+    "IMAGE_DESCRIPTION_PROVIDER": "vision",
+    "PROVIDERS": {
+        "default": {
+            "provider": os.environ.get("WAGTAIL_AI_DEFAULT_PROVIDER", "openai"),
+            "model": os.environ.get(
+                "WAGTAIL_AI_DEFAULT_MODEL", "mistral-small-3.2-24b-instruct-2506"
+            ),
+            # If not provided, AnyLLM will default to the provider's (openai) values
+            "api_key": os.environ.get("WAGTAIL_AI_DEFAULT_API_KEY"),
+            "api_base": os.environ.get("WAGTAIL_AI_DEFAULT_API_BASE"),
+        },
+        "vision": {
+            "provider": os.environ.get("WAGTAIL_AI_VISION_PROVIDER", "mistral"),
+            "model": os.environ.get(
+                "WAGTAIL_AI_VISION_MODEL",
+                "pixtral-12b-2409",
+            ),
+            "api_key": os.environ.get("WAGTAIL_AI_VISION_API_KEY"),
+            "api_base": os.environ.get("WAGTAIL_AI_VISION_API_BASE"),
+        },
+    },
+}
+
+WAGTAILIMAGES_IMAGE_FORM_BASE = "wagtail_ai.forms.DescribeImageForm"
