@@ -3,8 +3,10 @@ from wagtail import hooks
 from wagtail.admin.rich_text.converters.html_to_contentstate import (
     InlineStyleElementHandler,
 )
+from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
+from wagtail_ai.panels import AIDescriptionFieldPanel
 
 from apps.core.models.feedback import Feedback
 
@@ -64,3 +66,7 @@ def register_keyboard_input_text_style(features):
     features.register_converter_rule("contentstate", feature_name, db_conversion)
 
     features.default_features.append("keyboard_input")
+
+
+# Enable AI prompts on built-in field.
+Page.promote_panels[0].args[0][-1] = AIDescriptionFieldPanel("search_description")

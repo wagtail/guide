@@ -9,6 +9,7 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
+from wagtail_ai.panels import AITitleFieldPanel
 
 from apps.core.models.feedback import Feedback
 from apps.llms_txt.mixins import MarkdownRouteMixin
@@ -38,7 +39,10 @@ class ContentPage(MarkdownRouteMixin, Page):
     body = StreamField(CONTENT_BLOCKS)
     table_of_contents = models.TextField(blank=True)
 
-    content_panels = Page.content_panels + [FieldPanel("body")]
+    content_panels = [
+        AITitleFieldPanel("title"),
+        FieldPanel("body"),
+    ]
 
     search_fields = Page.search_fields + [index.SearchField("body")]
 
