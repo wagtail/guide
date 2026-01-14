@@ -656,32 +656,6 @@ if (
         )
 
 WAGTAIL_AI = {
-    "BACKENDS": {
-        "default": {
-            "CLASS": "wagtail_ai.ai.llm.LLMBackend",
-            "CONFIG": {
-                # Model ID recognizable by the "LLM" library.
-                "MODEL_ID": os.environ.get(
-                    "WAGTAIL_AI_DEFAULT_MODEL_ID", "gpt-4.1-mini"
-                ),
-                "TOKEN_LIMIT": int(
-                    os.environ.get("WAGTAIL_AI_DEFAULT_TOKEN_LIMIT", 32768)
-                ),
-            },
-        },
-        "vision": {
-            "CLASS": "wagtail_ai.ai.openai.OpenAIBackend",
-            "CONFIG": {
-                "MODEL_ID": os.environ.get(
-                    "WAGTAIL_AI_VISION_MODEL_ID", "gpt-4.1-mini"
-                ),
-                "TOKEN_LIMIT": int(
-                    os.environ.get("WAGTAIL_AI_VISION_TOKEN_LIMIT", 32768)
-                ),
-            },
-        },
-    },
-    "IMAGE_DESCRIPTION_PROVIDER": "vision",
     "PROVIDERS": {
         "default": {
             "provider": os.environ.get("WAGTAIL_AI_DEFAULT_PROVIDER", "openai"),
@@ -693,7 +667,7 @@ WAGTAIL_AI = {
             "api_base": os.environ.get("WAGTAIL_AI_DEFAULT_API_BASE"),
         },
         "vision": {
-            "provider": os.environ.get("WAGTAIL_AI_VISION_PROVIDER", "mistral"),
+            "provider": os.environ.get("WAGTAIL_AI_VISION_PROVIDER", "openai"),
             "model": os.environ.get(
                 "WAGTAIL_AI_VISION_MODEL",
                 "pixtral-12b-2409",
@@ -702,6 +676,7 @@ WAGTAIL_AI = {
             "api_base": os.environ.get("WAGTAIL_AI_VISION_API_BASE"),
         },
     },
+    "IMAGE_DESCRIPTION_PROVIDER": "vision",
 }
 
 WAGTAILIMAGES_IMAGE_FORM_BASE = "wagtail_ai.forms.DescribeImageForm"
