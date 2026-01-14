@@ -1,6 +1,6 @@
-# Guide
+# Wagtail user guide
 
-Guide is a website to help content editors, moderators, administrators, and other users learn how to use the Wagtail content management system (CMS).
+The user guide is a website to help content editors, moderators, administrators, and other users learn how to use the Wagtail content management system (CMS). It’s a comprehensive documentation resource for CMS users, featuring hands-on learning material as well as reference content. It follows the [Diátaxis](https://diataxis.fr/) framework. For the Wagtail developer documentation, visit [docs.wagtail.org](https://docs.wagtail.org/en/stable/).
 
 The Wagtail guide will ultimately include:
 
