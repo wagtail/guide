@@ -25,26 +25,26 @@ def create_table_of_contents(body):
     toc = ""
     if headings:
         toc += "<ul>"
-        nested_ul_open = False
+        is_h3_list_open = False
         for i, heading in enumerate(headings):
             anchor = heading.attrs.get("id", slugify(heading.text))
             if heading.name == "h2":
                 # Close any open nested list before starting a new h2
-                if nested_ul_open:
+                if is_h3_list_open:
                     toc += "</ul></li>"
-                    nested_ul_open = False
+                    is_h3_list_open = False
                 toc += f'<li><a href="#{anchor}">{heading.text}</a>'
                 # Check if next heading is h3, if not close this li
                 if i + 1 >= len(headings) or headings[i + 1].name != "h3":
                     toc += "</li>"
             elif heading.name == "h3":
                 # Start a nested list if not already open
-                if not nested_ul_open:
+                if not is_h3_list_open:
                     toc += "<ul>"
-                    nested_ul_open = True
+                    is_h3_list_open = True
                 toc += f'<li><a href="#{anchor}">{heading.text}</a></li>'
         # Close any open nested list at the end
-        if nested_ul_open:
+        if is_h3_list_open:
             toc += "</ul></li>"
         toc += "</ul>"
     return toc
