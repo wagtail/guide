@@ -18,6 +18,12 @@
             list-style-type: none;
             padding: 0;
             margin: 0;
+            
+            // Nested lists (h3 under h2)
+            ul {
+                padding-inline-start: 33px; // indent by icon width + margin
+                margin-top: ($gutter * 0.5);
+            }
         }
 
         li {
