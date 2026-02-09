@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
 prompts:
-  # Separate prompts with more or less context to 
+  # Separate prompts with more or less context to
   - file://prompts/support-with-instructions.txt
   - file://./support-with-llms.txt
   - file://./support-with-llms-full.txt
