@@ -1,0 +1,2666 @@
+# Wagtail user guide
+
+> This documentation is written for anyone creating content or managing content production in Wagtail. It covers everything you can expect when using a standard Wagtail site.
+
+------------------------------------------------------------------------
+
+# Wagtail user guide
+
+Page URL: https://guide.wagtail.org/en-latest/
+
+> This documentation is written for anyone creating content or managing content production in Wagtail. It covers everything you can expect when using a standard Wagtail site.
+
+
+Welcome to the Wagtail user guide! The guide is here to help content editors, moderators, administrators, and other users learn how to use the Wagtail content management system (CMS).
+
+## [Getting started](https://guide.wagtail.org/en-latest/getting-started/)
+
+Our tutorials will help you learn and master the different ways of creating and managing content in Wagtail. It’s the best place to get started.
+
+## [How-to guides](https://guide.wagtail.org/en-latest/how-to-guides/)
+
+Our how-to guides explain the simplest ways to achieve common tasks.
+
+## [Concepts](https://guide.wagtail.org/en-latest/concepts/)
+
+Wagtail has strong opinions about CMS best practices. This section describes why Wagtail works how it does from a user’s perspective.
+
+## [Reference](https://guide.wagtail.org/en-latest/reference/)
+
+What is a Snippet? What does a permission do? Our reference material gets to the point, giving the key information at a glance.
+
+
+------------------------------------------------------------------------
+
+# Getting started
+
+Page URL: https://guide.wagtail.org/en-latest/getting-started/
+
+> Here are our step-by-step tutorials to learn Wagtail concepts.
+
+
+Here are our step-by-step tutorials to learn Wagtail concepts.
+
+
+------------------------------------------------------------------------
+
+# Overview
+
+Page URL: https://guide.wagtail.org/en-latest/getting-started/overview/
+
+> If you&#39;re brand new to Wagtail, we recommend you go through our guides in sequence. Otherwise, you can click through the different categories below to learn more about different aspects of Wagtail.
+
+
+Welcome to the Wagtail User Guide!
+
+If you’re here, you probably already know that Wagtail is an open-source Content Management System (CMS) created by Torchbox and supported by an international core team of developers. Wagtail is a popular CMS for many websites because it's scalable and highly customizable.
+
+This guide is a collection of tutorials, how-to guides, reference guides, and explanations of concepts that help you learn how to manage content on a standard Wagtail website. If you’re an editor, administrator, or general user of Wagtail, this guide is for you. If you’re a developer, you might find the [developer documentation](https://docs.wagtail.org/) more useful.
+
+If you're totally new to Wagtail, it is best that you read through this User Guide in sequence. Otherwise, you can click through the different categories in this User Guide to learn more about the different aspects of the Wagtail [Admin interface](/en-latest/concepts/wagtail-interfaces/).
+
+
+## The Wagtail demo site
+
+The examples in this guide use the [bakerydemo demo website](https://github.com/wagtail/bakerydemo) as a sample website. However, the instructions are general enough to be applicable to any Wagtail website.
+
+This documentation uses the URL [www.example.com](https://www.example.com/) to represent the root or homepage of your website.
+
+
+## Log in to the admin interface
+
+Editors start by logging into the [Admin interface](/en-latest/concepts/wagtail-interfaces/). You can access the login page, by appending **_/admin_** to the end of your root URL. For example, **_www.example.com/admin_**. On the login page, enter your username and password and click **Sign in**.
+
+![Screenshot of "Sign in to Wagtail" screen, with username, password, "Remember me" fields, a "Forgotten password?" link, and a submit button. Shows the Wagtail logo at the bottom, and has a gradient background from teal to indigo](https://guide-media.wagtail.org/images/Screenshot_of_22Sign_in_to_Wagtail22_screen_wi.width-900_zfnbcw5.png)
+
+
+
+
+------------------------------------------------------------------------
+
+# How-to guides
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/
+
+> Use our guides to learn how to do a specific task in the CMS.
+
+
+Use our guides to learn how to do a specific task in the CMS.
+
+
+------------------------------------------------------------------------
+
+# Find your way around
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/find-your-way-around/
+
+> This section describes the different pages that you will see as you navigate around the CMS, and how you can find the content that you are looking for.
+
+
+This section describes the different pages that you are going to see as you navigate around the Wagtail [Admin interface](/en-latest/concepts/wagtail-interfaces/).
+
+
+## The Dashboard
+
+The **Dashboard** is the main hub of the Wagtail website. From the dashboard, you can access all of the content you create in Wagtail as well as reports, settings, and other content management features.
+
+If you access a new version of Wagtail for the first time, your **Dashboard** shows a banner notifying you of the changes to Wagtail. The banner has a link to the User guide, where you can learn more about these changes.
+
+![Wagtail dashboard with new Things in Wagtail 4 have changed banner](https://guide-media.wagtail.org/images/Wagtail_dashboard_with_new_Things_in_Wagtail_4.width-900_RFwEK1H.png)
+
+
+
+
+
+
+Note: What you see in your **Dashboard** depends on your user role. Common user roles include editors, moderators, and administrators.
+
+Wagtail is highly customizable, so your **Dashboard** may look different from the one in this demonstration. This User guide uses the Wagtail Bakery for demonstration purposes. If you have trouble locating a panel or feature, you may want to ask your webmaster or developer if they added any customizations.
+
+
+### How to reach the Dashboard
+
+Logging into Wagtail automatically takes you to the **Dashboard**. If you navigate away from the dashboard, you can return to it at any time by clicking on the Wagtail logo in the top-left section of your screen.
+
+
+
+The following are some of the tools that you can find within the **Dashboard**:
+
+### The Dashboard panels
+
+The dashboard panels provide you with an overview of the various states of your Wagtail pages.
+
+### The dashboard panels
+
+![Screenshot of Wagtails dashboard with sidebar header summary metrics and listing for pages in different states](https://guide-media.wagtail.org/images/Screenshot_of_Wagtails_dashboard_with_sidebar_.width-900_QlyJUwJ.png)
+
+
+
+The different panels on your dashboard are as follows:
+
+#### Your pages in a workflow
+
+The _Your pages in a workflow_ panel shows you any pages in moderation that you own or have submitted for moderation yourself. It also shows the moderation tasks that are pending and how long the tasks have been open.
+
+#### Awaiting your review
+
+If your webmaster or web developer gives you permission to perform moderation actions, your Wagtail dashboard displays the _Awaiting your review_ panel. This panel shows content that's ready for you to review.
+
+From the panel, you can perform the following actions:
+
+* Click the name of a page to edit that page.
+* Use the buttons to move the page to the next stage in your workflow by requesting changes to a page, approving the page, or approving the page with a comment.
+* Get a quick view of the page status by hovering over the indicator circles to get more information about the pending task. The indicator circles show a tick for a completed task or an empty circle for an incomplete one.
+* See how long a page has been waiting for review.
+
+#### Your most recent edits
+
+The _Your most recent edits_ panel displays the five pages you last edited.
+
+The panel also shows the date that you last edited the pages as well as the [current status of the page](/en-latest/reference/page-status-definitions/)s.
+
+#### Your locked pages
+
+The _Your locked pages_ panel shows all of the pages you've locked so that only you can edit them. From this panel, you can quickly view the date you locked a page. To edit a locked page, click the name.
+
+
+### The Sidebar
+
+On the left-hand side of the dashboard and throughout Wagtail is a menu called the **Sidebar**. You can use the **Sidebar** to navigate to different parts of Wagtail.
+
+The **Sidebar** helps you quickly access your content as well as Wagtail features and settings. The items on the **Sidebar** can vary depending on what your developer or webmaster decides to give you access to. A standard Wagtail installation has the main Wagtail features in the sidebar. These features include Search, Documents, Snippets, Forms, Reports, Settings, and Help.
+
+
+
+
+Note: If you want the **Sidebar** to take up less space, you can click the white arrow near the top of the **Sidebar** to switch it into _slim_ mode and give yourself more space for writing.
+
+
+### The Explorer page
+
+The Explorer page allows you to view a page’s children and perform actions on them. On the Explorer page, you can publish and unpublish pages. You can also move the pages to other sections, drill down into the content tree, or reorder child pages within a parent.
+
+You can see the name of the page whose Explorer page you are on as a heading at the top of the screen. If the page has child pages within it, then you can see a list displaying the child pages below the heading. Clicking the title of a child page takes you to the edit screen, from which you can edit that child page.
+
+If you hover over a child page, you get an arrow on the right-hand side of that child page row. Clicking the arrow displays a further level of child pages.
+
+![Listing of pages with highlight on the arrow of a child page Blog when hovered over](https://guide-media.wagtail.org/images/Listing_of_pages_with_highlight_on_the_arrow_o.width-900_uCnVcoL.png)
+
+Additionally, hovering over a child page displays a checkbox at the left-hand side of the child page row. Selecting one or more child pages by clicking their checkboxes gives you an action bar at the bottom of the Explorer page. Clicking on any of the options in the action bar takes you to a confirmation page from which you can confirm the action.
+
+![The page listing with checkboxes in the first column two of which are checked At the bottom is an actions menu with different buttons and a 2 pages selected label](https://guide-media.wagtail.org/images/The_page_listing_with_checkboxes_in_the_first_.width-900_XMD8r5A.png)
+
+As you drill down through the site, the breadcrumb (the row of pages beginning with the home icon) displays the path you have taken. Clicking on the page titles in the breadcrumb takes you to the Explorer screen for that page.
+
+![Close-up of the pages breadcrumb with icon buttons next to it The breadcrumb reads Root  Welcome to the Wagtail bakery  Breads](https://guide-media.wagtail.org/images/Close-up_of_the_pages_breadcrumb_with_icon_but.width-900_ajJ67se.png)
+
+Clicking on the **… Actions** dropdown shows a list of actions for the parent page, like Move, Copy, Delete, Unpublish, and History. Also, clicking the Sort menu order option from the dropdown takes you to the ordering page.
+
+![Breads page listing with expanded three dots Actions menu in the header showing 7 different page actions One Add child page is highlighted in red](https://guide-media.wagtail.org/images/Breads_page_listing_with_expanded_three_dots_A.width-900_9Cddamn.png)
+
+To view the parent page on the live website, click **Live** from the top-right side of the Explorer page.
+
+
+### Search Wagtail
+
+The search feature is the topmost feature in the Wagtail **Sidebar**. You can use the search feature to quickly search for content in Wagtail.
+
+![Search screen with bread typed in focused field and There are 6 matching pages underneath The results show filters and sorting options and four results rows are visible underneath](https://guide-media.wagtail.org/images/Search_screen_with_bread_typed_in_focused_fiel.width-900_c6bO1hD.png)
+
+
+
+
+### Adjust Wagtail's settings
+
+Click **Settings** from the Wagtail sidebar to access Wagtail settings. If you have the correct role, you'll be able to add users, add user groups, and perform other administrative tasks.
+
+
+### Get help
+
+Click **Help** from the Wagtail sidebar to access links to the user documentation and the new features of the latest version of Wagtail.
+
+
+------------------------------------------------------------------------
+
+# Manage pages
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-pages/
+
+> Create new pages by clicking the Add child page button. This creates a child page of the section you are currently in. In this case a child page of the &#39;Breads&#39; page.
+
+
+## Create new pages
+
+To create a new page, click the **Add** button at the top of page. This creates a child page of the section you are currently in. In this case, a child page of the **Breads** page. There are other actions relating to pages available in the **Actions** menu next to the Add button:
+
+![Breads page listing with expanded three dots Actions menu in the header showing 7 different page actions One Add child page is highlighted in red](https://guide-media.wagtail.org/images/Breads_page_listing_with_expanded_three_dots_A.width-900_9Cddamn.png)
+
+
+
+
+## Edit existing pages
+
+You can access an existing page's [edit screen](/en-latest/concepts/wagtail-interfaces/) in three ways.
+
+First, by clicking **… Actions** and then select the Edit option from the dropdown. Second, by clicking the page's title if you are accessing the page from its parent's Explorer page or in search results. Last, if you are accessing the page from the [Explorer page](/en-latest/how-to-guides/find-your-way-around/) of its parent, you can hover over the page and then click Edit.
+
+On the [edit screen](/en-latest/concepts/wagtail-interfaces/), you can find the title of the page you are editing at the top of the page. If the page is already published, then you can find a link to the live version of the page at the top right of the page. To change the title of the page, click the title field and enter a new title.
+
+![Page editor for Bread and Circuses page The form to the left and to the right the Preview side panel is expanded showing the page as it would appear to users on Mobile devices](https://guide-media.wagtail.org/images/Page_editor_for_Bread_and_Circuses_page_The_fo.width-900_cb8HY0Q.png)
+
+## Validation errors
+
+Clicking "Save draft" will save the latest changes as a draft, skipping form fields validation where possible. Clicking "Publish" always runs all available form field validation. When errors are present, they are all displayed directly within the form, with an overview message at the top of the page, including a shortcut to go to the first error:
+
+![Validation error message on page publish with go to first error shortcut button](https://guide-media.wagtail.org/images/Validation_error_message_on_page_publish_with_.width-900.png)
+
+
+
+---
+
+## Available actions
+
+While on the [edit screen](/en-latest/concepts/wagtail-interfaces/), you can perform several actions, such as copying, moving, or deleting a page. To perform any of these actions, click **… Actions** at the top of the [edit screen](/en-latest/concepts/wagtail-interfaces/) and select the applicable option from the dropdown.
+
+
+## Edit block content
+
+Wagtail’s block-based editing is called StreamField. It’s a key feature of the CMS, that gives editors creative control over content.
+
+![Close-up of a rich text block with a text paragraph and then a thumbnail with a video Play symbol in the top right](https://guide-media.wagtail.org/images/Close-up_of_a_rich_text_block_with_a_text_para.width-900.png)
+
+Within block-based StreamField, editors can:
+
+* Insert blocks – as a list where all blocks are of the same type, or as a stream with multiple supported block types.
+* Reorder blocks – with up and down controls, or drag and drop.
+* Duplicate blocks - to speed up content entry.
+* Remove blocks.
+
+Within blocks, the same fields are used as other aspects of the page. Or often, blocks can be nested within other blocks.
+
+The same block-based interface is also available for more structured data, often combined with [snippets](/en-latest/how-to-guides/manage-snippets/), with minor differences in capabilities (for example absence of "duplicate" option:
+
+![Authors block with two Authors child items each containing a People field The first blocks controls to the right are highlighted in red](https://guide-media.wagtail.org/images/Authors_block_with_two_Authors_child_items_eac.width-900.png)
+
+### Block chooser
+
+Clicking the "+" Add button, the block chooser appears. It allows the user to choose between available block types, which vary depending on configuration of the page and field.
+
+![Block chooser in StreamField, with a block being previewed](https://guide-media.wagtail.org/images/block_chooser_and_preview_focus.width-900.png)
+
+If configured, blocks can display a preview of how they would display on the site and description of their intended use.
+
+
+## Create and edit comments
+
+To toggle on commenting mode, click **Comments** at the top of the [edit screen](/en-latest/concepts/wagtail-interfaces/) page. Once commenting mode is on, you can create a new comment or reply to a comment by hovering over any commentable field to reveal the add comment icon.
+
+![Screenshot of a Subtitle form field with a comment button next to it highlighted in red](https://guide-media.wagtail.org/images/Screenshot_of_a_Subtitle_form_field_with_a_com.width-900_debqfyS.png)
+
+If there is no pre-existing comment in the field, click the add comment icon to create a new comment. However, if there is an existing comment, clicking either the field button or the comment brings the comment thread into focus. This allows you to add new replies.
+
+![Two form fields with a comment pop-up off to the right side](https://guide-media.wagtail.org/images/Two_form_fields_with_a_comment_pop-up_off_to_t.width-900_wlOeHj8.png)
+
+To comment on the text within the rich text field, highlight the text and then click the add comment icon to add an inline comment.
+
+!["Heat is gradually" text selection within a rich text editor. Above the selection, the inline toolbar shows, with a "bubble" icon comment button to the right in teal](https://guide-media.wagtail.org/images/22Heat_is_gradually22_text_selection_within_a_.width-900_cemT3h0.png)
+
+Alternatively, you can perform all of these actions using the comment shortcut, Ctrl + Alt + M on Windows and ⌘ + Alt + M on macOS.
+
+To edit, delete, or resolve a comment, click the three vertical dots in the top right of an existing comment and select the applicable option. Saving the page after leaving a comment or replying to a comment saves the comment or reply.
+
+![A comment pop-up, with its three dots "actions" menu expanded, with Edit, Delete, Resolve options](https://guide-media.wagtail.org/images/A_comment_pop-up_with_its_three_dots_22actions.width-900_SlOlf6V.png)
+
+
+
+
+Note: Currently, fields inside **InlinePanels** and **ListBlocks** are uncommentable.
+
+
+The arrow to the right of the comments icon shows the comment notifications
+panel, where you can enable or disable email notifications for other users' comments on the page.
+
+![Wide screenshot of the page editors tabs and the comment notifications switch off to the right](https://guide-media.wagtail.org/images/Wide_screenshot_of_the_page_editors_tabs_and_t.width-900_yxd4W35.png)
+
+
+
+
+Note: You will always receive email notifications for threads you are part of, unless you opt out of all comment notifications in your account settings.
+
+All participants in a thread will receive email notifications for new replies, even if they no longer have permission to edit the page.
+
+
+## Concurrent editing notifications
+
+![Concurrent editing warning dialog to prevent unintentional overrides](https://guide-media.wagtail.org/images/Concurrent_editing_warning_dialog_to_prevent_u.width-900.png)
+
+When multiple users concurrently work on the same content, Wagtail displays notifications to inform them of potential editing conflicts. Those notifications initially appear as user avatars in the page header, each with a status tooltip.
+
+When a user saves their work, other users are informed and presented with options: they can refresh the page to view the latest changes, or proceed with their own changes, overwriting the other user's work.
+
+![Concurrent editing overwrite confirmation dialog](https://guide-media.wagtail.org/images/overwrite_confirmation_dialog.width-900.png)
+
+Users are displayed as "active" in concurrent editing notifications until they switch to another application or close the browser tab, or after a set timeout.
+
+
+## Manage page privacy
+
+Users with publish permission on a page can set it to be private by clicking the ‘Change privacy’ control in the status panel. This sets a restriction on who is allowed to view the page, and its [child pages](/en-latest/concepts/pages/). Several options are available:
+
+* **Public**: the page is accessible to anyone who can access the website.
+* **Accessible to any logged-in users:** The user must log in to view the page. All user accounts are granted access, regardless of permission level.
+* **Accessible with a shared password:** The user must enter the given shared password to view the page. This is appropriate for situations where you want to share a page with a trusted group of people, but giving them individual user accounts would be overkill. The same password is shared between all users, and this works independently of any user accounts that exist on the site.
+* **Accessible to users in specific groups:** The user must be logged in, and a member of one or more of the [specified groups](/en-latest/how-to-guides/manage-users-and-roles/), in order to view the page.
+
+
+Warning: Shared passwords should not be used to protect sensitive content, as the password is shared between all users, and stored in plain text in the database. Where possible, it’s recommended to require users log in to access private page content.
+
+
+## **Manage page history**
+
+Wagtail allows you to retrieve the version of the content you previously saved as a draft or published. You can do this by hovering over a page on the [Explorer page](/en-latest/how-to-guides/find-your-way-around/) and clicking **More** from the resulting dropdown options. Alternatively, you can access the page history screen by clicking the **History** icon in the top-right corner when editing a page.
+
+On the page's history screen, you can see all the actions previously done on that particular page and the users that carried out the actions. Also, you can see the date or time that the action occurred.
+
+You can also search for specific versions of your content on the page history screen by applying a filter.
+
+![Page history for Breads and circuses with a listing of actions and a filtering form to the right](https://guide-media.wagtail.org/images/Page_history_for_Breads_and_circuses_with_a_li.width-900_h1DdDZJ.png)
+
+If you want to compare different draft versions, hover over the draft and click **Compare with previous version** or **Compare with current version**.
+
+To replace the current version of the draft with a previous version, hover over the preferred version of your draft on the page history screen and click **Review this version**. Then click **Replace current version** located at the bottom of the screen. This action appears as a _Revert_ action on the page history screen and you can always go back to review it.
+
+![page history replace current draft](https://guide-media.wagtail.org/images/page_history_replace_current_draft_neqsiyo.width-900.png)
+
+
+
+
+
+
+## Workflow
+
+If the page is currently in a workflow, then you can see an additional indicator underneath the title showing the current workflow task. Clicking this shows more information about the page's progress through the workflow and any comments left by reviewers.
+
+![The page editing form with its Info side panel opened to the right with a highlight on page workflow metadata](https://guide-media.wagtail.org/images/The_page_editing_form_with_its_Info_side_panel.width-900_IDKppPB.png)
+
+If you have permission to perform moderation actions, for example, approval or requesting changes on the current task. In that case, you can see additional options in the action bar at the bottom of the page.
+
+
+## Copy pages
+
+Sometimes, you don't need to create a new page from scratch. For example, you may have several pages that are similar in terms of structure but differ in content. In that case, you can copy an existing page and only change the required parts.
+
+![Copy action available when hovering over a page in an explorer page](https://guide-media.wagtail.org/images/Copy_action_available_when_hovering_over_a_pag.width-900_UEKIsmm.png)
+
+To copy an existing page, hover over a page in an [Explorer page](/en-latest/how-to-guides/find-your-way-around/), then click **More** and select **Copy**. Selecting **Copy** from the dropdown takes you to a form where you can enter the title and slug of the copy and also choose its parent page. You then get the option to publish the copy right away and an option to mark the copy as an alias of the original page. Once you have completed the form, click **Copy this page**.
+
+![Copy page form with the options to change the title slug parent page published status and option to create an alias](https://guide-media.wagtail.org/images/Copy_page_form_with_the_options_to_change_the_.width-900_nri0WYZ.png)
+
+Congratulations, you just copied a page. You can now find your copied page on the Explorer page.
+
+
+## Alias pages
+
+When copying a page, you have the option to mark it as an alias. The content of an aliased page always stays in sync with the original.
+
+This is useful when you want a page to be available in multiple places. For example, if you have a page about Brioche as a child page of Breads, and you want to make the Brioche page available in the Pastries section. One way to do this is to create a copy of the Brioche page and change the parent page to the Pastries page. However, you now need to remember to update this copy each time you modify the original page. If you mark a copy as an alias, Wagtail automatically makes changes to the copy each time you modify and publish the original page.
+
+Creating an alias for an existing page is similar to creating a copy. Hover over a page in the [Explorer page](/en-latest/how-to-guides/find-your-way-around/), click **More**, and then select **Copy**. Selecting **Copy** takes you to the copy page form. On the copy page form, choose another page as the parent page by clicking Choose another page.
+
+![Clicking the change button during the copy page form in order to change the parent of the copied page](https://guide-media.wagtail.org/images/Clicking_the_change_button_during_the_copy_pag.width-900_0wwrJ40.png)
+
+Then, click the **Alias** checkbox and click **Copy this page** to complete the aliasing.
+
+![Clicking on the Copy this page button to confirm aliasing](https://guide-media.wagtail.org/images/Clicking_on_the_Copy_this_page_button_to_confi.width-900_sIikjIn.png)
+
+Congratulations, you just aliased a page. You can now find your aliased page on the [Explorer page](/en-latest/how-to-guides/find-your-way-around/) of the parent page.
+
+If you try to edit the aliased page, you get a notification that it's an alias of another page. To edit an aliased page, you have two options:
+
+* Edit the original page. This option changes both the original page and the aliased page.
+* Convert the alias page to an ordinary page, which is a copy of the original. If you choose this option, you must make manual changes to the alias page in order for it to be in sync with the original page.
+
+
+------------------------------------------------------------------------
+
+# Manage documents
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-documents/
+
+> Documents such as PDFs can be managed from the Documents interface, available in the left-hand menu.
+
+
+You can manage documents such as PDF files from the [Documents interface](/en-latest/concepts/wagtail-interfaces/). To access the Documents interface, click **Documents** in the [Sidebar](/en-latest/how-to-guides/find-your-way-around/). This interface allows you to view, add, and remove documents from the Admin interface.
+
+![Documents listing with Search field in header Add document button and a Collections dropdown Underneath are 2 rows of documents with a header row above](https://guide-media.wagtail.org/images/Documents_listing_with_Search_field_in_header_.width-900_2st99KC.png)
+
+Add documents by clicking **Add documents** at the top right of the documents interface. Search for previously added documents by entering the title of the document in the search bar. The results automatically update as you type. You can also filter the results by Collection by selecting a collection from the **Collection** dropdown preceding the documents list.
+
+![Documents listing with two items one of which is selected with their left-hand checkbox Underneath an action menu shows different actions and the text 1 document selected](https://guide-media.wagtail.org/images/Documents_listing_with_two_items_one_of_which_.width-900_2mroCAB.png)
+
+Select multiple documents by clicking the checkbox on the left side of each document, then use the bulk actions bar at the bottom to perform an action on all selected documents.
+
+If you want to edit a document, click the title of the document. Doing this takes you to the [edit screen](/en-latest/concepts/wagtail-interfaces/).
+
+![Document editing form for a Cookbook Skillet Cornbread Document To the right we see the file size of 130 KB and a Usage Used 0 times label](https://guide-media.wagtail.org/images/Document_editing_form_for_a_Cookbook_Skillet_C.width-900_7iyqe53.png)
+
+When editing a document, you can replace the file associated with that document record. This means you can update documents without having to update the pages they're on. Changing the file changes it on all pages that use the document. You can also change the collection of the document by clicking on the Collection dropdown on the edit page and selecting a new collection of your choice. Add or remove tags using the Tags field on the edit screen. Once you are done editing a document, save your edits by clicking **Save** at the bottom of the [edit screen](/en-latest/concepts/wagtail-interfaces/).
+
+To completely delete a document and its record, select the document by clicking the checkbox at the left-hand side of the document record row in the [Documents interface](/en-latest/concepts/wagtail-interfaces/). Then click **Delete** from the action bar displayed at the bottom of the Documents interface.
+
+![Screenshot of the document interface with a document selected and the Delete button in the action bar highlighted](https://guide-media.wagtail.org/images/Screenshot_of_the_document_interface_with_a_do.width-900_ExAbYK2.png)
+
+You can also delete a document and its record from the [edit screen](/en-latest/concepts/wagtail-interfaces/) when editing a document by clicking **Delete document** at the bottom of the [edit screen](/en-latest/concepts/wagtail-interfaces/).
+
+
+Warning: Deleted documents cannot be recovered.
+
+
+------------------------------------------------------------------------
+
+# Manage images
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-images/
+
+> If you want to edit, add or remove images from the CMS outside of the individual pages you can do so from the Images interface.
+
+
+## Add, edit, and remove images
+
+If you want to edit, add, or remove images from the [Admin interface](/en-latest/concepts/wagtail-interfaces/) outside of the individual pages, you can do so from the [Images interface](/en-latest/concepts/wagtail-interfaces/). To access the Images interface, click **Images** in the [Sidebar](/en-latest/how-to-guides/find-your-way-around/).
+
+![Images listing with header and images grid](https://guide-media.wagtail.org/images/Images_listing_with_header_and_images_grid_OFs.width-900.png)
+
+Wagtail allows you to select multiple images from the Images interface at once. To do this, select the checkbox on the top left of each image block, then use the bulk actions bar at the bottom to perform an action on all selected images.
+
+![Images listing with checkboxes shown next to images Five images are selected and a bottom menu shows different actions as well as a 5 images selected label](https://guide-media.wagtail.org/images/Images_listing_with_checkboxes_shown_next_to_i.width-900_uduIqfm.png)
+
+Also, Wagtail allows you to edit the data associated with an image by clicking on the image to access its edit screen. Image data includes the title, the file, the collection associated with it, the associated tags, and the focal area.
+
+## List layout
+
+In addition to the default “grid” layout, this interface also supports viewing images in a list, like other listings. This can be useful when working with larger numbers of images.
+
+![Images listing with header and images list](https://guide-media.wagtail.org/images/Images_listing_with_header_and_images_list.width-900.png)
+
+## Image alt text
+
+By default, Wagtail uses the image’s description field as alt text. Alt text is important for screen reader users accessing the site but also the CMS, to get a text description of the image contents.
+
+![Image editing form for Olivia Ava image To the right of the form is an image preview focal point controls and metadata about the image](https://guide-media.wagtail.org/images/Image_editing_form_for_Olivia_Ava_image_To_the.width-900_T2JPY0c.png)
+
+It is also common for site implementers to customize this, either by adding a separate alt text field for all images, or where images are used.
+
+So, to help screen reader users better understand your images, ensure you provide image descriptions or explicitly mark images that are purely decorative.
+
+
+Warning: Changing the file will change it on all pages that use the image.
+
+
+## Set the focal area of an image
+
+The Images interface allows you to set a focal area, which can affect how your image displays to visitors on the front end. If you crop your images in some way to make them fit into a specific shape, then the focal area defines the centre point from which you crop the images.
+
+You can set the focal area of an image by clicking the image to access its [edit screen](/en-latest/concepts/wagtail-interfaces/). Then drag a marquee around the most significant element of the image, and then click **Save** to save it. Once you set the focal area of an image and save it, you can see the most significant element of the image on the front end.
+
+To remove the focal area, click **Remove focal area** in the [edit screen](/en-latest/concepts/wagtail-interfaces/).
+
+## Image format requirements
+
+By default, Wagtail supports image uploads in the following file formats: AVIF, GIF, JPG, JPEG, PNG, WebP. Site implementers can also allow fewer formats, or add support for HEIC / HEIF. Wagtail will then convert images to the appropriate format for site users based on configuration by developers.
+
+Wagtail also optimizes image quality based on the needs of site users, per the configuration done by developers. By default, images use a "safe for web" quality setting to apply compression suitable for most use cases from thumbnails to photography. Developers can override this default configuration wherever images are in use, or even display images with "lossless" quality.
+
+### File size requirements
+
+By default, Wagtail limits image uploads to a maximum of 10MB. It also restricts uploading of images larger than 128 megapixels (close to 16K resolution).
+
+
+------------------------------------------------------------------------
+
+# Manage snippets
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-snippets/
+
+> Snippets allow you to create elements on a website once and reuse them in multiple places.
+
+
+## The use of snippets
+
+Snippets allow you to create elements on a website once and reuse them in multiple places. You only have to change something in a snippet once, and the changes appear in all occurrences.
+
+The use of snippets varies between websites. Wagtail developers use snippets for the following purposes:
+
+* For blog post authors. As a result, you can add them to multiple pages and manage them from one place.
+* For adverts. This way, you can apply them site-wide or on individual pages.
+* To manage links in a global area of the site. For example, in the footer.
+* For calls to action, such as newsletter sign-up blocks, that may be consistent across many different pages.
+
+## The Snippets menu
+
+You can access the snippets by clicking **Snippets** in the [Sidebar](/en-latest/how-to-guides/find-your-way-around/). Clicking **Snippets** takes you to the [Snippets interface](/en-latest/concepts/wagtail-interfaces/).
+
+## Viewing snippets
+
+Clicking a snippet type will display all of its items.
+
+![Snippets listing for countries](https://guide-media.wagtail.org/images/Snippets_listing_for_countries.width-900.png)
+
+In this listing view, it’s entirely up to site implementers to decide which attributes of the snippets are displayed, used for sorting, available for searching and filtering.
+
+When configured this listing view can also be used to reorder the items of a snippet:
+
+![Snippets listing for countries with manual reordering support](https://guide-media.wagtail.org/images/Snippets_listing_for_countries_with_manual_reo.width-900.png)
+
+
+
+## Adding and editing
+
+To add, edit, or delete a snippet, click the snippet type that interests you. Clicking the snippet type takes you to the [edit screen](/en-latest/concepts/wagtail-interfaces/), from which you can add, edit, or delete a snippet. Hovering over an individual snippet displays the options to edit or delete that snippet. To add a new snippet to the snippet type, click **Add (snippet type)**.
+
+![Snippets listing, with five rows. For each row, we show the snippets name and number of instances](https://guide-media.wagtail.org/images/Snippets_listing_with_five_rows._For_each_row_.width-900_rsCGlq7.png)
+
+
+
+
+Warning: Editing a snippet changes it on all of the pages on which it appears. In the top-right corner of the Snippet [edit screen](/en-latest/concepts/wagtail-interfaces/), you can see a label saying how many times you have used the snippet. Clicking this label displays a listing of all of these pages.
+
+
+## Add snippets while editing a page
+
+When editing a page, you may find yourself in need of a new snippet. Don't worry, Wagtail has this covered. You can create a new one without leaving the page you are editing.
+
+Open the [Snippets interface](/en-latest/concepts/wagtail-interfaces/) in a new tab while editing the page by pressing Ctrl+click in Windows or cmd+click in macOS. You can also open a new tab by right-clicking it and then selecting the **Open in new tab** option. Add the new snippet from this new tab as you normally would. Then return to your existing tab and reopen the Snippet chooser window by clicking **Snippets** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/).
+
+Congratulation, you can now see your new snippet, even though you didn’t leave the edit page.
+
+![Snippet editing form for a People snippet instance. To the right of the form is a "Usage Used n times" label](https://guide-media.wagtail.org/images/Snippet_editing_form_for_a_People_snippet_inst.width-900.png)
+
+
+
+
+Note: Even though this is possible, it is advisable to save your page as a draft as often as possible. This prevents you from accidentally exiting the edit page and losing your changes.
+
+
+------------------------------------------------------------------------
+
+# Manage forms
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-forms/
+
+
+Wagtail provides a flexible form builder module, that allows users to create forms directly from the admin interface without requiring technical expertise.
+
+## Set up and access the form builder
+
+Forms management is an opt-in feature. For developer documentation, see [Form builder in the developer docs](https://docs.wagtail.org/en/stable/reference/contrib/forms/). Once configured, in Wagtail, forms can be configured with the interface to [manage pages](/en-latest/how-to-guides/manage-pages/). Submissions appear in a separate Forms interface.
+
+## Build your form fields
+
+On a page type with forms support, add any necessary form fields. Here are supported field types:
+
+* Single line text
+* Multi-line text
+* Email
+* Number
+* URL
+* Checkbox
+* Checkboxes
+* Drop down
+* Multiple select
+* Radio buttons
+* Date
+* Date/time
+* Hidden field
+
+And here are the available field configuration options:
+
+* **Label**: The label of the field for users of the form
+* **Help text**: additional information about the field
+* **Required**: (on/off)
+* **Field type**
+* **Choices**: Comma or new line separated list of choices. Only applicable in checkboxes, radio and dropdown.
+* **Default value**: Comma or new line separated values supported for checkboxes.
+
+Here is an example field configured to be required multi-line text:
+
+![wagtail multi-line text field required](https://guide-media.wagtail.org/images/wagtail_multi-line_text_field_required.width-900.png)
+
+## Configure submission and thank-you settings
+
+After defining the form fields, configure how submissions will be handled. By default all submissions are saved in the CMS, but developers often configure an option to specify an email address for receiving submissions. If available, it’s also important to set up a “thank you” page or customize a success message to acknowledge users after they submit the form. This small detail improves the user experience and confirms that the submission was successful.
+
+## Manage and export submissions
+
+Alongside the form fields, developers may configure a "Forms submissions panel" which includes the number of total submissions for the given form and also a link to the listing of submissions. Otherwise, navigate to the Forms interface which lists all pages with configured forms on the site.
+
+For each form page, all submissions appear in a table, with configured fields. From there, you can:
+
+* Export submissions as XLSX (Microsoft Excel, Google Sheets, Apple Numbers) or CSV
+* Filter submissions by date
+* Order submissions by ascending or descending date
+
+Here is a screenshot of this interface with sample content:
+
+![wagtail forms data - contact us submissions listing](https://guide-media.wagtail.org/images/wagtail_forms_data_-_contact_us_submissions_li.width-900.png)
+
+## Accessibility tips for forms
+
+To build accessible forms, we recommend to:
+
+* Keep the number of form fields small, avoiding adding fields unless they are necessary.
+* Provide help text, making it clear how specific fields are meant to be used.
+
+
+------------------------------------------------------------------------
+
+# Manage collections
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-collections/
+
+> Access to specific sets of images and documents can be controlled by setting up ‘collections’.
+
+
+You can control access to specific sets of images and documents by setting up _collections_. By default, all images and documents belong to the _root collection_, but users with appropriate permissions can create new collections from the Collections interface. Go to **Settings > Collections** from the Wagtail [Sidebar](/en-latest/how-to-guides/find-your-way-around/) to access the Collections interface.
+
+![Collections listing with three rows Bakeries BreadPage Images Other](https://guide-media.wagtail.org/images/Collections_listing_with_three_rows_Bakeries_B.width-900_wfcKD0D.png)
+
+## Add a collection
+
+To create a collection, click **Add a collection** from the [Collections interface](/en-latest/concepts/wagtail-interfaces/). Then enter a name in the **Name** field and select a parent. Click **Create** to complete the creation process.
+
+![Form to create a collection with a Name text field and Parent dropdown field](https://guide-media.wagtail.org/images/Form_to_create_a_collection_with_a_Name_text_f.width-900_AjTrT2Z.png)
+
+## Add images or documents to a collection
+
+To add images to a collection, click **Images** from the Wagtail [sidebar](/en-latest/how-to-guides/find-your-way-around/) and select a collection from the **Collections** dropdown. Then click **Add an image** and follow the instructions on the screen.
+
+![Screenshot of the Add Images page with a drag-and-drop zone with the Collection dropdown field highlighted in red](https://guide-media.wagtail.org/images/Screenshot_of_the_Add_Images_page_with_a_drag-.width-900_7O96bkj.png)
+
+The process of adding documents to a collection is similar to that of images. Click **Documents** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) and select a collection from the **Collections** dropdown. Then click **Add a document** and follow the instructions on the screen.
+
+It's possible to add an image or document to a collection while editing them. To do this, click **Images** or **Documents** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) and select the image or document you want to add to a collection by clicking it. Then choose a collection from the **Collection** dropdown in the [edit screen](/en-latest/concepts/wagtail-interfaces/).
+
+![Screenshot of the image editing form for an image titled Olivia Ava with the Collection field highlighted in red](https://guide-media.wagtail.org/images/Screenshot_of_the_image_editing_form_for_an_im.width-900_wUGdfde.png)
+
+You can also select a collection as part of uploading multiple images or documents.
+
+## Privacy settings
+
+To set permissions to determine who is able to view documents within a collection, go to **Settings > Collections** and select a collection. Then click **Privacy** preceding the collection name.
+
+![The collection editing form for BreadPage Images with a red highlight around the Privacy public form control](https://guide-media.wagtail.org/images/The_collection_editing_form_for_BreadPage_Imag.width-900_aUsWz8h.png)
+
+Clicking **Privacy** gives you a pop-up modal from which you can select the level of privacy for the collection.
+
+![Change privacy modal dialog, with four options as radio buttons](https://guide-media.wagtail.org/images/Change_privacy_modal_dialog_with_four_options_.width-900_KDRvPGs.png)
+
+The permissions set on a collection apply to that collection and all collections below it in the hierarchy. Therefore, if you make the _root_ collection private, all documents on the site become private. Permissions set in other collections only apply to those collections.
+
+
+Note: Privacy settings added to a collection are only enforced for documents within the collection. Privacy settings do not apply to images.
+
+
+------------------------------------------------------------------------
+
+# Manage redirects
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-redirects/
+
+> A redirect ensures that when a page is no longer available (404), the visitor and search engines are sent to a new page.
+
+
+## **About redirects**
+
+In the course of publishing and unpublishing pages, you eventually need to make redirects. A redirect helps send visitors and search engines to a new page if your web page becomes unavailable (404). This way, visitors won’t end up on a broken journey that results in a _page not found_.
+
+Wagtail considers two kinds of configurations for a redirect, depending on whether Permanent remains checked or not:
+
+* Permanent redirect (checked by default)
+* Temporary redirect
+
+For both redirect configurations, the visitor won’t notice a difference when visiting a page, but search engines react to these two configurations of redirect differently. In the case of a temporary redirect, a search engine keeps track of your old page and indexes the redirected page. However, with a permanent redirect, a search engine marks the old page as obsolete and considers the new page as a replacement.
+
+
+Note: As a best practice, Wagtail checks redirects as permanent by default. This is to prevent the undermining of your search engine ranking.
+
+
+## **Configure redirects**
+
+Go to **Settings > Redirects** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) to configure redirects. You can create a new redirect and edit or search for an existing one from the Redirects interface.
+
+![Redirects listing with a search field in the header buttons to add and import redirects and rows of existing underneath](https://guide-media.wagtail.org/images/Redirects_listing_with_a_search_field_in_the_h.width-900_v4iFdpb.png)
+
+Search for existing redirects by entering your search term in the search bar. The results automatically update as you type.
+
+## Add redirects
+
+You can create a new redirect by clicking **Add redirect** in the top-right of the [Redirect interface](/en-latest/concepts/wagtail-interfaces/). Then set **Redirect from** to the URL pattern that's no longer available on your website. If your Wagtail is _multisite_, set the **From site** to the website that has the unavailable URL pattern.
+
+By default, Wagtail sets a redirect to a _permanent_ _redirect_. Configure your redirect as a temporary one by unchecking the **Permanent** checkbox.
+
+**Redirect to a page** allows you to redirect visitors and search engines to a new page within Wagtail, while the **Redirect to any URL** field allows you to redirect to a different domain outside of Wagtail.
+
+## Edit redirects
+
+Edit the details of an existing redirect by clicking the URL path of the redirect you want to configure on the [Redirect interface](/en-latest/concepts/wagtail-interfaces/).
+
+![Editing form for a redirect with from fields Site field permanent checkbox and destination fields for page and URL options](https://guide-media.wagtail.org/images/Editing_form_for_a_redirect_with_from_fields_S.width-900_HxQifuJ.png)
+
+## Delete redirects
+
+This can also be done from the edit interface.
+
+## Import and export redirects
+
+From the Redirects interface, users can also:
+
+* Import new redirects from a CSV file (by default with "from" and "to" columns for each row)
+* Export existing redirects as CSV or XLSX
+
+
+Note: Keep in mind that a redirect only initiates if the page is not found. It doesn't apply to existing pages (200), which resolves on your site.
+
+
+------------------------------------------------------------------------
+
+# Manage users and roles
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-users-and-roles/
+
+> As an administrator, a common task will be adding, modifying or removing user profiles.
+
+
+Wagtail allows several users to manage content in the admin interface. These users have roles, which determine the access rights they can exercise.
+
+
+Note: The user roles in your [Admin interface](/en-latest/concepts/wagtail-interfaces/) may be different from these because Wagtail is highly customizable. If this is the case, contact your web developer for more details.
+
+
+By default, there are three user roles:
+
+
+## Administrator
+
+An administrator has the highest level of access to the admin interface, and are able to perform all actions in the [Admin interface](/en-latest/concepts/wagtail-interfaces/). A common task of an administrator is to add, modify, or remove user profiles. As an administrator, you can add, modify, and remove users via the Users interface. To access the Users interface, go to **Settings > Users** from the Wagtail [Sidebar](/en-latest/how-to-guides/find-your-way-around/).
+
+In the [Users interface](/en-latest/concepts/wagtail-interfaces/), you can see all of your users, their usernames, roles, and status. The status of a user can either be active or inactive. You can sort this listing either by Name or Username.
+
+![The users listing with search and a CTA to add users This shows three rows with users Olivia Ava Admin User and Muddy Waters](https://guide-media.wagtail.org/images/The_users_listing_with_search_and_a_CTA_to_add.width-900_HrsMly9.png)
+
+Select multiple users by checking the checkbox to the left of each user row, then use the bulk action bar at the bottom to perform an action on all selected users.
+
+![The users listing with checkboxes in the first column The checkbox for the Admin user row has been checked and a footer with different actions shows at the bottom of the screen](https://guide-media.wagtail.org/images/The_users_listing_with_checkboxes_in_the_first.width-900_j4UH2pO.png)
+
+Clicking on a user’s name opens their profile in an [edit screen.](/en-latest/concepts/wagtail-interfaces/) From here, you can then edit that user's details. It is also possible to change users’ passwords from their edit screen, but it is worth encouraging your users to use the **Forgotten password** link on the login screen instead. This should save you some time!
+
+
+## Moderator
+
+A moderator has the next level of access after an administrator. A moderator has access to creating drafts and publishing them. However, a moderator can't access the [Settings](/en-latest/how-to-guides/find-your-way-around/) section of the [Admin interface](/en-latest/concepts/wagtail-interfaces/).
+
+
+## Editor
+
+An editor has the least level of access to the [Admin interface](/en-latest/concepts/wagtail-interfaces/). An editor can only create drafts but not publish them. Also, as in the case of a moderator, an editor can't access the [Settings](/en-latest/how-to-guides/find-your-way-around/) section of the [Admin interface](/en-latest/concepts/wagtail-interfaces/).
+
+
+------------------------------------------------------------------------
+
+# Configure workflows for moderation
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/configure-workflows-for-moderation/
+
+> Workflows allow you to configure how moderation works on your site. Workflows are sequences of tasks, all of which must be approved before the workflow completes (by default, this results in the publication of the page, but depends on your site settings).
+
+
+## About workflows
+
+Workflows allow you to configure how moderation works on your site. Workflows are sequences of tasks that require approval before completion. A completed workflow usually results in the publication of a page, depending on your website's settings.
+
+To access the Workflow interface, go to **Settings > Workflows** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/).
+
+![Listing of workflows with a single Moderators approval workflow shown that has a single step](https://guide-media.wagtail.org/images/Listing_of_workflows_with_a_single_Moderators_.width-900_BfEuku6.png)
+
+From the [Workflow interface](/en-latest/concepts/wagtail-interfaces/), you can see all of the workflows on your site and the order of tasks in each. To create a new workflow, click **Add a workflow** from the [Workflow interface](/en-latest/concepts/wagtail-interfaces/).
+
+Furthermore, the [Workflow interface](/en-latest/concepts/wagtail-interfaces/) shows how many pages each workflow covers. If you click the number of pages, you can see a list of all the pages a workflow applies to.
+
+
+## **Edit workflows**
+
+In the [Workflow interface](/en-latest/concepts/wagtail-interfaces/), click on the name of a workflow to edit it or to assign it to a part of the page tree.
+
+Click **Add task** under **Add tasks to your workflow** to add a task. When adding a task to a workflow, you can create a new task or reuse an existing one.
+
+To change a task in the workflow, hover over the task under **Add tasks to your workflow** and select **Choose another task** from the pop-up options.
+
+You can also reorder tasks in a workflow by hovering over a task under the **Add tasks to your workflow** and then clicking the up and down arrow.
+
+Under **Assign your workflow to pages**, you can see a list of the pages assigned to a workflow. All child pages take the same workflow as their parents. So if the root page of your site gets assigned to a workflow, it becomes the default workflow. You may remove a page from the workflow by clicking **Delete** at the right of each entry. Also, you can change the page in an entry to another by clicking **Choose another page**.
+
+The action menu at the bottom allows you to save your changes, or disable the workflow. Disabling a workflow cancels all pages currently in moderation in that workflow, and prevents others from starting it. If the workflow was previously disabled, then you get the option to enable it in the action menu.
+
+![Screenshot of the workflow editing interface with fields to change the workflow name tasks and assigned pages](https://guide-media.wagtail.org/images/Screenshot_of_the_workflow_editing_interface_w.width-900_MbZ7ac3.png)
+
+
+
+
+## Create and edit tasks
+
+To create a task, go to **Settings > Workflows tasks** from the Sidebar. This takes you to the [Tasks interface](/en-latest/concepts/wagtail-interfaces/), where you can see a list of the currently available tasks and which workflows use each task. Similar to workflows, you can click the name of an existing task to edit it. To add a new task, click **Add a task**.
+
+![Tasks listing with a single item](https://guide-media.wagtail.org/images/Tasks_listing_with_a_single_item_MvFdm6B.width-900.png)
+
+When creating a task, if you have multiple task types available, then they are offered to you as options. By default, only _group approval tasks_ are available. By creating a _group approval task_, you are able to select one or multiple groups. Members of any of these, as well as administrators, will be able to approve or reject moderation for this task.
+
+![Tasks creation form with Name field and Groups checkboxes with two Moderators and Editors options](https://guide-media.wagtail.org/images/Tasks_creation_form_with_Name_field_and_Groups.width-900_Sf0WPeH.png)
+
+When editing a task, you may find that some fields, such as the name field, are uneditable. This is to ensure workflow history remains consistent. If you need to change the name of a task, then disable the old task, and create a new one with the name you need. Disabling a task causes any pages currently in moderation on that task to skip to the next task.
+
+
+------------------------------------------------------------------------
+
+# Promote search results
+
+Page URL: https://guide.wagtail.org/en-latest/how-to-guides/promote-search-results/
+
+> Promoted search results are an optional Wagtail feature. For details of how to enable them on a Wagtail installation, see Promoted search results.
+
+
+Note: Promoted search results are an optional Wagtail feature. For details of how to enable them on a Wagtail installation, see [Promoted search results](https://docs.wagtail.org/en/stable/reference/contrib/searchpromotions.html#module-wagtail.contrib.search_promotions).
+
+
+Wagtail allows you to promote certain search results depending on the keyword or phrase entered by the user when searching. This can be particularly useful when users commonly refer to parts of your organization by an acronym that isn’t in official use. It's also useful if you want to direct users to a page when they enter a certain term related to the page but not included in the text of the page itself.
+
+For example, Wagtail developers can use this feature to direct people who searched for "finances" on a particular Website to the website's _Annual budget review_ page. The word "finances" isn't mentioned in either the title or the body of the target page, so they created a promoted search result for the word "finances" that pushed the _Annual budget review_ page to the top of the search results.
+
+
+Note: The promoted result only works if the user types _exactly_ the phrase that you have set it up for. If you have variations of a phrase that you want to take into account, then you must create additional promoted results.
+
+
+To set up promoted search results, go to **Settings > Promoted search results** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/). The resulting screen displays a list of previously added promoted search keywords. You can add a promoted result by clicking **Add new promoted result** in the top right of the resulting screen.
+
+![Promoted results listing with search field Add button and four results listed under as rows](https://guide-media.wagtail.org/images/Promoted_results_listing_with_search_field_Add.width-900_WUMaHh9.png)
+
+When adding a promoted result, Wagtail provides you with a **Choose from popular search terms** option. This shows you the most popular terms entered by users into your internal search. Use this list to match your existing promoted results so that users are able to find what they're looking for.
+
+![Popular search terms modal dialog with close button search fields and a table showing multiple terms with their respective Views](https://guide-media.wagtail.org/images/Popular_search_terms_modal_dialog_with_close_b.width-900_1CVXDKo.png)
+
+Once you have entered the search keyword or selected from the most popular terms entered by users, complete the process by clicking **Add recommended page**.
+
+You can add multiple results, but be careful about adding too many, as you may end up hiding all of your organic results behind promoted results. This may not be helpful for users who aren’t really sure what they're looking for.
+
+To edit an existing promoted result go to **Settings > Promoted search results** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) and then click the search term you want to edit.
+
+![Promoted result editing form with search term field and associated pages](https://guide-media.wagtail.org/images/Promoted_result_editing_form_with_search_term_.width-900_SnsILeD.png)
+
+
+
+
+------------------------------------------------------------------------
+
+# Concepts
+
+Page URL: https://guide.wagtail.org/en-latest/concepts/
+
+> Wagtail has strong opinions about CMS best practices. This section describes why Wagtail works how it does from a user’s perspective.
+
+
+Wagtail has strong opinions about CMS best practices. This section describes why Wagtail works how it does from a user’s perspective.
+
+
+------------------------------------------------------------------------
+
+# Wagtail interfaces
+
+Page URL: https://guide.wagtail.org/en-latest/concepts/wagtail-interfaces/
+
+> A Wagtail interface is a screen in the Wagtail portal where you can manage a particular content type. The following are the several interfaces available to you in the Wagtail CMS.
+
+
+A Wagtail interface is a screen in the Wagtail portal where you can manage a particular content type. The following are the several interfaces available to you in the Wagtail CMS:
+
+## Admin interface
+
+The admin interface is the official name for the entire Wagtail content management portal, from which you can manage your content. It represents the entire part of Wagtail from which you can add content such as text, images, documents, and snippets. You can also perform other non-code operations, whether you are an editor, moderator, or administrator of a Wagtail website.
+
+## Image interface
+
+The Image interface refers to the screen you get when you click **Images** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/). You can [manage images](/en-latest/how-to-guides/manage-images/) from this interface: add images, add tags to images, or modify the data associated with an existing image record from this interface. Also, you can sort the existing images either alphabetically, by their upload dates, or by their file size.
+
+## Documents interface
+
+The Document interface refers to the screen you get when you click **Documents** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/). This interface allows you to [manage documents](/en-latest/how-to-guides/manage-documents/) from the Admin interface. On this interface, you can filter existing documents by their collection and perform bulk actions on them by clicking the checkboxes located at the left-hand side of each document.
+
+## Snippets interface
+
+Another interface Wagtail provides is the Snippets interface. The Snippets interface allows you to [manage snippets](/en-latest/how-to-guides/manage-snippets/) on your Wagtail websites.
+
+Snippets are reusable components that you can use in multiple places on your Wagtail website. To access the Snippets interface, click Snippets from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/). To learn how to manage snippets, go to the [Manage snippets](/en-latest/how-to-guides/manage-snippets/) section of this User guide documentation.
+
+## Collections interface
+
+The Collections interface refers to the screen from which you can [manage your collections](/en-latest/how-to-guides/manage-collections/). It's important to understand what collections are and their uses. Collections allow you to control access to specific sets of images and documents. Another way of using collections is by using it to group related images or documents.
+
+## Redirects interface
+
+The Redirects interface refers to the screen from which you can [configure your redirects](/en-latest/how-to-guides/manage-redirects/). For proper context, a redirect helps send visitors and search engines to a new page if your web page becomes unavailable (404). This way, visitors won’t end up on a broken journey that results in a _page not found_.
+
+## Users interface
+
+Wagtail allows you to give multiple users the right to manage the content of your website via the [Admin interface](/en-latest/concepts/wagtail-interfaces/). These users can perform actions simultaneously in your [Admin interface](/en-latest/concepts/wagtail-interfaces/) and the kind of action they can perform depends on the roles assigned to them.
+
+The Users interface is the screen from which you can [manage these users](/en-latest/how-to-guides/manage-users-and-roles/). In the Users interface, you can see a list of all of your users, their usernames, roles, and status. It's also possible to sort this listing either by Name or Username.
+
+## Workflow interface
+
+The Workflow interface is the screen from which you set up your workflows. On this interface, you can add new workflows and access the edit screen, from which you can edit the existing ones.
+
+To learn about Workflows and how to set them up, go to [Configure workflows for the moderation](/en-latest/how-to-guides/configure-workflows-for-moderation/) guide of this User guide documentation.
+
+## Tasks interface
+
+The Workflow interface is the screen from which you set and manage your Workflow tasks. On this interface, you can add new tasks and access the edit screen, from which you can edit the existing ones.
+
+To learn about Workflow tasks and how to set them up, go to [Configure workflows for the moderation](/en-latest/how-to-guides/configure-workflows-for-moderation/) guide of this User guide documentation.
+
+## Edit screen
+
+An edit screen is any screen in the admin interface, from which you can edit your pages, snippets, images, documents, and other items related to the management of your content.
+
+
+------------------------------------------------------------------------
+
+# Pages
+
+Page URL: https://guide.wagtail.org/en-latest/concepts/pages/
+
+> You can use Wagtail Pages to organize the content of your Wagtail websites. It&#39;s common for a typical website to have multiple web pages, and the web pages themselves can have several sections. The same is true for Wagtail pages.
+
+
+You can use Wagtail Pages to organize the content of your website. It's common for a typical website to have multiple web pages, organized in several sections. The same is true in the CMS. Wagtail pages can have child pages within them. In turn, these child pages can have child pages of their own. You can use this **page tree structure** to represent the sections of the site.
+
+## Wagtail page tree structure
+
+The structure of a Wagtail website is like a tree. At the top of this tree-like structure is a _Root page_ which branches off to several child pages. This is meant to match the information architecture of the website; with the homepage at the top, then "level 1" pages likely reflected in the site’s main menu, and further pages within.
+
+The CMS doesn’t mandate using this tree structure but we find it helps organize larger websites. For developers, it also helps in automatically generating menus, breadcrumbs, listings, and other site navigation features. Our developer documentation covers more of the [page tree theory](https://docs.wagtail.org/en/stable/reference/pages/theory.html).
+
+In the CMS interface, the **Page explorer** allows navigating the site in this tree structure:
+
+![The page explorer with the home page highlighted](https://guide-media.wagtail.org/images/The_page_explorer_with_the_home_page_highlight.width-900_fOh4v2u.png)
+
+### Nature of the relationship between Wagtail pages
+
+To talk about specific areas within the page tree, we use the metaphor of a parent-child relationship between pages. A Wagtail parent page has within it one or more child pages. For instance, in the Admin interface of the Bakery demo, if you click **Pages** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/), the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) extends to show you the _Welcome to the Wagtail Bakery_ page. The _Welcome to the Wagtail Bakery_ homepage is a parent page. Clicking it takes you to its [Explorer page](/en-latest/how-to-guides/find-your-way-around/), where you can see all the child pages within it.
+
+## Page types
+
+You can have different page types available for you to use in the Admin interface. Developers configure available page types when building the site.
+
+Having multiple page types in your Admin interface allows you to choose the structure you want your page to adopt. You can choose a page type for your pages when you are creating them.
+
+The page type of a parent page may differ from that of the child pages within it. For instance, in the [Admin interface](/en-latest/concepts/wagtail-interfaces/) of the Bakery demo, the page type of the_ Welcome to the Wagtail Bakery_ page is _Home Page_. Its child page _Breads_ has the _Breads index_ page type, while _Blog_, another child page has the _Blog index_ page type.
+
+
+------------------------------------------------------------------------
+
+# Reports
+
+Page URL: https://guide.wagtail.org/en-latest/concepts/reports/
+
+> Reports are lists of pages that match a specific search. These lists give you an overview of the different actions taken on your website.
+
+
+Reports are lists of pages that match a specific search. These lists give you an overview of the different actions taken on your website. For instance, a Report could show you the history of all actions related to the creation and publishing of your pages. This means you can see when users of your [Admin interface](/en-latest/concepts/wagtail-interfaces/) added a page as a draft, submitted it for moderation, published it, and deleted it. You also get to see the users that performed these actions.
+
+By default, Wagtail provides you with Reports on your Locked pages, Workflows, Workflow tasks, Site history, and Aging pages. With the right permission, you can access these Reports by clicking **Reports** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) in your [Admin interface](/en-latest/how-to-guides/find-your-way-around/). You can further filter what pages are displayed, and also export these reports in spreadsheet format.
+
+It's also possible that features in the **Reports** section of your [Admin interface](/en-latest/concepts/wagtail-interfaces/) are different from the default features. This is because Wagtail is highly customizable. If this is the case, contact your web developer for more information.
+
+## Locked pages report
+
+The Locked pages Report is one of the default Reports in the [Admin interface](/en-latest/concepts/wagtail-interfaces/). This Report consists of a list of your locked pages. You also get to see the time and date when the pages got locked.
+
+Only users with the right permissions, usually an [Administrator](/en-latest/how-to-guides/manage-users-and-roles/) can access this list.
+
+## Workflows report
+
+Another default Report provided by Wagtail in the [Admin interface](/en-latest/concepts/wagtail-interfaces/) is the Workflows Report. This report shows you the history of all your [Workflows](/en-latest/how-to-guides/configure-workflows-for-moderation/). By accessing this Report you get a list of the [Workflows](/en-latest/how-to-guides/configure-workflows-for-moderation/) you have submitted for moderation, approved Workflows, and cancelled Workflows. Also, you get to see the time and date that the users perform each action.
+
+Unlike Locked pages Reports, Workflows Reports don’t require high-level permissions to access.
+
+## Workflow tasks report
+
+The Workflow tasks report is a Report that shows you the history of actions related to your Workflow tasks. By accessing this Report you get a list of the Workflow tasks that are in progress, approved, or cancelled. You also get to see the time and date that the users perform each action.
+
+Similar to the Workflows Report, you don't require high-level permissions to access the Workflow tasks Report.
+
+## Site history report
+
+The Site history Report provides you with the history of all actions performed on your Wagtail website through the Admin interface. These actions include, but are not limited to the following:
+
+* Creating, publishing, unpublishing, copying, aliasing, and deleting your pages.
+* Saving your pages as drafts.
+* Locking and unlocking of pages.
+* Creating and editing redirects.
+
+## Aging pages report
+
+Aging pages lists all pages on the site from oldest to newest. This helps content teams understand which pages might need updating.
+
+## Page types usage report
+
+This report provides an overview of all page types in use on the site, each with a count of how many pages it has, and a link to a sample page of that type.
+
+## Search terms report
+
+For sites set up to [promote search results](/en-6.4.x/how-to-guides/promote-search-results/), this report displays all recorded search terms and their number of views.
+
+
+------------------------------------------------------------------------
+
+# Users status
+
+Page URL: https://guide.wagtail.org/en-latest/concepts/users-status/
+
+> A Wagtail user can either be active or inactive. A user is active if they have the right permissions to log in and perform any action in the Admin interface.
+
+
+A Wagtail user can either be active or inactive. A user is active if they have the right permissions to log in and perform any action in the [Admin interface](/en-latest/concepts/wagtail-interfaces/).
+
+The status of a user determines whether that user still has the right permission to perform any action in the Admin interface. Wagtail provides for two statuses: active and inactive.
+
+## Active status
+
+A user is active if they have the right permission to log into the [Admin interface](/en-latest/concepts/wagtail-interfaces/) and perform an action. This action could be as simple as making a draft.
+
+## Inactive status
+
+When a user loses access to the [Admin interface](/en-latest/concepts/), they become inactive. Changing the status of a user from active to inactive is one of the rights reserved exclusively to an Administrator.
+
+Making a user inactive is an alternative to deleting the user. This is because if you delete a user, you lose all the records or history of all actions that such a user has performed in the past. This might lead to some inconvenience. By making such users inactive instead, you deny them their access to the [Admin interface](/en-latest/concepts/wagtail-interfaces/) while preserving the records of their actions while they were active.
+
+
+------------------------------------------------------------------------
+
+# Page status
+
+Page URL: https://guide.wagtail.org/en-latest/concepts/page-status/
+
+> Page status has to do with the current state of your pages. Your pages can be in one of seven different states.
+
+
+Page status has to do with the current state of your pages. Your pages can be in one of seven different states. They're as follows:
+
+## Draft
+
+A page is a _Draft_ if it's newly created and saved as a _Draft_. The main takeaway here is that the page is new and you have never published it.
+
+Pages with a _Draft_ status are only available in your [Admin interface](/en-latest/concepts/wagtail-interfaces/) and not on your live website.
+
+## In moderation
+
+A page assumes the status _In moderation_ if you submit a page that you have never published for moderation.
+
+The content of the page becomes available on your website only if a user with the right permissions approves the page. Once another user approves the page, the status changes to Live. By default, [Administrator](/en-latest/how-to-guides/manage-users-and-roles/) and [Moderator](/en-latest/how-to-guides/manage-users-and-roles/) users can approve pages in moderation.
+
+## Scheduled
+
+A page assumes the _Scheduled_ state when you configure it for publication at a later date. The page locks itself until its publication, when it becomes _Live_.
+
+## Expired
+
+The page was Live, and subsequently unpublished because it had an expiry date set that has now passed. See [scheduled publishing](/en-latest/concepts/scheduled-publishing/) for more information.
+
+## Live
+
+A page assumes the _Live_ status if you publish it. This could either be by publishing a newly created page, edits of an existing page, a copied page, or an aliased page.
+
+You can see the content of a _Live_ page on your website.
+
+## Live + Draft
+
+The status of a page becomes _Live + Draft_ if you have previously published it and then save an edit of the page as a draft.
+
+In this instance, the previous version of the page remains available on your website, but the edits made to it won't be available on your website. To make the edits available on your website, the status of the page has to become _Live_. You can achieve this by going to the edit screen of the page and publishing it.
+
+## Live + (another status)
+
+A page could assume the status of _Live + (another status)_ if you have previously published it and then perform another action on the already published page. For instance, a page becomes _Live + In moderation_ if you have published it in the past and then submit an edit of it for moderation.
+
+
+------------------------------------------------------------------------
+
+# Accessibility features
+
+Page URL: https://guide.wagtail.org/en-latest/concepts/accessibility-features/
+
+
+## Global navigation
+
+Wagtail provides multiple navigation components that appear on most pages in the [Admin interface](/en-latest/concepts/wagtail-interfaces/). These components are as follows:
+
+### Skip link
+
+![Wagtail dashboard with the skip link](https://guide-media.wagtail.org/images/Wagtail_dashboard_with_the_skip_link_VKexAHG.width-900.png)
+
+The skip link appears as a **Skip to main content** button in the [Admin interface](/en-latest/concepts/wagtail-interfaces/). If you press the **tab** key of your keyboard on a newly loaded page, the skip link will appear at the top-left corner of your screen. Once the **Skip link** appears, press the **enter** key to activate it. Activating the **Skip link** moves your keyboard focus to the main content of the current page you’re on. This way, you skip over the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) options to the main content.
+
+### Collapsible sections
+
+![Page editor for Breads and Circuses blog page with sections toggle button and anchor links highlighted](https://guide-media.wagtail.org/images/Page_editor_for_Breads_and_Circuses_blog_page_.width-900_QWaiZGW.png)
+
+Collapsible sections make it easier to navigate forms. You can find Collapsible sections on the [Dashboard](/en-latest/how-to-guides/find-your-way-around/) and forms to [manage pages](/en-latest/how-to-guides/manage-pages/). You can use your mouse or keyboard to collapse or expand collapsible sections. The collapsible section anchor link also gives you the link to the section you are working to share with teammates or keep for later.
+
+On forms, you can also **Collapse all** sections in one go, and then **Expand all** or expand individual sections as needed.
+
+![Page editor for Breads and Circuses blog page with the collapse expand all having been clicked](https://guide-media.wagtail.org/images/Page_editor_for_Breads_and_Circuses_blog_page_.width-900_LfZLMSq.png)
+
+### Session time limit
+
+The **session time limit** in the Wagtail CMS works behind the scenes. A session is created when a user logs in. The default time limit is two weeks but can vary depending on the configuration of the CMS.
+
+### Text search
+
+Like most websites, Wagtail supports text search with the use of the Ctrl + F in Windows and **⌘ + F** on macOS. Using the text search feature in the Admin interface searches texts that match your search input in the current tab.
+
+## Keyboard shortcuts
+
+Find all shortcuts supported on your site with the "Keyboard shortcuts" item within the "Help" menu.
+
+![Keyboard shortcuts dialog](https://guide-media.wagtail.org/images/Keyboard_shortcuts_dialog_tWoC6ww.width-900.png)
+
+
+
+### Page-level keyboard shortcuts
+
+On all screens, we support:
+
+* ? to show keyboard shortcuts
+* / to focus the search
+* [ to expand or collapse the main sidebar.
+* Esc to close modal dialogs
+
+On the Edit screen, Wagtail supports additional page-level keyboard shortcuts. These shortcuts are as follows:
+
+* **⌘ + P** / **Ctrl + P**: This shortcut opens up the Live preview. With the Live preview, you can view the structure of your content in different screen sizes.
+* **⌘ + S** / **Ctrl + S**: This shortcut saves your work as a draft.
+* ] to expand or collapse the mini-map.
+
+### Rich text keyboard shortcuts
+
+Within rich text fields, a large number of shortcuts are available, depending on what type of formatting is enabled within the field. For a full reference, see the [Draftail keyboard shortcuts documentation](https://www.draftail.org/docs/keyboard-shortcuts).
+
+Here are common formatting shortcuts:
+
+* Paste a URL over selected text to create a link: Ctrl + V / ⌘ + V
+* Insert or edit link with the chooser dialog: Ctrl + K / ⌘ + K
+* Open link: Alt + ↵ / ⌥ + ↵
+* Insert horizontal rule: insert `---`
+* Text formatting (if enabled)
+  * Bold: Ctrl + B / ⌘ + B, or insert `**`
+  * Italic: Ctrl + I / ⌘ + I, or insert `_`
+  * Underline: Ctrl + U / ⌘ + U
+  * Monospace (code): Ctrl + J / ⌘ + J, or insert ```
+  * Strikethrough: Ctrl + ⇧ + X / ⌘ + ⇧ + X, or insert `~`
+  * Superscript: Ctrl + . / ⌘ + .
+  * Subscript: Ctrl + , / ⌘ + ,
+* Block formatting (if enabled)
+  * Apply heading style [1-6]: Ctrl + Alt + [1-6] / ⌘ + ⌥ + [1-6], or insert `##`
+  * Numbered list: Ctrl + ⇧ + 7 / ⌘ + ⇧ + 7, or insert `1.`
+  * Bulleted list: Ctrl + ⇧ + 8 / ⌘ + ⇧ + 8, or insert `-`
+  * Blockquote: insert `>`
+  * Code block: insert `````
+* Insert a comment (if enabled): Ctrl + Alt + M / ⌘ + ⌥ + M
+
+### Bulk selection shortcut
+
+On large listings with bulk editing checkboxes, Wagtail also supports "Shift+Click" selection to mark a large number of items as selected in one go. To use it, keep the Shift or ⇧ key pressed and click on one item to select preceding items.
+
+## Edit screen features
+
+The Edit screen accessibility features are specific to the [Edit screen](/en-latest/concepts/wagtail-interfaces/). These features are as follows:
+
+### Mini-map
+
+The mini-map or “minimap” helps to easily navigate the sections of your content. Placed on the right-hand side of the [Edit screen](https://guide.wagtail.org/en-latest/concepts/wagtail-interfaces/#edit-screen), it contains a list of the different sections within the form and directly links to each of them. Toggle it with the dedicated button, or the ] keyboard shortcut.
+
+The Mini-map also indicates the type of the different sections: headings, subheadings, and blocks within the content.
+
+![Page editor for Breads and Circuses blog page with the minimap opened to the right focused on the toggle](https://guide-media.wagtail.org/images/Page_editor_for_Breads_and_Circuses_blog_page_.width-900_Ve7MRSW.png)
+
+### Editing of headings and elements nesting in rich text fields
+
+This feature allows screen reader users to detect different types of headings within a text block.
+
+### Live preview
+
+Live preview allows you to view the content structure of your work in different screen sizes. Live preview supports mobile, tablet, and desktop screen sizes.
+
+### Command palette
+
+Typing “/” within the body of your content reveals an interface called the Command palette. The Command palette contains features such as:
+
+* Headings
+* Numbered list
+* Bulleted list
+* Embed
+* Link
+* Document
+* Image
+* Blocks
+
+## User account preferences
+
+User account preferences are settings that are specific to your account. You can access your user account preferences and notification settings from [account settings](/en-latest/reference/account-settings/).
+
+## Browser-level user interface settings
+
+Browser-level user interface settings are stored within your browser. You can adjust these settings based on your preference. If you reload the admin interface or log out and then log back in within the same browser, these settings will remain.
+
+Browser-level user interface settings include the following accessibility settings:
+
+### Sidebar expanded/collapsed
+
+You can expand or collapse the [Sidebar](https://guide.wagtail.org/en-latest/how-to-guides/find-your-way-around/#the-sidebar). Collapsing the Sidebar allows the [Dashboard](https://guide.wagtail.org/en-latest/how-to-guides/find-your-way-around/#the-dashboard) to take up more screen space of the browser. This can also be done with the [ keyboard shortcut.
+
+![The Wagtail sidebar with its minimize control highlighted](https://guide-media.wagtail.org/images/The_Wagtail_sidebar_with_its_minimize_control_.width-900_EMtj2DT.png)
+
+### Rich text toolbar pinned/unpinned
+
+Highlighting text within a rich text field displays a toolbar above the highlighted content. This toolbar contains features such as text bold, text italic, and headings. You can pin this toolbar to be always visible to the top of all rich text fields if you prefer.
+
+![Pin toolbar](https://guide-media.wagtail.org/images/Pin_toolbar.width-900.png)
+
+### **Mini-map expanded/collapsed**
+
+Like the _sidebar expanded/collapsed_, this feature keeps your mini-map opened or closed on your Edit screen, and will be saved across all of your editing sessions Toggle it with the dedicated button, or the ] keyboard shortcut.
+
+![Page editor for Breads and Circuses blog page with the minimap opened to the right focused on the toggle](https://guide-media.wagtail.org/images/Page_editor_for_Breads_and_Circuses_blog_page_.width-900_Ve7MRSW.png)
+
+### Side panel
+
+The Edit screen has a top header. This toolbar contains the following options:
+
+* **Status**: This indicates the current status of your page. For more information on the various page statuses available, read [Page status](https://guide.wagtail.org/en-latest/concepts/page-status/).
+* **Live Preview**: Live preview allows you to preview content on different screen sizes.
+* **Checks**: Automated checks flagging possible issues with the page content.
+* **Comment**: This notifies and shows you the comments made on your content by teammates.
+
+When you select an option in the toolbar, the selection opens up as a side panel. You can expand or collapse this Side panel, and which panel is active will be saved across editing sessions.
+
+![The page editing form with its Info side panel opened to the right and the Info side panel toggle highlighted](https://guide-media.wagtail.org/images/The_page_editing_form_with_its_Info_side_panel.width-900_RDgRFkj.png)
+
+
+
+
+------------------------------------------------------------------------
+
+# Scheduled publishing
+
+Page URL: https://guide.wagtail.org/en-latest/concepts/scheduled-publishing/
+
+
+Wagtail supports scheduling content for new and existing pages, as well as when configured for [snippets](/en-latest/how-to-guides/manage-snippets/). Page publishing can be scheduled through the _Set schedule_ feature in the _Status_ side panel of the _Edit_ page (see [Manage pages](/en-latest/how-to-guides/manage-pages/)).
+
+## Scheduling content updates
+
+The basic workflow is as follows:
+
+* Scheduling is done by setting the _go-live at_ field of the page and clicking _Publish_.
+* Scheduling a revision for a page that is not currently live means that page will go live when the scheduled time comes.
+* Scheduling a new version for a page that is already live means that the new version will be published when the time comes.
+* If the page has a scheduled revision and you set another revision to publish immediately (i.e. clicking _Publish_ with the _go-live at_ field unset), the scheduled revision will be unscheduled.
+* If the page has a scheduled revision and you schedule another revision to publish (i.e. clicking _Publish_ with the _go-live at_ field set), the existing scheduled revision will be unscheduled and the new revision will be scheduled instead.
+
+Note that you have to click _Publish_ after setting the _go-live at_ field for the revision to be scheduled. Saving a draft revision with the _go-live at_ field without clicking _Publish_ will not schedule it to be published.
+
+The _History_ view for a given page will show which revision is scheduled and when it is scheduled. A scheduled revision in the list will also provide an _Unschedule_ button to cancel it.
+
+## Scheduled unpublishing
+
+In addition to scheduling a page to be published, it is also possible to schedule a page to be unpublished by setting the _expire at_ field. However, unlike with publishing, the unpublishing schedule is applied to the live page instance rather than a specific revision. This means that any change to the _expire at_ field will only be effective once the associated revision is published (i.e. when the changes are applied to the live instance). To illustrate:
+
+* Scheduled unpublishing is done by setting the _expire at_ field of the page and clicking _Publish_. If the _go-live at_ field is also set, then the unpublishing schedule will only be applied after the revision goes live.
+* Consider a live page that is scheduled to be unpublished on e.g. 14 June. Then sometime before the schedule, consider that a new revision is scheduled to be published on a date that’s **earlier** than the unpublishing schedule, e.g. 9 June. When the new revision goes live on 9 June, the _expire at_ field contained in the new revision will replace the existing unpublishing schedule. This means:
+  * If the new revision contains a different _expire at_ field (e.g. 17 June), the new revision will go live on 9 June and the page will not be unpublished on 14 June but will be unpublished on 17 June.
+  * If the new revision has the _expire at_ field unset, the new revision will go live on 9 June and the unpublishing schedule will be unset, thus the page will not be unpublished.
+* Consider another live page that is scheduled to be unpublished on e.g. 14 June. Then sometime before the schedule, consider that a new revision is scheduled to be published on a date that’s **later** than the unpublishing schedule, e.g. 21 June. The new revision will not take effect until it goes live on 21 June, so the page will still be unpublished on 14 June. This means:
+  * If the new revision contains a different _expire at_ field (e.g. 25 June), the page will be unpublished on 14 June, the new revision will go live on 21 June and the page will be unpublished again on 25 June.
+  * If the new revision has the _expire at_ field unset, the page will be unpublished on 14 June and the new revision will go live on 21 June.
+
+Once a page expires, its [page status](/en-latest/concepts/page-status/) in the CMS changes to "Expired".
+
+## Scheduling frequency
+
+For scheduling to work, developers must have set up the [publish_scheduled](https://docs.wagtail.org/en/stable/reference/management_commands.html#publish-scheduled) management command. This can be run every hour, or every 15 minutes, or at any other interval depending on the needs of the website.
+
+
+------------------------------------------------------------------------
+
+# Reference
+
+Page URL: https://guide.wagtail.org/en-latest/reference/
+
+> Our reference material gets to the point, giving the key information at a glance.
+
+
+What is a Snippet? What does a permission do?
+
+
+
+Our reference material gets to the point, giving the key information at a glance.
+
+
+------------------------------------------------------------------------
+
+# Browser compatibility
+
+Page URL: https://guide.wagtail.org/en-latest/reference/browser-compatibility/
+
+> For the best experience and security, we recommend that you keep your browser up to date.
+
+
+Some issues with Wagtail may come from the browser. Try [clearing the browser cache and cookies](https://www.refreshyourcache.com/), or you can also try using Wagtail with [another browser](https://browsehappy.com/) to see if the problem persists.
+
+JavaScript is required to use Wagtail – make sure it is [enabled in your browser](https://www.enable-javascript.com/).
+
+## **Supported browsers**
+
+For the best experience and security, we recommend that you keep your browser up to date. Go to [Browse Happy](https://browsehappy.com/) for more information.
+
+## **IE11**
+
+Wagtail has officially removed support for the legacy Internet Explorer browser in version 2.15.
+
+* In Wagtail 2.11 (LTS), there was be a warning message displayed on the Wagtail dashboard for IE11 users with administrator role.
+* In Wagtail 2.12, the message was displayed to all users regardless of their role.
+* In Wagtail 2.13 and 2.14, the message was displayed at the top of all pages.
+* Wagtail 2.15 and beyond don’t support IE11.
+* Starting in Wagtail 2.16, there is no warning message for users.
+
+If this affects you or your organisation, consider which alternative browsers you may be able to use. Wagtail is fully compatible with Microsoft Edge, Microsoft’s replacement for Internet Explorer. You may consider using its [IE mode](https://docs.microsoft.com/en-us/deployedge/edge-ie-mode) to keep access to IE11-only sites, while other sites and apps like Wagtail can use modern browser capabilities.
+
+## **Assistive technologies**
+
+We want Wagtail to be accessible for users of a wide range of assistive technologies, but are aware of many blockers currently. For an overview, see our [public accessibility audit](https://docs.google.com/spreadsheets/d/1l7tnpEyJiC5BWE_JX0XCkknyrjxYA5T2aee5JgPnmi4/edit).
+
+
+------------------------------------------------------------------------
+
+# Content checks
+
+Page URL: https://guide.wagtail.org/en-latest/reference/content-checks/
+
+
+Content quality checks are present in the CMS. Here are the checks available out of the box. Those checks are based on the content of the page as seen by users of the site, not what is editable in the CMS.
+
+## Content metrics
+
+Wagtail calculates multiple metrics based on the page’s content, live in the page editor.
+
+![Page editor for "Bread and Circuses" page. The form to the left, and to the right the Checks side panel is expanded, showing different metrics about the page](https://guide-media.wagtail.org/images/Page_editor_for_22Bread_and_Circuses22_page._T.width-900.png)
+
+### **Words**
+
+We calculate the number of words present in the "plain text" content, with no formatting counted. This calculation is done differently for all languages, based on language-specific rules.
+
+### **Reading time**
+
+We calculate reading time from word count, using different reading speeds for different languages. Out of the box, Wagtail supports reading speeds for:
+
+* Arabic
+* Chinese
+* Dutch
+* English
+* Finnish
+* French
+* German
+* Hebrew
+* Italian
+* Korean
+* Spanish
+* Swedish
+
+Other languages default to the "English" reading speed factor.
+
+### **Readability**
+
+We use the [LIX readability formula](https://en.wikipedia.org/wiki/Lix_(readability_test)), based on length of words and sentences. Content scores worse when there is a high proportion of long sentences and long words.
+
+To better understand the score for a page, copy the content as it’s displayed to site users into an external tool like the [Hemingway Editor](https://hemingwayapp.com/). This will give you more granular feedback on which parts of the content might need improvements.
+
+## Accessibility checker
+
+To ensure accessibility of content for site users, the **Checks** side panel runs automated accessibility checks on the page content. The checker can help authors create more accessible websites following best practices and accessibility standards like [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/). The checker is based on the [Axe](https://github.com/dequelabs/axe-core) testing engine and scans the loaded page for errors.
+
+![Accessibility checker showing one error with a heading hierarchy issue](https://guide-media.wagtail.org/images/Accessibility_checker_showing_one_error_with_a.width-900.png)
+
+By default, the checker includes the following rules to find common accessibility issues in authored content:
+
+* `button-name`: button elements must always have a text label.
+* `empty-heading`: This rule checks for headings with no text content. Empty headings are confusing to screen readers users and should be avoided.
+* `empty-table-header`: Table header text should not be empty
+* `frame-title`: iframe elements must always have a text label.
+* `heading-order`: This rule checks for incorrect heading order. Headings should be ordered in a logical and consistent manner, with the main heading (h1) followed by subheadings (h2, h3, etc.).
+* `input-button-name`: input button elements must always have a text label.
+* `link-name`: link elements must always have a text label.
+* `p-as-heading`: This rule checks for paragraphs that are styled as headings. Paragraphs should not be styled as headings, as they don’t help users who rely on headings to navigate content.
+* `alt-text-quality`: A custom rule ensures that image alt texts don’t contain anti-patterns like file extensions and underscores.
+
+
+------------------------------------------------------------------------
+
+# Account settings
+
+Page URL: https://guide.wagtail.org/en-latest/reference/account-settings/
+
+> User account settings are specific to your account. Includes user preferences, notification settings, and more.
+
+
+User account settings are specific to your account. You can access your settings by clicking on your username at the bottom of the Sidebar. Then, select the Account option. It looks like this:
+
+![User profile locale and theme settings](https://guide-media.wagtail.org/images/User_profile_locale_and_theme_settings_QLvDMRH.width-900.png)
+
+## Profile settings
+
+### Name and email
+
+By default, Wagtail provides separate First Name, Last Name, and Email fields. Your name appears across the CMS interfaces when you manage content.
+
+Note in addition, administrators can change usernames via the interface to [manage users and roles](/en-latest/how-to-guides/manage-users-and-roles/).
+
+### Profile picture
+
+If a user has not uploaded a profile picture, Wagtail will look for an avatar linked to their email address on [Gravatar](https://gravatar.com/). Or you can upload your picture directly! Recommended format: 160x160 pixels.
+
+### Locale
+
+#### Preferred language
+
+The Wagtail Admin interface supports various languages. To choose your preferred language, click the dropdown menu labeled **‘Preferred language’**. Selecting your preferred language affects every aspect of the interface.
+
+#### Current time zone
+
+You can find the time zone option in the **’Locale’** section of your account preferences. Also, You can customize your time based on your preference on the drop-down menu.
+
+### Theme preferences
+
+#### **Admin theme**
+
+Wagtail offers the following admin theme options:
+
+* Light mode
+* Dark mode
+* System default
+
+The light and dark themes offer alternative color schemes for a more personalized user experience. Selecting system default aligns the theme of your admin interface with your computer's default theme.
+
+#### **Contrast theme**
+
+Adjust the level of contrast in the user interface, between:
+
+* **System default**: matching your operating system or browser settings.
+* **More contrast**: extra borders or visual cues for interactive elements.
+
+#### **Density**
+
+Configure how information-dense you want the admin interface to be.
+
+* **Default**: Spacious UI.
+* **Snug**: More information-dense.
+
+**Keyboard shortcuts**
+
+You can disable Wagtail’s custom keyboard shortcuts if required for compatibility purposes.
+
+* **On** (default): adds support for [custom keyboard shortcuts](/en-latest/concepts/accessibility-features/).
+* **Off**: only retain universal shortcuts for rich text.
+
+## Password
+
+You can change your password from here, by providing your old password, new password, and a confirmation of the new value. Wagtail’s password validation rules are heavily configurable, here are the default checks:
+
+* Your password can’t be too similar to your other personal information.
+* Your password must contain at least 8 characters.
+* Your password can’t be a commonly used password.
+* Your password can’t be entirely numeric.
+
+From the login interface, you can also find a "Forgotten password?" link to the password reset form. Submit your account email to receive a password reset link, which allows setting a new password without having to provide the old one.
+
+## **Notification settings**
+
+![User profile notification settings](https://guide-media.wagtail.org/images/User_profile_notification_settings_tOttJ7P.width-900.png)
+
+In a separate tab, the notification settings allow users to customize their preferences for receiving notifications relating to Wagtail’s [workflows for moderation](/en-latest/how-to-guides/configure-workflows-for-moderation/). You can choose to receive notifications for various events such as content updates, status, comments. This feature ensures that you stay on top of any changes or updates within the CMS.
+
+Currently-supported notifications settings are:
+
+* **Submitted notifications**: Receive notification when a page is submitted for moderation
+* **Approved notifications**: Receive notification when your page edit is approved
+* **Rejected notifications**: Receive notification when your page edit is rejected
+* **Updated comments notifications**: Receive notification when comments have been created, resolved, or deleted on a page that you have subscribed to receive comment notifications on
+
+
+------------------------------------------------------------------------
+
+# Releases
+
+Page URL: https://guide.wagtail.org/en-latest/releases/
+
+> Here are overviews of changes made to Wagtail in specific new releases.
+
+
+Here are overviews of changes made to Wagtail in specific new releases.
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 7.3
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-3/
+
+
+Here are highlights from Wagtail 7.3. For full technical details, view the complete [v7.3 release notes](https://docs.wagtail.org/en/latest/releases/7.3.html).
+
+## Autosave for pages and snippets
+
+Wagtail can now automatically save your work as you edit pages and snippets, a long-awaited step on our [roadmap to collaborative content management](https://wagtail.org/blog/our-roadmap-for-collaborative-content-management/).
+
+![Autosave indicator in page editor, saved status](https://guide-media.wagtail.org/images/Autosave_indicator_-_saved.width-900.png)
+
+As you make changes, Wagtail periodically saves a draft in the background, helping prevent accidental data loss. Autosave pauses and clearly notifies you when there is a problem such as validation errors or another user editing the same content. Once the issue is resolved, autosave resumes automatically.
+
+![Autosave indicator in page editor, paused status with warning icon](https://guide-media.wagtail.org/images/Autosave_indicator_-_paused.width-900.png)
+
+
+
+## Custom editing layouts for block-based content
+
+Developers can now group and reorder fields within content blocks, including placing advanced or less frequently used options into collapsible “settings” sections. For CMS users, this means:
+
+* Less visual clutter when editing content
+* Important fields are easier to find
+* Advanced options stay out of the way unless needed
+
+## llms.txt for docs
+
+![llms.txt screenshot in code editor](https://guide-media.wagtail.org/images/carbon.width-900.png)
+
+For users of Large Language Models (LLMs), the user guide contents are available in LLM-friendly formats:
+
+* [llms.txt](https://guide.wagtail.org/llms.txt), an LLM-focused index of all site contents.
+* [llms-full.txt](https://guide.wagtail.org/llms-full.txt), a full copy of the documentation
+* [llms-prompt.txt](https://guide.wagtail.org/llms-prompt.txt), an opinionated prompt you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
+
+View our [About page](/en-latest/about/) for more information.
+
+## Improved image performance by default
+
+Wagtail now uses improved default image quality settings for newly uploaded images. These updated defaults reduce image file sizes by 20-50%, while keeping visual quality consistent across formats. The result is:
+
+* Faster page loading
+* Lower data usage
+* Reduced energy consumption and carbon footprint when viewing pages
+
+The visual quality of images should be near-identical - see if you can spot the difference between the top 3 and bottom 3 images:
+
+![Collage of 6 identical images of an Egyptian temple, with different encoding settings](https://guide-media.wagtail.org/images/high-vs-low.width-800.width-900.png)
+
+For more information, check out our blog: [40% smaller images, same quality](https://wagtail.org/blog/40-smaller-images-same-quality/).
+
+## Custom content quality checks
+
+![Screenshot of two custom checks in the page editor side panel](https://guide-media.wagtail.org/images/Custom_content_checks.width-900.png)
+
+The built-in content checks system can now be extended with additional rules. Depending on how your site is configured, you may see new checks providing guidance on areas such as accessibility, readability, SEO, or general content quality. These checks appear directly in the editor, giving immediate feedback while you work.
+
+## Other improvements you may notice
+
+This release also includes a range of smaller enhancements that improve day-to-day editing:
+
+* Oversized profile avatar images are automatically resized when uploaded
+* Built-in embeds now support Loom
+* Block-based content now renders in structured format in comparison views
+* Bulk actions confirmation steps now preserve search and filtering when returning to the listings.
+
+Many behind-the-scenes fixes and performance improvements are also included.
+
+## Feedback requests
+
+We need feedback from our users!
+
+* What do you think of our llms.txt implementation? Any cool use cases or rough edges? Let us know in the [llms.txt feedback discussion thread](https://github.com/wagtail/wagtail/discussions/13648).
+* Do you work on multilingual sites? Let us know about pain points in [Improving support for multilingual websites](https://github.com/wagtail/wagtail/discussions/13693).
+
+---
+
+To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), subscribe to the [Wagtail newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 7.2
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-2/
+
+
+Here are highlights from Wagtail 7.2. For more details, view the full [v7.2 release notes](https://docs.wagtail.org/en/latest/releases/7.2.html).
+
+## Reordering support for snippets
+
+![Snippets listing for countries with manual reordering support](https://guide-media.wagtail.org/images/Snippets_listing_for_countries_with_manual_reo.width-900.png)
+
+Snippet listings now support reordering of items using drag-and-drop, similarly to pages. Once enabled by a developer, this becomes available in the listing’s "Actions". The order of items will then reflect on the website where enabled.
+
+## Media listings improvements
+
+![Images listing with header and images list](https://guide-media.wagtail.org/images/Images_listing_with_header_and_images_list_dsC.width-900.png)
+
+Admin and document listings now support filtering by usage count. Image choosers now have both grid and list layouts, with a new toggle for users to switch between the two. The new toggle has also been added to standalone image listings for consistency.
+
+## Readability score metric
+
+![Page editor for "Bread and Circuses" page. The form to the left, and to the right the Checks side panel is expanded, showing different metrics about the page](https://guide-media.wagtail.org/images/Page_editor_for_22Bread_and_Circuses22_page._T.width-900.png)
+
+Built-in [content checks](https://guide.wagtail.org/en-latest/reference/content-checks/) now include a readability score, based on length of words and sentences in the page content. The content metrics also now provide an explainer panel detailing how they are calculated.
+
+## Quick access to first validation error
+
+![Validation error message on page publish with go to first error shortcut button](https://guide-media.wagtail.org/images/Validation_error_message_on_page_publish_with_.width-900.png)
+
+Error messages for form validation errors now contain a “Go to the first error” shortcut button. This speeds up navigating to address error messages, particularly for forms split between multiple tabs, where the errors can be hard to locate.
+
+## Keyboard shortcuts improvements
+
+![Keyboard shortcuts dialog](https://guide-media.wagtail.org/images/Keyboard_shortcuts_dialog_tWoC6ww.width-900.png)
+
+We introduce two new shortcuts, ? to open the keyboard shortcuts dialog, and / to focus the search input in the sidebar. The keyboard shortcuts dialog has been reorganized into better categories. when keyboard shortcuts are disabled in user preferences, the “add comment” shortcut is also disabled, and messaging has been added to the keyboard shortcuts dialog to indicate the status of keyboard shortcuts and how to enable or disable them via user preferences.
+
+
+
+---
+
+To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), our [weekly newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).
+
+## Other UI improvements
+
+* We now support calculating content metrics without opening the preview panel.
+* The rich text toolbar now always shows above form action buttons.
+* We now use more consistent sentence format for error message.
+
+## Feedback requests
+
+Do you use Wagtail on a tablet or smartphone? Please let us know more about what you do and how well it works on our [mobile support discussion thread](https://github.com/wagtail/wagtail/discussions/13273).
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 7.1
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-1/
+
+
+Here are highlights from Wagtail 7.1. For more details, view the full [v7.1 release notes](https://docs.wagtail.org/en/latest/releases/7.1.html).
+
+## **Previews support for settings**
+
+![Generic settings with preview](https://guide-media.wagtail.org/images/Generic_settings_with_preview.width-900.png)
+
+You can now preview changes made to your site's settings in real time. This allows you to see how updates will look before applying them, for example for navigation items like main menus or footers.
+
+## Media listings improvements
+
+![Images listing with header and images list](https://guide-media.wagtail.org/images/Images_listing_with_header_and_images_list.width-900.png)
+
+[Image listings](/en-latest/how-to-guides/manage-images/) now offer both grid and list layouts. The new list layout provides additional details including file names, collections, creation dates, and usage count (with support for ordering by count), allowing easier management of images.
+
+[Document listings](/en-latest/how-to-guides/manage-documents/) now also display usage counts, helping you quickly identify how documents are used throughout your site.
+
+![Documents listing with Search field in header Add document button and a Collections dropdown Underneath are 2 rows of documents with a header row above](https://guide-media.wagtail.org/images/Documents_listing_with_Search_field_in_header_.width-900_2st99KC.png)
+
+Thank you to [Joel William](https://www.linkedin.com/in/joel-william-360228276/) for implementing those features as part of the [Google Summer of Code program](https://wagtail.org/blog/four-contributors-for-gsoc-2025/)!
+
+## Collapsible blocks settings
+
+![Collapsible block settings](https://guide-media.wagtail.org/images/Collapsible_block_settings.width-900.png)
+
+Nested structured blocks in StreamField can now be collapsed or expanded, simplifying the editing interface when working with complex content structures. This makes it possible for developers to hide away some of a block’s configuration options, so CMS users can more easily scan the UI for important fields.
+
+## Enhanced preview for headless setups
+
+![Page editor for Bread and Circuses page The form to the left and to the right the Preview side panel is expanded showing the page as it would appear to users on Mobile devices](https://guide-media.wagtail.org/images/Page_editor_for_Bread_and_Circuses_page_The_fo.width-900_l88OI5D.png)
+
+Live previews have better support for headless websites. Where configured, you can preview content using your headless frontend, benefiting from additional features like accessibility checks, content metrics, and scroll restoration.
+
+## Expanded keyboard shortcuts
+
+![Keyboard shortcuts dialog](https://guide-media.wagtail.org/images/Keyboard_shortcuts_dialog_alyQsTE.width-900.png)
+
+Two new additional [keyboard shortcuts](/en-latest/concepts/accessibility-features/) have been introduced to simplify navigation within the Wagtail admin interface: [ to toggle the main sidebar, and ] to toggle the minimap in the page editor. Users can also disable keyboard shortcuts entirely in their profile settings if preferred. There are more shortcuts to come in future releases.
+
+Thank you to [Dhruvi Patel](https://www.linkedin.com/in/dhruvi-patel-55043412a/) for implementing those features as part of the [Google Summer of Code program](https://wagtail.org/blog/four-contributors-for-gsoc-2025/)!
+
+## Other UI improvements
+
+* Header breadcrumbs now save their expanded or collapsed state across navigation and refreshes.
+* Added an 'Edit' button to the success message after copying a page.
+* Restricted file dialog in the multiple image uploader to accepted image file types.
+* Bulk deletion actions for multiple pages now require a type-to-confirm step.
+* Active user states now displayed using intuitive check or cross icons.
+* Collapsed StreamField blocks now summarize additional field types (checkboxes, radio buttons).
+* Block previews now support translation.
+* Panel collapse button labels are now translatable.
+* AVIF image uploads through the image chooser now supported on Firefox.
+* Table cells in listings avoid breaking words unless specifically enabled.
+* "All items in listing" bulk actions for images/documents respect user permissions.
+* Listings clearly distinguish boolean values without relying on colors.
+* InlinePanel labels and headings have improved capitalization handling.
+* Commenting keyboard shortcuts more effectively move focus to existing comments.
+* Validation errors within StreamField blocks are now clearly marked.
+* Accessibility dialog positioning now adjusts based on the user bar location.
+* Locale-aware number columns introduced for clearer numeric listings.
+* Rich text fields now support minimum length validation.
+* Always show block types in StreamField UI
+
+---
+
+To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), our [newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/). Or join [Wagtail Space 2025](https://wagtail.org/wagtail-space-2025/) this October!
+
+## Feedback requests
+
+Do you use Wagtail on a tablet or smartphone? Please let us know more about what you do and how well it works on our [mobile support discussion thread](https://github.com/wagtail/wagtail/discussions/13273).
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 7.0
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-0/
+
+
+Here are highlights from Wagtail 7.0. For more details 👉️ view the full [v7.0 release notes](https://docs.wagtail.org/en/latest/releases/7.0.html).
+
+## Deferred validation for drafts
+
+Pages (and snippets with draft support) now allow users to save work-in-progress versions with more of the fields left empty, even if they might be marked as required. Validation is applied as normal when the page or snippet is published, scheduled, or submitted to a workflow. This is an important stepping stone towards future [auto-save support](https://github.com/wagtail/roadmap/issues/24), for which we are looking for a [feature sponsor](https://wagtail.org/sponsor/).
+
+## New and improved pagination
+
+All listing views and most choosers now use a more advanced pagination feature, so users can more easily navigate to a specific page.
+
+![Pagination controls in redirects](https://guide-media.wagtail.org/images/Pagination_controls_in_redirects.width-900.png)
+
+## Locale in listings and choosers
+
+This release adds a new "Locale" column to the listings and choosers of translatable models, making it easier to filter and sort by locale.
+
+![Locale in snippets listings](https://guide-media.wagtail.org/images/Locale_in_snippets_listings.width-900.png)
+
+The current content's locale is applied in choosers by default, with the ability to clear the locale filter.
+
+![Locale in page chooser](https://guide-media.wagtail.org/images/Locale_in_page_chooser.width-900.png)
+
+## Additional user interface improvements
+
+Here are smaller improvements which will make users’ lives better in the administration interface.
+
+* Pages can now be configured by developers to be private by default.
+* More of the rich text fields’ user interface labels are now translated.
+* The Keyboard shortcuts viewer under "Help" now documents the shortcut to add comments.
+
+![Keyboard shortcuts panel within the Help menu](https://guide-media.wagtail.org/images/Keyboard_shortcuts_panel_within_the_Help_menu.width-900.png)
+
+
+
+---
+
+To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), our [newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 6.4
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-4/
+
+
+Here are highlights from Wagtail 6.4. For more details 👉️ view the full [v6.4 release notes](https://docs.wagtail.org/en/stable/releases/6.4.html).
+
+### Previews for StreamField Blocks
+
+![Block chooser in StreamField, with a block being previewed](https://guide-media.wagtail.org/images/block_chooser_and_preview_focus.width-900.png)
+
+Previews for StreamField blocks are now available. Once configured by a developer, previews appear in the block chooser next to the available options to help editors make informed decisions when selecting blocks. Blocks also supporting having a description, to document their usage alongside or instead of the preview.
+
+### Alt text management enhancements
+
+![Alt text accessibility checker](https://guide-media.wagtail.org/images/Alt_text_accessibility_checker.width-900.png)
+
+Improvements to alt text handling include:
+
+* **Default alt text for Image block**: When selecting a new image, Wagtail’s default Image block now automatically populates its contextual alt text using the image's description if set. This can also be configured by developers to retrieve alt text from a different field than the description.
+* **Alt text quality check**: Alt text quality checks are now enabled by default, picking up common problem patterns like file names in alt text
+
+### Drag-and-drop reordering for StreamField
+
+
+
+StreamField blocks now support drag-and-drop reordering of items within a field. This enhancement simplifies content changes, particularly for fields containing a large number of items. To use this feature, collapse the block or keep it open – then use the drag handle to move the block up or down.
+
+![Authors block with two Authors child items each containing a People field The first blocks controls to the right are highlighted in red](https://guide-media.wagtail.org/images/Authors_block_with_two_Authors_child_items_eac.width-900.png)
+
+This is also supported for other types of orderable content, such as form fields in the Wagtail form builder or items in promoted search results.
+
+### Search terms report
+
+![Search terms report, with 4 terms displayed](https://guide-media.wagtail.org/images/Search_terms_report.width-900.png)
+
+For users of [promoted search results](https://guide.wagtail.org/en-latest/how-to-guides/promote-search-results/), a new search terms report is available in the admin interface. This report provides:
+
+* A list of terms searched by website users.
+* Count of search occurrences for each term.
+
+This feature allows for better insights into user behavior and adjustments to search promotions.
+
+### Additional user interface improvements
+
+Other updates in this release include:
+
+* Better default headings and labels added for InlinePanel orderable items.
+* Translation of time zone options in the Account view across all supported languages.
+* Explicit labeling for the "server time zone" option in account settings.
+* Scrolling improvements in the page editor to always keep text visible while typing at the bottom of the screen.
+* Correct placement of comment buttons near date/time fields.
+* Breadcrumbs enabled in revisions compare view, generic template views, and the Account view.
+
+---
+
+To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), our [newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 6.3
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-3/
+
+> Highlights from the new admin features in Wagtail 6.3
+
+
+Here are highlights from Wagtail 6.3. For more details 👉️ view the full [v6.3 release notes](https://docs.wagtail.org/en/stable/releases/6.3.html).
+
+## Incremental dashboard enhancements
+
+![Wagtail dashboard with new design released in Wagtail 6.3](https://guide-media.wagtail.org/images/Wagtail_dashboard_with_new_Things_in_Wagtail_4.width-900_MPQXgu4.png)
+
+The Wagtail dashboard design evolves towards providing more information and navigation features. Mobile support is much improved. Upgrade banners are now dismissible.
+
+## Enhanced contrast admin theme
+
+![Wagtail page listing in light theme with enhanced-contrast designs](https://guide-media.wagtail.org/images/Wagtail_page_listing_in_light_theme_with_enhan.width-900.png)
+
+CMS users can now control the level of contrast of UI elements in the admin interface. This new customization is designed for partially sighted users, complementing existing support for a dark theme and Windows Contrast Themes. The new “More contrast” theming can be enabled in account preferences, or will otherwise be derived from operating system preferences.
+
+## Universal design
+
+This release follows through with “universal listings” user experience and design consistency improvements earlier in 2024, with the following features.
+
+* All create/edit admin forms now use a sticky submit button, for consistency and to speed up edits
+* Secondary form actions such as “Delete” are now in the header actions menu, for consistency and to make the actions more easily reachable for keyboard users
+* Documents and Images views now use universal listings styles
+* Page type usage, workflow usage, and workflow history views views also use universal listings styles
+* The forms pages listing now supports search and filtering
+
+## HEIC / HEIF image upload support
+
+When enabled by a developer, Wagtail now allows users to upload and use [HEIC / HEIF](https://en.wikipedia.org/wiki/High_Efficiency_Image_File_Format) images in Wagtail. By default, these images are automatically converted to JPEG format when rendered. For more details, see [HEIC / HEIF images in the developer docs](https://docs.wagtail.org/en/latest/topics/images.html#heic-heif-images).
+
+### Image description field
+
+![Image editing form for Olivia Ava image To the right of the form is an image preview focal point controls and metadata about the image](https://guide-media.wagtail.org/images/Image_editing_form_for_Olivia_Ava_image_To_the.width-900_VsFI5Yq.png)
+
+To better support alternative text requirements for images, Wagtail now includes a built-in "Description" field for images. This will be used as image alt text within the CMS interface, and can also be configured by developers to be used when displaying images on the site.
+
+## Other UI improvements
+
+* Snippets editing forms can now detect and flag unsaved edits to encourage saving.
+* The footer actions dropdown has been redesigned with larger text and increased color contrast.
+* Page privacy rules can now be set on pages within a section where the parent page already has its own rules.
+* Pasting text content with URLs within, automatically converts those URLs to links.
+* The admin interface now supports the Uyghur language.
+
+---
+
+To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), our [newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 6.2
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-2/
+
+> Highlights from the new admin features in Wagtail 6.2
+
+
+Here are highlights from Wagtail 6.2. For more details, view the full [v6.2 release notes](https://docs.wagtail.org/en/stable/releases/6.2.html).
+
+## Content metrics
+
+![Content metrics in Wagtail 6.2 in the side panel](https://guide-media.wagtail.org/images/Content_metrics_in_Wagtail_6.2.width-900.png)
+
+The page editor’s Checks panel now displays two content metrics: word count, and reading time. They are calculated based on the contents of the page preview. Where possible, the calculation only takes into account the "main" content area of the page. This avoids navigation menus and footer information elements being used in the word count.
+
+The Checks panel has also been redesigned to accommodate a wider breadth of types of checks, and interactive checks, in future releases.
+
+This feature was implemented thanks to a [feature sponsorship](https://wagtail.org/sponsor/) by The Motley Fool.
+
+## Concurrent editing notifications
+
+![Concurrent editing warning dialog to prevent unintentional overrides](https://guide-media.wagtail.org/images/Concurrent_editing_warning_dialog_to_prevent_u.width-900.png)
+
+When multiple users concurrently work on the same content, Wagtail now displays notifications to inform them of potential editing conflicts. Those notifications initially appear as user avatars in the page header, each with a status tooltip.
+
+---
+
+Concurrent editing notifications are available for pages, and snippets. Specific messaging about conflicting versions is only available for pages and snippets with support for saving revisions with a version history.
+
+## Alt text accessibility check
+
+![Accessibility checker dialog with two issues found, one alt text, one about headings](https://guide-media.wagtail.org/images/Alt_text_accessibility_checker.width-900.png)
+
+The built-in accessibility checker now includes a new rule about quality of alt text, which tests alt text for the presence of known bad patterns such as file extensions and underscores. This rule is enabled by default, but can be disabled if necessary.
+
+## Universal listings designs for report views
+
+![Wagtail 6.2 site history report with new listing and filter interface](https://guide-media.wagtail.org/images/Wagtail_6.2_site_history_report_with_new_listi.width-900.png)
+
+All built-in and custom [reports](/en-latest/concepts/reports/) now use the new listing visual design and filtering features introduced in all other areas of the admin interface over past releases.
+
+## **Other user interface refinements**
+
+Here are additional changes to the user interface across the CMS:
+
+* Redirects forms now use the same page layout as other forms in the CMS
+* Listing views no longer show links to editing forms for users without appropriate permissions
+* Editing views no longer show the delete button if permissions prevent deletion
+* Increased visibility of draft page titles in listings
+* New design for locale labels in listings
+* Address layout issues in the title cell of universal listings
+* Going below or above the minimum and maximum block counts now shows a warning
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 6.1
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-1/
+
+
+Here are highlights from Wagtail 6.1. For more details, view the full [v6.1 release notes](https://docs.wagtail.org/en/stable/releases/6.1.html).
+
+## Universal listings continued
+
+![Documents listing with Search field in header Add document button and a Collections dropdown Underneath are 2 rows of documents with a header row above](https://guide-media.wagtail.org/images/Documents_listing_with_Search_field_in_header_.width-900_X1WPjE0.png)
+
+Continuing work on the Universal Listings project, this release rolls out universal listing styles for the following views:
+
+* Image listings
+* Document listings
+* Site and locale listings
+* Page and snippet history views
+* Form builder submissions
+* Collections listings
+* Groups
+* Users
+* Workflow and task views
+* Search promotions index views
+* Redirects index
+
+With this work, we hope to increase the consistency of the user experience across different parts of the CMS. The Universal Listings designs also improve the information density of the interface, and how well it works on sites with a lot of filtering options set up.
+
+## **Information-dense admin interface**
+
+![Editing interface for Welcome to the Wagtail Bakery, in snug mode](https://guide-media.wagtail.org/images/Editing_interface_for_Welcome_to_the_Wagtail_B.width-900.png)
+
+Wagtail now provides a way for you to control the information density of the admin interface, via your [user profile preferences]().
+
+The new setting allows switching between the “default” density and a new “snug” mode, which reduces the spacing and size of UI elements. To switch Snug mode on, go to your Account settings and under **Theme Preferences** change your **Density** preference from "Default" to "Snug".
+
+This change will make it easier for users to tweak the CMS to their liking, so Wagtail works well for users who expect a dense interface, and those who prefer the more spacious defaults.
+
+## **Keyboard shortcuts overview**
+
+![Keyboard shortcuts dialog](https://guide-media.wagtail.org/images/Keyboard_shortcuts_dialog.width-900.png)
+
+A new dialog is available from the help menu, providing an overview of keyboard shortcuts available in the Wagtail admin.
+
+We hope to introduce more keyboard shortcuts in the future, and consistently document all of the shortcuts available in the CMS so keyboard users have a reference of all options.
+
+### **Better guidance for password-protected content**
+
+![Page privacy dialog with the Shared Password option selected](https://guide-media.wagtail.org/images/Page_privacy_dialog_with_the_Shared_Password_o.width-900.png)
+
+Wagtail now includes extra guidance in its private pages and [private collections (documents)](/en-latest/how-to-guides/manage-collections/) forms, to warn users about the pitfalls of the “shared password” option. For projects with higher security requirements, it’s also now possible to disable the shared password option entirely.
+
+## Other user interface refinements
+
+Here are additional changes to the user interface across the CMS:
+
+* Add ability to bulk toggle permissions in the user group editing view, including shift+click for multiple selections
+* Use custom setting icons in setting editing views
+* Ensure re-ordering buttons work correctly when using a nested InlinePanel
+* Ensure dropdown content cannot get higher than the viewport and add scrolling within content if needed
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 6.0
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-0/
+
+
+Here are highlights from Wagtail 6.0. For more details, view the full [v6.0 release notes](https://docs.wagtail.org/en/latest/releases/6.0.html).
+
+## **Universal listings**
+
+![Wagtail 6.0 universal listings interface, with example of searching for a "bread" blog page](https://guide-media.wagtail.org/images/wagtail-6-filters-listing.width-900.png)
+
+Following design improvements to page listings, Wagtail now provides a unified search and filtering interface for all listings. This will improve navigation capabilities, particularly for sites with a large number of pages or where content tends to use a flat structure. We also hope to roll out this interface across all areas of the CMS for a consistent experience.
+
+In this release, the universal listing interface is available for [Pages](/en-latest/how-to-guides/manage-pages/), [Snippets](/en-latest/how-to-guides/manage-snippets/), and Forms. For pages, the UI includes the following filters out of the box:
+
+* Page type
+* Date updated
+* Owner
+* Edited by
+* Site
+* Has child pages
+* Locale
+
+## **Right-to-left language support**
+
+![Wagtail 6.0 right-to-left interface example, with the page editor and a page preview](https://guide-media.wagtail.org/images/wagtail-6-rtl.width-900.png)
+
+The admin interface now supports right-to-left languages, such as Persian, Arabic, and Hebrew. Though there are still some areas that need improvement, all admin views will now be displayed in the correct direction.
+
+For projects with users of right-to-left languages – there should be no need to customize the CMS for compatibility anymore.
+
+## **Accessibility checker in page editor**
+
+![Wagtail 6.0 accessibility checker demo, with 3 issues found relating to headings on the page](https://guide-media.wagtail.org/images/wagtail-6-accessibility-checker-light.width-900.png)
+
+The built-in accessibility checker now displays as a side panel within page and snippet editors supporting preview. In this release, the new “Checks” side panel only shows accessibility-related issues for pages with the userbar enabled. In the future, it will be updated to support any content checks, across any page. For more information on future plans, see [Looking for sponsorship – Accessibility checks for site administrators](https://wagtail.org/blog/looking-for-sponsorship-accessibility-checks-for-site-administrators/) on the Wagtail blog.
+
+## Polished dark mode
+
+![Wagtail 6.0 in dark mode – with the same example as the accessibility checker](https://guide-media.wagtail.org/images/wagtail-6-accessibility-checker-dark.width-900.png)
+
+Wagtail 6.0 comes with refinements to the dark theme within the admin interface. Dark themes are an important [accessibility](https://wagtail.org/accessibility/) feature, and they help with environmental [sustainability](https://wagtail.org/sustainability/) by reducing display power consumption for OLED devices.
+
+## **Page types usage report**
+
+![Wagtail 6.0 page types report, on a simple site with 9 page types and 30 pages](https://guide-media.wagtail.org/images/wagtail-6-page-types-usage-report.width-900.png)
+
+The new Page types report provides a breakdown of the number of pages for each type. It helps answer questions such as:
+
+* Which page types do we have on our CMS?
+* How many pages of that page type do we have?
+* When was a page of that type last edited? By whom? Which page was that?
+
+This feature was implemented thanks to a [feature sponsorship](https://wagtail.org/sponsor/) by Mozilla.
+
+## **Accessibility improvements**
+
+This release comes with a high number of accessibility improvements across the admin interface:
+
+* Better support to define header cells for tables
+* Keyboard support for table editing
+* Keyboard support in all action menus
+* Refinements in labels used by screen reader and speech recognition users
+
+View our [Accessibility](https://wagtail.org/accessibility/) page for more information about the state of Wagtail accessibility.
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 5.2
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-5-2/
+
+
+Here are highlights from Wagtail 5.2. For more details, view the full [v5.2 release notes](https://docs.wagtail.org/en/v5.2.3/releases/5.2.html).
+
+## **Redesigned page listing view**
+
+The page explorer listing view has been redesigned to allow improved navigation and searching. Here is an example of the new interface:
+
+![v5.2 redesigned pages listing](https://guide-media.wagtail.org/images/page-listing-redesigned.width-900.png)
+
+This supports searching for pages within a specific section of the site, finding matches across all sub-sections:
+
+![v5.2 pages listing with search](https://guide-media.wagtail.org/images/page-listing-search.width-900.png)
+
+## User interface refinements
+
+Several tweaks have been made to the admin user interface which we hope will make it easier to use.
+
+* Show the full first published at date within a tooltip on the Page status sidebar on the relative date
+* Do not render minimap if there are no panel anchors
+* Use dropdown buttons on listings in dashboard panels
+* Add compare buttons to workflow dashboard panel
+* Implement breadcrumbs design refinements
+* Add support for Shift + Click behaviour in form submissions and simple translations submissions
+* Improve filtering of audit logging based on the user’s permissions
+
+Here is a screenshot of the "compare" buttons in the workflow panel on the dashboard:
+
+![v5.2 compare buttons highlighted in red on dashboard](https://guide-media.wagtail.org/images/compare-buttons.width-900.png)
+
+## **External links in promoted search results**
+
+Promoted search result entries can now use an external URL along with custom link text, instead of linking to a page within Wagtail. This makes it easier to manage promoted content across multiple websites.
+
+![v5.2 promoted search results external links](https://guide-media.wagtail.org/images/external-links.width-900.png)
+
+## Subject and body for email links
+
+In the link chooser, email links now support setting an email subject and body:
+
+![v5.2 email subject body fields in link chooser modal](https://guide-media.wagtail.org/images/email-subject-body.width-900.png)
+
+## Site-specific improvements
+
+The following two highlights require site-specific configuration. While we expect they will improve editors’ workflow, they need to be set up based on the site’s needs, and may not be visible at all on your website.
+
+### **Wagtail user interface extensions with Stimulus**
+
+Wagtail now officially supports [admin UI customisations with Stimulus](https://docs.wagtail.org/en/latest/extending/extending_client_side.html#extending-client-side). We expect this will make it much simpler for site implementers to customize the administration interface for their project’s needs.
+
+### Content management features beyond pages
+
+Following recent improvements to Snippets, the following content management features can now be set up on arbitrary content/data in the CMS, rather than pages / snippets only:
+
+* Filtering and export on list / index views, as well as customizations via `list_display`, `list_filter`, `list_export`, `list_per_page`, `ordering`.
+* Standalone Usage, Inspect, History views for arbitrary content/data.
+* Breadcrumbs in admin views.
+* Custom buttons in list/index views.
+
+Here is an example of the Usage, History, and Breadcrumbs as available in Snippets – which will be available for arbitrary content once configured:
+
+![v5.2 snippets editing interface](https://guide-media.wagtail.org/images/snippets-features.width-900.png)
+
+
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 5.1
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-5-1/
+
+> Here are highlights from Wagtail 5.0. For more details, view the full v5.0 release notes.
+
+
+Here are highlights from Wagtail 5.1. For more details, view the full [v5.1 release notes](https://docs.wagtail.org/en/latest/releases/5.1.html).
+
+## **Read-only panels**
+
+Field panels can now be marked as read-only, so that they are displayed in the admin but cannot be edited.
+
+## **AVIF image support**
+
+Wagtail now supports [AVIF](https://en.wikipedia.org/wiki/AVIF), a modern image format. We encourage all Wagtail users to consider using it to improve the performance of the sites and reduce their carbon footprint.
+
+## Accessibility improvements
+
+Wagtail now uses its modern tooltip and dropdown components across more of the interface, which addresses long-standing accessibility issues for keyboard, screen reader, and speech recognition users across:
+
+* Page listings actions under the “More” dropdown.
+* Bulk actions under the “More” dropdown.
+* Chooser buttons in forms
+
+## Dark mode improvements
+
+Following our [last release](/en-latest/releases/new-in-wagtail-5-0/), we’ve made tweaks to our new dark theme across the CMS.
+
+* Update link/document rich text tooltips for consistency with the inline toolbar
+* Increase the contrast between the rich text / StreamField block picker and the page in dark mode
+* Add support for presenting the userbar (Wagtail button) in dark mode
+* Ensure taggit field type-ahead options show correctly in the dark mode theme
+
+## General UI improvements
+
+* Auto-select the StreamField block when only one block type is declared
+* Adopt optimised Wagtail logo in the admin interface
+* Move comment notifications toggle to the comments side panel
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 5.0
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-5-0/
+
+> Here are highlights from Wagtail 5.0. For more details, view the full v5.0 release notes.
+
+
+Here are highlights from Wagtail 5.0. For more details, view the full [v5.0 release notes](https://docs.wagtail.org/en/latest/releases/5.0.html).
+
+### **Object usage information on deleting objects**
+
+On deleting a page, image, document or snippet, the confirmation screen now provides a summary of where the object is used, allowing users to see the effect that deletion will have elsewhere on the site.
+
+This usage information is also now available for pages, rather than only images / documents / snippets.
+
+### **SVG image support**
+
+The image library can now be configured to allow uploading SVG images.
+
+### **Accessibility checker improvements**
+
+The [built-in accessibility checker](https://docs.wagtail.org/en/latest/advanced_topics/accessibility_considerations.html#built-in-accessibility-checker) has been updated with:
+
+* 5 more checks enabled by default.
+* Sorting of checker results according to their position on the page.
+* Highlight styles to more easily identify elements with errors.
+
+### **Always-on minimap**
+
+Following its introduction in Wagtail 4.1, we have made a number of improvements to the page editor minimap:
+
+* It now stays opened until dismissed, so users can keep it expanded if desired.
+* Its "expanded" state is preserved when navigating between different views of the CMS.
+* The minimap and "Collapse all" button now appear next to side panels rather than underneath, so they can be used at any time.
+* Clicking any item reveals the minimap, with appropriate text for screen reader users.
+* Navigating to a collapsed section of the page will reveal this section.
+
+### **Dark mode**
+
+Wagtail’s admin interface now supports dark mode. The new dark theme can be enabled in account preferences, as well as configuring permanent usage of the light theme, or following system preferences.
+
+We hope this new theme will bring accessibility improvements for users who perfer light text on dark backgrounds, and energy usage efficiency improvements for users of OLED monitors.
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 4.2
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-4-2/
+
+> With Wagtail 4.0, 4.1, and now 4.2 – we&#39;ve added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team.
+
+
+Wagtail 4.2 comes with gradual improvements on functionality previous added in [Wagtail 4.1](/en-latest/releases/new-in-wagtail-4-1/) and [4.0](https://wagtail.org/blog/how-you-can-make-content-soar-with-wagtail-40/).
+
+## Supercharged snippets
+
+Continuing the changes introduced in the last release, snippets have two new capabilities matching what is possible with pages:
+
+* Locking – to prevent other users from editing a snippet.
+* [Workflows](/en-latest/how-to-guides/configure-workflows-for-moderation/) – to structure content review on your site.
+
+### Multiple chooser panel
+
+When configured by developers, site users can now select multiple items at a time in chooser modals. For example, here is a screenshot of a "Person" chooser allowing to select multiple blog post authors in one go:
+
+![Multiple chooser panel for persons, with four items selectable](https://guide-media.wagtail.org/images/Multiple_chooser_panel_for_persons_with_four_i.width-900.png)
+
+## Resizable side panels
+
+To make the most of the space on the page editor, you can now resize side panels by using the "grip" button and dragging the panel to the appropriate size. Here is an example, with the preview panel:
+
+![Page editor for "Bread and Circuses" page. The form to the left, and to the right the Preview side panel is expanded, showing the page as it would appear to users on Mobile devices](https://guide-media.wagtail.org/images/Page_editor_for_Bread_and_Circuses_page_The_fo.width-900.png)
+
+## Built-in accessibility checker
+
+Wagtail includes an accessibility checker built into the user bar. The checker can help authors create more accessible websites in compliance with the Web Content Accessibility Guidelines (WCAG). The checker is based on the [Axe](https://github.com/dequelabs/axe-core) testing engine and scans the loaded page for errors, displaying the results as a list:
+
+![Accessibility checker showing one error with a heading hierarchy issue](https://guide-media.wagtail.org/images/Accessibility_checker_showing_one_error_with_a.width-900.png)
+
+By default, the checker includes the following rules that are among the most common and critical accessibility issues to be violated by editors in Wagtail:
+
+* `empty-heading`: This rule checks for headings with no text content. Empty headings are confusing to screen readers users and should be avoided.
+* `p-as-heading`: This rule checks for paragraphs that are styled as headings. Paragraphs should not be styled as headings, as this can cause confusion for users who rely on headings to navigate content.
+* `heading-order`: This rule checks for incorrect heading order. Headings should be ordered in a logical and consistent manner, with the main heading (h1) followed by subheadings (h2, h3, etc.).
+
+## Rich text improvements
+
+Following feedback from Wagtail users on [rich text UI improvements in Wagtail 4.0](https://docs.wagtail.org/en/stable/releases/4.0.html#rich-text-improvements-4), we have further refined the behavior of rich text fields to cater for different scenarios:
+
+* Users can now choose between an “inline” floating toolbar, and a fixed toolbar at the top of the editor. Both toolbars display all formatting options.
+* The ‘/’ command palette and block picker in rich text fields now contain all formatting options except text styles.
+* The ‘/’ command palette and block picker are now always available no matter where the cursor is placed, to support inserting content at any point within text, transforming existing content, and splitting StreamField blocks in the middle of a paragraph when needed.
+* The block picker interface now displays two columns so more options are visible without scrolling.
+
+
+------------------------------------------------------------------------
+
+# New in Wagtail 4.1
+
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-4-1/
+
+> With Wagtail 4.0 and 4.1, we&#39;ve added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team.
+
+
+Wagtail is a lot like a local library — it's packed with amazing resources and nearly everyone will find something they love inside it. Developers love how extendable the code is, content creators enjoy the writer-focused interface, and administrators appreciate the reports and logging tools that help them keep track of their users and all of the content they create.
+
+
+With Wagtail 4.0 and 4.1, we've added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team — from the system administrator who manages the content up to the business owner who hits the publish button on a new article. Let's explore some of the new features and changes you can find in the newest versions of Wagtail.
+
+## Onboarding documentation when you need it
+
+![Wagtail dashboard with new "Things in Wagtail 4 have changed" banner](https://guide-media.wagtail.org/images/Wagtail_dashboard_with_new_Things_in_Wagtail_4.width-900.png)
+
+Starting in Wagtail 4.1, we introduce a new “Help” menu item, with links to user documentation. Those links can be customised for each project, or point to Wagtail’s official guides.
+
+We’ve also added a prominent banner to the dashboard, so people using a new version of Wagtail for the first time get a clear call to action to check out the documentation.
+
+## A fully redesigned page editor
+
+When you sign in, one of the first things you'll notice in Wagtail 4.0 is that the page editor experience has been completely redesigned and updated. Thanks to [generous support from Google](https://www.prnewswire.com/news-releases/google-sponsors-wagtail-cmss-next-generation-web-content-management-experience-301473717.html), all of the styling, forms and widgets have been updated to provide content creators with a seamless, pleasing editing experience. StreamField has been revamped to provide a smoother process for creating content and to make it easier for blocks to be nested inside each other. You'll also notice that all the sections of the page editor are collapsible by default, which will help reduce the amount of scrolling you have to do for longer pieces of content. Because – let's just be honest – _no one_ actually likes scrolling unless they're scrolling through TikTok videos of baby animals.
+
+![Page editor for "Breads and Circuses" blog page, with the info side panel opened to the right, showing the page’s metadata](https://guide-media.wagtail.org/images/Page_editor_for_22Breads_and_Circuses22_blog_p.width-900_aWwHuBl.png)
+
+In Wagtail 4.1, we went one step further and introduced a new toggle to collapse all sections of the page at once, as well as a _minimap_ component. This summarises all of the sections of the page to make it easier to navigate long pages, and validation errors straightforward to locate.
+
+![Page editor for "Breads and Circuses" blog page, with the minimap opened to the right, showing the form sections](https://guide-media.wagtail.org/images/Page_editor_for_22Breads_and_Circuses22_blog_p.width-900_rxHi1iC.png)
+
+## Richer rich text
+
+While updating the page editor, many new features and updates were made to the rich text editor as well. Content creators can now access formatting options and blocks with a “/” slash command. Writers who are tired of highlighting and clicking formatting buttons will love this feature because now you can switch from paragraph text to a numbered list to a heading to a paragraph again without your fingers leaving the keyboard. You can also use the slash command, or the little green plus button that it activates, to split blocks in two and add new blocks in the middle of existing blocks.
+
+![This is a screenshot demonstrating the new slash command you can use in the Rich Text editor of Wagtail](https://guide-media.wagtail.org/images/This_is_a_screenshot_demonstrating_the_new_sla.width-900_uJFDAUA.png)
+
+Link creation is now automatic too. When you paste a URL into a rich text editor, a link will automatically be created rather than having to manually add the link to the URL each time. We also made it easier to undo automatic formatting changes, like the addition of a numbered list when you type “1.” The Wagtail 4 rich text editor also has stronger support for right-to-left languages.
+
+One other useful update to the rich text editor that will make fans of brevity happy is the optional character count feature that can be displayed underneath the rich text editor. So if you have writers who consistently go over character limits, now they can easily track how many characters are contained in each rich text block they're working on. You can even give your writers a gentle nudge if you want by changing the help text to “Brevity is the soul of wit”.
+
+## Enhanced accessibility and support for Windows High Contrast mode
+
+Some of the biggest improvements to this release are ones that many users might not notice right away. But we're hoping users who navigate with keyboards or screen readers will have an improved experience from the efforts we made to provide consistent locations for the help text and error messages throughout the user interface. We also made the tooltips more accessible and improved the accessibility of the sign-in page for Wagtail by improving its structure as well as adding a skip link and messages for screen readers.
+
+The biggest accessibility win for Wagtail 4.0 is the improved support we added for Windows High Contrast mode. Windows High Contrast mode is a feature that users with low vision or photosensitivity find very useful. With the new improvements, Wagtail has more styles designed to comply with the colours required by Windows High Contrast mode users and will provide them with a more pleasant experience.
+
+## A new way to preview
+
+Rather than opening a whole new tab or page to preview your content, Wagtail 4.0 comes with a live preview panel that can be opened within the page editor. With this panel, content creators can also get a quick view of what their page will look like on multiple displays without having to fuss with browser tools. With just a couple of clicks, you can quickly see how your page will look on mobile, tablet and desktop displays. You can still open a full page preview if that is your preference, but we think you'll enjoy the new preview panel so much that you might never want to click out of the editor.
+
+![Page editor for "Bread and Circuses" page. The form to the left, and to the right the Preview side panel is expanded, showing the page as it would appear to users on Mobile devices](https://guide-media.wagtail.org/images/Page_editor_for_Bread_and_Circuses_page_The_fo.width-900.png)
+
+## Simplified scheduled publishing
+
+In Wagtail 4.1, scheduled publishing is much simpler. Available from the Info side panel, setting a schedule now directly saves the page, and the Info side panel is updated with the expected publication (and expiry) times.
+
+## Colour the admin your way
+
+Don't like the colours we chose for the new default theme? Want to provide some custom branding for your organisation's version of Wagtail? Need to provide extra contrast for your users? Wagtail 4.0 now comes with built-in variables for custom theming. Also, if you _really_ miss the teal and don't share our newfound love for indigo, you can switch it back. We might be just a little bit sad if you do that, but you do you and have fun creating your own colour combos.
+
+## Usage reports
+
+In past versions, getting usage information for different types of content required configuration by developers, and had a clear performance cost. As of Wagtail 4.1 this is now always-on, and snappy, regardless of the size of the site.
+
+Here is what usage counts looks like for a snippet:
+
+![Snippet editing form for a People snippet instance. To the right of the form is a "Usage Used 2 times" label](https://guide-media.wagtail.org/images/Snippet_editing_form_for_a_People_snippet_inst.width-900.png)
+
+## Supercharged snippets
+
+Paying closer attention to the above screenshot, there’s a lot more now happening with snippets! If configured, they can keep track of their history of changes and have drafts, as well as scheduled publishing.
+
+## Global settings for multi-site installations
+
+Multi-site enthusiasts rejoice! With the introduction of global settings models, you will no longer have to enter settings over and over again for each site in your installation. With a new model called _BaseGenericSetting,_ you can define shared settings for multiple sites rather than repetitively adding settings for each individual site. This new feature is as DRY as they come — so dry, it makes the Sahara Desert jealous.
+
+
+------------------------------------------------------------------------
+
+# About
+
+Page URL: https://guide.wagtail.org/en-latest/about/
+
+> The User Guide is a website to help content editors, moderators, administrators, and other users learn how to use the Wagtail content management system (CMS).
+
+
+The User Guide is a website to help content editors, moderators, administrators, and other users learn how to use [Wagtail](https://wagtail.org/), the leading open source Python content management system (CMS). It’s comprehensive documentation for CMS users, including reference information on the admin features, how-tos, and more.
+
+## **AI-friendly documentation**
+
+For users of Large Language Models (LLMs), the user guide contents are available in LLM-friendly formats:
+
+* [llms.txt](https://guide.wagtail.org/llms.txt), an LLM-focused index of all site contents.
+* [llms-full.txt](https://guide.wagtail.org/llms-full.txt), a full copy of the documentation
+* [llms-prompt.txt](https://guide.wagtail.org/llms-prompt.txt), an opinionated prompt you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
+
+Let us know if this is useful to you in our [llms.txt feedback discussion thread](https://github.com/wagtail/wagtail/discussions/13648).
+
+## Community resources
+
+Beyond the user guide documentation pages, here are other opportunities to find out more about Wagtail, contribute to the project, and chat with others in our community.
+
+### Issues and feature requests
+
+If you think you’ve found a bug in Wagtail, or you’d like to suggest a new feature, please check our [issue tracker in GitHub](https://github.com/wagtail/wagtail/issues). If your bug or suggestion isn’t there, raise a new issue, providing as much relevant context as possible.
+
+### Community events
+
+We organize or take part in multiple events every year - check out our [Wagtail events list](https://wagtail.org/events/).
+
+
+------------------------------------------------------------------------
+
+# Contributing
+
+Page URL: https://guide.wagtail.org/en-latest/about/contributing/
+
+> We welcome all support, whether on bug reports, code, design, reviews, tests, documentation, translations or just feature requests.
+
+
+We welcome all support for this User Guide, whether on bug reports, code, design, reviews, tests, documentation, translations or just feature requests.
+
+## Contributing
+
+All of the User Guide pages are maintained in Wagtail. We use [GitHub Discussions](https://github.com/wagtail/guide/discussions) to coordinate content improvements, with features requests and bug reports for the site in the [issue tracker](https://github.com/wagtail/guide/issues).
+
+### Writing content
+
+If you want to help with content, reach out to us in [GitHub Discussions](https://github.com/wagtail/guide/discussions) or on the #editor-guide channel of the [Wagtail Slack workspace](https://github.com/wagtail/wagtail/wiki/Slack). We will then create an account for you in Wagtail, making sure you have access to the right parts of the content.
+
+## Translations
+
+We want the guide to ultimately be available in as many languages as Wagtail itself. If you want to help with translations, start a thread in [GitHub Discussions](https://github.com/wagtail/guide/discussions) or join the #editor-guide channel of the [Wagtail Slack workspace](https://github.com/wagtail/wagtail/wiki/Slack). We will then create an account for you in Wagtail, making sure you have access to the right parts of the content.
+
+### How to translate
+
+We set up a separate translation team for each language, with their own Group able to submit changes to all pages and images in their locale. Translation teams reflect the changes in the “latest” version of the documentation, with legacy versions only being accessible to admin users.
+
+For example, the _Translators: Icelandic (latest)_ group has access to:
+
+* Translation: Can submit translations
+* Can access Wagtail admin: Yes
+* Pages: Notendahandbók Wagtail (latest homepage): Add, Edit, Lock, Unlock
+* Images: "Icelandic (latest)": Add, Edit, Choose
+
+When working on changes to the "latest" source content in English, make sure to avoid unnecessarily removing and adding StreamField blocks, so block references are stable between revisions.
+
+## Versioning
+
+Our default "latest" version of the guide corresponds to Wagtail’s release currently in development. When Wagtail has a new release, we create a copy of the guide’s "latest" content for that release. Here are the preliminary steps to do this:
+
+1. Make sure the version exists in the Django settings ([`WAGTAIL_GUIDE_VERSIONS`](https://github.com/search?q=repo%3Awagtail%2Fguide%20WAGTAIL_GUIDE_VERSIONS&type=code)).
+2. Add the new version in the CMS in [Locales](https://guide.wagtail.org/admin/locales/).
+3. Add the new version in the CMS in [Collections](https://guide.wagtail.org/admin/collections/) – with a parent collection matching the version number, and then a child collection for any language with translated images (currently English only).
+
+We then review and update the website’s content in the "Latest" version to match the current capabilities of Wagtail, before proceeding to make a copy of all content for the new release.
+
+### Page content
+
+Then for every locale:
+
+1. Translate the "latest" homepage of the site (without child pages) to the new locale.
+2. Translate all child pages of the "latest" homepage (with child pages) to the new locale.
+3. For all pages of the new locale, manually publish changes for published pages only (page by page).
+4. Make sure to re-order the pages of the new locale so they show in the correct order in the site’s sidebar.
+
+### Images
+
+First, use the "docs-screenshot" suite of [wagtail-tooling](https://github.com/thibaudcolas/wagtail-tooling) to take new screenshots of the CMS with the [bakerydemo](https://github.com/wagtail/bakerydemo) project as the target. Screenshots all use standardized sizes, and a uniform style for highlights on the screen.
+
+Then, upload the new images in the CMS:
+
+1. Bulk-move all images in the "English (latest)" collection to the new collection.
+2. Create a new copy of every image in the new collection, assigning it to the "English (latest)" collection
+3. Go through all "latest" pages of the site and update them to use the new copies of the images
+4. For all pages of the "latest" locale, manually sync translations (without publishing).
+5. For all "latest" locales, go through the pages and publish the ones that have no translations missing, so they use the latest images.
+
+### Release pages
+
+The "New in Wagtail release" pages are derived from the [developer docs release notes](https://docs.wagtail.org/en/stable/releases/index.html), converted to make them more suitable for an audience of CMS users.
+
+They follow a set structure: one section per "headline feature" in the release notes that has value for CMS users, then one "Other UI improvements" section with new features and bug fixes that are relevant for those users but didn’t get highlighted in the developer notes.
+
+#### Structure
+
+* Include screenshots or visual examples to illustrate interface improvements.
+* Provide concise, user-friendly summaries (ideally one to two sentences per feature).
+* Link to full technical release notes where appropriate.
+
+#### Content style
+
+* Replace technical jargon with plain language, using a neutral tone overall.
+* Describe functionality clearly from the user's perspective.
+* Clearly state how changes benefit or affect the user's workflow or experience.
+
+## Contributors
+
+### Content contributors
+
+The guides’ English content is brought to you by:
+
+* Damilola Oladele
+* Thibaud Colas
+* Meagen Voss
+* Elizabeth Bassey
+* Kelvin Obidozie
+* Marvis Chukwudi
+* Akua Dokua Asiedu
+* Jadesola Kareem
+* You? [Learn how to contribute to this guide](/en-latest/about/contributing/)
+
+### Translators
+
+#### Icelandic
+
+* Sævar Öfjörð Magnússon
+* Arnar Tumi Þorsteinsson
+
+#### Dutch
+
+* Coen van der Kamp
+
+#### Portuguese (Brazil)
+
+* Fábio Santos
+
+### Original docs.wagtail.org contributors
+
+The guide was initially exported from Wagtail’s developer documentation, with contributions by:
+
+* Thibaud Colas
+* Karl Hobley
+* Benedikt Breinbauer
+* Emily Topp-Mugglestone
+* Matt Westcott
+* Chris Rogers
+* LB
+* Dan Swain
+* Phil Dexter
+* Kalob Taulien
+* Cynthia Kiser
+* Lisa Ballam
+* Patrick Woods
+* Shohan Dutta Roy
+* Sævar Öfjörð Magnússon
+* Tim Heap
+* Brylie Christopher Oxley
+* Chris May
+* Dave Cranwell
+* Akua Dokua Asiedu
+* Dominik Lech
+* Eric Dyken
+* Eric Sherman
+* Gianluca De Cola
+* Helen Chapman
+* Jake Howard
+* Janneke Janssen
+* Jeffrey Hearn
+* John-Scott Atlakson
+* Kees Hink
+* Liam Brenner
+* Martey Dodoo
+* Naomi I. Morduch Toubman
+* Nick Smith
+* Shwet Khatri
+* Storm Heg
+* Tidiane Dia
+* Tom Dyson
+* Vlad Podgurschi
+* Aidarbek Suleimenov
+* dthompson86
+* Kevin Howbrook
+* Maarten Kling
+* mien
+* Damee Zivah Olawuyi
+
+## Website build contributors
+
+This website exists thanks to the hard work of a lot of our contributors.
+
+* Hitansh Shah
+* Coen van der Kamp
+* Meagen Voss
+* Phil Dexter
+* Thibaud Colas
+* Ben Enright
+* Jake Howard
+* LB
+* Sage Abdullah
+* Tom Dyson
+* Karl Hobley
+* Abigail Hampson
+* Nick Lee
+* Scott Cranfill
+* Sævar Öfjörð Magnússon
+* Victoria Ajala
+* Nick Vines
+* Julian Bigler
+* Alex Morega
+* Tidiane Dia
+
+### Outreachy December 2022 team
+
+The contents of the guide were heavily updated as part of [Outreachy December 2022](https://wagtail.org/blog/outreachy-welcoming-new-contributors-to-open-source/). The project team was:
+
+* [Damilola Oladele](https://github.com/activus-d), **Contributor**
+* Coen van der Kamp, **Mentor**
+* Thibaud Colas, **Mentor**
+* Storm Heg, **Mentor**
+* Jonny Peacock,** Mentor**
+* Stephanie Brown,** Mentor**
+
+### Google Summer of Code 2022 team
+
+This project was one of three being sponsored by Google as a part of [Google Summer of Code 2022](https://summerofcode.withgoogle.com/). The project team was:
+
+* [Hitansh Shah](https://github.com/Hitansh-Shah), **Contributor**
+* [Coen van der Kamp](https://github.com/allcaps), **Mentor**
+* [Meagen Voss](https://github.com/vossisboss), **Mentor**
+* [Thibaud Colas](https://github.com/thibaudcolas), **Mentor**
+
+Read Hitansh’s [Google Summer of Code: Wagtail Editor Guide](https://wagtail.org/blog/google-summer-of-code-wagtail-editor-guide/) report for more information about the project.
+
+

@@ -1,0 +1,53 @@
+# Wagtail user guide
+
+> This documentation is written for anyone creating content or managing content production in Wagtail. It covers everything you can expect when using a standard Wagtail site.
+
+View the full site contents: [llms-full.txt](https://guide.wagtail.org/llms-full.txt)
+
+## Table of Contents
+
+
+- [Wagtail user guide](https://guide.wagtail.org/en-latest/markdown/): This documentation is written for anyone creating content or managing content production in Wagtail. It covers everything you can expect when using a standard Wagtail site.
+- [Getting started](https://guide.wagtail.org/en-latest/getting-started/markdown/): Here are our step-by-step tutorials to learn Wagtail concepts.
+- [Overview](https://guide.wagtail.org/en-latest/getting-started/overview/markdown/): If you're brand new to Wagtail, we recommend you go through our guides in sequence. Otherwise, you can click through the different categories below to learn more about different aspects of Wagtail.
+- [How-to guides](https://guide.wagtail.org/en-latest/how-to-guides/markdown/): Use our guides to learn how to do a specific task in the CMS.
+- [Find your way around](https://guide.wagtail.org/en-latest/how-to-guides/find-your-way-around/markdown/): This section describes the different pages that you will see as you navigate around the CMS, and how you can find the content that you are looking for.
+- [Manage pages](https://guide.wagtail.org/en-latest/how-to-guides/manage-pages/markdown/): Create new pages by clicking the Add child page button. This creates a child page of the section you are currently in. In this case a child page of the 'Breads' page.
+- [Manage documents](https://guide.wagtail.org/en-latest/how-to-guides/manage-documents/markdown/): Documents such as PDFs can be managed from the Documents interface, available in the left-hand menu.
+- [Manage images](https://guide.wagtail.org/en-latest/how-to-guides/manage-images/markdown/): If you want to edit, add or remove images from the CMS outside of the individual pages you can do so from the Images interface.
+- [Manage snippets](https://guide.wagtail.org/en-latest/how-to-guides/manage-snippets/markdown/): Snippets allow you to create elements on a website once and reuse them in multiple places.
+- [Manage forms](https://guide.wagtail.org/en-latest/how-to-guides/manage-forms/markdown/)
+- [Manage collections](https://guide.wagtail.org/en-latest/how-to-guides/manage-collections/markdown/): Access to specific sets of images and documents can be controlled by setting up ‘collections’.
+- [Manage redirects](https://guide.wagtail.org/en-latest/how-to-guides/manage-redirects/markdown/): A redirect ensures that when a page is no longer available (404), the visitor and search engines are sent to a new page.
+- [Manage users and roles](https://guide.wagtail.org/en-latest/how-to-guides/manage-users-and-roles/markdown/): As an administrator, a common task will be adding, modifying or removing user profiles.
+- [Configure workflows for moderation](https://guide.wagtail.org/en-latest/how-to-guides/configure-workflows-for-moderation/markdown/): Workflows allow you to configure how moderation works on your site. Workflows are sequences of tasks, all of which must be approved before the workflow completes (by default, this results in the publication of the page, but depends on your site settings).
+- [Promote search results](https://guide.wagtail.org/en-latest/how-to-guides/promote-search-results/markdown/): Promoted search results are an optional Wagtail feature. For details of how to enable them on a Wagtail installation, see Promoted search results.
+- [Concepts](https://guide.wagtail.org/en-latest/concepts/markdown/): Wagtail has strong opinions about CMS best practices. This section describes why Wagtail works how it does from a user’s perspective.
+- [Wagtail interfaces](https://guide.wagtail.org/en-latest/concepts/wagtail-interfaces/markdown/): A Wagtail interface is a screen in the Wagtail portal where you can manage a particular content type. The following are the several interfaces available to you in the Wagtail CMS.
+- [Pages](https://guide.wagtail.org/en-latest/concepts/pages/markdown/): You can use Wagtail Pages to organize the content of your Wagtail websites. It's common for a typical website to have multiple web pages, and the web pages themselves can have several sections. The same is true for Wagtail pages.
+- [Reports](https://guide.wagtail.org/en-latest/concepts/reports/markdown/): Reports are lists of pages that match a specific search. These lists give you an overview of the different actions taken on your website.
+- [Users status](https://guide.wagtail.org/en-latest/concepts/users-status/markdown/): A Wagtail user can either be active or inactive. A user is active if they have the right permissions to log in and perform any action in the Admin interface.
+- [Page status](https://guide.wagtail.org/en-latest/concepts/page-status/markdown/): Page status has to do with the current state of your pages. Your pages can be in one of seven different states.
+- [Accessibility features](https://guide.wagtail.org/en-latest/concepts/accessibility-features/markdown/)
+- [Scheduled publishing](https://guide.wagtail.org/en-latest/concepts/scheduled-publishing/markdown/)
+- [Reference](https://guide.wagtail.org/en-latest/reference/markdown/): Our reference material gets to the point, giving the key information at a glance.
+- [Browser compatibility](https://guide.wagtail.org/en-latest/reference/browser-compatibility/markdown/): For the best experience and security, we recommend that you keep your browser up to date.
+- [Content checks](https://guide.wagtail.org/en-latest/reference/content-checks/markdown/)
+- [Account settings](https://guide.wagtail.org/en-latest/reference/account-settings/markdown/): User account settings are specific to your account. Includes user preferences, notification settings, and more.
+- [Releases](https://guide.wagtail.org/en-latest/releases/markdown/): Here are overviews of changes made to Wagtail in specific new releases.
+- [New in Wagtail 7.3](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-3/markdown/)
+- [New in Wagtail 7.2](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-2/markdown/)
+- [New in Wagtail 7.1](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-1/markdown/)
+- [New in Wagtail 7.0](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-0/markdown/)
+- [New in Wagtail 6.4](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-4/markdown/)
+- [New in Wagtail 6.3](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-3/markdown/): Highlights from the new admin features in Wagtail 6.3
+- [New in Wagtail 6.2](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-2/markdown/): Highlights from the new admin features in Wagtail 6.2
+- [New in Wagtail 6.1](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-1/markdown/)
+- [New in Wagtail 6.0](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-0/markdown/)
+- [New in Wagtail 5.2](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-5-2/markdown/)
+- [New in Wagtail 5.1](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-5-1/markdown/): Here are highlights from Wagtail 5.0. For more details, view the full v5.0 release notes.
+- [New in Wagtail 5.0](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-5-0/markdown/): Here are highlights from Wagtail 5.0. For more details, view the full v5.0 release notes.
+- [New in Wagtail 4.2](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-4-2/markdown/): With Wagtail 4.0, 4.1, and now 4.2 – we've added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team.
+- [New in Wagtail 4.1](https://guide.wagtail.org/en-latest/releases/new-in-wagtail-4-1/markdown/): With Wagtail 4.0 and 4.1, we've added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team.
+- [About](https://guide.wagtail.org/en-latest/about/markdown/): The User Guide is a website to help content editors, moderators, administrators, and other users learn how to use the Wagtail content management system (CMS).
+- [Contributing](https://guide.wagtail.org/en-latest/about/contributing/markdown/): We welcome all support, whether on bug reports, code, design, reviews, tests, documentation, translations or just feature requests.
