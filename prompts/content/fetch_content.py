@@ -59,7 +59,7 @@ def update_readme(token_counts: list[tuple[Path, int]]) -> None:
         "| --- | ---: |",
     ]
     for rel_path, tokens in token_counts:
-        link = f"[{rel_path}](en-latest/{rel_path})"
+        link = f"[{rel_path}](content/en-latest/{rel_path})"
         lines.append(f"| {link} | {tokens} |")
     lines += ["", end]
 
