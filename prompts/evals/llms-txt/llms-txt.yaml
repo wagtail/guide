@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
 prompts:
-  #- file://prompts/support-with-nothing.txt
-  #- file://prompts/support-with-instructions.txt
-  - file://prompts/support-with-llms.txt
+  # Separate prompts with more or less context to 
+  - file://prompts/support-with-instructions.txt
+  - file://./support-with-llms.txt
   - file://./support-with-llms-full.txt
 providers:
   # - id: openrouter:mistralai/ministral-14b-2512
