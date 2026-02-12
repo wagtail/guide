@@ -1,0 +1,65 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+prompts:
+  - file://./image-prompt.json
+providers:
+  - id: openai:chat:mistral-small-3.2-24b-instruct-2506
+    config:
+      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
+      apiKey: '{{ env.SCW_SECRET_KEY }}'
+  - id: openai:chat:holo2-30b-a3b
+    config:
+      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
+      apiKey: '{{ env.SCW_SECRET_KEY }}'
+  - id: openai:chat:gpt-4.1-mini
+defaultTest:
+  options:
+    temperature: 0.7
+  assert:
+    # Must be a single line (no newlines).
+    - type: regex
+      value: "^[^\\n]+$"
+    # Must not be wrapped in quotes.
+    - type: not-regex
+      value: '^["''].*["'']$'
+    # Must not contain HTML tags.
+    - type: not-contains-html
+    # Must use sentence case, not Title Case (no consecutive capitalised words)
+    - type: not-regex
+      value: "\\b[A-Z][a-z]+\\s[A-Z][a-z]+\\s[A-Z][a-z]+"
+tests:
+  - description: Image title
+    vars:
+      prompt: 'Generate a title (in plain text, no longer than {{ max_length }} characters, without quotes) for the following image:'
+      max_length: 255
+      image_url: 'https://guide-media.wagtail.org/images/Keyboard_shortcuts_dialog_tWoC6ww.width-900.png'
+  - description: Image description
+    vars:
+      prompt: 'Generate a description (in plain text, no longer than {{ max_length }} characters) for the following image:'
+      max_length: 255
+      image_url: 'https://guide-media.wagtail.org/images/Keyboard_shortcuts_dialog_tWoC6ww.width-900.png'
+  - description: Non-contextual alt text
+    vars:
+      prompt: 'Generate an alt text (and only the text) for the following image:'
+      image_url: 'https://guide-media.wagtail.org/images/Keyboard_shortcuts_dialog_tWoC6ww.width-900.png'
+  - description: Contextual alt text
+    vars:
+      prompt: |-
+        Generate an alt text (and only the text) for the following image:
+        {{ image }}
+
+        Make the alt text relevant to the following content shown before the image:
+
+        ---
+        {{ form_context_before }}
+        ---
+
+        and also relevant to the following content shown after the image:
+
+        ---
+        {{ form_context_after }}
+      image: |
+        ![Keyboard shortcuts dialog]({{ image_url }})
+      image_url: 'https://guide-media.wagtail.org/images/Keyboard_shortcuts_dialog_tWoC6ww.width-900.png'
+      page: file://../../content/en-latest/concepts/accessibility-features.md
+    options:
+      transformVars: file://transform_vars.py

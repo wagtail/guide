@@ -1,0 +1,89 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+prompts:
+  - id: page-title
+    raw: |-
+      Create an SEO-friendly page title, and respond ONLY with the title in plain text (without quotes), for the following page content:
+
+      {{ content }}
+  - id: page-description
+    raw: |-
+      Create an SEO-friendly meta description, and respond ONLY with the description in plain text (without quotes), for the following page content:
+
+      {{ content }}
+providers:
+  - id: openai:chat:mistralai/ministral-3-3b
+    config:
+      apiBaseUrl: http://127.0.0.1:1234/v1
+      apiKey: not-needed
+  - id: openai:chat:mistral-small-3.2-24b-instruct-2506
+    config:
+      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
+      apiKey: '{{ env.SCW_SECRET_KEY }}'
+  - id: openai:chat:gpt-oss-120b
+    config:
+      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
+      apiKey: '{{ env.SCW_SECRET_KEY }}'
+      showThinking: false
+  - id: anthropic:messages:claude-opus-4-5-20251101
+defaultTest:
+  options:
+    temperature: 0.7
+  assert:
+    # Must be a single line (no newlines).
+    - type: regex
+      value: "^[^\\n]+$"
+    # Must not be wrapped in quotes.
+    - type: not-regex
+      value: '^["''].*["'']$'
+    # Must not contain HTML tags.
+    - type: not-contains-html
+    # Must use sentence case, not Title Case (no consecutive capitalised words)
+    - type: not-regex
+      value: "\\b[A-Z][a-z]+\\s[A-Z][a-z]+\\s[A-Z][a-z]+"
+    # Must not contain common LLM preamble
+    - type: not-icontains-any
+      value:
+        - 'Title:'
+        - 'Description:'
+        - 'SEO'
+tests:
+  - description: Page titles
+    vars:
+      content:
+        - file://../content/en-latest/how-to-guides/manage-pages.md
+        - file://../content/en-latest/reference/content-checks.md
+        - file://../content/en-latest/releases/new-in-wagtail-7-3.md
+    prompts:
+      - page-title
+    assert:
+      - $ref: '#/assertionTemplates/seoTitle'
+  - description: Page descriptions
+    vars:
+      content:
+        - file://../content/en-latest/how-to-guides/manage-pages.md
+        - file://../content/en-latest/reference/content-checks.md
+        - file://../content/en-latest/releases/new-in-wagtail-7-3.md
+    prompts:
+      - page-description
+    assert:
+      - $ref: '#/assertionTemplates/seoDescription'
+
+assertionTemplates:
+  seoTitle:
+    type: assert-set
+    assert:
+      - type: regex
+        value: '^.{10,70}$'
+      - type: word-count
+        value:
+          min: 2
+          max: 15
+  seoDescription:
+    type: assert-set
+    assert:
+      - type: regex
+        value: '^.{100,160}$'
+      - type: word-count
+        value:
+          min: 10
+          max: 30

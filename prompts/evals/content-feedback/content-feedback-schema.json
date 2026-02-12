@@ -1,0 +1,74 @@
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "ContentFeedbackSchema",
+    "strict": true,
+    "schema": {
+      "title": "ContentFeedbackSchema",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "quality_score",
+        "qualitative_feedback",
+        "specific_improvements"
+      ],
+      "$defs": {
+        "QualityScore": {
+          "enum": [1, 2, 3],
+          "title": "QualityScore",
+          "type": "integer"
+        },
+        "SpecificImprovement": {
+          "properties": {
+            "original_text": {
+              "description": "The original text that needs improvement",
+              "title": "Original Text",
+              "type": "string"
+            },
+            "suggested_text": {
+              "description": "The suggested revised text in the content's language, in plain text",
+              "title": "Suggested Text",
+              "type": "string"
+            },
+            "explanation": {
+              "description": "A brief explanation in plain text in the editor's language for why this change would improve the content",
+              "title": "Explanation",
+              "type": "string"
+            }
+          },
+          "required": ["original_text", "suggested_text", "explanation"],
+          "title": "SpecificImprovement",
+          "type": "object",
+          "additionalProperties": false
+        }
+      },
+      "properties": {
+        "quality_score": {
+          "description": "Quality score between 1 and 3 (1=needs major improvement, 2=adequate, 3=excellent)",
+          "enum": [1, 2, 3],
+          "title": "QualityScore",
+          "type": "integer"
+        },
+        "qualitative_feedback": {
+          "description": "3-5 bullet points of qualitative feedback highlighting strengths and areas for improvement",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5,
+          "minItems": 3,
+          "title": "Qualitative Feedback",
+          "type": "array"
+        },
+        "specific_improvements": {
+          "description": "Specific text improvements with original text, suggested text, and explanation",
+          "items": {
+            "$ref": "#/$defs/SpecificImprovement"
+          },
+          "minItems": 1,
+          "title": "Specific Improvements",
+          "type": "array"
+        }
+      }
+    }
+  }
+}

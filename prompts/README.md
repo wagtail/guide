@@ -6,6 +6,22 @@ We use LLMs to help manage the site’s contents and experiment with the [Wagtai
 -   Increased reusability of the contents. We want the content to be simple to access in its original format but also reusable for custom guides.
 -   Dogfooding with real-world content. Being able to work on Wagtail features that are only testable with real-world data and use cases.
 
+In addition to AI integrations within Django/Wagtail, the project also uses [Promptfoo](https://www.promptfoo.dev/docs/intro/) to test its prompts with eval suites.
+
+## llms.txt prompts
+
+Use Promptfoo to check whether the project’s llms.txt content helps in answering common questions about the site.
+
+```bash
+promptfoo eval -c prompts/evals/llms-txt/llms-txt.yaml
+```
+
+## Wagtail AI prompts
+
+```bash
+promptfoo eval -c prompts/evals/page-meta.yaml
+```
+
 ## Website contents
 
 We version the site’s contents to simplify experimentation with different AI prompts. Run `./prompts/content/fetch_content.py && npm run format` to retrieve the latest copy.
@@ -16,8 +32,8 @@ We version the site’s contents to simplify experimentation with different AI p
 
 Token counts (gpt-oss-120b):
 
-| File                                                                                                                 | Tokens |
-| -------------------------------------------------------------------------------------------------------------------- | -----: |
+| File                                                                                                                         | Tokens |
+| ---------------------------------------------------------------------------------------------------------------------------- | -----: |
 | [llms.txt](content/en-latest/llms.txt)                                                                                       |   2168 |
 | [llms-full.txt](content/en-latest/llms-full.txt)                                                                             |  36705 |
 | [markdown.md](content/en-latest/markdown.md)                                                                                 |    271 |

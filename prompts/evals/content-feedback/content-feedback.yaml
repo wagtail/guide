@@ -1,0 +1,72 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+prompts:
+  - file://./content-feedback-prompt.json
+providers:
+  - id: openai:chat:mistralai/ministral-3-3b
+    config:
+      apiBaseUrl: http://127.0.0.1:1234/v1
+      apiKey: not-needed
+      response_format: file://./content-feedback-schema.json
+      max_tokens: 8192
+  - id: openai:chat:mistral-small-3.2-24b-instruct-2506
+    config:
+      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
+      apiKey: '{{ env.SCW_SECRET_KEY }}'
+      response_format: file://./content-feedback-schema.json
+  - id: openai:chat:gpt-4.1-mini
+    config:
+      response_format: file://./content-feedback-schema.json
+
+defaultTest:
+  options:
+    temperature: 0.7
+    transform: JSON.parse(output)
+  vars:
+    editor_language: English
+    content_language: English
+    content_feedback_prompt: ''
+  assert:
+    - type: finish-reason
+      value: stop
+    # Output must be valid JSON matching the ContentFeedbackSchema.
+    - type: is-json
+      value:
+        type: object
+        required:
+          - quality_score
+          - qualitative_feedback
+          - specific_improvements
+        properties:
+          quality_score:
+            type: integer
+            enum: [1, 2, 3]
+          qualitative_feedback:
+            type: array
+            items:
+              type: string
+            minItems: 3
+            maxItems: 5
+          specific_improvements:
+            type: array
+            minItems: 1
+            items:
+              type: object
+              required:
+                - original_text
+                - suggested_text
+                - explanation
+              properties:
+                original_text:
+                  type: string
+                suggested_text:
+                  type: string
+                explanation:
+                  type: string
+        additionalProperties: false
+tests:
+  - description: Sample pages
+    vars:
+      content:
+        - file://../../content/en-latest/how-to-guides/manage-pages.md
+        - file://../../content/en-latest/reference/content-checks.md
+        - file://../../content/en-latest/releases/new-in-wagtail-7-3.md
