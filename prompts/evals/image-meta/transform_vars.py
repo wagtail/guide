@@ -1,5 +1,4 @@
 from pathlib import Path
-import os
 
 
 def get_transform(vars, context):
