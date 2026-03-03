@@ -1,0 +1,53 @@
+import os
+
+# Overrides to run Wagtail AI with a local LLM.
+WAGTAIL_AI = {
+    "BACKENDS": {
+        "default": {
+            "CLASS": "wagtail_ai.ai.llm.LLMBackend",
+            "CONFIG": {
+                "MODEL_ID": os.environ.get(
+                    "WAGTAIL_AI_DEFAULT_MODEL_ID", "mistralai/ministral-3-3b"
+                ),
+                "TOKEN_LIMIT": int(
+                    os.environ.get("WAGTAIL_AI_DEFAULT_TOKEN_LIMIT", 32768)
+                ),
+            },
+        },
+        "vision": {
+            "CLASS": "wagtail_ai.ai.openai.OpenAIBackend",
+            "CONFIG": {
+                "MODEL_ID": os.environ.get(
+                    "WAGTAIL_AI_VISION_MODEL_ID", "mistralai/ministral-3-3b"
+                ),
+                "TOKEN_LIMIT": int(
+                    os.environ.get("WAGTAIL_AI_VISION_TOKEN_LIMIT", 32768)
+                ),
+            },
+        },
+    },
+    "IMAGE_DESCRIPTION_PROVIDER": "vision",
+    "PROVIDERS": {
+        "default": {
+            "provider": os.environ.get("WAGTAIL_AI_DEFAULT_PROVIDER", "openai"),
+            "model": os.environ.get(
+                "WAGTAIL_AI_DEFAULT_MODEL", "mistralai/ministral-3-3b"
+            ),
+            "api_key": os.environ.get("WAGTAIL_AI_DEFAULT_API_KEY", "not-needed"),
+            "api_base": os.environ.get(
+                "WAGTAIL_AI_DEFAULT_API_BASE", "http://127.0.0.1:1234/v1"
+            ),
+        },
+        "vision": {
+            "provider": os.environ.get("WAGTAIL_AI_VISION_PROVIDER", "mistral"),
+            "model": os.environ.get(
+                "WAGTAIL_AI_VISION_MODEL",
+                "mistralai/ministral-3-3b",
+            ),
+            "api_key": os.environ.get("WAGTAIL_AI_VISION_API_KEY", "not-needed"),
+            "api_base": os.environ.get(
+                "WAGTAIL_AI_VISION_API_BASE", "http://127.0.0.1:1234/v1"
+            ),
+        },
+    },
+}
