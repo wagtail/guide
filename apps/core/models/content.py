@@ -50,7 +50,7 @@ class ContentPage(MarkdownRouteMixin, Page):
         context = super().get_context(request, *args, **kwargs)
 
         if self.live and self.show_in_menus:
-            pages = Page.objects.live().in_menu()
+            pages = Page.objects.live().public().in_menu()
             context.update(
                 previous=pages.filter(path__lt=self.path).last(),
                 next=pages.filter(path__gt=self.path).first(),

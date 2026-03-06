@@ -1,4 +1,5 @@
 from django.test import TestCase
+from wagtail.models import PageViewRestriction
 
 from apps.core.factories import ContentPageFactory, HomePageFactory
 
@@ -32,3 +33,16 @@ class TestNavigationButtons(TestCase):
         self.assertIsNone(self.res_last_child.context["next"])
         self.assertEqual(self.res_subchild1.context["next"].specific, self.subchild2)
         self.assertEqual(self.res_subchild2.context["next"].specific, self.last_child)
+
+    def test_previous_next_exclude_private_pages(self):
+        private_page = ContentPageFactory(parent=self.first_child, title="Private")
+        PageViewRestriction.objects.create(
+            page=private_page,
+            restriction_type=PageViewRestriction.LOGIN,
+        )
+
+        res_subchild2 = self.client.get(self.subchild2.url)
+        res_last_child = self.client.get(self.last_child.url)
+
+        self.assertEqual(res_subchild2.context["next"].specific, self.last_child)
+        self.assertEqual(res_last_child.context["previous"].specific, self.subchild2)
