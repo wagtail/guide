@@ -19,6 +19,7 @@ def header(context):
         Page.objects.descendant_of(home)
         .filter(depth__gt=2, depth__lte=4)
         .live()
+        .public()
         .in_menu()
     )
     return {

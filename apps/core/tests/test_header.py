@@ -1,7 +1,7 @@
 from django.template import Context, Template
 from django.test import TestCase
 from django.utils import translation
-from wagtail.models import Page
+from wagtail.models import Page, PageViewRestriction
 
 from apps.core.factories import HomePageFactory
 
@@ -45,3 +45,22 @@ class TestHeader(TestCase):
         self.assertIn('href="/en-latest/a/ab/"', result)
         self.assertIn('href="/en-latest/a/ac/"', result)
         self.assertIn('href="/en-latest/b/"', result)
+
+    def test_header_excludes_private_pages(self):
+        """Descendants of private pages should also be excluded from the nav."""
+        private_section = Page(title="members", slug="members", show_in_menus=True)
+        self.home.add_child(instance=private_section)
+
+        PageViewRestriction.objects.create(
+            page=private_section,
+            restriction_type=PageViewRestriction.LOGIN,
+        )
+
+        member_page = Page(title="member-only", slug="member-only", show_in_menus=True)
+        private_section.add_child(instance=member_page)
+
+        translation.activate(self.home.locale.language_code)
+        template = Template("{% load core_tags %}{% header %}")
+        result = template.render(Context({}))
+
+        self.assertNotIn('members"', result)
