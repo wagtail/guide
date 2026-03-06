@@ -47,7 +47,6 @@ class TestHeader(TestCase):
         self.assertIn('href="/en-latest/b/"', result)
 
     def test_header_excludes_private_pages(self):
-        """Descendants of private pages should also be excluded from the nav."""
         private_section = Page(title="members", slug="members", show_in_menus=True)
         self.home.add_child(instance=private_section)
 

@@ -50,6 +50,7 @@ def hreflangs(context):
     translation_language_codes = (
         page.get_translations()
         .live()
+        .public()
         .filter(locale__language_code__endswith=version)
         .values_list("locale__language_code", flat=True)
     )
