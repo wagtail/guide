@@ -15,7 +15,10 @@ def search(request):
     # Search
     if search_query:
         search_results = (
-            Page.objects.live().filter(locale=Locale.get_active()).search(search_query)
+            Page.objects.live()
+            .public()
+            .filter(locale=Locale.get_active())
+            .search(search_query)
         )
         query = Query.get(search_query)
 
@@ -64,6 +67,7 @@ def search_json(request):
     if search_query := request.GET.get("query"):
         search_results = (
             Page.objects.live()
+            .public()
             .filter(locale=Locale.get_active())
             .autocomplete(search_query)
         )
