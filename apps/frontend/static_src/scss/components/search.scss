@@ -47,3 +47,10 @@
         }
     }
 }
+
+.search .modal-content {
+    background-color: light-dark($color--white, $color--off-black);
+    color: light-dark($color--off-black, $color--light-grey);
+    border-radius: $border-radius--lg;
+    border: 1px solid light-dark($color--light-grey, $color--grey);
+}

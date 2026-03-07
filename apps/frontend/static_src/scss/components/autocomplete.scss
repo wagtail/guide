@@ -1,13 +1,14 @@
 .autocomplete {
     $root: &;
     $row-spacing: ($gutter * 2);
+    $meta-color: light-dark($color--grey, $color--light-teal);
 
     &__count {
         @include fs(s);
         position: absolute;
         top: $gutter;
         inset-inline-end: 0;
-        color: $color--grey;
+        color: $meta-color;
         font-weight: 500;
         padding: 0 $row-spacing;
         margin-bottom: $gutter;
@@ -17,16 +18,20 @@
     &__row {
         display: block;
         padding: $gutter $row-spacing;
-        border-top: 1px solid $color--light-grey;
+        border-top: 1px solid light-dark($color--light-grey, $color--grey);
+
+        &__row {
+            border-top-color: $color--grey;
+        }
         text-decoration: none;
         transition: background-color $transition;
 
         &:hover,
         &:focus {
-            background-color: $color--light-grey;
+            background-color: light-dark($color--light-grey, $color--grey);
 
             #{$root}__heading {
-                color: $color--primary;
+                color: light-dark($color--primary, $color--light-teal);
                 text-decoration: underline;
             }
         }
@@ -40,7 +45,7 @@
         @include fs(s);
         font-weight: 700;
         margin-bottom: 5px;
-        color: $color--off-black;
+        color: light-dark($color--off-black, $color--light-grey);
         transition: color $transition;
     }
 
@@ -48,12 +53,12 @@
         @include fs(xxs);
         // stylelint-disable-next-line property-disallowed-list
         text-transform: uppercase;
-        color: $color--grey;
+        color: $meta-color;
     }
 
     &__description {
         @include fs(xs);
-        color: $color--grey;
+        color: $meta-color;
         margin-bottom: 0;
     }
 }
