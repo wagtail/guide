@@ -1,9 +1,9 @@
 {% load manifest i18n %}
 
-<div class="modal fade" id="search-modal" tabindex="-1" aria-hidden="true">
+<div class="search modal fade" id="search-modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form class="search" action="{% url 'search' %}" method="get">
+            <form action="{% url 'search' %}" method="get">
                 <div class="search__container modal-body">
                     <label for="search" class="u-sr-only">{% trans 'Search' %}</label>
                     <input type="text" id="search" name="query" data-search-input placeholder="{% trans 'Search' %}…" class="search__input">
