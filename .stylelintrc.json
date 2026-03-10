@@ -2,7 +2,7 @@
   "extends": ["@wagtail/stylelint-config-wagtail"],
   "rules": {
     "scale-unlimited/declaration-strict-value": [
-      ["/color/", "fill", "stroke"],
+      ["color", "/-color/", "fill", "stroke"],
       {
         "ignoreValues": [
           "currentColor",
