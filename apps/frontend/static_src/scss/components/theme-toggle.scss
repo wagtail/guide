@@ -10,7 +10,7 @@
 
     &__label {
         @include fs(xxs);
-        color: $color--off-black;
+        color: light-dark($color--off-black, $color--light-grey);
     }
 
     &__button {
@@ -25,7 +25,7 @@
         margin: 0 ($gutter * 0.5);
         display: inline-block;
         cursor: pointer;
-        background: $color--grey;
+        background: light-dark($color--grey, $color--light-grey);
 
         &::before {
             top: 4px;
@@ -36,7 +36,7 @@
             display: block;
             position: absolute;
             border-radius: 12px;
-            background-color: $color--light-grey;
+            background-color: light-dark($color--light-grey, $color--black);
             transition: inset-inline-start $transition;
         }
 
@@ -49,7 +49,7 @@
             display: block;
             position: absolute;
             border-radius: 0.5px;
-            background: $color--off-black;
+            background: light-dark($color--off-black, $color--light-grey);
         }
     }
 
@@ -57,7 +57,7 @@
         display: none;
     }
 
-    .theme-dark & {
+    :has([name='color-scheme'][content^='dark']) & {
         .dark-only {
             display: block;
         }
@@ -67,25 +67,17 @@
         }
 
         #{$root}__button {
-            background: $color--light-grey;
-
             &::before {
-                background: $color--black;
                 inset-inline-start: 4px;
             }
 
             &::after {
-                background: $color--light-grey;
                 top: -2px;
                 inset-inline-end: 2px;
                 width: 32px;
                 height: 32px;
                 border-radius: 16px;
             }
-        }
-
-        #{$root}__label {
-            color: $color--light-grey;
         }
     }
 }

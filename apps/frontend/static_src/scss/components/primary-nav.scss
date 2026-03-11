@@ -2,7 +2,7 @@
     display: none;
     position: absolute;
     z-index: 5;
-    background-color: $color--page-bg;
+    background-color: light-dark($color--page-bg, $color--off-black);
     padding: ($gutter * 6) $gutter ($gutter * 2);
     top: 0;
     inset-inline-end: -$gutter;
@@ -32,13 +32,5 @@
 
     &.is-visible {
         display: block;
-    }
-
-    .theme-dark & {
-        background-color: $color--off-black;
-
-        @include media-query(large) {
-            background-color: transparent;
-        }
     }
 }

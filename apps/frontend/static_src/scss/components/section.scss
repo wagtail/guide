@@ -31,11 +31,15 @@
         min-width: 100px;
         max-width: 100px;
         margin-inline-end: ($gutter * 2);
+
+        .svg_icon__original_path {
+            fill: light-dark(currentcolor, $color--white);
+        }
     }
 
     &__heading {
         @include fs(xl);
-        color: $color--black;
+        color: light-dark($color--black, $color--white);
         margin-bottom: ($gutter * 0.25);
         font-weight: 700;
         transition: color $transition;
@@ -43,27 +47,7 @@
 
     &__description {
         @include fs(xs);
-        color: $color--grey;
+        color: light-dark($color--grey, $color--light-grey);
         margin: 0;
-    }
-
-    .theme-dark & {
-        #{$root}__heading {
-            color: $color--white;
-        }
-
-        #{$root}__description {
-            color: $color--light-grey;
-        }
-
-        #{$root}__icon {
-            .svg_icon__original_path {
-                fill: $color--white;
-            }
-
-            .svg_icon__animated_path {
-                opacity: 0.9;
-            }
-        }
     }
 }
