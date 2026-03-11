@@ -1,7 +1,6 @@
 import json
 
 from bs4 import BeautifulSoup
-from django.db import models
 from django.http import HttpResponse
 from django.template import Context, Template
 from django.utils.text import slugify
@@ -20,14 +19,52 @@ from ..blocks import CONTENT_BLOCKS
 def create_table_of_contents(body):
     template = Template("{% load wagtailcore_tags %}{% include_block body %}")
     content = template.render(Context({"body": body}))
+
     soup = BeautifulSoup(content, "lxml")
     headings = soup.select("h2,h3")
     toc = ""
     if headings:
         toc += "<ul>"
+        # Track the current state of nesting
+        in_h2_li = False
+        in_nested_ul = False
+
         for heading in headings:
             anchor = heading.attrs.get("id", slugify(heading.text))
-            toc += f'<li><a href="#{anchor}">{heading.text}</a></li>'
+
+            if heading.name == "h2":
+                # If we were in a nested ul (under a previous h2), close it
+                if in_nested_ul:
+                    toc += "</ul>"
+                    in_nested_ul = False
+
+                # If we were in an h2 li, close it
+                if in_h2_li:
+                    toc += "</li>"
+
+                # Start new h2 li
+                toc += f'<li><a href="#{anchor}">{heading.text}</a>'
+                in_h2_li = True
+
+            elif heading.name == "h3":
+                # If this H3 is the very first thing or we are strictly compliant,
+                # it should be inside an LI.
+                # If we are inside an h2_li, we can open a nested UL.
+                if in_h2_li:
+                    if not in_nested_ul:
+                        toc += "<ul>"
+                        in_nested_ul = True
+                    toc += f'<li><a href="#{anchor}">{heading.text}</a></li>'
+                else:
+                    # Fallback for H3 at top level (orphaned)
+                    toc += f'<li><a href="#{anchor}">{heading.text}</a></li>'
+
+        # Cleanup at the end
+        if in_nested_ul:
+            toc += "</ul>"
+        if in_h2_li:
+            toc += "</li>"
+
         toc += "</ul>"
     return toc
 
@@ -37,7 +74,10 @@ class ContentPage(MarkdownRouteMixin, Page):
     subpage_types = ["core.ContentPage"]
 
     body = StreamField(CONTENT_BLOCKS)
-    table_of_contents = models.TextField(blank=True)
+
+    @property
+    def table_of_contents(self):
+        return create_table_of_contents(self.body)
 
     content_panels = [
         AITitleFieldPanel("title"),
@@ -77,7 +117,3 @@ class ContentPage(MarkdownRouteMixin, Page):
             return HttpResponse(json.dumps(data))
         else:
             return super().serve(request, *args, **kwargs)
-
-    def save_revision(self, *args, **kwargs):
-        self.table_of_contents = create_table_of_contents(self.body)
-        return super().save_revision(*args, **kwargs)
