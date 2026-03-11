@@ -13,7 +13,7 @@
     &:hover,
     &:focus {
         #{$root}__line {
-            background-color: $color--primary;
+            background-color: light-dark($color--primary, $color--light-teal);
         }
     }
 
@@ -24,7 +24,7 @@
         width: 21px;
         height: 3px;
         border-radius: 4px;
-        background-color: $color--black;
+        background-color: light-dark($color--black, $color--white);
         opacity: 1;
         transform: translateX(-50%) rotate(0deg);
         transition: top $transition, width $transition, opacity $transition,
@@ -73,19 +73,6 @@
             .is-open & {
                 width: 0%;
                 inset: 15px auto auto 50%;
-            }
-        }
-    }
-
-    .theme-dark & {
-        #{$root}__line {
-            background-color: $color--white;
-        }
-
-        &:hover,
-        &:focus {
-            #{$root}__line {
-                background-color: $color--light-teal;
             }
         }
     }

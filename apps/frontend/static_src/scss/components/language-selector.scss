@@ -1,15 +1,14 @@
 .language-selector {
-    $root: &;
     overflow: hidden;
 
     &__toggle {
         @include fs(xxs);
         font-weight: 500;
         padding: 10px;
-        background-color: $color--white;
+        background-color: light-dark($color--white, $color--black);
         border: 1px solid rgba($color--grey, 0.4);
         border-radius: $border-radius--m;
-        color: $color--off-black;
+        color: light-dark($color--off-black, $color--light-grey);
         cursor: pointer;
         transition: color $transition;
 
@@ -20,18 +19,20 @@
 
         &:hover,
         &:focus {
-            color: $color--active;
-            border-color: $color--active;
+            color: light-dark($color--active, $color--light-teal);
+            border-color: light-dark($color--active, $color--light-teal);
         }
     }
 
     &__dropdown {
-        --bs-dropdown-bg: #{$color--white};
+        --bs-dropdown-bg: #{light-dark($color--white, $color--black)};
         overflow: hidden;
         border-radius: $border-radius--m;
         border: 1px solid rgba($color--off-black, 0.15);
         box-shadow: 0 0.5rem 1rem rgba($color--black, 0.15);
         padding: 0.5rem 0;
+        background-color: light-dark($color--white, $color--black);
+        color: light-dark($color--off-black, $color--light-grey);
     }
 
     &__dropdown-item {
@@ -41,20 +42,11 @@
         white-space: nowrap;
         max-width: 200px;
         width: auto;
-    }
 
-    .theme-dark & {
-        #{$root}__toggle,
-        #{$root}__dropdown {
-            background-color: $color--black;
-            color: $color--light-grey;
-        }
-        #{$root}__dropdown-item {
-            &:hover,
-            &:focus {
-                color: $color--light-teal;
-                border-color: $color--light-teal;
-            }
+        &:hover,
+        &:focus {
+            color: light-dark(currentcolor, $color--light-teal);
+            border-color: light-dark(currentcolor, $color--light-teal);
         }
     }
 }

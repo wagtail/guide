@@ -8,34 +8,20 @@ html {
 }
 
 body {
-    background-color: $color--page-bg;
-    color: $color--off-black;
+    background-color: light-dark($color--page-bg, $color--off-black);
+    color: light-dark($color--off-black, $color--light-grey);
 
     &.no-scroll {
         overflow-y: hidden;
     }
-
-    &.theme-dark {
-        background-color: $color--off-black;
-        color: $color--light-grey;
-    }
 }
 
 a {
-    color: $color--primary;
+    color: light-dark($color--primary, $color--light-teal);
     transition: color $transition;
 
     &:hover,
     &:focus {
-        color: $color--black;
-    }
-
-    .theme-dark & {
-        color: $color--light-teal;
-
-        &:hover,
-        &:focus {
-            color: $color--white;
-        }
+        color: light-dark($color--black, $color--white);
     }
 }

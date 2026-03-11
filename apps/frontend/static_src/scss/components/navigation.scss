@@ -1,5 +1,4 @@
 .navigation {
-    $root: &;
     list-style: none;
     padding: 2px 0 2px 2px; // to prevent outline being cropped off
     margin: 0;
@@ -18,12 +17,12 @@
         padding: 5px 10px;
         border-radius: $border-radius;
         text-decoration: none;
-        color: $color--off-black;
+        color: light-dark($color--off-black, $color--light-grey);
         transition: color $transition, background-color $transition;
 
         &:hover,
         &:focus {
-            background-color: $color--white;
+            background-color: light-dark($color--white, $color--black);
         }
 
         &--heading {
@@ -32,24 +31,8 @@
         }
 
         &.active {
-            background-color: $color--active;
-            color: $color--white;
-        }
-    }
-
-    .theme-dark & {
-        #{$root}__link {
-            color: $color--light-grey;
-
-            &:hover,
-            &:focus {
-                background-color: $color--black;
-            }
-
-            &.active {
-                background-color: $color--light-teal;
-                color: $color--black;
-            }
+            background-color: light-dark($color--active, $color--light-teal);
+            color: light-dark($color--white, $color--black);
         }
     }
 }

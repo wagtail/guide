@@ -29,9 +29,9 @@
         @include fs(xxs);
         font-weight: 500;
         padding: 10px;
-        background-color: $color--white;
+        background-color: light-dark($color--white, $color--black);
         border: 1px solid rgba($color--grey, 0.4);
-        color: $color--off-black;
+        color: light-dark($color--off-black, $color--light-grey);
         cursor: pointer;
         transition: color $transition;
         position: relative;
@@ -43,35 +43,21 @@
 
         &:hover,
         &:focus {
-            color: $color--active;
-            border-color: $color--active;
+            color: light-dark($color--active, $color--light-teal);
+            border-color: light-dark($color--active, $color--light-teal);
             // Show a full outline around the button.
             z-index: 3;
-        }
-
-        .theme-dark & {
-            background-color: $color--black;
-            color: $color--light-grey;
-
-            &:hover,
-            &:focus {
-                color: $color--light-teal;
-                border-color: $color--light-teal;
-            }
         }
     }
 
     .dropdown-menu {
         --bs-dropdown-padding-y: 0.25rem;
-        --bs-dropdown-bg: #{$color--white};
+        --bs-dropdown-bg: light-dark(#{$color--white}, #{$color--black});
         --bs-dropdown-border-radius: #{$border-radius--m};
         border: 1px solid rgba($color--off-black, 0.15);
         box-shadow: 0 0.5rem 1rem rgba($color--black, 0.15);
-
-        .theme-dark & {
-            background-color: $color--black;
-            color: $color--white;
-        }
+        background-color: light-dark($color--white, $color--black);
+        color: light-dark(currentcolor, $color--white);
     }
 
     .dropdown-item {
@@ -82,15 +68,10 @@
 
         &:hover,
         &:active {
-            color: $color--active;
+            color: light-dark($color--active, $color--light-teal);
+            background-color: light-dark(transparent, rgba($color--white, 0.1));
         }
 
-        .theme-dark & {
-            color: $color--light-grey;
-
-            &:hover {
-                background-color: rgba($color--white, 0.1);
-            }
-        }
+        color: light-dark(currentcolor, $color--light-grey);
     }
 }

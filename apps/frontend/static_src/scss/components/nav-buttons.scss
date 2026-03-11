@@ -1,5 +1,4 @@
 .nav-buttons {
-    $root: &;
     display: flex;
     justify-content: space-between;
     margin-bottom: ($gutter * 3);
@@ -13,7 +12,7 @@
         display: flex;
         align-items: center;
         padding: ($gutter * 0.5) $gutter;
-        border: 1px solid $color--off-black;
+        border: 1px solid light-dark($color--off-black, $color--light-grey);
         border-radius: $border-radius--lg;
         color: $color--off-black;
         text-decoration: none;
@@ -44,11 +43,5 @@
     &__label {
         @include fs(xs);
         font-weight: 700;
-    }
-
-    .theme-dark & {
-        #{$root}__link {
-            border-color: $color--light-grey;
-        }
     }
 }
