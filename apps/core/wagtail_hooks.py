@@ -1,14 +1,20 @@
 import wagtail.admin.rich_text.editors.draftail.features as draftail_features
+from django.urls import reverse
 from wagtail import hooks
+from wagtail.admin.menu import MenuItem
 from wagtail.admin.rich_text.converters.html_to_contentstate import (
     InlineStyleElementHandler,
 )
+from wagtail.admin.ui.components import Component
 from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
 from wagtail_ai.panels import AIDescriptionFieldPanel
 
 from apps.core.models.feedback import Feedback
+
+STYLE_GUIDE_URL = "https://github.com/wagtail/guide/blob/main/docs/style-guide.md"
+CONTRIBUTING_URL = "https://github.com/wagtail/guide/blob/main/CONTRIBUTING.md"
 
 
 class FeedbackViewSet(SnippetViewSet):
@@ -22,6 +28,72 @@ class FeedbackViewSet(SnippetViewSet):
 
 
 register_snippet(FeedbackViewSet)
+
+
+class CMSResourcesPanel(Component):
+    order = 50
+    template_name = "core/admin/cms_resources_panel.html"
+
+    def get_context_data(self, parent_context):
+        context = super().get_context_data(parent_context)
+        context["style_guide_url"] = STYLE_GUIDE_URL
+        context["contributing_url"] = CONTRIBUTING_URL
+        return context
+
+
+@hooks.register("construct_homepage_panels")
+def add_cms_resources_panel(request, panels):
+    panels.append(CMSResourcesPanel())
+
+
+@hooks.register("register_help_menu_item")
+def register_style_guide_help_menu_item():
+    return MenuItem(
+        "Documentation style guide",
+        STYLE_GUIDE_URL,
+        icon_name="edit",
+        order=200,
+    )
+
+
+@hooks.register("register_help_menu_item")
+def register_llms_txt_help_menu_item():
+    return MenuItem(
+        "Contributing",
+        CONTRIBUTING_URL,
+        icon_name="group",
+        order=201,
+    )
+
+
+@hooks.register("register_help_menu_item")
+def register_contributing_help_menu_item():
+    return MenuItem(
+        "llms.txt",
+        reverse("llms_txt"),
+        icon_name="doc-empty",
+        order=202,
+    )
+
+
+@hooks.register("register_help_menu_item")
+def register_llms_full_txt_help_menu_item():
+    return MenuItem(
+        "llms-full.txt",
+        reverse("llms_full_txt"),
+        icon_name="doc-full",
+        order=203,
+    )
+
+
+@hooks.register("register_help_menu_item")
+def register_llms_prompt_help_menu_item():
+    return MenuItem(
+        "llms-prompt.txt",
+        reverse("llms_prompt"),
+        icon_name="doc-empty",
+        order=204,
+    )
 
 
 @hooks.register("register_rich_text_features")
