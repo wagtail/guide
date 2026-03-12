@@ -390,7 +390,7 @@ WHITENOISE_ROOT = os.path.join(BASE_DIR, "public")
 
 # Wagtail settings
 
-WAGTAIL_SITE_NAME = "guide"
+WAGTAIL_SITE_NAME = "Wagtail user guide 📚️"
 
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
