@@ -9,6 +9,7 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
+from apps.core.mixins import LocaleURLMixin
 from wagtail_ai.panels import AITitleFieldPanel
 
 from apps.core.models.feedback import Feedback
@@ -32,7 +33,7 @@ def create_table_of_contents(body):
     return toc
 
 
-class ContentPage(MarkdownRouteMixin, Page):
+class ContentPage(MarkdownRouteMixin, LocaleURLMixin, Page):
     show_in_menus_default = True
     subpage_types = ["core.ContentPage"]
 
