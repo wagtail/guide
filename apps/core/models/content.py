@@ -9,9 +9,9 @@ from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
-from apps.core.mixins import LocaleURLMixin
 from wagtail_ai.panels import AITitleFieldPanel
 
+from apps.core.mixins import LocaleURLMixin
 from apps.core.models.feedback import Feedback
 from apps.llms_txt.mixins import MarkdownRouteMixin
 
