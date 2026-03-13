@@ -20,7 +20,10 @@ class LocaleURLMixin:
 
     def get_url_parts(self, request=None):
         use_wagtail_i18n = getattr(settings, "WAGTAIL_I18N_ENABLED", False)
-        if use_wagtail_i18n and translation.get_language() not in get_content_languages():
+        if (
+            use_wagtail_i18n
+            and translation.get_language() not in get_content_languages()
+        ):
             with translation.override(self.locale.language_code):
                 return super().get_url_parts(request=request)
         return super().get_url_parts(request=request)
