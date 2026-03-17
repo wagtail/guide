@@ -6,6 +6,10 @@ providers:
     config:
       apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
       apiKey: '{{ env.SCW_SECRET_KEY }}'
+  - id: openai:chat:pixtral-12b-2409
+    config:
+      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
+      apiKey: '{{ env.SCW_SECRET_KEY }}'
   - id: openai:chat:holo2-30b-a3b
     config:
       apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
