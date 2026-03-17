@@ -14,7 +14,7 @@
         padding: ($gutter * 0.5) $gutter;
         border: 1px solid light-dark($color--off-black, $color--light-grey);
         border-radius: $border-radius--lg;
-        color: $color--off-black;
+        color: light-dark($color--blue, $color--white);
         text-decoration: none;
         transition: color $transition;
         margin-bottom: ($gutter * 0.5);
@@ -23,20 +23,14 @@
             margin-bottom: 0;
         }
 
-        &:hover,
-        &:focus {
-            color: $color--active;
+        svg {
+            width: 30px;
+            height: 25px;
+            fill: light-dark($color--teal, $color--light-teal);
         }
-    }
 
-    &__arrow {
-        &--prev {
+        &[rel='prev'] svg {
             transform: rotateZ(180deg);
-            margin-inline-end: ($gutter * 0.25);
-        }
-
-        &--next {
-            margin-inline-start: ($gutter * 0.25);
         }
     }
 

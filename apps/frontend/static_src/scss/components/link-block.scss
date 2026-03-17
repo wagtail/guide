@@ -30,14 +30,6 @@
     &:hover,
     &:focus {
         cursor: pointer;
-        color: inherit;
-
-        #{$root}__heading {
-            color: $color--secondary;
-        }
-
-        .footer-svg__path {
-            fill: $color--secondary;
-        }
+        color: $color--secondary;
     }
 }

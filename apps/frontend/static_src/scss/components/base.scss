@@ -25,3 +25,7 @@ a {
         color: light-dark($color--black, $color--white);
     }
 }
+
+svg {
+    fill: currentColor;
+}
