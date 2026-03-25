@@ -510,9 +510,9 @@ if "EMAIL_SUBJECT_PREFIX" in env:
 # the users.
 # https://docs.djangoproject.com/en/stable/ref/settings/#default-from-email
 if "SERVER_EMAIL" in env:
-    SERVER_EMAIL = DEFAULT_FROM_EMAIL = env["SERVER_EMAIL"]
+    SERVER_EMAIL = env["SERVER_EMAIL"]
 
-    WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = f"Wagtail user guide <{SERVER_EMAIL}>"
+    DEFAULT_FROM_EMAIL = f"Wagtail user guide <{SERVER_EMAIL}>"
 
 # Logging
 # This logging is configured to be used with Sentry and console logs. Console
