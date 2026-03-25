@@ -512,6 +512,7 @@ if "EMAIL_SUBJECT_PREFIX" in env:
 if "SERVER_EMAIL" in env:
     SERVER_EMAIL = DEFAULT_FROM_EMAIL = env["SERVER_EMAIL"]
 
+    WAGTAILADMIN_NOTIFICATION_FROM_EMAIL = f"Wagtail user guide <{SERVER_EMAIL}>"
 
 # Logging
 # This logging is configured to be used with Sentry and console logs. Console
