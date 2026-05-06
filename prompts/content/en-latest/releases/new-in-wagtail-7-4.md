@@ -1,8 +1,8 @@
-# New in Wagtail 7.3
+# New in Wagtail 7.4
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-3/
+Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-4/
 
-Here are highlights from Wagtail 7.3. For full technical details, view the complete [v7.3 release notes](https://docs.wagtail.org/en/latest/releases/7.3.html).
+Here are highlights from Wagtail 7.4. For full technical details, view the complete [v7.4 release notes](https://docs.wagtail.org/en/latest/releases/7.4.html).
 
 ## Autosave for pages and snippets
 
@@ -18,9 +18,9 @@ As you make changes, Wagtail periodically saves a draft in the background, helpi
 
 Developers can now group and reorder fields within content blocks, including placing advanced or less frequently used options into collapsible “settings” sections. For CMS users, this means:
 
--   Less visual clutter when editing content
--   Important fields are easier to find
--   Advanced options stay out of the way unless needed
+- Less visual clutter when editing content
+- Important fields are easier to find
+- Advanced options stay out of the way unless needed
 
 ## llms.txt for docs
 
@@ -28,9 +28,9 @@ Developers can now group and reorder fields within content blocks, including pla
 
 For users of Large Language Models (LLMs), the user guide contents are available in LLM-friendly formats:
 
--   [llms.txt](https://guide.wagtail.org/llms.txt), an LLM-focused index of all site contents.
--   [llms-full.txt](https://guide.wagtail.org/llms-full.txt), a full copy of the documentation
--   [llms-prompt.txt](https://guide.wagtail.org/llms-prompt.txt), an opinionated prompt you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
+- [llms.txt](https://guide.wagtail.org/llms.txt), an LLM-focused index of all site contents.
+- [llms-full.txt](https://guide.wagtail.org/llms-full.txt), a full copy of the documentation
+- [llms-prompt.txt](https://guide.wagtail.org/llms-prompt.txt), an opinionated prompt you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
 
 View our [About page](/en-latest/about/) for more information.
 
@@ -38,9 +38,9 @@ View our [About page](/en-latest/about/) for more information.
 
 Wagtail now uses improved default image quality settings for newly uploaded images. These updated defaults reduce image file sizes by 20-50%, while keeping visual quality consistent across formats. The result is:
 
--   Faster page loading
--   Lower data usage
--   Reduced energy consumption and carbon footprint when viewing pages
+- Faster page loading
+- Lower data usage
+- Reduced energy consumption and carbon footprint when viewing pages
 
 The visual quality of images should be near-identical - see if you can spot the difference between the top 3 and bottom 3 images:
 
@@ -58,10 +58,10 @@ The built-in content checks system can now be extended with additional rules. De
 
 This release also includes a range of smaller enhancements that improve day-to-day editing:
 
--   Oversized profile avatar images are automatically resized when uploaded
--   Built-in embeds now support Loom
--   Block-based content now renders in structured format in comparison views
--   Bulk actions confirmation steps now preserve search and filtering when returning to the listings.
+- Oversized profile avatar images are automatically resized when uploaded
+- Built-in embeds now support Loom
+- Block-based content now renders in structured format in comparison views
+- Bulk actions confirmation steps now preserve search and filtering when returning to the listings.
 
 Many behind-the-scenes fixes and performance improvements are also included.
 
@@ -69,8 +69,8 @@ Many behind-the-scenes fixes and performance improvements are also included.
 
 We need feedback from our users!
 
--   What do you think of our llms.txt implementation? Any cool use cases or rough edges? Let us know in the [llms.txt feedback discussion thread](https://github.com/wagtail/wagtail/discussions/13648).
--   Do you work on multilingual sites? Let us know about pain points in [Improving support for multilingual websites](https://github.com/wagtail/wagtail/discussions/13693).
+- What do you think of our llms.txt implementation? Any cool use cases or rough edges? Let us know in the [llms.txt feedback discussion thread](https://github.com/wagtail/wagtail/discussions/13648).
+- Do you work on multilingual sites? Let us know about pain points in [Improving support for multilingual websites](https://github.com/wagtail/wagtail/discussions/13693).
 
 ---
 
