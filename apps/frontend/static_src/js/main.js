@@ -11,6 +11,7 @@ handleFeedback();
 
 const searchInput = document.querySelector('[data-search-input]');
 const searchIconButton = document.querySelector('[data-search-icon-button]');
+const searchModal = document.getElementById('search-modal');
 
 const removeExistingChildren = (parent) => {
     // eslint-disable-next-line no-param-reassign
@@ -87,6 +88,10 @@ searchIconButton.addEventListener('click', () => {
 
     removeExistingChildren(resultsDiv);
     removeExistingChildren(resultsCountContainer);
+});
+
+searchModal.addEventListener('shown.bs.modal', () => {
+    searchInput.focus();
 });
 
 function initComponent(ComponentClass) {
