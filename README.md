@@ -71,17 +71,20 @@ Or both, in a single command:
 
 ### Setting up development with Docker
 
-1. Create a `.env` file in the project root containing these variables, you can adjust the values to your preferences:
+1. Optianally, create a `.env` file in the project root containing these variables, you can adjust the values to your preferences:
     ```
     ALLOWED_HOSTS=localhost
     PORT=8000
     SECRET_KEY=some-random-secret
     DJANGO_SETTINGS_MODULE=apps.guide.settings.dev
     ```
-2. Build the image by running the `make docker-build` command.
-3. Run the container with `make docker-run`.
-4. Run the init script in the container: `make docker-init`
-5. You should now have access to the project in your browser at `http://localhost:8000`
+2. Build and start the development container by running the `make docker-run` command.  
+   This starts the server in the foreground. To run it in the background, use `make docker-start` instead.
+3. In another terminal, run the init script in the container: `make docker-init`
+4. You should now have access to the project in your browser at `http://localhost:8000`
+5. To stop the container, run `make docker-stop`
+
+Code changes are picked up automatically. Only rebuild when dependencies change:`make docker-build`
 
 # Gitpod
 
