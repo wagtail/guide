@@ -12,6 +12,10 @@ handleFeedback();
 const searchInput = document.querySelector('[data-search-input]');
 const searchIconButton = document.querySelector('[data-search-icon-button]');
 const searchModal = document.getElementById('search-modal');
+const resultsDiv = document.querySelector('[data-results]');
+const resultsCountContainer = document.querySelector(
+    '[data-results-count-container]',
+);
 
 const removeExistingChildren = (parent) => {
     // eslint-disable-next-line no-param-reassign
@@ -19,11 +23,6 @@ const removeExistingChildren = (parent) => {
 };
 
 const injectResultsInHTML = (results) => {
-    const resultsDiv = document.querySelector('[data-results]');
-    const resultsCountContainer = document.querySelector(
-        '[data-results-count-container]',
-    );
-
     removeExistingChildren(resultsDiv);
     removeExistingChildren(resultsCountContainer);
 
@@ -80,18 +79,14 @@ const onSearchInputChange = async (event) => {
 };
 searchInput.addEventListener('keyup', debounce(onSearchInputChange, 150));
 
-searchIconButton.addEventListener('click', () => {
-    const resultsDiv = document.querySelector('[data-results]');
-    const resultsCountContainer = document.querySelector(
-        '[data-results-count-container]',
-    );
-
-    removeExistingChildren(resultsDiv);
-    removeExistingChildren(resultsCountContainer);
-});
-
 searchModal.addEventListener('shown.bs.modal', () => {
     searchInput.focus();
+});
+
+searchModal.addEventListener('hidden.bs.modal', () => {
+    searchInput.value = '';
+    removeExistingChildren(resultsDiv);
+    removeExistingChildren(resultsCountContainer);
 });
 
 function initComponent(ComponentClass) {
