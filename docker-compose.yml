@@ -1,0 +1,25 @@
+services:
+  web:
+    build:
+      context: .
+      args:
+        POETRY_INSTALL_ARGS: ""
+    ports:
+      - "${PORT:-8000}:${PORT:-8000}"
+    environment:
+      DJANGO_SETTINGS_MODULE: apps.guide.settings.dev
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - .:/app
+      - staticfiles:/app/static
+    command:
+      - poetry
+      - run
+      - python
+      - manage.py
+      - runserver
+      - "0.0.0.0:${PORT:-8000}"
+volumes:
+  staticfiles:
