@@ -12,7 +12,7 @@
         content: '';
         display: block;
         position: absolute;
-        inset-inline-start:($gutter * 1.7);
+        inset-inline-start:($gutter * 1.6);
         inset-block-start: 50%;
         transform: translateY(-50%);
         width: 21px;
@@ -23,6 +23,14 @@
         background-position: center;
         pointer-events: none;
         filter: light-dark(none, brightness(0) invert(1));
+    }
+
+    &__container.is-loading::after {
+        background-image: none;
+        border: 2px solid #ccc;
+        border-top-color: #333;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
     }
 
     &__input {
@@ -37,6 +45,10 @@
     &__button {
         display: none; // only show if no js
     }
+}
+
+@keyframes spin {
+    to { transform: translateY(-50%) rotate(360deg); }
 }
 
 .search .modal-content {

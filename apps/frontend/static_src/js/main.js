@@ -60,6 +60,11 @@ const injectResultsInHTML = (results) => {
 
 const onSearchInputChange = async (event) => {
     const query = event.target.value;
+
+    document.querySelector('.search__container').classList.add('is-loading');
+
+    const minDelay = new Promise(resolve => setTimeout(resolve, 200));
+
     try {
         const res = await fetch(
             `${window.location.origin}${
@@ -75,6 +80,9 @@ const onSearchInputChange = async (event) => {
         console.log(err);
         // eslint-disable-next-line no-alert
         window.alert(`Error: ${err}`);
+    } finally {
+        await minDelay; // wait for 300ms to pass if fetch was faster
+        document.querySelector('.search__container').classList.remove('is-loading');
     }
 };
 searchInput.addEventListener('keyup', debounce(onSearchInputChange, 150));
