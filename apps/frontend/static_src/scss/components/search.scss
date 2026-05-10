@@ -5,6 +5,24 @@
         display: flex;
         flex-direction: row;
         justify-content: stretch;
+        position: relative;
+    }
+
+    &__container::after {
+        content: '';
+        display: block;
+        position: absolute;
+        inset-inline-start:($gutter * 1.7);
+        inset-block-start: 50%;
+        transform: translateY(-50%);
+        width: 21px;
+        height: 21px;
+        background-image: url('../images/search.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        pointer-events: none;
+        filter: light-dark(none, brightness(0) invert(1));
     }
 
     &__input {
@@ -12,6 +30,7 @@
         border: 1px solid $color--black;
         width: 100%;
         padding: $gutter;
+        padding-inline-start: ($gutter * 2);
         border-radius: $border-radius--m;
     }
 
