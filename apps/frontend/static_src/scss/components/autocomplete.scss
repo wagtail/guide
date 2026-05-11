@@ -5,14 +5,11 @@
 
     &__count {
         @include fs(s);
-        position: absolute;
-        top: $gutter;
-        inset-inline-end: 0;
+        text-align: right;
         color: $meta-color;
         font-weight: 500;
         padding: 0 $row-spacing;
         margin-bottom: $gutter;
-        margin-top: $gutter;
     }
 
     &__row {
