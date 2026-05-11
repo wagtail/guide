@@ -38,7 +38,7 @@ const injectResultsInHTML = (results) => {
     resultsCountHeading.classList.add('autocomplete__count');
     resultsCountContainer.appendChild(resultsCountHeading);
 
-    results.forEach((result) => {
+    results.forEach((result, index) => {
         const resultDiv = document.createElement('a');
         const resultHeading = document.createElement('h3');
         const resultDescription = document.createElement('div');
@@ -55,6 +55,12 @@ const injectResultsInHTML = (results) => {
         resultDiv.classList.add('autocomplete__row');
         resultHeading.classList.add('autocomplete__heading');
         resultsDiv.appendChild(resultDiv);
+
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                resultDiv.classList.add('is-visible');
+            }, index *400);
+        });
     });
 };
 

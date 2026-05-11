@@ -20,7 +20,14 @@
         padding: $gutter $row-spacing;
         border-top: 1px solid light-dark($color--light-grey, $color--grey);
         text-decoration: none;
-        transition: background-color $transition;
+        transition: background-color $transition, opacity 0.25s ease-out, transform 0.25s ease-out;
+        opacity: 0;
+        transform: translateY(8px);
+
+        &.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         &:hover,
         &:focus {
