@@ -4,11 +4,12 @@ Important context for AI coding agents working on this project.
 
 ## Development commands
 
+> **Note:** Run `source "$(poetry env activate)"` before any `make` command, These require the Poetry virtual environment to be active.
+
 -   `make lint`: Lint the project.
 -   `make format`: Format project files.
 -   `make test`: Run tests.
--   `source $(poetry env activate)`: Activate Poetry's virtual environment.
--   `make translations`: Generate and Compile translation strings.
+-   `make translations`: Generate and compile translation strings.
 
 ## Setup & run commands
 
@@ -48,5 +49,5 @@ Defined in `ruff.toml`, `.eslintrc.json`, `.prettierrc.json`, `.stylelintrc.json
 
 -   Be concise and to the point. Explain rationales that aren’t obvious.
 -   Recent commit messages use short, capitalized, imperative summaries (e.g., “Enforce additional mypy check”).
--   PRs should include a clear description, links to any related issues.
 -   Always add a disclaimer to the PR description mentioning how AI agents are involved with the contribution.
+-   Do not add commits unrelated to the PR — check commit history against upstream main before pushing.
