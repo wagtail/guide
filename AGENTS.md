@@ -48,6 +48,6 @@ Defined in `ruff.toml`, `.eslintrc.json`, `.prettierrc.json`, `.stylelintrc.json
 ## Commit & pull request guidelines
 
 -   Be concise and to the point. Explain rationales that aren’t obvious.
--   Commit messages must be a single line, short, capitalized, imperative summary. Do not add a description body unless explicitly asked.
+-   Commit messages must be a single line, short, sentence case, imperative summary. Do not add a description body unless explicitly asked.
 -   Always add a disclaimer to the PR description mentioning how AI agents are involved with the contribution.
 -   Do not add commits unrelated to the PR — check commit history against upstream main before pushing.
