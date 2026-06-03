@@ -71,6 +71,8 @@ Or both, in a single command:
 
 ### Setting up development with Docker
 
+**Requirements:** [Docker](https://www.docker.com/) and Docker Compose (Docker Compose is included with Docker Desktop for Mac and Windows).
+
 1. Create a `.env` file in the project root containing these variables, you can adjust the values to your preferences:
     ```
     ALLOWED_HOSTS=localhost
@@ -82,6 +84,14 @@ Or both, in a single command:
 3. Run the container with `make docker-run`.
 4. Run the init script in the container: `make docker-init`
 5. You should now have access to the project in your browser at `http://localhost:8000`
+
+To access the app container, run:
+
+`make docker-shell`
+
+To access the frontend container to run linting, etc:
+
+`make docker-shell-frontend`
 
 # Gitpod
 
