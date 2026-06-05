@@ -17,7 +17,6 @@ from pathlib import Path
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 
-
 env = os.environ.copy()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -229,6 +228,7 @@ PERMISSIONS_POLICY = {
 
 if "CSP_DEFAULT_SRC" in env:
     from django.utils.csp import CSP
+
     MIDDLEWARE.append("django.middleware.csp.ContentSecurityPolicyMiddleware")
 
     # The "special" source values of

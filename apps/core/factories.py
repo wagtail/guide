@@ -30,7 +30,7 @@ class HomePageFactory(wagtail_factories.PageFactory):
         if not home:
             root = Page.get_first_root_node()
             locale = kwargs.get("locale")
-            home = HomePage(title="Wagtail User Guide", slug="home-x",locale=locale)
+            home = HomePage(title="Wagtail User Guide", slug="home-x", locale=locale)
             root.add_child(instance=home)
             site = Site.objects.first()
             if site:
