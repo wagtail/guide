@@ -14,3 +14,4 @@ apps/guide/settings/local.py
 /static/
 .coverage
 .ruff_cache
+.idea/
