@@ -22,9 +22,25 @@ WAGTAIL_VERSIONS = [
 ]
 
 
-class TextBlock(RichTextBlock):
+class TextBlock(blocks.StructBlock):
+    content = RichTextBlock(features=["bold", "italic", "link"])
+    version = blocks.ChoiceBlock(choices=[(v, v) for v in WAGTAIL_VERSIONS])
+    change_type = blocks.ChoiceBlock(
+        choices=[
+            ("added", _("Added")),
+            ("changed", _("Changed")),
+            ("removed", _("Removed")),
+        ]
+    )
+
     class Meta:
         template = "core/blocks/text.html"
+        icon = "pilcrow"
+        label = _("Text")
+        form_layout = blocks.BlockGroup(
+            children=["content"],
+            settings=["version", "change_type"],
+        )
 
 
 class SectionStructValue(blocks.StructValue):

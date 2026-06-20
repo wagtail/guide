@@ -2,9 +2,11 @@
 
 <div class="version-note version-note--{{ value.change_type }}">
     <div class="version-note__header">
-        <div class="version-note__icon">
-            {% include value.icon %}
-        </div>
+        {% if value.change_type %}
+            <div class="version-note__icon">
+                {% include value.icon %}
+            </div>
+        {% endif %}
         <span class="version-note__label">
             {% blocktrans with version=value.version %}New in Wagtail {{ version }}{% endblocktrans %}
         </span>
