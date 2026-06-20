@@ -41,9 +41,20 @@
         }
     }
 
-    &--added,
-    &--changed,
-    &--removed {
+    &--added {
+        #{$root}__header {
+            background-color: $color--primary;
+        }
+
+        #{$root}__body {
+            background-color: light-dark(
+                $color--extra-light-teal,
+                $color--black
+            );
+        }
+    }
+
+    &--changed {
         #{$root}__header {
             background-color: $color--blue;
         }
@@ -51,6 +62,19 @@
         #{$root}__body {
             background-color: light-dark(
                 $color--extra-light-blue,
+                $color--black
+            );
+        }
+    }
+
+    &--removed {
+        #{$root}__header {
+            background-color: $color--grey;
+        }
+
+        #{$root}__body {
+            background-color: light-dark(
+                rgba($color--grey, 0.15),
                 $color--black
             );
         }
