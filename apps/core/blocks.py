@@ -22,7 +22,12 @@ WAGTAIL_VERSIONS = [
 ]
 
 
-class TextBlock(blocks.StructBlock):
+class TextBlock(RichTextBlock):
+    class Meta:
+        template = "core/blocks/text.html"
+
+
+class TextBlockVersioned(blocks.StructBlock):
     content = RichTextBlock(features=["bold", "italic", "link"])
     version = blocks.ChoiceBlock(choices=[(v, v) for v in WAGTAIL_VERSIONS])
     change_type = blocks.ChoiceBlock(
@@ -34,9 +39,9 @@ class TextBlock(blocks.StructBlock):
     )
 
     class Meta:
-        template = "core/blocks/text.html"
+        template = "core/blocks/text_versioned.html"
         icon = "pilcrow"
-        label = _("Text")
+        label = _("Text (versioned)")
         form_layout = blocks.BlockGroup(
             children=["content"],
             settings=["version", "change_type"],
@@ -138,6 +143,7 @@ class VersionNoteBlock(blocks.StructBlock):
 
 CONTENT_BLOCKS = [
     ("text", TextBlock()),
+    ("text_versioned", TextBlockVersioned()),
     ("alert", AlertBlock()),
     ("version_note", VersionNoteBlock()),
 ]

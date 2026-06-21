@@ -1,8 +1,3 @@
 {% load wagtailcore_tags %}
 
-{% if value.version %}
-<div class="version-badge version-badge--{{ value.change_type }}">
-    {{ value.change_type|title }} in Wagtail {{ value.version }}
-</div>
-{% endif %}
-{{ value.content|richtext }}
+{{ self|richtext }}
