@@ -106,15 +106,6 @@ class VersionNoteStructValue(blocks.StructValue):
     def icon(self):
         return f"core/svg/{self.get('change_type')}.svg"
 
-    def change_type_display(self):
-        change_type = self.get("change_type")
-        choices = {
-            "added": _("Added"),
-            "changed": _("Changed"),
-            "removed": _("Removed"),
-        }
-        return choices.get(change_type, change_type)
-
 
 class VersionNoteBlock(blocks.StructBlock):
     version = blocks.ChoiceBlock(
