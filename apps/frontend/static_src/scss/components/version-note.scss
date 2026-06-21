@@ -16,16 +16,6 @@
         font-weight: 700;
     }
 
-    &__badge {
-        margin-inline-start: auto;
-        padding: 2px 8px;
-        border-radius: $border-radius--lg;
-        background-color: rgba($color--white, 0.2);
-        color: $color--white;
-        font-size: 14px;
-        font-weight: 600;
-    }
-
     &__body {
         padding: $gutter;
     }

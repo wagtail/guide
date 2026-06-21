@@ -8,9 +8,8 @@
             </div>
         {% endif %}
         <span class="version-note__label">
-            {% blocktrans with version=value.version %}New in Wagtail {{ version }}{% endblocktrans %}
+            {% blocktrans with change_type=value.change_type_display version=value.version %}{{ change_type }} in Wagtail {{ version }}{% endblocktrans %}
         </span>
-        <span class="version-note__badge">{{ value.change_type_display }}</span>
     </div>
     <div class="version-note__body">
         {{ value.content|richtext }}
