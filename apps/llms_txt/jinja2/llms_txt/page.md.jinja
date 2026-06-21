@@ -15,7 +15,7 @@ Page URL: {{ page.full_url }}
 {%- elif block.block_type == 'alert' %}
 {{block.value.alert_type}}: {{ block.value.alert_body|richtext_markdown }}
 {%- elif block.block_type == 'version_note' %}
-{{ block.value.change_type_display }} in Wagtail {{ block.value.version }}: {{ block.value.content|richtext_markdown }}
+{{ block.value.change_type|capitalize }} in Wagtail {{ block.value.version }}: {{ block.value.content|richtext_markdown }}
 {%- endif %}
 {%- endfor %}
 

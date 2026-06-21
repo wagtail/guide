@@ -8,7 +8,7 @@
             </div>
         {% endif %}
         <span class="version-note__label">
-            {% blocktrans with change_type=value.change_type_display version=value.version %}{{ change_type }} in Wagtail {{ version }}{% endblocktrans %}
+            {% blocktrans with change_type=value.change_type|title version=value.version %}{{ change_type }} in Wagtail {{ version }}{% endblocktrans %}
         </span>
     </div>
     <div class="version-note__body">
