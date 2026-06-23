@@ -73,6 +73,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django_permissions_policy.PermissionsPolicyMiddleware",
+    "django.middleware.csp.ContentSecurityPolicyMiddleware",
     # Whitenoise middleware is used to server static files (CSS, JS, etc.).
     # According to the official documentation it should be listed underneath
     # SecurityMiddleware.
@@ -229,8 +230,6 @@ PERMISSIONS_POLICY = {
 
 if "CSP_DEFAULT_SRC" in env:
     from django.utils.csp import CSP
-
-    MIDDLEWARE.append("django.middleware.csp.ContentSecurityPolicyMiddleware")
 
     # The "special" source values of
     # 'self', 'unsafe-inline', 'unsafe-eval', and 'none' must be quoted!
