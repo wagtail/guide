@@ -38,11 +38,10 @@ description: Steps for creating a pull request in this project.
 
 ### Testing
 
--   Summarise results briefly, e.g. "All tests pass, no lint errors"
 -   Only report lint/test results for files included in this PR. Do not mention unrelated or untracked files.
--   Share guidance on any specific tests related to the PR - command(s) and results.
+-   Share guidance on any specific tests related to the PR - command(s) and results. Consider if it might be worth to script some of the testing in bash or Python.
 -   For frontend changes, add before/after screenshots if possible.
--   Note any testing still left to do or areas needing careful review
+-   Note any manual testing that would be worth doing or areas needing careful review
 
 ### AI usage
 
