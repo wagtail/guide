@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.postgres",
     "whitenoise.runserver_nostatic",  # Must be before `django.contrib.staticfiles`
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
@@ -72,6 +73,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django_permissions_policy.PermissionsPolicyMiddleware",
+    "django.middleware.csp.ContentSecurityPolicyMiddleware",
     # Whitenoise middleware is used to server static files (CSS, JS, etc.).
     # According to the official documentation it should be listed underneath
     # SecurityMiddleware.
@@ -101,6 +103,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "django.template.context_processors.csp",
             ],
         },
     },
@@ -222,37 +225,41 @@ PERMISSIONS_POLICY = {
     "usb": [],
 }
 
-# Content Security policy settings
-# http://django-csp.readthedocs.io/en/latest/configuration.html
+# Content Security Policy settings
+# https://docs.djangoproject.com/en/6.0/ref/middleware/#django.middleware.csp.ContentSecurityPolicyMiddleware
+
 if "CSP_DEFAULT_SRC" in env:
-    MIDDLEWARE.append("csp.middleware.CSPMiddleware")
+    from django.utils.csp import CSP
 
-    CSP_REPORT_ONLY = env.get("CSP_REPORT_ONLY", "false").lower() == "true"
-
-    CSP_INCLUDE_NONCE_IN = ["script-src", "style-src"]
-
-    # The “special” source values of
+    # The "special" source values of
     # 'self', 'unsafe-inline', 'unsafe-eval', and 'none' must be quoted!
-    # e.g.: CSP_DEFAULT_SRC = "'self'" Without quotes they will not work as intended.
+    # e.g.: CSP_DEFAULT_SRC="'self'" Without quotes they will not work as intended.
 
-    CSP_DEFAULT_SRC = env.get("CSP_DEFAULT_SRC").split(",")
+    csp_policy = {
+        "default-src": env.get("CSP_DEFAULT_SRC").split(","),
+    }
     if "CSP_SCRIPT_SRC" in env:
-        CSP_SCRIPT_SRC = env.get("CSP_SCRIPT_SRC").split(",")
+        csp_policy["script-src"] = env.get("CSP_SCRIPT_SRC").split(",") + [CSP.NONCE]
     if "CSP_STYLE_SRC" in env:
-        CSP_STYLE_SRC = env.get("CSP_STYLE_SRC").split(",")
+        csp_policy["style-src"] = env.get("CSP_STYLE_SRC").split(",") + [CSP.NONCE]
     if "CSP_IMG_SRC" in env:
-        CSP_IMG_SRC = env.get("CSP_IMG_SRC").split(",")
+        csp_policy["img-src"] = env.get("CSP_IMG_SRC").split(",")
     if "CSP_CONNECT_SRC" in env:
-        CSP_CONNECT_SRC = env.get("CSP_CONNECT_SRC").split(",")
+        csp_policy["connect-src"] = env.get("CSP_CONNECT_SRC").split(",")
     if "CSP_FONT_SRC" in env:
-        CSP_FONT_SRC = env.get("CSP_FONT_SRC").split(",")
+        csp_policy["font-src"] = env.get("CSP_FONT_SRC").split(",")
     if "CSP_BASE_URI" in env:
-        CSP_BASE_URI = env.get("CSP_BASE_URI").split(",")
+        csp_policy["base-uri"] = env.get("CSP_BASE_URI").split(",")
     if "CSP_OBJECT_SRC" in env:
-        CSP_OBJECT_SRC = env.get("CSP_OBJECT_SRC").split(",")
+        csp_policy["object-src"] = env.get("CSP_OBJECT_SRC").split(",")
     if "CSP_REPORT_URI" in env:
-        CSP_REPORT_URI = env.get("CSP_REPORT_URI")
+        csp_policy["report-uri"] = [env.get("CSP_REPORT_URI")]
 
+    report_only = env.get("CSP_REPORT_ONLY", "false").lower() == "true"
+    if report_only:
+        SECURE_CSP_REPORT_ONLY = csp_policy
+    else:
+        SECURE_CSP = csp_policy
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
