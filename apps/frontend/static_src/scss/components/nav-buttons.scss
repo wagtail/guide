@@ -32,6 +32,16 @@
         &[rel='prev'] svg {
             transform: rotateZ(180deg);
         }
+
+        [dir='rtl'] & {
+            &[rel='prev'] svg {
+                transform: none;
+            }
+
+            &[rel='next'] svg {
+                transform: rotateZ(180deg);
+            }
+        }
     }
 
     &__label {
