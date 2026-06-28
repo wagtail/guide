@@ -39,7 +39,7 @@
 
 
     <p class="byline">
-        <em>{% blocktrans with last_updated=page.last_published_at|date:"F j, Y" trimmed %}Last updated: {{ last_updated }}{% endblocktrans %}</em>
+        <em dir ="auto">{% blocktrans with last_updated=page.last_published_at|date:"F j, Y" trimmed %}Last updated: {{ last_updated }}{% endblocktrans %}</em>
     </p>
 
     {% include '../components/nav_buttons.html' %}
