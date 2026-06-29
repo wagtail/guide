@@ -5,7 +5,10 @@
 
     &__count {
         @include fs(s);
+        position: relative;
+        top: $gutter;
         text-align: end;
+        inset-inline-end: 0;
         color: $meta-color;
         font-weight: 500;
         padding: 0 $row-spacing;
