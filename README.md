@@ -14,7 +14,6 @@ You can learn more about the documentation system [here](https://documentation.d
 # Table of Contents
 
 -   [Installation](#installation)
--   [Gitpod](#gitpod)
 -   [Contributing](#contributing)
 -   [Other Notes](#other-notes)
 
@@ -82,18 +81,6 @@ Or both, in a single command:
 3. Run the container with `make docker-run`.
 4. Run the init script in the container: `make docker-init`
 5. You should now have access to the project in your browser at `http://localhost:8000`
-
-# Gitpod
-
-With Gitpod you can deploy a ready-to-code Wagtail Guide development environment with a single click to evaluate the code.
-
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/wagtail/guide)
-
-Steps:
-
-1. Click the `Open in Gitpod` button.
-2. Relax: a development environment with an active Wagtail Guide site will be created for you.
-3. Login at `/admin/` with username `admin` and password `changeme`
 
 # Contributing
 
