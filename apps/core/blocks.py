@@ -2,10 +2,50 @@ from django.utils.translation import gettext as _
 from wagtail import blocks
 from wagtail.blocks import RichTextBlock
 
+WAGTAIL_VERSIONS = [
+    "4.1",
+    "4.2",
+    "5.0",
+    "5.1",
+    "5.2",
+    "6.0",
+    "6.1",
+    "6.2",
+    "6.3",
+    "6.4",
+    "7.0",
+    "7.1",
+    "7.2",
+    "7.3",
+    "7.4",
+    "8.0",
+]
+
 
 class TextBlock(RichTextBlock):
     class Meta:
         template = "core/blocks/text.html"
+
+
+class TextBlockVersioned(blocks.StructBlock):
+    content = RichTextBlock(features=["bold", "italic", "link"])
+    version = blocks.ChoiceBlock(choices=[(v, v) for v in WAGTAIL_VERSIONS])
+    change_type = blocks.ChoiceBlock(
+        choices=[
+            ("added", _("Added")),
+            ("changed", _("Changed")),
+            ("removed", _("Removed")),
+        ]
+    )
+
+    class Meta:
+        template = "core/blocks/text_versioned.html"
+        icon = "pilcrow"
+        label = _("Text (versioned)")
+        form_layout = blocks.BlockGroup(
+            children=["content"],
+            settings=["version", "change_type"],
+        )
 
 
 class SectionStructValue(blocks.StructValue):
@@ -62,5 +102,40 @@ class AlertBlock(blocks.StructBlock):
         value_class = AlertStructValue
 
 
-CONTENT_BLOCKS = [("text", TextBlock()), ("alert", AlertBlock())]
+class VersionNoteStructValue(blocks.StructValue):
+    def icon(self):
+        return f"core/svg/{self.get('change_type')}.svg"
+
+
+class VersionNoteBlock(blocks.StructBlock):
+    version = blocks.ChoiceBlock(
+        choices=[(v, v) for v in WAGTAIL_VERSIONS],
+        label=_("Version"),
+    )
+    change_type = blocks.ChoiceBlock(
+        choices=[
+            ("added", _("Added")),
+            ("changed", _("Changed")),
+            ("removed", _("Removed")),
+        ],
+        label=_("Type of change"),
+    )
+    content = RichTextBlock(
+        features=["bold", "italic", "link"],
+        label=_("Content"),
+    )
+
+    class Meta:
+        template = "core/blocks/version_note.html"
+        icon = "tag"
+        label = _("Version note")
+        value_class = VersionNoteStructValue
+
+
+CONTENT_BLOCKS = [
+    ("text", TextBlock()),
+    ("text_versioned", TextBlockVersioned()),
+    ("alert", AlertBlock()),
+    ("version_note", VersionNoteBlock()),
+]
 HOME_BLOCKS = [("section_grid", SectionGridBlock())]

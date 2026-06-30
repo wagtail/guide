@@ -1,0 +1,82 @@
+.version-note {
+    $root: &;
+    box-shadow: 2px 2px 8px 0 rgba($color--black, 0.3);
+    border-radius: $border-radius--m;
+    margin-bottom: ($gutter * 3);
+    overflow: hidden;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        padding: ($gutter * 0.75) $gutter;
+    }
+
+    &__label {
+        color: $color--white;
+        font-weight: 700;
+    }
+
+    &__body {
+        padding: $gutter;
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        margin-inline-end: ($gutter * 0.5);
+        height: 20px;
+
+        svg {
+            height: 100%;
+        }
+    }
+
+    &--added {
+        #{$root}__header {
+            background-color: $color--primary;
+        }
+
+        #{$root}__body {
+            background-color: light-dark(
+                $color--extra-light-teal,
+                $color--black
+            );
+        }
+    }
+
+    &--changed {
+        #{$root}__header {
+            background-color: $color--blue;
+        }
+
+        #{$root}__body {
+            background-color: light-dark(
+                $color--extra-light-blue,
+                $color--black
+            );
+        }
+    }
+
+    &--removed {
+        #{$root}__header {
+            background-color: $color--grey;
+        }
+
+        #{$root}__body {
+            background-color: light-dark(
+                rgba($color--grey, 0.15),
+                $color--black
+            );
+        }
+    }
+
+    // Extra specificity to override default StreamField values
+    .streamfield & {
+        #{$root}__label {
+            @include rem-font-size($base-font-size);
+            /* stylelint-disable-next-line declaration-no-important */
+            margin: 0 !important;
+            line-height: 1;
+        }
+    }
+}
