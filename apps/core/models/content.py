@@ -11,7 +11,6 @@ from wagtail.models import Page
 from wagtail.search import index
 from wagtail_ai.panels import AITitleFieldPanel
 
-from apps.core.mixins import LocaleURLMixin
 from apps.core.models.feedback import Feedback
 from apps.llms_txt.mixins import MarkdownRouteMixin
 
@@ -33,7 +32,7 @@ def create_table_of_contents(body):
     return toc
 
 
-class ContentPage(MarkdownRouteMixin, LocaleURLMixin, Page):
+class ContentPage(MarkdownRouteMixin, Page):
     show_in_menus_default = True
     subpage_types = ["core.ContentPage"]
 

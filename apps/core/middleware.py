@@ -1,3 +1,6 @@
+import re
+from urllib.parse import parse_qsl, urlencode, urlparse
+
 from django.conf import settings
 from django.shortcuts import redirect
 from django.urls import LocalePrefixPattern
@@ -6,6 +9,31 @@ from django.utils.translation import activate, get_language
 from apps.core.models import HomePage
 
 pattern = LocalePrefixPattern()
+
+PATTERN = re.compile(
+    r"^/(?P<lang>[a-z-]+)-(?P<ver>latest|\d+\.\d+\.x|\d+\.x)(?P<rest>/.*)$"
+)
+
+
+class VersionedUrlRedirectMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        path = request.path_info
+        match = PATTERN.match(path)
+
+        if match and request.method in ("GET", "HEAD"):
+            lang = match.group("lang")
+            ver = match.group("ver")
+            rest = match.group("rest")
+            parsed = urlparse(rest)
+            query = dict(parse_qsl(request.META["QUERY_STRING"]))
+            query["target_version"] = ver
+            new_url = f"/{lang}{parsed.path}?{urlencode(query)}"
+            return redirect(new_url)
+
+        return self.get_response(request)
 
 
 class ValidateLocaleMiddleware:

@@ -12,7 +12,7 @@ The guides’ English content is brought to you by:
 -   Marvis Chukwudi
 -   Akua Dokua Asiedu
 -   Jadesola Kareem
--   You? [Learn how to contribute to this guide](/en-latest/about/contributing/)
+-   You? [Learn how to contribute to this guide](/en/about/contributing/)
 
 ## Translators
 

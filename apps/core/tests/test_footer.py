@@ -9,8 +9,8 @@ from apps.core.models.snippets import FooterContent
 class TestFooter(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.en_latest = LocaleFactory(language_code="en-latest")
-        cls.id_latest = LocaleFactory(language_code="id-latest")
+        cls.en_latest = LocaleFactory(language_code="en")
+        cls.id_latest = LocaleFactory(language_code="id")
 
         cls.footer_en = FooterContent.objects.first()
         cls.footer_id = cls.footer_en.copy_for_translation(cls.id_latest)
@@ -61,7 +61,7 @@ class TestFooter(TestCase):
 
     def test_footer_inclusion_tag_untranslated(self):
         # A normal request will go through LocaleMiddleware to activate the locale.
-        translation.activate("nl-latest")
+        translation.activate("nl")
         template = Template("{% load core_tags %}{% footer %}")
         result = template.render(Context({}))
 
