@@ -41,10 +41,10 @@ class TestHeader(TestCase):
         result = template.render(Context({}))
         self.assertIn('aria-label="Wagtail User Guide"', result)
         self.assertIn('<nav class="primary-nav" data-mobile-menu>', result)
-        self.assertIn('href="/en-latest/a/"', result)
-        self.assertIn('href="/en-latest/a/ab/"', result)
-        self.assertIn('href="/en-latest/a/ac/"', result)
-        self.assertIn('href="/en-latest/b/"', result)
+        self.assertIn('href="/en/a/"', result)
+        self.assertIn('href="/en/a/ab/"', result)
+        self.assertIn('href="/en/a/ac/"', result)
+        self.assertIn('href="/en/b/"', result)
 
     def test_header_excludes_private_pages(self):
         private_section = Page(title="members", slug="members", show_in_menus=True)

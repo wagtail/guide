@@ -37,22 +37,10 @@ class HomePage(MarkdownRouteMixin, Page):
 
     def get_fallback_pages(self, request, path_components):
         # No fallback for main locale.
-        if (language_code := self.locale.language_code) == settings.LANGUAGE_CODE:
+        if self.locale.language_code == settings.LANGUAGE_CODE:
             return []
 
-        # Work out translations of the page requested corresponding to:
-        # 1. Same version but in english (if language requested isn't english)
-        # 2. Same language using latest version (if version requested isn't the latest)
-        # 3. Latest version in English
-        language, version = language_code.rsplit("-", maxsplit=1)
-        codes = {language, "en"}
-        versions = {version, "latest"}
-        possible_language_codes = [
-            f"{code}-{version}" for code in codes for version in versions
-        ]
-        translations = self.get_translations(inclusive=False).filter(
-            locale__language_code__in=possible_language_codes
-        )
+        translations = self.get_translations(inclusive=False)
 
         fallback_pages = []
         for page in translations:
