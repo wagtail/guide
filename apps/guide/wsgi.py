@@ -11,8 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-from monkey_patches import *  # noqa: F403
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "guide.settings.dev")
 
 application = get_wsgi_application()

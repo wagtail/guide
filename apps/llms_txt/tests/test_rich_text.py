@@ -19,8 +19,8 @@ class TestMarkdownContentstateConverter(TestCase):
         self.assertEqual(markdown, "Heading 1\n\n## Heading 2\n\n")
 
     def test_to_markdown_format_internal_links(self):
-        en_latest = LocaleFactory(language_code="en-latest")
+        en_latest = LocaleFactory(language_code="en")
         page = ContentPageFactory(locale=en_latest)
         html = f'<p><a linktype="page" id="{page.id}">Example</a></p>'
         markdown = self.converter.to_markdown_format(html)
-        self.assertEqual(markdown, f"[Example](/en-latest/{page.slug}/)\n\n")
+        self.assertEqual(markdown, f"[Example](/en/{page.slug}/)\n\n")

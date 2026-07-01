@@ -79,6 +79,7 @@ MIDDLEWARE = [
     # SecurityMiddleware.
     # http://whitenoise.evans.io/en/stable/#quickstart-for-django-apps
     "whitenoise.middleware.WhiteNoiseMiddleware",
+    "apps.core.middleware.VersionedUrlRedirectMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "apps.core.middleware.ValidateLocaleMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -263,7 +264,7 @@ if "CSP_DEFAULT_SRC" in env:
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-LANGUAGE_CODE = "en-latest"
+LANGUAGE_CODE = "en"
 
 TIME_ZONE = "UTC"
 
@@ -336,31 +337,7 @@ WAGTAIL_GUIDE_LANGUAGES = [
     ("zh-hant", "Chinese Traditional"),
 ]
 
-WAGTAIL_GUIDE_VERSIONS = [
-    "latest",
-    "8.0.x",
-    "7.4.x",
-    "7.3.x",
-    "7.2.x",
-    "7.1.x",
-    "7.0.x",
-    "6.4.x",
-    "6.3.x",
-    "6.2.x",
-    "6.1.x",
-    "6.0.x",
-    "5.2.x",
-    "5.1.x",
-    "5.0.x",
-    "4.2.x",
-    "4.1.x",
-]
-
-WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
-    (f"{code}-{version}", f"{name} ({version})")
-    for code, name in WAGTAIL_GUIDE_LANGUAGES
-    for version in WAGTAIL_GUIDE_VERSIONS
-]
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = WAGTAIL_GUIDE_LANGUAGES
 
 LOCALE_PATHS = [
     BASE_DIR / "locale",
