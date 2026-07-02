@@ -8,6 +8,7 @@ services:
       - '${PORT:-8000}:${PORT:-8000}'
     environment:
       DJANGO_SETTINGS_MODULE: apps.guide.settings.dev
+      DATABASE_URL: postgres://guide@db/guide # pragma: allowlist secret
     env_file:
       - path: .env
         required: false
@@ -21,5 +22,30 @@ services:
       - manage.py
       - runserver
       - '0.0.0.0:${PORT:-8000}'
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: postgres:17
+    expose:
+      - 5432
+    environment:
+      # Location of DB data folder
+      PGDATA: /var/lib/postgresql/data/pgdata
+      # Defaults for createdb/dropdb/pg_restore etc.
+      PGDATABASE: guide
+      PGUSER: guide
+      # Values for initdb
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_USER: guide
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    attach: false
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U guide']
+      interval: 5s
+      timeout: 5s
+      retries: 5
 volumes:
   staticfiles:
+  pgdata:
