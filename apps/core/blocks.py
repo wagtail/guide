@@ -102,40 +102,9 @@ class AlertBlock(blocks.StructBlock):
         value_class = AlertStructValue
 
 
-class VersionNoteStructValue(blocks.StructValue):
-    def icon(self):
-        return f"core/svg/{self.get('change_type')}.svg"
-
-
-class VersionNoteBlock(blocks.StructBlock):
-    version = blocks.ChoiceBlock(
-        choices=[(v, v) for v in WAGTAIL_VERSIONS],
-        label=_("Version"),
-    )
-    change_type = blocks.ChoiceBlock(
-        choices=[
-            ("added", _("Added")),
-            ("changed", _("Changed")),
-            ("removed", _("Removed")),
-        ],
-        label=_("Type of change"),
-    )
-    content = RichTextBlock(
-        features=["bold", "italic", "link"],
-        label=_("Content"),
-    )
-
-    class Meta:
-        template = "core/blocks/version_note.html"
-        icon = "tag"
-        label = _("Version note")
-        value_class = VersionNoteStructValue
-
-
 CONTENT_BLOCKS = [
     ("text", TextBlock()),
     ("text_versioned", TextBlockVersioned()),
     ("alert", AlertBlock()),
-    ("version_note", VersionNoteBlock()),
 ]
 HOME_BLOCKS = [("section_grid", SectionGridBlock())]
