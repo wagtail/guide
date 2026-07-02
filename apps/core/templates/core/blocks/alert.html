@@ -5,7 +5,7 @@
         <div class="alert__icon">
             {% include self.icon %}
         </div>
-        <div class="alert__heading">{% trans self.alert_type %}</div>
+        <div class="alert__heading" dir="auto" >{% trans self.alert_type %}</div>
     </div>
     <div class="alert__content">
         {{ self.alert_body|richtext }}

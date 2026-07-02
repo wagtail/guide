@@ -5,7 +5,7 @@
 
     &__count {
         @include fs(s);
-        position: absolute;
+        position: relative;
         top: $gutter;
         inset-inline-end: 0;
         color: $meta-color;

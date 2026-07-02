@@ -27,6 +27,7 @@ const injectResultsInHTML = (results) => {
     removeExistingChildren(resultsCountContainer);
 
     const resultsCountHeading = document.createElement('h2');
+    resultsCountHeading.dir = 'auto';
     const resultHeadingString = ngettext(
         '%s result found.',
         '%s results found.',
@@ -40,9 +41,13 @@ const injectResultsInHTML = (results) => {
 
     results.forEach((result) => {
         const resultDiv = document.createElement('a');
+        resultDiv.dir = 'auto';
         const resultHeading = document.createElement('h3');
+        resultHeading.dir = 'auto';
         const resultDescription = document.createElement('div');
+        resultDescription.dir = 'auto';
         const resultParentSection = document.createElement('div');
+        resultParentSection.dir = 'auto';
         resultHeading.innerText = result.title;
         resultDescription.innerText = result.search_description;
         resultParentSection.innerText = result.parent_section;
