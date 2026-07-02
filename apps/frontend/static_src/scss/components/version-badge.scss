@@ -1,17 +1,22 @@
 .version-badge {
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: ($gutter * 0.5);
-    padding: 2px 10px;
-    border-radius: $border-radius--lg;
-    font-size: 14px;
+    display: inline;
+    margin-inline-end: 0.4em;
+    padding: 1px 7px;
+    border-radius: $border-radius--m;
+    font-size: 0.8em;
     font-weight: 600;
-    line-height: 1.5;
+    line-height: 1.4;
+    vertical-align: baseline;
+    background-color: light-dark(
+        rgba($color--grey, 0.12),
+        rgba($color--light-grey, 0.1)
+    );
+    color: light-dark($color--grey, $color--light-grey);
 
     &--added {
         background-color: light-dark(
             $color--extra-light-teal,
-            rgba($color--light-teal, 0.15)
+            rgba($color--light-teal, 0.12)
         );
         color: light-dark($color--teal, $color--light-teal);
     }
@@ -19,14 +24,14 @@
     &--changed {
         background-color: light-dark(
             $color--extra-light-blue,
-            rgba($color--light-blue, 0.15)
+            rgba($color--light-blue, 0.12)
         );
         color: light-dark($color--blue, $color--light-blue);
     }
 
     &--removed {
         background-color: light-dark(
-            rgba($color--grey, 0.15),
+            rgba($color--grey, 0.12),
             rgba($color--light-grey, 0.1)
         );
         color: light-dark($color--grey, $color--light-grey);

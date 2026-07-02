@@ -29,13 +29,17 @@ class TextBlock(RichTextBlock):
 
 class TextBlockVersioned(blocks.StructBlock):
     content = RichTextBlock(features=["bold", "italic", "link"])
-    version = blocks.ChoiceBlock(choices=[(v, v) for v in WAGTAIL_VERSIONS])
+    version = blocks.ChoiceBlock(
+        choices=[(v, v) for v in WAGTAIL_VERSIONS],
+        required=False,
+    )
     change_type = blocks.ChoiceBlock(
         choices=[
             ("added", _("Added")),
             ("changed", _("Changed")),
             ("removed", _("Removed")),
-        ]
+        ],
+        required=False,
     )
 
     class Meta:

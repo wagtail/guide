@@ -1,8 +1,14 @@
 {% load wagtailcore_tags %}
 
-{% if value.version %}
-<div class="version-badge version-badge--{{ value.change_type }}">
-    {{ value.change_type|title }} in Wagtail {{ value.version }}
-</div>
+{% if value.version or value.change_type %}
+<span class="version-badge{% if value.change_type %} version-badge--{{ value.change_type }}{% endif %}">
+    {% if value.change_type and value.version %}
+        {{ value.change_type|title }} in Wagtail {{ value.version }}
+    {% elif value.change_type %}
+        {{ value.change_type|title }}
+    {% else %}
+        Wagtail {{ value.version }}
+    {% endif %}
+</span>
 {% endif %}
 {{ value.content|richtext }}
