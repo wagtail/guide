@@ -34,10 +34,13 @@
     }
 
     &__form {
-        display: none;
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity $transition;
 
         &.active {
-            display: block;
+            visibility: visible;
+            opacity: 1;
         }
     }
 
