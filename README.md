@@ -57,7 +57,7 @@ You can access the administrative area at [http://127.0.0.1:8000/admin](http://1
 
 To activate Poetry's virtual environment, run:
 
-    source $(poetry env activate)
+    eval $(poetry env activate)
 
 To generate and compile translation strings, run:
 
