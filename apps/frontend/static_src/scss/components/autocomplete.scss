@@ -5,14 +5,11 @@
 
     &__count {
         @include fs(s);
-        position: absolute;
-        top: $gutter;
-        inset-inline-end: 0;
+        text-align: right;
         color: $meta-color;
         font-weight: 500;
         padding: 0 $row-spacing;
         margin-bottom: $gutter;
-        margin-top: $gutter;
     }
 
     &__row {
@@ -20,7 +17,14 @@
         padding: $gutter $row-spacing;
         border-top: 1px solid light-dark($color--light-grey, $color--grey);
         text-decoration: none;
-        transition: background-color $transition;
+        transition: background-color $transition, opacity 0.25s ease-out, transform 0.25s ease-out;
+        opacity: 0;
+        transform: translateY(8px);
+
+        &.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
         &:hover,
         &:focus {

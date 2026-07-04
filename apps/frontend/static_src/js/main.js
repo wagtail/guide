@@ -11,6 +11,11 @@ handleFeedback();
 
 const searchInput = document.querySelector('[data-search-input]');
 const searchIconButton = document.querySelector('[data-search-icon-button]');
+const searchModal = document.getElementById('search-modal');
+const resultsDiv = document.querySelector('[data-results]');
+const resultsCountContainer = document.querySelector(
+    '[data-results-count-container]',
+);
 
 const removeExistingChildren = (parent) => {
     // eslint-disable-next-line no-param-reassign
@@ -18,11 +23,6 @@ const removeExistingChildren = (parent) => {
 };
 
 const injectResultsInHTML = (results) => {
-    const resultsDiv = document.querySelector('[data-results]');
-    const resultsCountContainer = document.querySelector(
-        '[data-results-count-container]',
-    );
-
     removeExistingChildren(resultsDiv);
     removeExistingChildren(resultsCountContainer);
 
@@ -38,7 +38,7 @@ const injectResultsInHTML = (results) => {
     resultsCountHeading.classList.add('autocomplete__count');
     resultsCountContainer.appendChild(resultsCountHeading);
 
-    results.forEach((result) => {
+    results.forEach((result, index) => {
         const resultDiv = document.createElement('a');
         const resultHeading = document.createElement('h3');
         const resultDescription = document.createElement('div');
@@ -55,11 +55,22 @@ const injectResultsInHTML = (results) => {
         resultDiv.classList.add('autocomplete__row');
         resultHeading.classList.add('autocomplete__heading');
         resultsDiv.appendChild(resultDiv);
+
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                resultDiv.classList.add('is-visible');
+            }, index *400);
+        });
     });
 };
 
 const onSearchInputChange = async (event) => {
     const query = event.target.value;
+
+    document.querySelector('.search__container').classList.add('is-loading');
+
+    const minDelay = new Promise(resolve => setTimeout(resolve, 200));
+
     try {
         const res = await fetch(
             `${window.location.origin}${
@@ -75,16 +86,19 @@ const onSearchInputChange = async (event) => {
         console.log(err);
         // eslint-disable-next-line no-alert
         window.alert(`Error: ${err}`);
+    } finally {
+        await minDelay; // wait for 300ms to pass if fetch was faster
+        document.querySelector('.search__container').classList.remove('is-loading');
     }
 };
 searchInput.addEventListener('keyup', debounce(onSearchInputChange, 150));
 
-searchIconButton.addEventListener('click', () => {
-    const resultsDiv = document.querySelector('[data-results]');
-    const resultsCountContainer = document.querySelector(
-        '[data-results-count-container]',
-    );
+searchModal.addEventListener('shown.bs.modal', () => {
+    searchInput.focus();
+});
 
+searchModal.addEventListener('hidden.bs.modal', () => {
+    searchInput.value = '';
     removeExistingChildren(resultsDiv);
     removeExistingChildren(resultsCountContainer);
 });
