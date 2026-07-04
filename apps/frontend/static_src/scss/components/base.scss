@@ -12,7 +12,7 @@ body {
     color: light-dark($color--off-black, $color--light-grey);
 
     &.no-scroll {
-        overflow-y: hidden;
+        overflow: hidden;
     }
 }
 
