@@ -8,11 +8,11 @@
         position: relative;
     }
 
-    &__container::after {
+    &__container:after {
         content: '';
         display: block;
         position: absolute;
-        inset-inline-start:($gutter * 1.6);
+        inset-inline-start: ($gutter * 1.6);
         inset-block-start: 50%;
         transform: translateY(-50%);
         width: 21px;
@@ -25,10 +25,10 @@
         filter: light-dark(none, brightness(0) invert(1));
     }
 
-    &__container.is-loading::after {
+    &__container.is-loading:after {
         background-image: none;
-        border: 2px solid #ccc;
-        border-top-color: #333;
+        border: 2px solid light-dark($color--light-grey, $color--grey);
+        border-top-color: light-dark($color--off-black, $color--light-grey);
         border-radius: 50%;
         animation: spin 1s linear infinite;
     }
@@ -48,7 +48,9 @@
 }
 
 @keyframes spin {
-    to { transform: translateY(-50%) rotate(360deg); }
+    to {
+        transform: translateY(-50%) rotate(360deg);
+    }
 }
 
 .search .modal-content {

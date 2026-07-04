@@ -5,7 +5,7 @@
 
     &__count {
         @include fs(s);
-        text-align: right;
+        text-align: end;
         color: $meta-color;
         font-weight: 500;
         padding: 0 $row-spacing;
@@ -17,7 +17,8 @@
         padding: $gutter $row-spacing;
         border-top: 1px solid light-dark($color--light-grey, $color--grey);
         text-decoration: none;
-        transition: background-color $transition, opacity 0.25s ease-out, transform 0.25s ease-out;
+        transition: background-color $transition, opacity 0.25s ease-out,
+            transform 0.25s ease-out;
         opacity: 0;
         transform: translateY(8px);
 

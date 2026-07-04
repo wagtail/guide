@@ -10,7 +10,6 @@ initSectionLink();
 handleFeedback();
 
 const searchInput = document.querySelector('[data-search-input]');
-const searchIconButton = document.querySelector('[data-search-icon-button]');
 const searchModal = document.getElementById('search-modal');
 const resultsDiv = document.querySelector('[data-results]');
 const resultsCountContainer = document.querySelector(
@@ -59,7 +58,7 @@ const injectResultsInHTML = (results) => {
         requestAnimationFrame(() => {
             setTimeout(() => {
                 resultDiv.classList.add('is-visible');
-            }, index *400);
+            }, index * 400);
         });
     });
 };
@@ -69,7 +68,9 @@ const onSearchInputChange = async (event) => {
 
     document.querySelector('.search__container').classList.add('is-loading');
 
-    const minDelay = new Promise(resolve => setTimeout(resolve, 200));
+    const minDelay = new Promise((resolve) => {
+        setTimeout(resolve, 200);
+    });
 
     try {
         const res = await fetch(
@@ -88,7 +89,9 @@ const onSearchInputChange = async (event) => {
         window.alert(`Error: ${err}`);
     } finally {
         await minDelay; // wait for 300ms to pass if fetch was faster
-        document.querySelector('.search__container').classList.remove('is-loading');
+        document
+            .querySelector('.search__container')
+            .classList.remove('is-loading');
     }
 };
 searchInput.addEventListener('keyup', debounce(onSearchInputChange, 150));
