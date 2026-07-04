@@ -41,7 +41,6 @@ jobs:
       - run: make test-coverage
 
   check_python:
-    name: 🐍 Check Python (backend)
     runs-on: ubuntu-latest
 
     steps:
@@ -55,7 +54,6 @@ jobs:
       - run: make lint-backend
 
   check_node:
-    name: 👩‍🚀 Check Node (frontend)
     runs-on: ubuntu-latest
 
     steps:
