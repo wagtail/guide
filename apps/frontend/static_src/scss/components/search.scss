@@ -35,6 +35,7 @@
 
     &__input {
         @include fs(m);
+        line-height: $base-line-height;
         border: 1px solid $color--black;
         width: 100%;
         padding: $gutter;
