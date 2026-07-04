@@ -35,7 +35,6 @@ jobs:
           cache: poetry
       - run: poetry install --no-root
       - run: poetry run python manage.py check
-      - run: poetry run python manage.py collectstatic --noinput --clear
       - run: poetry run python manage.py createcachetable
       - run: poetry run python manage.py makemigrations --check
       - run: mkdir ./apps/frontend/static && echo "{}" > ./apps/frontend/static/manifest.json

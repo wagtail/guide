@@ -36,9 +36,6 @@ SECURE_HSTS_SECONDS = int(
 # https://docs.djangoproject.com/en/3.2/ref/settings/#secure-hsts-include-subdomains
 SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 
-# https://docs.djangoproject.com/en/stable/ref/settings/#secure-browser-xss-filter
-SECURE_BROWSER_XSS_FILTER = True
-
 # https://docs.djangoproject.com/en/stable/ref/settings/#secure-content-type-nosniff
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
