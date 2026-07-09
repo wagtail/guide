@@ -27,20 +27,12 @@
             width: 30px;
             height: 25px;
             fill: light-dark($color--teal, $color--light-teal);
+            --direction-deg: calc(var(--w-direction-factor) * -90deg);
+            transform: rotateZ(calc(90deg + var(--direction-deg)));
         }
 
         &[rel='prev'] svg {
-            transform: rotateZ(180deg);
-        }
-
-        [dir='rtl'] & {
-            &[rel='prev'] svg {
-                transform: none;
-            }
-
-            &[rel='next'] svg {
-                transform: rotateZ(180deg);
-            }
+            --direction-deg: calc(var(--w-direction-factor) * 90deg);
         }
     }
 

@@ -31,13 +31,9 @@ When working on changes to the "latest" source content in English, make sure to 
 
 #### RTL support
 
-The guide supports right-to-left languages, like Arabic and Hebrew. All layout
-and styling changes must work correctly in both LTR and RTL.
+The guide supports right-to-left languages, like Arabic and Hebrew. All layout and styling changes must work correctly in both LTR and RTL.
 
-We test RTL changes by setting `dir="rtl"` on the page and comparing against
-the LTR version. If you're unsure whether something should mirror or stay
-fixed, start a thread in [GitHub Discussions](https://github.com/wagtail/guide/discussions)
-or the #editor-guide channel of the [Wagtail Slack workspace](https://github.com/wagtail/wagtail/wiki/Slack).
+If you're unsure whether something should mirror or stay fixed, start a thread in [GitHub Discussions](https://github.com/wagtail/guide/discussions) or the #editor-guide channel of the [Wagtail Slack workspace](https://github.com/wagtail/wagtail/wiki/Slack).
 
 ### Versioning
 

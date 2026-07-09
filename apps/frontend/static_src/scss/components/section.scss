@@ -36,8 +36,8 @@
             fill: light-dark(currentcolor, $color--white);
         }
 
-        [dir='rtl'] & .svg_icon--flip-rtl {
-            transform: scaleX(-1);
+        .svg_icon--flip-rtl {
+            transform: scaleX(var(--w-direction-factor));
         }
     }
 

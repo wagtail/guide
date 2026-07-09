@@ -1,6 +1,6 @@
 .primary-nav {
     display: none;
-    position: fixed;
+    position: absolute;
     z-index: 5;
     background-color: light-dark($color--page-bg, $color--off-black);
     padding: ($gutter * 6) $gutter ($gutter * 2);

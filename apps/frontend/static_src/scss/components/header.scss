@@ -17,13 +17,6 @@
         @include media-query(large) {
             flex-direction: column;
             margin-bottom: ($gutter * 2);
-
-            [dir='rtl'] & {
-                display: grid;
-                grid-template-columns: max-content;
-                justify-content: end;
-                justify-items: end;
-            }
         }
 
         // Mask off menu behind logo
