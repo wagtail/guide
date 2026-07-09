@@ -3,7 +3,7 @@
 {% wagtail_site as current_site %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
 <!DOCTYPE html>
-<html lang="{% block lang %}{% get_language_from_language_code self.locale.language_code %}{% endblock %}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" class="no-js">
+<html lang="{% block lang %}{{ self.locale.language_code }}{% endblock %}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" class="no-js">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -23,7 +23,7 @@
         We don’t want older versions of the documentation to show up in search results.
         So we block all non-latest pages indexing with the robots=noindex meta tag.
         {% endcomment %}
-        {% if SEO_NOINDEX or "latest" not in self.locale.language_code %}
+        {% if SEO_NOINDEX %}
         <meta name="robots" content="noindex">
         {% endif %}
 
@@ -40,7 +40,7 @@
         {% hreflangs %}
 
         {% if page %}
-            <link rel="canonical" href="{% get_translation_url page 'en-latest' %}">
+            <link rel="canonical" href="{% get_translation_url page 'en' %}">
         {% endif %}
 
         {% if page.has_markdown_route %}

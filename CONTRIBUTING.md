@@ -39,9 +39,8 @@ If you're unsure whether something should mirror or stay fixed, start a thread i
 
 Our default "latest" version of the guide corresponds to Wagtail’s release currently in development. When Wagtail has a new release, we create a copy of the guide’s "latest" content for that release. Here are the preliminary steps to do this:
 
-1. Make sure the version exists in the Django settings ([`WAGTAIL_GUIDE_VERSIONS`](https://github.com/search?q=repo%3Awagtail%2Fguide%20WAGTAIL_GUIDE_VERSIONS&type=code)).
-2. Add the new version in the CMS in [Locales](https://guide.wagtail.org/admin/locales/).
-3. Add the new version in the CMS in [Collections](https://guide.wagtail.org/admin/collections/) – with a parent collection matching the version number, and then a child collection for any language with translated images (currently English only).
+1.Add the new version in the CMS in [Locales](https://guide.wagtail.org/admin/locales/).
+2.Add the new version in the CMS in [Collections](https://guide.wagtail.org/admin/collections/) – with a parent collection matching the version number, and then a child collection for any language with translated images (currently English only).
 
 We then review and update the website’s content in the "Latest" version to match the current capabilities of Wagtail, before proceeding to make a copy of all content for the new release.
 

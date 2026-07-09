@@ -44,21 +44,16 @@ def hreflangs(context):
     if not page:
         return {}
 
-    version = get_version_from_language_code(page.locale.language_code)
-
-    # Only get translations for the current version.
     translation_language_codes = (
         page.get_translations()
         .live()
         .public()
-        .filter(locale__language_code__endswith=version)
         .values_list("locale__language_code", flat=True)
     )
 
     return {
         "translations": [
-            (get_language_from_language_code(lc), get_translation_url(page, lc))
-            for lc in translation_language_codes
+            (lc, get_translation_url(page, lc)) for lc in translation_language_codes
         ]
     }
 
@@ -70,13 +65,3 @@ def footer():
         obj = FooterContent.objects.first()
 
     return {"footer": obj}
-
-
-@register.simple_tag
-def get_version_from_language_code(language_code):
-    return language_code.rsplit("-", maxsplit=1)[1]
-
-
-@register.simple_tag
-def get_language_from_language_code(language_code):
-    return language_code.rsplit("-", maxsplit=1)[0]

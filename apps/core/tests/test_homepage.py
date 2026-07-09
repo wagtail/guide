@@ -14,7 +14,5 @@ class TestHomePage(TestCase):
 
         self.assertContains(
             response,
-            (
-                '<p>Want to learn more about <a href="/en-latest/">Wagtail’s future</a>?</p>'
-            ),
+            ('<p>Want to learn more about <a href="/en/">Wagtail’s future</a>?</p>'),
         )

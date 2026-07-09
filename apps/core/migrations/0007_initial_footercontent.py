@@ -7,10 +7,10 @@ def create_initial_footer_content(apps, schema_editor):
     Locale = apps.get_model("wagtailcore", "Locale")
     FooterContent = apps.get_model("core", "FooterContent")
     FooterItem = apps.get_model("core", "FooterItem")
-    en_latest = Locale.objects.get(language_code="en-latest")
+    en = Locale.objects.get(language_code="en")
 
     footer_content = FooterContent.objects.create(
-        locale=en_latest,
+        locale=en,
         copyright_text=(
             '<p data-block-key="q66lz">'
             "Copyright and related rights waived via "
@@ -42,7 +42,7 @@ def create_initial_footer_content(apps, schema_editor):
 
     for data in items_data:
         FooterItem.objects.create(
-            locale=en_latest,
+            locale=en,
             parent_footer=footer_content,
             **data,
         )

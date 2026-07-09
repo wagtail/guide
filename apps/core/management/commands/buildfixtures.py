@@ -40,11 +40,7 @@ class Command(BaseCommand):
             # Make sure languages with region code is handled correctly
             ("pt-br", "Portuguese (Brazil)"),
         ]
-        locales = [
-            (f"{code}-{version}", f"{name} ({version})")
-            for code, name in languages
-            for version in settings.WAGTAIL_GUIDE_VERSIONS
-        ]
+        locales = [(code, name) for code, name in languages]
         for language_code, label in locales[1:]:
             locale, _ = Locale.objects.get_or_create(language_code=language_code)
             obj = self.home.copy_for_translation(locale)

@@ -5,15 +5,15 @@
         {% if page %}
         <button class="language-selector__toggle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
             {% get_language_info for LANGUAGE_CODE as lang %}
-            <span class="language-selector__label" dir="auto">{{ lang.name_translated }} {% if page %}({% get_version_from_language_code page.localized.locale.language_code %}){% endif %}</span>
+            <span class="language-selector__label" dir="auto">{{ lang.name_translated }}</span>
         </button>
         {% spaceless %}
             <ul class="language-selector__dropdown dropdown-menu">
             {% for translation in page.get_translations.live %}
                 {% get_language_info for translation.locale.language_code as lang %}
                 <li>
-                    <a href="{% pageurl translation %}" rel="alternate" hreflang="{% get_language_from_language_code translation.locale.language_code %}" class="language-selector__dropdown-item dropdown-item" dir="auto">
-                        {{ lang.name_local }} ({% get_version_from_language_code translation.locale.language_code %})
+                    <a href="{% pageurl translation %}" rel="alternate" hreflang="{{ translation.locale.language_code }}" class="language-selector__dropdown-item dropdown-item" dir="auto">
+                        {{ lang.name_local }}
                     </a>
                 </li>
             {% endfor %}
