@@ -1,0 +1,31 @@
+.version-badge {
+    display: inline-block;
+    margin-inline-end: 0.4em;
+    padding: 1px 7px;
+    border-radius: $border-radius--m;
+    font-size: 0.8em;
+    font-weight: 600;
+    line-height: 1.4;
+    vertical-align: baseline;
+    background-color: light-dark(
+        rgba($color--grey, 0.12),
+        rgba($color--light-grey, 0.1)
+    );
+    color: light-dark($color--grey, $color--light-grey);
+
+    &--added {
+        background-color: light-dark(
+            $color--extra-light-teal,
+            rgba($color--light-teal, 0.12)
+        );
+        color: light-dark($color--teal, $color--light-teal);
+    }
+
+    &--changed {
+        background-color: light-dark(
+            $color--extra-light-blue,
+            rgba($color--light-blue, 0.12)
+        );
+        color: light-dark($color--blue, $color--light-blue);
+    }
+}
