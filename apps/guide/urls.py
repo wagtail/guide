@@ -6,9 +6,9 @@ from django.views.generic import TemplateView
 from django.views.i18n import JavaScriptCatalog
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.api.v3.urls import api
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
-from wagtail.api.v3.urls import api
 
 from apps.llms_txt import views as llms_txt_views
 from apps.search import views as search_views
