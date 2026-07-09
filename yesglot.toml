@@ -18,3 +18,11 @@ path = "locale/ar/LC_MESSAGES/django.po"
 [[target_language]]
 tag = "ar"
 path = "locale/ar/LC_MESSAGES/djangojs.po"
+
+[[target_language]]
+tag = "fr"
+path = "locale/fr/LC_MESSAGES/django.po"
+
+[[target_language]]
+tag = "fr"
+path = "locale/fr/LC_MESSAGES/djangojs.po"
