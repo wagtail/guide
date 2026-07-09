@@ -87,3 +87,18 @@
         }
     }
 }
+
+@mixin light-dark($property, $light, $dark){
+
+    #{$property}: $light;
+    @supports (color: light-dark(#000, #fff)) {
+        #{$property}: light-dark(#{$light}, #{$dark});
+    }
+
+    @supports not (color: light-dark(#000, #fff)) {
+        :global(body.theme-dark) & {
+            #{$property}: $dark;
+        }
+    }
+}
+
