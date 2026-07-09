@@ -1,0 +1,24 @@
+# https://github.com/yesglot/yesglot.toml
+[yesglot]
+version = 1
+
+[project]
+id = "019f4774-04ec-775b-84d6-2a096f79b662"
+technology = "django"
+tracked_branch = "main"
+custom_prompt = "This is the Wagtail CMS "guide" onboarding/training site. Preserve product 
+and brand names (Wagtail, Django, Python) untranslated. Keep all placeholders 
+(%(name)s, {name}, %s) and HTML tags exactly as in the source. Use a friendly, 
+clear, instructional tone appropriate for CMS documentation/UI labels, not 
+formal or literary language."
+
+[source_language]
+tag = "en"
+
+[[target_language]]
+tag = "ar"
+path = "locale/ar/LC_MESSAGES/django.po"
+
+[[target_language]]
+tag = "ar"
+path = "locale/ar/LC_MESSAGES/djangojs.po"
