@@ -10,12 +10,11 @@ Page URL: {{ page.full_url }}
 {%- for block in page.body %}
 {%- if block.block_type == 'text' %}
 {{ block.value|richtext_markdown }}
-{%- elif block.block_type == 'text_versioned' %}
+{%- elif block.block_type == 'text_annotated' %}
+{%- if block.value.change_type and block.value.version %}{{ block.value.change_type|capitalize }} in Wagtail {{ block.value.version }}: {% endif -%}
 {{ block.value.content|richtext_markdown }}
 {%- elif block.block_type == 'alert' %}
 {{block.value.alert_type}}: {{ block.value.alert_body|richtext_markdown }}
-{%- elif block.block_type == 'version_note' %}
-{{ block.value.change_type|capitalize }} in Wagtail {{ block.value.version }}: {{ block.value.content|richtext_markdown }}
 {%- endif %}
 {%- endfor %}
 

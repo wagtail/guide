@@ -1,5 +1,5 @@
 .version-badge {
-    display: inline;
+    display: inline-block;
     margin-inline-end: 0.4em;
     padding: 1px 7px;
     border-radius: $border-radius--m;
@@ -27,13 +27,5 @@
             rgba($color--light-blue, 0.12)
         );
         color: light-dark($color--blue, $color--light-blue);
-    }
-
-    &--removed {
-        background-color: light-dark(
-            rgba($color--grey, 0.12),
-            rgba($color--light-grey, 0.1)
-        );
-        color: light-dark($color--grey, $color--light-grey);
     }
 }

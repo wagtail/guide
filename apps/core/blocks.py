@@ -1,25 +1,12 @@
-from django.utils.translation import gettext as _
+from django.core.validators import RegexValidator
+from django.utils.translation import gettext_lazy as _
 from wagtail import blocks
 from wagtail.blocks import RichTextBlock
 
-WAGTAIL_VERSIONS = [
-    "4.1",
-    "4.2",
-    "5.0",
-    "5.1",
-    "5.2",
-    "6.0",
-    "6.1",
-    "6.2",
-    "6.3",
-    "6.4",
-    "7.0",
-    "7.1",
-    "7.2",
-    "7.3",
-    "7.4",
-    "8.0",
-]
+VERSION_VALIDATOR = RegexValidator(
+    regex=r"^\d+\.\d+$",
+    message=_("Enter a version in x.y format, e.g. 7.4 or 8.10."),
+)
 
 
 class TextBlock(RichTextBlock):
@@ -27,11 +14,13 @@ class TextBlock(RichTextBlock):
         template = "core/blocks/text.html"
 
 
-class TextBlockVersioned(blocks.StructBlock):
-    content = RichTextBlock(features=["bold", "italic", "link"])
-    version = blocks.ChoiceBlock(
-        choices=[(v, v) for v in WAGTAIL_VERSIONS],
+class AnnotatedTextBlock(blocks.StructBlock):
+    content = RichTextBlock()
+    version = blocks.CharBlock(
+        max_length=20,
         required=False,
+        validators=[VERSION_VALIDATOR],
+        help_text=_("Wagtail version, in x.y format, e.g. 7.4 or 8.10."),
     )
     change_type = blocks.ChoiceBlock(
         choices=[
@@ -43,9 +32,9 @@ class TextBlockVersioned(blocks.StructBlock):
     )
 
     class Meta:
-        template = "core/blocks/text_versioned.html"
+        template = "core/blocks/text_annotated.html"
         icon = "pilcrow"
-        label = _("Text (versioned)")
+        label = _("Text (annotated)")
         form_layout = blocks.BlockGroup(
             children=["content"],
             settings=["version", "change_type"],
@@ -108,7 +97,7 @@ class AlertBlock(blocks.StructBlock):
 
 CONTENT_BLOCKS = [
     ("text", TextBlock()),
-    ("text_versioned", TextBlockVersioned()),
+    ("text_annotated", AnnotatedTextBlock()),
     ("alert", AlertBlock()),
 ]
 HOME_BLOCKS = [("section_grid", SectionGridBlock())]
