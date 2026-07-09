@@ -9,7 +9,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.14"
 django = ">=6.0,<7.0"
-wagtail = ">=7.4,<7.5"
+wagtail = {url = "https://releases.wagtail.org/nightly/dist/wagtail-8.0.dev20260709-py3-none-any.whl"}
 django-manifest-loader = "^1.0.0"
 lxml = ">=4.9,<7"
 djangorestframework = ">=3.13.1,<4.0"
