@@ -8,6 +8,7 @@ from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
+from wagtail.api.v3.urls import api
 
 from apps.llms_txt import views as llms_txt_views
 from apps.search import views as search_views
@@ -29,6 +30,7 @@ urlpatterns = [
         llms_txt_views.agent_skill_view,
         name="agent_skill",
     ),
+    path("api/v3/", api.urls),
 ]
 
 
