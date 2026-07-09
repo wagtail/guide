@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -12,7 +11,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,115 +19,115 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "Tutorial"
-msgstr ""
+msgstr "البرنامج التعليمي"
 
 msgid "How-to"
-msgstr ""
+msgstr "كيفية التنفيذ"
 
 msgid "Reference"
-msgstr ""
+msgstr "المرجع"
 
 msgid "Explanation"
-msgstr ""
+msgstr "الشرح"
 
 msgid "Section"
-msgstr ""
+msgstr "القسم"
 
 msgid "Title"
-msgstr ""
+msgstr "العنوان"
 
 msgid "Text"
-msgstr ""
+msgstr "النص"
 
 msgid "Page"
-msgstr ""
+msgstr "الصفحة"
 
 msgid "Section grid"
-msgstr ""
+msgstr "شبكة الأقسام"
 
 msgid "Warning"
-msgstr ""
+msgstr "تحذير"
 
 msgid "Note"
-msgstr ""
+msgstr "ملاحظة"
 
 msgid "Page not found"
-msgstr ""
+msgstr "الصفحة غير موجودة"
 
 msgid "Sorry, this page could not be found."
-msgstr ""
+msgstr "عذرًا، تعذر العثور على هذه الصفحة."
 
 msgid "Was this page helpful?"
-msgstr ""
+msgstr "هل كانت هذه الصفحة مفيدة؟"
 
 msgid "This page was helpful"
-msgstr ""
+msgstr "كانت هذه الصفحة مفيدة"
 
 msgid "Happy"
-msgstr ""
+msgstr "راضٍ"
 
 msgid "This page could be improved"
-msgstr ""
+msgstr "يمكن تحسين هذه الصفحة"
 
 msgid "Unhappy"
-msgstr ""
+msgstr "غير راضٍ"
 
 msgid "Help us improve by telling what you missed"
-msgstr ""
+msgstr "ساعدنا على التحسين بإخبارنا بما كان ينقصك"
 
 msgid "Your feedback"
-msgstr ""
+msgstr "ملاحظاتك"
 
 msgid "Submit"
-msgstr ""
+msgstr "إرسال"
 
 msgid "User guide"
-msgstr ""
+msgstr "دليل المستخدم"
 
 msgid "Toggle the search form"
-msgstr ""
+msgstr "تبديل نموذج البحث"
 
 msgid "Mobile menu toggle"
-msgstr ""
+msgstr "تبديل القائمة على الجوال"
 
 msgid "Search"
-msgstr ""
+msgstr "بحث"
 
 msgid "Skip to main content"
-msgstr ""
+msgstr "تخطَّ إلى المحتوى الرئيسي"
 
 msgid "JavaScript is required to toggle light/dark mode."
-msgstr ""
+msgstr "JavaScript مطلوب للتبديل بين الوضع الفاتح/الداكن."
 
 msgid "Dark"
-msgstr ""
+msgstr "داكن"
 
 msgid "Toggle between dark and light theme"
-msgstr ""
+msgstr "التبديل بين النسق الداكن والفاتح"
 
 msgid "Light mode"
-msgstr ""
+msgstr "الوضع الفاتح"
 
 msgid "Dark mode"
-msgstr ""
+msgstr "الوضع الداكن"
 
 msgid "Light"
-msgstr ""
+msgstr "فاتح"
 
 msgid "On this page"
-msgstr ""
+msgstr "في هذه الصفحة"
 
 msgid "image"
-msgstr ""
+msgstr "صورة"
 
 msgid "Previous"
-msgstr ""
+msgstr "السابق"
 
 msgid "Next"
-msgstr ""
+msgstr "التالي"
 
 msgid "No results found"
-msgstr ""
+msgstr "لم يتم العثور على نتائج"
 
 msgid "Home"
-msgstr ""
+msgstr "الرئيسية"
