@@ -35,6 +35,10 @@
         .svg_icon__original_path {
             fill: light-dark(currentcolor, $color--white);
         }
+
+        .svg_icon--flip-rtl {
+            transform: scaleX(var(--w-direction-factor));
+        }
     }
 
     &__heading {

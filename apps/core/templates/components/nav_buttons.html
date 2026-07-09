@@ -4,14 +4,14 @@
     {% if previous %}
         <a href="{% pageurl previous %}" class="nav-buttons__link" rel="prev">
             {% include "core/svg/arrow.svg" %}
-            <div class="nav-buttons__label">
+            <div class="nav-buttons__label" dir="auto">
                 {{ previous }}
             </div>
         </a>
     {% endif %}
     {% if next %}
         <a href="{% pageurl next %}" class="nav-buttons__link" rel="next">
-            <div class="nav-buttons__label">
+            <div class="nav-buttons__label" dir="auto">
                 {{ next }}
             </div>
             {% include "core/svg/arrow.svg" %}

@@ -5,6 +5,7 @@
 
     &__count {
         @include fs(s);
+        top: $gutter;
         text-align: end;
         color: $meta-color;
         font-weight: 500;

@@ -63,7 +63,9 @@ export const handleFeedback = () => {
             tooltipList.forEach((tooltip) => {
                 tooltip.dispose();
             });
-            feedbackContainer.innerHTML = gettext('Thanks for your feedback!');
+            feedbackContainer.innerHTML = `<span dir="auto">${gettext(
+                'Thanks for your feedback!',
+            )}</span>`;
             feedbackPk = data.pk;
             additionalFeedbackContainer.classList.add('active');
         } catch (err) {

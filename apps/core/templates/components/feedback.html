@@ -3,7 +3,7 @@
 <div class="feedback">
     {% csrf_token %}
     <div class="feedback__container" data-feedback-container>
-        <h2 class="feedback__heading">{% trans 'Was this page helpful?' %}</h2>
+        <h2 class="feedback__heading" dir="auto">{% trans 'Was this page helpful?' %}</h2>
         <div class="feedback__options">
             <button class="feedback__button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="{% trans 'This page was helpful' %}" data-bs-trigger="hover" data-happy-button aria-label="{% trans 'Happy' %}">
                 {% include "./svg/happy.svg" %}

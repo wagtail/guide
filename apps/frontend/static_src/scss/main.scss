@@ -12,13 +12,15 @@
 @import '~bootstrap/scss/modal';
 @import '~bootstrap/scss/tooltip';
 
+// Project-wide elements styles.
+@import './components/base';
+
 // Custom component styles
 @import './components/alert';
 @import './components/version-badge';
 @import './components/app';
 @import './components/copy-button';
 @import './components/autocomplete';
-@import './components/base';
 @import './components/burger';
 @import './components/dropdown-toggle';
 @import './components/error-page';
