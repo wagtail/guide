@@ -1,0 +1,18 @@
+{
+  "name": "Wagtail Guide",
+  "website": "https://guide.wagtail.org/",
+  "repository": "https://github.com/wagtail/guide",
+  "stack": "container",
+  "env": {
+    "SECRET_KEY": {
+      "generator": "secret"
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "addons": ["heroku-redis:mini", "heroku-postgresql:essential-0"]
+}
