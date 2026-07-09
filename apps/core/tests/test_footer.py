@@ -9,11 +9,11 @@ from apps.core.models.snippets import FooterContent
 class TestFooter(TestCase):
     @classmethod
     def setUpTestData(cls):
-        cls.en_latest = LocaleFactory(language_code="en")
-        cls.id_latest = LocaleFactory(language_code="id")
+        cls.en_locale = LocaleFactory(language_code="en")
+        cls.id_locale = LocaleFactory(language_code="id")
 
         cls.footer_en = FooterContent.objects.first()
-        cls.footer_id = cls.footer_en.copy_for_translation(cls.id_latest)
+        cls.footer_id = cls.footer_en.copy_for_translation(cls.id_locale)
 
         cls.footer_id.copyright_text = (
             "Hak cipta dan hak terkait dibebaskan melalui CC0"
@@ -45,7 +45,7 @@ class TestFooter(TestCase):
 
     def test_footer_inclusion_tag_translated(self):
         # A normal request will go through LocaleMiddleware to activate the locale.
-        translation.activate(self.id_latest.language_code)
+        translation.activate(self.id_locale.language_code)
         template = Template("{% load core_tags %}{% footer %}")
         result = template.render(Context({}))
 

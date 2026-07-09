@@ -1,5 +1,5 @@
 import re
-from urllib.parse import parse_qsl, urlencode, urlparse
+from urllib.parse import parse_qsl, urlencode
 
 from django.conf import settings
 from django.shortcuts import redirect
@@ -27,10 +27,9 @@ class VersionedUrlRedirectMiddleware:
             lang = match.group("lang")
             ver = match.group("ver")
             rest = match.group("rest")
-            parsed = urlparse(rest)
             query = dict(parse_qsl(request.META["QUERY_STRING"]))
             query["target_version"] = ver
-            new_url = f"/{lang}{parsed.path}?{urlencode(query)}"
+            new_url = f"/{lang}{rest}?{urlencode(query)}"
             return redirect(new_url)
 
         return self.get_response(request)
