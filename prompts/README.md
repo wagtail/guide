@@ -30,7 +30,7 @@ We version the site’s contents to simplify experimentation with different AI p
 
 <!-- TOKEN_COUNTS_START -->
 
-Token counts (gpt-oss-120b):
+Last updated: 2026-07-10, token counts (gpt-oss-120b):
 
 | File                                                                                                                  | Tokens |
 | --------------------------------------------------------------------------------------------------------------------- | -----: |

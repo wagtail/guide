@@ -6,6 +6,7 @@
 
 import logging
 import re
+from datetime import date
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -53,7 +54,7 @@ def update_readme(token_counts: list[tuple[Path, int]]) -> None:
     lines = [
         start,
         "",
-        f"Token counts ({TOKENIZER_MODEL}):",
+        f"Last updated: {date.today().isoformat()}, token counts ({TOKENIZER_MODEL}):",
         "",
         "| File | Tokens |",
         "| --- | ---: |",
