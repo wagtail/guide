@@ -20,6 +20,18 @@ Currently, the project uses:
 -   A production environment auto-deployed on commits to `main`.
 -   [Review Apps](https://devcenter.heroku.com/articles/github-integration-review-apps) for first-party pull requests.
 
+## Database management
+
+Here are relevant comments to retrieve a copy of the production database from Heroku, and apply it to your local environment. Note: adapt the database hostname to your local environment.
+
+```bash
+heroku pg:backups:download --output=./database_dumps/YYYYMMDD-wagtail-guide-production.dump --app wagtail-guide-production
+dropdb --if-exists --host db.guide.orb.local --username=guide guide
+createdb --host db.guide.orb.local --username=guide guide
+psql -d guide -U guide --host db.guide.orb.local -c 'CREATE SCHEMA heroku_ext;'
+pg_restore --clean --no-acl --if-exists --no-owner --host db.guide.orb.local --username=guide -d guide database_dumps/YYYYMMDD-wagtail-guide-production.dump
+```
+
 ## Access
 
 The guide is hosted and managed by Torchbox's sysadmin team. Access is given only when needed following the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege). If you need access to Heroku, a project maintainer can contact Torchbox's sysadmin team who can provide access.
