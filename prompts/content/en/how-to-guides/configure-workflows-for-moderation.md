@@ -1,6 +1,6 @@
 # Configure workflows for moderation
 
-Page URL: https://guide.wagtail.org/en-latest/how-to-guides/configure-workflows-for-moderation/
+Page URL: https://guide.wagtail.org/en/how-to-guides/configure-workflows-for-moderation/
 
 > Workflows allow you to configure how moderation works on your site. Workflows are sequences of tasks, all of which must be approved before the workflow completes (by default, this results in the publication of the page, but depends on your site settings).
 
@@ -8,17 +8,17 @@ Page URL: https://guide.wagtail.org/en-latest/how-to-guides/configure-workflows-
 
 Workflows allow you to configure how moderation works on your site. Workflows are sequences of tasks that require approval before completion. A completed workflow usually results in the publication of a page, depending on your website's settings.
 
-To access the Workflow interface, go to **Settings > Workflows** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/).
+To access the Workflow interface, go to **Settings > Workflows** from the [Sidebar](/en/how-to-guides/find-your-way-around/).
 
 ![Listing of workflows with a single Moderators approval workflow shown that has a single step](https://guide-media.wagtail.org/images/Listing_of_workflows_with_a_single_Moderators_.width-900_BfEuku6.png)
 
-From the [Workflow interface](/en-latest/concepts/wagtail-interfaces/), you can see all of the workflows on your site and the order of tasks in each. To create a new workflow, click **Add a workflow** from the [Workflow interface](/en-latest/concepts/wagtail-interfaces/).
+From the [Workflow interface](/en/concepts/wagtail-interfaces/), you can see all of the workflows on your site and the order of tasks in each. To create a new workflow, click **Add a workflow** from the [Workflow interface](/en/concepts/wagtail-interfaces/).
 
-Furthermore, the [Workflow interface](/en-latest/concepts/wagtail-interfaces/) shows how many pages each workflow covers. If you click the number of pages, you can see a list of all the pages a workflow applies to.
+Furthermore, the [Workflow interface](/en/concepts/wagtail-interfaces/) shows how many pages each workflow covers. If you click the number of pages, you can see a list of all the pages a workflow applies to.
 
 ## **Edit workflows**
 
-In the [Workflow interface](/en-latest/concepts/wagtail-interfaces/), click on the name of a workflow to edit it or to assign it to a part of the page tree.
+In the [Workflow interface](/en/concepts/wagtail-interfaces/), click on the name of a workflow to edit it or to assign it to a part of the page tree.
 
 Click **Add task** under **Add tasks to your workflow** to add a task. When adding a task to a workflow, you can create a new task or reuse an existing one.
 
@@ -34,7 +34,7 @@ The action menu at the bottom allows you to save your changes, or disable the wo
 
 ## Create and edit tasks
 
-To create a task, go to **Settings > Workflows tasks** from the Sidebar. This takes you to the [Tasks interface](/en-latest/concepts/wagtail-interfaces/), where you can see a list of the currently available tasks and which workflows use each task. Similar to workflows, you can click the name of an existing task to edit it. To add a new task, click **Add a task**.
+To create a task, go to **Settings > Workflows tasks** from the Sidebar. This takes you to the [Tasks interface](/en/concepts/wagtail-interfaces/), where you can see a list of the currently available tasks and which workflows use each task. Similar to workflows, you can click the name of an existing task to edit it. To add a new task, click **Add a task**.
 
 ![Tasks listing with a single item](https://guide-media.wagtail.org/images/Tasks_listing_with_a_single_item_MvFdm6B.width-900.png)
 

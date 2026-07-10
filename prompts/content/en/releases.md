@@ -1,6 +1,6 @@
 # Releases
 
-Page URL: https://guide.wagtail.org/en-latest/releases/
+Page URL: https://guide.wagtail.org/en/releases/
 
 > Here are overviews of changes made to Wagtail in specific new releases.
 

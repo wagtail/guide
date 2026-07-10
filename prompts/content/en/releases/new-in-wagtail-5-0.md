@@ -1,6 +1,6 @@
 # New in Wagtail 5.0
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-5-0/
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-5-0/
 
 > Here are highlights from Wagtail 5.0. For more details, view the full v5.0 release notes.
 

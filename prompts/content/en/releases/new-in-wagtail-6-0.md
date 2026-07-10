@@ -1,6 +1,6 @@
 # New in Wagtail 6.0
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-0/
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-6-0/
 
 Here are highlights from Wagtail 6.0. For more details, view the full [v6.0 release notes](https://docs.wagtail.org/en/latest/releases/6.0.html).
 
@@ -10,7 +10,7 @@ Here are highlights from Wagtail 6.0. For more details, view the full [v6.0 rele
 
 Following design improvements to page listings, Wagtail now provides a unified search and filtering interface for all listings. This will improve navigation capabilities, particularly for sites with a large number of pages or where content tends to use a flat structure. We also hope to roll out this interface across all areas of the CMS for a consistent experience.
 
-In this release, the universal listing interface is available for [Pages](/en-latest/how-to-guides/manage-pages/), [Snippets](/en-latest/how-to-guides/manage-snippets/), and Forms. For pages, the UI includes the following filters out of the box:
+In this release, the universal listing interface is available for [Pages](/en/how-to-guides/manage-pages/), [Snippets](/en/how-to-guides/manage-snippets/), and Forms. For pages, the UI includes the following filters out of the box:
 
 -   Page type
 -   Date updated

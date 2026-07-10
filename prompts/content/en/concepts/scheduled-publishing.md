@@ -1,8 +1,8 @@
 # Scheduled publishing
 
-Page URL: https://guide.wagtail.org/en-latest/concepts/scheduled-publishing/
+Page URL: https://guide.wagtail.org/en/concepts/scheduled-publishing/
 
-Wagtail supports scheduling content for new and existing pages, as well as when configured for [snippets](/en-latest/how-to-guides/manage-snippets/). Page publishing can be scheduled through the _Set schedule_ feature in the _Status_ side panel of the _Edit_ page (see [Manage pages](/en-latest/how-to-guides/manage-pages/)).
+Wagtail supports scheduling content for new and existing pages, as well as when configured for [snippets](/en/how-to-guides/manage-snippets/). Page publishing can be scheduled through the _Set schedule_ feature in the _Status_ side panel of the _Edit_ page (see [Manage pages](/en/how-to-guides/manage-pages/)).
 
 ## Scheduling content updates
 
@@ -30,7 +30,7 @@ In addition to scheduling a page to be published, it is also possible to schedul
     -   If the new revision contains a different _expire at_ field (e.g. 25 June), the page will be unpublished on 14 June, the new revision will go live on 21 June and the page will be unpublished again on 25 June.
     -   If the new revision has the _expire at_ field unset, the page will be unpublished on 14 June and the new revision will go live on 21 June.
 
-Once a page expires, its [page status](/en-latest/concepts/page-status/) in the CMS changes to "Expired".
+Once a page expires, its [page status](/en/concepts/page-status/) in the CMS changes to "Expired".
 
 ## Scheduling frequency
 

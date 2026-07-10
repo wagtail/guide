@@ -1,6 +1,6 @@
 # New in Wagtail 6.2
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-2/
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-6-2/
 
 > Highlights from the new admin features in Wagtail 6.2
 
@@ -36,7 +36,7 @@ The built-in accessibility checker now includes a new rule about quality of alt 
 
 ![Wagtail 6.2 site history report with new listing and filter interface](https://guide-media.wagtail.org/images/Wagtail_6.2_site_history_report_with_new_listi.width-900.png)
 
-All built-in and custom [reports](/en-latest/concepts/reports/) now use the new listing visual design and filtering features introduced in all other areas of the admin interface over past releases.
+All built-in and custom [reports](/en/concepts/reports/) now use the new listing visual design and filtering features introduced in all other areas of the admin interface over past releases.
 
 ## **Other user interface refinements**
 

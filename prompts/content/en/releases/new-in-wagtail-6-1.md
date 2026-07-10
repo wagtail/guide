@@ -1,6 +1,6 @@
 # New in Wagtail 6.1
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-1/
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-6-1/
 
 Here are highlights from Wagtail 6.1. For more details, view the full [v6.1 release notes](https://docs.wagtail.org/en/stable/releases/6.1.html).
 
@@ -46,7 +46,7 @@ We hope to introduce more keyboard shortcuts in the future, and consistently doc
 
 ![Page privacy dialog with the Shared Password option selected](https://guide-media.wagtail.org/images/Page_privacy_dialog_with_the_Shared_Password_o.width-900.png)
 
-Wagtail now includes extra guidance in its private pages and [private collections (documents)](/en-latest/how-to-guides/manage-collections/) forms, to warn users about the pitfalls of the “shared password” option. For projects with higher security requirements, it’s also now possible to disable the shared password option entirely.
+Wagtail now includes extra guidance in its private pages and [private collections (documents)](/en/how-to-guides/manage-collections/) forms, to warn users about the pitfalls of the “shared password” option. For projects with higher security requirements, it’s also now possible to disable the shared password option entirely.
 
 ## Other user interface refinements
 

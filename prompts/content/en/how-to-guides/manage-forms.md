@@ -1,12 +1,12 @@
 # Manage forms
 
-Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-forms/
+Page URL: https://guide.wagtail.org/en/how-to-guides/manage-forms/
 
 Wagtail provides a flexible form builder module, that allows users to create forms directly from the admin interface without requiring technical expertise.
 
 ## Set up and access the form builder
 
-Forms management is an opt-in feature. For developer documentation, see [Form builder in the developer docs](https://docs.wagtail.org/en/stable/reference/contrib/forms/). Once configured, in Wagtail, forms can be configured with the interface to [manage pages](/en-latest/how-to-guides/manage-pages/). Submissions appear in a separate Forms interface.
+Forms management is an opt-in feature. For developer documentation, see [Form builder in the developer docs](https://docs.wagtail.org/en/stable/reference/contrib/forms/). Once configured, in Wagtail, forms can be configured with the interface to [manage pages](/en/how-to-guides/manage-pages/). Submissions appear in a separate Forms interface.
 
 ## Build your form fields
 

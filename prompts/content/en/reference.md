@@ -1,6 +1,6 @@
 # Reference
 
-Page URL: https://guide.wagtail.org/en-latest/reference/
+Page URL: https://guide.wagtail.org/en/reference/
 
 > Our reference material gets to the point, giving the key information at a glance.
 

@@ -1,6 +1,6 @@
 # Account settings
 
-Page URL: https://guide.wagtail.org/en-latest/reference/account-settings/
+Page URL: https://guide.wagtail.org/en/reference/account-settings/
 
 > User account settings are specific to your account. Includes user preferences, notification settings, and more.
 
@@ -14,7 +14,7 @@ User account settings are specific to your account. You can access your settings
 
 By default, Wagtail provides separate First Name, Last Name, and Email fields. Your name appears across the CMS interfaces when you manage content.
 
-Note in addition, administrators can change usernames via the interface to [manage users and roles](/en-latest/how-to-guides/manage-users-and-roles/).
+Note in addition, administrators can change usernames via the interface to [manage users and roles](/en/how-to-guides/manage-users-and-roles/).
 
 ### Profile picture
 
@@ -60,7 +60,7 @@ Configure how information-dense you want the admin interface to be.
 
 You can disable Wagtail’s custom keyboard shortcuts if required for compatibility purposes.
 
--   **On** (default): adds support for [custom keyboard shortcuts](/en-latest/concepts/accessibility-features/).
+-   **On** (default): adds support for [custom keyboard shortcuts](/en/concepts/accessibility-features/).
 -   **Off**: only retain universal shortcuts for rich text.
 
 ## Password
@@ -78,7 +78,7 @@ From the login interface, you can also find a "Forgotten password?" link to the 
 
 ![User profile notification settings](https://guide-media.wagtail.org/images/User_profile_notification_settings_tOttJ7P.width-900.png)
 
-In a separate tab, the notification settings allow users to customize their preferences for receiving notifications relating to Wagtail’s [workflows for moderation](/en-latest/how-to-guides/configure-workflows-for-moderation/). You can choose to receive notifications for various events such as content updates, status, comments. This feature ensures that you stay on top of any changes or updates within the CMS.
+In a separate tab, the notification settings allow users to customize their preferences for receiving notifications relating to Wagtail’s [workflows for moderation](/en/how-to-guides/configure-workflows-for-moderation/). You can choose to receive notifications for various events such as content updates, status, comments. This feature ensures that you stay on top of any changes or updates within the CMS.
 
 Currently-supported notifications settings are:
 

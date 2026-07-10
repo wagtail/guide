@@ -1,12 +1,12 @@
 # Manage images
 
-Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-images/
+Page URL: https://guide.wagtail.org/en/how-to-guides/manage-images/
 
 > If you want to edit, add or remove images from the CMS outside of the individual pages you can do so from the Images interface.
 
 ## Add, edit, and remove images
 
-If you want to edit, add, or remove images from the [Admin interface](/en-latest/concepts/wagtail-interfaces/) outside of the individual pages, you can do so from the [Images interface](/en-latest/concepts/wagtail-interfaces/). To access the Images interface, click **Images** in the [Sidebar](/en-latest/how-to-guides/find-your-way-around/).
+If you want to edit, add, or remove images from the [Admin interface](/en/concepts/wagtail-interfaces/) outside of the individual pages, you can do so from the [Images interface](/en/concepts/wagtail-interfaces/). To access the Images interface, click **Images** in the [Sidebar](/en/how-to-guides/find-your-way-around/).
 
 ![Images listing with header and images grid](https://guide-media.wagtail.org/images/Images_listing_with_header_and_images_grid_OFs.width-900.png)
 
@@ -38,9 +38,9 @@ Warning: Changing the file will change it on all pages that use the image.
 
 The Images interface allows you to set a focal area, which can affect how your image displays to visitors on the front end. If you crop your images in some way to make them fit into a specific shape, then the focal area defines the centre point from which you crop the images.
 
-You can set the focal area of an image by clicking the image to access its [edit screen](/en-latest/concepts/wagtail-interfaces/). Then drag a marquee around the most significant element of the image, and then click **Save** to save it. Once you set the focal area of an image and save it, you can see the most significant element of the image on the front end.
+You can set the focal area of an image by clicking the image to access its [edit screen](/en/concepts/wagtail-interfaces/). Then drag a marquee around the most significant element of the image, and then click **Save** to save it. Once you set the focal area of an image and save it, you can see the most significant element of the image on the front end.
 
-To remove the focal area, click **Remove focal area** in the [edit screen](/en-latest/concepts/wagtail-interfaces/).
+To remove the focal area, click **Remove focal area** in the [edit screen](/en/concepts/wagtail-interfaces/).
 
 ## Image format requirements
 

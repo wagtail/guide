@@ -1,22 +1,22 @@
 # Accessibility features
 
-Page URL: https://guide.wagtail.org/en-latest/concepts/accessibility-features/
+Page URL: https://guide.wagtail.org/en/concepts/accessibility-features/
 
 ## Global navigation
 
-Wagtail provides multiple navigation components that appear on most pages in the [Admin interface](/en-latest/concepts/wagtail-interfaces/). These components are as follows:
+Wagtail provides multiple navigation components that appear on most pages in the [Admin interface](/en/concepts/wagtail-interfaces/). These components are as follows:
 
 ### Skip link
 
 ![Wagtail dashboard with the skip link](https://guide-media.wagtail.org/images/Wagtail_dashboard_with_the_skip_link_VKexAHG.width-900.png)
 
-The skip link appears as a **Skip to main content** button in the [Admin interface](/en-latest/concepts/wagtail-interfaces/). If you press the **tab** key of your keyboard on a newly loaded page, the skip link will appear at the top-left corner of your screen. Once the **Skip link** appears, press the **enter** key to activate it. Activating the **Skip link** moves your keyboard focus to the main content of the current page you’re on. This way, you skip over the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) options to the main content.
+The skip link appears as a **Skip to main content** button in the [Admin interface](/en/concepts/wagtail-interfaces/). If you press the **tab** key of your keyboard on a newly loaded page, the skip link will appear at the top-left corner of your screen. Once the **Skip link** appears, press the **enter** key to activate it. Activating the **Skip link** moves your keyboard focus to the main content of the current page you’re on. This way, you skip over the [Sidebar](/en/how-to-guides/find-your-way-around/) options to the main content.
 
 ### Collapsible sections
 
 ![Page editor for Breads and Circuses blog page with sections toggle button and anchor links highlighted](https://guide-media.wagtail.org/images/Page_editor_for_Breads_and_Circuses_blog_page_.width-900_QWaiZGW.png)
 
-Collapsible sections make it easier to navigate forms. You can find Collapsible sections on the [Dashboard](/en-latest/how-to-guides/find-your-way-around/) and forms to [manage pages](/en-latest/how-to-guides/manage-pages/). You can use your mouse or keyboard to collapse or expand collapsible sections. The collapsible section anchor link also gives you the link to the section you are working to share with teammates or keep for later.
+Collapsible sections make it easier to navigate forms. You can find Collapsible sections on the [Dashboard](/en/how-to-guides/find-your-way-around/) and forms to [manage pages](/en/how-to-guides/manage-pages/). You can use your mouse or keyboard to collapse or expand collapsible sections. The collapsible section anchor link also gives you the link to the section you are working to share with teammates or keep for later.
 
 On forms, you can also **Collapse all** sections in one go, and then **Expand all** or expand individual sections as needed.
 
@@ -83,11 +83,11 @@ On large listings with bulk editing checkboxes, Wagtail also supports "Shift+Cli
 
 ## Edit screen features
 
-The Edit screen accessibility features are specific to the [Edit screen](/en-latest/concepts/wagtail-interfaces/). These features are as follows:
+The Edit screen accessibility features are specific to the [Edit screen](/en/concepts/wagtail-interfaces/). These features are as follows:
 
 ### Mini-map
 
-The mini-map or “minimap” helps to easily navigate the sections of your content. Placed on the right-hand side of the [Edit screen](https://guide.wagtail.org/en-latest/concepts/wagtail-interfaces/#edit-screen), it contains a list of the different sections within the form and directly links to each of them. Toggle it with the dedicated button, or the ] keyboard shortcut.
+The mini-map or “minimap” helps to easily navigate the sections of your content. Placed on the right-hand side of the [Edit screen](https://guide.wagtail.org/en/concepts/wagtail-interfaces/#edit-screen), it contains a list of the different sections within the form and directly links to each of them. Toggle it with the dedicated button, or the ] keyboard shortcut.
 
 The Mini-map also indicates the type of the different sections: headings, subheadings, and blocks within the content.
 
@@ -116,7 +116,7 @@ Typing “/” within the body of your content reveals an interface called the C
 
 ## User account preferences
 
-User account preferences are settings that are specific to your account. You can access your user account preferences and notification settings from [account settings](/en-latest/reference/account-settings/).
+User account preferences are settings that are specific to your account. You can access your user account preferences and notification settings from [account settings](/en/reference/account-settings/).
 
 ## Browser-level user interface settings
 
@@ -126,7 +126,7 @@ Browser-level user interface settings include the following accessibility settin
 
 ### Sidebar expanded/collapsed
 
-You can expand or collapse the [Sidebar](https://guide.wagtail.org/en-latest/how-to-guides/find-your-way-around/#the-sidebar). Collapsing the Sidebar allows the [Dashboard](https://guide.wagtail.org/en-latest/how-to-guides/find-your-way-around/#the-dashboard) to take up more screen space of the browser. This can also be done with the [ keyboard shortcut.
+You can expand or collapse the [Sidebar](https://guide.wagtail.org/en/how-to-guides/find-your-way-around/#the-sidebar). Collapsing the Sidebar allows the [Dashboard](https://guide.wagtail.org/en/how-to-guides/find-your-way-around/#the-dashboard) to take up more screen space of the browser. This can also be done with the [ keyboard shortcut.
 
 ![The Wagtail sidebar with its minimize control highlighted](https://guide-media.wagtail.org/images/The_Wagtail_sidebar_with_its_minimize_control_.width-900_EMtj2DT.png)
 
@@ -146,7 +146,7 @@ Like the _sidebar expanded/collapsed_, this feature keeps your mini-map opened o
 
 The Edit screen has a top header. This toolbar contains the following options:
 
--   **Status**: This indicates the current status of your page. For more information on the various page statuses available, read [Page status](https://guide.wagtail.org/en-latest/concepts/page-status/).
+-   **Status**: This indicates the current status of your page. For more information on the various page statuses available, read [Page status](https://guide.wagtail.org/en/concepts/page-status/).
 -   **Live Preview**: Live preview allows you to preview content on different screen sizes.
 -   **Checks**: Automated checks flagging possible issues with the page content.
 -   **Comment**: This notifies and shows you the comments made on your content by teammates.

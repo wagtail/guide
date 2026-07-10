@@ -1,6 +1,6 @@
 # New in Wagtail 6.3
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-6-3/
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-6-3/
 
 > Highlights from the new admin features in Wagtail 6.3
 

@@ -1,28 +1,28 @@
 # Manage collections
 
-Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-collections/
+Page URL: https://guide.wagtail.org/en/how-to-guides/manage-collections/
 
 > Access to specific sets of images and documents can be controlled by setting up ‘collections’.
 
-You can control access to specific sets of images and documents by setting up _collections_. By default, all images and documents belong to the _root collection_, but users with appropriate permissions can create new collections from the Collections interface. Go to **Settings > Collections** from the Wagtail [Sidebar](/en-latest/how-to-guides/find-your-way-around/) to access the Collections interface.
+You can control access to specific sets of images and documents by setting up _collections_. By default, all images and documents belong to the _root collection_, but users with appropriate permissions can create new collections from the Collections interface. Go to **Settings > Collections** from the Wagtail [Sidebar](/en/how-to-guides/find-your-way-around/) to access the Collections interface.
 
 ![Collections listing with three rows Bakeries BreadPage Images Other](https://guide-media.wagtail.org/images/Collections_listing_with_three_rows_Bakeries_B.width-900_wfcKD0D.png)
 
 ## Add a collection
 
-To create a collection, click **Add a collection** from the [Collections interface](/en-latest/concepts/wagtail-interfaces/). Then enter a name in the **Name** field and select a parent. Click **Create** to complete the creation process.
+To create a collection, click **Add a collection** from the [Collections interface](/en/concepts/wagtail-interfaces/). Then enter a name in the **Name** field and select a parent. Click **Create** to complete the creation process.
 
 ![Form to create a collection with a Name text field and Parent dropdown field](https://guide-media.wagtail.org/images/Form_to_create_a_collection_with_a_Name_text_f.width-900_AjTrT2Z.png)
 
 ## Add images or documents to a collection
 
-To add images to a collection, click **Images** from the Wagtail [sidebar](/en-latest/how-to-guides/find-your-way-around/) and select a collection from the **Collections** dropdown. Then click **Add an image** and follow the instructions on the screen.
+To add images to a collection, click **Images** from the Wagtail [sidebar](/en/how-to-guides/find-your-way-around/) and select a collection from the **Collections** dropdown. Then click **Add an image** and follow the instructions on the screen.
 
 ![Screenshot of the Add Images page with a drag-and-drop zone with the Collection dropdown field highlighted in red](https://guide-media.wagtail.org/images/Screenshot_of_the_Add_Images_page_with_a_drag-.width-900_7O96bkj.png)
 
-The process of adding documents to a collection is similar to that of images. Click **Documents** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) and select a collection from the **Collections** dropdown. Then click **Add a document** and follow the instructions on the screen.
+The process of adding documents to a collection is similar to that of images. Click **Documents** from the [Sidebar](/en/how-to-guides/find-your-way-around/) and select a collection from the **Collections** dropdown. Then click **Add a document** and follow the instructions on the screen.
 
-It's possible to add an image or document to a collection while editing them. To do this, click **Images** or **Documents** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) and select the image or document you want to add to a collection by clicking it. Then choose a collection from the **Collection** dropdown in the [edit screen](/en-latest/concepts/wagtail-interfaces/).
+It's possible to add an image or document to a collection while editing them. To do this, click **Images** or **Documents** from the [Sidebar](/en/how-to-guides/find-your-way-around/) and select the image or document you want to add to a collection by clicking it. Then choose a collection from the **Collection** dropdown in the [edit screen](/en/concepts/wagtail-interfaces/).
 
 ![Screenshot of the image editing form for an image titled Olivia Ava with the Collection field highlighted in red](https://guide-media.wagtail.org/images/Screenshot_of_the_image_editing_form_for_an_im.width-900_wUGdfde.png)
 

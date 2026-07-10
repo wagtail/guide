@@ -1,6 +1,6 @@
 # New in Wagtail 4.1
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-4-1/
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-4-1/
 
 > With Wagtail 4.0 and 4.1, we&#39;ve added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team.
 

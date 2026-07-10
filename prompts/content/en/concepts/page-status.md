@@ -1,6 +1,6 @@
 # Page status
 
-Page URL: https://guide.wagtail.org/en-latest/concepts/page-status/
+Page URL: https://guide.wagtail.org/en/concepts/page-status/
 
 > Page status has to do with the current state of your pages. Your pages can be in one of seven different states.
 
@@ -10,13 +10,13 @@ Page status has to do with the current state of your pages. Your pages can be in
 
 A page is a _Draft_ if it's newly created and saved as a _Draft_. The main takeaway here is that the page is new and you have never published it.
 
-Pages with a _Draft_ status are only available in your [Admin interface](/en-latest/concepts/wagtail-interfaces/) and not on your live website.
+Pages with a _Draft_ status are only available in your [Admin interface](/en/concepts/wagtail-interfaces/) and not on your live website.
 
 ## In moderation
 
 A page assumes the status _In moderation_ if you submit a page that you have never published for moderation.
 
-The content of the page becomes available on your website only if a user with the right permissions approves the page. Once another user approves the page, the status changes to Live. By default, [Administrator](/en-latest/how-to-guides/manage-users-and-roles/) and [Moderator](/en-latest/how-to-guides/manage-users-and-roles/) users can approve pages in moderation.
+The content of the page becomes available on your website only if a user with the right permissions approves the page. Once another user approves the page, the status changes to Live. By default, [Administrator](/en/how-to-guides/manage-users-and-roles/) and [Moderator](/en/how-to-guides/manage-users-and-roles/) users can approve pages in moderation.
 
 ## Scheduled
 
@@ -24,7 +24,7 @@ A page assumes the _Scheduled_ state when you configure it for publication at a 
 
 ## Expired
 
-The page was Live, and subsequently unpublished because it had an expiry date set that has now passed. See [scheduled publishing](/en-latest/concepts/scheduled-publishing/) for more information.
+The page was Live, and subsequently unpublished because it had an expiry date set that has now passed. See [scheduled publishing](/en/concepts/scheduled-publishing/) for more information.
 
 ## Live
 

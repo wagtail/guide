@@ -1,6 +1,6 @@
 # New in Wagtail 7.3
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-3/
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-7-3/
 
 Here are highlights from Wagtail 7.3. For full technical details, view the complete [v7.3 release notes](https://docs.wagtail.org/en/latest/releases/7.3.html).
 
@@ -32,7 +32,7 @@ For users of Large Language Models (LLMs), the user guide contents are available
 -   [llms-full.txt](https://guide.wagtail.org/llms-full.txt), a full copy of the documentation
 -   [llms-prompt.txt](https://guide.wagtail.org/llms-prompt.txt), an opinionated prompt you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
 
-View our [About page](/en-latest/about/) for more information.
+View our [About page](/en/about/) for more information.
 
 ## Improved image performance by default
 

@@ -1,6 +1,6 @@
 # New in Wagtail 5.1
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-5-1/
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-5-1/
 
 > Here are highlights from Wagtail 5.0. For more details, view the full v5.0 release notes.
 
@@ -24,7 +24,7 @@ Wagtail now uses its modern tooltip and dropdown components across more of the i
 
 ## Dark mode improvements
 
-Following our [last release](/en-latest/releases/new-in-wagtail-5-0/), we’ve made tweaks to our new dark theme across the CMS.
+Following our [last release](/en/releases/new-in-wagtail-5-0/), we’ve made tweaks to our new dark theme across the CMS.
 
 -   Update link/document rich text tooltips for consistency with the inline toolbar
 -   Increase the contrast between the rich text / StreamField block picker and the page in dark mode

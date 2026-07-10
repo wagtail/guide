@@ -1,6 +1,6 @@
 # Promote search results
 
-Page URL: https://guide.wagtail.org/en-latest/how-to-guides/promote-search-results/
+Page URL: https://guide.wagtail.org/en/how-to-guides/promote-search-results/
 
 > Promoted search results are an optional Wagtail feature. For details of how to enable them on a Wagtail installation, see Promoted search results.
 
@@ -12,7 +12,7 @@ For example, Wagtail developers can use this feature to direct people who search
 
 Note: The promoted result only works if the user types _exactly_ the phrase that you have set it up for. If you have variations of a phrase that you want to take into account, then you must create additional promoted results.
 
-To set up promoted search results, go to **Settings > Promoted search results** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/). The resulting screen displays a list of previously added promoted search keywords. You can add a promoted result by clicking **Add new promoted result** in the top right of the resulting screen.
+To set up promoted search results, go to **Settings > Promoted search results** from the [Sidebar](/en/how-to-guides/find-your-way-around/). The resulting screen displays a list of previously added promoted search keywords. You can add a promoted result by clicking **Add new promoted result** in the top right of the resulting screen.
 
 ![Promoted results listing with search field Add button and four results listed under as rows](https://guide-media.wagtail.org/images/Promoted_results_listing_with_search_field_Add.width-900_WUMaHh9.png)
 
@@ -24,6 +24,6 @@ Once you have entered the search keyword or selected from the most popular terms
 
 You can add multiple results, but be careful about adding too many, as you may end up hiding all of your organic results behind promoted results. This may not be helpful for users who aren’t really sure what they're looking for.
 
-To edit an existing promoted result go to **Settings > Promoted search results** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) and then click the search term you want to edit.
+To edit an existing promoted result go to **Settings > Promoted search results** from the [Sidebar](/en/how-to-guides/find-your-way-around/) and then click the search term you want to edit.
 
 ![Promoted result editing form with search term field and associated pages](https://guide-media.wagtail.org/images/Promoted_result_editing_form_with_search_term_.width-900_SnsILeD.png)

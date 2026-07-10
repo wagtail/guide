@@ -1,6 +1,6 @@
 # Pages
 
-Page URL: https://guide.wagtail.org/en-latest/concepts/pages/
+Page URL: https://guide.wagtail.org/en/concepts/pages/
 
 > You can use Wagtail Pages to organize the content of your Wagtail websites. It&#39;s common for a typical website to have multiple web pages, and the web pages themselves can have several sections. The same is true for Wagtail pages.
 
@@ -18,7 +18,7 @@ In the CMS interface, the **Page explorer** allows navigating the site in this t
 
 ### Nature of the relationship between Wagtail pages
 
-To talk about specific areas within the page tree, we use the metaphor of a parent-child relationship between pages. A Wagtail parent page has within it one or more child pages. For instance, in the Admin interface of the Bakery demo, if you click **Pages** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/), the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) extends to show you the _Welcome to the Wagtail Bakery_ page. The _Welcome to the Wagtail Bakery_ homepage is a parent page. Clicking it takes you to its [Explorer page](/en-latest/how-to-guides/find-your-way-around/), where you can see all the child pages within it.
+To talk about specific areas within the page tree, we use the metaphor of a parent-child relationship between pages. A Wagtail parent page has within it one or more child pages. For instance, in the Admin interface of the Bakery demo, if you click **Pages** from the [Sidebar](/en/how-to-guides/find-your-way-around/), the [Sidebar](/en/how-to-guides/find-your-way-around/) extends to show you the _Welcome to the Wagtail Bakery_ page. The _Welcome to the Wagtail Bakery_ homepage is a parent page. Clicking it takes you to its [Explorer page](/en/how-to-guides/find-your-way-around/), where you can see all the child pages within it.
 
 ## Page types
 
@@ -26,4 +26,4 @@ You can have different page types available for you to use in the Admin interfac
 
 Having multiple page types in your Admin interface allows you to choose the structure you want your page to adopt. You can choose a page type for your pages when you are creating them.
 
-The page type of a parent page may differ from that of the child pages within it. For instance, in the [Admin interface](/en-latest/concepts/wagtail-interfaces/) of the Bakery demo, the page type of the* Welcome to the Wagtail Bakery* page is _Home Page_. Its child page _Breads_ has the _Breads index_ page type, while _Blog_, another child page has the _Blog index_ page type.
+The page type of a parent page may differ from that of the child pages within it. For instance, in the [Admin interface](/en/concepts/wagtail-interfaces/) of the Bakery demo, the page type of the* Welcome to the Wagtail Bakery* page is _Home Page_. Its child page _Breads_ has the _Breads index_ page type, while _Blog_, another child page has the _Blog index_ page type.

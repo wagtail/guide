@@ -1,17 +1,17 @@
 # New in Wagtail 4.2
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-4-2/
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-4-2/
 
 > With Wagtail 4.0, 4.1, and now 4.2 – we&#39;ve added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team.
 
-Wagtail 4.2 comes with gradual improvements on functionality previous added in [Wagtail 4.1](/en-latest/releases/new-in-wagtail-4-1/) and [4.0](https://wagtail.org/blog/how-you-can-make-content-soar-with-wagtail-40/).
+Wagtail 4.2 comes with gradual improvements on functionality previous added in [Wagtail 4.1](/en/releases/new-in-wagtail-4-1/) and [4.0](https://wagtail.org/blog/how-you-can-make-content-soar-with-wagtail-40/).
 
 ## Supercharged snippets
 
 Continuing the changes introduced in the last release, snippets have two new capabilities matching what is possible with pages:
 
 -   Locking – to prevent other users from editing a snippet.
--   [Workflows](/en-latest/how-to-guides/configure-workflows-for-moderation/) – to structure content review on your site.
+-   [Workflows](/en/how-to-guides/configure-workflows-for-moderation/) – to structure content review on your site.
 
 ### Multiple chooser panel
 

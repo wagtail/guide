@@ -1,24 +1,24 @@
 # Reports
 
-Page URL: https://guide.wagtail.org/en-latest/concepts/reports/
+Page URL: https://guide.wagtail.org/en/concepts/reports/
 
 > Reports are lists of pages that match a specific search. These lists give you an overview of the different actions taken on your website.
 
-Reports are lists of pages that match a specific search. These lists give you an overview of the different actions taken on your website. For instance, a Report could show you the history of all actions related to the creation and publishing of your pages. This means you can see when users of your [Admin interface](/en-latest/concepts/wagtail-interfaces/) added a page as a draft, submitted it for moderation, published it, and deleted it. You also get to see the users that performed these actions.
+Reports are lists of pages that match a specific search. These lists give you an overview of the different actions taken on your website. For instance, a Report could show you the history of all actions related to the creation and publishing of your pages. This means you can see when users of your [Admin interface](/en/concepts/wagtail-interfaces/) added a page as a draft, submitted it for moderation, published it, and deleted it. You also get to see the users that performed these actions.
 
-By default, Wagtail provides you with Reports on your Locked pages, Workflows, Workflow tasks, Site history, and Aging pages. With the right permission, you can access these Reports by clicking **Reports** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) in your [Admin interface](/en-latest/how-to-guides/find-your-way-around/). You can further filter what pages are displayed, and also export these reports in spreadsheet format.
+By default, Wagtail provides you with Reports on your Locked pages, Workflows, Workflow tasks, Site history, and Aging pages. With the right permission, you can access these Reports by clicking **Reports** from the [Sidebar](/en/how-to-guides/find-your-way-around/) in your [Admin interface](/en/how-to-guides/find-your-way-around/). You can further filter what pages are displayed, and also export these reports in spreadsheet format.
 
-It's also possible that features in the **Reports** section of your [Admin interface](/en-latest/concepts/wagtail-interfaces/) are different from the default features. This is because Wagtail is highly customizable. If this is the case, contact your web developer for more information.
+It's also possible that features in the **Reports** section of your [Admin interface](/en/concepts/wagtail-interfaces/) are different from the default features. This is because Wagtail is highly customizable. If this is the case, contact your web developer for more information.
 
 ## Locked pages report
 
-The Locked pages Report is one of the default Reports in the [Admin interface](/en-latest/concepts/wagtail-interfaces/). This Report consists of a list of your locked pages. You also get to see the time and date when the pages got locked.
+The Locked pages Report is one of the default Reports in the [Admin interface](/en/concepts/wagtail-interfaces/). This Report consists of a list of your locked pages. You also get to see the time and date when the pages got locked.
 
-Only users with the right permissions, usually an [Administrator](/en-latest/how-to-guides/manage-users-and-roles/) can access this list.
+Only users with the right permissions, usually an [Administrator](/en/how-to-guides/manage-users-and-roles/) can access this list.
 
 ## Workflows report
 
-Another default Report provided by Wagtail in the [Admin interface](/en-latest/concepts/wagtail-interfaces/) is the Workflows Report. This report shows you the history of all your [Workflows](/en-latest/how-to-guides/configure-workflows-for-moderation/). By accessing this Report you get a list of the [Workflows](/en-latest/how-to-guides/configure-workflows-for-moderation/) you have submitted for moderation, approved Workflows, and cancelled Workflows. Also, you get to see the time and date that the users perform each action.
+Another default Report provided by Wagtail in the [Admin interface](/en/concepts/wagtail-interfaces/) is the Workflows Report. This report shows you the history of all your [Workflows](/en/how-to-guides/configure-workflows-for-moderation/). By accessing this Report you get a list of the [Workflows](/en/how-to-guides/configure-workflows-for-moderation/) you have submitted for moderation, approved Workflows, and cancelled Workflows. Also, you get to see the time and date that the users perform each action.
 
 Unlike Locked pages Reports, Workflows Reports don’t require high-level permissions to access.
 

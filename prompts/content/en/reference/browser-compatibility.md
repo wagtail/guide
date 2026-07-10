@@ -1,6 +1,6 @@
 # Browser compatibility
 
-Page URL: https://guide.wagtail.org/en-latest/reference/browser-compatibility/
+Page URL: https://guide.wagtail.org/en/reference/browser-compatibility/
 
 > For the best experience and security, we recommend that you keep your browser up to date.
 

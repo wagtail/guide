@@ -1,10 +1,10 @@
 # Find your way around
 
-Page URL: https://guide.wagtail.org/en-latest/how-to-guides/find-your-way-around/
+Page URL: https://guide.wagtail.org/en/how-to-guides/find-your-way-around/
 
 > This section describes the different pages that you will see as you navigate around the CMS, and how you can find the content that you are looking for.
 
-This section describes the different pages that you are going to see as you navigate around the Wagtail [Admin interface](/en-latest/concepts/wagtail-interfaces/).
+This section describes the different pages that you are going to see as you navigate around the Wagtail [Admin interface](/en/concepts/wagtail-interfaces/).
 
 ## The Dashboard
 
@@ -53,7 +53,7 @@ From the panel, you can perform the following actions:
 
 The _Your most recent edits_ panel displays the five pages you last edited.
 
-The panel also shows the date that you last edited the pages as well as the [current status of the page](/en-latest/reference/page-status-definitions/)s.
+The panel also shows the date that you last edited the pages as well as the [current status of the page](/en/reference/page-status-definitions/)s.
 
 #### Your locked pages
 

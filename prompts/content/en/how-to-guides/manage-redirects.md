@@ -1,6 +1,6 @@
 # Manage redirects
 
-Page URL: https://guide.wagtail.org/en-latest/how-to-guides/manage-redirects/
+Page URL: https://guide.wagtail.org/en/how-to-guides/manage-redirects/
 
 > A redirect ensures that when a page is no longer available (404), the visitor and search engines are sent to a new page.
 
@@ -19,7 +19,7 @@ Note: As a best practice, Wagtail checks redirects as permanent by default. This
 
 ## **Configure redirects**
 
-Go to **Settings > Redirects** from the [Sidebar](/en-latest/how-to-guides/find-your-way-around/) to configure redirects. You can create a new redirect and edit or search for an existing one from the Redirects interface.
+Go to **Settings > Redirects** from the [Sidebar](/en/how-to-guides/find-your-way-around/) to configure redirects. You can create a new redirect and edit or search for an existing one from the Redirects interface.
 
 ![Redirects listing with a search field in the header buttons to add and import redirects and rows of existing underneath](https://guide-media.wagtail.org/images/Redirects_listing_with_a_search_field_in_the_h.width-900_v4iFdpb.png)
 
@@ -27,7 +27,7 @@ Search for existing redirects by entering your search term in the search bar. Th
 
 ## Add redirects
 
-You can create a new redirect by clicking **Add redirect** in the top-right of the [Redirect interface](/en-latest/concepts/wagtail-interfaces/). Then set **Redirect from** to the URL pattern that's no longer available on your website. If your Wagtail is _multisite_, set the **From site** to the website that has the unavailable URL pattern.
+You can create a new redirect by clicking **Add redirect** in the top-right of the [Redirect interface](/en/concepts/wagtail-interfaces/). Then set **Redirect from** to the URL pattern that's no longer available on your website. If your Wagtail is _multisite_, set the **From site** to the website that has the unavailable URL pattern.
 
 By default, Wagtail sets a redirect to a _permanent_ _redirect_. Configure your redirect as a temporary one by unchecking the **Permanent** checkbox.
 
@@ -35,7 +35,7 @@ By default, Wagtail sets a redirect to a _permanent_ _redirect_. Configure your 
 
 ## Edit redirects
 
-Edit the details of an existing redirect by clicking the URL path of the redirect you want to configure on the [Redirect interface](/en-latest/concepts/wagtail-interfaces/).
+Edit the details of an existing redirect by clicking the URL path of the redirect you want to configure on the [Redirect interface](/en/concepts/wagtail-interfaces/).
 
 ![Editing form for a redirect with from fields Site field permanent checkbox and destination fields for page and URL options](https://guide-media.wagtail.org/images/Editing_form_for_a_redirect_with_from_fields_S.width-900_HxQifuJ.png)
 

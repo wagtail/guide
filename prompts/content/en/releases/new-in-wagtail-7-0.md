@@ -1,6 +1,6 @@
 # New in Wagtail 7.0
 
-Page URL: https://guide.wagtail.org/en-latest/releases/new-in-wagtail-7-0/
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-7-0/
 
 Here are highlights from Wagtail 7.0. For more details 👉️ view the full [v7.0 release notes](https://docs.wagtail.org/en/latest/releases/7.0.html).
 

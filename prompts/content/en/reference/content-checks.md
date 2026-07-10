@@ -1,6 +1,6 @@
 # Content checks
 
-Page URL: https://guide.wagtail.org/en-latest/reference/content-checks/
+Page URL: https://guide.wagtail.org/en/reference/content-checks/
 
 Content quality checks are present in the CMS. Here are the checks available out of the box. Those checks are based on the content of the page as seen by users of the site, not what is editable in the CMS.
 
