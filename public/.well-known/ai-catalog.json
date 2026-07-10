@@ -1,0 +1,23 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Wagtail user guide 📚️",
+    "identifier": "did:web:guide.wagtail.org",
+    "documentationUrl": "https://guide.wagtail.org/en/about/"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:guide.wagtail.org:skill:wagtail-guide-support",
+      "displayName": "Wagtail guide support",
+      "type": "application/agent-skills+md",
+      "url": "https://guide.wagtail.org/.well-known/agent-skills/wagtail-guide-support/SKILL.md",
+      "description": "A professional support helper for Wagtail CMS users. Use when answering Wagtail CMS user questions with the Wagtail Guide as authoritative documentation.",
+      "version": "1.0.0",
+      "updatedAt": "2026-07-10T00:00:00Z",
+      "publisher": {
+        "identifier": "did:web:guide.wagtail.org",
+        "displayName": "Wagtail user guide 📚️"
+      }
+    }
+  ]
+}
