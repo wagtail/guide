@@ -1,6 +1,12 @@
 {
   "extends": ["@wagtail/stylelint-config-wagtail"],
   "rules": {
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ],
     "scale-unlimited/declaration-strict-value": [
       ["color", "/-color/", "fill", "stroke"],
       {
