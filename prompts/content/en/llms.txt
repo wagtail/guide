@@ -12,7 +12,7 @@ View the full site contents: [llms-full.txt](https://guide.wagtail.org/llms-full
 - [Overview](https://guide.wagtail.org/en/getting-started/overview/markdown/): If you're brand new to Wagtail, we recommend you go through our guides in sequence. Otherwise, you can click through the different categories below to learn more about different aspects of Wagtail.
 - [How-to guides](https://guide.wagtail.org/en/how-to-guides/markdown/): Use our guides to learn how to do a specific task in the CMS.
 - [Find your way around](https://guide.wagtail.org/en/how-to-guides/find-your-way-around/markdown/): This section describes the different pages that you will see as you navigate around the CMS, and how you can find the content that you are looking for.
-- [Manage pages](https://guide.wagtail.org/en/how-to-guides/manage-pages/markdown/): Create new pages by clicking the Add child page button. This creates a child page of the section you are currently in. In this case a child page of the 'Breads' page.
+- [Manage pages](https://guide.wagtail.org/en/how-to-guides/manage-pages/markdown/)
 - [Manage documents](https://guide.wagtail.org/en/how-to-guides/manage-documents/markdown/): Documents such as PDFs can be managed from the Documents interface, available in the left-hand menu.
 - [Manage images](https://guide.wagtail.org/en/how-to-guides/manage-images/markdown/): If you want to edit, add or remove images from the CMS outside of the individual pages you can do so from the Images interface.
 - [Manage snippets](https://guide.wagtail.org/en/how-to-guides/manage-snippets/markdown/): Snippets allow you to create elements on a website once and reuse them in multiple places.
@@ -35,6 +35,7 @@ View the full site contents: [llms-full.txt](https://guide.wagtail.org/llms-full
 - [Content checks](https://guide.wagtail.org/en/reference/content-checks/markdown/)
 - [Account settings](https://guide.wagtail.org/en/reference/account-settings/markdown/): User account settings are specific to your account. Includes user preferences, notification settings, and more.
 - [Releases](https://guide.wagtail.org/en/releases/markdown/): Here are overviews of changes made to Wagtail in specific new releases.
+- [New in Wagtail 7.4](https://guide.wagtail.org/en/releases/new-in-wagtail-7-4/markdown/): Explore Wagtail 7.4: refined autosave, draft‑saving incomplete blocks, customizable listings, enhanced search, content checks, UI tweaks, and security fixes.
 - [New in Wagtail 7.3](https://guide.wagtail.org/en/releases/new-in-wagtail-7-3/markdown/)
 - [New in Wagtail 7.2](https://guide.wagtail.org/en/releases/new-in-wagtail-7-2/markdown/)
 - [New in Wagtail 7.1](https://guide.wagtail.org/en/releases/new-in-wagtail-7-1/markdown/)
@@ -50,4 +51,3 @@ View the full site contents: [llms-full.txt](https://guide.wagtail.org/llms-full
 - [New in Wagtail 4.2](https://guide.wagtail.org/en/releases/new-in-wagtail-4-2/markdown/): With Wagtail 4.0, 4.1, and now 4.2 – we've added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team.
 - [New in Wagtail 4.1](https://guide.wagtail.org/en/releases/new-in-wagtail-4-1/markdown/): With Wagtail 4.0 and 4.1, we've added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team.
 - [About](https://guide.wagtail.org/en/about/markdown/): The User Guide is a website to help content editors, moderators, administrators, and other users learn how to use the Wagtail content management system (CMS).
-- [Contributing](https://guide.wagtail.org/en/about/contributing/markdown/): We welcome all support, whether on bug reports, code, design, reviews, tests, documentation, translations or just feature requests.

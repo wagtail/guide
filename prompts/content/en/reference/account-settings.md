@@ -44,7 +44,7 @@ The light and dark themes offer alternative color schemes for a more personalize
 
 #### **Contrast theme**
 
-Adjust the level of contrast in the user interface, between:
+Added in Wagtail 6.3: Adjust the level of contrast in the user interface, between:
 
 -   **System default**: matching your operating system or browser settings.
 -   **More contrast**: extra borders or visual cues for interactive elements.

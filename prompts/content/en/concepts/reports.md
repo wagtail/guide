@@ -47,4 +47,4 @@ This report provides an overview of all page types in use on the site, each with
 
 ## Search terms report
 
-For sites set up to [promote search results](/en-6.4.x/how-to-guides/promote-search-results/), this report displays all recorded search terms and their number of views.
+For sites set up to [promote search results](/en/how-to-guides/promote-search-results/), this report displays all recorded search terms and their number of views.

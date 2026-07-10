@@ -226,8 +226,6 @@ Click **Help** from the Wagtail sidebar to access links to the user documentatio
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/manage-pages/
 
-> Create new pages by clicking the Add child page button. This creates a child page of the section you are currently in. In this case a child page of the &#39;Breads&#39; page.
-
 
 ## Create new pages
 
@@ -235,8 +233,13 @@ To create a new page, click the **Add** button at the top of page. This creates 
 
 ![Breads page listing with expanded three dots Actions menu in the header showing 7 different page actions One Add child page is highlighted in red](https://guide-media.wagtail.org/images/Breads_page_listing_with_expanded_three_dots_A.width-900_9Cddamn.png)
 
+### Autosave
 
+When making changes to a new or existing page, the page editor will periodically automatically save the page contents. This functionality is available for all page types by default, as well as [snippets](/en/how-to-guides/manage-snippets/) when configured by site implementers.
 
+![Autosave indicator in page editor, saved status](https://guide-media.wagtail.org/images/Autosave_indicator_-_saved.original.width-900.png)
+
+In addition to autosaving, the editor will also alert users of possible concurrent editing conflicts when multiple users are working on the same content. And flag internet connectivity and network issues that pop up as you work.
 
 ## Edit existing pages
 
@@ -288,7 +291,9 @@ Clicking the "+" Add button, the block chooser appears. It allows the user to ch
 
 ![Block chooser in StreamField, with a block being previewed](https://guide-media.wagtail.org/images/block_chooser_and_preview_focus.width-900.png)
 
-If configured, blocks can display a preview of how they would display on the site and description of their intended use.
+
+
+Added in Wagtail 6.4: If configured, blocks can display a preview of how they would display on the site and description of their intended use.
 
 
 ## Create and edit comments
@@ -1052,11 +1057,18 @@ Aging pages lists all pages on the site from oldest to newest. This helps conten
 
 ## Page types usage report
 
-This report provides an overview of all page types in use on the site, each with a count of how many pages it has, and a link to a sample page of that type.
+
+
+Added in Wagtail 6.0: This report provides an overview of all page types in use on the site, each with a count of how many pages it has, and a link to a sample page of that type.
+
+
+
 
 ## Search terms report
 
-For sites set up to [promote search results](/en-6.4.x/how-to-guides/promote-search-results/), this report displays all recorded search terms and their number of views.
+
+
+Added in Wagtail 6.4: For sites set up to [promote search results](/en/how-to-guides/promote-search-results/), this report displays all recorded search terms and their number of views.
 
 
 ------------------------------------------------------------------------
@@ -1399,7 +1411,12 @@ Content quality checks are present in the CMS. Here are the checks available out
 
 ## Content metrics
 
-Wagtail calculates multiple metrics based on the page’s content, live in the page editor.
+
+
+Added in Wagtail 6.2: Wagtail calculates multiple metrics based on the page’s content, live in the page editor.
+
+
+
 
 ![Page editor for "Bread and Circuses" page. The form to the left, and to the right the Checks side panel is expanded, showing different metrics about the page](https://guide-media.wagtail.org/images/Page_editor_for_22Bread_and_Circuses22_page._T.width-900.png)
 
@@ -1432,9 +1449,9 @@ We use the [LIX readability formula](https://en.wikipedia.org/wiki/Lix_(readabil
 
 To better understand the score for a page, copy the content as it’s displayed to site users into an external tool like the [Hemingway Editor](https://hemingwayapp.com/). This will give you more granular feedback on which parts of the content might need improvements.
 
-## Accessibility checker
+## Content checker
 
-To ensure accessibility of content for site users, the **Checks** side panel runs automated accessibility checks on the page content. The checker can help authors create more accessible websites following best practices and accessibility standards like [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/). The checker is based on the [Axe](https://github.com/dequelabs/axe-core) testing engine and scans the loaded page for errors.
+To assess content quality, the **Checks** side panel runs automated content checks on the page content, with a primary focus on accessibility. The checker can help authors create more accessible by following best practices and accessibility standards like [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/). The checker is based on the [Axe](https://github.com/dequelabs/axe-core) testing engine and scans the loaded page for errors.
 
 ![Accessibility checker showing one error with a heading hierarchy issue](https://guide-media.wagtail.org/images/Accessibility_checker_showing_one_error_with_a.width-900.png)
 
@@ -1448,7 +1465,10 @@ By default, the checker includes the following rules to find common accessibilit
 * `input-button-name`: input button elements must always have a text label.
 * `link-name`: link elements must always have a text label.
 * `p-as-heading`: This rule checks for paragraphs that are styled as headings. Paragraphs should not be styled as headings, as they don’t help users who rely on headings to navigate content.
-* `alt-text-quality`: A custom rule ensures that image alt texts don’t contain anti-patterns like file extensions and underscores.
+* `alt-text-quality`: Ensures that image alt texts don’t contain anti-patterns like file extensions and underscores.
+* `empty-meta-description`: Ensures any Search Engine Optimization (SEO) meta description tags present on the page contain content.
+
+The checker supports custom rules, so projects may also include checks relating to other aspects of content quality such as adherence to a style guide (tone of voice alignment, flagging jargon), content size (limiting the use of heavy assets like images or videos), compliance. Or more advanced or opinionated checks about accessibility and SEO.
 
 
 ------------------------------------------------------------------------
@@ -1500,10 +1520,11 @@ The light and dark themes offer alternative color schemes for a more personalize
 
 #### **Contrast theme**
 
-Adjust the level of contrast in the user interface, between:
+Added in Wagtail 6.3: Adjust the level of contrast in the user interface, between:
 
 * **System default**: matching your operating system or browser settings.
 * **More contrast**: extra borders or visual cues for interactive elements.
+
 
 #### **Density**
 
@@ -1558,6 +1579,84 @@ Here are overviews of changes made to Wagtail in specific new releases.
 
 ------------------------------------------------------------------------
 
+# New in Wagtail 7.4
+
+Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-7-4/
+
+> Explore Wagtail 7.4: refined autosave, draft‑saving incomplete blocks, customizable listings, enhanced search, content checks, UI tweaks, and security fixes.
+
+
+Here are highlights from Wagtail 7.4. For full technical details, view the complete [v7.4 release notes](https://docs.wagtail.org/en/stable/releases/7.4.html).
+
+## **Autosave refinements**
+
+![Network error message while editing a page in Wagtail CMS](https://guide-media.wagtail.org/images/Autosave_error_message_modal_-_a_network_error.width-900.png)
+
+The autosave and concurrent editing notifications introduced in Wagtail 7.3 have been refined based on user feedback. Race conditions and brief network outages are handled more gracefully, the indicator messaging and alignment have been polished, and you can now distinguish which other users are active or idle while looking at the same page or snippet.
+
+## **Save drafts of blocks without filling every field**
+
+You can now save a draft of a page or snippet that contains incomplete StreamField blocks, even when some required fields inside a block are empty. This makes it easier to capture work in progress without losing your changes. Required fields are still enforced when you publish, schedule, or submit content to a workflow.
+
+## **Customizable page listings**
+
+Once enabled by a developer, the [page explorer](/en/how-to-guides/manage-pages/) and per-page-type listings can now be tailored for individual page types. That means custom columns, custom filters, and other refinements that make it easier to find and manage pages in large sites. Depending on how your site is configured, you may see different listings depending on which section of the site you're browsing.
+
+## **Search improvements**
+
+Wagtail's [built-in search](/en/how-to-guides/manage-pages/) has been upgraded with several enhancements:
+
+* Fuzzy matching is now supported on PostgreSQL, so small typos still surface relevant results.
+* Searching and filtering can reach deeper into related content, with no nesting limit.
+
+## **Content quality checker enhancements**
+
+![Wagtail page editor with live preview to the side, with a content checker annotation for a heading hierarchy issue](https://guide-media.wagtail.org/images/Content_checker_inline_error_highlight.width-900.png)
+
+The built-in [content checks](/en/reference/content-checks/) get three improvements in this release:
+
+* Issues found by the checker are now shown as annotations directly inside the preview panel, so you can see exactly which part of the page they relate to.
+* A new SEO check flags pages with an empty meta description, helping search engines and link previews show useful summaries of your pages.
+* Custom checks built by your developers can now retrieve content metrics, opening up more ways to give you feedback as you write.
+
+![Page editor with content checker issue reported for an empty meta description](https://guide-media.wagtail.org/images/Content_checker_meta_description_empty.width-900.png)
+
+## **Other UI improvements**
+
+This release also includes a range of smaller enhancements that improve day-to-day editing:
+
+* Block-based content now lists block groups in the order developers defined them, making the **Add block** menu more predictable.
+* The **Collapse all** state in the page editor is preserved when you switch between editor tabs.
+* Mailto and anchor links pasted into rich text fields are now preserved, instead of being stripped.
+* The **Submit to workflow** menu now uses the workflow's name when creating a new page.
+* Page descriptions are better aligned in the **Add subpage** view.
+* More embed providers are supported out of the box, including Flourish data visualizations and Heyzine flipbooks.
+* The page type usage view now supports custom listings, and lets you create new pages of that type directly from the view.
+* Image blocks correctly update alt text after you switch to a new image with the **Decorative** option turned off.
+* Long workflow task names are now truncated in admin tables, keeping listings tidy.
+* The **Add child page** button is hidden when limits configured by your developer prevent more children of that type.
+* Choice fields now display their human-friendly label in snippet and content listings, instead of the raw stored value.
+* The Pages menu in the [Sidebar](https://markdownlivepreview.com/en/how-to-guides/find-your-way-around/) now closes correctly when you click the sidebar search.
+* Hover and focus styles for the comment button on the page title have been refined.
+* Users with the right permissions can now reliably cancel a workflow task that's in progress.
+
+## **Security and audit follow-ups**
+
+Wagtail recently underwent an [independent code security audit](https://wagtail.org/blog/independent-security-audit-findings-and-next-steps/) commissioned by the [Interministerial Digital Directorate (DINUM)](https://www.numerique.gouv.fr/) of France. This release ships several follow-ups from that audit, alongside fixes for five disclosed vulnerabilities related to permissions on revisions, page history, form submissions, copying pages, and the Documents and Images API. If you administer a Wagtail site, we recommend upgrading promptly. For full details, see the [v7.4 release notes](https://docs.wagtail.org/en/latest/releases/7.4.html).
+
+Many thanks to the Sites Conformes team at DINUM for sponsoring the audit, and to the security researchers who reported the issues.
+
+## **Feedback requests**
+
+We need feedback from our users!
+
+* Do you work on multilingual sites? Let us know about pain points in [Improving support for multilingual websites](https://github.com/wagtail/wagtail/discussions/13693).
+
+To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), subscribe to the [Wagtail newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).
+
+
+------------------------------------------------------------------------
+
 # New in Wagtail 7.3
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-7-3/
@@ -1593,7 +1692,7 @@ For users of Large Language Models (LLMs), the user guide contents are available
 
 * [llms.txt](https://guide.wagtail.org/llms.txt), an LLM-focused index of all site contents.
 * [llms-full.txt](https://guide.wagtail.org/llms-full.txt), a full copy of the documentation
-* [llms-prompt.txt](https://guide.wagtail.org/llms-prompt.txt), an opinionated prompt you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
+* [Wagtail guide support](https://guide.wagtail.org/.well-known/agent-skills/wagtail-guide-support/SKILL.md), an opinionated agent skill you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
 
 View our [About page](/en/about/) for more information.
 
@@ -1615,7 +1714,7 @@ For more information, check out our blog: [40% smaller images, same quality](htt
 
 ![Screenshot of two custom checks in the page editor side panel](https://guide-media.wagtail.org/images/Custom_content_checks.width-900.png)
 
-The built-in content checks system can now be extended with additional rules. Depending on how your site is configured, you may see new checks providing guidance on areas such as accessibility, readability, SEO, or general content quality. These checks appear directly in the editor, giving immediate feedback while you work.
+The built-in content checks system can now be extended with additional rules. If custom rules are implemented on your site, you will see new checks providing guidance on areas such as accessibility, readability, SEO, or general content quality. These checks appear directly in the editor, giving immediate feedback while you work.
 
 ## Other improvements you may notice
 
@@ -1679,12 +1778,6 @@ Error messages for form validation errors now contain a “Go to the first error
 
 We introduce two new shortcuts, ? to open the keyboard shortcuts dialog, and / to focus the search input in the sidebar. The keyboard shortcuts dialog has been reorganized into better categories. when keyboard shortcuts are disabled in user preferences, the “add comment” shortcut is also disabled, and messaging has been added to the keyboard shortcuts dialog to indicate the status of keyboard shortcuts and how to enable or disable them via user preferences.
 
-
-
----
-
-To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), our [weekly newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).
-
 ## Other UI improvements
 
 * We now support calculating content metrics without opening the preview panel.
@@ -1694,6 +1787,12 @@ To learn about future enhancements ahead of time 👉️ check out the [Wagtail 
 ## Feedback requests
 
 Do you use Wagtail on a tablet or smartphone? Please let us know more about what you do and how well it works on our [mobile support discussion thread](https://github.com/wagtail/wagtail/discussions/13273).
+
+
+
+---
+
+To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), our [weekly newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).
 
 
 ------------------------------------------------------------------------
@@ -2250,17 +2349,17 @@ Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-5-0/
 
 Here are highlights from Wagtail 5.0. For more details, view the full [v5.0 release notes](https://docs.wagtail.org/en/latest/releases/5.0.html).
 
-### **Object usage information on deleting objects**
+## **Object usage information on deleting objects**
 
 On deleting a page, image, document or snippet, the confirmation screen now provides a summary of where the object is used, allowing users to see the effect that deletion will have elsewhere on the site.
 
 This usage information is also now available for pages, rather than only images / documents / snippets.
 
-### **SVG image support**
+## **SVG image support**
 
 The image library can now be configured to allow uploading SVG images.
 
-### **Accessibility checker improvements**
+## **Accessibility checker improvements**
 
 The [built-in accessibility checker](https://docs.wagtail.org/en/latest/advanced_topics/accessibility_considerations.html#built-in-accessibility-checker) has been updated with:
 
@@ -2268,7 +2367,7 @@ The [built-in accessibility checker](https://docs.wagtail.org/en/latest/advanced
 * Sorting of checker results according to their position on the page.
 * Highlight styles to more easily identify elements with errors.
 
-### **Always-on minimap**
+## **Always-on minimap**
 
 Following its introduction in Wagtail 4.1, we have made a number of improvements to the page editor minimap:
 
@@ -2278,7 +2377,7 @@ Following its introduction in Wagtail 4.1, we have made a number of improvements
 * Clicking any item reveals the minimap, with appropriate text for screen reader users.
 * Navigating to a collapsed section of the page will reveal this section.
 
-### **Dark mode**
+## **Dark mode**
 
 Wagtail’s admin interface now supports dark mode. The new dark theme can be enabled in account preferences, as well as configuring permanent usage of the light theme, or following system preferences.
 
@@ -2433,11 +2532,11 @@ For users of Large Language Models (LLMs), the user guide contents are available
 
 * [llms.txt](https://guide.wagtail.org/llms.txt), an LLM-focused index of all site contents.
 * [llms-full.txt](https://guide.wagtail.org/llms-full.txt), a full copy of the documentation
-* [llms-prompt.txt](https://guide.wagtail.org/llms-prompt.txt), an opinionated prompt you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
+* [Wagtail guide support skill](https://guide.wagtail.org/.well-known/agent-skills/wagtail-guide-support/SKILL.md), an opinionated agent skill you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
 
 Let us know if this is useful to you in our [llms.txt feedback discussion thread](https://github.com/wagtail/wagtail/discussions/13648).
 
-## Community resources
+## **Other resources**
 
 Beyond the user guide documentation pages, here are other opportunities to find out more about Wagtail, contribute to the project, and chat with others in our community.
 
@@ -2448,219 +2547,5 @@ If you think you’ve found a bug in Wagtail, or you’d like to suggest a new f
 ### Community events
 
 We organize or take part in multiple events every year - check out our [Wagtail events list](https://wagtail.org/events/).
-
-
-------------------------------------------------------------------------
-
-# Contributing
-
-Page URL: https://guide.wagtail.org/en/about/contributing/
-
-> We welcome all support, whether on bug reports, code, design, reviews, tests, documentation, translations or just feature requests.
-
-
-We welcome all support for this User Guide, whether on bug reports, code, design, reviews, tests, documentation, translations or just feature requests.
-
-## Contributing
-
-All of the User Guide pages are maintained in Wagtail. We use [GitHub Discussions](https://github.com/wagtail/guide/discussions) to coordinate content improvements, with features requests and bug reports for the site in the [issue tracker](https://github.com/wagtail/guide/issues).
-
-### Writing content
-
-If you want to help with content, reach out to us in [GitHub Discussions](https://github.com/wagtail/guide/discussions) or on the #editor-guide channel of the [Wagtail Slack workspace](https://github.com/wagtail/wagtail/wiki/Slack). We will then create an account for you in Wagtail, making sure you have access to the right parts of the content.
-
-## Translations
-
-We want the guide to ultimately be available in as many languages as Wagtail itself. If you want to help with translations, start a thread in [GitHub Discussions](https://github.com/wagtail/guide/discussions) or join the #editor-guide channel of the [Wagtail Slack workspace](https://github.com/wagtail/wagtail/wiki/Slack). We will then create an account for you in Wagtail, making sure you have access to the right parts of the content.
-
-### How to translate
-
-We set up a separate translation team for each language, with their own Group able to submit changes to all pages and images in their locale. Translation teams reflect the changes in the “latest” version of the documentation, with legacy versions only being accessible to admin users.
-
-For example, the _Translators: Icelandic (latest)_ group has access to:
-
-* Translation: Can submit translations
-* Can access Wagtail admin: Yes
-* Pages: Notendahandbók Wagtail (latest homepage): Add, Edit, Lock, Unlock
-* Images: "Icelandic (latest)": Add, Edit, Choose
-
-When working on changes to the "latest" source content in English, make sure to avoid unnecessarily removing and adding StreamField blocks, so block references are stable between revisions.
-
-## Versioning
-
-Our default "latest" version of the guide corresponds to Wagtail’s release currently in development. When Wagtail has a new release, we create a copy of the guide’s "latest" content for that release. Here are the preliminary steps to do this:
-
-1. Make sure the version exists in the Django settings ([`WAGTAIL_GUIDE_VERSIONS`](https://github.com/search?q=repo%3Awagtail%2Fguide%20WAGTAIL_GUIDE_VERSIONS&type=code)).
-2. Add the new version in the CMS in [Locales](https://guide.wagtail.org/admin/locales/).
-3. Add the new version in the CMS in [Collections](https://guide.wagtail.org/admin/collections/) – with a parent collection matching the version number, and then a child collection for any language with translated images (currently English only).
-
-We then review and update the website’s content in the "Latest" version to match the current capabilities of Wagtail, before proceeding to make a copy of all content for the new release.
-
-### Page content
-
-Then for every locale:
-
-1. Translate the "latest" homepage of the site (without child pages) to the new locale.
-2. Translate all child pages of the "latest" homepage (with child pages) to the new locale.
-3. For all pages of the new locale, manually publish changes for published pages only (page by page).
-4. Make sure to re-order the pages of the new locale so they show in the correct order in the site’s sidebar.
-
-### Images
-
-First, use the "docs-screenshot" suite of [wagtail-tooling](https://github.com/thibaudcolas/wagtail-tooling) to take new screenshots of the CMS with the [bakerydemo](https://github.com/wagtail/bakerydemo) project as the target. Screenshots all use standardized sizes, and a uniform style for highlights on the screen.
-
-Then, upload the new images in the CMS:
-
-1. Bulk-move all images in the "English (latest)" collection to the new collection.
-2. Create a new copy of every image in the new collection, assigning it to the "English (latest)" collection
-3. Go through all "latest" pages of the site and update them to use the new copies of the images
-4. For all pages of the "latest" locale, manually sync translations (without publishing).
-5. For all "latest" locales, go through the pages and publish the ones that have no translations missing, so they use the latest images.
-
-### Release pages
-
-The "New in Wagtail release" pages are derived from the [developer docs release notes](https://docs.wagtail.org/en/stable/releases/index.html), converted to make them more suitable for an audience of CMS users.
-
-They follow a set structure: one section per "headline feature" in the release notes that has value for CMS users, then one "Other UI improvements" section with new features and bug fixes that are relevant for those users but didn’t get highlighted in the developer notes.
-
-#### Structure
-
-* Include screenshots or visual examples to illustrate interface improvements.
-* Provide concise, user-friendly summaries (ideally one to two sentences per feature).
-* Link to full technical release notes where appropriate.
-
-#### Content style
-
-* Replace technical jargon with plain language, using a neutral tone overall.
-* Describe functionality clearly from the user's perspective.
-* Clearly state how changes benefit or affect the user's workflow or experience.
-
-## Contributors
-
-### Content contributors
-
-The guides’ English content is brought to you by:
-
-* Damilola Oladele
-* Thibaud Colas
-* Meagen Voss
-* Elizabeth Bassey
-* Kelvin Obidozie
-* Marvis Chukwudi
-* Akua Dokua Asiedu
-* Jadesola Kareem
-* You? [Learn how to contribute to this guide](/en/about/contributing/)
-
-### Translators
-
-#### Icelandic
-
-* Sævar Öfjörð Magnússon
-* Arnar Tumi Þorsteinsson
-
-#### Dutch
-
-* Coen van der Kamp
-
-#### Portuguese (Brazil)
-
-* Fábio Santos
-
-### Original docs.wagtail.org contributors
-
-The guide was initially exported from Wagtail’s developer documentation, with contributions by:
-
-* Thibaud Colas
-* Karl Hobley
-* Benedikt Breinbauer
-* Emily Topp-Mugglestone
-* Matt Westcott
-* Chris Rogers
-* LB
-* Dan Swain
-* Phil Dexter
-* Kalob Taulien
-* Cynthia Kiser
-* Lisa Ballam
-* Patrick Woods
-* Shohan Dutta Roy
-* Sævar Öfjörð Magnússon
-* Tim Heap
-* Brylie Christopher Oxley
-* Chris May
-* Dave Cranwell
-* Akua Dokua Asiedu
-* Dominik Lech
-* Eric Dyken
-* Eric Sherman
-* Gianluca De Cola
-* Helen Chapman
-* Jake Howard
-* Janneke Janssen
-* Jeffrey Hearn
-* John-Scott Atlakson
-* Kees Hink
-* Liam Brenner
-* Martey Dodoo
-* Naomi I. Morduch Toubman
-* Nick Smith
-* Shwet Khatri
-* Storm Heg
-* Tidiane Dia
-* Tom Dyson
-* Vlad Podgurschi
-* Aidarbek Suleimenov
-* dthompson86
-* Kevin Howbrook
-* Maarten Kling
-* mien
-* Damee Zivah Olawuyi
-
-## Website build contributors
-
-This website exists thanks to the hard work of a lot of our contributors.
-
-* Hitansh Shah
-* Coen van der Kamp
-* Meagen Voss
-* Phil Dexter
-* Thibaud Colas
-* Ben Enright
-* Jake Howard
-* LB
-* Sage Abdullah
-* Tom Dyson
-* Karl Hobley
-* Abigail Hampson
-* Nick Lee
-* Scott Cranfill
-* Sævar Öfjörð Magnússon
-* Victoria Ajala
-* Nick Vines
-* Julian Bigler
-* Alex Morega
-* Tidiane Dia
-
-### Outreachy December 2022 team
-
-The contents of the guide were heavily updated as part of [Outreachy December 2022](https://wagtail.org/blog/outreachy-welcoming-new-contributors-to-open-source/). The project team was:
-
-* [Damilola Oladele](https://github.com/activus-d), **Contributor**
-* Coen van der Kamp, **Mentor**
-* Thibaud Colas, **Mentor**
-* Storm Heg, **Mentor**
-* Jonny Peacock,** Mentor**
-* Stephanie Brown,** Mentor**
-
-### Google Summer of Code 2022 team
-
-This project was one of three being sponsored by Google as a part of [Google Summer of Code 2022](https://summerofcode.withgoogle.com/). The project team was:
-
-* [Hitansh Shah](https://github.com/Hitansh-Shah), **Contributor**
-* [Coen van der Kamp](https://github.com/allcaps), **Mentor**
-* [Meagen Voss](https://github.com/vossisboss), **Mentor**
-* [Thibaud Colas](https://github.com/thibaudcolas), **Mentor**
-
-Read Hitansh’s [Google Summer of Code: Wagtail Editor Guide](https://wagtail.org/blog/google-summer-of-code-wagtail-editor-guide/) report for more information about the project.
 
 

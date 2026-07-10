@@ -39,9 +39,9 @@ We use the [LIX readability formula](<https://en.wikipedia.org/wiki/Lix_(readabi
 
 To better understand the score for a page, copy the content as it’s displayed to site users into an external tool like the [Hemingway Editor](https://hemingwayapp.com/). This will give you more granular feedback on which parts of the content might need improvements.
 
-## Accessibility checker
+## Content checker
 
-To ensure accessibility of content for site users, the **Checks** side panel runs automated accessibility checks on the page content. The checker can help authors create more accessible websites following best practices and accessibility standards like [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/). The checker is based on the [Axe](https://github.com/dequelabs/axe-core) testing engine and scans the loaded page for errors.
+To assess content quality, the **Checks** side panel runs automated content checks on the page content, with a primary focus on accessibility. The checker can help authors create more accessible by following best practices and accessibility standards like [WCAG](https://www.w3.org/WAI/standards-guidelines/wcag/). The checker is based on the [Axe](https://github.com/dequelabs/axe-core) testing engine and scans the loaded page for errors.
 
 ![Accessibility checker showing one error with a heading hierarchy issue](https://guide-media.wagtail.org/images/Accessibility_checker_showing_one_error_with_a.width-900.png)
 
@@ -55,4 +55,7 @@ By default, the checker includes the following rules to find common accessibilit
 -   `input-button-name`: input button elements must always have a text label.
 -   `link-name`: link elements must always have a text label.
 -   `p-as-heading`: This rule checks for paragraphs that are styled as headings. Paragraphs should not be styled as headings, as they don’t help users who rely on headings to navigate content.
--   `alt-text-quality`: A custom rule ensures that image alt texts don’t contain anti-patterns like file extensions and underscores.
+-   `alt-text-quality`: Ensures that image alt texts don’t contain anti-patterns like file extensions and underscores.
+-   `empty-meta-description`: Ensures any Search Engine Optimization (SEO) meta description tags present on the page contain content.
+
+The checker supports custom rules, so projects may also include checks relating to other aspects of content quality such as adherence to a style guide (tone of voice alignment, flagging jargon), content size (limiting the use of heavy assets like images or videos), compliance. Or more advanced or opinionated checks about accessibility and SEO.

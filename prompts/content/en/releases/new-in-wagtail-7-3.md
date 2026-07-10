@@ -52,7 +52,7 @@ For more information, check out our blog: [40% smaller images, same quality](htt
 
 ![Screenshot of two custom checks in the page editor side panel](https://guide-media.wagtail.org/images/Custom_content_checks.width-900.png)
 
-The built-in content checks system can now be extended with additional rules. Depending on how your site is configured, you may see new checks providing guidance on areas such as accessibility, readability, SEO, or general content quality. These checks appear directly in the editor, giving immediate feedback while you work.
+The built-in content checks system can now be extended with additional rules. If custom rules are implemented on your site, you will see new checks providing guidance on areas such as accessibility, readability, SEO, or general content quality. These checks appear directly in the editor, giving immediate feedback while you work.
 
 ## Other improvements you may notice
 

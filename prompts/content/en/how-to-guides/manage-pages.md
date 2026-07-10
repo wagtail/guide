@@ -2,13 +2,19 @@
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/manage-pages/
 
-> Create new pages by clicking the Add child page button. This creates a child page of the section you are currently in. In this case a child page of the &#39;Breads&#39; page.
-
 ## Create new pages
 
 To create a new page, click the **Add** button at the top of page. This creates a child page of the section you are currently in. In this case, a child page of the **Breads** page. There are other actions relating to pages available in the **Actions** menu next to the Add button:
 
 ![Breads page listing with expanded three dots Actions menu in the header showing 7 different page actions One Add child page is highlighted in red](https://guide-media.wagtail.org/images/Breads_page_listing_with_expanded_three_dots_A.width-900_9Cddamn.png)
+
+### Autosave
+
+When making changes to a new or existing page, the page editor will periodically automatically save the page contents. This functionality is available for all page types by default, as well as [snippets](/en/how-to-guides/manage-snippets/) when configured by site implementers.
+
+![Autosave indicator in page editor, saved status](https://guide-media.wagtail.org/images/Autosave_indicator_-_saved.original.width-900.png)
+
+In addition to autosaving, the editor will also alert users of possible concurrent editing conflicts when multiple users are working on the same content. And flag internet connectivity and network issues that pop up as you work.
 
 ## Edit existing pages
 

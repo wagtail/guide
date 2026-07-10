@@ -34,10 +34,6 @@ Error messages for form validation errors now contain a “Go to the first error
 
 We introduce two new shortcuts, ? to open the keyboard shortcuts dialog, and / to focus the search input in the sidebar. The keyboard shortcuts dialog has been reorganized into better categories. when keyboard shortcuts are disabled in user preferences, the “add comment” shortcut is also disabled, and messaging has been added to the keyboard shortcuts dialog to indicate the status of keyboard shortcuts and how to enable or disable them via user preferences.
 
----
-
-To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), our [weekly newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).
-
 ## Other UI improvements
 
 -   We now support calculating content metrics without opening the preview panel.
@@ -47,3 +43,7 @@ To learn about future enhancements ahead of time 👉️ check out the [Wagtail 
 ## Feedback requests
 
 Do you use Wagtail on a tablet or smartphone? Please let us know more about what you do and how well it works on our [mobile support discussion thread](https://github.com/wagtail/wagtail/discussions/13273).
+
+---
+
+To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), our [weekly newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).
