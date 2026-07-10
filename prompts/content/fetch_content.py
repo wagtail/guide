@@ -1,6 +1,6 @@
 #!/usr/bin/env -S uv run
 # /// script
-# dependencies = ["httpx", "tiktoken"]
+# dependencies = ["httpx2", "tiktoken"]
 # ///
 """Download the site contents for experimentation with LLMs."""
 
@@ -9,7 +9,7 @@ import re
 from pathlib import Path
 from urllib.parse import urlparse
 
-import httpx
+import httpx2
 import tiktoken
 
 logger = logging.getLogger(__name__)
@@ -75,7 +75,7 @@ def update_readme(token_counts: list[tuple[Path, int]]) -> None:
 def main() -> int:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    with httpx.Client(follow_redirects=True, timeout=30.0) as client:
+    with httpx2.Client(follow_redirects=True, timeout=30.0) as client:
         llms_txt = client.get(LLMS_URL).raise_for_status().text
         llms_path = OUTPUT_DIR / "llms.txt"
         llms_path.write_text(llms_txt, encoding="utf-8")
