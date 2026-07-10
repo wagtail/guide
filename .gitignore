@@ -7,6 +7,7 @@ db.sqlite3
 .env
 .vscode
 
+database_dumps
 apps/frontend/static/
 apps/guide/settings/local.py
 
