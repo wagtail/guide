@@ -88,8 +88,7 @@
     }
 }
 
-@mixin light-dark($property, $light, $dark){
-
+@mixin light-dark($property, $light, $dark) {
     #{$property}: $light;
     @supports (color: light-dark(#000, #fff)) {
         #{$property}: light-dark(#{$light}, #{$dark});
@@ -101,4 +100,3 @@
         }
     }
 }
-
