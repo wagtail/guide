@@ -19,7 +19,16 @@ urlpatterns = [
     path("sitemap.xml", sitemap),
     path("llms.txt", llms_txt_views.llms_txt_view, name="llms_txt"),
     path("llms-full.txt", llms_txt_views.llms_full_txt_view, name="llms_full_txt"),
-    path("llms-prompt.txt", llms_txt_views.llms_prompt_txt_view, name="llms_prompt"),
+    path(
+        ".well-known/agent-skills/index.json",
+        llms_txt_views.agent_skills_index_view,
+        name="agent_skills_index",
+    ),
+    path(
+        ".well-known/agent-skills/wagtail-guide-support/SKILL.md",
+        llms_txt_views.agent_skill_view,
+        name="agent_skill",
+    ),
 ]
 
 

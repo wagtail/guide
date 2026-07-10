@@ -87,10 +87,10 @@ def register_llms_full_txt_help_menu_item():
 
 
 @hooks.register("register_help_menu_item")
-def register_llms_prompt_help_menu_item():
+def register_agent_skills_help_menu_item():
     return MenuItem(
-        "llms-prompt.txt",
-        reverse("llms_prompt"),
+        "Agent skills",
+        reverse("agent_skills_index"),
         icon_name="doc-empty",
         order=204,
     )
