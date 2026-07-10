@@ -29,9 +29,9 @@ defaultTest:
   options:
     temperature: 0.7
   vars:
-    llms_txt: file://../content/en-latest/llms.txt
-    llms_full: file://../content/en-latest/llms-full.txt
-    # llms_abridged: file://../content/en-latest/llms-abridged.txt
+    llms_txt: file://../content/en/llms.txt
+    llms_full: file://../content/en/llms-full.txt
+    # llms_abridged: file://../content/en/llms-abridged.txt
   assert:
     - type: llm-rubric
       value: The response should provide a step-by-step guide or a clear summary.
@@ -51,7 +51,7 @@ tests:
           - page type
           - save
           - manage pages
-          - https://guide.wagtail.org/en-latest/how-to-guides/manage-pages/
+          - https://guide.wagtail.org/en/how-to-guides/manage-pages/
 
   - description: Unsupported feature - document recovery
     vars:
@@ -59,7 +59,7 @@ tests:
     assert:
       - type: icontains-all
         value:
-          - https://guide.wagtail.org/en-latest/how-to-guides/manage-documents/
+          - https://guide.wagtail.org/en/how-to-guides/manage-documents/
       - type: llm-rubric
         value: The response should be clear that document recovery isn’t supported by default.
 
@@ -69,7 +69,7 @@ tests:
     assert:
       - type: icontains-all
         value:
-          - https://guide.wagtail.org/en-latest/how-to-guides/manage-snippets/
+          - https://guide.wagtail.org/en/how-to-guides/manage-snippets/
       - type: llm-rubric
         value: The response should explain that snippets are reusable content elements.
 
@@ -89,7 +89,7 @@ tests:
     assert:
       - type: icontains-all
         value:
-          - https://guide.wagtail.org/en-latest/concepts/accessibility-features/
+          - https://guide.wagtail.org/en/concepts/accessibility-features/
           - rich text
           - '?'
           - '/'

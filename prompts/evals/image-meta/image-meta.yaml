@@ -64,6 +64,6 @@ tests:
       image: |
         ![Keyboard shortcuts dialog]({{ image_url }})
       image_url: 'https://guide-media.wagtail.org/images/Keyboard_shortcuts_dialog_tWoC6ww.width-900.png'
-      page: file://../../content/en-latest/concepts/accessibility-features.md
+      page: file://../../content/en/concepts/accessibility-features.md
     options:
       transformVars: file://transform_vars.py

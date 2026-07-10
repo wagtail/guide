@@ -21,7 +21,7 @@ Usage:
 
 ### Goals
 
--   Produce a single Markdown file at `prompts/content/en-latest/releases/new-in-wagtail-<X-Y>.md`, following the page template, structure, exclusion rules, and tone defined in the style guide.
+-   Produce a single Markdown file at `prompts/content/en/releases/new-in-wagtail-<X-Y>.md`, following the page template, structure, exclusion rules, and tone defined in the style guide.
 -   Translate the developer release notes into plain language for content editors, moderators, and administrators who use Wagtail but don't write code for it.
 -   Suggest other documentation changes and internal links to existing or newly-introduced docs.
 
@@ -43,8 +43,8 @@ Always fetch the latest information from the canonical sources rather than relyi
 
 -   **Style guide**: [Release notes guidance](../../../docs/style-guide.md#release-notes-guidance) — the source of truth for page structure, tone, what to include/exclude, and how to translate developer jargon.
 -   **Developer release notes**: `https://docs.wagtail.org/en/latest/releases/<X.Y>.html.md`.
--   **Recent precedents**: `prompts/content/en-latest/releases/new-in-wagtail-<previous>.md` — read at least the two most recent for tone calibration.
--   **User guide pages worth linking to**: search `prompts/content/en-latest/` for destinations matching each new feature. Feel free to suggest documentation changes to link to.
+-   **Recent precedents**: `prompts/content/en/releases/new-in-wagtail-<previous>.md` — read at least the two most recent for tone calibration.
+-   **User guide pages worth linking to**: search `prompts/content/en/` for destinations matching each new feature. Feel free to suggest documentation changes to link to.
 
 ### Reporting
 
@@ -55,14 +55,14 @@ After writing the file, report:
 -   Each developer-notes item that was deliberately excluded, grouped by reason (security / maintenance / deprecation / developer-only API / unclear user value).
 -   Every `<!-- TODO: screenshot -->` marker, with suggested alt text.
 -   Every internal link suggestion to documentation that needs to be created.
--   Suggested follow-ups: user guide pages under `prompts/content/en-latest/` that may need updates to acknowledge the new features.
+-   Suggested follow-ups: user guide pages under `prompts/content/en/` that may need updates to acknowledge the new features.
 
 ## Steps
 
 ### 1. Resolve the target version and gather sources
 
 -   [ ] Confirm the target version with the user, or resolve "latest" via the [release schedule](https://github.com/wagtail/wagtail/wiki/Release-schedule).
--   [ ] Compute the output filename: `prompts/content/en-latest/releases/new-in-wagtail-<X-Y>.md` (dash separator, not dot). Read it if it already exists.
+-   [ ] Compute the output filename: `prompts/content/en/releases/new-in-wagtail-<X-Y>.md` (dash separator, not dot). Read it if it already exists.
 -   [ ] Fetch the developer release notes Markdown source. Detect LTS designation by looking for "(LTS)" in the page title.
 -   [ ] Read the [Release notes guidance](../../../docs/style-guide.md#release-notes-guidance) section of the style guide and the two most recent precedent files.
 

@@ -67,6 +67,6 @@ tests:
   - description: Sample pages
     vars:
       content:
-        - file://../../content/en-latest/how-to-guides/manage-pages.md
-        - file://../../content/en-latest/reference/content-checks.md
-        - file://../../content/en-latest/releases/new-in-wagtail-7-3.md
+        - file://../../content/en/how-to-guides/manage-pages.md
+        - file://../../content/en/reference/content-checks.md
+        - file://../../content/en/releases/new-in-wagtail-7-3.md

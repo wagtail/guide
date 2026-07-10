@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 
 LLMS_URL = "https://guide.wagtail.org/llms.txt"
 BASE_DIR = Path(__file__).resolve().parent
-OUTPUT_DIR = BASE_DIR / "en-latest"
+OUTPUT_DIR = BASE_DIR / "en"
 README_PATH = BASE_DIR.parent / "README.md"
 URL_RE = re.compile(r"https?://[^\s]+")
 
@@ -33,7 +33,7 @@ def safe_path_for_url(url: str) -> Path:
     parts = [part for part in path.split("/") if part]
     if not parts:
         parts = ["index"]
-    if parts[0] == "en-latest":
+    if parts[0] == "en":
         parts = parts[1:] or ["index"]
     if parts[-1] == "markdown" and len(parts) > 1:
         filename = parts[-2]
@@ -59,7 +59,7 @@ def update_readme(token_counts: list[tuple[Path, int]]) -> None:
         "| --- | ---: |",
     ]
     for rel_path, tokens in token_counts:
-        link = f"[{rel_path}](content/en-latest/{rel_path})"
+        link = f"[{rel_path}](content/en/{rel_path})"
         lines.append(f"| {link} | {tokens} |")
     lines += ["", end]
 

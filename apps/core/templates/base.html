@@ -20,8 +20,7 @@
         <meta name="color-scheme" content="light dark">
 
         {% comment %}
-        We don’t want older versions of the documentation to show up in search results.
-        So we block all non-latest pages indexing with the robots=noindex meta tag.
+        Prevent specific views indexing, with the robots=noindex meta tag.
         {% endcomment %}
         {% if SEO_NOINDEX %}
         <meta name="robots" content="noindex">
