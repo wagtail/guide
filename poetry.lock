@@ -6,7 +6,7 @@ version = "0.7.0"
 description = "Reusable constraint types to use with typing.Annotated"
 optional = false
 python-versions = ">=3.8"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "annotated_types-0.7.0-py3-none-any.whl", hash = "sha256:1f02e8b43a8fbbc3f3e0d4f0f4bfc8131bcb4eebe8849b8e5c773f3a1c582a53"},
     {file = "annotated_types-0.7.0.tar.gz", hash = "sha256:aff07c09a53a08bc8cfccb9c85b05f1aa9a2a6f23728d790723543408344ce89"},
@@ -531,14 +531,14 @@ typing-extensions = ">=3.10.0.0"
 
 [[package]]
 name = "django"
-version = "6.0.6"
+version = "6.0.7"
 description = "A high-level Python web framework that encourages rapid development and clean, pragmatic design."
 optional = false
 python-versions = ">=3.12"
 groups = ["main", "dev", "production"]
 files = [
-    {file = "django-6.0.6-py3-none-any.whl", hash = "sha256:25148b1194c47c2e685e5f5e9c5d59c78b075dfd282cb9618861ba6c1708f4d2"},
-    {file = "django-6.0.6.tar.gz", hash = "sha256:ad03916ba59523d781ae5c3f631960c23d69a9d9c43cecda52fc23b47e953713"},
+    {file = "django-6.0.7-py3-none-any.whl", hash = "sha256:a037427c2288443a8c02a1b02295a31c239663aa682bc50b1976afb7cf6a769e"},
+    {file = "django-6.0.7.tar.gz", hash = "sha256:2998503fc083124fb58037084bfa00de323c7c743f05f1b4284e77bff0ab8890"},
 ]
 
 [package.dependencies]
@@ -631,6 +631,27 @@ django = ">=4.2"
 
 [package.extras]
 taggit = ["django-taggit (>=3.1)"]
+
+[[package]]
+name = "django-ninja"
+version = "1.6.2"
+description = "Django Ninja - Fast Django REST framework"
+optional = false
+python-versions = ">=3.7"
+groups = ["main", "dev"]
+files = [
+    {file = "django_ninja-1.6.2-py3-none-any.whl", hash = "sha256:20095f5900bada22ea00cf1a58af50bdb285b2354c61a9d9b47d0dc89ac462d6"},
+    {file = "django_ninja-1.6.2.tar.gz", hash = "sha256:d56ae5aa4791068ef4ac9a66cfdf2fc11f507413ded35abb79c51d0d52ad6412"},
+]
+
+[package.dependencies]
+Django = ">=3.1,<6.1"
+pydantic = ">=2.0,<3.0.0"
+
+[package.extras]
+dev = ["pre-commit"]
+doc = ["markdown-include", "mkdocs", "mkdocs-material", "mkdocstrings"]
+test = ["django-stubs", "mypy (==1.7.1)", "psycopg2-binary", "pytest", "pytest-asyncio", "pytest-cov", "pytest-django", "ruff (==0.5.7)"]
 
 [[package]]
 name = "django-permissionedforms"
@@ -1791,7 +1812,7 @@ version = "2.13.4"
 description = "Data validation using Python type hints"
 optional = false
 python-versions = ">=3.9"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "pydantic-2.13.4-py3-none-any.whl", hash = "sha256:45a282cde31d808236fd7ea9d919b128653c8b38b393d1c4ab335c62924d9aba"},
     {file = "pydantic-2.13.4.tar.gz", hash = "sha256:c40756b57adaa8b1efeeced5c196f3f3b7c435f90e84ea7f443901bec8099ef6"},
@@ -1813,7 +1834,7 @@ version = "2.46.4"
 description = "Core functionality for Pydantic validation and serialization"
 optional = false
 python-versions = ">=3.9"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "pydantic_core-2.46.4-cp310-cp310-macosx_10_12_x86_64.whl", hash = "sha256:a396dcc17e5a0b164dbe026896245a4fa9ff402edca1dff0be3d53a517f74de4"},
     {file = "pydantic_core-2.46.4-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:da4b951fe36dc7c3a1ccb4e3cd1747c3542b8c9ceede8fc86cae054e764485f5"},
@@ -2479,7 +2500,7 @@ version = "0.4.2"
 description = "Runtime typing introspection tools"
 optional = false
 python-versions = ">=3.9"
-groups = ["main"]
+groups = ["main", "dev"]
 files = [
     {file = "typing_inspection-0.4.2-py3-none-any.whl", hash = "sha256:4ed1cacbdc298c220f1bd249ed5287caa16f34d44ef4e9c3d0cbad5b521545e7"},
     {file = "typing_inspection-0.4.2.tar.gz", hash = "sha256:ba561c48a67c5958007083d386c3295464928b01faa735ab8547c5692e87f464"},
@@ -2521,14 +2542,13 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 
 [[package]]
 name = "wagtail"
-version = "7.4.2"
+version = "8.0.dev20260709"
 description = "A Django content management system."
 optional = false
 python-versions = ">=3.10"
 groups = ["main", "dev"]
 files = [
-    {file = "wagtail-7.4.2-py3-none-any.whl", hash = "sha256:ae80a6d536a4098f7c9d37e169ba0f14c29c9769b50b6d92546f41e5cad201d8"},
-    {file = "wagtail-7.4.2.tar.gz", hash = "sha256:6e261b50693abfbe2b738717bedc5bd0915e2e08efb9400102f4098c0c03aaab"},
+    {file = "wagtail-8.0.dev20260709-py3-none-any.whl", hash = "sha256:75b72f4098717df2bb8bee62d13012b3940c6ee21110448417db3be272e49b70"},
 ]
 
 [package.dependencies]
@@ -2537,6 +2557,7 @@ beautifulsoup4 = ">=4.13.3,<5"
 Django = ">=5.2"
 django-filter = ">=23.3"
 django-modelcluster = ">=6.5,<7.0"
+django-ninja = ">=1.4,<2.0"
 django-permissionedforms = ">=0.1,<1.0"
 django-taggit = ">=5.0,<7"
 django-tasks = ">=0.9,<0.13"
@@ -2547,13 +2568,18 @@ laces = ">=0.1,<0.2"
 modelsearch = ">=1.3,<1.4"
 openpyxl = ">=3.0.10,<4.0"
 Pillow = ">=9.1.0"
+pydantic = ">=2,<3"
 requests = ">=2.11.1,<3.0"
 telepath = ">=0.3.1,<1"
 Willow = {version = ">=1.11.0,<2", extras = ["heif"]}
 
 [package.extras]
-docs = ["Sphinx (>=7.3)", "myst_parser (>=4.0.0,<6)", "pyenchant (>=3.3.0,<4)", "sphinx-autobuild (>=0.6.0)", "sphinx-wagtail-theme (>=6.5.0,<7)", "sphinx_llm (>=0.2.1)", "sphinxcontrib-spelling (>=8,<9)"]
-testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-frontdoor (>=1.0,<1.1)", "boto3 (>=1.28,<2)", "coverage (>=3.7.0)", "curlylint (==0.13.1)", "django-pattern-library (>=0.7)", "djhtml (==3.0.10)", "doc8 (==2.0.0)", "factory-boy (>=3.2)", "freezegun (>=0.3.8)", "polib (>=1.1,<2.0)", "responses (>=0.25,<1)", "ruff (==0.15.2)", "semgrep (==1.152.0)", "tblib (>=3.0,<4.0)"]
+docs = ["Sphinx (>=7.3)", "myst_parser (>=4.0.0,<6)", "pyenchant (>=3.3.0,<4)", "sphinx-autobuild (>=0.6.0)", "sphinx-wagtail-theme (>=6.5.0,<7)", "sphinx_llm (>=0.2.1)", "sphinxcontrib-httpdomain (>=1.5.0)", "sphinxcontrib-openapi (>=0.9.0)", "sphinxcontrib-spelling (>=8,<9)"]
+testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-frontdoor (>=1.0,<1.1)", "boto3 (>=1.28,<2)", "coverage (>=3.7.0)", "curlylint (==0.13.1)", "django-pattern-library (>=0.7)", "django-stubs (==6.0.6)", "djhtml (==3.0.11)", "doc8 (==2.0.0)", "factory-boy (>=3.2)", "freezegun (>=0.3.8)", "polib (>=1.1,<2.0)", "responses (>=0.25,<1)", "ruff (==0.15.20)", "semgrep (==1.168.0)", "tblib (>=3.0,<4.0)", "ty (==0.0.56)"]
+
+[package.source]
+type = "url"
+url = "https://releases.wagtail.org/nightly/dist/wagtail-8.0.dev20260709-py3-none-any.whl"
 
 [[package]]
 name = "wagtail-ai"
@@ -2663,4 +2689,4 @@ wand = ["Wand (>=0.6,<1.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14"
-content-hash = "b82f60c83badcf4d89dac8050e181d359ad17078d81b14aeab02076fc4eb5b57"
+content-hash = "fcccc34c7b1ba647bfedc7bd563976b18086a2cba122367c844de24df4b75e42"
