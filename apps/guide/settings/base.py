@@ -271,6 +271,16 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 WAGTAIL_I18N_ENABLED = True
 
+if "DEEPL_AUTH_KEY" in env:
+    WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
+        "CLASS": "wagtail_localize.machine_translators.deepl.DeepLTranslator",
+        "OPTIONS": {
+            "AUTH_KEY": env["DEEPL_AUTH_KEY"],
+            "FORMALITY": env.get("DEEPL_FORMALITY", "default"),
+            "TIMEOUT": int(env.get("DEEPL_TIMEOUT", "30")),
+        },
+    }
+
 
 USE_TZ = True
 
