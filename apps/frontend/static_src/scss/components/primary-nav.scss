@@ -9,8 +9,8 @@
     max-height: 100vh;
     height: 100vh;
     overflow-x: scroll;
-    inset-inline-start: -10px; // ensure vertical reading line is aligned
-    width: calc(100% - 10px); // compensate for reading line adjustment
+    inset-inline-start: -10px;
+    width: calc(100% - 10px);
 
     @include media-query(medium) {
         inset-inline-end: -($gutter * 3);
@@ -34,11 +34,6 @@
     }
 }
 
-// Theme + language controls rendered at the top of the burger overlay on
-// mobile. Hidden on desktop (the nav becomes a sidebar there, and the
-// controls already live in .page-tools above the content).
-// The margin-top pushes the controls below the header's gradient mask
-// (header__identity::after, 160px tall) so their colors aren't washed out.
 .primary-nav__tools {
     margin-top: ($gutter * 2);
     margin-bottom: ($gutter * 2);
@@ -59,9 +54,6 @@
         margin-inline-end: 0;
 
         .copy-button__toggle {
-            // The container is auto-height inline-flex, so height: 100% does
-            // not resolve and leaves the arrow shorter than the button. Let
-            // the default cross-axis stretch fill it to match.
             height: auto;
         }
     }
