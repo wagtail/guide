@@ -9,8 +9,8 @@
     max-height: 100vh;
     height: 100vh;
     overflow-x: scroll;
-    inset-inline-start: -10px;
-    width: calc(100% - 10px);
+    inset-inline-start: -10px; // ensure vertical reading line is aligned
+    width: calc(100% - 10px); // compensate for reading line adjustment
 
     @include media-query(medium) {
         inset-inline-end: -($gutter * 3);
