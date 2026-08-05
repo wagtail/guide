@@ -17,3 +17,8 @@ apps/guide/settings/local.py
 .coverage
 .ruff_cache
 .idea/
+
+# Eval-generated artifacts (regenerate with scripts/eval/*.py)
+scripts/eval/out/
+scripts/eval/__pycache__/
+scripts/eval/cost_*.csv

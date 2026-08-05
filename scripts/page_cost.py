@@ -15,24 +15,23 @@ Before running:
 - Set TARGET_LANG_CODE to the locale it was translated to.
 - Set PRICING to the model's per-1M-token rates. (None, None) -> "?" in $.
 """
+
 import csv
 import os
 import re
 from datetime import timedelta
 
-from django.utils import timezone
 from django.utils.translation import get_language_info
-from wagtail.models import Page, Locale
-from wagtail_localize.models import TranslationSource, Translation, StringTranslation
-
+from wagtail.models import Locale, Page
+from wagtail_localize.models import StringTranslation, Translation, TranslationSource
 from wagtail_localize_ai.models import TranslationLog
 
 # === Config (edit these) ===
 # Pick the page by id OR by title substring (case-insensitive). If both are set,
 # PAGE_ID wins. Leave PAGE_ID=None and set PAGE_TITLE_SUBSTRING to match by name.
 PAGE_ID = 66
-# PAGE_TITLE_SUBSTRING = "manage documents"   # resolves Arabic aliases to English source automatically
-TARGET_LANG_CODE = "ar"   # target locale language_code
+PAGE_TITLE_SUBSTRING = None  # e.g. "manage documents"   # resolves Arabic aliases to English source automatically
+TARGET_LANG_CODE = "ar"  # target locale language_code
 
 # Log rows are matched to this page's translation run by timestamp. The admin
 # run fires within seconds of Translation creation; widen this only if the page
@@ -43,7 +42,7 @@ PRICING = {
     # {model_name: (input_per_1M, output_per_1M, currency_symbol)}.
     # Fill from each provider's pricing page. (None, None) -> cost column shows "?".
     "z-ai/glm-5.2": (1.40, 4.40, "$"),
-    "google/gemma-4-26b-a4b-it":(0.07,0.34, "$"),
+    "google/gemma-4-26b-a4b-it": (0.07, 0.34, "$"),
     "deepseek/deepseek-v4-flash": (0.14, 0.28, "$"),
     "MiniMax-M2.7": (0.60, 3.00, "£"),
     "DeepSeek-V3.2": (None, None, "£"),
@@ -92,7 +91,9 @@ def main():
             print(f"Multiple pages match {PAGE_TITLE_SUBSTRING!r}:")
             for p in matches:
                 print(f"  id={p.id}  {p.title}")
-            print("Set PAGE_ID to one of these ids in scripts/page_cost.py to disambiguate.")
+            print(
+                "Set PAGE_ID to one of these ids in scripts/page_cost.py to disambiguate."
+            )
             return
         picked = matches[0]
     else:
@@ -134,18 +135,28 @@ def main():
     # StringTranslation rows for this page+locale are updated at the moment the
     # run saves its output, which coincides with the log row timestamp.
     page_string_ids = list(source.stringsegment_set.values_list("string_id", flat=True))
-    page_context_ids = list(source.stringsegment_set.values_list("context_id", flat=True))
+    page_context_ids = list(
+        source.stringsegment_set.values_list("context_id", flat=True)
+    )
     saved = StringTranslation.objects.filter(
         translation_of_id__in=page_string_ids,
         context_id__in=page_context_ids,
         locale=target_locale,
     )
-    saved_machine = saved.filter(translation_type=StringTranslation.TRANSLATION_TYPE_MACHINE)
+    saved_machine = saved.filter(
+        translation_type=StringTranslation.TRANSLATION_TYPE_MACHINE
+    )
 
-    latest_save = saved_machine.order_by("-updated_at").values_list("updated_at", flat=True).first()
+    latest_save = (
+        saved_machine.order_by("-updated_at")
+        .values_list("updated_at", flat=True)
+        .first()
+    )
 
     try:
-        translation = Translation.objects.get(source=source, target_locale=target_locale)
+        translation = Translation.objects.get(
+            source=source, target_locale=target_locale
+        )
     except Translation.DoesNotExist:
         print(f"No Translation row for {page.title!r} -> {TARGET_LANG_CODE!r}.")
         print("Has this page ever been translated to that locale via the admin?")
@@ -168,17 +179,19 @@ def main():
     logs = list(log_qs)
 
     if not logs:
-        print(f"No TranslationLog rows found within ±{LOG_WINDOW_MINUTES}min of "
-              f"the latest translation save ({anchor:%H:%M:%S}).")
+        print(
+            f"No TranslationLog rows found within ±{LOG_WINDOW_MINUTES}min of "
+            f"the latest translation save ({anchor:%H:%M:%S})."
+        )
         print("Widen LOG_WINDOW_MINUTES, or check that AI translation was used.")
         return
 
     # 3. Sum tokens across all log rows belonging to this page's run.
-    total_in = sum(l.input_tokens for l in logs)
-    total_out = sum(l.output_tokens for l in logs)
+    total_in = sum(log.input_tokens for log in logs)
+    total_out = sum(log.output_tokens for log in logs)
     matched_model = logs[-1].model
     matched_provider = logs[-1].provider
-    errors = [l.error for l in logs if l.error]
+    errors = [log.error for log in logs if log.error]
 
     # 4. Compute $ from tokens × rates.
     cost, cur = _compute_cost(matched_model, total_in, total_out)
@@ -194,17 +207,25 @@ def main():
     print(f"Target locale: {target_language} ({target_locale.language_code})")
     print(f"Provider: {matched_provider or '?'}   Model: {matched_model or '?'}")
     print(f"Segments on page: {total_segments}   Matched log rows: {len(logs)}")
-    print(f"Log timespan: {logs[0].timestamp:%Y-%m-%d %H:%M:%S} -> {logs[-1].timestamp:%Y-%m-%d %H:%M:%S}")
-    print(f"Data source: saved TranslationLog (read-only, no LLM calls)")
+    print(
+        f"Log timespan: {logs[0].timestamp:%Y-%m-%d %H:%M:%S} -> {logs[-1].timestamp:%Y-%m-%d %H:%M:%S}"
+    )
+    print("Data source: saved TranslationLog (read-only, no LLM calls)")
     print("=" * 80)
     print("=" * 80)
-    print(f"PAGE COST:  page={page.title!r} (id={page.id})  model={matched_model or '?'}")
-    print(f"            segments={total_segments}   input_tokens={total_in}   output_tokens={total_out}   total_tokens={total_in + total_out}")
+    print(
+        f"PAGE COST:  page={page.title!r} (id={page.id})  model={matched_model or '?'}"
+    )
+    print(
+        f"            segments={total_segments}   input_tokens={total_in}   output_tokens={total_out}   total_tokens={total_in + total_out}"
+    )
     if cost is not None:
         print(f"            >>> PAGE COST = {_fmt_cost(cost, cur)} <<<")
         print(f"            avg per string = {_fmt_cost(cost / n, cur)}")
     else:
-        print(f"            (rates missing for model {matched_model!r} in PRICING; fill PRICING to compute $).")
+        print(
+            f"            (rates missing for model {matched_model!r} in PRICING; fill PRICING to compute $)."
+        )
     if errors:
         print(f"NOTE: {len(errors)} log row(s) had errors during translation.")
     print("=" * 80)
