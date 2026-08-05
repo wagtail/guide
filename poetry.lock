@@ -2622,6 +2622,26 @@ linting = ["pre-commit (>=4.2.0,<6)"]
 testing = ["coverage (>=7.0,<8.0)", "dj-database-url (>=2.1.0,<3)", "django-rq (>=2.5,<3.0)", "freezegun (>=1.2,<2)", "google-cloud-translate (>=3.0.0)", "wagtail-modeladmin (>=2.0,<3.0)"]
 
 [[package]]
+name = "wagtail-localize-ai"
+version = "0.3.1"
+description = "Any-LLM powered machine translator for wagtail-localize"
+optional = false
+python-versions = ">=3.11"
+groups = ["main"]
+files = []
+develop = false
+
+[package.dependencies]
+any-llm-sdk = "*"
+wagtail-localize = "*"
+
+[package.source]
+type = "git"
+url = "https://github.com/Raghaddahi/wagtail-localize-ai.git"
+reference = "main"
+resolved_reference = "014abb865554a609dddd3b3d31e8b19888d6e24e"
+
+[[package]]
 name = "whitenoise"
 version = "6.6.0"
 description = "Radically simplified static file serving for WSGI applications"
@@ -2663,4 +2683,4 @@ wand = ["Wand (>=0.6,<1.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14"
-content-hash = "b82f60c83badcf4d89dac8050e181d359ad17078d81b14aeab02076fc4eb5b57"
+content-hash = "5394fb9d7c9c3bdf1ff9bf418fc9c04b90fcc155d8531ceb52f55c4819f79266"

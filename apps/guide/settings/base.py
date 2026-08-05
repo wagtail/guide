@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "wagtail_ai",
     "rest_framework",
     "wagtail_localize",
+    "wagtail_localize_ai",
     "wagtail_localize.locales",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
@@ -271,6 +272,26 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 WAGTAIL_I18N_ENABLED = True
 
+WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
+    "CLASS": "wagtail_localize_ai.translator.AITranslator",
+}
+
+AI_PROVIDERS = {
+    "openai": {
+        "_name": "OpenAI",
+        "_provider": "openai",
+        "api_key": os.environ.get("ARGYLLDATA_API_KEY"),
+        "api_base": os.environ.get(
+            "ARGYLLDATA_API_BASE", "https://api.argylldev.ai/v1"
+        ),
+    },
+    "kilo": {
+        "_name": "Kilo",
+        "_provider": "openai",
+        "api_key": os.environ.get("KILO_API_KEY"),
+        "api_base": "https://api.kilo.ai/api/gateway",
+    },
+}
 
 USE_TZ = True
 
