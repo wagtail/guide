@@ -2557,14 +2557,14 @@ testing = ["Jinja2 (>=3.0,<3.2)", "azure-mgmt-cdn (>=12.0,<13.0)", "azure-mgmt-f
 
 [[package]]
 name = "wagtail-ai"
-version = "3.1.0"
+version = "3.1.1"
 description = "Get a hand writing your content with AI super powers!"
 optional = false
 python-versions = ">=3.11"
 groups = ["main"]
 files = [
-    {file = "wagtail_ai-3.1.0-py3-none-any.whl", hash = "sha256:3ed6e2cd8a189726ba0f9bee2f990f0fe1f66db66df229f491a2b45a048af042"},
-    {file = "wagtail_ai-3.1.0.tar.gz", hash = "sha256:377a8a179c5272a31b8b9ea26a2b5c792a3a5ffecc4b364b5df2ea472582958d"},
+    {file = "wagtail_ai-3.1.1-py3-none-any.whl", hash = "sha256:6e53a17069ffe67f3db8837269baa5327475ab797cf9716898f1e7bf479adf32"},
+    {file = "wagtail_ai-3.1.1.tar.gz", hash = "sha256:00154266beb4434d8173a648b1b0fcdecf57df47b2262fece1bb406d27977551"},
 ]
 
 [package.dependencies]
@@ -2663,4 +2663,4 @@ wand = ["Wand (>=0.6,<1.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14"
-content-hash = "b82f60c83badcf4d89dac8050e181d359ad17078d81b14aeab02076fc4eb5b57"
+content-hash = "2899321243e30f497e6e04b42b0277e447a338cb715f7b51c236f0d00c6a4bcc"
