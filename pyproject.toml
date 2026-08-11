@@ -25,7 +25,7 @@ jinja2 = "^3.1.6"
 wagtail-ai = "^3.1.1"
 
 [tool.poetry.group.dev.dependencies]
-ruff = "^0.14.8"
+ruff = "^0.16.2"
 django-extensions = "^3.2.1"
 wagtail-factories = "^4.1.0"
 coverage = "^7.3.2"
