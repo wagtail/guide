@@ -2554,13 +2554,13 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 
 [[package]]
 name = "wagtail"
-version = "8.0.dev20260805"
+version = "8.0.dev20260811"
 description = "A Django content management system."
 optional = false
 python-versions = ">=3.10"
 groups = ["main", "dev"]
 files = [
-    {file = "wagtail-8.0.dev20260805-py3-none-any.whl", hash = "sha256:ae308cd1304f562191cd694c1063a6076a4ec905f910e533ca278e735a1921d5"},
+    {file = "wagtail-8.0.dev20260811-py3-none-any.whl", hash = "sha256:0708923115a29d97ba30a7a918c7458ea3eaadfbee393c2cbf6cea25997d71b5"},
 ]
 
 [package.dependencies]
@@ -2592,7 +2592,7 @@ testing = ["Jinja2 (>=3.0,<3.2)", "azure-identity (>=1,<2)", "azure-mgmt-cdn (>=
 
 [package.source]
 type = "url"
-url = "https://releases.wagtail.org/nightly/dist/wagtail-8.0.dev20260805-py3-none-any.whl"
+url = "https://releases.wagtail.org/nightly/dist/wagtail-8.0.dev20260811-py3-none-any.whl"
 
 [[package]]
 name = "wagtail-ai"
@@ -2702,4 +2702,4 @@ wand = ["Wand (>=0.6,<1.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.14"
-content-hash = "870f50b8ebb8bf69b252b5c11ab83aebf0ff49fb91c3155ab5be901b08f6e0e7"
+content-hash = "f39dc732eb3410577112a4614fe9f61d2fa9733f3d7797e3a365655944cd2abf"
