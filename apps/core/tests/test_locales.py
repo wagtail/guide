@@ -11,7 +11,7 @@ class TestPageLocales(TestCase):
     def setUp(self):
         self.en = LocaleFactory(language_code="en")
         self.home_page_en = HomePageFactory(locale=self.en)
-        self.nl = LocaleFactory(language_code="nl-4.1.x")
+        self.nl = LocaleFactory(language_code="nl")
         self.home_page_nl = self.home_page_en.copy_for_translation(self.nl)
         self.home_page_nl.save_revision().publish()
         self.user = get_user_model().objects.create_superuser(
