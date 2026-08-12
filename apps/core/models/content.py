@@ -1,9 +1,9 @@
 import json
 
 from bs4 import BeautifulSoup
-from django.db import models
 from django.http import HttpResponse
 from django.template import Context, Template
+from django.utils.functional import cached_property
 from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
 from wagtail.fields import StreamField
@@ -37,7 +37,10 @@ class ContentPage(MarkdownRouteMixin, Page):
     subpage_types = ["core.ContentPage"]
 
     body = StreamField(CONTENT_BLOCKS)
-    table_of_contents = models.TextField(blank=True)
+
+    @cached_property
+    def table_of_contents(self):
+        return create_table_of_contents(self.body)
 
     content_panels = [
         AITitleFieldPanel("title"),
@@ -77,7 +80,3 @@ class ContentPage(MarkdownRouteMixin, Page):
             return HttpResponse(json.dumps(data))
         else:
             return super().serve(request, *args, **kwargs)
-
-    def save_revision(self, *args, **kwargs):
-        self.table_of_contents = create_table_of_contents(self.body)
-        return super().save_revision(*args, **kwargs)

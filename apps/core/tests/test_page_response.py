@@ -40,5 +40,5 @@ class TestPageResponseStatusCode(TestCase):
             self.content_page_response, template_name="core/content_page.html", count=1
         )
         self.assertTemplateUsed(
-            self.content_page_response, template_name="core/blocks/text.html", count=2
+            self.content_page_response, template_name="core/blocks/text.html", count=4
         )
