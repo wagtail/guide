@@ -653,6 +653,14 @@ WAGTAIL_AI = {
             "api_key": os.environ.get("WAGTAIL_AI_DEFAULT_API_KEY"),
             "api_base": os.environ.get("WAGTAIL_AI_DEFAULT_API_BASE"),
         },
+        "translator": {
+            "provider": os.environ.get("WAGTAIL_AI_TRANSLATOR_PROVIDER", "openai"),
+            "model": os.environ.get(
+                "WAGTAIL_AI_TRANSLATOR_MODEL", "mistral-small-3.2-24b-instruct-2506"
+            ),
+            "api_key": os.environ.get("WAGTAIL_AI_TRANSLATOR_API_KEY"),
+            "api_base": os.environ.get("WAGTAIL_AI_TRANSLATOR_API_BASE"),
+        },
         "vision": {
             "provider": os.environ.get("WAGTAIL_AI_VISION_PROVIDER", "openai"),
             "model": os.environ.get(
@@ -683,3 +691,7 @@ WAGTAIL_AI = {
 }
 
 WAGTAILIMAGES_IMAGE_FORM_BASE = "wagtail_ai.forms.DescribeImageForm"
+
+WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
+    "CLASS": "apps.core.translator.LLMTranslator",
+}
