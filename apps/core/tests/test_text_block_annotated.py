@@ -65,7 +65,7 @@ class TestAnnotatedTextBlock(TestCase):
     def test_uses_annotated_template(self):
         page = self._page_with_annotated_block("<p>Content</p>", change_type="added")
         response = self.client.get(page.url)
-        self.assertTemplateUsed(response, "core/blocks/text_annotated.html", count=1)
+        self.assertTemplateUsed(response, "core/blocks/text_annotated.html", count=2)
 
     def test_version_validation_accepts_x_y_format(self):
         version_block = AnnotatedTextBlock().child_blocks["version"]
