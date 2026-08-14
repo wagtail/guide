@@ -7,8 +7,8 @@ license = "BSD-3-Clause"
 authors = [{ name = "Guide contributors", email = "no-reply@guide.wagtail.org" }]
 requires-python = ">=3.14"
 dependencies = [
-    "django>=6.0,<7.0",
-    "wagtail>=7.4,<7.5",
+    "django==6.1.*",
+    "wagtail==8.0rc1",
     "django-manifest-loader>=1.0.0,<2.0.0",
     "lxml>=4.9,<7",
     "djangorestframework>=3.13.1,<4.0",
@@ -19,7 +19,7 @@ dependencies = [
     "wagtail-localize>=1.13,<2.0",
     "django-permissions-policy>=4.13.0,<5.0.0",
     "sentry-sdk[django]>=2.45.0,<3.0.0",
-    "draftjs-exporter-markdown>=0.2.4,<0.3.0",
+    "draftjs-exporter>=7.1.0,<8.0",
     "jinja2>=3.1.6,<4.0.0",
     "wagtail-ai>=3.1.1,<4.0.0",
 ]
@@ -40,3 +40,9 @@ production = [
 
 [tool.uv]
 package = false
+# Wagtail 8.0 depends on django-ninja, which caps Django at <6.1. Django 6.1
+# support in Wagtail 8.0 is provisional, so override django-ninja's Django upper
+# bound to keep the project on Django 6.1.
+override-dependencies = [
+    "django==6.1.*",
+]
