@@ -1,3 +1,4 @@
+import json
 from unittest.mock import patch
 
 from django.test import TestCase
@@ -33,6 +34,36 @@ class TestContentPage(TestCase):
         self.assertEqual(
             self.content_page.table_of_contents,
             '<ul><li><a href="#something">ekkie</a></li></ul>',
+        )
+
+    def test_escapes_heading_text(self):
+        self.content_page.body = json.dumps(
+            [
+                {
+                    "type": "text",
+                    "value": "<h2>&lt;script&gt;alert(1)&lt;/script&gt;</h2>",
+                }
+            ]
+        )
+
+        self.assertEqual(
+            self.content_page.table_of_contents,
+            '<ul><li><a href="#scriptalert1script">&lt;script&gt;alert(1)&lt;/script&gt;</a></li></ul>',
+        )
+
+    def test_escapes_existing_id(self):
+        self.content_page.body = json.dumps(
+            [
+                {
+                    "type": "text",
+                    "value": '<h2 id="section&quot; onclick=&quot;alert(1)">Title</h2>',
+                }
+            ]
+        )
+
+        self.assertEqual(
+            self.content_page.table_of_contents,
+            '<ul><li><a href="#section&quot; onclick=&quot;alert(1)">Title</a></li></ul>',
         )
 
     def test_table_of_contents_is_cached_on_page_instance(self):
