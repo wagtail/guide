@@ -2,6 +2,7 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.api import APIField
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, TranslatableMixin
 from wagtail.snippets.models import register_snippet
@@ -39,6 +40,13 @@ class FooterItem(TranslatableMixin, Orderable):
         FieldPanel("description"),
         FieldPanel("link"),
         FieldPanel("icon"),
+    ]
+
+    api_fields = [
+        APIField("title"),
+        APIField("description"),
+        APIField("link"),
+        APIField("icon"),
     ]
 
     def __str__(self):

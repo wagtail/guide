@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.http.response import Http404
 from wagtail.admin.panels import FieldPanel
+from wagtail.api import APIField
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
 
@@ -25,6 +26,11 @@ class HomePage(MarkdownRouteMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel("introduction"),
         FieldPanel("sections"),
+    ]
+
+    api_fields = [
+        APIField("introduction"),
+        APIField("sections"),
     ]
 
     def route(self, request, path_components):

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "wagtail_localize.locales",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.api.v2",
     "wagtail.contrib.routable_page",
     "wagtail.contrib.search_promotions",
     "wagtail.contrib.settings",
