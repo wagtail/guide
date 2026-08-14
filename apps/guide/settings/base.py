@@ -380,6 +380,10 @@ WHITENOISE_ROOT = os.path.join(BASE_DIR, "public")
 
 WAGTAIL_SITE_NAME = "Wagtail user guide 📚️"
 
+# Current Wagtail version covered by the guide, in x.y format (e.g. "7.4").
+# Used by the Block usage report to flag annotated blocks that reference
+WAGTAIL_GUIDE_CURRENT_VERSION = "7.4"
+
 # Search
 # https://docs.wagtail.org/en/stable/topics/search/backends.html
 WAGTAILSEARCH_BACKENDS = {
