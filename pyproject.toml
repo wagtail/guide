@@ -1,41 +1,42 @@
-[tool.poetry]
+[project]
 name = "guide"
 version = "0.1.0"
 description = "Wagtail User Guide"
-authors = ["Guide contributors <no-reply@guide.wagtail.org>"]
-license = "BSD-3-Clause"
 readme = "README.md"
+license = "BSD-3-Clause"
+authors = [{ name = "Guide contributors", email = "no-reply@guide.wagtail.org" }]
+requires-python = ">=3.14"
+dependencies = [
+    "django>=6.0,<7.0",
+    "wagtail>=7.4,<7.5",
+    "django-manifest-loader>=1.0.0,<2.0.0",
+    "lxml>=4.9,<7",
+    "djangorestframework>=3.13.1,<4.0",
+    "dj-database-url>=2.1,<2.2",
+    "django-storages>=1.14,<1.15",
+    "whitenoise>=6.6,<6.7",
+    "psycopg>=3.2.10,<3.3",
+    "wagtail-localize>=1.13,<2.0",
+    "django-permissions-policy>=4.13.0,<5.0.0",
+    "sentry-sdk[django]>=2.45.0,<3.0.0",
+    "draftjs-exporter-markdown>=0.2.4,<0.3.0",
+    "jinja2>=3.1.6,<4.0.0",
+    "wagtail-ai>=3.1.1,<4.0.0",
+]
 
-[tool.poetry.dependencies]
-python = ">=3.14"
-django = ">=6.0,<7.0"
-wagtail = ">=7.4,<7.5"
-django-manifest-loader = "^1.0.0"
-lxml = ">=4.9,<7"
-djangorestframework = ">=3.13.1,<4.0"
-dj-database-url = ">=2.1,<2.2"
-django-storages = ">=1.14,<1.15"
-whitenoise = ">=6.6,<6.7"
-psycopg = "~3.2.10"
-wagtail-localize = "^1.13"
-django-permissions-policy = "^4.13.0"
-sentry-sdk = { extras = ["django"], version = "^2.45.0" }
-draftjs-exporter-markdown = "^0.2.4"
-jinja2 = "^3.1.6"
-wagtail-ai = "^3.1.1"
+[dependency-groups]
+dev = [
+    "ruff>=0.16.2,<0.17.0",
+    "django-extensions>=3.2.1,<4.0.0",
+    "wagtail-factories>=4.1.0,<5.0.0",
+    "coverage>=7.3.2,<8.0.0",
+]
+production = [
+    "gunicorn==21.2.0",
+    "django-redis>=5.4,<5.5",
+    "sentry-sdk>=2.45.0,<3.0.0",
+    "boto3>=1.24.93,<2.0.0",
+]
 
-[tool.poetry.group.dev.dependencies]
-ruff = "^0.16.2"
-django-extensions = "^3.2.1"
-wagtail-factories = "^4.1.0"
-coverage = "^7.3.2"
-
-[tool.poetry.group.production.dependencies]
-gunicorn = "21.2.0"
-django-redis = ">=5.4,<5.5"
-sentry-sdk = "^2.45.0"
-boto3 = "^1.24.93"
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+package = false

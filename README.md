@@ -25,7 +25,8 @@ We assume that you have basic knowledge of Node/Webpack and Python/Django/Wagtai
 
 -   Git
 -   Python >= 3.14
--   Poetry >= 2.2.1
+-   uv
+-   just
 -   Node (see `.nvmrc` for version)
 
 ### Setting up Wagtail guide in a virtual environment
@@ -36,37 +37,35 @@ Run:
 
 Confirm that the output is showing version Python 3.14 (or higher). If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
 
-With the Python version output confirmed, [install Poetry](https://python-poetry.org/docs).
+With the Python version output confirmed, [install uv](https://docs.astral.sh/uv/).
 
 Now we're ready to set up the guide project:
 
     cd ~/dev [or your preferred dev directory]
     git clone https://github.com/wagtail/guide.git
     cd guide
-    make backend
-    make frontend
-    make buildfixtures
+    just backend
+    just frontend
+    just buildfixtures
 
 Once the backend and frontend have been set up, you can run the development server with:
 
-    make run
+    just run
 
 If everything worked, [http://127.0.0.1:8000](http://127.0.0.1:8000) should show you a welcome page.
 
 You can access the administrative area at [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin) and log in using the credentials you created during the backend setup.
 
-To activate Poetry's virtual environment, run:
-
-    eval $(poetry env activate)
+`uv` manages the project's virtual environment automatically, so there's no need to activate it manually. To run a command in the environment, prefix it with `uv run`, for example `uv run python manage.py shell`.
 
 To generate and compile translation strings, run:
 
-    make makemessages
-    make compilemessages
+    just makemessages
+    just compilemessages
 
 Or both, in a single command:
 
-    make translations
+    just translations
 
 ### Setting up development with Docker
 
@@ -77,13 +76,13 @@ Or both, in a single command:
     SECRET_KEY=some-random-secret
     DJANGO_SETTINGS_MODULE=apps.guide.settings.dev
     ```
-2. Build and start the development container by running the `make docker-run` command.  
-   This starts the server in the foreground. To run it in the background, use `make docker-start` instead.
-3. In another terminal, run the init script in the container: `make docker-init`
+2. Build and start the development container by running the `just docker-run` command.
+   This starts the server in the foreground. To run it in the background, use `just docker-start` instead.
+3. In another terminal, run the init script in the container: `just docker-init`
 4. You should now have access to the project in your browser at `http://localhost:8000`
-5. To stop the container, run `make docker-stop`
+5. To stop the container, run `just docker-stop`
 
-Code changes are picked up automatically. Only rebuild when dependencies change:`make docker-build`
+Code changes are picked up automatically. Only rebuild when dependencies change:`just docker-build`
 
 # Contributing
 
@@ -91,9 +90,9 @@ If you're a Python or Django developer, fork the repo and join us. You'll find a
 
 ## Development
 
--   Run formatting (Ruff & Prettier) `make format`
--   Run linting (Ruff, Prettier, Eslint) `make lint`
--   Run tests `make test`
+-   Run formatting (Ruff & Prettier) `just format`
+-   Run linting (Ruff, Prettier, Eslint) `just lint`
+-   Run tests `just test`
 
 # Other Notes
 

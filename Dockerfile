@@ -19,11 +19,14 @@ RUN npm run build
 # however weigh a lot, approx. up to 1.5GiB per built image.
 FROM python:3.14 as production
 
-ARG POETRY_HOME=/opt/poetry
-ARG POETRY_INSTALL_ARGS="--without dev"
+# Install uv using the official standalone binary.
+# Keep this version in sync with the local `uv` used to generate uv.lock.
+COPY --from=ghcr.io/astral-sh/uv:0.11.19 /uv /uvx /bin/
 
-# IMPORTANT: Remember to review this when upgrading
-ARG POETRY_VERSION=2.1.2
+# Arguments to control which dependency groups get installed. Defaults to the
+# production configuration, and can be overridden at build time (e.g. for the
+# development container).
+ARG UV_SYNC_ARGS="--no-dev --group production"
 
 # Install dependencies in a virtualenv
 ENV VIRTUAL_ENV=/venv
@@ -35,7 +38,11 @@ WORKDIR /app
 # Set default environment variables. They are used at build time and runtime.
 # If you specify your own environment variables on Heroku, they will
 # override the ones set here. The ones below serve as sane defaults only.
-#  * PATH - Make sure that Poetry is on the PATH, along with our venv
+#  * PATH - Make sure that uv is on the PATH, along with our venv
+#  * UV_PROJECT_ENVIRONMENT - Install dependencies into $VIRTUAL_ENV instead of
+#    the default `.venv` in the project directory.
+#  * UV_COMPILE_BYTECODE - Compile Python bytecode for faster container starts.
+#  * UV_LINK_MODE - Use copy mode to avoid hardlinks which break in Docker layers.
 #  * PYTHONUNBUFFERED - This is useful so Python does not hold any messages
 #    from being output.
 #    https://docs.python.org/3.14/using/cmdline.html#envvar-PYTHONUNBUFFERED
@@ -48,8 +55,10 @@ WORKDIR /app
 #    read by Gunicorn.
 #  * GUNICORN_CMD_ARGS - additional arguments to be passed to Gunicorn. This
 #    variable is read by Gunicorn
-ENV PATH=${POETRY_HOME}/bin:$VIRTUAL_ENV/bin:$PATH \
-    POETRY_INSTALL_ARGS=${POETRY_INSTALL_ARGS} \
+ENV PATH=$VIRTUAL_ENV/bin:$PATH \
+    UV_PROJECT_ENVIRONMENT=$VIRTUAL_ENV \
+    UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy \
     PYTHONUNBUFFERED=1 \
     DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
     PORT=8000 \
@@ -64,13 +73,6 @@ ENV BUILD_ENV=${BUILD_ENV}
 # server (Gunicorn). Heroku will ignore this.
 EXPOSE 8000
 
-# Install poetry using the installer (keeps Poetry's dependencies isolated from the app's)
-# chown protects us against cases where files downloaded by poetry have invalid ownership
-# chmod ensures poetry dependencies are accessible when packages are installed
-RUN curl -sSL https://install.python-poetry.org | python3 -
-RUN chown -R root:root ${POETRY_HOME} && \
-    chmod -R 0755 ${POETRY_HOME}
-
 # Don't use the root user as it's an anti-pattern and Heroku does not run
 # containers as root either.
 # https://devcenter.heroku.com/articles/container-registry-and-runtime#dockerfile-commands-and-runtime
@@ -78,15 +80,13 @@ USER guide
 
 # Install your app's Python requirements.
 RUN python -m venv $VIRTUAL_ENV
-COPY --chown=guide pyproject.toml poetry.lock ./
-RUN pip install --upgrade pip && poetry install ${POETRY_INSTALL_ARGS} --no-root
+COPY --chown=guide pyproject.toml uv.lock ./
+RUN uv sync --frozen ${UV_SYNC_ARGS}
 
 COPY --chown=guide --from=frontend ./apps/frontend/static ./apps/frontend/static
 
 # Copy application code.
 COPY --chown=guide . .
-
-RUN poetry install ${POETRY_INSTALL_ARGS} --no-root
 
 # Collect static. This command will move static files from application
 # directories and "static_compiled" folder to the main static directory that
