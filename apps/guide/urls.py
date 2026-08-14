@@ -9,6 +9,7 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
+from apps.guide.api import api_router
 from apps.llms_txt import views as llms_txt_views
 from apps.search import views as search_views
 
@@ -16,6 +17,7 @@ urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
+    path("api/v2/", api_router.urls),
     path("sitemap.xml", sitemap),
     path("llms.txt", llms_txt_views.llms_txt_view, name="llms_txt"),
     path("llms-full.txt", llms_txt_views.llms_full_txt_view, name="llms_full_txt"),

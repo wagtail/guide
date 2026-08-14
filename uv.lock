@@ -2,6 +2,9 @@ version = 1
 revision = 3
 requires-python = ">=3.14"
 
+[manifest]
+overrides = [{ name = "django", specifier = "==6.1.*" }]
+
 [[package]]
 name = "annotated-types"
 version = "0.8.0"
@@ -440,6 +443,19 @@ wheels = [
 ]
 
 [[package]]
+name = "django-ninja"
+version = "1.6.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "django" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/d5/7c/3307e17b872f545c88314b2737a22f965785dfb5a120d739b0131d0492c3/django_ninja-1.6.2.tar.gz", hash = "sha256:d56ae5aa4791068ef4ac9a66cfdf2fc11f507413ded35abb79c51d0d52ad6412", size = 3685599, upload-time = "2026-03-18T20:06:47.284Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/21/0c/25f72060a39632fbd2d90e9c8b6052a09cd45b0598fc06c0758d313f0052/django_ninja-1.6.2-py3-none-any.whl", hash = "sha256:20095f5900bada22ea00cf1a58af50bdb285b2354c61a9d9b47d0dc89ac462d6", size = 2374994, upload-time = "2026-03-18T20:06:45.676Z" },
+]
+
+[[package]]
 name = "django-permissionedforms"
 version = "0.1"
 source = { registry = "https://pypi.org/simple" }
@@ -563,23 +579,11 @@ wheels = [
 
 [[package]]
 name = "draftjs-exporter"
-version = "5.2.0"
+version = "7.1.0"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/4f/61/8b7fab482ef246f931b57f55f370e68377a53dcf5259f3fcf01e4889d4af/draftjs_exporter-5.2.0.tar.gz", hash = "sha256:4d665f8c75fd173d2c99326405300e8defcf4961b9b2f16ff117486489c6760b", size = 19674, upload-time = "2026-01-02T14:19:38.17Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9e/ac/18fe333830cfaab6fceb760fcfd0db9f5c08a8ae53605f7c5b3e194d4f0c/draftjs_exporter-7.1.0.tar.gz", hash = "sha256:ad27634d514f8bcfb828b19cfc84a8fee7cb1f0fd706d249f70633436272d687", size = 45259, upload-time = "2026-08-13T12:03:54.418Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/53/e1/2f81aa30ba22ceabb6779ed5dbd6b27fbf6f28deabad91140d1a32f3da5b/draftjs_exporter-5.2.0-py3-none-any.whl", hash = "sha256:f5255510a9c1de60807c1ba4be9666fb44ba263841b63329c8ce70d66146764c", size = 26251, upload-time = "2026-01-02T14:19:36.843Z" },
-]
-
-[[package]]
-name = "draftjs-exporter-markdown"
-version = "0.2.4"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "draftjs-exporter" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/ce/80/141b6b0b0a7e41a1f2bc4c06656411d5a4f77c052e724a3e05550406a4ac/draftjs_exporter_markdown-0.2.4.tar.gz", hash = "sha256:13d2d93f7e8d200e6f717b98352bf41cbbe730faeb9fa0a04decd28b888b4a98", size = 6527, upload-time = "2022-04-05T02:08:30.963Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/cb/cc/3bd94f14f5d443b9b2bb5660592574641969158e6f219c853e46710571e0/draftjs_exporter_markdown-0.2.4-py3-none-any.whl", hash = "sha256:85ef894a57a9d3f1d26572d8ecc2873d643d06cc0fbf41d80778c1e4d63954d9", size = 8492, upload-time = "2022-04-05T02:08:28.953Z" },
+    { url = "https://files.pythonhosted.org/packages/05/83/7bb024971238052574eb6e4479f2c80339784be533268a60559fa544bca9/draftjs_exporter-7.1.0-py3-none-any.whl", hash = "sha256:4a9397751aae7e66b25cba538a4a0421801c5dcfee2e75e9f664bd9cb37e90fd", size = 62604, upload-time = "2026-08-13T12:03:53.368Z" },
 ]
 
 [[package]]
@@ -635,7 +639,7 @@ dependencies = [
     { name = "django-permissions-policy" },
     { name = "django-storages" },
     { name = "djangorestframework" },
-    { name = "draftjs-exporter-markdown" },
+    { name = "draftjs-exporter" },
     { name = "jinja2" },
     { name = "lxml" },
     { name = "psycopg" },
@@ -663,17 +667,17 @@ production = [
 [package.metadata]
 requires-dist = [
     { name = "dj-database-url", specifier = ">=2.1,<2.2" },
-    { name = "django", specifier = ">=6.0,<7.0" },
+    { name = "django", specifier = "==6.1.*" },
     { name = "django-manifest-loader", specifier = ">=1.0.0,<2.0.0" },
     { name = "django-permissions-policy", specifier = ">=4.13.0,<5.0.0" },
     { name = "django-storages", specifier = ">=1.14,<1.15" },
     { name = "djangorestframework", specifier = ">=3.13.1,<4.0" },
-    { name = "draftjs-exporter-markdown", specifier = ">=0.2.4,<0.3.0" },
+    { name = "draftjs-exporter", specifier = ">=7.1.0,<8.0" },
     { name = "jinja2", specifier = ">=3.1.6,<4.0.0" },
     { name = "lxml", specifier = ">=4.9,<7" },
     { name = "psycopg", specifier = ">=3.2.10,<3.3" },
     { name = "sentry-sdk", extras = ["django"], specifier = ">=2.45.0,<3.0.0" },
-    { name = "wagtail", specifier = ">=7.4,<7.5" },
+    { name = "wagtail", specifier = "==8.0rc1" },
     { name = "wagtail-ai", specifier = ">=3.1.1,<4.0.0" },
     { name = "wagtail-localize", specifier = ">=1.13,<2.0" },
     { name = "whitenoise", specifier = ">=6.6,<6.7" },
@@ -1465,6 +1469,15 @@ wheels = [
 ]
 
 [[package]]
+name = "swapper"
+version = "1.4.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/9b/3b/98ea1cfc04dc9805d58c5a96dd006f5d88a5a32b7b05e1f5a1c00363bb9a/swapper-1.4.0.tar.gz", hash = "sha256:9e083af114ee0593241a7b877e3e0e7d3a580454f5d59016c667a5563306f8fe", size = 12668, upload-time = "2024-08-14T19:36:07.539Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e9/53/c59363308ef97507a680372471e25e1ebab2e706a45a7c416eea6474c928/swapper-1.4.0-py2.py3-none-any.whl", hash = "sha256:57b8378aad234242542fe32dc6e8cff0ed24b63493d20b3c88ee01f894b9345e", size = 7106, upload-time = "2024-08-14T19:36:06.247Z" },
+]
+
+[[package]]
 name = "tabulate"
 version = "0.10.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1544,7 +1557,7 @@ wheels = [
 
 [[package]]
 name = "wagtail"
-version = "7.4.2"
+version = "8.0rc1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyascii" },
@@ -1552,6 +1565,7 @@ dependencies = [
     { name = "django" },
     { name = "django-filter" },
     { name = "django-modelcluster" },
+    { name = "django-ninja" },
     { name = "django-permissionedforms" },
     { name = "django-taggit" },
     { name = "django-tasks" },
@@ -1562,13 +1576,15 @@ dependencies = [
     { name = "modelsearch" },
     { name = "openpyxl" },
     { name = "pillow" },
+    { name = "pydantic" },
     { name = "requests" },
+    { name = "swapper" },
     { name = "telepath" },
     { name = "willow", extra = ["heif"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/91/83/a644e4657aba0f6d56e225d5a46f6471e44dab7fbfcac48af1d1c4f6a70b/wagtail-7.4.2.tar.gz", hash = "sha256:6e261b50693abfbe2b738717bedc5bd0915e2e08efb9400102f4098c0c03aaab", size = 6811456, upload-time = "2026-06-15T15:36:21.187Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d8/8f/8583aa02525f2a4202933b7822605e3b14368f0d0265a260eb16f834d25d/wagtail-8.0rc1.tar.gz", hash = "sha256:aad64128ed53adb3f30cbcf67488734dfb6ac0390697784675b3c8eb3066cee5", size = 7105871, upload-time = "2026-08-13T16:29:35.89Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/9e/2e/9b0903d637ccfcbf1f8847d0f649d9d29eb46b329135313abff7835c0610/wagtail-7.4.2-py3-none-any.whl", hash = "sha256:ae80a6d536a4098f7c9d37e169ba0f14c29c9769b50b6d92546f41e5cad201d8", size = 9463486, upload-time = "2026-06-15T15:36:15.799Z" },
+    { url = "https://files.pythonhosted.org/packages/9e/b4/53338d9e0a3359e9aa99d5b80d889b97009d27e39aa233680d36cb5e7dc1/wagtail-8.0rc1-py3-none-any.whl", hash = "sha256:2b0c6c098b4d3f8d7f90baecf74550beb1150430cde4d2b0d9e51ab51b00f2fc", size = 9808769, upload-time = "2026-08-13T16:29:24.137Z" },
 ]
 
 [[package]]

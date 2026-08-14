@@ -7,6 +7,7 @@ from django.utils.functional import cached_property
 from django.utils.html import format_html
 from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
+from wagtail.api import APIField
 from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
@@ -49,6 +50,10 @@ class ContentPage(MarkdownRouteMixin, Page):
     ]
 
     search_fields = Page.search_fields + [index.SearchField("body")]
+
+    api_fields = [
+        APIField("body"),
+    ]
 
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
