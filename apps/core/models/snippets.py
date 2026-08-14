@@ -43,10 +43,10 @@ class FooterItem(TranslatableMixin, Orderable):
     ]
 
     api_fields = [
-        APIField("title"),
-        APIField("description"),
-        APIField("link"),
-        APIField("icon"),
+        APIField("title", writable=True),
+        APIField("description", writable=True),
+        APIField("link", writable=True),
+        APIField("icon", writable=True),
     ]
 
     def __str__(self):
