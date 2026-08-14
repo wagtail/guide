@@ -4,19 +4,19 @@ Important context for AI coding agents working on this project.
 
 ## Development commands
 
-> **Note:** Run `source "$(poetry env activate)"` before any `make` command, These require the Poetry virtual environment to be active.
+> **Note:** Run commands via `just`, which invokes `uv` to manage the virtual environment automatically.
 
--   `make lint`: Lint the project.
--   `make format`: Format project files.
--   `make test`: Run tests.
--   `make translations`: Generate and compile translation strings.
+-   `just lint`: Lint the project.
+-   `just format`: Format project files.
+-   `just test`: Run tests.
+-   `just translations`: Generate and compile translation strings.
 
 ## Setup & run commands
 
--   `make backend`:Build the backend.
--   `make frontend`:Build the frontend.
--   `make buildfixtures`:Build the test fixtures.
--   `make run`: Run the development server.
+-   `just backend`:Build the backend.
+-   `just frontend`:Build the frontend.
+-   `just buildfixtures`:Build the test fixtures.
+-   `just run`: Run the development server.
 
 ## Docker setup
 
@@ -31,9 +31,9 @@ DJANGO_SETTINGS_MODULE=apps.guide.settings.dev
 
 ### Docker commands
 
--   `make docker-build`: Build the Docker image.
--   `make docker-run`: Run the Docker container.
--   `make docker-init`: Initialize the project inside the container.
+-   `just docker-build`: Build the Docker image.
+-   `just docker-run`: Run the Docker container.
+-   `just docker-init`: Initialize the project inside the container.
 
 ## Coding style & naming conventions
 

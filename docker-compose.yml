@@ -3,7 +3,7 @@ services:
     build:
       context: .
       args:
-        POETRY_INSTALL_ARGS: ''
+        UV_SYNC_ARGS: '--all-groups'
     ports:
       - '${PORT:-8000}:${PORT:-8000}'
     environment:
@@ -16,7 +16,7 @@ services:
       - .:/app
       - staticfiles:/app/static
     command:
-      - poetry
+      - uv
       - run
       - python
       - manage.py
