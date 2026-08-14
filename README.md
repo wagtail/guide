@@ -26,6 +26,7 @@ We assume that you have basic knowledge of Node/Webpack and Python/Django/Wagtai
 -   Git
 -   Python >= 3.14
 -   uv
+-   just
 -   Node (see `.nvmrc` for version)
 
 ### Setting up Wagtail guide in a virtual environment

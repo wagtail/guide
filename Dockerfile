@@ -20,7 +20,8 @@ RUN npm run build
 FROM python:3.14 as production
 
 # Install uv using the official standalone binary.
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+# Keep this version in sync with the local `uv` used to generate uv.lock.
+COPY --from=ghcr.io/astral-sh/uv:0.11.19 /uv /uvx /bin/
 
 # Arguments to control which dependency groups get installed. Defaults to the
 # production configuration, and can be overridden at build time (e.g. for the
@@ -38,6 +39,8 @@ WORKDIR /app
 # If you specify your own environment variables on Heroku, they will
 # override the ones set here. The ones below serve as sane defaults only.
 #  * PATH - Make sure that uv is on the PATH, along with our venv
+#  * UV_PROJECT_ENVIRONMENT - Install dependencies into $VIRTUAL_ENV instead of
+#    the default `.venv` in the project directory.
 #  * UV_COMPILE_BYTECODE - Compile Python bytecode for faster container starts.
 #  * UV_LINK_MODE - Use copy mode to avoid hardlinks which break in Docker layers.
 #  * PYTHONUNBUFFERED - This is useful so Python does not hold any messages
@@ -53,6 +56,7 @@ WORKDIR /app
 #  * GUNICORN_CMD_ARGS - additional arguments to be passed to Gunicorn. This
 #    variable is read by Gunicorn
 ENV PATH=$VIRTUAL_ENV/bin:$PATH \
+    UV_PROJECT_ENVIRONMENT=$VIRTUAL_ENV \
     UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
     PYTHONUNBUFFERED=1 \

@@ -18,7 +18,7 @@ test:
 
 # Run tests with coverage.
 test-coverage:
-    uv run coverage run manage.py test
+    DJANGO_SETTINGS_MODULE=apps.guide.settings.test uv run coverage run manage.py test
     uv run coverage report
 
 # Format the backend code with Ruff.
