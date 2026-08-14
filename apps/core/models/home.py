@@ -29,8 +29,8 @@ class HomePage(MarkdownRouteMixin, Page):
     ]
 
     api_fields = [
-        APIField("introduction"),
-        APIField("sections"),
+        APIField("introduction", writable=True),
+        APIField("sections", writable=True),
     ]
 
     def route(self, request, path_components):

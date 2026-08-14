@@ -52,7 +52,7 @@ class ContentPage(MarkdownRouteMixin, Page):
     search_fields = Page.search_fields + [index.SearchField("body")]
 
     api_fields = [
-        APIField("body"),
+        APIField("body", writable=True),
     ]
 
     def get_context(self, request, *args, **kwargs):

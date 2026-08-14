@@ -17,9 +17,9 @@ class Feedback(models.Model):
     feedback_text = models.TextField(blank=True)
 
     api_fields = [
-        APIField("feedback"),
-        APIField("page"),
-        APIField("feedback_text"),
+        APIField("feedback", writable=True),
+        APIField("page", writable=True),
+        APIField("feedback_text", writable=True),
     ]
 
     class Meta:

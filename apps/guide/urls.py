@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 from django.views.i18n import JavaScriptCatalog
 from wagtail import urls as wagtail_urls
 from wagtail.admin import urls as wagtailadmin_urls
+from wagtail.api.v3.urls import api as wagtail_api_v3
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
@@ -18,6 +19,7 @@ urlpatterns = [
     path("admin/", include(wagtailadmin_urls)),
     path("documents/", include(wagtaildocs_urls)),
     path("api/v2/", api_router.urls),
+    path("api/v3-preview/", wagtail_api_v3.urls),
     path("sitemap.xml", sitemap),
     path("llms.txt", llms_txt_views.llms_txt_view, name="llms_txt"),
     path("llms-full.txt", llms_txt_views.llms_full_txt_view, name="llms_full_txt"),
