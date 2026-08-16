@@ -1,0 +1,16 @@
+{% load wagtailcore_tags i18n %}
+
+{% with pages=page.visible_related_pages %}
+    {% if pages %}
+        <div class="related-pages">
+            <h2 class="related-pages__heading">{% trans "Related pages" %}</h2>
+            <ul class="related-pages__list">
+                {% for related in pages %}
+                    <li class="related-pages__item">
+                        <a href="{% pageurl related %}" class="related-pages__link" dir="auto">{{ related.title }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endwith %}

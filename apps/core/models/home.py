@@ -1,9 +1,11 @@
 from django.conf import settings
 from django.http.response import Http404
+from django.utils.translation import gettext_lazy as _
 from wagtail.admin.panels import FieldPanel
 from wagtail.api import APIField
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
+from wagtail_ai.panels import AIMultipleChooserPanel
 
 from apps.llms_txt.mixins import MarkdownRouteMixin
 
@@ -26,6 +28,15 @@ class HomePage(MarkdownRouteMixin, Page):
     content_panels = Page.content_panels + [
         FieldPanel("introduction"),
         FieldPanel("sections"),
+        AIMultipleChooserPanel(
+            "related_pages",
+            chooser_field_name="related_page",
+            heading=_("Related pages"),
+            label=_("Page"),
+            max_num=5,
+            vector_index="PageIndex",
+            suggest_limit=2,
+        ),
     ]
 
     api_fields = [
@@ -58,3 +69,12 @@ class HomePage(MarkdownRouteMixin, Page):
                 fallback_pages.append(result.page)
 
         return fallback_pages
+
+    @property
+    def visible_related_pages(self):
+        related_ids = list(self.related_pages.values_list("related_page_id", flat=True))
+        if not related_ids:
+            return []
+        pages = Page.objects.live().public().filter(id__in=related_ids)
+        pages_by_id = {p.pk: p for p in pages}
+        return [pages_by_id[pid] for pid in related_ids if pid in pages_by_id]

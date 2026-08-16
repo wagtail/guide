@@ -6,12 +6,13 @@ from django.template import Context, Template
 from django.utils.functional import cached_property
 from django.utils.html import format_html
 from django.utils.text import slugify
+from django.utils.translation import gettext_lazy as _
 from wagtail.admin.panels import FieldPanel
 from wagtail.api import APIField
 from wagtail.fields import StreamField
 from wagtail.models import Page
 from wagtail.search import index
-from wagtail_ai.panels import AITitleFieldPanel
+from wagtail_ai.panels import AIMultipleChooserPanel, AITitleFieldPanel
 
 from apps.core.models.feedback import Feedback
 from apps.llms_txt.mixins import MarkdownRouteMixin
@@ -47,6 +48,15 @@ class ContentPage(MarkdownRouteMixin, Page):
     content_panels = [
         AITitleFieldPanel("title"),
         FieldPanel("body"),
+        AIMultipleChooserPanel(
+            "related_pages",
+            chooser_field_name="related_page",
+            heading=_("Related pages"),
+            label=_("Page"),
+            max_num=5,
+            vector_index="PageIndex",
+            suggest_limit=2,
+        ),
     ]
 
     search_fields = Page.search_fields + [index.SearchField("body")]
@@ -86,3 +96,12 @@ class ContentPage(MarkdownRouteMixin, Page):
             return HttpResponse(json.dumps(data))
         else:
             return super().serve(request, *args, **kwargs)
+
+    @property
+    def visible_related_pages(self):
+        related_ids = list(self.related_pages.values_list("related_page_id", flat=True))
+        if not related_ids:
+            return []
+        pages = Page.objects.live().public().filter(id__in=related_ids)
+        pages_by_id = {p.pk: p for p in pages}
+        return [pages_by_id[pid] for pid in related_ids if pid in pages_by_id]
