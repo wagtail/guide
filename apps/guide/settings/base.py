@@ -676,12 +676,12 @@ WAGTAIL_AI = {
             "api_base": os.environ.get("WAGTAIL_AI_VISION_API_BASE"),
         },
         "embedding": {
-            "provider": "openai",
+            "provider": os.environ.get("WAGTAIL_AI_EMBEDDING_PROVIDER", "openai"),
             "model": os.environ.get(
                 "WAGTAIL_AI_EMBEDDING_MODEL", "openai/text-embedding-3-large"
             ),
-            "api_key": os.environ.get("KILO_API_KEY"),
-            "api_base": "https://api.kilo.ai/api/gateway",
+            "api_key": os.environ.get("WAGTAIL_AI_EMBEDDING_API_KEY"),
+            "api_base": os.environ.get("WAGTAIL_AI_EMBEDDING_API_BASE"),
         },
     },
     "IMAGE_DESCRIPTION_PROVIDER": "vision",

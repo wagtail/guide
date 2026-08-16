@@ -25,75 +25,50 @@ class TestRelatedPages(TestCase):
         end = content.index("</div>", start)
         return content[start:end]
 
-    def test_related_pages_render_in_curated_order(self):
-        response = self.client.get(self.source.url)
-        related_html = self._get_related_pages_html(response)
+    def test_related_pages_render_in_curated_order_with_correct_urls(self):
+        html = self._get_related_pages_html(self.client.get(self.source.url))
 
-        concepts_index = related_html.index(self.related_2.title)
-        how_to_index = related_html.index(self.related_1.title)
-        self.assertLess(concepts_index, how_to_index)
-
-    def test_related_pages_link_to_correct_urls(self):
-        response = self.client.get(self.source.url)
-        related_html = self._get_related_pages_html(response)
-
-        self.assertIn(f'href="{self.related_1.url}"', related_html)
-        self.assertIn(f'href="{self.related_2.url}"', related_html)
+        self.assertLess(
+            html.index(self.related_2.title), html.index(self.related_1.title)
+        )
+        self.assertIn(f'href="{self.related_1.url}"', html)
+        self.assertIn(f'href="{self.related_2.url}"', html)
 
     def test_no_related_pages_section_when_empty(self):
         other_page = ContentPageFactory(parent=self.home, title="Lonely page")
-        response = self.client.get(other_page.url)
-        content = response.content.decode()
+        content = self.client.get(other_page.url).content.decode()
 
         self.assertNotIn("related-pages", content)
 
-    def test_draft_related_pages_are_excluded(self):
-        draft_page = ContentPageFactory(
-            parent=self.home, title="Draft page", live=False
-        )
-        RelatedPage.objects.create(
-            source_page=self.source, related_page=draft_page, sort_order=2
-        )
-
-        response = self.client.get(self.source.url)
-        content = response.content.decode()
-
-        self.assertNotIn(draft_page.title, content)
-
-    def test_private_related_pages_are_excluded(self):
-        private_page = ContentPageFactory(parent=self.home, title="Private page")
+    def test_draft_and_private_pages_are_excluded(self):
+        draft = ContentPageFactory(parent=self.home, title="Draft", live=False)
+        private = ContentPageFactory(parent=self.home, title="Private")
         PageViewRestriction.objects.create(
-            page=private_page,
-            restriction_type=PageViewRestriction.LOGIN,
+            page=private, restriction_type=PageViewRestriction.LOGIN
         )
         RelatedPage.objects.create(
-            source_page=self.source, related_page=private_page, sort_order=2
+            source_page=self.source, related_page=draft, sort_order=2
+        )
+        RelatedPage.objects.create(
+            source_page=self.source, related_page=private, sort_order=3
         )
 
-        response = self.client.get(self.source.url)
-        content = response.content.decode()
+        content = self.client.get(self.source.url).content.decode()
 
-        self.assertNotIn(private_page.title, content)
+        self.assertNotIn("Draft", content)
+        self.assertNotIn("Private", content)
 
     def test_related_pages_appear_in_markdown_export(self):
         markdown = self.source.to_markdown()
 
         self.assertIn("## Related pages", markdown)
         self.assertIn(f"[{self.related_1.title}]({self.related_1.full_url})", markdown)
-        self.assertIn(f"[{self.related_2.title}]({self.related_2.full_url})", markdown)
-
-    def test_no_related_pages_heading_in_markdown_when_empty(self):
-        other_page = ContentPageFactory(parent=self.home, title="Lonely page")
-        markdown = other_page.to_markdown()
-
-        self.assertNotIn("## Related pages", markdown)
 
     def test_home_page_related_pages_render(self):
         RelatedPage.objects.create(
             source_page=self.home, related_page=self.related_1, sort_order=0
         )
 
-        response = self.client.get(self.home.url)
-        related_html = self._get_related_pages_html(response)
+        html = self._get_related_pages_html(self.client.get(self.home.url))
 
-        self.assertIn(self.related_1.title, related_html)
+        self.assertIn(self.related_1.title, html)

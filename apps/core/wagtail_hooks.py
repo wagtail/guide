@@ -9,17 +9,12 @@ from wagtail.admin.ui.components import Component
 from wagtail.models import Page
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
-from wagtail_ai.agents.suggested_content import SuggestedContentAgent  # noqa: F401
+from wagtail_ai.agents.suggested_content import SuggestedContentAgent
 from wagtail_ai.panels import AIDescriptionFieldPanel
 
-from apps.core import vector_indexes  # noqa: F401
-from apps.core.agents import LocalizedSuggestedContentAgent  # noqa: F401
+from apps.core import vector_indexes
+from apps.core.agents import LocalizedSuggestedContentAgent
 from apps.core.models.feedback import Feedback
-
-# Note: the `wagtail_ai.agents.suggested_content` import above must stay
-# before the `apps.core.agents` import. It triggers registration of the
-# default SuggestedContentAgent, so our LocalizedSuggestedContentAgent
-# (registered with the same slug) is registered last and takes priority.
 
 STYLE_GUIDE_URL = "https://github.com/wagtail/guide/blob/main/docs/style-guide.md"
 CONTRIBUTING_URL = "https://github.com/wagtail/guide/blob/main/CONTRIBUTING.md"
