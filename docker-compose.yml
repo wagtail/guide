@@ -28,7 +28,7 @@ services:
   db:
     image: pgvector/pgvector:pg17
     ports:
-      - "5432:5432"
+      - '5432:5432'
     environment:
       # Location of DB data folder
       PGDATA: /var/lib/postgresql/data/pgdata

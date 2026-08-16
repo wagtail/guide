@@ -31,7 +31,8 @@
         background: light-dark($color--light-grey, $color--off-black);
         text-decoration: none;
         transition: background $transition, transform $transition;
-        border-inline-start: 3px solid light-dark($color--teal, $color--light-teal);
+        border-inline-start: 3px solid
+            light-dark($color--teal, $color--light-teal);
 
         @include fs(xs);
         font-weight: 700;
