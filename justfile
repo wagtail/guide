@@ -21,6 +21,24 @@ test-coverage:
     DJANGO_SETTINGS_MODULE=apps.guide.settings.test uv run coverage run manage.py test
     uv run coverage report
 
+# Install Playwright browsers (Chromium, Firefox, Edge).
+e2e-install:
+    npm run e2e:install
+
+# Run end-to-end tests with Playwright. Builds frontend assets first.
+e2e:
+    npm run build
+    npm run e2e
+
+# Run end-to-end tests interactively with the Playwright UI.
+e2e-ui:
+    npm run build
+    npm run e2e:ui
+
+# Open the last Playwright HTML report.
+e2e-report:
+    npm run e2e:report
+
 # Format the backend code with Ruff.
 format-backend:
     uv run ruff check . --fix

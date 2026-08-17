@@ -9,6 +9,7 @@ Important context for AI coding agents working on this project.
 -   `just lint`: Lint the project.
 -   `just format`: Format project files.
 -   `just test`: Run tests.
+-   `just e2e`: Run end-to-end tests with Playwright (requires `just e2e-install` first; stop any dev server on :8000 before running).
 -   `just translations`: Generate and compile translation strings.
 
 ## Setup & run commands

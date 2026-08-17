@@ -5,7 +5,17 @@
     "jest": true
   },
   "extends": ["@wagtail/eslint-config-wagtail"],
-  "overrides": [],
+  "overrides": [
+    {
+      "files": ["playwright.config.js", "tests/e2e/**/*.js"],
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "error",
+          { "devDependencies": true }
+        ]
+      }
+    }
+  ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
