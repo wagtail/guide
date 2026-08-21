@@ -15,12 +15,18 @@
     "lint:css": "stylelint **/*.scss",
     "lint:format": "prettier --check .",
     "lint:js": "eslint --report-unused-disable-directives .",
-    "lint": "npm run lint:js && npm run lint:css && npm run lint:format"
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:format",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:report": "playwright show-report",
+    "e2e:install": "playwright install --with-deps chromium firefox msedge"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.3",
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0",
     "@wagtail/eslint-config-wagtail": "^0.4.0",
     "@wagtail/stylelint-config-wagtail": "^0.5.0",
     "babel-loader": "^8.2.3",

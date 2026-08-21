@@ -17,3 +17,11 @@ apps/guide/settings/local.py
 .coverage
 .ruff_cache
 .idea/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+/db_e2e.sqlite3

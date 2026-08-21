@@ -93,6 +93,7 @@ If you're a Python or Django developer, fork the repo and join us. You'll find a
 -   Run formatting (Ruff & Prettier) `just format`
 -   Run linting (Ruff, Prettier, Eslint) `just lint`
 -   Run tests `just test`
+-   Run end-to-end tests `just e2e` (first-time setup: `just e2e-install`)
 
 # Other Notes
 
