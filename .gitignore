@@ -18,7 +18,7 @@ apps/guide/settings/local.py
 .ruff_cache
 .idea/
 
-# Eval-generated artifacts (regenerate with scripts/eval/*.py)
-scripts/eval/out/
-scripts/eval/__pycache__/
-scripts/eval/cost_*.csv
+# Inspect AI eval logs (browse with `just eval-view`)
+prompts/evals/translations-inspect_ai/logs/
+# Generated glossaries (regenerate with `just eval-glossary <lang>`)
+prompts/evals/translations-inspect_ai/glossary/
