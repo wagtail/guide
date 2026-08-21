@@ -40,9 +40,3 @@ production = [
 
 [tool.uv]
 package = false
-# Wagtail 8.0 depends on django-ninja, which caps Django at <6.1. Django 6.1
-# support in Wagtail 8.0 is provisional, so override django-ninja's Django upper
-# bound to keep the project on Django 6.1.
-override-dependencies = [
-    "django==6.1.*",
-]
