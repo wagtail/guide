@@ -58,6 +58,9 @@ INSTALLED_APPS = [
     "wagtail",
     "modelcluster",
     "taggit",
+    "django_ai_core",
+    "django_ai_core.contrib.index",
+    "django_ai_core.contrib.index.storage.pgvector",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -671,6 +674,14 @@ WAGTAIL_AI = {
             ),
             "api_key": os.environ.get("WAGTAIL_AI_VISION_API_KEY"),
             "api_base": os.environ.get("WAGTAIL_AI_VISION_API_BASE"),
+        },
+        "embedding": {
+            "provider": os.environ.get("WAGTAIL_AI_EMBEDDING_PROVIDER", "openai"),
+            "model": os.environ.get(
+                "WAGTAIL_AI_EMBEDDING_MODEL", "openai/text-embedding-3-large"
+            ),
+            "api_key": os.environ.get("WAGTAIL_AI_EMBEDDING_API_KEY"),
+            "api_base": os.environ.get("WAGTAIL_AI_EMBEDDING_API_BASE"),
         },
     },
     "IMAGE_DESCRIPTION_PROVIDER": "vision",

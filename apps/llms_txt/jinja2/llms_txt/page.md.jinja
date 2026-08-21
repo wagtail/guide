@@ -27,3 +27,13 @@ Page URL: {{ page.full_url }}
 
 {% endfor %}
 {%- endif -%}
+
+{%- if page.visible_related_pages %}
+
+## Related pages
+
+{% for related in page.visible_related_pages -%}
+- [{{ related.title }}]({{ related.full_url }})
+{% endfor -%}
+{%- endif %}
+

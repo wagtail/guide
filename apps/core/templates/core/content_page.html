@@ -42,6 +42,8 @@
         <em>{% blocktrans with last_updated=page.last_published_at|date:"F j, Y" trimmed %}Last updated: {{ last_updated }}{% endblocktrans %}</em>
     </p>
 
+    {% include '../components/related_pages.html' %}
+
     {% include '../components/nav_buttons.html' %}
     {% include '../components/feedback.html' %}
 {% endblock %}
