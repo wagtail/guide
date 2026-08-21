@@ -1,11 +1,18 @@
 from .base import *  # noqa: F403
 
-DEBUG = False
+# Allow enabling DEBUG (e.g. on review apps) via a `DEBUG` environment variable.
+# Defaults to False for safety.
+DEBUG = env.get("DEBUG", "false").lower() == "true"  # noqa: F405
 
 SECRET_KEY = env["SECRET_KEY"]  # noqa: F405
 
+# When DEBUG is enabled (e.g. on review apps), allow any host unless an
+# explicit ALLOWED_HOSTS is provided. This avoids 400 errors on the app's
+# dynamic hostname.
 if allowed_hosts := env.get("ALLOWED_HOSTS"):  # noqa: F405
     ALLOWED_HOSTS = allowed_hosts.split(",")
+elif DEBUG:
+    ALLOWED_HOSTS = ["*"]
 
 MANIFEST_LOADER["cache"] = True  # noqa: F405
 

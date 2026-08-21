@@ -1,9 +1,12 @@
 {
-  "name": "Wagtail Guide",
-  "website": "https://guide.wagtail.org/",
-  "repository": "https://github.com/wagtail/guide",
-  "stack": "container",
+  "addons": ["heroku-redis:mini", "heroku-postgresql:essential-0"],
   "env": {
+    "ALLOWED_HOSTS": {
+      "value": "*"
+    },
+    "DEBUG": {
+      "value": "true"
+    },
     "SECRET_KEY": {
       "generator": "secret"
     }
@@ -14,5 +17,8 @@
       "size": "basic"
     }
   },
-  "addons": ["heroku-redis:mini", "heroku-postgresql:essential-0"]
+  "name": "Wagtail Guide",
+  "repository": "https://github.com/wagtail/guide",
+  "stack": "container",
+  "website": "https://guide.wagtail.org/"
 }
