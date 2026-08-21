@@ -1,6 +1,6 @@
 # Demo access
 
-The guide website is configured with a private demo section, so we can easily share access to a realistic demo of [Wagtail AI](https://wagtail.org/wagtail-ai/) and [Wagtail Localize](https://wagtail.org/wagtail-localize/), with real-world content.
+The [Wagtail user guide website](https://guide.wagtail.org/en/) has a private demo section, so we can easily share access to a realistic demo of [Wagtail AI](https://wagtail.org/wagtail-ai/) and [Wagtail Localize](https://wagtail.org/wagtail-localize/), with real-world content.
 
 ## How to log in
 
