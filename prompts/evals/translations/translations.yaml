@@ -1,0 +1,97 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+# LLM translator eval — Promptfoo counterpart of prompts/evals/translations-inspect_ai/.
+#
+# Prerequisite: export the glossaries once per language:
+#   just eval-glossary is de fr pt-br ar
+# Run:
+#   just eval-promptfoo            # full run: 5 languages x 10 tests x 3 models
+#   just eval-promptfoo -n 3       # smoke run: first 3 tests per scenario
+#   just eval-promptfoo-view       # browse results
+description: LLM translator quality — evals the system prompt and glossary injection in apps/core/translator.py
+
+prompts:
+  # Python prompt function mirroring LLMTranslator.get_messages, including the
+  # per-segment glossary of official Wagtail admin translations.
+  - file://./translation_prompt.py:prompt
+
+providers:
+  - id: openai:chat:deepseek-v4-flash-0731
+    config: &scaleway
+      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
+      apiKey: '{{ env.SCW_SECRET_KEY }}'
+      temperature: 0
+      # Reasoning models spend output tokens on thinking before the answer;
+      # the default max_tokens truncates their visible output.
+      max_tokens: 4096
+      showThinking: false
+  - id: openai:chat:mistral-medium-3.5-128b
+    config: *scaleway
+  - id: openai:chat:gemma-4-26b-a4b-it
+    config: *scaleway
+
+defaultTest:
+  vars:
+    source_language: English
+    # Dynamic var: glossary lines for this test's text + lang_code, used by
+    # both the prompt function and the llm-rubric grader below.
+    glossary: file://./glossary_var.py
+  assert:
+    # Deterministic format rules, as in the Inspect eval's rule_checks scorer.
+    - type: python
+      value: file://./check_format.py:no_wrapper
+    - type: python
+      value: file://./check_format.py:allowed_tags_only
+    - type: python
+      value: file://./check_format.py:tags_preserved
+    - type: python
+      value: file://./check_format.py:attributes_clean
+    - type: python
+      value: file://./check_format.py:not_truncated
+    - type: python
+      value: file://./check_format.py:glossary_compliant
+    - type: python
+      value: file://./check_format.py:translated
+    # LLM judge, as in the Inspect eval's model_graded_qa scorer.
+    - type: llm-rubric
+      provider:
+        id: openai:chat:glm-5.2
+        config: *scaleway
+      value: |
+        You are an expert reviewer of {{ target_language }} machine
+        translation quality for a software user guide. The source English
+        text (may contain inline HTML) is:
+
+        {{ text }}
+
+        Requirements the translation must meet:
+        1. HTML tags and their attributes match the source exactly — same
+           tags, same order, no additions.
+        2. Text inside <b>/<i> tags is a UI label from the Wagtail admin
+           interface. Where an official admin translation exists, it must be
+           used exactly. Official translations for the labels in this segment:
+        {{ glossary }}
+           Labels without an official translation are translated naturally
+           and consistently.
+        3. Plain prose and link text are translated into fluent, formal
+           {{ target_language }}, with meaning fully preserved (no omissions,
+           additions, or mistranslations).
+        4. The output contains only the translation — no commentary,
+           reasoning, or code fences — and is complete (not truncated).
+        5. Terminology is consistent: one term per concept.
+
+        Fail the output if it violates a structural requirement (HTML,
+        official UI label translations, extra commentary, truncation) or
+        materially mistranslates. Score 0.5 but pass for minor fluency,
+        terminology, or accuracy issues. Score 1 if it meets all
+        requirements.
+
+scenarios:
+  - config:
+      - vars: { target_language: Icelandic, lang_code: is }
+      - vars: { target_language: German, lang_code: de }
+      - vars: { target_language: French, lang_code: fr }
+      - vars: { target_language: Brazilian Portuguese, lang_code: pt-br }
+      - vars: { target_language: Arabic, lang_code: ar }
+    # Shared with the Inspect AI eval — segments extracted from real guide
+    # content (see segments.yaml for sources).
+    tests: file://./segments.yaml
