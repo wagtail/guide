@@ -23,8 +23,8 @@ html {
 }
 
 body {
-    background-color: light-dark($color--page-bg, $color--off-black);
-    color: light-dark($color--off-black, $color--light-grey);
+    background-color: var(--color-background);
+    color: var(--color-text);
 
     &.no-scroll {
         overflow: hidden;
@@ -32,12 +32,12 @@ body {
 }
 
 a {
-    color: light-dark($color--primary, $color--light-teal);
+    color: var(--color-primary);
     transition: color $transition;
 
     &:hover,
     &:focus {
-        color: light-dark($color--black, $color--white);
+        color: var(--color-text-standout);
     }
 }
 

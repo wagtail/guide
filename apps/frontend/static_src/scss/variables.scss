@@ -17,6 +17,24 @@ $color--secondary: $color--light-teal;
 $color--active: $color--blue;
 $color--page-bg: $color--light-grey;
 
+// Theme-aware design tokens (light / dark).
+// Centralises all colour switching so components can use these semantic
+// custom properties instead of repeating light-dark() logic.
+// https://github.com/wagtail/guide/issues/198
+:root {
+    --color-text: light-dark(#{$color--off-black}, #{$color--light-grey});
+    --color-text-standout: light-dark(#{$color--black}, #{$color--white});
+    --color-background: light-dark(#{$color--page-bg}, #{$color--off-black});
+    --color-background-standout: light-dark(#{$color--white}, #{$color--black});
+    --color-background-subtle: light-dark(
+        #{$color--light-grey},
+        #{$color--grey}
+    );
+    --color-primary: light-dark(#{$color--primary}, #{$color--light-teal});
+    --color-active: light-dark(#{$color--active}, #{$color--light-teal});
+    --color-secondary-text: light-dark(#{$color--grey}, #{$color--light-grey});
+}
+
 // Typography
 // Wagtail's official system font stack (https://github.com/wagtail/wagtail/commit/f968aac)
 $font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,

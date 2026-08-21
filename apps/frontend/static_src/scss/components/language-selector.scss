@@ -5,10 +5,10 @@
         @include fs(xxs);
         font-weight: 500;
         padding: 10px;
-        background-color: light-dark($color--white, $color--black);
+        background-color: var(--color-background-standout);
         border: 1px solid rgba($color--grey, 0.4);
         border-radius: $border-radius--m;
-        color: light-dark($color--off-black, $color--light-grey);
+        color: var(--color-text);
         cursor: pointer;
         transition: color $transition;
 
@@ -19,20 +19,20 @@
 
         &:hover,
         &:focus {
-            color: light-dark($color--active, $color--light-teal);
-            border-color: light-dark($color--active, $color--light-teal);
+            color: var(--color-active);
+            border-color: var(--color-active);
         }
     }
 
     &__dropdown {
-        --bs-dropdown-bg: #{light-dark($color--white, $color--black)};
+        --bs-dropdown-bg: var(--color-background-standout);
         overflow: hidden;
         border-radius: $border-radius--m;
         border: 1px solid rgba($color--off-black, 0.15);
         box-shadow: 0 0.5rem 1rem rgba($color--black, 0.15);
         padding: 0.5rem 0;
-        background-color: light-dark($color--white, $color--black);
-        color: light-dark($color--off-black, $color--light-grey);
+        background-color: var(--color-background-standout);
+        color: var(--color-text);
     }
 
     &__dropdown-item {

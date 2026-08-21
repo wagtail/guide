@@ -43,7 +43,7 @@
 
     &__heading {
         @include fs(xl);
-        color: light-dark($color--black, $color--white);
+        color: var(--color-text-standout);
         margin-bottom: ($gutter * 0.25);
         font-weight: 700;
         transition: color $transition;
@@ -51,7 +51,7 @@
 
     &__description {
         @include fs(xs);
-        color: light-dark($color--grey, $color--light-grey);
+        color: var(--color-secondary-text);
         margin: 0;
     }
 }

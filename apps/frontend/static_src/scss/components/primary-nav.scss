@@ -2,7 +2,7 @@
     display: none;
     position: absolute;
     z-index: 5;
-    background-color: light-dark($color--page-bg, $color--off-black);
+    background-color: var(--color-background);
     padding: ($gutter * 6) $gutter ($gutter * 2);
     top: 0;
     inset-inline-end: -$gutter;

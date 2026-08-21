@@ -26,7 +26,7 @@
         svg {
             width: 30px;
             height: 25px;
-            fill: light-dark($color--teal, $color--light-teal);
+            fill: var(--color-primary);
             --direction-deg: calc(var(--w-direction-factor) * -90deg);
             transform: rotateZ(calc(90deg + var(--direction-deg)));
         }

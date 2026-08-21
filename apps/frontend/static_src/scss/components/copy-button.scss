@@ -29,9 +29,9 @@
         @include fs(xxs);
         font-weight: 500;
         padding: 10px;
-        background-color: light-dark($color--white, $color--black);
+        background-color: var(--color-background-standout);
         border: 1px solid rgba($color--grey, 0.4);
-        color: light-dark($color--off-black, $color--light-grey);
+        color: var(--color-text);
         cursor: pointer;
         transition: color $transition;
         position: relative;
@@ -43,8 +43,8 @@
 
         &:hover,
         &:focus {
-            color: light-dark($color--active, $color--light-teal);
-            border-color: light-dark($color--active, $color--light-teal);
+            color: var(--color-active);
+            border-color: var(--color-active);
             // Show a full outline around the button.
             z-index: 3;
         }
@@ -52,11 +52,11 @@
 
     .dropdown-menu {
         --bs-dropdown-padding-y: 0.25rem;
-        --bs-dropdown-bg: light-dark(#{$color--white}, #{$color--black});
+        --bs-dropdown-bg: var(--color-background-standout);
         --bs-dropdown-border-radius: #{$border-radius--m};
         border: 1px solid rgba($color--off-black, 0.15);
         box-shadow: 0 0.5rem 1rem rgba($color--black, 0.15);
-        background-color: light-dark($color--white, $color--black);
+        background-color: var(--color-background-standout);
         color: light-dark(currentcolor, $color--white);
     }
 
@@ -68,7 +68,7 @@
 
         &:hover,
         &:active {
-            color: light-dark($color--active, $color--light-teal);
+            color: var(--color-active);
             background-color: light-dark(transparent, rgba($color--white, 0.1));
         }
 

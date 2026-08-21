@@ -10,8 +10,8 @@
         position: absolute;
         top: -200px;
         inset-inline-start: 0;
-        color: light-dark($color--black, $color--white);
-        background-color: light-dark($color--white, $color--black);
+        color: var(--color-text-standout);
+        background-color: var(--color-background-standout);
         padding: ($gutter * 0.5) $gutter;
         white-space: nowrap;
 

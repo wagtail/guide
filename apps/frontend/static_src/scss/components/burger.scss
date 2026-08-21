@@ -13,7 +13,7 @@
     &:hover,
     &:focus {
         #{$root}__line {
-            background-color: light-dark($color--primary, $color--light-teal);
+            background-color: var(--color-primary);
         }
     }
 
@@ -24,7 +24,7 @@
         width: 21px;
         height: 3px;
         border-radius: 4px;
-        background-color: light-dark($color--black, $color--white);
+        background-color: var(--color-text-standout);
         opacity: 1;
         transform: translateX(-50%) rotate(0deg);
         transition: top $transition, width $transition, opacity $transition,

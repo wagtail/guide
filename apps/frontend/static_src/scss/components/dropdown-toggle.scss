@@ -3,6 +3,6 @@
     font-weight: 700;
 
     &::after {
-        color: light-dark($color--primary, $color--light-teal);
+        color: var(--color-primary);
     }
 }

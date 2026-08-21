@@ -10,7 +10,7 @@
 
     &__label {
         @include fs(xxs);
-        color: light-dark($color--off-black, $color--light-grey);
+        color: var(--color-text);
     }
 
     &__button {
@@ -49,7 +49,7 @@
             display: block;
             position: absolute;
             border-radius: 0.5px;
-            background: light-dark($color--off-black, $color--light-grey);
+            background: var(--color-text);
         }
     }
 

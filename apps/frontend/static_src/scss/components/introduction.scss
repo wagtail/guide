@@ -1,5 +1,5 @@
 .introduction {
     font-size: $base-font-size;
     margin-bottom: ($gutter * 3);
-    color: light-dark($color--off-black, $color--light-grey);
+    color: var(--color-text);
 }

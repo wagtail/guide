@@ -17,12 +17,12 @@
         padding: 5px 10px;
         border-radius: $border-radius;
         text-decoration: none;
-        color: light-dark($color--off-black, $color--light-grey);
+        color: var(--color-text);
         transition: color $transition, background-color $transition;
 
         &:hover,
         &:focus {
-            background-color: light-dark($color--white, $color--black);
+            background-color: var(--color-background-standout);
         }
 
         &--heading {
@@ -31,8 +31,8 @@
         }
 
         &.active {
-            background-color: light-dark($color--active, $color--light-teal);
-            color: light-dark($color--white, $color--black);
+            background-color: var(--color-active);
+            color: var(--color-background-standout);
         }
     }
 }

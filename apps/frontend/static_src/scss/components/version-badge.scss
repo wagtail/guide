@@ -11,14 +11,14 @@
         rgba($color--grey, 0.12),
         rgba($color--light-grey, 0.1)
     );
-    color: light-dark($color--grey, $color--light-grey);
+    color: var(--color-secondary-text);
 
     &--added {
         background-color: light-dark(
             $color--extra-light-teal,
             rgba($color--light-teal, 0.12)
         );
-        color: light-dark($color--teal, $color--light-teal);
+        color: var(--color-primary);
     }
 
     &--changed {

@@ -16,7 +16,7 @@
     &__row {
         display: block;
         padding: $gutter $row-spacing;
-        border-top: 1px solid light-dark($color--light-grey, $color--grey);
+        border-top: 1px solid var(--color-background-subtle);
         text-decoration: none;
         transition: background-color $transition, opacity 0.25s ease-out,
             transform 0.25s ease-out;
@@ -30,10 +30,10 @@
 
         &:hover,
         &:focus {
-            background-color: light-dark($color--light-grey, $color--grey);
+            background-color: var(--color-background-subtle);
 
             #{$root}__heading {
-                color: light-dark($color--primary, $color--light-teal);
+                color: var(--color-primary);
                 text-decoration: underline;
             }
         }
@@ -47,7 +47,7 @@
         @include fs(s);
         font-weight: 700;
         margin-bottom: 5px;
-        color: light-dark($color--off-black, $color--light-grey);
+        color: var(--color-text);
         transition: color $transition;
     }
 
