@@ -4,14 +4,11 @@ import uuid
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from django.template.defaultfilters import slugify
-from faker import Faker
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Collection, Locale, Page
 
 from apps.core.factories import ContentPageFactory, HomePageFactory
-
-fake = Faker()
 
 
 class Command(BaseCommand):

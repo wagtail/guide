@@ -14,7 +14,7 @@ class ImageFactory(DjangoModelFactory):
 
 
 class DocumentFactory(DjangoModelFactory):
-    title = factory.Faker("bs")
+    title = "User guide"
     file = factory.django.FileField()
 
     class Meta:

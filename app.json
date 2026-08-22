@@ -11,6 +11,13 @@
       "generator": "secret"
     }
   },
+  "environments": {
+    "review": {
+      "scripts": {
+        "postdeploy": "uv run --no-sync --with \"wagtail-factories>=4.1.0,<5.0.0\" python manage.py buildfixtures"
+      }
+    }
+  },
   "formation": {
     "web": {
       "quantity": 1,
