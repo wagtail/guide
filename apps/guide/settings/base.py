@@ -29,6 +29,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+    # `scout_apm.django` must be the first entry so its middleware and
+    # instrumentation wrap the rest of the request stack.
+    "scout_apm.django",
     "apps.frontend",
     "apps.core",
     "apps.llms_txt",

@@ -22,6 +22,7 @@ dependencies = [
     "draftjs-exporter>=7.1.0,<8.0",
     "jinja2>=3.1.6,<4.0.0",
     "wagtail-ai>=3.1.1,<4.0.0",
+    "scout-apm>=3.5.3,<4.0.0",
 ]
 
 [dependency-groups]
