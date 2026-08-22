@@ -53,8 +53,6 @@ WORKDIR /app
 #    read/used by Gunicorn.
 #  * WEB_CONCURRENCY - number of workers used by Gunicorn. The variable is
 #    read by Gunicorn.
-#  * GUNICORN_CMD_ARGS - additional arguments to be passed to Gunicorn. This
-#    variable is read by Gunicorn
 ENV PATH=$VIRTUAL_ENV/bin:$PATH \
     UV_PROJECT_ENVIRONMENT=$VIRTUAL_ENV \
     UV_COMPILE_BYTECODE=1 \
@@ -62,8 +60,7 @@ ENV PATH=$VIRTUAL_ENV/bin:$PATH \
     PYTHONUNBUFFERED=1 \
     DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
     PORT=8000 \
-    WEB_CONCURRENCY=3 \
-    GUNICORN_CMD_ARGS="-c gunicorn-conf.py --max-requests 1200 --max-requests-jitter 50 --access-logfile - --timeout 25"
+    WEB_CONCURRENCY=2
 
 # Make $BUILD_ENV available at runtime
 ARG BUILD_ENV
@@ -93,6 +90,7 @@ COPY --chown=guide . .
 # will be served by the WSGI server.
 RUN SECRET_KEY=none python manage.py collectstatic --noinput --clear
 
-# Run the WSGI server. It reads GUNICORN_CMD_ARGS, PORT and WEB_CONCURRENCY
-# environment variable hence we don't specify a lot options below.
-CMD gunicorn apps.guide.wsgi:application
+# Run the WSGI server. Configuration lives in `gunicorn.conf.py`, which
+# configures the app, port and worker recycling. `WEB_CONCURRENCY` is read by
+# gunicorn to determine the number of workers.
+CMD gunicorn
