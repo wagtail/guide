@@ -14,11 +14,11 @@ Your account is set up with your email address `<Email>` as the username. To acc
 
 Within the CMS, you will find the [Wagtail AI](https://wagtail-ai.readthedocs.io/latest/) features in those areas:
 
-- [Pages > Demos](https://guide.wagtail.org/admin/pages/1476/): those pages are only visible to logged-in users, feel free to change them however you wish!
-- [Images](https://guide.wagtail.org/admin/images/): to generate titles and descriptions (used as alt text). Those images are only available in the demo pages, so feel free to also upload new ones.
-- [Settings > Agents](https://guide.wagtail.org/admin/settings/wagtail_ai/agentsettings/1/): for configuration of most AI features on pages and images.
-- [Settings > Prompts](https://guide.wagtail.org/admin/prompt/): for configuration of the rich text fields integration which is still a work in progress.
-- Finally, under the “Help” menu, you can find the site’s documentation style guide, and llms.txt files - if you want to experiment with AI tools outside the CMS with the site content and guidance.
+-   [Pages > Demos](https://guide.wagtail.org/admin/pages/1476/): those pages are only visible to logged-in users, feel free to change them however you wish!
+-   [Images](https://guide.wagtail.org/admin/images/): to generate titles and descriptions (used as alt text). Those images are only available in the demo pages, so feel free to also upload new ones.
+-   [Settings > Agents](https://guide.wagtail.org/admin/settings/wagtail_ai/agentsettings/1/): for configuration of most AI features on pages and images.
+-   [Settings > Prompts](https://guide.wagtail.org/admin/prompt/): for configuration of the rich text fields integration which is still a work in progress.
+-   Finally, under the “Help” menu, you can find the site’s documentation style guide, and llms.txt files - if you want to experiment with AI tools outside the CMS with the site content and guidance.
 
 Keep in mind this is a **shared demo environment.** Your demo content will be visible to other CMS users, and any Agents or Prompts changes in particular will apply site-wide.
 
