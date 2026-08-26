@@ -1,12 +1,6 @@
 .streamfield {
-    @include fs(xs);
     margin-bottom: ($gutter * 3);
     max-width: 900px;
-
-    @include media-query(large) {
-        /* stylelint-disable-next-line declaration-no-important */
-        font-size: $base-font-size !important;
-    }
 
     h2 {
         @include fs(xl);
