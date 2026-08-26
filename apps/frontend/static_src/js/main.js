@@ -69,7 +69,13 @@ const injectResultsInHTML = (results) => {
 };
 
 const onSearchInputChange = async (event) => {
-    const query = event.target.value;
+    const query = event.target.value.trim();
+
+    if (!query) {
+        removeExistingChildren(resultsDiv);
+        removeExistingChildren(resultsCountContainer);
+        return;
+    }
 
     document.querySelector('.search__container').classList.add('is-loading');
 
@@ -99,7 +105,12 @@ const onSearchInputChange = async (event) => {
             .classList.remove('is-loading');
     }
 };
-searchInput.addEventListener('keyup', debounce(onSearchInputChange, 150));
+const onSearchInputKeyUp = debounce(onSearchInputChange, 150);
+
+searchInput.addEventListener('keyup', (event) => {
+    if (event.key === 'Tab') return;
+    onSearchInputKeyUp(event);
+});
 
 searchModal.addEventListener('shown.bs.modal', () => {
     searchInput.focus();
