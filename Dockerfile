@@ -124,4 +124,4 @@ RUN SECRET_KEY=none python manage.py collectstatic --noinput --clear
 
 # Gunicorn config lives in gunicorn.conf.py (its default location), which
 # reads WEB_CONCURRENCY for the number of workers to spawn.
-CMD gunicorn
+CMD ["gunicorn"]
