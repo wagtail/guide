@@ -8,6 +8,13 @@ on:
   pull_request:
 
 jobs:
+  docker-build-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6
+      - run: docker build --check .
+
   test:
     runs-on: ubuntu-latest
 

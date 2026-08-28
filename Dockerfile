@@ -1,96 +1,127 @@
-# (Keep the version in sync with the node install below)
-FROM node:24 as frontend
+# syntax=docker/dockerfile:1.10
+# check=error=true
 
-# Make build & post-install scripts behave as if we were in a CI environment (e.g. for logging verbosity purposes).
+# Opt into newer Dockerfile syntax, make `docker build .` fail on warnings
+# See https://docs.docker.com/reference/build-checks/.
+# Run `docker build --check .` for better error messages.
+
+# frontend stages
+
+# Keep the Node version in sync with the dev stage below and .nvmrc.
+FROM node:24 AS frontend-deps
+
+# Make build & post-install scripts behave as if in CI (e.g. logging verbosity).
 ARG CI=true
 
-# Install front-end dependencies.
+# Split from frontend-build so the dev stage below can reuse node_modules
+# without needing to run the production build.
 COPY package.json package-lock.json webpack.config.js ./
-RUN npm ci
+RUN --mount=type=cache,target=/root/.npm npm ci
 
-# Compile static files
+FROM frontend-deps AS frontend-build
+
 COPY ./apps/frontend/static_src/ ./apps/frontend/static_src/
 RUN npm run build
 
+# base stage
 
-# We use Debian images because they are considered more stable than the alpine
-# ones becase they use a different C compiler. Debian images also come with
-# all useful packages required for image manipulation out of the box. They
-# however weigh a lot, approx. up to 1.5GiB per built image.
-FROM python:3.14 as production
+# Debian over alpine: it's considered more stable (different C compiler) and
+# ships with the packages commonly needed for image manipulation, at the
+# cost of a larger (~1.5GiB) image.
+FROM python:3.14 AS base
 
-# Install uv using the official standalone binary.
 # Keep this version in sync with the local `uv` used to generate uv.lock.
 COPY --from=ghcr.io/astral-sh/uv:0.11.19 /uv /uvx /bin/
 
-# Arguments to control which dependency groups get installed. Defaults to the
-# production configuration, and can be overridden at build time (e.g. for the
-# development container).
-ARG UV_SYNC_ARGS="--no-dev --group production"
-
-# Install dependencies in a virtualenv
 ENV VIRTUAL_ENV=/venv
 
 RUN useradd guide --create-home && mkdir /app $VIRTUAL_ENV && chown -R guide /app $VIRTUAL_ENV
 
 WORKDIR /app
 
-# Set default environment variables. They are used at build time and runtime.
-# If you specify your own environment variables on Heroku, they will
-# override the ones set here. The ones below serve as sane defaults only.
-#  * PATH - Make sure that uv is on the PATH, along with our venv
-#  * UV_PROJECT_ENVIRONMENT - Install dependencies into $VIRTUAL_ENV instead of
-#    the default `.venv` in the project directory.
-#  * UV_COMPILE_BYTECODE - Compile Python bytecode for faster container starts.
-#  * UV_LINK_MODE - Use copy mode to avoid hardlinks which break in Docker layers.
-#  * PYTHONUNBUFFERED - This is useful so Python does not hold any messages
-#    from being output.
+# Defaults only: any environment variables set on Heroku override these.
+#  * UV_PROJECT_ENVIRONMENT - installs into $VIRTUAL_ENV instead of the
+#    project's default `.venv`, so it isn't clobbered by a bind mount in dev.
+#  * UV_LINK_MODE=copy - hardlinks break across Docker layers.
+#  * PYTHONUNBUFFERED - otherwise logs can be lost if the process crashes:
 #    https://docs.python.org/3.14/using/cmdline.html#envvar-PYTHONUNBUFFERED
-#    https://docs.python.org/3.14/using/cmdline.html#cmdoption-u
-#  * DJANGO_SETTINGS_MODULE - default settings used in the container.
-#  * PORT - default port used. Please match with EXPOSE.
-#    Heroku will ignore EXPOSE and only set PORT variable. PORT variable is
-#    read/used by Gunicorn.
-#  * WEB_CONCURRENCY - number of workers used by Gunicorn. The variable is
-#    read by Gunicorn.
+#  * PORT - read by Gunicorn; Heroku sets this itself and ignores EXPOSE.
 ENV PATH=$VIRTUAL_ENV/bin:$PATH \
     UV_PROJECT_ENVIRONMENT=$VIRTUAL_ENV \
     UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
     PYTHONUNBUFFERED=1 \
-    DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
-    PORT=8000 \
-    WEB_CONCURRENCY=2
+    PORT=8000
 
-# Make $BUILD_ENV available at runtime
-ARG BUILD_ENV
-ENV BUILD_ENV=${BUILD_ENV}
-
-# Port exposed by this container. Should default to the port used by your WSGI
-# server (Gunicorn). Heroku will ignore this.
 EXPOSE 8000
 
-# Don't use the root user as it's an anti-pattern and Heroku does not run
-# containers as root either.
+# Heroku doesn't run containers as root either:
 # https://devcenter.heroku.com/articles/container-registry-and-runtime#dockerfile-commands-and-runtime
 USER guide
 
-# Install your app's Python requirements.
 RUN python -m venv $VIRTUAL_ENV
 COPY --chown=guide pyproject.toml uv.lock ./
+
+
+# dev stage
+
+# Used by `docker compose` for local development. Application code isn't
+# copied in at build time - docker-compose bind mounts it instead - so only
+# rebuild this image when dependencies change (`docker compose build`).
+FROM base AS dev
+
+USER root
+
+# Node's major version is kept in sync with frontend-deps above and .nvmrc.
+# `just` is installed too, so the recipes in ./justfile also work from a
+# shell in this container, the same way they do on the host.
+RUN --mount=type=cache,target=/var/lib/apt/lists,sharing=locked \
+    --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    mkdir -p /etc/apt/keyrings \
+    && apt-get --quiet --yes update \
+    && apt-get --quiet --yes install --no-install-recommends ca-certificates curl gnupg \
+    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_24.x nodistro main" > /etc/apt/sources.list.d/nodesource.list \
+    && apt-get --quiet --yes update \
+    && apt-get --quiet --yes install --no-install-recommends nodejs \
+    && curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --to /usr/local/bin
+
+USER guide
+
+ARG UV_SYNC_ARGS="--all-groups"
 RUN uv sync --frozen ${UV_SYNC_ARGS}
 
-COPY --chown=guide --from=frontend ./apps/frontend/static ./apps/frontend/static
+# Reuses node_modules from frontend-deps so a freshly built container doesn't
+# need to `npm ci` before assets can be built. docker-compose.yml volumes
+# node_modules so it isn't shadowed by the code bind mount.
+COPY --chown=guide --from=frontend-deps ./node_modules ./node_modules
+COPY --chown=guide package.json package-lock.json webpack.config.js ./
 
-# Copy application code.
+CMD ["uv", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+
+# production stage
+
+# Runs in production on Heroku. Last stage so it's the default target for an untargeted `docker build .`
+FROM base AS production
+
+# Can be overridden at build time, e.g. by the dev stage above.
+ARG UV_SYNC_ARGS="--no-dev --group production"
+
+ENV DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
+    WEB_CONCURRENCY=2
+
+# ARGs aren't available at runtime, so re-declare as an ENV to pass it through.
+ARG BUILD_ENV
+ENV BUILD_ENV=${BUILD_ENV}
+
+RUN uv sync --frozen ${UV_SYNC_ARGS}
+
+COPY --chown=guide --from=frontend-build ./apps/frontend/static ./apps/frontend/static
 COPY --chown=guide . .
 
-# Collect static. This command will move static files from application
-# directories and "static_compiled" folder to the main static directory that
-# will be served by the WSGI server.
 RUN SECRET_KEY=none python manage.py collectstatic --noinput --clear
 
-# Run the WSGI server. Configuration lives in `gunicorn.conf.py`, which
-# configures the app, port and worker recycling. `WEB_CONCURRENCY` is read by
-# gunicorn to determine the number of workers.
+# Gunicorn config lives in gunicorn.conf.py (its default location), which
+# reads WEB_CONCURRENCY for the number of workers to spawn.
 CMD gunicorn

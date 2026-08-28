@@ -94,29 +94,3 @@ eval-promptfoo-view:
 # Browse translation eval results in the Inspect viewer.
 eval-view:
     uvx --from inspect-ai --python 3.12 inspect view --log-dir prompts/evals/translations-inspect_ai/logs
-
-# Build the Docker image.
-docker-build:
-    docker compose build
-
-# Run the Docker container in the foreground.
-docker-run:
-    docker compose up --remove-orphans
-
-# Run the Docker container in the background.
-docker-start:
-    docker compose up --remove-orphans -d
-
-# Stop the Docker container.
-docker-stop:
-    docker compose down
-
-# Open a shell in the running Docker container.
-docker-exec:
-    docker compose exec web /bin/bash
-
-# Initialise the project inside the Docker container.
-docker-init:
-    docker compose exec web uv run python manage.py migrate
-    docker compose exec web uv run python manage.py createcachetable
-    docker compose exec web uv run python manage.py createsuperuser
