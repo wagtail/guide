@@ -5,18 +5,24 @@
 # See https://docs.docker.com/reference/build-checks/.
 # Run `docker build --check .` for better error messages.
 
+# NOTE: Heroku builds this file with the legacy (non-BuildKit) Docker builder:
+#   - BuildKit-only features such as `RUN --mount=type=cache` aren't supported.
+#   - Every stage is built, even those unused by the final stage.
+# The development container is built from Dockerfile.dev instead, so this file
+# only contains stages needed for production.
+
 # frontend stages
 
-# Keep the Node version in sync with the dev stage below and .nvmrc.
+# Keep the Node version in sync with Dockerfile.dev and .nvmrc.
 FROM node:26 AS frontend-deps
 
 # Make build & post-install scripts behave as if in CI (e.g. logging verbosity).
 ARG CI=true
 
-# Split from frontend-build so the dev stage below can reuse node_modules
-# without needing to run the production build.
+# Split from frontend-build so Dockerfile.dev can reuse node_modules without
+# needing to run the production build.
 COPY package.json package-lock.json webpack.config.js ./
-RUN --mount=type=cache,target=/root/.npm npm ci
+RUN npm ci
 
 FROM frontend-deps AS frontend-build
 
@@ -61,42 +67,6 @@ USER guide
 
 RUN python -m venv $VIRTUAL_ENV
 COPY --chown=guide pyproject.toml uv.lock ./
-
-
-# dev stage
-
-# Used by `docker compose` for local development. Application code isn't
-# copied in at build time - docker-compose bind mounts it instead - so only
-# rebuild this image when dependencies change (`docker compose build`).
-FROM base AS dev
-
-USER root
-
-# Node's major version is kept in sync with frontend-deps above and .nvmrc.
-# `just` is installed too, so the recipes in ./justfile also work from a
-# shell in this container, the same way they do on the host.
-RUN --mount=type=cache,target=/var/lib/apt/lists,sharing=locked \
-    --mount=type=cache,target=/var/cache/apt,sharing=locked \
-    mkdir -p /etc/apt/keyrings \
-    && apt-get --quiet --yes update \
-    && apt-get --quiet --yes install --no-install-recommends ca-certificates curl gnupg \
-    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_26.x nodistro main" > /etc/apt/sources.list.d/nodesource.list \
-    && apt-get --quiet --yes update \
-    && apt-get --quiet --yes install --no-install-recommends nodejs just
-
-USER guide
-
-ARG UV_SYNC_ARGS="--all-groups"
-RUN uv sync --frozen ${UV_SYNC_ARGS}
-
-# Reuses node_modules from frontend-deps so a freshly built container doesn't
-# need to `npm ci` before assets can be built. docker-compose.yml volumes
-# node_modules so it isn't shadowed by the code bind mount.
-COPY --chown=guide --from=frontend-deps ./node_modules ./node_modules
-COPY --chown=guide package.json package-lock.json webpack.config.js ./
-
-CMD ["uv", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
 # production stage

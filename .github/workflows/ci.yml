@@ -14,6 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - run: docker build --check .
+      - run: docker build --check -f Dockerfile.dev .
 
   test:
     runs-on: ubuntu-latest

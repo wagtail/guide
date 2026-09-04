@@ -2,6 +2,7 @@ services:
   web:
     build:
       context: .
+      dockerfile: Dockerfile.dev
       target: dev
       args:
         UV_SYNC_ARGS: '--all-groups'
@@ -16,8 +17,8 @@ services:
     volumes:
       - .:/app
       - staticfiles:/app/static
-      # Keeps node_modules (installed into the dev image, see Dockerfile) from
-      # being shadowed by the bind mount above. Since Docker keeps this
+      # Keeps node_modules (installed into the dev image, see Dockerfile.dev)
+      # from being shadowed by the bind mount above. Since Docker keeps this
       # directory's contents separate from the host, run npm/Node commands
       # consistently from inside the container (not from the host) so they
       # see the same node_modules.
