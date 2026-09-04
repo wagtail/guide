@@ -8,7 +8,7 @@
 # frontend stages
 
 # Keep the Node version in sync with the dev stage below and .nvmrc.
-FROM node:24 AS frontend-deps
+FROM node:26 AS frontend-deps
 
 # Make build & post-install scripts behave as if in CI (e.g. logging verbosity).
 ARG CI=true
@@ -81,7 +81,7 @@ RUN --mount=type=cache,target=/var/lib/apt/lists,sharing=locked \
     && apt-get --quiet --yes update \
     && apt-get --quiet --yes install --no-install-recommends ca-certificates curl gnupg \
     && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
-    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_24.x nodistro main" > /etc/apt/sources.list.d/nodesource.list \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_26.x nodistro main" > /etc/apt/sources.list.d/nodesource.list \
     && apt-get --quiet --yes update \
     && apt-get --quiet --yes install --no-install-recommends nodejs just
 
