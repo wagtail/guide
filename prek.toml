@@ -49,7 +49,7 @@ types_or = ["css", "scss", "javascript", "json", "yaml", "markdown", "html"]
 [[repos.hooks]]
 id = "eslint"
 name = "eslint"
-entry = "eslint --report-unused-disable-directives"
+entry = "npx eslint --report-unused-disable-directives"
 language = "system"
 types_or = ["javascript"]
 
