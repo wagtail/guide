@@ -2,6 +2,7 @@ services:
   web:
     build:
       context: .
+      target: dev
       args:
         UV_SYNC_ARGS: '--all-groups'
     ports:
@@ -15,6 +16,12 @@ services:
     volumes:
       - .:/app
       - staticfiles:/app/static
+      # Keeps node_modules (installed into the dev image, see Dockerfile) from
+      # being shadowed by the bind mount above. Since Docker keeps this
+      # directory's contents separate from the host, run npm/Node commands
+      # consistently from inside the container (not from the host) so they
+      # see the same node_modules.
+      - node_modules:/app/node_modules
     command:
       - uv
       - run
@@ -22,6 +29,7 @@ services:
       - manage.py
       - runserver
       - '0.0.0.0:${PORT:-8000}'
+    init: true
     depends_on:
       db:
         condition: service_healthy
@@ -48,4 +56,5 @@ services:
       retries: 5
 volumes:
   staticfiles:
+  node_modules:
   pgdata:

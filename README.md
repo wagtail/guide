@@ -69,20 +69,21 @@ Or both, in a single command:
 
 ### Setting up development with Docker
 
-1. Optianally, create a `.env` file in the project root containing these variables, you can adjust the values to your preferences:
+1. Optionally, create a `.env` file in the project root containing these variables, you can adjust the values to your preferences:
     ```
     ALLOWED_HOSTS=localhost
     PORT=8000
     SECRET_KEY=some-random-secret
     DJANGO_SETTINGS_MODULE=apps.guide.settings.dev
     ```
-2. Build and start the development container by running the `just docker-run` command.
-   This starts the server in the foreground. To run it in the background, use `just docker-start` instead.
-3. In another terminal, run the init script in the container: `just docker-init`
-4. You should now have access to the project in your browser at `http://localhost:8000`
-5. To stop the container, run `just docker-stop`
+2. Build and start the development container by running `docker compose up --remove-orphans`.
+   This starts the server in the foreground. To run it in the background, add `-d`.
+3. In another terminal, open a shell in the container: `docker compose exec web bash`
+4. From that shell, run `just backend` to set up the database, and `just frontend` to build the front-end assets. The container bundles Python and Node, so any other `just` recipe (`just test`, `just lint`, ...) works the same as it does on the host — you don't need either installed locally to use Docker.
+5. You should now have access to the project in your browser at `http://localhost:8000`
+6. To stop the container, run `docker compose down`
 
-Code changes are picked up automatically. Only rebuild when dependencies change:`just docker-build`
+Code changes are picked up automatically. Only rebuild the image when dependencies change: `docker compose build`.
 
 # Contributing
 

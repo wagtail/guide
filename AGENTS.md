@@ -31,9 +31,10 @@ DJANGO_SETTINGS_MODULE=apps.guide.settings.dev
 
 ### Docker commands
 
--   `just docker-build`: Build the Docker image.
--   `just docker-run`: Run the Docker container.
--   `just docker-init`: Initialize the project inside the container.
+-   `docker compose up --remove-orphans`: Build (if needed) and run the container.
+-   `docker compose exec web bash`: Open a shell in the container. The container bundles Python
+    and Node, so the same `just` commands (e.g. `just backend`, `just frontend`) work from there.
+-   `docker compose build`: Rebuild the image after a dependency change.
 
 ## Coding style & naming conventions
 
