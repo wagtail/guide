@@ -34,3 +34,32 @@
         display: block;
     }
 }
+
+.primary-nav__tools {
+    margin-top: ($gutter * 2);
+    margin-bottom: ($gutter * 2);
+    padding-bottom: $gutter;
+    border-bottom: 1px solid
+        light-dark(rgba($color--off-black, 0.1), rgba($color--white, 0.1));
+
+    @include media-query(large) {
+        display: none;
+    }
+
+    .theme-toggle {
+        margin-inline-end: 0;
+    }
+
+    .copy-button {
+        margin-top: $gutter;
+        margin-inline-end: 0;
+
+        .copy-button__toggle {
+            height: auto;
+        }
+    }
+
+    .language-selector {
+        margin-top: $gutter;
+    }
+}
