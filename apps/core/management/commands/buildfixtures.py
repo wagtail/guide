@@ -34,7 +34,7 @@ class Command(BaseCommand):
         self.home = HomePageFactory(locale=self.locale)
         languages = [
             ("en", "English"),
-            ("nl", "Dutch"),
+            ("fr", "French"),
             # Make sure languages with region code is handled correctly
             ("pt-br", "Portuguese (Brazil)"),
         ]
