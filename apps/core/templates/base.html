@@ -1,7 +1,8 @@
-{% load core_tags wagtailcore_tags wagtailroutablepage_tags wagtailuserbar manifest i18n %}
+{% load core_tags wagtailcore_tags wagtailroutablepage_tags wagtailuserbar wagtail_cache manifest i18n %}
 
 {% wagtail_site as current_site %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
 <html lang="{% block lang %}{{ self.locale.language_code }}{% endblock %}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" class="no-js">
     <head>
@@ -92,7 +93,10 @@
 
         <div class="grid">
             <div class="app__header">
-                {% header %}
+                {# The header only varies by language - the active menu item is highlighted client-side. #}
+                {% wagtailcache 86400 header LANGUAGE_CODE %}
+                    {% header %}
+                {% endwagtailcache %}
             </div>
 
             <div class="app__content">

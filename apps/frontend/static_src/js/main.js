@@ -2,11 +2,13 @@
 import debounce from 'lodash.debounce';
 import './theme-detect';
 import { initSectionLink } from './section-link';
+import { initActiveNavItem } from './active-nav-item';
 import { handleFeedback } from './feedback';
 import MobileMenu from './mobile-menu';
 import CopyButton from './copy-button';
 
 initSectionLink();
+initActiveNavItem();
 handleFeedback();
 
 const searchInput = document.querySelector('[data-search-input]');
