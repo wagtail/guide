@@ -5,3 +5,8 @@ class LLMsTxtConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "apps.llms_txt"
     verbose_name = "llms.txt"
+
+    def ready(self):
+        from . import signals
+
+        signals.register_signals()
