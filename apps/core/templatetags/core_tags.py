@@ -58,6 +58,21 @@ def hreflangs(context):
     }
 
 
+@register.inclusion_tag("components/language_selector.html", takes_context=True)
+def language_selector(context):
+    page = context.get("page")
+    if not page:
+        return {"page": None, "translations": []}
+
+    translations = page.get_translations().live().select_related("locale")
+    return {
+        "page": page,
+        "request": context.get("request"),
+        "translations": translations,
+        "LANGUAGE_CODE": get_language(),
+    }
+
+
 @register.inclusion_tag("components/footer.html")
 def footer():
     obj = FooterContent.objects.filter(locale__language_code=get_language()).first()
