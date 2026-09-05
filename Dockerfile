@@ -39,6 +39,18 @@ FROM python:3.14 AS base
 # Keep this version in sync with the local `uv` used to generate uv.lock.
 COPY --from=ghcr.io/astral-sh/uv:0.11.19 /uv /uvx /bin/
 
+# Use jemalloc as the system allocator: glibc's malloc fragments badly in
+# long-running Python processes, so memory use creeps up over time.
+# The symlink provides an architecture-independent path for LD_PRELOAD below,
+# which doesn't expand globs itself. The `test -e` check fails the build if
+# the glob ever stops matching: `ln -s` would otherwise silently create a
+# dangling symlink, and jemalloc would not be used.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libjemalloc2 \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s /usr/lib/*/libjemalloc.so.2 /usr/local/lib/libjemalloc.so \
+    && test -e /usr/local/lib/libjemalloc.so
+
 ENV VIRTUAL_ENV=/venv
 
 RUN useradd guide --create-home && mkdir /app $VIRTUAL_ENV && chown -R guide /app $VIRTUAL_ENV
@@ -51,12 +63,17 @@ WORKDIR /app
 #  * UV_LINK_MODE=copy - hardlinks break across Docker layers.
 #  * PYTHONUNBUFFERED - otherwise logs can be lost if the process crashes:
 #    https://docs.python.org/3.14/using/cmdline.html#envvar-PYTHONUNBUFFERED
+#  * LD_PRELOAD / MALLOC_ARENA_MAX - use jemalloc (installed above) instead of
+#    glibc's malloc, and limit the number of memory arenas glibc would
+#    otherwise create per core, to keep memory use stable over time.
 #  * PORT - read by Gunicorn; Heroku sets this itself and ignores EXPOSE.
 ENV PATH=$VIRTUAL_ENV/bin:$PATH \
     UV_PROJECT_ENVIRONMENT=$VIRTUAL_ENV \
     UV_COMPILE_BYTECODE=1 \
     UV_LINK_MODE=copy \
     PYTHONUNBUFFERED=1 \
+    LD_PRELOAD=/usr/local/lib/libjemalloc.so \
+    MALLOC_ARENA_MAX=2 \
     PORT=8000
 
 EXPOSE 8000
@@ -78,7 +95,7 @@ FROM base AS production
 ARG UV_SYNC_ARGS="--no-dev --group production"
 
 ENV DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
-    WEB_CONCURRENCY=2
+    WEB_CONCURRENCY=1
 
 # ARGs aren't available at runtime, so re-declare as an ENV to pass it through.
 ARG BUILD_ENV
@@ -92,5 +109,7 @@ COPY --chown=guide . .
 RUN SECRET_KEY=none python manage.py collectstatic --noinput --clear
 
 # Gunicorn config lives in gunicorn.conf.py (its default location), which
-# reads WEB_CONCURRENCY for the number of workers to spawn.
+# reads WEB_CONCURRENCY for the number of worker processes to spawn. Requests
+# are served by threads within each worker (see gunicorn.conf.py), so one
+# worker process is enough to serve many concurrent requests.
 CMD ["gunicorn"]
