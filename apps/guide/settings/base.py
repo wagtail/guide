@@ -127,6 +127,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "apps.guide.wsgi.application"
 
+# The production server runs this ASGI application (see gunicorn.conf.py).
+# The development server (`manage.py runserver`) still serves the WSGI
+# application above, which is fine for a fully synchronous app.
+ASGI_APPLICATION = "apps.guide.asgi.application"
+
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases

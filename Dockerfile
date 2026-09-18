@@ -109,7 +109,8 @@ COPY --chown=guide . .
 RUN SECRET_KEY=none python manage.py collectstatic --noinput --clear
 
 # Gunicorn config lives in gunicorn.conf.py (its default location), which
-# reads WEB_CONCURRENCY for the number of worker processes to spawn. Requests
-# are served by threads within each worker (see gunicorn.conf.py), so one
-# worker process is enough to serve many concurrent requests.
+# reads WEB_CONCURRENCY for the number of worker processes to spawn. Each
+# worker serves requests with an asyncio event loop (see gunicorn.conf.py),
+# and Django runs the app's synchronous views in one thread per worker, so
+# the number of concurrent requests scales with WEB_CONCURRENCY.
 CMD ["gunicorn"]
