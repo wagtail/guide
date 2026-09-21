@@ -1,0 +1,116 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+# JSON-Schema (structured outputs) arm of the batch translation eval.
+#
+# Same dataset, prompts, checks, models, and judge as translations-batch.yaml,
+# but the provider sends Scaleway's OpenAI-compatible `response_format`
+# json_schema (strict) so the model is CONSTRAINED to reply
+# {"segments": [{"id", "text"}, ...]} — syntax enforced by the API, not by
+# prompting. Compared against the generic "reply in JSON" arm to measure what
+# structured outputs actually buy.
+#
+# Prerequisite: export the glossaries once per language:
+#   just eval-glossary is de fr pt-br ar
+# Run:
+#   just eval-batch-schema
+description: Batch page translation with JSON Schema structured outputs (Scaleway response_format json_schema, strict)
+
+prompts:
+  - file://./translation_prompt.py:prompt
+
+providers:
+  - id: openai:chat:deepseek-v4-flash-0731
+    label: deepseek-v4-flash-0731-schema
+    config: &scaleway-schema
+      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
+      apiKey: '{{ env.SCW_SECRET_KEY }}'
+      temperature: 0
+      max_tokens: 16384
+      showThinking: false
+      response_format: file://./response_format.json
+  - id: openai:chat:mistral-medium-3.5-128b
+    label: mistral-medium-3.5-128b-schema
+    config: *scaleway-schema
+  - id: openai:chat:gemma-4-26b-a4b-it
+    label: gemma-4-26b-a4b-it-schema
+    config: *scaleway-schema
+
+defaultTest:
+  vars:
+    source_language: English
+    glossary: file://./glossary_var.py
+  assert:
+    - type: python
+      value: file://./check_batch.py:envelope
+    - type: python
+      value: file://./check_batch.py:segments_translated
+    - type: python
+      value: file://./check_batch.py:tags_preserved_per_segment
+    - type: python
+      value: file://./check_batch.py:allowed_tags_only
+    - type: python
+      value: file://./check_batch.py:attributes_clean
+    - type: python
+      value: file://./check_batch.py:not_truncated
+    - type: python
+      value: file://./check_batch.py:glossary_compliant
+    - type: python
+      value: file://./check_batch.py:no_wrapper
+    # The API enforces the schema, so syntax is checked by envelope; the judge
+    # still grades translation quality of the whole document.
+    - type: llm-rubric
+      provider:
+        id: openai:chat:glm-5.2
+        config:
+          apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
+          apiKey: '{{ env.SCW_SECRET_KEY }}'
+          temperature: 0
+          max_tokens: 16384
+          showThinking: false
+      value: |
+        You are an expert reviewer of {{ target_language }} machine
+        translation quality for a software user guide. The source English
+        document (a list of translatable segments in a
+        {{ format | upper }} envelope, may contain inline HTML) is:
+
+        {{ src_doc }}
+
+        The candidate translation replies as {"segments": [{"id", "text"},
+        ...]} - this wrapper is expected and correct.
+
+        Requirements the translation must meet:
+        1. Every segment is present, in the same order, with the same id;
+           no segments dropped, merged, added, or repeated.
+        2. Within each segment, HTML tags and their attributes match the
+           source exactly — same tags, same order, no additions.
+        3. Text inside <b>/<i> tags is a UI label from the Wagtail admin
+           interface. Where an official admin translation exists, it must
+           be used exactly. Official translations for the labels in this
+           document:
+        {{ glossary }}
+           Labels without an official translation are translated naturally
+           and consistently.
+        4. Plain prose and link text are translated into fluent, formal
+           {{ target_language }}, with meaning fully preserved (no
+           omissions, additions, or mistranslations). Slug-like segments
+           (lowercase identifiers such as "new-in-wagtail-7-4") must be
+           kept unchanged. Short labels may legitimately be identical in
+           both languages.
+        5. The output contains only the translation — no commentary,
+           reasoning, or code fences — and is complete (not truncated).
+        6. Terminology is consistent ACROSS segments: one term per concept
+           throughout the document.
+
+        Fail the output if it violates a structural requirement
+        (missing/duplicated segments, HTML structure, official UI label
+        translations, extra commentary, truncation) or materially
+        mistranslates. Score 0.5 but pass for minor fluency, terminology,
+        or accuracy issues. Score 1 if it meets all requirements.
+
+scenarios:
+  - config:
+      - vars: { target_language: Icelandic, lang_code: is }
+      - vars: { target_language: German, lang_code: de }
+      - vars: { target_language: French, lang_code: fr }
+      - vars: { target_language: Brazilian Portuguese, lang_code: pt-br }
+      - vars: { target_language: Arabic, lang_code: ar }
+    tests: file://./tests-batch-schema.yaml

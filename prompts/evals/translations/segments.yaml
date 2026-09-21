@@ -1,6 +1,9 @@
 # Shared translation eval segments — single source of truth for both the
 # Promptfoo eval (referenced from translations.yaml via `tests: file://`)
-# and the Inspect AI eval (loaded by translations-inspect_ai/translation_task.py).
+# and the Inspect AI per-segment eval (loaded by
+# translations-inspect_ai/translation_task.py). The whole-page eval
+# (translations-inspect_ai/translation_batch_task.py) and the Promptfoo
+# batch eval instead use translations-batch/documents.json.
 #
 # Each entry is a Promptfoo test case (description, vars, metadata); Inspect
 # maps it to a Sample (id=metadata.id, input=vars.text, metadata=metadata).

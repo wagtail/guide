@@ -10,6 +10,44 @@ It evaluates the translator behaviour defined in `apps/core/translator.py`
 (same system prompt, glossary injection, temperature 0) without needing Django
 or the database.
 
+## Whole-page eval (`translation_batch_task.py`)
+
+`translation_batch_task.py` is the document-level variant: each sample is an
+ENTIRE page — all segments translated in ONE LLM request, wrapped in an XML
+envelope (`<document>` with `<segment id="...">` children). Both the source
+and the candidate's reply are whole documents, which is what makes
+page-wide terminology consistency gradeable: the judge checks that one term
+per concept holds ACROSS segments, not just within each paragraph.
+
+-   Dataset: `prompts/evals/translations-batch/documents.json` (generated
+    from real guide content by `build_documents.py` in the same directory).
+-   Prompt: the production system prompt + whole-document glossary + XML
+    format instructions + a worked few-shot example, mirroring the Promptfoo
+    batch eval (`prompts/evals/translations-batch/translation_prompt.py`).
+-   `rule_checks` decodes the envelope and verifies, per segment: ids in
+    order and complete (`envelope`), inline tag/attribute structure (`tags`),
+    official `<b>`/`<i>` label translations (`glossary`), no truncation
+    (`no_trunc`), plus no commentary/bleed around the envelope (`no_bleed`).
+-   The LLM judge grades the whole document with a cross-segment
+    terminology-consistency requirement (requirement 6 in its rubric).
+
+Run it with:
+
+```sh
+just eval-translations-batch                    # all candidates, Arabic
+just eval-translations-batch --limit 1          # one page, quick smoke run
+```
+
+Per-segment results for the same pages come from the Promptfoo baseline
+(`just eval-batch-baseline`), so document-level vs per-segment quality is
+directly comparable.
+
+## Per-segment eval (`translation_task.py`)
+
+`translation_task.py` below is the original per-segment eval: each sample is
+a single wagtail-localize segment, translated in isolation — the same request
+shape production currently uses.
+
 ## Setup
 
 The script is self-contained: a [PEP 723](https://peps.python.org/pep-0723/)
@@ -60,14 +98,20 @@ readable programmatically with `inspect_ai.log.read_eval_log`).
 
 ## What's scored
 
--   `rule_checks` — deterministic, stdlib `html.parser` only: HTML tag/attribute
-    structure, glossary compliance for `<b>`/`<i>` labels (position-wise, exact
-    official translation), no truncation, no reasoning bleed. Reported per rule
-    (accuracy ± stderr).
+In both evals:
+
+-   `rule_checks` — deterministic, stdlib `html.parser` only. Per-segment eval:
+    HTML tag/attribute structure, glossary compliance for `<b>`/`<i>` labels
+    (position-wise, exact official translation), no truncation, no reasoning
+    bleed. Whole-page eval: the same checks, run on each segment of the
+    decoded envelope, plus envelope completeness/order (`envelope`). Reported
+    per rule (accuracy ± stderr).
 -   `model_graded_qa` — LLM judge (`glm-5.2` by default) grading
     accuracy/fluency/rule compliance as C/P/I with partial credit. The judge
-    prompt includes the same per-segment glossary (via sample metadata). The
+    prompt includes the glossary for the sample (via sample metadata). The
     judge is deliberately not one of the candidates, to avoid self-preference.
+    The whole-page judge additionally requires terminology to be consistent
+    ACROSS the document — one term per concept page-wide.
 
 ## Notes / differences from the custom suite
 
@@ -79,12 +123,18 @@ readable programmatically with `inspect_ai.log.read_eval_log`).
     custom scorer again — start without it.
 -   Rules that don't apply to a sample (e.g. no glossary term in the source)
     count as a pass rather than being excluded from the denominator.
--   The dataset is `prompts/evals/translations/segments.yaml`, shared with the
-    Promptfoo eval: segments extracted verbatim from real guide content
-    (`prompts/content/en/how-to-guides/manage-documents.md` and
+-   The per-segment dataset is `prompts/evals/translations/segments.yaml`,
+    shared with the Promptfoo eval: segments extracted verbatim from real
+    guide content (`prompts/content/en/how-to-guides/manage-documents.md` and
     `prompts/content/en/releases/new-in-wagtail-7-4.md`), in the HTML form the
     translator receives from wagtail-localize. Each entry is a Promptfoo test
     case (`description`, `vars.text`, `metadata.id`/`metadata.source`);
     `translation_task.py` maps them to Inspect Samples. Regenerate from live
     page content with `export_segments.py` (see its docstring), or grow the
     file as regressions are found.
+-   The whole-page dataset is
+    `prompts/evals/translations-batch/documents.json` — the same guide pages
+    as the Promptfoo batch eval, so batch results are comparable across both
+    harnesses. Rebuild with
+    `uv run python prompts/evals/translations-batch/build_documents.py`.
+

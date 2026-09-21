@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+# Per-segment baseline for the batch eval, using the SAME pages/segments as
+# prompts/evals/translations-batch/ (generated from documents.json), so
+# results are directly comparable: same judge, same models, same content.
+#
+# Run:
+#   just eval-batch-baseline
+description: Per-segment baseline over the batch eval's pages — one LLM request per segment
+
+prompts:
+  - file://../translations/translation_prompt.py:prompt
+
+providers:
+  - id: openai:chat:deepseek-v4-flash-0731
+    config: &scaleway
+      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
+      apiKey: '{{ env.SCW_SECRET_KEY }}'
+      temperature: 0
+      max_tokens: 16384
+      showThinking: false
+  - id: openai:chat:mistral-medium-3.5-128b
+    config: *scaleway
+  - id: openai:chat:gemma-4-26b-a4b-it
+    config: *scaleway
+
+defaultTest:
+  vars:
+    source_language: English
+    glossary: file://../translations/glossary_var.py
+  assert:
+    - type: python
+      value: file://../translations/check_format.py:no_wrapper
+    - type: python
+      value: file://../translations/check_format.py:allowed_tags_only
+    - type: python
+      value: file://../translations/check_format.py:tags_preserved
+    - type: python
+      value: file://../translations/check_format.py:attributes_clean
+    - type: python
+      value: file://../translations/check_format.py:not_truncated
+    - type: python
+      value: file://../translations/check_format.py:glossary_compliant
+    - type: python
+      value: file://../translations/check_format.py:translated
+    - type: llm-rubric
+      provider:
+        id: openai:chat:glm-5.2
+        config: *scaleway
+      value: |
+        You are an expert reviewer of {{ target_language }} machine
+        translation quality for a software user guide. The source English
+        text (may contain inline HTML) is:
+
+        {{ text }}
+
+        Requirements the translation must meet:
+        1. HTML tags and their attributes match the source exactly — same
+           tags, same order, no additions.
+        2. Text inside <b>/<i> tags is a UI label from the Wagtail admin
+           interface. Where an official admin translation exists, it must be
+           used exactly. Official translations for the labels in this segment:
+        {{ glossary }}
+           Labels without an official translation are translated naturally
+           and consistently.
+        3. Plain prose and link text are translated into fluent, formal
+           {{ target_language }}, with meaning fully preserved (no omissions,
+           additions, or mistranslations).
+        4. The output contains only the translation — no commentary,
+           reasoning, or code fences — and is complete (not truncated).
+        5. Terminology is consistent: one term per concept.
+
+        Fail the output if it violates a structural requirement (HTML,
+        official UI label translations, extra commentary, truncation) or
+        materially mistranslates. Score 0.5 but pass for minor fluency,
+        terminology, or accuracy issues. Score 1 if it meets all
+        requirements.
+
+scenarios:
+  - config:
+      - vars: { target_language: Icelandic, lang_code: is }
+      - vars: { target_language: German, lang_code: de }
+      - vars: { target_language: French, lang_code: fr }
+      - vars: { target_language: Brazilian Portuguese, lang_code: pt-br }
+      - vars: { target_language: Arabic, lang_code: ar }
+    tests: file://./tests-segments.yaml

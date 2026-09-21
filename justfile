@@ -79,13 +79,26 @@ compilemessages:
 eval-translations *ARGS:
     ./prompts/evals/translations-inspect_ai/translation_task.py "$@"
 
+
+# Run the whole-page (document-level) Inspect AI translation eval (Scaleway).
+eval-translations-batch *ARGS:
+    ./prompts/evals/translations-inspect_ai/translation_batch_task.py "$@"
+
 # Export Wagtail admin UI translations as eval glossaries, per language code.
 eval-glossary *LANGS="ar":
     uv run python prompts/evals/translations-inspect_ai/export_glossary.py {{ LANGS }}
 
-# Run the Promptfoo translation eval across all candidate models (Scaleway).
-eval-promptfoo *ARGS:
-    npx --yes promptfoo@latest eval -c prompts/evals/translations/translations.yaml "$@"
+# Run the Promptfoo batch (document-level) translation eval.
+eval-batch *ARGS:
+    npx --yes promptfoo@latest eval -c prompts/evals/translations-batch/translations-batch.yaml "$@"
+
+# Run the per-segment baseline over the batch eval's pages.
+eval-batch-baseline *ARGS:
+    npx --yes promptfoo@latest eval -c prompts/evals/translations-batch/translations-segments-baseline.yaml "$@"
+
+# Run the Promptfoo JSON-Schema (structured outputs) batch eval.
+eval-batch-schema *ARGS:
+    npx --yes promptfoo@latest eval -c prompts/evals/translations-batch/translations-batch-schema.yaml "$@"
 
 # Browse Promptfoo translation eval results.
 eval-promptfoo-view:
