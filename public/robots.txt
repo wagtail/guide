@@ -4,3 +4,5 @@ Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Disallow: /admin/
 Disallow: /search/
 Disallow: /search_json/
+
+Sitemap: https://guide.wagtail.org/sitemap.xml
