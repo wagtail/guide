@@ -1,4 +1,6 @@
 User-Agent: *
+# This guide is public domain — we want it read, indexed and used by AI. https://contentsignals.org/
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Disallow: /admin/
 Disallow: /search/
 Disallow: /search_json/
