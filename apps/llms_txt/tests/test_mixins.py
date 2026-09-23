@@ -24,3 +24,21 @@ class TestMarkdownRouteMixin(TestCase):
         self.assertEqual(response["Content-Type"], "text/markdown;charset=utf-8")
         content = response.content.decode("utf-8")
         self.assertIn(self.content_page.title, content)
+
+    def test_markdown_view_includes_frontmatter(self):
+        """The standalone Markdown route leads with a YAML metadata block."""
+        response = self.client.get(
+            self.content_page.url + self.content_page.reverse_subpage("markdown")
+        )
+        content = response.content.decode("utf-8")
+        self.assertTrue(content.startswith("---\n"))
+        self.assertIn(f'title: "{self.content_page.title}"', content)
+
+    def test_to_markdown_omits_frontmatter_by_default(self):
+        """
+        llms-full.txt concatenates every page, so the embedded form must not
+        carry its own `---` block.
+        """
+        markdown = self.content_page.to_markdown()
+        self.assertFalse(markdown.startswith("---"))
+        self.assertNotIn("lang:", markdown)
