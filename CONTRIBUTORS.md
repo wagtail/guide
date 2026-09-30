@@ -112,8 +112,8 @@ The contents of the guide were heavily updated as part of [Outreachy December 20
 -   Coen van der Kamp, **Mentor**
 -   Thibaud Colas, **Mentor**
 -   Storm Heg, **Mentor**
--   Jonny Peacock,** Mentor**
--   Stephanie Brown,** Mentor**
+-   Jonny Peacock, **Mentor**
+-   Stephanie Brown, **Mentor**
 
 ## Google Summer of Code 2022 team
 
