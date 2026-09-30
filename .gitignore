@@ -7,6 +7,7 @@ db.sqlite3
 .DS_Store
 .env
 .vscode
+.wagtail-cli.toml
 
 database_dumps
 apps/frontend/static/

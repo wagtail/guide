@@ -1,0 +1,27 @@
+# Example configuration for the Wagtail CLI (`wt`, from the wagtail-cli
+# package). Copy this file to `.wagtail-cli.toml` and fill in your own values:
+#
+#     cp .wagtail-cli.toml.example .wagtail-cli.toml
+#
+# The copy is gitignored — it holds a token, so keep it local to your machine.
+#
+# `wt` looks for the URL and token in this order:
+#   1. The `WAGTAIL_CLI_BASE_URL` / `WAGTAIL_CLI_TOKEN` environment variables
+#   2. `./.wagtail-cli.toml` (project root, not committed) — wins over `~`
+#   3. `~/.wagtail-cli.toml` (written by `wt api init`)
+#
+# The URL is the base of a Wagtail API. This project mounts the v3 API at
+# `/api/v3-preview/`, so:
+#   - local development server: http://localhost:8000/api/v3-preview/
+#   - deployed preview site:    https://guide.wagtail.org/api/v3-preview/
+#
+# The token belongs to a Wagtail user. On a local project you can mint one
+# with (note the required `--name`):
+#
+#     wt api_tokens create --user=<username> --name=<token name>
+#
+# Tokens carry the permissions of their user, so treat this file as a secret.
+# Full reference: https://wagtail.github.io/wagtail-cli/
+
+url = "http://localhost:8000/api/v3-preview/"
+token = "wagtail_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"

@@ -63,6 +63,10 @@ backend:
 run:
     uv run python manage.py runserver
 
+# Run the Wagtail CLI (`wt`) against the configured site.
+wt *ARGS:
+    uv run wt "$@"
+
 # Generate and compile translation strings.
 translations: makemessages compilemessages
 

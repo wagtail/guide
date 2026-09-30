@@ -596,6 +596,13 @@ REST_FRAMEWORK = {
 
 WAGTAILSNIPPETS_MENU_SHOW_ALL = True
 
+# Wagtail API pagination.
+# The default cap is 20 items per request. We raise it to 100 to make scripted
+# access to the API practical (for example with the `wt` / wagtail-cli client).
+# Both the v2 (`WAGTAILAPI_LIMIT_MAX`) and v3 (`WAGTAILAPI_LIMIT_MAX` via
+# `wagtail.api.v3.pagination`) endpoints honour this setting.
+WAGTAILAPI_LIMIT_MAX = int(env.get("WAGTAILAPI_LIMIT_MAX", 100))
+
 # The Django default for the maximum number of GET or POST parameters is 1000. For
 # especially large Wagtail pages with many fields, we need to override this. See
 # https://docs.wagtail.org/en/stable/releases/6.4.html#data-upload-max-number-fields-update
