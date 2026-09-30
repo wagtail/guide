@@ -69,15 +69,16 @@ Or both, in a single command:
 
 ### Using the Wagtail CLI
 
-The [Wagtail CLI](https://wagtail.github.io/wagtail-cli/) (`wt`, from the `wagtail-cli` package) lets you read and write content from the terminal, including via the Wagtail API. It is already a project dependency, so `uv run wt …` works out of the box.
+The [Wagtail CLI](https://wagtail.github.io/wagtail-cli/) (`wt`, from the `wagtail-cli` package) lets you read and write content from the terminal, including via the Wagtail API.
 
-It needs credentials to talk to a site. Copy the example configuration and fill in the API base URL and a token:
+To start, copy the example configuration and fill in the API base URL and a token (keep this private):
 
-    cp .wagtail-cli.toml.example .wagtail-cli.toml
+```bash
+cp .wagtail-cli.example.toml .wagtail-cli.toml
+# Generate a token.
+uv run wt api_tokens create --user=<username> --name=<token name>
 
-The `.wagtail-cli.toml` file is gitignored — it holds a token, so keep it local to your machine. For a local development server, mint a token with `uv run wt api_tokens create --user=<username> --name=<token name>` and use `http://localhost:8000/api/v3-preview/` as the base URL. To check the setup works:
-
-    just wt api whoami
+```
 
 ### Setting up development with Docker
 

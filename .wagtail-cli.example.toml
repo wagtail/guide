@@ -1,0 +1,5 @@
+# Configuration for [Wagtail CLI](https://wagtail.github.io/wagtail-cli/).
+
+url = "https://guide.wagtail.org/api/v3-preview/"
+# Security-sensitive, keep private.
+token = "wagtail_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
