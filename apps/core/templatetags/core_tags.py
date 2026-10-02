@@ -26,6 +26,8 @@ def header(context):
         "site_title": home.title,
         "current_page": context.get("page"),
         "annotated_list": Page.get_annotated_list_qs(pages),
+        "page": context.get("page"),
+        "request": context.get("request"),
     }
 
 

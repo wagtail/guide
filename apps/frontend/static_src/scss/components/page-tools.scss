@@ -1,11 +1,12 @@
 .page-tools {
     position: relative;
     z-index: 4;
-    display: flex;
+    display: none;
     justify-content: flex-end;
     margin-bottom: ($gutter * 2);
 
     @include media-query(large) {
+        display: flex;
         margin-bottom: ($gutter * 5);
     }
 }
