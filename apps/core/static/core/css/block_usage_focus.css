@@ -1,0 +1,5 @@
+.block-usage--highlight {
+    outline: 3px solid #ff9c00;
+    outline-offset: 2px;
+    transition: outline 0.3s ease;
+}

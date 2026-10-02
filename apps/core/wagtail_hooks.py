@@ -1,5 +1,7 @@
 import wagtail.admin.rich_text.editors.draftail.features as draftail_features
-from django.urls import reverse
+from django.templatetags.static import static
+from django.urls import path, reverse
+from django.utils.html import format_html
 from wagtail import hooks
 from wagtail.admin.menu import MenuItem
 from wagtail.admin.rich_text.converters.html_to_contentstate import (
@@ -7,11 +9,13 @@ from wagtail.admin.rich_text.converters.html_to_contentstate import (
 )
 from wagtail.admin.ui.components import Component
 from wagtail.models import Page
+from wagtail.permissions import page_permission_policy
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.views.snippets import SnippetViewSet
 from wagtail_ai.panels import AIDescriptionFieldPanel
 
 from apps.core.models.feedback import Feedback
+from apps.core.reports import BlockUsageReportView
 
 STYLE_GUIDE_URL = "https://github.com/wagtail/guide/blob/main/docs/style-guide.md"
 CONTRIBUTING_URL = "https://github.com/wagtail/guide/blob/main/CONTRIBUTING.md"
@@ -93,6 +97,49 @@ def register_agent_skills_help_menu_item():
         reverse("agent_skills_index"),
         icon_name="doc-empty",
         order=204,
+    )
+
+
+class BlockUsageReportMenuItem(MenuItem):
+    def is_shown(self, request):
+        return page_permission_policy.user_has_any_permission(
+            request.user, ["add", "change", "publish"]
+        )
+
+
+@hooks.register("register_reports_menu_item")
+def register_block_usage_report_menu_item():
+    return BlockUsageReportMenuItem(
+        "Annotated blocks usage",
+        reverse("block_usage_report"),
+        name="block-usage",
+        icon_name="doc-empty-inverse",
+        order=1300,
+    )
+
+
+@hooks.register("register_admin_urls")
+def register_block_usage_report_urls():
+    return [
+        path(
+            "reports/block-usage/",
+            BlockUsageReportView.as_view(),
+            name="block_usage_report",
+        ),
+        path(
+            "reports/block-usage/results/",
+            BlockUsageReportView.as_view(results_only=True),
+            name="block_usage_report_results",
+        ),
+    ]
+
+
+@hooks.register("insert_editor_js")
+def insert_block_focus_js():
+    return format_html(
+        '<link rel="stylesheet" href="{}">\n<script src="{}"></script>',
+        static("core/css/block_usage_focus.css"),
+        static("core/js/block_usage_focus.js"),
     )
 
 
