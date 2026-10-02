@@ -1,5 +1,9 @@
+import json
+
 from django.core.cache import cache
+from django.db import connection
 from django.test import TestCase
+from django.test.utils import CaptureQueriesContext
 from wagtail.models import Site
 
 from apps.core.factories import ContentPageFactory, HomePageFactory
@@ -28,8 +32,52 @@ class TestLLMsTxtViews(TestCase):
     def test_llms_full_txt_renders_pages(self):
         response = self.client.get("/llms-full.txt")
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response["Content-Type"], "text/markdown;charset=utf-8")
+        self.assertEqual(
+            response["Content-Type"],
+            "text/markdown;charset=utf-8",
+        )
         self.assertIn(self.content_page.title.encode(), response.content)
+
+    def test_llms_full_txt_does_not_fetch_body_per_page(self):
+        ContentPageFactory(
+            parent=self.home_page,
+            title="Second page",
+            body=json.dumps(
+                [{"type": "text", "value": "<p>Second page body content.</p>"}]
+            ),
+        )
+        ContentPageFactory(
+            parent=self.home_page,
+            title="Third page",
+            body=json.dumps(
+                [{"type": "text", "value": "<p>Third page body content.</p>"}]
+            ),
+        )
+        ContentPageFactory(
+            parent=self.home_page,
+            title="Fourth page",
+            body=json.dumps(
+                [{"type": "text", "value": "<p>Fourth page body content.</p>"}]
+            ),
+        )
+
+        cache.clear()
+
+        with CaptureQueriesContext(connection) as captured_queries:
+            response = self.client.get("/llms-full.txt")
+
+        self.assertEqual(response.status_code, 200)
+
+        body_queries = [
+            query["sql"]
+            for query in captured_queries
+            if 'FROM "core_contentpage"' in query["sql"] and '"body"' in query["sql"]
+        ]
+
+        self.assertLessEqual(len(body_queries), 1)
+        self.assertIn(b"Second page body content.", response.content)
+        self.assertIn(b"Third page body content.", response.content)
+        self.assertIn(b"Fourth page body content.", response.content)
 
     def test_responses_are_cached(self):
         for path, template_name in (

@@ -41,7 +41,7 @@ def invalidate_cache():
             cache.delete(get_cache_key(site_pk, template_name))
 
 
-def _render_llms_txt(request, template_name):
+def _render_llms_txt(request, template_name, defer_streamfields=True):
     sitemap = Sitemap(request)
     # Same site resolution as Sitemap.items(), so the cache key is in sync
     # with the pages being rendered.
@@ -49,7 +49,17 @@ def _render_llms_txt(request, template_name):
     key = get_cache_key(site.pk, template_name)
     content = cache.get(key)
     if content is None:
-        context = {"pages": sitemap.items()}
+        if defer_streamfields:
+            pages = sitemap.items()
+        else:
+            pages = (
+                site.root_page.get_descendants(inclusive=True)
+                .live()
+                .public()
+                .order_by("path")
+                .specific()
+            )
+        context = {"pages": pages}
         content = loader.get_template(template_name).render(context, request)
         cache.set(key, content, timeout=CACHE_TIMEOUT)
     return HttpResponse(content, content_type=RESPONSE_CONTENT_TYPE)
@@ -97,4 +107,4 @@ def llms_txt_view(request):
 
 @cache_control(max_age=3600)
 def llms_full_txt_view(request):
-    return _render_llms_txt(request, LLMS_FULL_TXT_TEMPLATE)
+    return _render_llms_txt(request, LLMS_FULL_TXT_TEMPLATE, defer_streamfields=False)
