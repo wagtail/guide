@@ -2,14 +2,15 @@ import json
 
 from bs4 import BeautifulSoup
 from django.http import HttpResponse
-from django.template import Context, Template
 from django.utils.functional import cached_property
 from django.utils.html import format_html
 from django.utils.text import slugify
 from wagtail.admin.panels import FieldPanel
 from wagtail.api import APIField
+from wagtail.blocks import StructValue
 from wagtail.fields import StreamField
 from wagtail.models import Page
+from wagtail.rich_text import RichText
 from wagtail.search import index
 from wagtail_ai.panels import AITitleFieldPanel
 
@@ -19,10 +20,22 @@ from apps.llms_txt.mixins import MarkdownRouteMixin
 from ..blocks import CONTENT_BLOCKS
 
 
+def get_rich_text_sources(body):
+    for block in body:
+        if isinstance(block.value, StructValue):
+            values = block.value.values()
+        else:
+            values = [block.value]
+        for value in values:
+            if isinstance(value, RichText):
+                yield value.source
+
+
 def create_table_of_contents(body):
-    template = Template("{% load wagtailcore_tags %}{% include_block body %}")
-    content = template.render(Context({"body": body}))
-    soup = BeautifulSoup(content, "lxml")
+    # Headings and their ids are stored in the rich text HTML, so read them
+    # from there rather than rendering the body a second time, which would
+    # repeat the database lookups for every link in it.
+    soup = BeautifulSoup("".join(get_rich_text_sources(body)), "lxml")
     headings = soup.select("h2,h3")
     toc = ""
     if headings:
