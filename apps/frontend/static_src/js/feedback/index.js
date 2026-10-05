@@ -1,26 +1,6 @@
 /* global gettext */
 import { Tooltip } from 'bootstrap';
-
-/**
- * Function to fetch cookie according to django docs
- * https://docs.djangoproject.com/en/4.1/howto/csrf/#acquiring-the-token-if-csrf-use-sessions-and-csrf-cookie-httponly-are-false
- *
- * @param {string} name
- * @returns {string?}
- */
-function getCookie(name) {
-  const cookies = (document.cookie || '')
-    .split(';')
-    .map((cookie) => cookie.trim());
-
-  const foundCookie = cookies.find(
-    (cookie) => cookie.substring(0, name.length + 1) === name + '=',
-  );
-
-  return foundCookie
-    ? decodeURIComponent(foundCookie.substring(name.length + 1))
-    : null;
-}
+import { getCsrfToken } from '../csrf-token';
 
 /**
  * Code to enable tooltip according to
@@ -53,7 +33,7 @@ export const handleFeedback = () => {
           feedback,
         }),
         headers: {
-          'X-CSRFToken': getCookie('csrftoken'),
+          'X-CSRFToken': getCsrfToken(),
           'Content-type': 'application/json; charset=UTF-8',
         },
       });
@@ -80,7 +60,7 @@ export const handleFeedback = () => {
           feedback_text: feedbackText.value,
         }),
         headers: {
-          'X-CSRFToken': getCookie('csrftoken'),
+          'X-CSRFToken': getCsrfToken(),
           'Content-type': 'application/json; charset=UTF-8',
         },
       });
