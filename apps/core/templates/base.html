@@ -45,7 +45,7 @@
 
         <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
         <link rel="api-catalog" href="/.well-known/api-catalog">
-        <link rel="service-desc" type="application/vnd.oai.openapi+json;version=3.1" href="/api/v3-preview/openapi.json">
+        <link rel="service-desc" type="application/vnd.oai.openapi+json;version=3.1" href="{% url 'wagtailapi_v3:openapi-json' %}">
 
         {% if page.has_markdown_route %}
             <link rel="alternate" type="text/markdown;charset=utf-8" href="{{ page.get_site.root_url }}{% routablepageurl page 'markdown' %}" />

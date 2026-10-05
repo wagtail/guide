@@ -1,6 +1,7 @@
 from django.http import HttpResponseNotFound, JsonResponse
 from django.http.response import Http404
 from django.template import loader
+from django.urls import reverse
 
 from apps.llms_txt.negotiation import (
     MARKDOWN_CONTENT_TYPE,
@@ -20,27 +21,23 @@ OPENAPI_CONTENT_TYPE = "application/vnd.oai.openapi+json;version=3.1"
 def api_catalog(request):
     """Serve the API catalog document (RFC 9727) for the public v3 API."""
     root_url = request.build_absolute_uri("/").rstrip("/")
-    api_url = f"{root_url}/api/v3-preview"
 
     linkset = {
         "linkset": [
             {
-                "anchor": f"{api_url}/",
+                "anchor": f"{root_url}{reverse('wagtailapi_v3:list_pages')}",
                 "item": [
-                    {"href": f"{api_url}/pages/"},
-                    {"href": f"{api_url}/redirects/"},
-                    {"href": f"{api_url}/documents/"},
-                    {"href": f"{api_url}/images/"},
+                    {"href": f"{root_url}{reverse('wagtailapi_v3:list_pages')}"},
                 ],
                 "service-desc": [
                     {
-                        "href": f"{api_url}/openapi.json",
+                        "href": f"{root_url}{reverse('wagtailapi_v3:openapi-json')}",
                         "type": OPENAPI_CONTENT_TYPE,
                     }
                 ],
                 "service-doc": [
                     {
-                        "href": f"{api_url}/docs/",
+                        "href": f"{root_url}{reverse('wagtailapi_v3:openapi-view')}",
                         "type": "text/html",
                     }
                 ],

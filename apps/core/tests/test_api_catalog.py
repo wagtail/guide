@@ -21,15 +21,13 @@ class TestAPICatalog(TestCase):
         _, linkset = self.get_linkset()
         self.assertEqual(
             [entry["anchor"] for entry in linkset["linkset"]],
-            ["http://testserver/api/v3-preview/"],
+            ["http://testserver/api/v3-preview/pages/"],
         )
 
     def test_lists_public_v3_endpoints(self):
         _, linkset = self.get_linkset()
         items = {item["href"] for item in linkset["linkset"][0]["item"]}
-        for path in ("pages/", "redirects/", "documents/", "images/"):
-            with self.subTest(path=path):
-                self.assertIn(f"http://testserver/api/v3-preview/{path}", items)
+        self.assertEqual(items, {"http://testserver/api/v3-preview/pages/"})
 
     def test_describes_the_api(self):
         _, linkset = self.get_linkset()
