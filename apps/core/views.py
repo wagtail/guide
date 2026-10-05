@@ -56,3 +56,10 @@ def render_page_not_found(request, path=None):
 
 def page_not_found(request, exception):
     return render_page_not_found(request, get_page_path(request))
+
+
+def preview_page_not_found(request, path=""):
+    """
+    Render the 404 handler as if `path` was not found, for local development.
+    """
+    return render_page_not_found(request, path)
