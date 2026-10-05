@@ -1,7 +1,7 @@
 """Shared glossary helpers for the Promptfoo translation eval.
 
 Reads the Wagtail admin translation glossaries exported by
-`just eval-glossary <lang>` (prompts/evals/translations-inspect_ai/glossary/<lang>.json),
+`just eval-glossary <lang>` (content/evals/translations-inspect_ai/glossary/<lang>.json),
 and mirrors the UI label extraction in apps/core/translator.py.
 """
 

@@ -1,5 +1,5 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
-# LLM translator eval — Promptfoo counterpart of prompts/evals/translations-inspect_ai/.
+# LLM translator eval — Promptfoo counterpart of content/evals/translations-inspect_ai/.
 #
 # Prerequisite: export the glossaries once per language:
 #   just eval-glossary is de fr pt-br ar
@@ -17,8 +17,8 @@ prompts:
 providers:
   - id: openai:chat:deepseek-v4-flash-0731
     config: &scaleway
-      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
-      apiKey: '{{ env.SCW_SECRET_KEY }}'
+      apiBaseUrl: "https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1"
+      apiKey: "{{ env.SCW_SECRET_KEY }}"
       temperature: 0
       # Reasoning models spend output tokens on thinking before the answer;
       # the default max_tokens truncates their visible output.

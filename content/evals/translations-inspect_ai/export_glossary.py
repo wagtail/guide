@@ -7,10 +7,10 @@ the Inspect eval, which runs outside the project environment.
 
 Usage (from the project root, one file per language code):
 
-    uv run python prompts/evals/translations-inspect_ai/export_glossary.py ar is fr
+    uv run python content/evals/translations-inspect_ai/export_glossary.py ar is fr
     # or: just eval-glossary ar is fr
 
-Output: prompts/evals/translations-inspect_ai/glossary/<lang>.json  ({"Collection": "Safn", ...})
+Output: content/evals/translations-inspect_ai/glossary/<lang>.json  ({"Collection": "Safn", ...})
 """
 
 import json

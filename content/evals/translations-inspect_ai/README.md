@@ -33,7 +33,7 @@ live from Django's merged translation catalog (which includes Wagtail's own
 mirrors this exactly, from a JSON export of the same catalog:
 
 ```sh
-just eval-glossary ar        # writes prompts/evals/translations-inspect_ai/glossary/ar.json
+just eval-glossary ar        # writes content/evals/translations-inspect_ai/glossary/ar.json
 just eval-glossary ar is fr  # one file per language code
 ```
 
@@ -55,7 +55,7 @@ Then browse per-sample transcripts, scores, and token usage:
 just eval-view
 ```
 
-Logs land in `prompts/evals/translations-inspect_ai/logs/` (gitignored; `.eval` files are also
+Logs land in `content/evals/translations-inspect_ai/logs/` (gitignored; `.eval` files are also
 readable programmatically with `inspect_ai.log.read_eval_log`).
 
 ## What's scored
@@ -79,10 +79,10 @@ readable programmatically with `inspect_ai.log.read_eval_log`).
   custom scorer again — start without it.
 - Rules that don't apply to a sample (e.g. no glossary term in the source)
   count as a pass rather than being excluded from the denominator.
-- The dataset is `prompts/evals/translations/segments.yaml`, shared with the
+- The dataset is `content/evals/translations/segments.yaml`, shared with the
   Promptfoo eval: segments extracted verbatim from real guide content
-  (`prompts/content/en/how-to-guides/manage-documents.md` and
-  `prompts/content/en/releases/new-in-wagtail-7-4.md`), in the HTML form the
+  (`content/en/how-to-guides/manage-documents.md` and
+  `content/en/releases/new-in-wagtail-7-4.md`), in the HTML form the
   translator receives from wagtail-localize. Each entry is a Promptfoo test
   case (`description`, `vars.text`, `metadata.id`/`metadata.source`);
   `translation_task.py` maps them to Inspect Samples. Regenerate from live

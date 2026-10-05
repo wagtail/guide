@@ -1,13 +1,13 @@
 """
 Export real translatable segments in the shared eval dataset format.
 
-Optional — a hand-picked prompts/evals/translations/segments.yaml (extracted
+Optional — a hand-picked content/evals/translations/segments.yaml (extracted
 from real guide content) is checked in. Use this to regenerate it from actual
 page content (the output is a JSON array, which is valid YAML):
 
     docker compose exec -T web python manage.py shell -c \
-        "exec(open('prompts/evals/translations-inspect_ai/export_segments.py').read())" \
-        > prompts/evals/translations/segments.yaml
+        "exec(open('content/evals/translations-inspect_ai/export_segments.py').read())" \
+        > content/evals/translations/segments.yaml
 """
 
 import json

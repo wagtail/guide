@@ -24,6 +24,6 @@ select = [
 # Standalone management/CLI scripts: they print to the console and import
 # Django models after the shell bootstrap, so those rules don't apply.
 [lint.per-file-ignores]
-"prompts/evals/**/*.py" = ["T20", "E402"]
+"content/evals/**/*.py" = ["T20", "E402"]
 
 fixable = ["C4", "E", "F", "I", "UP"]

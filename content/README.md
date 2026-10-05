@@ -13,18 +13,18 @@ In addition to AI integrations within Django/Wagtail, the project also uses [Pro
 Use Promptfoo to check whether the project’s llms.txt content helps in answering common questions about the site.
 
 ```bash
-promptfoo eval -c prompts/evals/llms-txt/llms-txt.yaml
+promptfoo eval -c content/evals/llms-txt/llms-txt.yaml
 ```
 
 ## Wagtail AI prompts
 
 ```bash
-promptfoo eval -c prompts/evals/page-meta.yaml
+promptfoo eval -c content/evals/page-meta.yaml
 ```
 
 ## Website contents
 
-We version the site’s contents to simplify experimentation with different AI prompts. Run `./prompts/content/fetch_content.py && npm run format` to retrieve the latest copy.
+We version the site’s contents to simplify experimentation with different AI prompts. Run `./content/fetch_content.py && npm run format` to retrieve the latest copy.
 
 ### Versioned content
 

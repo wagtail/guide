@@ -84,15 +84,15 @@ compilemessages:
 
 # Evaluate translation quality of candidate LLMs with Inspect AI (Scaleway).
 eval-translations *ARGS:
-    ./prompts/evals/translations-inspect_ai/translation_task.py "$@"
+    ./content/evals/translations-inspect_ai/translation_task.py "$@"
 
 # Export Wagtail admin UI translations as eval glossaries, per language code.
 eval-glossary *LANGS="ar":
-    uv run python prompts/evals/translations-inspect_ai/export_glossary.py {{ LANGS }}
+    uv run python content/evals/translations-inspect_ai/export_glossary.py {{ LANGS }}
 
 # Run the Promptfoo translation eval across all candidate models (Scaleway).
 eval-promptfoo *ARGS:
-    npx --yes promptfoo@latest eval -c prompts/evals/translations/translations.yaml "$@"
+    npx --yes promptfoo@latest eval -c content/evals/translations/translations.yaml "$@"
 
 # Browse Promptfoo translation eval results.
 eval-promptfoo-view:
@@ -100,4 +100,4 @@ eval-promptfoo-view:
 
 # Browse translation eval results in the Inspect viewer.
 eval-view:
-    uvx --from inspect-ai --python 3.12 inspect view --log-dir prompts/evals/translations-inspect_ai/logs
+    uvx --from inspect-ai --python 3.12 inspect view --log-dir content/evals/translations-inspect_ai/logs

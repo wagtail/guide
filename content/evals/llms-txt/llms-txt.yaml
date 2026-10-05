@@ -1,7 +1,7 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
 prompts:
   # Separate prompts with more or less context to
-  - file://prompts/support-with-instructions.txt
+  - file://./support-with-instructions.txt
   - file://./support-with-llms.txt
   - file://./support-with-llms-full.txt
 providers:
@@ -18,12 +18,12 @@ providers:
   #     apiKey: not-needed
   - id: openai:chat:mistral-small-3.2-24b-instruct-2506
     config:
-      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
-      apiKey: '{{ env.SCW_SECRET_KEY }}'
+      apiBaseUrl: "https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1"
+      apiKey: "{{ env.SCW_SECRET_KEY }}"
   - id: openai:chat:gpt-oss-120b
     config:
-      apiBaseUrl: 'https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1'
-      apiKey: '{{ env.SCW_SECRET_KEY }}'
+      apiBaseUrl: "https://api.scaleway.ai/{{ env.SCW_DEFAULT_PROJECT_ID }}/v1"
+      apiKey: "{{ env.SCW_SECRET_KEY }}"
   - id: anthropic:messages:claude-opus-4-5-20251101
 defaultTest:
   options:
@@ -91,5 +91,5 @@ tests:
         value:
           - https://guide.wagtail.org/en/concepts/accessibility-features/
           - rich text
-          - '?'
-          - '/'
+          - "?"
+          - "/"

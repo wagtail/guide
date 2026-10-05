@@ -23,8 +23,8 @@ apps/core/translator.py. Export the glossary for a language first:
 
 Run it directly (uv resolves the inline dependencies):
 
-    ./prompts/evals/translations-inspect_ai/translation_task.py
-    ./prompts/evals/translations-inspect_ai/translation_task.py --limit 2 --target-language Icelandic --lang-code is
+    ./content/evals/translations-inspect_ai/translation_task.py
+    ./content/evals/translations-inspect_ai/translation_task.py --limit 2 --target-language Icelandic --lang-code is
 
 or via just:
 
