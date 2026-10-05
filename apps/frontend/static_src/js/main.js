@@ -1,5 +1,5 @@
 /* global ngettext, interpolate */
-import debounce from 'lodash.debounce';
+import { debounce } from './debounce';
 import '../scss/main.scss';
 import './theme-detect';
 import { initSectionLink } from './section-link';
