@@ -10,6 +10,7 @@ from wagtail.api.v3.urls import api as wagtail_api_v3
 from wagtail.contrib.sitemaps.views import sitemap
 from wagtail.documents import urls as wagtaildocs_urls
 
+from apps.core import views as core_views
 from apps.guide.api import api_router
 from apps.llms_txt import views as llms_txt_views
 from apps.search import views as search_views
@@ -29,6 +30,11 @@ urlpatterns = [
         name="openapi_schema",
     ),
     path("sitemap.xml", sitemap),
+    path(
+        ".well-known/api-catalog",
+        core_views.api_catalog,
+        name="api_catalog",
+    ),
     path("llms.txt", llms_txt_views.llms_txt_view, name="llms_txt"),
     path("llms-full.txt", llms_txt_views.llms_full_txt_view, name="llms_full_txt"),
     path(
