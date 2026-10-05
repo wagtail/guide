@@ -8,7 +8,6 @@ from wagtail.models import Page
 from apps.llms_txt.mixins import MarkdownRouteMixin
 
 from ..blocks import HOME_BLOCKS
-from ..views import Custom404
 
 
 class HomePage(MarkdownRouteMixin, Page):
@@ -32,14 +31,6 @@ class HomePage(MarkdownRouteMixin, Page):
         APIField("introduction", writable=True),
         APIField("sections", writable=True),
     ]
-
-    def route(self, request, path_components):
-        try:
-            return super().route(request, path_components)
-        except Http404:
-            raise Custom404(
-                fallback_pages=self.get_fallback_pages(request, path_components)
-            )
 
     def get_fallback_pages(self, request, path_components):
         # No fallback for main locale.
