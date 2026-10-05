@@ -121,7 +121,6 @@ export default defineConfig({
             '*.html',
             // Not covered by the previous Prettier setup, and noisy to reformat.
             '*.md',
-            '*.toml',
         ],
     },
     test: {
