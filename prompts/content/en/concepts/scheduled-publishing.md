@@ -1,3 +1,8 @@
+---
+title: 'Scheduled publishing'
+last_modified: '2025-12-18'
+---
+
 # Scheduled publishing
 
 Page URL: https://guide.wagtail.org/en/concepts/scheduled-publishing/

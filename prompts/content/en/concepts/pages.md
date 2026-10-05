@@ -1,3 +1,9 @@
+---
+title: 'Pages'
+description: "You can use Wagtail Pages to organize the content of your Wagtail websites. It\u0027s common for a typical website to have multiple web pages, and the web pages themselves can have several sections. The same is true for Wagtail pages."
+last_modified: '2024-10-18'
+---
+
 # Pages
 
 Page URL: https://guide.wagtail.org/en/concepts/pages/

@@ -1,3 +1,9 @@
+---
+title: 'New in Wagtail 5.1'
+description: 'Here are highlights from Wagtail 5.0. For more details, view the full v5.0 release notes.'
+last_modified: '2023-08-01'
+---
+
 # New in Wagtail 5.1
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-5-1/

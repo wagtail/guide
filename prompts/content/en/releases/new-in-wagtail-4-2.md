@@ -1,3 +1,9 @@
+---
+title: 'New in Wagtail 4.2'
+description: "With Wagtail 4.0, 4.1, and now 4.2 \u2013 we\u0027ve added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team."
+last_modified: '2023-02-07'
+---
+
 # New in Wagtail 4.2
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-4-2/

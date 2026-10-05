@@ -1,3 +1,9 @@
+---
+title: 'Manage users and roles'
+description: 'As an administrator, a common task will be adding, modifying or removing user profiles.'
+last_modified: '2025-07-30'
+---
+
 # Manage users and roles
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/manage-users-and-roles/

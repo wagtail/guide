@@ -1,6 +1,14 @@
+---
+title: 'New in Wagtail 7.3'
+description: 'New features and other highlights from Wagtail 7.3: autosave, llms.txt, image performance'
+last_modified: '2026-08-20'
+---
+
 # New in Wagtail 7.3
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-7-3/
+
+> New features and other highlights from Wagtail 7.3: autosave, llms.txt, image performance
 
 Here are highlights from Wagtail 7.3. For full technical details, view the complete [v7.3 release notes](https://docs.wagtail.org/en/latest/releases/7.3.html).
 
@@ -30,7 +38,7 @@ For users of Large Language Models (LLMs), the user guide contents are available
 
 - [llms.txt](https://guide.wagtail.org/llms.txt), an LLM-focused index of all site contents.
 - [llms-full.txt](https://guide.wagtail.org/llms-full.txt), a full copy of the documentation
-- [llms-prompt.txt](https://guide.wagtail.org/llms-prompt.txt), an opinionated prompt you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
+- [Wagtail guide support](https://guide.wagtail.org/.well-known/agent-skills/wagtail-guide-support/SKILL.md), an opinionated agent skill you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
 
 View our [About page](/en/about/) for more information.
 

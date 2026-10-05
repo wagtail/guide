@@ -1,3 +1,9 @@
+---
+title: 'Overview'
+description: "If you\u0027re brand new to Wagtail, we recommend you go through our guides in sequence. Otherwise, you can click through the different categories below to learn more about different aspects of Wagtail."
+last_modified: '2024-06-20'
+---
+
 # Overview
 
 Page URL: https://guide.wagtail.org/en/getting-started/overview/
@@ -20,6 +26,6 @@ This documentation uses the URL [www.example.com](https://www.example.com/) to r
 
 ## Log in to the admin interface
 
-Editors start by logging into the [Admin interface](/en/concepts/wagtail-interfaces/). You can access the login page, by appending **_/admin_** to the end of your root URL. For example, **_www.example.com/admin_**. On the login page, enter your username and password and click **Sign in**.
+Editors start by logging into the [Admin interface](/en/concepts/wagtail-interfaces/). You can access the login page, by appending _**/admin**_ to the end of your root URL. For example, _**www.example.com/admin**_. On the login page, enter your username and password and click **Sign in**.
 
 ![Screenshot of "Sign in to Wagtail" screen, with username, password, "Remember me" fields, a "Forgotten password?" link, and a submit button. Shows the Wagtail logo at the bottom, and has a gradient background from teal to indigo](https://guide-media.wagtail.org/images/Screenshot_of_22Sign_in_to_Wagtail22_screen_wi.width-900_zfnbcw5.png)

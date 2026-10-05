@@ -1,3 +1,8 @@
+---
+title: 'New in Wagtail 5.2'
+last_modified: '2024-02-05'
+---
+
 # New in Wagtail 5.2
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-5-2/

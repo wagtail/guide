@@ -1,3 +1,9 @@
+---
+title: 'Browser compatibility'
+description: 'For the best experience and security, we recommend that you keep your browser up to date.'
+last_modified: '2023-01-12'
+---
+
 # Browser compatibility
 
 Page URL: https://guide.wagtail.org/en/reference/browser-compatibility/

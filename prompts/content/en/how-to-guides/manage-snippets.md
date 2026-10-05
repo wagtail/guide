@@ -1,3 +1,9 @@
+---
+title: 'Manage snippets'
+description: 'Snippets allow you to create elements on a website once and reuse them in multiple places.'
+last_modified: '2025-11-05'
+---
+
 # Manage snippets
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/manage-snippets/

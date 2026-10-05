@@ -1,3 +1,9 @@
+---
+title: 'Page status'
+description: 'Page status has to do with the current state of your pages. Your pages can be in one of seven different states.'
+last_modified: '2025-12-18'
+---
+
 # Page status
 
 Page URL: https://guide.wagtail.org/en/concepts/page-status/

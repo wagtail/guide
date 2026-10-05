@@ -1,3 +1,8 @@
+---
+title: 'New in Wagtail 7.0'
+last_modified: '2025-05-07'
+---
+
 # New in Wagtail 7.0
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-7-0/

@@ -1,3 +1,9 @@
+---
+title: 'Configure workflows for moderation'
+description: 'Workflows allow you to configure how moderation works on your site. Workflows are sequences of tasks, all of which must be approved before the workflow completes (by default, this results in the publication of the page, but depends on your site settings).'
+last_modified: '2024-06-21'
+---
+
 # Configure workflows for moderation
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/configure-workflows-for-moderation/

@@ -1,3 +1,8 @@
+---
+title: 'Manage forms'
+last_modified: '2025-01-14'
+---
+
 # Manage forms
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/manage-forms/

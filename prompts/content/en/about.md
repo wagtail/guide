@@ -1,3 +1,9 @@
+---
+title: 'About'
+description: 'The User Guide is a website to help content editors, moderators, administrators, and other users learn how to use the Wagtail content management system (CMS).'
+last_modified: '2026-07-10'
+---
+
 # About
 
 Page URL: https://guide.wagtail.org/en/about/
@@ -12,11 +18,11 @@ For users of Large Language Models (LLMs), the user guide contents are available
 
 - [llms.txt](https://guide.wagtail.org/llms.txt), an LLM-focused index of all site contents.
 - [llms-full.txt](https://guide.wagtail.org/llms-full.txt), a full copy of the documentation
-- [llms-prompt.txt](https://guide.wagtail.org/llms-prompt.txt), an opinionated prompt you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
+- [Wagtail guide support skill](https://guide.wagtail.org/.well-known/agent-skills/wagtail-guide-support/SKILL.md), an opinionated agent skill you can copy-paste into your preferred AI tool so it answers questions based on the site’s contents.
 
 Let us know if this is useful to you in our [llms.txt feedback discussion thread](https://github.com/wagtail/wagtail/discussions/13648).
 
-## Community resources
+## **Other resources**
 
 Beyond the user guide documentation pages, here are other opportunities to find out more about Wagtail, contribute to the project, and chat with others in our community.
 

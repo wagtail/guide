@@ -1,3 +1,8 @@
+---
+title: 'New in Wagtail 6.1'
+last_modified: '2024-05-09'
+---
+
 # New in Wagtail 6.1
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-6-1/
@@ -28,7 +33,7 @@ With this work, we hope to increase the consistency of the user experience acros
 
 ![Editing interface for Welcome to the Wagtail Bakery, in snug mode](https://guide-media.wagtail.org/images/Editing_interface_for_Welcome_to_the_Wagtail_B.width-900.png)
 
-Wagtail now provides a way for you to control the information density of the admin interface, via your [user profile preferences](<>).
+Wagtail now provides a way for you to control the information density of the admin interface, via your user profile preferences.
 
 The new setting allows switching between the “default” density and a new “snug” mode, which reduces the spacing and size of UI elements. To switch Snug mode on, go to your Account settings and under **Theme Preferences** change your **Density** preference from "Default" to "Snug".
 

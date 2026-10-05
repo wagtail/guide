@@ -1,3 +1,9 @@
+---
+title: 'Wagtail user guide'
+description: 'This documentation is written for anyone creating content or managing content production in Wagtail. It covers everything you can expect when using a standard Wagtail site.'
+last_modified: '2026-08-20'
+---
+
 # Wagtail user guide
 
 Page URL: https://guide.wagtail.org/en/
@@ -5,6 +11,10 @@ Page URL: https://guide.wagtail.org/en/
 > This documentation is written for anyone creating content or managing content production in Wagtail. It covers everything you can expect when using a standard Wagtail site.
 
 Welcome to the Wagtail user guide! The guide is here to help content editors, moderators, administrators, and other users learn how to use the Wagtail content management system (CMS).
+
+---
+
+📣 check out our upcoming [Wagtail Space 2026 conference](https://wagtail.org/wagtail-space-2026/) on 18-20 November 📣
 
 ## [Getting started](https://guide.wagtail.org/en/getting-started/)
 

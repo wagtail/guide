@@ -1,0 +1,12 @@
+{
+  "$schema": "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  "skills": [
+    {
+      "name": "wagtail-guide-support",
+      "type": "skill-md",
+      "description": "A professional support helper for Wagtail CMS users. Use when answering questions about using the Wagtail CMS admin interface as an editor, moderator, or administrator, with the Wagtail Guide as authoritative documentation. Not for Wagtail developer questions.",
+      "url": "/.well-known/agent-skills/wagtail-guide-support/SKILL.md",
+      "digest": "sha256:be8ee60d0d5df4a5b82b33ac8dd2ee497a74202f574bf99b2f5e98e6de1d43cd"
+    }
+  ]
+}

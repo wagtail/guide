@@ -1,3 +1,9 @@
+---
+title: 'New in Wagtail 6.2'
+description: 'Highlights from the new admin features in Wagtail 6.2'
+last_modified: '2024-10-15'
+---
+
 # New in Wagtail 6.2
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-6-2/

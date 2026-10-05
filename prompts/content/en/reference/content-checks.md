@@ -1,12 +1,20 @@
+---
+title: 'Content checks'
+description: 'A built-in content quality checker system to meet high standards on accessibility, SEO, tone of voice, and any other aspect of content performance.'
+last_modified: '2026-07-22'
+---
+
 # Content checks
 
 Page URL: https://guide.wagtail.org/en/reference/content-checks/
+
+> A built-in content quality checker system to meet high standards on accessibility, SEO, tone of voice, and any other aspect of content performance.
 
 Content quality checks are present in the CMS. Here are the checks available out of the box. Those checks are based on the content of the page as seen by users of the site, not what is editable in the CMS.
 
 ## Content metrics
 
-Wagtail calculates multiple metrics based on the page’s content, live in the page editor.
+Added in Wagtail 6.2: Wagtail calculates multiple metrics based on the page’s content, live in the page editor.
 
 ![Page editor for "Bread and Circuses" page. The form to the left, and to the right the Checks side panel is expanded, showing different metrics about the page](https://guide-media.wagtail.org/images/Page_editor_for_22Bread_and_Circuses22_page._T.width-900.png)
 
@@ -35,7 +43,7 @@ Other languages default to the "English" reading speed factor.
 
 ### **Readability**
 
-We use the [LIX readability formula](<https://en.wikipedia.org/wiki/Lix_(readability_test)>), based on length of words and sentences. Content scores worse when there is a high proportion of long sentences and long words.
+Added in Wagtail 7.2: We use the [LIX readability formula](<https://en.wikipedia.org/wiki/Lix_(readability_test)>), based on length of words and sentences. Content scores worse when there is a high proportion of long sentences and long words.
 
 To better understand the score for a page, copy the content as it’s displayed to site users into an external tool like the [Hemingway Editor](https://hemingwayapp.com/). This will give you more granular feedback on which parts of the content might need improvements.
 

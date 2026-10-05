@@ -2,7 +2,26 @@
 
 > This documentation is written for anyone creating content or managing content production in Wagtail. It covers everything you can expect when using a standard Wagtail site.
 
-View the full site contents: [llms-full.txt](https://guide.wagtail.org/llms-full.txt)
+**When to use this guide:** questions about using the Wagtail CMS admin interface as an editor, moderator, or administrator:
+
+- Creating, editing, copying, moving, deleting, and scheduling pages, including previews, comments, page history, and privacy.
+- Managing images, documents, snippets, forms, collections, and redirects.
+- Managing users and their roles, and configuring moderation workflows.
+- Finding content in the admin, promoting search results, and using reports.
+- Understanding CMS concepts such as page status, Wagtail interfaces, content checks, and accessibility features.
+- Account settings and browser compatibility.
+- What changed for CMS users in a specific Wagtail release.
+
+**When not to use this guide:** developer-focused questions such as writing Wagtail or Django code, defining page models or StreamField blocks, configuring project settings, deployment, or using the developer API. Use the developer documentation at https://docs.wagtail.org/ for those.
+
+Features and available options can vary between Wagtail sites because sites may be configured or customised by their implementers. When a user's admin interface differs from this guide, say so rather than guessing.
+
+**How to use this guide:**
+
+1. Find relevant pages in the table of contents below.
+2. Fetch the Markdown version of each page from the linked URL.
+3. For broad questions that span many topics, fetch llms-full.txt (listed under Optional), which contains every page in one file.
+4. When citing a page, use the `Page URL` given at the top of its Markdown.
 
 ## Table of Contents
 
@@ -32,11 +51,12 @@ View the full site contents: [llms-full.txt](https://guide.wagtail.org/llms-full
 - [Scheduled publishing](https://guide.wagtail.org/en/concepts/scheduled-publishing/markdown/)
 - [Reference](https://guide.wagtail.org/en/reference/markdown/): Our reference material gets to the point, giving the key information at a glance.
 - [Browser compatibility](https://guide.wagtail.org/en/reference/browser-compatibility/markdown/): For the best experience and security, we recommend that you keep your browser up to date.
-- [Content checks](https://guide.wagtail.org/en/reference/content-checks/markdown/)
+- [Content checks](https://guide.wagtail.org/en/reference/content-checks/markdown/): A built-in content quality checker system to meet high standards on accessibility, SEO, tone of voice, and any other aspect of content performance.
 - [Account settings](https://guide.wagtail.org/en/reference/account-settings/markdown/): User account settings are specific to your account. Includes user preferences, notification settings, and more.
 - [Releases](https://guide.wagtail.org/en/releases/markdown/): Here are overviews of changes made to Wagtail in specific new releases.
-- [New in Wagtail 7.4](https://guide.wagtail.org/en/releases/new-in-wagtail-7-4/markdown/): Explore Wagtail 7.4: refined autosave, draft‑saving incomplete blocks, customizable listings, enhanced search, content checks, UI tweaks, and security fixes.
-- [New in Wagtail 7.3](https://guide.wagtail.org/en/releases/new-in-wagtail-7-3/markdown/)
+- [New in Wagtail 8.0](https://guide.wagtail.org/en/releases/new-in-wagtail-8-0/markdown/): Discover Wagtail 8.0: the new v3 API to create, edit, and publish content programmatically, plus improvements to the site switcher, workflow details, and image handling.
+- [New in Wagtail 7.4](https://guide.wagtail.org/en/releases/new-in-wagtail-7-4/markdown/): Explore Wagtail 7.4: refined autosave, draft‑saving incomplete blocks, customizable listings, enhanced search, content checks, UI tweaks, and security fixes.
+- [New in Wagtail 7.3](https://guide.wagtail.org/en/releases/new-in-wagtail-7-3/markdown/): New features and other highlights from Wagtail 7.3: autosave, llms.txt, image performance
 - [New in Wagtail 7.2](https://guide.wagtail.org/en/releases/new-in-wagtail-7-2/markdown/)
 - [New in Wagtail 7.1](https://guide.wagtail.org/en/releases/new-in-wagtail-7-1/markdown/)
 - [New in Wagtail 7.0](https://guide.wagtail.org/en/releases/new-in-wagtail-7-0/markdown/)
@@ -51,3 +71,9 @@ View the full site contents: [llms-full.txt](https://guide.wagtail.org/llms-full
 - [New in Wagtail 4.2](https://guide.wagtail.org/en/releases/new-in-wagtail-4-2/markdown/): With Wagtail 4.0, 4.1, and now 4.2 – we've added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team.
 - [New in Wagtail 4.1](https://guide.wagtail.org/en/releases/new-in-wagtail-4-1/markdown/): With Wagtail 4.0 and 4.1, we've added many substantial updates to the Wagtail page editor as well as some other tools that support every member of a content team.
 - [About](https://guide.wagtail.org/en/about/markdown/): The User Guide is a website to help content editors, moderators, administrators, and other users learn how to use the Wagtail content management system (CMS).
+
+## Optional
+
+- [llms-full.txt](https://guide.wagtail.org/llms-full.txt): Every page of this guide in one file.
+- [wagtail-guide-support](https://guide.wagtail.org/.well-known/agent-skills/wagtail-guide-support/SKILL.md): Agent skill for answering Wagtail CMS user questions with this guide. Load it into any agent that supports Agent Skills.
+- [Agent skills index](https://guide.wagtail.org/.well-known/agent-skills/index.json): Agent Skills discovery index for this site.

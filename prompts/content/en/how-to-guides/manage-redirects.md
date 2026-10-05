@@ -1,3 +1,9 @@
+---
+title: 'Manage redirects'
+description: 'A redirect ensures that when a page is no longer available (404), the visitor and search engines are sent to a new page.'
+last_modified: '2024-12-06'
+---
+
 # Manage redirects
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/manage-redirects/

@@ -1,3 +1,9 @@
+---
+title: 'Manage images'
+description: 'If you want to edit, add or remove images from the CMS outside of the individual pages you can do so from the Images interface.'
+last_modified: '2026-01-15'
+---
+
 # Manage images
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/manage-images/

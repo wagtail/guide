@@ -1,3 +1,8 @@
+---
+title: 'Accessibility features'
+last_modified: '2026-07-10'
+---
+
 # Accessibility features
 
 Page URL: https://guide.wagtail.org/en/concepts/accessibility-features/
@@ -42,14 +47,14 @@ On all screens, we support:
 
 - ? to show keyboard shortcuts
 - / to focus the search
-- [ to expand or collapse the main sidebar.
+- \[ to expand or collapse the main sidebar.
 - Esc to close modal dialogs
 
 On the Edit screen, Wagtail supports additional page-level keyboard shortcuts. These shortcuts are as follows:
 
 - **⌘ + P** / **Ctrl + P**: This shortcut opens up the Live preview. With the Live preview, you can view the structure of your content in different screen sizes.
 - **⌘ + S** / **Ctrl + S**: This shortcut saves your work as a draft.
-- ] to expand or collapse the mini-map.
+- \] to expand or collapse the mini-map.
 
 ### Rich text keyboard shortcuts
 
@@ -65,16 +70,16 @@ Here are common formatting shortcuts:
   - Bold: Ctrl + B / ⌘ + B, or insert `**`
   - Italic: Ctrl + I / ⌘ + I, or insert `_`
   - Underline: Ctrl + U / ⌘ + U
-  - Monospace (code): Ctrl + J / ⌘ + J, or insert ```
+  - Monospace (code): Ctrl + J / ⌘ + J, or insert `` ` ``
   - Strikethrough: Ctrl + ⇧ + X / ⌘ + ⇧ + X, or insert `~`
   - Superscript: Ctrl + . / ⌘ + .
   - Subscript: Ctrl + , / ⌘ + ,
 - Block formatting (if enabled)
-  - Apply heading style [1-6]: Ctrl + Alt + [1-6] / ⌘ + ⌥ + [1-6], or insert `##`
+  - Apply heading style \[1-6\]: Ctrl + Alt + \[1-6\] / ⌘ + ⌥ + \[1-6\], or insert `##`
   - Numbered list: Ctrl + ⇧ + 7 / ⌘ + ⇧ + 7, or insert `1.`
   - Bulleted list: Ctrl + ⇧ + 8 / ⌘ + ⇧ + 8, or insert `-`
   - Blockquote: insert `>`
-  - Code block: insert `````
+  - Code block: insert ` ``` `
 - Insert a comment (if enabled): Ctrl + Alt + M / ⌘ + ⌥ + M
 
 ### Bulk selection shortcut
@@ -87,7 +92,7 @@ The Edit screen accessibility features are specific to the [Edit screen](/en/con
 
 ### Mini-map
 
-The mini-map or “minimap” helps to easily navigate the sections of your content. Placed on the right-hand side of the [Edit screen](https://guide.wagtail.org/en/concepts/wagtail-interfaces/#edit-screen), it contains a list of the different sections within the form and directly links to each of them. Toggle it with the dedicated button, or the ] keyboard shortcut.
+The mini-map or “minimap” helps to easily navigate the sections of your content. Placed on the right-hand side of the [Edit screen](/en/concepts/wagtail-interfaces/), it contains a list of the different sections within the form and directly links to each of them. Toggle it with the dedicated button, or the \] keyboard shortcut.
 
 The Mini-map also indicates the type of the different sections: headings, subheadings, and blocks within the content.
 
@@ -126,7 +131,7 @@ Browser-level user interface settings include the following accessibility settin
 
 ### Sidebar expanded/collapsed
 
-You can expand or collapse the [Sidebar](https://guide.wagtail.org/en/how-to-guides/find-your-way-around/#the-sidebar). Collapsing the Sidebar allows the [Dashboard](https://guide.wagtail.org/en/how-to-guides/find-your-way-around/#the-dashboard) to take up more screen space of the browser. This can also be done with the [ keyboard shortcut.
+You can expand or collapse the [Sidebar](/en/how-to-guides/find-your-way-around/). Collapsing the Sidebar allows the [Dashboard](/en/how-to-guides/find-your-way-around/) to take up more screen space of the browser. This can also be done with the \[ keyboard shortcut.
 
 ![The Wagtail sidebar with its minimize control highlighted](https://guide-media.wagtail.org/images/The_Wagtail_sidebar_with_its_minimize_control_.width-900_EMtj2DT.png)
 
@@ -138,7 +143,7 @@ Highlighting text within a rich text field displays a toolbar above the highligh
 
 ### **Mini-map expanded/collapsed**
 
-Like the _sidebar expanded/collapsed_, this feature keeps your mini-map opened or closed on your Edit screen, and will be saved across all of your editing sessions Toggle it with the dedicated button, or the ] keyboard shortcut.
+Like the _sidebar expanded/collapsed_, this feature keeps your mini-map opened or closed on your Edit screen, and will be saved across all of your editing sessions Toggle it with the dedicated button, or the \] keyboard shortcut.
 
 ![Page editor for Breads and Circuses blog page with the minimap opened to the right focused on the toggle](https://guide-media.wagtail.org/images/Page_editor_for_Breads_and_Circuses_blog_page_.width-900_Ve7MRSW.png)
 
@@ -146,7 +151,7 @@ Like the _sidebar expanded/collapsed_, this feature keeps your mini-map opened o
 
 The Edit screen has a top header. This toolbar contains the following options:
 
-- **Status**: This indicates the current status of your page. For more information on the various page statuses available, read [Page status](https://guide.wagtail.org/en/concepts/page-status/).
+- **Status**: This indicates the current status of your page. For more information on the various page statuses available, read [Page status](https://guide.wagtail.org/en-latest/concepts/page-status/).
 - **Live Preview**: Live preview allows you to preview content on different screen sizes.
 - **Checks**: Automated checks flagging possible issues with the page content.
 - **Comment**: This notifies and shows you the comments made on your content by teammates.

@@ -1,3 +1,8 @@
+---
+title: 'New in Wagtail 6.4'
+last_modified: '2026-07-10'
+---
+
 # New in Wagtail 6.4
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-6-4/
@@ -31,7 +36,7 @@ This is also supported for other types of orderable content, such as form fields
 
 ![Search terms report, with 4 terms displayed](https://guide-media.wagtail.org/images/Search_terms_report.width-900.png)
 
-For users of [promoted search results](https://guide.wagtail.org/en/how-to-guides/promote-search-results/), a new search terms report is available in the admin interface. This report provides:
+For users of [promoted search results](/en/how-to-guides/promote-search-results/), a new search terms report is available in the admin interface. This report provides:
 
 - A list of terms searched by website users.
 - Count of search occurrences for each term.

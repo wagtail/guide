@@ -1,3 +1,9 @@
+---
+title: 'Promote search results'
+description: 'Promoted search results are an optional Wagtail feature. For details of how to enable them on a Wagtail installation, see Promoted search results.'
+last_modified: '2025-01-22'
+---
+
 # Promote search results
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/promote-search-results/

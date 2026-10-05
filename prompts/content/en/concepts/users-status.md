@@ -1,3 +1,9 @@
+---
+title: 'Users status'
+description: 'A Wagtail user can either be active or inactive. A user is active if they have the right permissions to log in and perform any action in the Admin interface.'
+last_modified: '2023-01-27'
+---
+
 # Users status
 
 Page URL: https://guide.wagtail.org/en/concepts/users-status/

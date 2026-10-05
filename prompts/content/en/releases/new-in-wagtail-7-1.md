@@ -1,3 +1,8 @@
+---
+title: 'New in Wagtail 7.1'
+last_modified: '2025-10-14'
+---
+
 # New in Wagtail 7.1
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-7-1/
@@ -38,7 +43,7 @@ Live previews have better support for headless websites. Where configured, you c
 
 ![Keyboard shortcuts dialog](https://guide-media.wagtail.org/images/Keyboard_shortcuts_dialog_alyQsTE.width-900.png)
 
-Two new additional [keyboard shortcuts](/en/concepts/accessibility-features/) have been introduced to simplify navigation within the Wagtail admin interface: [ to toggle the main sidebar, and ] to toggle the minimap in the page editor. Users can also disable keyboard shortcuts entirely in their profile settings if preferred. There are more shortcuts to come in future releases.
+Two new additional [keyboard shortcuts](/en/concepts/accessibility-features/) have been introduced to simplify navigation within the Wagtail admin interface: \[ to toggle the main sidebar, and \] to toggle the minimap in the page editor. Users can also disable keyboard shortcuts entirely in their profile settings if preferred. There are more shortcuts to come in future releases.
 
 Thank you to [Dhruvi Patel](https://www.linkedin.com/in/dhruvi-patel-55043412a/) for implementing those features as part of the [Google Summer of Code program](https://wagtail.org/blog/four-contributors-for-gsoc-2025/)!
 

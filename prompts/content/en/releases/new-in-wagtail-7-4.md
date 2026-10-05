@@ -1,3 +1,9 @@
+---
+title: 'New in Wagtail 7.4'
+description: "Explore Wagtail\u202f7.4: refined autosave, draft\u2011saving incomplete blocks, customizable listings, enhanced search, content checks, UI tweaks, and security fixes."
+last_modified: '2026-07-10'
+---
+
 # New in Wagtail 7.4
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-7-4/
@@ -54,7 +60,7 @@ This release also includes a range of smaller enhancements that improve day-to-d
 - Long workflow task names are now truncated in admin tables, keeping listings tidy.
 - The **Add child page** button is hidden when limits configured by your developer prevent more children of that type.
 - Choice fields now display their human-friendly label in snippet and content listings, instead of the raw stored value.
-- The Pages menu in the [Sidebar](https://markdownlivepreview.com/en/how-to-guides/find-your-way-around/) now closes correctly when you click the sidebar search.
+- The Pages menu in the [Sidebar](/en/how-to-guides/find-your-way-around/) now closes correctly when you click the sidebar search.
 - Hover and focus styles for the comment button on the page title have been refined.
 - Users with the right permissions can now reliably cancel a workflow task that's in progress.
 

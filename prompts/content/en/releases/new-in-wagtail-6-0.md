@@ -1,3 +1,8 @@
+---
+title: 'New in Wagtail 6.0'
+last_modified: '2024-05-07'
+---
+
 # New in Wagtail 6.0
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-6-0/

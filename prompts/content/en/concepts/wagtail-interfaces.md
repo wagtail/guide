@@ -1,3 +1,9 @@
+---
+title: 'Wagtail interfaces'
+description: 'A Wagtail interface is a screen in the Wagtail portal where you can manage a particular content type. The following are the several interfaces available to you in the Wagtail CMS.'
+last_modified: '2026-01-09'
+---
+
 # Wagtail interfaces
 
 Page URL: https://guide.wagtail.org/en/concepts/wagtail-interfaces/

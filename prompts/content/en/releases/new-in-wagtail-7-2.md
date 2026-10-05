@@ -1,3 +1,8 @@
+---
+title: 'New in Wagtail 7.2'
+last_modified: '2026-07-10'
+---
+
 # New in Wagtail 7.2
 
 Page URL: https://guide.wagtail.org/en/releases/new-in-wagtail-7-2/
@@ -20,7 +25,7 @@ Admin and document listings now support filtering by usage count. Image choosers
 
 ![Page editor for "Bread and Circuses" page. The form to the left, and to the right the Checks side panel is expanded, showing different metrics about the page](https://guide-media.wagtail.org/images/Page_editor_for_22Bread_and_Circuses22_page._T.width-900.png)
 
-Built-in [content checks](https://guide.wagtail.org/en/reference/content-checks/) now include a readability score, based on length of words and sentences in the page content. The content metrics also now provide an explainer panel detailing how they are calculated.
+Built-in [content checks](/en/reference/content-checks/) now include a readability score, based on length of words and sentences in the page content. The content metrics also now provide an explainer panel detailing how they are calculated.
 
 ## Quick access to first validation error
 

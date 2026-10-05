@@ -1,3 +1,9 @@
+---
+title: 'Reports'
+description: 'Reports are lists of pages that match a specific search. These lists give you an overview of the different actions taken on your website.'
+last_modified: '2026-07-10'
+---
+
 # Reports
 
 Page URL: https://guide.wagtail.org/en/concepts/reports/
@@ -43,8 +49,8 @@ Aging pages lists all pages on the site from oldest to newest. This helps conten
 
 ## Page types usage report
 
-This report provides an overview of all page types in use on the site, each with a count of how many pages it has, and a link to a sample page of that type.
+Added in Wagtail 6.0: This report provides an overview of all page types in use on the site, each with a count of how many pages it has, and a link to a sample page of that type.
 
 ## Search terms report
 
-For sites set up to [promote search results](/en/how-to-guides/promote-search-results/), this report displays all recorded search terms and their number of views.
+Added in Wagtail 6.4: For sites set up to [promote search results](/en/how-to-guides/promote-search-results/), this report displays all recorded search terms and their number of views.

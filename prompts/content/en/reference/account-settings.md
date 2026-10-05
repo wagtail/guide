@@ -1,3 +1,9 @@
+---
+title: 'Account settings'
+description: 'User account settings are specific to your account. Includes user preferences, notification settings, and more.'
+last_modified: '2026-07-10'
+---
+
 # Account settings
 
 Page URL: https://guide.wagtail.org/en/reference/account-settings/

@@ -1,3 +1,9 @@
+---
+title: 'Find your way around'
+description: 'This section describes the different pages that you will see as you navigate around the CMS, and how you can find the content that you are looking for.'
+last_modified: '2025-01-22'
+---
+
 # Find your way around
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/find-your-way-around/

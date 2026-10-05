@@ -1,3 +1,9 @@
+---
+title: 'Manage documents'
+description: 'Documents such as PDFs can be managed from the Documents interface, available in the left-hand menu.'
+last_modified: '2025-07-30'
+---
+
 # Manage documents
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/manage-documents/

@@ -1,3 +1,8 @@
+---
+title: 'Manage pages'
+last_modified: '2026-07-10'
+---
+
 # Manage pages
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/manage-pages/
@@ -10,7 +15,7 @@ To create a new page, click the **Add** button at the top of page. This creates 
 
 ### Autosave
 
-When making changes to a new or existing page, the page editor will periodically automatically save the page contents. This functionality is available for all page types by default, as well as [snippets](/en/how-to-guides/manage-snippets/) when configured by site implementers.
+Added in Wagtail 7.3: When making changes to a new or existing page, the page editor will periodically automatically save the page contents. This functionality is available for all page types by default, as well as [snippets](/en/how-to-guides/manage-snippets/) when configured by site implementers.
 
 ![Autosave indicator in page editor, saved status](https://guide-media.wagtail.org/images/Autosave_indicator_-_saved.original.width-900.png)
 
@@ -63,7 +68,7 @@ Clicking the "+" Add button, the block chooser appears. It allows the user to ch
 
 ![Block chooser in StreamField, with a block being previewed](https://guide-media.wagtail.org/images/block_chooser_and_preview_focus.width-900.png)
 
-If configured, blocks can display a preview of how they would display on the site and description of their intended use.
+Added in Wagtail 6.4: If configured, blocks can display a preview of how they would display on the site and description of their intended use.
 
 ## Create and edit comments
 

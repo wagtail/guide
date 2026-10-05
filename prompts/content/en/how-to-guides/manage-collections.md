@@ -1,3 +1,9 @@
+---
+title: 'Manage collections'
+description: "Access to specific sets of images and documents can be controlled by setting up \u2018collections\u2019."
+last_modified: '2024-10-28'
+---
+
 # Manage collections
 
 Page URL: https://guide.wagtail.org/en/how-to-guides/manage-collections/
