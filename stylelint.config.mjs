@@ -6,17 +6,6 @@
 export default {
   extends: ['@wagtail/stylelint-config-wagtail'],
   rules: {
-    /**
-     * Only require mixins with no block of their own (e.g. `@include fs(s)`) to
-     * come before declarations. The shared config also requires block-level
-     * includes such as `@include media-query(large) { … }` to come first, but
-     * moving those above base declarations flips the CSS cascade at the
-     * configured breakpoints.
-     */
-    'order/order': [
-      { type: 'at-rule', name: 'include', hasBlock: false },
-      'declarations',
-    ],
     'scale-unlimited/declaration-strict-value': [
       ['color', '/-color/', 'fill', 'stroke'],
       {

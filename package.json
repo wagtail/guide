@@ -19,7 +19,7 @@
     "bootstrap": "^5.3.8"
   },
   "devDependencies": {
-    "@wagtail/stylelint-config-wagtail": "^2.0.0",
+    "@wagtail/stylelint-config-wagtail": "^2.0.1",
     "browserslist": "^4.29.3",
     "happy-dom": "^20.14.5",
     "sass": "^1.49.8",

@@ -17,7 +17,8 @@
     border-radius: 0;
     border-start-end-radius: $border-radius--m;
     border-end-end-radius: $border-radius--m;
-    padding-inline: ($gutter * 0.4) ($gutter * 0.4);
+    padding-inline-start: ($gutter * 0.4);
+    padding-inline-end: ($gutter * 0.4);
     height: 100%;
   }
 
@@ -60,10 +61,11 @@
   }
 
   .dropdown-item {
+    --bs-dropdown-item-padding-y: 0.35rem;
+
     @include fs(xs);
     box-sizing: border-box;
     cursor: pointer;
-    --bs-dropdown-item-padding-y: 0.35rem;
 
     &:hover,
     &:active {
