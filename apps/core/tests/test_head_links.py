@@ -28,6 +28,17 @@ class TestAICatalogLink(TestCase):
                     '<link rel="api-catalog" href="/.well-known/api-catalog">',
                 )
 
+    def test_pages_link_to_the_api_description(self):
+        for url in (self.home_page.url, self.content_page.url):
+            with self.subTest(url=url):
+                response = self.client.get(url)
+                self.assertContains(
+                    response,
+                    '<link rel="service-desc" '
+                    'type="application/vnd.oai.openapi+json;version=3.1" '
+                    'href="/api/v3-preview/openapi.json">',
+                )
+
     def test_ai_catalog_is_served(self):
         response = self.client.get("/.well-known/ai-catalog.json")
         self.assertEqual(response.status_code, 200)
