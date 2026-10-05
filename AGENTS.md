@@ -42,7 +42,7 @@ Defined in `ruff.toml`, `vite.config.ts` (Oxlint and Oxfmt), `.stylelintrc.json`
 
 -   **Python**: 4 spaces indent, `ruff format` (line-length 88, target py312)
 -   **JavaScript**: `oxlint` via Vite+ (`vp lint`), with `correctness`, `suspicious` and `perf` rules as errors
--   **Formatting**: `oxfmt` via Vite+ (`vp fmt`) for JS, SCSS, JSON and YAML (`singleQuote`, `trailingComma: all`)
+-   **Formatting**: `oxfmt` via Vite+ (`vp fmt`) for JS, SCSS, JSON, YAML and Markdown (`singleQuote`, `trailingComma: all`)
 -   **SCSS/CSS**: `stylelint` with `@wagtail/stylelint-config-wagtail` (strict color values)
 -   **Tests**: Python modules named `test_*.py`, classes named `Test*`, methods named `test_*`. JavaScript tests use Vitest (`vp test`), in `*.test.js` files next to the code
 

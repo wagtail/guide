@@ -43,7 +43,7 @@ id = "oxfmt"
 name = "oxfmt"
 entry = "npx vp fmt"
 language = "system"
-types_or = ["css", "scss", "javascript", "json", "yaml", "toml"]
+types_or = ["css", "scss", "javascript", "json", "yaml", "toml", "markdown"]
 
 [[repos.hooks]]
 id = "oxlint"
