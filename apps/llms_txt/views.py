@@ -10,8 +10,9 @@ from wagtail.models import Site
 SKILL_NAME = "wagtail-guide-support"
 SKILL_DESCRIPTION = (
     "A professional support helper for Wagtail CMS users. "
-    "Use when answering Wagtail CMS user questions "
-    "with the Wagtail Guide as authoritative documentation."
+    "Use when answering questions about using the Wagtail CMS admin interface "
+    "as an editor, moderator, or administrator, with the Wagtail Guide as "
+    "authoritative documentation. Not for Wagtail developer questions."
 )
 SCHEMA_URI = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
 
@@ -49,7 +50,7 @@ def _render_llms_txt(request, template_name):
     key = get_cache_key(site.pk, template_name)
     content = cache.get(key)
     if content is None:
-        context = {"pages": sitemap.items()}
+        context = {"pages": sitemap.items(), "skill_name": SKILL_NAME}
         content = loader.get_template(template_name).render(context, request)
         cache.set(key, content, timeout=CACHE_TIMEOUT)
     return HttpResponse(content, content_type=RESPONSE_CONTENT_TYPE)
