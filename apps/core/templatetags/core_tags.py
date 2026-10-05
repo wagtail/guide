@@ -37,15 +37,19 @@ def hreflangs(context):
         return {}
 
     # Each language version must list itself as well as all other versions,
-    # using its own localised URL (slugs are translated per locale).
+    # using its own localised URL (slugs are translated per locale). A page can
+    # be live and public yet have no URL (full_url is None) when it isn't
+    # reachable through a site, so only list versions that resolve to a URL.
     translations = [page, *page.get_translations().live().public()]
 
     alternates = [
         (translation.locale.language_code, translation.full_url)
         for translation in translations
+        if translation.full_url
     ]
 
-    # Fallback for users whose language doesn't match any version.
+    # Fallback for users whose language doesn't match any version: prefer the
+    # default language, else fall back to this page's own URL when it has one.
     x_default = next(
         (
             url

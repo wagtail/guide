@@ -1,4 +1,5 @@
 from django.test import TestCase
+from wagtail.models import Page
 
 from apps.core.factories import ContentPageFactory, HomePageFactory, LocaleFactory
 
@@ -99,5 +100,39 @@ class TestHreflangs(TestCase):
         self.assertNotIn("erste-schritte", "\n".join(lines))
         self.assertIn(
             f'<link rel="alternate" hreflang="en" href="{self.en_page.full_url}">',
+            lines,
+        )
+
+    def test_translation_without_url_is_omitted(self):
+        # A translation can be live and public yet have no URL (full_url is
+        # None) when it isn't reachable through a site. It must be omitted
+        # rather than rendered with a literal href="None".
+        ar_locale = LocaleFactory(language_code="ar")
+        ar_home = self.home.copy_for_translation(ar_locale)
+        ar_home.save_revision().publish()
+        ar_page = self.en_page.copy_for_translation(ar_locale)
+        ar_page.slug = "al-bidaya"
+        ar_page.save()
+        ar_page.save_revision().publish()
+
+        # Move the live, public translation out from under the site root so it
+        # resolves to no URL, while staying live.
+        root = Page.get_first_root_node()
+        ar_page.move(root, pos="last-child")
+        ar_page.refresh_from_db()
+        self.assertIsNone(ar_page.full_url)
+        self.assertTrue(ar_page.live)
+
+        lines = self.get_hreflangs(self.en_page.url)
+
+        self.assertNotIn('href="None"', "\n".join(lines))
+        self.assertNotIn('hreflang="ar"', "\n".join(lines))
+        self.assertIn(
+            f'<link rel="alternate" hreflang="en" href="{self.en_page.full_url}">',
+            lines,
+        )
+        self.assertIn(
+            f'<link rel="alternate" hreflang="x-default" '
+            f'href="{self.en_page.full_url}">',
             lines,
         )
