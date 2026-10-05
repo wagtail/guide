@@ -51,3 +51,15 @@ class TestAICatalogLink(TestCase):
         urls = {entry["url"] for entry in entries}
         self.assertIn("https://guide.wagtail.org/llms.txt", urls)
         self.assertIn("https://guide.wagtail.org/llms-full.txt", urls)
+
+    def test_ai_catalog_lists_the_openapi_description(self):
+        response = self.client.get("/.well-known/ai-catalog.json")
+        content = b"".join(response.streaming_content)
+        entries = json.loads(content)["entries"]
+        openapi = [e for e in entries if e["type"].startswith("application/vnd.oai.")]
+        self.assertEqual(len(openapi), 1)
+        self.assertEqual(
+            openapi[0]["url"],
+            "https://guide.wagtail.org/api/v3-preview/openapi.json",
+        )
+        self.assertEqual(openapi[0]["auth"]["status"], "none")
