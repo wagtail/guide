@@ -1,8 +1,13 @@
+import json
+
 from django import template
+from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
 from wagtail.models import Page
 
 from apps.core.models import FooterContent, HomePage
+from apps.core.structured_data import build_graph
 
 register = template.Library()
 
@@ -80,3 +85,19 @@ def footer():
         obj = FooterContent.objects.first()
 
     return {"footer": obj}
+
+
+# Same escapes as Django's json_script, so content can't close the script tag.
+JSON_SCRIPT_ESCAPES = {ord(">"): "\\u003E", ord("<"): "\\u003C", ord("&"): "\\u0026"}
+
+
+@register.simple_tag(takes_context=True)
+def structured_data(context, site):
+    if not site:
+        return ""
+
+    data = build_graph(site, page=context.get("page"), request=context.get("request"))
+    payload = json.dumps(data).translate(JSON_SCRIPT_ESCAPES)
+    return format_html(
+        '<script type="application/ld+json">{}</script>', mark_safe(payload)
+    )
