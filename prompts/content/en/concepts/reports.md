@@ -32,10 +32,10 @@ Similar to the Workflows Report, you don't require high-level permissions to acc
 
 The Site history Report provides you with the history of all actions performed on your Wagtail website through the Admin interface. These actions include, but are not limited to the following:
 
--   Creating, publishing, unpublishing, copying, aliasing, and deleting your pages.
--   Saving your pages as drafts.
--   Locking and unlocking of pages.
--   Creating and editing redirects.
+- Creating, publishing, unpublishing, copying, aliasing, and deleting your pages.
+- Saving your pages as drafts.
+- Locking and unlocking of pages.
+- Creating and editing redirects.
 
 ## Aging pages report
 

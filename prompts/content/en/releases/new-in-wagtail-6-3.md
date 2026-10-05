@@ -22,11 +22,11 @@ CMS users can now control the level of contrast of UI elements in the admin inte
 
 This release follows through with “universal listings” user experience and design consistency improvements earlier in 2024, with the following features.
 
--   All create/edit admin forms now use a sticky submit button, for consistency and to speed up edits
--   Secondary form actions such as “Delete” are now in the header actions menu, for consistency and to make the actions more easily reachable for keyboard users
--   Documents and Images views now use universal listings styles
--   Page type usage, workflow usage, and workflow history views views also use universal listings styles
--   The forms pages listing now supports search and filtering
+- All create/edit admin forms now use a sticky submit button, for consistency and to speed up edits
+- Secondary form actions such as “Delete” are now in the header actions menu, for consistency and to make the actions more easily reachable for keyboard users
+- Documents and Images views now use universal listings styles
+- Page type usage, workflow usage, and workflow history views views also use universal listings styles
+- The forms pages listing now supports search and filtering
 
 ## HEIC / HEIF image upload support
 
@@ -40,11 +40,11 @@ To better support alternative text requirements for images, Wagtail now includes
 
 ## Other UI improvements
 
--   Snippets editing forms can now detect and flag unsaved edits to encourage saving.
--   The footer actions dropdown has been redesigned with larger text and increased color contrast.
--   Page privacy rules can now be set on pages within a section where the parent page already has its own rules.
--   Pasting text content with URLs within, automatically converts those URLs to links.
--   The admin interface now supports the Uyghur language.
+- Snippets editing forms can now detect and flag unsaved edits to encourage saving.
+- The footer actions dropdown has been redesigned with larger text and increased color contrast.
+- Page privacy rules can now be set on pages within a section where the parent page already has its own rules.
+- Pasting text content with URLs within, automatically converts those URLs to links.
+- The admin interface now supports the Uyghur language.
 
 ---
 

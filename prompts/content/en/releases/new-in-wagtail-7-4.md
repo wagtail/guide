@@ -24,8 +24,8 @@ Once enabled by a developer, the [page explorer](/en/how-to-guides/manage-pages/
 
 Wagtail's [built-in search](/en/how-to-guides/manage-pages/) has been upgraded with several enhancements:
 
--   Fuzzy matching is now supported on PostgreSQL, so small typos still surface relevant results.
--   Searching and filtering can reach deeper into related content, with no nesting limit.
+- Fuzzy matching is now supported on PostgreSQL, so small typos still surface relevant results.
+- Searching and filtering can reach deeper into related content, with no nesting limit.
 
 ## **Content quality checker enhancements**
 
@@ -33,9 +33,9 @@ Wagtail's [built-in search](/en/how-to-guides/manage-pages/) has been upgraded w
 
 The built-in [content checks](/en/reference/content-checks/) get three improvements in this release:
 
--   Issues found by the checker are now shown as annotations directly inside the preview panel, so you can see exactly which part of the page they relate to.
--   A new SEO check flags pages with an empty meta description, helping search engines and link previews show useful summaries of your pages.
--   Custom checks built by your developers can now retrieve content metrics, opening up more ways to give you feedback as you write.
+- Issues found by the checker are now shown as annotations directly inside the preview panel, so you can see exactly which part of the page they relate to.
+- A new SEO check flags pages with an empty meta description, helping search engines and link previews show useful summaries of your pages.
+- Custom checks built by your developers can now retrieve content metrics, opening up more ways to give you feedback as you write.
 
 ![Page editor with content checker issue reported for an empty meta description](https://guide-media.wagtail.org/images/Content_checker_meta_description_empty.width-900.png)
 
@@ -43,20 +43,20 @@ The built-in [content checks](/en/reference/content-checks/) get three improveme
 
 This release also includes a range of smaller enhancements that improve day-to-day editing:
 
--   Block-based content now lists block groups in the order developers defined them, making the **Add block** menu more predictable.
--   The **Collapse all** state in the page editor is preserved when you switch between editor tabs.
--   Mailto and anchor links pasted into rich text fields are now preserved, instead of being stripped.
--   The **Submit to workflow** menu now uses the workflow's name when creating a new page.
--   Page descriptions are better aligned in the **Add subpage** view.
--   More embed providers are supported out of the box, including Flourish data visualizations and Heyzine flipbooks.
--   The page type usage view now supports custom listings, and lets you create new pages of that type directly from the view.
--   Image blocks correctly update alt text after you switch to a new image with the **Decorative** option turned off.
--   Long workflow task names are now truncated in admin tables, keeping listings tidy.
--   The **Add child page** button is hidden when limits configured by your developer prevent more children of that type.
--   Choice fields now display their human-friendly label in snippet and content listings, instead of the raw stored value.
--   The Pages menu in the [Sidebar](https://markdownlivepreview.com/en/how-to-guides/find-your-way-around/) now closes correctly when you click the sidebar search.
--   Hover and focus styles for the comment button on the page title have been refined.
--   Users with the right permissions can now reliably cancel a workflow task that's in progress.
+- Block-based content now lists block groups in the order developers defined them, making the **Add block** menu more predictable.
+- The **Collapse all** state in the page editor is preserved when you switch between editor tabs.
+- Mailto and anchor links pasted into rich text fields are now preserved, instead of being stripped.
+- The **Submit to workflow** menu now uses the workflow's name when creating a new page.
+- Page descriptions are better aligned in the **Add subpage** view.
+- More embed providers are supported out of the box, including Flourish data visualizations and Heyzine flipbooks.
+- The page type usage view now supports custom listings, and lets you create new pages of that type directly from the view.
+- Image blocks correctly update alt text after you switch to a new image with the **Decorative** option turned off.
+- Long workflow task names are now truncated in admin tables, keeping listings tidy.
+- The **Add child page** button is hidden when limits configured by your developer prevent more children of that type.
+- Choice fields now display their human-friendly label in snippet and content listings, instead of the raw stored value.
+- The Pages menu in the [Sidebar](https://markdownlivepreview.com/en/how-to-guides/find-your-way-around/) now closes correctly when you click the sidebar search.
+- Hover and focus styles for the comment button on the page title have been refined.
+- Users with the right permissions can now reliably cancel a workflow task that's in progress.
 
 ## **Security and audit follow-ups**
 
@@ -68,6 +68,6 @@ Many thanks to the Sites Conformes team at DINUM for sponsoring the audit, and t
 
 We need feedback from our users!
 
--   Do you work on multilingual sites? Let us know about pain points in [Improving support for multilingual websites](https://github.com/wagtail/wagtail/discussions/13693).
+- Do you work on multilingual sites? Let us know about pain points in [Improving support for multilingual websites](https://github.com/wagtail/wagtail/discussions/13693).
 
 To learn about future enhancements ahead of time 👉️ check out the [Wagtail roadmap](https://wagtail.org/roadmap/), subscribe to the [Wagtail newsletter](https://wagtail.org/newsletter/), or read [Keeping up with upcoming changes in Wagtail](https://wagtail.org/blog/keeping-up-with-upcoming-changes-in-wagtail/).

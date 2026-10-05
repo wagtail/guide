@@ -10,10 +10,10 @@ Snippets allow you to create elements on a website once and reuse them in multip
 
 The use of snippets varies between websites. Wagtail developers use snippets for the following purposes:
 
--   For blog post authors. As a result, you can add them to multiple pages and manage them from one place.
--   For adverts. This way, you can apply them site-wide or on individual pages.
--   To manage links in a global area of the site. For example, in the footer.
--   For calls to action, such as newsletter sign-up blocks, that may be consistent across many different pages.
+- For blog post authors. As a result, you can add them to multiple pages and manage them from one place.
+- For adverts. This way, you can apply them site-wide or on individual pages.
+- To manage links in a global area of the site. For example, in the footer.
+- For calls to action, such as newsletter sign-up blocks, that may be consistent across many different pages.
 
 ## The Snippets menu
 

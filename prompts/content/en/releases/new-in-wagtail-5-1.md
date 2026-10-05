@@ -18,21 +18,21 @@ Wagtail now supports [AVIF](https://en.wikipedia.org/wiki/AVIF), a modern image 
 
 Wagtail now uses its modern tooltip and dropdown components across more of the interface, which addresses long-standing accessibility issues for keyboard, screen reader, and speech recognition users across:
 
--   Page listings actions under the “More” dropdown.
--   Bulk actions under the “More” dropdown.
--   Chooser buttons in forms
+- Page listings actions under the “More” dropdown.
+- Bulk actions under the “More” dropdown.
+- Chooser buttons in forms
 
 ## Dark mode improvements
 
 Following our [last release](/en/releases/new-in-wagtail-5-0/), we’ve made tweaks to our new dark theme across the CMS.
 
--   Update link/document rich text tooltips for consistency with the inline toolbar
--   Increase the contrast between the rich text / StreamField block picker and the page in dark mode
--   Add support for presenting the userbar (Wagtail button) in dark mode
--   Ensure taggit field type-ahead options show correctly in the dark mode theme
+- Update link/document rich text tooltips for consistency with the inline toolbar
+- Increase the contrast between the rich text / StreamField block picker and the page in dark mode
+- Add support for presenting the userbar (Wagtail button) in dark mode
+- Ensure taggit field type-ahead options show correctly in the dark mode theme
 
 ## General UI improvements
 
--   Auto-select the StreamField block when only one block type is declared
--   Adopt optimised Wagtail logo in the admin interface
--   Move comment notifications toggle to the comments side panel
+- Auto-select the StreamField block when only one block type is declared
+- Adopt optimised Wagtail logo in the admin interface
+- Move comment notifications toggle to the comments side panel

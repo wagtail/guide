@@ -16,8 +16,8 @@ Previews for StreamField blocks are now available. Once configured by a develope
 
 Improvements to alt text handling include:
 
--   **Default alt text for Image block**: When selecting a new image, Wagtail’s default Image block now automatically populates its contextual alt text using the image's description if set. This can also be configured by developers to retrieve alt text from a different field than the description.
--   **Alt text quality check**: Alt text quality checks are now enabled by default, picking up common problem patterns like file names in alt text
+- **Default alt text for Image block**: When selecting a new image, Wagtail’s default Image block now automatically populates its contextual alt text using the image's description if set. This can also be configured by developers to retrieve alt text from a different field than the description.
+- **Alt text quality check**: Alt text quality checks are now enabled by default, picking up common problem patterns like file names in alt text
 
 ### Drag-and-drop reordering for StreamField
 
@@ -33,8 +33,8 @@ This is also supported for other types of orderable content, such as form fields
 
 For users of [promoted search results](https://guide.wagtail.org/en/how-to-guides/promote-search-results/), a new search terms report is available in the admin interface. This report provides:
 
--   A list of terms searched by website users.
--   Count of search occurrences for each term.
+- A list of terms searched by website users.
+- Count of search occurrences for each term.
 
 This feature allows for better insights into user behavior and adjustments to search promotions.
 
@@ -42,12 +42,12 @@ This feature allows for better insights into user behavior and adjustments to se
 
 Other updates in this release include:
 
--   Better default headings and labels added for InlinePanel orderable items.
--   Translation of time zone options in the Account view across all supported languages.
--   Explicit labeling for the "server time zone" option in account settings.
--   Scrolling improvements in the page editor to always keep text visible while typing at the bottom of the screen.
--   Correct placement of comment buttons near date/time fields.
--   Breadcrumbs enabled in revisions compare view, generic template views, and the Account view.
+- Better default headings and labels added for InlinePanel orderable items.
+- Translation of time zone options in the Account view across all supported languages.
+- Explicit labeling for the "server time zone" option in account settings.
+- Scrolling improvements in the page editor to always keep text visible while typing at the bottom of the screen.
+- Correct placement of comment buttons near date/time fields.
+- Breadcrumbs enabled in revisions compare view, generic template views, and the Account view.
 
 ---
 

@@ -10,8 +10,8 @@ Wagtail 4.2 comes with gradual improvements on functionality previous added in [
 
 Continuing the changes introduced in the last release, snippets have two new capabilities matching what is possible with pages:
 
--   Locking – to prevent other users from editing a snippet.
--   [Workflows](/en/how-to-guides/configure-workflows-for-moderation/) – to structure content review on your site.
+- Locking – to prevent other users from editing a snippet.
+- [Workflows](/en/how-to-guides/configure-workflows-for-moderation/) – to structure content review on your site.
 
 ### Multiple chooser panel
 
@@ -33,15 +33,15 @@ Wagtail includes an accessibility checker built into the user bar. The checker c
 
 By default, the checker includes the following rules that are among the most common and critical accessibility issues to be violated by editors in Wagtail:
 
--   `empty-heading`: This rule checks for headings with no text content. Empty headings are confusing to screen readers users and should be avoided.
--   `p-as-heading`: This rule checks for paragraphs that are styled as headings. Paragraphs should not be styled as headings, as this can cause confusion for users who rely on headings to navigate content.
--   `heading-order`: This rule checks for incorrect heading order. Headings should be ordered in a logical and consistent manner, with the main heading (h1) followed by subheadings (h2, h3, etc.).
+- `empty-heading`: This rule checks for headings with no text content. Empty headings are confusing to screen readers users and should be avoided.
+- `p-as-heading`: This rule checks for paragraphs that are styled as headings. Paragraphs should not be styled as headings, as this can cause confusion for users who rely on headings to navigate content.
+- `heading-order`: This rule checks for incorrect heading order. Headings should be ordered in a logical and consistent manner, with the main heading (h1) followed by subheadings (h2, h3, etc.).
 
 ## Rich text improvements
 
 Following feedback from Wagtail users on [rich text UI improvements in Wagtail 4.0](https://docs.wagtail.org/en/stable/releases/4.0.html#rich-text-improvements-4), we have further refined the behavior of rich text fields to cater for different scenarios:
 
--   Users can now choose between an “inline” floating toolbar, and a fixed toolbar at the top of the editor. Both toolbars display all formatting options.
--   The ‘/’ command palette and block picker in rich text fields now contain all formatting options except text styles.
--   The ‘/’ command palette and block picker are now always available no matter where the cursor is placed, to support inserting content at any point within text, transforming existing content, and splitting StreamField blocks in the middle of a paragraph when needed.
--   The block picker interface now displays two columns so more options are visible without scrolling.
+- Users can now choose between an “inline” floating toolbar, and a fixed toolbar at the top of the editor. Both toolbars display all formatting options.
+- The ‘/’ command palette and block picker in rich text fields now contain all formatting options except text styles.
+- The ‘/’ command palette and block picker are now always available no matter where the cursor is placed, to support inserting content at any point within text, transforming existing content, and splitting StreamField blocks in the middle of a paragraph when needed.
+- The block picker interface now displays two columns so more options are visible without scrolling.

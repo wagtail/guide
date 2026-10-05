@@ -28,9 +28,9 @@ The current content's locale is applied in choosers by default, with the ability
 
 Here are smaller improvements which will make users’ lives better in the administration interface.
 
--   Pages can now be configured by developers to be private by default.
--   More of the rich text fields’ user interface labels are now translated.
--   The Keyboard shortcuts viewer under "Help" now documents the shortcut to add comments.
+- Pages can now be configured by developers to be private by default.
+- More of the rich text fields’ user interface labels are now translated.
+- The Keyboard shortcuts viewer under "Help" now documents the shortcut to add comments.
 
 ![Keyboard shortcuts panel within the Help menu](https://guide-media.wagtail.org/images/Keyboard_shortcuts_panel_within_the_Help_menu.width-900.png)
 

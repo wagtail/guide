@@ -44,10 +44,10 @@ If your webmaster or web developer gives you permission to perform moderation ac
 
 From the panel, you can perform the following actions:
 
--   Click the name of a page to edit that page.
--   Use the buttons to move the page to the next stage in your workflow by requesting changes to a page, approving the page, or approving the page with a comment.
--   Get a quick view of the page status by hovering over the indicator circles to get more information about the pending task. The indicator circles show a tick for a completed task or an empty circle for an incomplete one.
--   See how long a page has been waiting for review.
+- Click the name of a page to edit that page.
+- Use the buttons to move the page to the next stage in your workflow by requesting changes to a page, approving the page, or approving the page with a comment.
+- Get a quick view of the page status by hovering over the indicator circles to get more information about the pending task. The indicator circles show a tick for a completed task or an empty circle for an incomplete one.
+- See how long a page has been waiting for review.
 
 #### Your most recent edits
 

@@ -12,28 +12,28 @@ Forms management is an opt-in feature. For developer documentation, see [Form bu
 
 On a page type with forms support, add any necessary form fields. Here are supported field types:
 
--   Single line text
--   Multi-line text
--   Email
--   Number
--   URL
--   Checkbox
--   Checkboxes
--   Drop down
--   Multiple select
--   Radio buttons
--   Date
--   Date/time
--   Hidden field
+- Single line text
+- Multi-line text
+- Email
+- Number
+- URL
+- Checkbox
+- Checkboxes
+- Drop down
+- Multiple select
+- Radio buttons
+- Date
+- Date/time
+- Hidden field
 
 And here are the available field configuration options:
 
--   **Label**: The label of the field for users of the form
--   **Help text**: additional information about the field
--   **Required**: (on/off)
--   **Field type**
--   **Choices**: Comma or new line separated list of choices. Only applicable in checkboxes, radio and dropdown.
--   **Default value**: Comma or new line separated values supported for checkboxes.
+- **Label**: The label of the field for users of the form
+- **Help text**: additional information about the field
+- **Required**: (on/off)
+- **Field type**
+- **Choices**: Comma or new line separated list of choices. Only applicable in checkboxes, radio and dropdown.
+- **Default value**: Comma or new line separated values supported for checkboxes.
 
 Here is an example field configured to be required multi-line text:
 
@@ -49,9 +49,9 @@ Alongside the form fields, developers may configure a "Forms submissions panel" 
 
 For each form page, all submissions appear in a table, with configured fields. From there, you can:
 
--   Export submissions as XLSX (Microsoft Excel, Google Sheets, Apple Numbers) or CSV
--   Filter submissions by date
--   Order submissions by ascending or descending date
+- Export submissions as XLSX (Microsoft Excel, Google Sheets, Apple Numbers) or CSV
+- Filter submissions by date
+- Order submissions by ascending or descending date
 
 Here is a screenshot of this interface with sample content:
 
@@ -61,5 +61,5 @@ Here is a screenshot of this interface with sample content:
 
 To build accessible forms, we recommend to:
 
--   Keep the number of form fields small, avoiding adding fields unless they are necessary.
--   Provide help text, making it clear how specific fields are meant to be used.
+- Keep the number of form fields small, avoiding adding fields unless they are necessary.
+- Provide help text, making it clear how specific fields are meant to be used.

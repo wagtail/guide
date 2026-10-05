@@ -36,9 +36,9 @@ We introduce two new shortcuts, ? to open the keyboard shortcuts dialog, and / t
 
 ## Other UI improvements
 
--   We now support calculating content metrics without opening the preview panel.
--   The rich text toolbar now always shows above form action buttons.
--   We now use more consistent sentence format for error message.
+- We now support calculating content metrics without opening the preview panel.
+- The rich text toolbar now always shows above form action buttons.
+- We now use more consistent sentence format for error message.
 
 ## Feedback requests
 

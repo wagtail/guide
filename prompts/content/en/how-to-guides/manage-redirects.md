@@ -10,8 +10,8 @@ In the course of publishing and unpublishing pages, you eventually need to make 
 
 Wagtail considers two kinds of configurations for a redirect, depending on whether Permanent remains checked or not:
 
--   Permanent redirect (checked by default)
--   Temporary redirect
+- Permanent redirect (checked by default)
+- Temporary redirect
 
 For both redirect configurations, the visitor won’t notice a difference when visiting a page, but search engines react to these two configurations of redirect differently. In the case of a temporary redirect, a search engine keeps track of your old page and indexes the redirected page. However, with a permanent redirect, a search engine marks the old page as obsolete and considers the new page as a replacement.
 
@@ -47,7 +47,7 @@ This can also be done from the edit interface.
 
 From the Redirects interface, users can also:
 
--   Import new redirects from a CSV file (by default with "from" and "to" columns for each row)
--   Export existing redirects as CSV or XLSX
+- Import new redirects from a CSV file (by default with "from" and "to" columns for each row)
+- Export existing redirects as CSV or XLSX
 
 Note: Keep in mind that a redirect only initiates if the page is not found. It doesn't apply to existing pages (200), which resolves on your site.

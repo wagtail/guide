@@ -46,10 +46,10 @@ Wagtail’s block-based editing is called StreamField. It’s a key feature of t
 
 Within block-based StreamField, editors can:
 
--   Insert blocks – as a list where all blocks are of the same type, or as a stream with multiple supported block types.
--   Reorder blocks – with up and down controls, or drag and drop.
--   Duplicate blocks - to speed up content entry.
--   Remove blocks.
+- Insert blocks – as a list where all blocks are of the same type, or as a stream with multiple supported block types.
+- Reorder blocks – with up and down controls, or drag and drop.
+- Duplicate blocks - to speed up content entry.
+- Remove blocks.
 
 Within blocks, the same fields are used as other aspects of the page. Or often, blocks can be nested within other blocks.
 
@@ -112,10 +112,10 @@ Users are displayed as "active" in concurrent editing notifications until they s
 
 Users with publish permission on a page can set it to be private by clicking the ‘Change privacy’ control in the status panel. This sets a restriction on who is allowed to view the page, and its [child pages](/en/concepts/pages/). Several options are available:
 
--   **Public**: the page is accessible to anyone who can access the website.
--   **Accessible to any logged-in users:** The user must log in to view the page. All user accounts are granted access, regardless of permission level.
--   **Accessible with a shared password:** The user must enter the given shared password to view the page. This is appropriate for situations where you want to share a page with a trusted group of people, but giving them individual user accounts would be overkill. The same password is shared between all users, and this works independently of any user accounts that exist on the site.
--   **Accessible to users in specific groups:** The user must be logged in, and a member of one or more of the [specified groups](/en/how-to-guides/manage-users-and-roles/), in order to view the page.
+- **Public**: the page is accessible to anyone who can access the website.
+- **Accessible to any logged-in users:** The user must log in to view the page. All user accounts are granted access, regardless of permission level.
+- **Accessible with a shared password:** The user must enter the given shared password to view the page. This is appropriate for situations where you want to share a page with a trusted group of people, but giving them individual user accounts would be overkill. The same password is shared between all users, and this works independently of any user accounts that exist on the site.
+- **Accessible to users in specific groups:** The user must be logged in, and a member of one or more of the [specified groups](/en/how-to-guides/manage-users-and-roles/), in order to view the page.
 
 Warning: Shared passwords should not be used to protect sensitive content, as the password is shared between all users, and stored in plain text in the database. Where possible, it’s recommended to require users log in to access private page content.
 
@@ -173,5 +173,5 @@ Congratulations, you just aliased a page. You can now find your aliased page on 
 
 If you try to edit the aliased page, you get a notification that it's an alias of another page. To edit an aliased page, you have two options:
 
--   Edit the original page. This option changes both the original page and the aliased page.
--   Convert the alias page to an ordinary page, which is a copy of the original. If you choose this option, you must make manual changes to the alias page in order for it to be in sync with the original page.
+- Edit the original page. This option changes both the original page and the aliased page.
+- Convert the alias page to an ordinary page, which is a copy of the original. If you choose this option, you must make manual changes to the alias page in order for it to be in sync with the original page.

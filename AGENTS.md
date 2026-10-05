@@ -6,17 +6,17 @@ Important context for AI coding agents working on this project.
 
 > **Note:** Run commands via `just`, which invokes `uv` to manage the virtual environment automatically.
 
--   `just lint`: Lint the project.
--   `just format`: Format project files.
--   `just test`: Run backend (Django) and frontend (Vitest) tests.
--   `just translations`: Generate and compile translation strings.
+- `just lint`: Lint the project.
+- `just format`: Format project files.
+- `just test`: Run backend (Django) and frontend (Vitest) tests.
+- `just translations`: Generate and compile translation strings.
 
 ## Setup & run commands
 
--   `just backend`:Build the backend.
--   `just frontend`:Build the frontend.
--   `just buildfixtures`:Build the test fixtures.
--   `just run`: Run the development server.
+- `just backend`:Build the backend.
+- `just frontend`:Build the frontend.
+- `just buildfixtures`:Build the test fixtures.
+- `just run`: Run the development server.
 
 ## Docker setup
 
@@ -31,24 +31,24 @@ DJANGO_SETTINGS_MODULE=apps.guide.settings.dev
 
 ### Docker commands
 
--   `docker compose up --remove-orphans`: Build (if needed) and run the container.
--   `docker compose exec web bash`: Open a shell in the container. The container bundles Python
-    and Node, so the same `just` commands (e.g. `just backend`, `just frontend`) work from there.
--   `docker compose build`: Rebuild the image after a dependency change.
+- `docker compose up --remove-orphans`: Build (if needed) and run the container.
+- `docker compose exec web bash`: Open a shell in the container. The container bundles Python
+  and Node, so the same `just` commands (e.g. `just backend`, `just frontend`) work from there.
+- `docker compose build`: Rebuild the image after a dependency change.
 
 ## Coding style & naming conventions
 
 Defined in `ruff.toml`, `vite.config.ts` (Oxlint and Oxfmt), `.stylelintrc.json`:
 
--   **Python**: 4 spaces indent, `ruff format` (line-length 88, target py312)
--   **JavaScript**: `oxlint` via Vite+ (`vp lint`), with `correctness`, `suspicious` and `perf` rules as errors
--   **Formatting**: `oxfmt` via Vite+ (`vp fmt`) for JS, SCSS, JSON, YAML and Markdown (`singleQuote`, `trailingComma: all`)
--   **SCSS/CSS**: `stylelint` with `@wagtail/stylelint-config-wagtail` (strict color values)
--   **Tests**: Python modules named `test_*.py`, classes named `Test*`, methods named `test_*`. JavaScript tests use Vitest (`vp test`), in `*.test.js` files next to the code
+- **Python**: 4 spaces indent, `ruff format` (line-length 88, target py312)
+- **JavaScript**: `oxlint` via Vite+ (`vp lint`), with `correctness`, `suspicious` and `perf` rules as errors
+- **Formatting**: `oxfmt` via Vite+ (`vp fmt`) for JS, SCSS, JSON, YAML and Markdown (`singleQuote`, `trailingComma: all`)
+- **SCSS/CSS**: `stylelint` with `@wagtail/stylelint-config-wagtail` (strict color values)
+- **Tests**: Python modules named `test_*.py`, classes named `Test*`, methods named `test_*`. JavaScript tests use Vitest (`vp test`), in `*.test.js` files next to the code
 
 ## Commit & pull request guidelines
 
--   Be concise and to the point. Explain rationales that aren’t obvious.
--   Commit messages must be a single line, short, sentence case, imperative summary. Do not add a description body unless explicitly asked.
--   Always add a disclaimer to the PR description mentioning how AI agents are involved with the contribution.
--   Do not add commits unrelated to the PR — check commit history against upstream main before pushing.
+- Be concise and to the point. Explain rationales that aren’t obvious.
+- Commit messages must be a single line, short, sentence case, imperative summary. Do not add a description body unless explicitly asked.
+- Always add a disclaimer to the PR description mentioning how AI agents are involved with the contribution.
+- Do not add commits unrelated to the PR — check commit history against upstream main before pushing.

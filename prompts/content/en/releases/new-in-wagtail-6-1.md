@@ -10,17 +10,17 @@ Here are highlights from Wagtail 6.1. For more details, view the full [v6.1 rele
 
 Continuing work on the Universal Listings project, this release rolls out universal listing styles for the following views:
 
--   Image listings
--   Document listings
--   Site and locale listings
--   Page and snippet history views
--   Form builder submissions
--   Collections listings
--   Groups
--   Users
--   Workflow and task views
--   Search promotions index views
--   Redirects index
+- Image listings
+- Document listings
+- Site and locale listings
+- Page and snippet history views
+- Form builder submissions
+- Collections listings
+- Groups
+- Users
+- Workflow and task views
+- Search promotions index views
+- Redirects index
 
 With this work, we hope to increase the consistency of the user experience across different parts of the CMS. The Universal Listings designs also improve the information density of the interface, and how well it works on sites with a lot of filtering options set up.
 
@@ -28,7 +28,7 @@ With this work, we hope to increase the consistency of the user experience acros
 
 ![Editing interface for Welcome to the Wagtail Bakery, in snug mode](https://guide-media.wagtail.org/images/Editing_interface_for_Welcome_to_the_Wagtail_B.width-900.png)
 
-Wagtail now provides a way for you to control the information density of the admin interface, via your [user profile preferences]().
+Wagtail now provides a way for you to control the information density of the admin interface, via your [user profile preferences](<>).
 
 The new setting allows switching between the “default” density and a new “snug” mode, which reduces the spacing and size of UI elements. To switch Snug mode on, go to your Account settings and under **Theme Preferences** change your **Density** preference from "Default" to "Snug".
 
@@ -52,7 +52,7 @@ Wagtail now includes extra guidance in its private pages and [private collection
 
 Here are additional changes to the user interface across the CMS:
 
--   Add ability to bulk toggle permissions in the user group editing view, including shift+click for multiple selections
--   Use custom setting icons in setting editing views
--   Ensure re-ordering buttons work correctly when using a nested InlinePanel
--   Ensure dropdown content cannot get higher than the viewport and add scrolling within content if needed
+- Add ability to bulk toggle permissions in the user group editing view, including shift+click for multiple selections
+- Use custom setting icons in setting editing views
+- Ensure re-ordering buttons work correctly when using a nested InlinePanel
+- Ensure dropdown content cannot get higher than the viewport and add scrolling within content if needed

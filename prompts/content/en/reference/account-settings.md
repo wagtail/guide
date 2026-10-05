@@ -36,9 +36,9 @@ You can find the time zone option in the **’Locale’** section of your accoun
 
 Wagtail offers the following admin theme options:
 
--   Light mode
--   Dark mode
--   System default
+- Light mode
+- Dark mode
+- System default
 
 The light and dark themes offer alternative color schemes for a more personalized user experience. Selecting system default aligns the theme of your admin interface with your computer's default theme.
 
@@ -46,31 +46,31 @@ The light and dark themes offer alternative color schemes for a more personalize
 
 Added in Wagtail 6.3: Adjust the level of contrast in the user interface, between:
 
--   **System default**: matching your operating system or browser settings.
--   **More contrast**: extra borders or visual cues for interactive elements.
+- **System default**: matching your operating system or browser settings.
+- **More contrast**: extra borders or visual cues for interactive elements.
 
 #### **Density**
 
 Configure how information-dense you want the admin interface to be.
 
--   **Default**: Spacious UI.
--   **Snug**: More information-dense.
+- **Default**: Spacious UI.
+- **Snug**: More information-dense.
 
 **Keyboard shortcuts**
 
 You can disable Wagtail’s custom keyboard shortcuts if required for compatibility purposes.
 
--   **On** (default): adds support for [custom keyboard shortcuts](/en/concepts/accessibility-features/).
--   **Off**: only retain universal shortcuts for rich text.
+- **On** (default): adds support for [custom keyboard shortcuts](/en/concepts/accessibility-features/).
+- **Off**: only retain universal shortcuts for rich text.
 
 ## Password
 
 You can change your password from here, by providing your old password, new password, and a confirmation of the new value. Wagtail’s password validation rules are heavily configurable, here are the default checks:
 
--   Your password can’t be too similar to your other personal information.
--   Your password must contain at least 8 characters.
--   Your password can’t be a commonly used password.
--   Your password can’t be entirely numeric.
+- Your password can’t be too similar to your other personal information.
+- Your password must contain at least 8 characters.
+- Your password can’t be a commonly used password.
+- Your password can’t be entirely numeric.
 
 From the login interface, you can also find a "Forgotten password?" link to the password reset form. Submit your account email to receive a password reset link, which allows setting a new password without having to provide the old one.
 
@@ -82,7 +82,7 @@ In a separate tab, the notification settings allow users to customize their pref
 
 Currently-supported notifications settings are:
 
--   **Submitted notifications**: Receive notification when a page is submitted for moderation
--   **Approved notifications**: Receive notification when your page edit is approved
--   **Rejected notifications**: Receive notification when your page edit is rejected
--   **Updated comments notifications**: Receive notification when comments have been created, resolved, or deleted on a page that you have subscribed to receive comment notifications on
+- **Submitted notifications**: Receive notification when a page is submitted for moderation
+- **Approved notifications**: Receive notification when your page edit is approved
+- **Rejected notifications**: Receive notification when your page edit is rejected
+- **Updated comments notifications**: Receive notification when comments have been created, resolved, or deleted on a page that you have subscribed to receive comment notifications on

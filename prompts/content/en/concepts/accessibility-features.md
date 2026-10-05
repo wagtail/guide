@@ -40,16 +40,16 @@ Find all shortcuts supported on your site with the "Keyboard shortcuts" item wit
 
 On all screens, we support:
 
--   ? to show keyboard shortcuts
--   / to focus the search
--   [ to expand or collapse the main sidebar.
--   Esc to close modal dialogs
+- ? to show keyboard shortcuts
+- / to focus the search
+- [ to expand or collapse the main sidebar.
+- Esc to close modal dialogs
 
 On the Edit screen, Wagtail supports additional page-level keyboard shortcuts. These shortcuts are as follows:
 
--   **⌘ + P** / **Ctrl + P**: This shortcut opens up the Live preview. With the Live preview, you can view the structure of your content in different screen sizes.
--   **⌘ + S** / **Ctrl + S**: This shortcut saves your work as a draft.
--   ] to expand or collapse the mini-map.
+- **⌘ + P** / **Ctrl + P**: This shortcut opens up the Live preview. With the Live preview, you can view the structure of your content in different screen sizes.
+- **⌘ + S** / **Ctrl + S**: This shortcut saves your work as a draft.
+- ] to expand or collapse the mini-map.
 
 ### Rich text keyboard shortcuts
 
@@ -57,25 +57,25 @@ Within rich text fields, a large number of shortcuts are available, depending on
 
 Here are common formatting shortcuts:
 
--   Paste a URL over selected text to create a link: Ctrl + V / ⌘ + V
--   Insert or edit link with the chooser dialog: Ctrl + K / ⌘ + K
--   Open link: Alt + ↵ / ⌥ + ↵
--   Insert horizontal rule: insert `---`
--   Text formatting (if enabled)
-    -   Bold: Ctrl + B / ⌘ + B, or insert `**`
-    -   Italic: Ctrl + I / ⌘ + I, or insert `_`
-    -   Underline: Ctrl + U / ⌘ + U
-    -   Monospace (code): Ctrl + J / ⌘ + J, or insert ```
-    -   Strikethrough: Ctrl + ⇧ + X / ⌘ + ⇧ + X, or insert `~`
-    -   Superscript: Ctrl + . / ⌘ + .
-    -   Subscript: Ctrl + , / ⌘ + ,
--   Block formatting (if enabled)
-    -   Apply heading style [1-6]: Ctrl + Alt + [1-6] / ⌘ + ⌥ + [1-6], or insert `##`
-    -   Numbered list: Ctrl + ⇧ + 7 / ⌘ + ⇧ + 7, or insert `1.`
-    -   Bulleted list: Ctrl + ⇧ + 8 / ⌘ + ⇧ + 8, or insert `-`
-    -   Blockquote: insert `>`
-    -   Code block: insert `````
--   Insert a comment (if enabled): Ctrl + Alt + M / ⌘ + ⌥ + M
+- Paste a URL over selected text to create a link: Ctrl + V / ⌘ + V
+- Insert or edit link with the chooser dialog: Ctrl + K / ⌘ + K
+- Open link: Alt + ↵ / ⌥ + ↵
+- Insert horizontal rule: insert `---`
+- Text formatting (if enabled)
+  - Bold: Ctrl + B / ⌘ + B, or insert `**`
+  - Italic: Ctrl + I / ⌘ + I, or insert `_`
+  - Underline: Ctrl + U / ⌘ + U
+  - Monospace (code): Ctrl + J / ⌘ + J, or insert ```
+  - Strikethrough: Ctrl + ⇧ + X / ⌘ + ⇧ + X, or insert `~`
+  - Superscript: Ctrl + . / ⌘ + .
+  - Subscript: Ctrl + , / ⌘ + ,
+- Block formatting (if enabled)
+  - Apply heading style [1-6]: Ctrl + Alt + [1-6] / ⌘ + ⌥ + [1-6], or insert `##`
+  - Numbered list: Ctrl + ⇧ + 7 / ⌘ + ⇧ + 7, or insert `1.`
+  - Bulleted list: Ctrl + ⇧ + 8 / ⌘ + ⇧ + 8, or insert `-`
+  - Blockquote: insert `>`
+  - Code block: insert `````
+- Insert a comment (if enabled): Ctrl + Alt + M / ⌘ + ⌥ + M
 
 ### Bulk selection shortcut
 
@@ -105,14 +105,14 @@ Live preview allows you to view the content structure of your work in different 
 
 Typing “/” within the body of your content reveals an interface called the Command palette. The Command palette contains features such as:
 
--   Headings
--   Numbered list
--   Bulleted list
--   Embed
--   Link
--   Document
--   Image
--   Blocks
+- Headings
+- Numbered list
+- Bulleted list
+- Embed
+- Link
+- Document
+- Image
+- Blocks
 
 ## User account preferences
 
@@ -146,10 +146,10 @@ Like the _sidebar expanded/collapsed_, this feature keeps your mini-map opened o
 
 The Edit screen has a top header. This toolbar contains the following options:
 
--   **Status**: This indicates the current status of your page. For more information on the various page statuses available, read [Page status](https://guide.wagtail.org/en/concepts/page-status/).
--   **Live Preview**: Live preview allows you to preview content on different screen sizes.
--   **Checks**: Automated checks flagging possible issues with the page content.
--   **Comment**: This notifies and shows you the comments made on your content by teammates.
+- **Status**: This indicates the current status of your page. For more information on the various page statuses available, read [Page status](https://guide.wagtail.org/en/concepts/page-status/).
+- **Live Preview**: Live preview allows you to preview content on different screen sizes.
+- **Checks**: Automated checks flagging possible issues with the page content.
+- **Comment**: This notifies and shows you the comments made on your content by teammates.
 
 When you select an option in the toolbar, the selection opens up as a side panel. You can expand or collapse this Side panel, and which panel is active will be saved across editing sessions.
 

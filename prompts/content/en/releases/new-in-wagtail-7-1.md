@@ -44,25 +44,25 @@ Thank you to [Dhruvi Patel](https://www.linkedin.com/in/dhruvi-patel-55043412a/)
 
 ## Other UI improvements
 
--   Header breadcrumbs now save their expanded or collapsed state across navigation and refreshes.
--   Added an 'Edit' button to the success message after copying a page.
--   Restricted file dialog in the multiple image uploader to accepted image file types.
--   Bulk deletion actions for multiple pages now require a type-to-confirm step.
--   Active user states now displayed using intuitive check or cross icons.
--   Collapsed StreamField blocks now summarize additional field types (checkboxes, radio buttons).
--   Block previews now support translation.
--   Panel collapse button labels are now translatable.
--   AVIF image uploads through the image chooser now supported on Firefox.
--   Table cells in listings avoid breaking words unless specifically enabled.
--   "All items in listing" bulk actions for images/documents respect user permissions.
--   Listings clearly distinguish boolean values without relying on colors.
--   InlinePanel labels and headings have improved capitalization handling.
--   Commenting keyboard shortcuts more effectively move focus to existing comments.
--   Validation errors within StreamField blocks are now clearly marked.
--   Accessibility dialog positioning now adjusts based on the user bar location.
--   Locale-aware number columns introduced for clearer numeric listings.
--   Rich text fields now support minimum length validation.
--   Always show block types in StreamField UI
+- Header breadcrumbs now save their expanded or collapsed state across navigation and refreshes.
+- Added an 'Edit' button to the success message after copying a page.
+- Restricted file dialog in the multiple image uploader to accepted image file types.
+- Bulk deletion actions for multiple pages now require a type-to-confirm step.
+- Active user states now displayed using intuitive check or cross icons.
+- Collapsed StreamField blocks now summarize additional field types (checkboxes, radio buttons).
+- Block previews now support translation.
+- Panel collapse button labels are now translatable.
+- AVIF image uploads through the image chooser now supported on Firefox.
+- Table cells in listings avoid breaking words unless specifically enabled.
+- "All items in listing" bulk actions for images/documents respect user permissions.
+- Listings clearly distinguish boolean values without relying on colors.
+- InlinePanel labels and headings have improved capitalization handling.
+- Commenting keyboard shortcuts more effectively move focus to existing comments.
+- Validation errors within StreamField blocks are now clearly marked.
+- Accessibility dialog positioning now adjusts based on the user bar location.
+- Locale-aware number columns introduced for clearer numeric listings.
+- Rich text fields now support minimum length validation.
+- Always show block types in StreamField UI
 
 ---
 

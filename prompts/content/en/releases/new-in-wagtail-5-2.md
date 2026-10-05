@@ -18,13 +18,13 @@ This supports searching for pages within a specific section of the site, finding
 
 Several tweaks have been made to the admin user interface which we hope will make it easier to use.
 
--   Show the full first published at date within a tooltip on the Page status sidebar on the relative date
--   Do not render minimap if there are no panel anchors
--   Use dropdown buttons on listings in dashboard panels
--   Add compare buttons to workflow dashboard panel
--   Implement breadcrumbs design refinements
--   Add support for Shift + Click behaviour in form submissions and simple translations submissions
--   Improve filtering of audit logging based on the user’s permissions
+- Show the full first published at date within a tooltip on the Page status sidebar on the relative date
+- Do not render minimap if there are no panel anchors
+- Use dropdown buttons on listings in dashboard panels
+- Add compare buttons to workflow dashboard panel
+- Implement breadcrumbs design refinements
+- Add support for Shift + Click behaviour in form submissions and simple translations submissions
+- Improve filtering of audit logging based on the user’s permissions
 
 Here is a screenshot of the "compare" buttons in the workflow panel on the dashboard:
 
@@ -54,10 +54,10 @@ Wagtail now officially supports [admin UI customisations with Stimulus](https://
 
 Following recent improvements to Snippets, the following content management features can now be set up on arbitrary content/data in the CMS, rather than pages / snippets only:
 
--   Filtering and export on list / index views, as well as customizations via `list_display`, `list_filter`, `list_export`, `list_per_page`, `ordering`.
--   Standalone Usage, Inspect, History views for arbitrary content/data.
--   Breadcrumbs in admin views.
--   Custom buttons in list/index views.
+- Filtering and export on list / index views, as well as customizations via `list_display`, `list_filter`, `list_export`, `list_per_page`, `ordering`.
+- Standalone Usage, Inspect, History views for arbitrary content/data.
+- Breadcrumbs in admin views.
+- Custom buttons in list/index views.
 
 Here is an example of the Usage, History, and Breadcrumbs as available in Snippets – which will be available for arbitrary content once configured:
 

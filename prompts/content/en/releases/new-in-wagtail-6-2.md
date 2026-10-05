@@ -42,10 +42,10 @@ All built-in and custom [reports](/en/concepts/reports/) now use the new listing
 
 Here are additional changes to the user interface across the CMS:
 
--   Redirects forms now use the same page layout as other forms in the CMS
--   Listing views no longer show links to editing forms for users without appropriate permissions
--   Editing views no longer show the delete button if permissions prevent deletion
--   Increased visibility of draft page titles in listings
--   New design for locale labels in listings
--   Address layout issues in the title cell of universal listings
--   Going below or above the minimum and maximum block counts now shows a warning
+- Redirects forms now use the same page layout as other forms in the CMS
+- Listing views no longer show links to editing forms for users without appropriate permissions
+- Editing views no longer show the delete button if permissions prevent deletion
+- Increased visibility of draft page titles in listings
+- New design for locale labels in listings
+- Address layout issues in the title cell of universal listings
+- Going below or above the minimum and maximum block counts now shows a warning

@@ -20,19 +20,19 @@ The image library can now be configured to allow uploading SVG images.
 
 The [built-in accessibility checker](https://docs.wagtail.org/en/latest/advanced_topics/accessibility_considerations.html#built-in-accessibility-checker) has been updated with:
 
--   5 more checks enabled by default.
--   Sorting of checker results according to their position on the page.
--   Highlight styles to more easily identify elements with errors.
+- 5 more checks enabled by default.
+- Sorting of checker results according to their position on the page.
+- Highlight styles to more easily identify elements with errors.
 
 ## **Always-on minimap**
 
 Following its introduction in Wagtail 4.1, we have made a number of improvements to the page editor minimap:
 
--   It now stays opened until dismissed, so users can keep it expanded if desired.
--   Its "expanded" state is preserved when navigating between different views of the CMS.
--   The minimap and "Collapse all" button now appear next to side panels rather than underneath, so they can be used at any time.
--   Clicking any item reveals the minimap, with appropriate text for screen reader users.
--   Navigating to a collapsed section of the page will reveal this section.
+- It now stays opened until dismissed, so users can keep it expanded if desired.
+- Its "expanded" state is preserved when navigating between different views of the CMS.
+- The minimap and "Collapse all" button now appear next to side panels rather than underneath, so they can be used at any time.
+- Clicking any item reveals the minimap, with appropriate text for screen reader users.
+- Navigating to a collapsed section of the page will reveal this section.
 
 ## **Dark mode**
 

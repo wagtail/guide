@@ -12,13 +12,13 @@ Following design improvements to page listings, Wagtail now provides a unified s
 
 In this release, the universal listing interface is available for [Pages](/en/how-to-guides/manage-pages/), [Snippets](/en/how-to-guides/manage-snippets/), and Forms. For pages, the UI includes the following filters out of the box:
 
--   Page type
--   Date updated
--   Owner
--   Edited by
--   Site
--   Has child pages
--   Locale
+- Page type
+- Date updated
+- Owner
+- Edited by
+- Site
+- Has child pages
+- Locale
 
 ## **Right-to-left language support**
 
@@ -46,9 +46,9 @@ Wagtail 6.0 comes with refinements to the dark theme within the admin interface.
 
 The new Page types report provides a breakdown of the number of pages for each type. It helps answer questions such as:
 
--   Which page types do we have on our CMS?
--   How many pages of that page type do we have?
--   When was a page of that type last edited? By whom? Which page was that?
+- Which page types do we have on our CMS?
+- How many pages of that page type do we have?
+- When was a page of that type last edited? By whom? Which page was that?
 
 This feature was implemented thanks to a [feature sponsorship](https://wagtail.org/sponsor/) by Mozilla.
 
@@ -56,9 +56,9 @@ This feature was implemented thanks to a [feature sponsorship](https://wagtail.o
 
 This release comes with a high number of accessibility improvements across the admin interface:
 
--   Better support to define header cells for tables
--   Keyboard support for table editing
--   Keyboard support in all action menus
--   Refinements in labels used by screen reader and speech recognition users
+- Better support to define header cells for tables
+- Keyboard support for table editing
+- Keyboard support in all action menus
+- Refinements in labels used by screen reader and speech recognition users
 
 View our [Accessibility](https://wagtail.org/accessibility/) page for more information about the state of Wagtail accessibility.

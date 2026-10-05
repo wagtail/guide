@@ -60,31 +60,31 @@ readable programmatically with `inspect_ai.log.read_eval_log`).
 
 ## What's scored
 
--   `rule_checks` — deterministic, stdlib `html.parser` only: HTML tag/attribute
-    structure, glossary compliance for `<b>`/`<i>` labels (position-wise, exact
-    official translation), no truncation, no reasoning bleed. Reported per rule
-    (accuracy ± stderr).
--   `model_graded_qa` — LLM judge (`glm-5.2` by default) grading
-    accuracy/fluency/rule compliance as C/P/I with partial credit. The judge
-    prompt includes the same per-segment glossary (via sample metadata). The
-    judge is deliberately not one of the candidates, to avoid self-preference.
+- `rule_checks` — deterministic, stdlib `html.parser` only: HTML tag/attribute
+  structure, glossary compliance for `<b>`/`<i>` labels (position-wise, exact
+  official translation), no truncation, no reasoning bleed. Reported per rule
+  (accuracy ± stderr).
+- `model_graded_qa` — LLM judge (`glm-5.2` by default) grading
+  accuracy/fluency/rule compliance as C/P/I with partial credit. The judge
+  prompt includes the same per-segment glossary (via sample metadata). The
+  judge is deliberately not one of the candidates, to avoid self-preference.
 
 ## Notes / differences from the custom suite
 
--   The old "keep `<b>`/`<i>` text in English" rule is replaced by glossary
-    compliance, matching the translator's actual behaviour.
--   Grading is per-candidate (C/P/I) rather than pairwise A/B/C ranking. Inspect
-    shuffles nothing because there is no position to bias; comparison happens
-    across eval runs in the viewer. Pairwise ranking is possible but needs a
-    custom scorer again — start without it.
--   Rules that don't apply to a sample (e.g. no glossary term in the source)
-    count as a pass rather than being excluded from the denominator.
--   The dataset is `prompts/evals/translations/segments.yaml`, shared with the
-    Promptfoo eval: segments extracted verbatim from real guide content
-    (`prompts/content/en/how-to-guides/manage-documents.md` and
-    `prompts/content/en/releases/new-in-wagtail-7-4.md`), in the HTML form the
-    translator receives from wagtail-localize. Each entry is a Promptfoo test
-    case (`description`, `vars.text`, `metadata.id`/`metadata.source`);
-    `translation_task.py` maps them to Inspect Samples. Regenerate from live
-    page content with `export_segments.py` (see its docstring), or grow the
-    file as regressions are found.
+- The old "keep `<b>`/`<i>` text in English" rule is replaced by glossary
+  compliance, matching the translator's actual behaviour.
+- Grading is per-candidate (C/P/I) rather than pairwise A/B/C ranking. Inspect
+  shuffles nothing because there is no position to bias; comparison happens
+  across eval runs in the viewer. Pairwise ranking is possible but needs a
+  custom scorer again — start without it.
+- Rules that don't apply to a sample (e.g. no glossary term in the source)
+  count as a pass rather than being excluded from the denominator.
+- The dataset is `prompts/evals/translations/segments.yaml`, shared with the
+  Promptfoo eval: segments extracted verbatim from real guide content
+  (`prompts/content/en/how-to-guides/manage-documents.md` and
+  `prompts/content/en/releases/new-in-wagtail-7-4.md`), in the HTML form the
+  translator receives from wagtail-localize. Each entry is a Promptfoo test
+  case (`description`, `vars.text`, `metadata.id`/`metadata.source`);
+  `translation_task.py` maps them to Inspect Samples. Regenerate from live
+  page content with `export_segments.py` (see its docstring), or grow the
+  file as regressions are found.

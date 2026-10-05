@@ -18,18 +18,18 @@ We calculate the number of words present in the "plain text" content, with no fo
 
 We calculate reading time from word count, using different reading speeds for different languages. Out of the box, Wagtail supports reading speeds for:
 
--   Arabic
--   Chinese
--   Dutch
--   English
--   Finnish
--   French
--   German
--   Hebrew
--   Italian
--   Korean
--   Spanish
--   Swedish
+- Arabic
+- Chinese
+- Dutch
+- English
+- Finnish
+- French
+- German
+- Hebrew
+- Italian
+- Korean
+- Spanish
+- Swedish
 
 Other languages default to the "English" reading speed factor.
 
@@ -47,15 +47,15 @@ To assess content quality, the **Checks** side panel runs automated content chec
 
 By default, the checker includes the following rules to find common accessibility issues in authored content:
 
--   `button-name`: button elements must always have a text label.
--   `empty-heading`: This rule checks for headings with no text content. Empty headings are confusing to screen readers users and should be avoided.
--   `empty-table-header`: Table header text should not be empty
--   `frame-title`: iframe elements must always have a text label.
--   `heading-order`: This rule checks for incorrect heading order. Headings should be ordered in a logical and consistent manner, with the main heading (h1) followed by subheadings (h2, h3, etc.).
--   `input-button-name`: input button elements must always have a text label.
--   `link-name`: link elements must always have a text label.
--   `p-as-heading`: This rule checks for paragraphs that are styled as headings. Paragraphs should not be styled as headings, as they don’t help users who rely on headings to navigate content.
--   `alt-text-quality`: Ensures that image alt texts don’t contain anti-patterns like file extensions and underscores.
--   `empty-meta-description`: Ensures any Search Engine Optimization (SEO) meta description tags present on the page contain content.
+- `button-name`: button elements must always have a text label.
+- `empty-heading`: This rule checks for headings with no text content. Empty headings are confusing to screen readers users and should be avoided.
+- `empty-table-header`: Table header text should not be empty
+- `frame-title`: iframe elements must always have a text label.
+- `heading-order`: This rule checks for incorrect heading order. Headings should be ordered in a logical and consistent manner, with the main heading (h1) followed by subheadings (h2, h3, etc.).
+- `input-button-name`: input button elements must always have a text label.
+- `link-name`: link elements must always have a text label.
+- `p-as-heading`: This rule checks for paragraphs that are styled as headings. Paragraphs should not be styled as headings, as they don’t help users who rely on headings to navigate content.
+- `alt-text-quality`: Ensures that image alt texts don’t contain anti-patterns like file extensions and underscores.
+- `empty-meta-description`: Ensures any Search Engine Optimization (SEO) meta description tags present on the page contain content.
 
 The checker supports custom rules, so projects may also include checks relating to other aspects of content quality such as adherence to a style guide (tone of voice alignment, flagging jargon), content size (limiting the use of heavy assets like images or videos), compliance. Or more advanced or opinionated checks about accessibility and SEO.
