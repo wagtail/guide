@@ -57,7 +57,7 @@
     display: none;
   }
 
-  :has([name='color-scheme'][content^='dark']) & {
+  :where(:has([name='color-scheme'][content^='dark'])) & {
     .dark-only {
       display: block;
     }

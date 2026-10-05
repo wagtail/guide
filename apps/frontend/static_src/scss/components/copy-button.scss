@@ -17,16 +17,15 @@
     border-radius: 0;
     border-start-end-radius: $border-radius--m;
     border-end-end-radius: $border-radius--m;
-    padding-inline-start: ($gutter * 0.4);
-    padding-inline-end: ($gutter * 0.4);
+    padding-inline: ($gutter * 0.4) ($gutter * 0.4);
     height: 100%;
   }
 
   &__btn,
   &__toggle {
+    @include fs(xxs);
     display: flex;
     align-items: center;
-    @include fs(xxs);
     font-weight: 500;
     padding: 10px;
     background-color: light-dark($color--white, $color--black);

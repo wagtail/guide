@@ -18,7 +18,7 @@
         color: $color--primary;
       }
 
-      .svg_icon__animated_path {
+      .svg-icon__animated-path {
         transform: rotate(8deg) scale(0.8, 0.8);
         transform-origin: 50% 50%;
         transition: transform 0.1s;
@@ -32,11 +32,11 @@
     max-width: 100px;
     margin-inline-end: ($gutter * 2);
 
-    .svg_icon__original_path {
+    .svg-icon__original-path {
       fill: light-dark(currentcolor, $color--white);
     }
 
-    .svg_icon--flip-rtl {
+    .svg-icon--flip-rtl {
       transform: scaleX(var(--w-direction-factor));
     }
   }
