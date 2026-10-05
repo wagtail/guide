@@ -112,18 +112,10 @@ export default defineConfig({
     },
     fmt: {
         printWidth: 80,
-        // Explicit, as Oxfmt would otherwise take the 2-space `.editorconfig` default.
-        tabWidth: 4,
         singleQuote: true,
         trailingComma: 'all',
         quoteProps: 'consistent',
         ignorePatterns: ['apps/frontend/static/**', '**/vendor/**', '*.html'],
-        overrides: [
-            {
-                files: ['*.json', '*.md', '*.yml', '*.yaml'],
-                options: { tabWidth: 2 },
-            },
-        ],
     },
     test: {
         environment: 'happy-dom',
