@@ -1,5 +1,9 @@
+import json
+
 from django.core.cache import cache
+from django.db import connection
 from django.test import TestCase
+from django.test.utils import CaptureQueriesContext
 from django.urls import reverse
 from wagtail.models import Site
 
@@ -67,6 +71,31 @@ class TestLLMsTxtViews(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response["Content-Type"], "text/markdown;charset=utf-8")
         self.assertIn(self.content_page.title.encode(), response.content)
+
+    def test_llms_full_txt_does_not_fetch_body_per_page(self):
+        names = ("Second", "Third", "Fourth")
+        for name in names:
+            ContentPageFactory(
+                parent=self.home_page,
+                title=f"{name} page",
+                body=json.dumps(
+                    [{"type": "text", "value": f"<p>{name} page body content.</p>"}]
+                ),
+            )
+        cache.clear()
+
+        with CaptureQueriesContext(connection) as ctx:
+            response = self.client.get("/llms-full.txt")
+
+        self.assertEqual(response.status_code, 200)
+        body_queries = [
+            query
+            for query in ctx.captured_queries
+            if 'FROM "core_contentpage"' in query["sql"] and '"body"' in query["sql"]
+        ]
+        self.assertEqual(len(body_queries), 1)
+        for name in names:
+            self.assertIn(f"{name} page body content.".encode(), response.content)
 
     def test_responses_are_cached(self):
         for path, template_name in (
