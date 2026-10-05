@@ -40,7 +40,7 @@
         {% hreflangs %}
 
         {% if page %}
-            <link rel="canonical" href="{% get_translation_url page 'en' %}">
+            <link rel="canonical" href="{{ page.full_url }}">
         {% endif %}
 
         {% if page.has_markdown_route %}

@@ -1,4 +1,5 @@
 from django import template
+from django.conf import settings
 from django.utils.translation import get_language
 from wagtail.models import Page
 
@@ -29,32 +30,34 @@ def header(context):
     }
 
 
-@register.simple_tag
-def get_translation_url(page, language_code):
-    return page.full_url.replace(
-        f"/{page.locale.language_code}/",
-        f"/{language_code}/",
-        1,
-    )
-
-
 @register.inclusion_tag("components/hreflangs.html", takes_context=True)
 def hreflangs(context):
     page = context.get("page")
     if not page:
         return {}
 
-    translation_language_codes = (
-        page.get_translations()
-        .live()
-        .public()
-        .values_list("locale__language_code", flat=True)
+    # Each language version must list itself as well as all other versions,
+    # using its own localised URL (slugs are translated per locale).
+    translations = [page, *page.get_translations().live().public()]
+
+    alternates = [
+        (translation.locale.language_code, translation.full_url)
+        for translation in translations
+    ]
+
+    # Fallback for users whose language doesn't match any version.
+    x_default = next(
+        (
+            url
+            for language_code, url in alternates
+            if language_code == settings.LANGUAGE_CODE
+        ),
+        page.full_url,
     )
 
     return {
-        "translations": [
-            (lc, get_translation_url(page, lc)) for lc in translation_language_codes
-        ]
+        "translations": alternates,
+        "x_default": x_default,
     }
 
 

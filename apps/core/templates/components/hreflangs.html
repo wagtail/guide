@@ -1,3 +1,6 @@
 {% for locale, href in translations %}
     <link rel="alternate" hreflang="{{ locale }}" href="{{ href }}">
 {% endfor %}
+{% if x_default %}
+    <link rel="alternate" hreflang="x-default" href="{{ x_default }}">
+{% endif %}
