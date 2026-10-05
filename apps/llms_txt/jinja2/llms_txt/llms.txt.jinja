@@ -35,8 +35,8 @@ Features and available options can vary between Wagtail sites because sites may 
 ## Table of Contents
 
 {% for page in pages %}
-- [{{ page.seo_title if page.seo_title else page.title }}]({{ page.full_url }}{{ page.reverse_subpage("markdown") }}){%- if page.search_description -%}: {{ page.search_description|safe }}{%- endif -%}
-{%- endfor -%}
+- [{{ page.seo_title if page.seo_title else page.title }}]({{ page.full_url }}{{ page.reverse_subpage("markdown") }}){%- if page.search_description -%}: {{ page.search_description.split()|join(" ")|safe }}{%- endif -%}
+{%- endfor %}
 
 ## Optional
 
