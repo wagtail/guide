@@ -1,30 +1,6 @@
-# Website prompts
-
-We use LLMs to help manage the site’s contents and experiment with the [Wagtail AI](content/https://wagtail.org/wagtail-ai/) package. The main goals are:
-
-- Increased automation for site upkeep. The site and its contents is very time-consuming to maintain, as it has to keep up with updates to Wagtail.
-- Increased reusability of the contents. We want the content to be simple to access in its original format but also reusable for custom guides.
-- Dogfooding with real-world content. Being able to work on Wagtail features that are only testable with real-world data and use cases.
-
-In addition to AI integrations within Django/Wagtail, the project also uses [Promptfoo](https://www.promptfoo.dev/docs/intro/) to test its prompts with eval suites.
-
-## llms.txt prompts
-
-Use Promptfoo to check whether the project’s llms.txt content helps in answering common questions about the site.
-
-```bash
-promptfoo eval -c content/evals/llms-txt/llms-txt.yaml
-```
-
-## Wagtail AI prompts
-
-```bash
-promptfoo eval -c content/evals/page-meta.yaml
-```
-
 ## Website contents
 
-We version the site’s contents to simplify experimentation with different AI prompts. Run `./content/fetch_content.py && npm run format` to retrieve the latest copy.
+We version the site’s contents as a [historical record](https://guide.wagtail.org/en/about/#historical-copies) and to simplify content reuse and experimentation with agents. Run `./content/fetch_content.py && npm run format` to retrieve the latest copy.
 
 ### Versioned content
 
@@ -86,3 +62,27 @@ Last updated: 2026-10-05, token counts (gpt-oss-120b):
 | [.well-known/agent-skills/index.json](content/en/.well-known/agent-skills/index.json)                                         |    184 |
 
 <!-- TOKEN_COUNTS_END -->
+
+## Website prompts
+
+We use LLMs to help manage the site’s contents and experiment with the [Wagtail AI](content/https://wagtail.org/wagtail-ai/) package. The main goals are:
+
+- Increased automation for site upkeep. The site and its contents is very time-consuming to maintain, as it has to keep up with updates to Wagtail.
+- Increased reusability of the contents. We want the content to be simple to access in its original format but also reusable for custom guides.
+- Dogfooding with real-world content. Being able to work on Wagtail features that are only testable with real-world data and use cases.
+
+In addition to AI integrations within Django/Wagtail, the project also uses [Promptfoo](https://www.promptfoo.dev/docs/intro/) to test its prompts with eval suites.
+
+## llms.txt prompts
+
+Use Promptfoo to check whether the project’s llms.txt content helps in answering common questions about the site.
+
+```bash
+promptfoo eval -c content/evals/llms-txt/llms-txt.yaml
+```
+
+## Wagtail AI prompts
+
+```bash
+promptfoo eval -c content/evals/page-meta.yaml
+```
