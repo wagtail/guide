@@ -16,6 +16,7 @@ from pathlib import Path
 
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.csp import CSP
 
 env = os.environ.copy()
 
@@ -230,41 +231,22 @@ PERMISSIONS_POLICY = {
     "usb": [],
 }
 
-# Content Security Policy settings
+# Content Security Policy
 # https://docs.djangoproject.com/en/6.0/ref/middleware/#django.middleware.csp.ContentSecurityPolicyMiddleware
+#
+# The "special" source values of 'self', 'unsafe-inline', 'unsafe-eval', and
+# 'none' must be quoted, e.g. "'self'". The report URI is environment-specific,
+# see `production.py`.
+SECURE_CSP = {
+    "default-src": ["'self'"],
+    # The nonce is added to the source lists so that our inline scripts and
+    # styles are allowed. https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/style-src
+    "script-src": ["'self'", "'report-sample'", CSP.NONCE],
+    "style-src": ["'self'", "'report-sample'", CSP.NONCE],
+    "img-src": ["'self'", "data:", "www.gravatar.com", "guide-media.wagtail.org"],
+    "connect-src": ["'self'", "releases.wagtail.org"],
+}
 
-if "CSP_DEFAULT_SRC" in env:
-    from django.utils.csp import CSP
-
-    # The "special" source values of
-    # 'self', 'unsafe-inline', 'unsafe-eval', and 'none' must be quoted!
-    # e.g.: CSP_DEFAULT_SRC="'self'" Without quotes they will not work as intended.
-
-    csp_policy = {
-        "default-src": env.get("CSP_DEFAULT_SRC").split(","),
-    }
-    if "CSP_SCRIPT_SRC" in env:
-        csp_policy["script-src"] = env.get("CSP_SCRIPT_SRC").split(",") + [CSP.NONCE]
-    if "CSP_STYLE_SRC" in env:
-        csp_policy["style-src"] = env.get("CSP_STYLE_SRC").split(",") + [CSP.NONCE]
-    if "CSP_IMG_SRC" in env:
-        csp_policy["img-src"] = env.get("CSP_IMG_SRC").split(",")
-    if "CSP_CONNECT_SRC" in env:
-        csp_policy["connect-src"] = env.get("CSP_CONNECT_SRC").split(",")
-    if "CSP_FONT_SRC" in env:
-        csp_policy["font-src"] = env.get("CSP_FONT_SRC").split(",")
-    if "CSP_BASE_URI" in env:
-        csp_policy["base-uri"] = env.get("CSP_BASE_URI").split(",")
-    if "CSP_OBJECT_SRC" in env:
-        csp_policy["object-src"] = env.get("CSP_OBJECT_SRC").split(",")
-    if "CSP_REPORT_URI" in env:
-        csp_policy["report-uri"] = [env.get("CSP_REPORT_URI")]
-
-    report_only = env.get("CSP_REPORT_ONLY", "false").lower() == "true"
-    if report_only:
-        SECURE_CSP_REPORT_ONLY = csp_policy
-    else:
-        SECURE_CSP = csp_policy
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
