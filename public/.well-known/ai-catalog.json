@@ -24,7 +24,7 @@
       "displayName": "Wagtail guide API (OpenAPI)",
       "type": "application/vnd.oai.openapi+json;version=3.1",
       "url": "https://guide.wagtail.org/api/v3-preview/openapi.json",
-      "description": "OpenAPI description for the guide's read-only Wagtail v3 API, exposing pages, documents, images, and redirects.",
+      "description": "OpenAPI description for the guide's read-only Wagtail v3 API, which exposes its published pages.",
       "tags": ["api", "rest", "openapi"],
       "trustManifest": {
         "identity": "did:web:guide.wagtail.org",
