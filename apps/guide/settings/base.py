@@ -513,6 +513,8 @@ if "SERVER_EMAIL" in env:
 # not Python exceptions.
 # We do not use default mail or file handlers because they are of no use for
 # us.
+# The console verbosity can be raised at runtime with the LOG_LEVEL and
+# DJANGO_LOG_LEVEL environment variables (e.g. on review apps).
 # https://docs.djangoproject.com/en/stable/topics/logging/
 LOGGING = {
     "version": 1,
@@ -530,10 +532,17 @@ LOGGING = {
             "format": "[%(asctime)s][%(process)d][%(levelname)s][%(name)s] %(message)s"
         }
     },
+    # Capture logs from our own code and third-party libraries that don't have
+    # a dedicated logger below, rather than letting them fall through to the
+    # default root logger (which only surfaces warnings and errors).
+    "root": {
+        "handlers": ["console"],
+        "level": env.get("LOG_LEVEL", "INFO"),
+    },
     "loggers": {
-        "wagtailkit_repo_name": {
+        "django": {
             "handlers": ["console"],
-            "level": "INFO",
+            "level": env.get("DJANGO_LOG_LEVEL", "INFO"),
             "propagate": False,
         },
         "wagtail": {
@@ -546,9 +555,12 @@ LOGGING = {
             "level": "WARNING",
             "propagate": False,
         },
+        # Security events (e.g. DisallowedHost, SuspiciousOperation, CSRF
+        # failures) are the most valuable signal in production logs, and are
+        # logged at INFO by some Django versions.
         "django.security": {
             "handlers": ["console"],
-            "level": "WARNING",
+            "level": "INFO",
             "propagate": False,
         },
     },
