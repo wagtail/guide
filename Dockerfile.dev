@@ -17,7 +17,7 @@ FROM node:26 AS frontend-deps
 # Make build & post-install scripts behave as if in CI (e.g. logging verbosity).
 ARG CI=true
 
-COPY package.json package-lock.json webpack.config.js ./
+COPY package.json package-lock.json vite.config.ts ./
 RUN --mount=type=cache,target=/root/.npm npm ci
 
 # base stage
@@ -91,6 +91,6 @@ RUN uv sync --frozen ${UV_SYNC_ARGS}
 # need to `npm ci` before assets can be built. docker-compose.yml volumes
 # node_modules so it isn't shadowed by the code bind mount.
 COPY --chown=guide --from=frontend-deps ./node_modules ./node_modules
-COPY --chown=guide package.json package-lock.json webpack.config.js ./
+COPY --chown=guide package.json package-lock.json vite.config.ts ./
 
 CMD ["uv", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]

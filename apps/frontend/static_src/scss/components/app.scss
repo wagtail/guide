@@ -19,9 +19,8 @@
             grid-column: 4 / span 7;
             min-height: 950px; // never go below the height of the left column
             margin-top: ($gutter * 3);
-            padding-bottom: (
-                $gutter * 5
-            ); // prevent content butting up against footer
+            // prevent content butting up against footer
+            padding-bottom: ($gutter * 5);
         }
     }
 }

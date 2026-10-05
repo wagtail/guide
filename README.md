@@ -19,7 +19,7 @@ You can learn more about the documentation system [here](https://documentation.d
 
 # Installation
 
-We assume that you have basic knowledge of Node/Webpack and Python/Django/Wagtail in these instructions. We recommend you develop Wagtail Guide locally on your machine using `venv` and [fnm](https://github.com/Schniz/fnm) to ensure you are on the correct Node version.
+We assume that you have basic knowledge of Node/Vite and Python/Django/Wagtail in these instructions. We recommend you develop Wagtail Guide locally on your machine using `venv` and [fnm](https://github.com/Schniz/fnm) to ensure you are on the correct Node version.
 
 #### Dependencies
 
@@ -104,8 +104,8 @@ If you're a Python or Django developer, fork the repo and join us. You'll find a
 
 ## Development
 
--   Run formatting (Ruff & Prettier) `just format`
--   Run linting (Ruff, Prettier, Eslint) `just lint`
+-   Run formatting (Ruff & Oxfmt) `just format`
+-   Run linting (Ruff, Oxlint, Oxfmt, Stylelint) `just lint`
 -   Run tests `just test`
 
 # Other Notes

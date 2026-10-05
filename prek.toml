@@ -17,7 +17,7 @@ hooks = [
     { id = "fix-byte-order-marker" },                # Remove UTF-8 byte order marker
     { id = "check-json" },                           # Validate JSON files
     { id = "check-json5" },                          # Validate JSON5 files
-    { id = "pretty-format-json" },                   # Pretty format JSON files
+    { id = "pretty-format-json", exclude = "^package(-lock)?\\.json$" }, # Pretty format JSON files (npm owns the package.json format)
     { id = "check-toml" },                           # Validate TOML files
     { id = "check-vcs-permalinks" },                 # Check that VCS links are permalinks
     { id = "check-yaml" },                           # Validate YAML files
@@ -40,22 +40,22 @@ hooks = [{ id = "ruff-check", args = ["--fix"] }, { id = "ruff-format" }]
 repo = "local"
 
 [[repos.hooks]]
-id = "prettier"
-name = "prettier"
-entry = "npx prettier --write"
+id = "oxfmt"
+name = "oxfmt"
+entry = "npx vp fmt"
 language = "system"
-types_or = ["css", "scss", "javascript", "json", "yaml", "markdown", "html"]
+types_or = ["css", "scss", "javascript", "json", "yaml"]
 
 [[repos.hooks]]
-id = "eslint"
-name = "eslint"
-entry = "npx eslint --report-unused-disable-directives"
+id = "oxlint"
+name = "oxlint"
+entry = "npx vp lint --report-unused-disable-directives"
 language = "system"
 types_or = ["javascript"]
 
 [[repos.hooks]]
 id = "stylelint"
 name = "stylelint"
-entry = "stylelint"
+entry = "npx stylelint"
 language = "system"
 types_or = ["css", "scss"]

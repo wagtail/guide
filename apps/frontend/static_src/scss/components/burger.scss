@@ -27,8 +27,12 @@
         background-color: light-dark($color--black, $color--white);
         opacity: 1;
         transform: translateX(-50%) rotate(0deg);
-        transition: top $transition, width $transition, opacity $transition,
-            transform $transition, background-color $transition,
+        transition:
+            top $transition,
+            width $transition,
+            opacity $transition,
+            transform $transition,
+            background-color $transition,
             left $transition;
 
         .is-open & {

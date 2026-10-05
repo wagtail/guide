@@ -38,7 +38,6 @@ class CopyButton {
             await navigator.clipboard.writeText(text);
             this.showFeedback(this.copyPage);
         } catch (error) {
-            // eslint-disable-next-line no-console
             console.error('Copy failed', error);
         }
     }
@@ -48,7 +47,6 @@ class CopyButton {
             await navigator.clipboard.writeText(this.markdownURL);
             this.showFeedback(this.copyPage);
         } catch (error) {
-            // eslint-disable-next-line no-console
             console.error('Copy failed', error);
         }
     }
@@ -62,13 +60,11 @@ class CopyButton {
             await navigator.clipboard.writeText(text);
             this.showFeedback(this.copyPage);
         } catch (error) {
-            // eslint-disable-next-line no-console
             console.error('Copy failed', error);
         }
     }
 
     showFeedback(btn) {
-        /* eslint-disable no-param-reassign */
         const btnText = btn.textContent;
 
         btn.textContent = this.node.dataset.successText;

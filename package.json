@@ -2,49 +2,34 @@
   "name": "guide",
   "private": true,
   "author": "",
-  "devEngines": {
-    "packageManager": {
-      "name": "npm"
-    }
-  },
+  "type": "module",
   "scripts": {
-    "start": "webpack --mode=development --watch --progress",
-    "build": "webpack --mode=production",
-    "format": "prettier --write .",
-    "fix:js": "eslint --fix .",
-    "lint:css": "stylelint **/*.scss",
-    "lint:format": "prettier --check .",
-    "lint:js": "eslint --report-unused-disable-directives .",
-    "lint": "npm run lint:js && npm run lint:css && npm run lint:format"
+    "start": "vp build --watch --mode development --minify false --sourcemap inline",
+    "build": "vp build",
+    "format": "vp fmt",
+    "fix": "vp check --fix",
+    "lint:css": "stylelint \"**/*.scss\"",
+    "lint:js": "vp lint --report-unused-disable-directives",
+    "lint:format": "vp fmt --check",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:format",
+    "test": "vp test run"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.5",
+    "bootstrap": "^5.3.8",
+    "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
-    "@babel/cli": "^7.17.3",
-    "@babel/core": "^7.17.5",
-    "@babel/preset-env": "^7.16.11",
-    "@wagtail/eslint-config-wagtail": "^0.4.0",
     "@wagtail/stylelint-config-wagtail": "^0.5.0",
-    "babel-loader": "^8.2.3",
-    "copy-webpack-plugin": "^10.2.4",
-    "css-loader": "^6.6.0",
-    "eslint": "^8.25.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-react": "^7.31.10",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "file-loader": "^6.2.0",
-    "mini-css-extract-plugin": "^2.5.3",
-    "postcss": "^8.4.6",
-    "postcss-loader": "^6.2.1",
-    "postcss-preset-env": "^7.4.1",
-    "prettier": "^2.7.1",
+    "browserslist": "^4.29.3",
+    "happy-dom": "^20.14.5",
     "sass": "^1.49.8",
-    "sass-loader": "^12.6.0",
     "stylelint": "^14.14.0",
-    "webpack": "^5.69.1",
-    "webpack-cli": "^4.9.2",
-    "webpack-manifest-plugin": "^4.1.1"
+    "vite-plus": "^1.0.0"
+  },
+  "overrides": {
+    "vite": "npm:@voidzero-dev/vite-plus-core@latest",
+    "vitest": "5.0.1"
   },
   "browserslist": [
     "Firefox ESR",
@@ -57,9 +42,9 @@
     "not safari 13",
     "not ie 11"
   ],
-  "dependencies": {
-    "@popperjs/core": "^2.11.5",
-    "bootstrap": "^5.3.8",
-    "lodash.debounce": "^4.0.8"
+  "devEngines": {
+    "packageManager": {
+      "name": "npm"
+    }
   }
 }

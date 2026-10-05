@@ -14,11 +14,18 @@ help:
 buildfixtures:
     uv run python manage.py buildfixtures
 
-# Run tests with the test settings.
-test:
+# Run all tests.
+test: test-backend test-frontend
+
+# Run the backend tests with the test settings.
+test-backend:
     DJANGO_SETTINGS_MODULE=apps.guide.settings.test uv run python manage.py test
 
-# Run tests with coverage.
+# Run the frontend tests with Vitest.
+test-frontend:
+    npm test
+
+# Run the backend tests with coverage.
 test-coverage:
     DJANGO_SETTINGS_MODULE=apps.guide.settings.test uv run coverage run manage.py test
     uv run coverage report
@@ -28,7 +35,7 @@ format-backend:
     uv run ruff check . --fix
     uv run ruff format .
 
-# Format the frontend code with Prettier.
+# Format the frontend code with Oxfmt.
 format-frontend:
     npm run format
 
@@ -40,7 +47,7 @@ lint-backend:
     uv run ruff check .
     uv run ruff format --check .
 
-# Lint the frontend code.
+# Lint the frontend code with Oxlint, Oxfmt, and Stylelint.
 lint-frontend:
     npm run lint
 

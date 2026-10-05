@@ -1,5 +1,6 @@
 /* global ngettext, interpolate */
 import debounce from 'lodash.debounce';
+import '../scss/main.scss';
 import './theme-detect';
 import { initSectionLink } from './section-link';
 import { initActiveNavItem } from './active-nav-item';
@@ -19,7 +20,6 @@ const resultsCountContainer = document.querySelector(
 );
 
 const removeExistingChildren = (parent) => {
-    // eslint-disable-next-line no-param-reassign
     parent.innerHTML = '';
 };
 
@@ -96,9 +96,7 @@ const onSearchInputChange = async (event) => {
         const data = await res.json();
         injectResultsInHTML(data);
     } catch (err) {
-        // eslint-disable-next-line no-console
         console.log(err);
-        // eslint-disable-next-line no-alert
         window.alert(`Error: ${err}`);
     } finally {
         await minDelay; // wait for 300ms to pass if fetch was faster

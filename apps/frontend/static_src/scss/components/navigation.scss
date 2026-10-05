@@ -18,7 +18,9 @@
         border-radius: $border-radius;
         text-decoration: none;
         color: light-dark($color--off-black, $color--light-grey);
-        transition: color $transition, background-color $transition;
+        transition:
+            color $transition,
+            background-color $transition;
 
         &:hover,
         &:focus {

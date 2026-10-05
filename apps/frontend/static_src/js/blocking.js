@@ -25,7 +25,6 @@ function updateThemeMode(event, { isInitial = false } = {}) {
     try {
         savedThemeMode = localStorage.getItem(STORAGE_KEY);
     } catch (error) {
-        // eslint-disable-next-line no-console
         console.warn('Unable to read theme from localStorage', error);
     }
 
@@ -60,7 +59,6 @@ function updateThemeMode(event, { isInitial = false } = {}) {
         try {
             localStorage.setItem(STORAGE_KEY, applyMode);
         } catch (error) {
-            // eslint-disable-next-line no-console
             console.warn('Unable to store theme in localStorage', error);
         }
     }

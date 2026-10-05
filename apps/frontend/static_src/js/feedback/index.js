@@ -69,7 +69,6 @@ export const handleFeedback = () => {
             feedbackPk = data.pk;
             additionalFeedbackContainer.classList.add('active');
         } catch (err) {
-            // eslint-disable-next-line no-console
             console.log(err);
         }
     };
@@ -89,7 +88,6 @@ export const handleFeedback = () => {
             });
             additionalFeedbackContainer.innerHTML = '';
         } catch (err) {
-            // eslint-disable-next-line no-console
             console.log(err);
         }
     };
