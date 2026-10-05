@@ -38,7 +38,7 @@ DJANGO_SETTINGS_MODULE=apps.guide.settings.dev
 
 ## Coding style & naming conventions
 
-Defined in `ruff.toml`, `vite.config.ts` (Oxlint and Oxfmt), `.stylelintrc.json`:
+Defined in `ruff.toml`, `vite.config.ts` (Oxlint and Oxfmt), `stylelint.config.mjs`:
 
 - **Python**: 4 spaces indent, `ruff format` (line-length 88, target py312)
 - **JavaScript**: `oxlint` via Vite+ (`vp lint`), with `correctness`, `suspicious` and `perf` rules as errors
