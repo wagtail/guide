@@ -1,40 +1,40 @@
 .navigation {
-    list-style: none;
-    padding: 2px 0 2px 2px; // to prevent outline being cropped off
-    margin: 0;
+  list-style: none;
+  padding: 2px 0 2px 2px; // to prevent outline being cropped off
+  margin: 0;
 
-    .navigation {
-        margin-bottom: $gutter; // keep this as small as possible to prevent scroll in left col
+  .navigation {
+    margin-bottom: $gutter; // keep this as small as possible to prevent scroll in left col
+  }
+
+  &__item {
+    margin-bottom: 0;
+  }
+
+  &__link {
+    @include fs(xxs);
+    display: block;
+    padding: 5px 10px;
+    border-radius: $border-radius;
+    text-decoration: none;
+    color: light-dark($color--off-black, $color--light-grey);
+    transition:
+      color $transition,
+      background-color $transition;
+
+    &:hover,
+    &:focus {
+      background-color: light-dark($color--white, $color--black);
     }
 
-    &__item {
-        margin-bottom: 0;
+    &--heading {
+      @include fs(xs);
+      font-weight: 700;
     }
 
-    &__link {
-        @include fs(xxs);
-        display: block;
-        padding: 5px 10px;
-        border-radius: $border-radius;
-        text-decoration: none;
-        color: light-dark($color--off-black, $color--light-grey);
-        transition:
-            color $transition,
-            background-color $transition;
-
-        &:hover,
-        &:focus {
-            background-color: light-dark($color--white, $color--black);
-        }
-
-        &--heading {
-            @include fs(xs);
-            font-weight: 700;
-        }
-
-        &.active {
-            background-color: light-dark($color--active, $color--light-teal);
-            color: light-dark($color--white, $color--black);
-        }
+    &.active {
+      background-color: light-dark($color--active, $color--light-teal);
+      color: light-dark($color--white, $color--black);
     }
+  }
 }

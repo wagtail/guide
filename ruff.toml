@@ -7,18 +7,18 @@ exclude = ["migrations", "node_modules", "venv", ".venv"]
 # E501: Line too long
 ignore = ["E501"]
 select = [
-    "BLE", # flake8-blind-except
-    "C4", # flake8-comprehensions
-    "DJ", # flake8-django
-    "E", # pycodestyle errors
-    "F", # pyflakes
-    "I", # isort
-    "PGH", # pygrep-hooks
-    "RUF100", # unused noqa
-    "T20", # flake8-print
-    "UP", # pyupgrade
-    "W", # pycodestyle warnings
-    "YTT", # flake8-2020
+  "BLE", # flake8-blind-except
+  "C4", # flake8-comprehensions
+  "DJ", # flake8-django
+  "E", # pycodestyle errors
+  "F", # pyflakes
+  "I", # isort
+  "PGH", # pygrep-hooks
+  "RUF100", # unused noqa
+  "T20", # flake8-print
+  "UP", # pyupgrade
+  "W", # pycodestyle warnings
+  "YTT", # flake8-2020
 ]
 
 # Standalone management/CLI scripts: they print to the console and import

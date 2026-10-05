@@ -1,179 +1,164 @@
 .header {
-    margin-top: $gutter;
-    width: calc(100% + 16px); // burger align with right edge of lang
+  margin-top: $gutter;
+  width: calc(100% + 16px); // burger align with right edge of lang
+
+  @include media-query(large) {
+    position: sticky;
+    width: auto;
+    top: ($gutter * 2.5);
+    margin-top: ($gutter * 2.5);
+  }
+
+  &__identity {
+    position: relative;
+    z-index: 6; // sit above primary nav overlay
+    display: flex;
 
     @include media-query(large) {
-        position: sticky;
-        width: auto;
-        top: ($gutter * 2.5);
-        margin-top: ($gutter * 2.5);
+      flex-direction: column;
+      margin-bottom: ($gutter * 2);
     }
 
-    &__identity {
-        position: relative;
-        z-index: 6; // sit above primary nav overlay
-        display: flex;
-
-        @include media-query(large) {
-            flex-direction: column;
-            margin-bottom: ($gutter * 2);
-        }
-
-        // Mask off menu behind logo
-        &::after {
-            .no-scroll & {
-                content: '';
-                pointer-events: none;
-                position: absolute;
-                z-index: -1;
-                inset: -20px;
-                background: linear-gradient(
-                    180deg,
-                    light-dark(
-                            rgba($color--page-bg, 1),
-                            rgba($color--off-black, 1)
-                        )
-                        0%,
-                    light-dark(
-                            rgba($color--page-bg, 1),
-                            rgba($color--off-black, 1)
-                        )
-                        40%,
-                    light-dark(
-                            rgba($color--page-bg, 0),
-                            rgba($color--off-black, 0)
-                        )
-                        100%
-                );
-                height: 160px;
-
-                // stylelint-disable-next-line max-nesting-depth
-                @include media-query(large) {
-                    content: none;
-                }
-            }
-        }
-    }
-
-    &__logo {
-        .light {
-            fill: light-dark($color--white, $color--black);
-        }
-
-        .dark {
-            fill: light-dark($color--black, $color--white);
-        }
-    }
-
-    &__logo-link {
-        display: block;
-        position: relative;
-        transition: opacity $transition;
-        width: 48px;
-        margin-inline-end: ($gutter * 0.5);
-        overflow: hidden;
-        direction: ltr;
-
-        @include media-query(large) {
-            width: auto;
-            inset-inline-start: -48px;
-            margin-inline-end: 0;
-
-            [dir='rtl'] & {
-                inset-inline-start: auto;
-                grid-column: 1;
-            }
-        }
-
-        &:hover,
-        &:focus {
-            opacity: 0.8;
-        }
-    }
-
-    &__strapline {
-        @include rem-font-size(29px); // one off font size
-        font-weight: 300;
-        letter-spacing: -0.5px;
-
-        @include media-query(large) {
-            @include rem-font-size(21px); // prevent wrapping
-        }
-
-        @media only screen and (min-width: $header-large-width) {
-            @include rem-font-size(29px); // one off font size
-        }
-    }
-
-    &__actions {
-        display: flex;
-        align-items: center;
-        inset-inline-start: 48px;
-
-        @include media-query(large) {
-            position: relative;
-            top: -$gutter;
-            inset-inline-start: 0;
-
-            [dir='rtl'] & {
-                grid-column: 1;
-                justify-content: flex-end;
-            }
-        }
-    }
-
-    &__burger {
+    // Mask off menu behind logo
+    &::after {
+      .no-scroll & {
+        content: '';
+        pointer-events: none;
         position: absolute;
-        inset-block-start: 15px;
-        inset-inline-end: 12px;
+        z-index: -1;
+        inset: -20px;
+        background: linear-gradient(
+          180deg,
+          light-dark(rgba($color--page-bg, 1), rgba($color--off-black, 1)) 0%,
+          light-dark(rgba($color--page-bg, 1), rgba($color--off-black, 1)) 40%,
+          light-dark(rgba($color--page-bg, 0), rgba($color--off-black, 0)) 100%
+        );
+        height: 160px;
+
+        // stylelint-disable-next-line max-nesting-depth
         @include media-query(large) {
-            display: none;
+          content: none;
         }
+      }
+    }
+  }
+
+  &__logo {
+    .light {
+      fill: light-dark($color--white, $color--black);
     }
 
-    &__search-toggle {
+    .dark {
+      fill: light-dark($color--black, $color--white);
+    }
+  }
+
+  &__logo-link {
+    display: block;
+    position: relative;
+    transition: opacity $transition;
+    width: 48px;
+    margin-inline-end: ($gutter * 0.5);
+    overflow: hidden;
+    direction: ltr;
+
+    @include media-query(large) {
+      width: auto;
+      inset-inline-start: -48px;
+      margin-inline-end: 0;
+
+      [dir='rtl'] & {
+        inset-inline-start: auto;
+        grid-column: 1;
+      }
+    }
+
+    &:hover,
+    &:focus {
+      opacity: 0.8;
+    }
+  }
+
+  &__strapline {
+    @include rem-font-size(29px); // one off font size
+    font-weight: 300;
+    letter-spacing: -0.5px;
+
+    @include media-query(large) {
+      @include rem-font-size(21px); // prevent wrapping
+    }
+
+    @media only screen and (min-width: $header-large-width) {
+      @include rem-font-size(29px); // one off font size
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    inset-inline-start: 48px;
+
+    @include media-query(large) {
+      position: relative;
+      top: -$gutter;
+      inset-inline-start: 0;
+
+      [dir='rtl'] & {
+        grid-column: 1;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  &__burger {
+    position: absolute;
+    inset-block-start: 15px;
+    inset-inline-end: 12px;
+    @include media-query(large) {
+      display: none;
+    }
+  }
+
+  &__search-toggle {
+    position: absolute;
+    inset-block-start: 17px;
+    inset-inline-end: 50px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background-color: transparent;
+    height: 40px;
+    width: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline-start: 20px;
+    transition: opacity $transition;
+
+    @include media-query(large) {
+      position: relative;
+      inset: auto;
+
+      &::before {
+        content: '';
         position: absolute;
-        inset-block-start: 17px;
-        inset-inline-end: 50px;
-        padding: 0;
-        margin: 0;
-        border: 0;
-        background-color: transparent;
-        height: 40px;
-        width: 42px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        inset-inline-start: -24px;
+        height: 30px;
+        width: 1px;
+        background-color: light-dark($color--off-black, $color--light-grey);
         margin-inline-start: 20px;
-        transition: opacity $transition;
-
-        @include media-query(large) {
-            position: relative;
-            inset: auto;
-
-            &::before {
-                content: '';
-                position: absolute;
-                inset-inline-start: -24px;
-                height: 30px;
-                width: 1px;
-                background-color: light-dark(
-                    $color--off-black,
-                    $color--light-grey
-                );
-                margin-inline-start: 20px;
-                margin-inline-end: 20px;
-            }
-        }
-
-        &:hover,
-        &:focus {
-            opacity: 0.6;
-        }
+        margin-inline-end: 20px;
+      }
     }
 
-    &__search-icon {
-        display: block;
-        fill: light-dark($color--black, $color--white);
+    &:hover,
+    &:focus {
+      opacity: 0.6;
     }
+  }
+
+  &__search-icon {
+    display: block;
+    fill: light-dark($color--black, $color--white);
+  }
 }

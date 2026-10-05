@@ -1,43 +1,43 @@
 .nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: ($gutter * 3);
+  flex-direction: column;
+
+  @include media-query(medium) {
+    flex-direction: row;
+  }
+
+  &__link {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: ($gutter * 3);
-    flex-direction: column;
+    align-items: center;
+    padding: ($gutter * 0.5) $gutter;
+    border: 1px solid light-dark($color--off-black, $color--light-grey);
+    border-radius: $border-radius--lg;
+    color: light-dark($color--blue, $color--white);
+    text-decoration: none;
+    transition: color $transition;
+    margin-bottom: ($gutter * 0.5);
 
     @include media-query(medium) {
-        flex-direction: row;
+      margin-bottom: 0;
     }
 
-    &__link {
-        display: flex;
-        align-items: center;
-        padding: ($gutter * 0.5) $gutter;
-        border: 1px solid light-dark($color--off-black, $color--light-grey);
-        border-radius: $border-radius--lg;
-        color: light-dark($color--blue, $color--white);
-        text-decoration: none;
-        transition: color $transition;
-        margin-bottom: ($gutter * 0.5);
-
-        @include media-query(medium) {
-            margin-bottom: 0;
-        }
-
-        svg {
-            width: 30px;
-            height: 25px;
-            fill: light-dark($color--teal, $color--light-teal);
-            --direction-deg: calc(var(--w-direction-factor) * -90deg);
-            transform: rotateZ(calc(90deg + var(--direction-deg)));
-        }
-
-        &[rel='prev'] svg {
-            --direction-deg: calc(var(--w-direction-factor) * 90deg);
-        }
+    svg {
+      width: 30px;
+      height: 25px;
+      fill: light-dark($color--teal, $color--light-teal);
+      --direction-deg: calc(var(--w-direction-factor) * -90deg);
+      transform: rotateZ(calc(90deg + var(--direction-deg)));
     }
 
-    &__label {
-        @include fs(xs);
-        font-weight: 700;
+    &[rel='prev'] svg {
+      --direction-deg: calc(var(--w-direction-factor) * 90deg);
     }
+  }
+
+  &__label {
+    @include fs(xs);
+    font-weight: 700;
+  }
 }

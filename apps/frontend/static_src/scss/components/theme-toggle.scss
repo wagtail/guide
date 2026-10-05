@@ -1,83 +1,83 @@
 .theme-toggle {
-    $root: &;
-    margin-inline-end: $gutter;
-    display: flex;
-    align-items: center;
+  $root: &;
+  margin-inline-end: $gutter;
+  display: flex;
+  align-items: center;
 
-    @include media-query(large) {
-        margin-inline-end: ($gutter * 1.5);
+  @include media-query(large) {
+    margin-inline-end: ($gutter * 1.5);
+  }
+
+  &__label {
+    @include fs(xxs);
+    color: light-dark($color--off-black, $color--light-grey);
+  }
+
+  &__button {
+    padding: 0;
+    width: 48px;
+    height: 28px;
+    border: 0;
+    outline: none;
+    overflow: hidden;
+    position: relative;
+    border-radius: 14px;
+    margin: 0 ($gutter * 0.5);
+    display: inline-block;
+    cursor: pointer;
+    background: light-dark($color--grey, $color--light-grey);
+
+    &::before {
+      top: 4px;
+      inset-inline-start: 24px;
+      content: '';
+      width: 20px;
+      height: 20px;
+      display: block;
+      position: absolute;
+      border-radius: 12px;
+      background-color: light-dark($color--light-grey, $color--black);
+      transition: inset-inline-start $transition;
     }
 
-    &__label {
-        @include fs(xxs);
-        color: light-dark($color--off-black, $color--light-grey);
+    &::after {
+      content: '';
+      top: 14px;
+      inset-inline-end: 2px;
+      width: 1px;
+      height: 1px;
+      display: block;
+      position: absolute;
+      border-radius: 0.5px;
+      background: light-dark($color--off-black, $color--light-grey);
     }
+  }
 
-    &__button {
-        padding: 0;
-        width: 48px;
-        height: 28px;
-        border: 0;
-        outline: none;
-        overflow: hidden;
-        position: relative;
-        border-radius: 14px;
-        margin: 0 ($gutter * 0.5);
-        display: inline-block;
-        cursor: pointer;
-        background: light-dark($color--grey, $color--light-grey);
+  .dark-only {
+    display: none;
+  }
 
-        &::before {
-            top: 4px;
-            inset-inline-start: 24px;
-            content: '';
-            width: 20px;
-            height: 20px;
-            display: block;
-            position: absolute;
-            border-radius: 12px;
-            background-color: light-dark($color--light-grey, $color--black);
-            transition: inset-inline-start $transition;
-        }
-
-        &::after {
-            content: '';
-            top: 14px;
-            inset-inline-end: 2px;
-            width: 1px;
-            height: 1px;
-            display: block;
-            position: absolute;
-            border-radius: 0.5px;
-            background: light-dark($color--off-black, $color--light-grey);
-        }
-    }
-
+  :has([name='color-scheme'][content^='dark']) & {
     .dark-only {
-        display: none;
+      display: block;
     }
 
-    :has([name='color-scheme'][content^='dark']) & {
-        .dark-only {
-            display: block;
-        }
-
-        .light-only {
-            display: none;
-        }
-
-        #{$root}__button {
-            &::before {
-                inset-inline-start: 4px;
-            }
-
-            &::after {
-                top: -2px;
-                inset-inline-end: 2px;
-                width: 32px;
-                height: 32px;
-                border-radius: 16px;
-            }
-        }
+    .light-only {
+      display: none;
     }
+
+    #{$root}__button {
+      &::before {
+        inset-inline-start: 4px;
+      }
+
+      &::after {
+        top: -2px;
+        inset-inline-end: 2px;
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+      }
+    }
+  }
 }

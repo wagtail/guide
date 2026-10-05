@@ -1,53 +1,53 @@
 .footer {
-    background-color: light-dark($color--blue, $color--black);
-    // For High-contrast mode users
-    border-top: 1px solid $color--blue;
-    padding: ($gutter * 2) 0 ($gutter * 3);
-    color: $color--white;
+  background-color: light-dark($color--blue, $color--black);
+  // For High-contrast mode users
+  border-top: 1px solid $color--blue;
+  padding: ($gutter * 2) 0 ($gutter * 3);
+  color: $color--white;
 
-    &__container {
-        @include grid-layout();
+  &__container {
+    @include grid-layout();
+  }
+
+  &__link-blocks {
+    display: grid;
+    margin-bottom: ($gutter * 2);
+
+    @include media-query(small) {
+      grid-column: 1 / span 2;
+      padding: 1px 1px 30px 1px;
     }
 
-    &__link-blocks {
-        display: grid;
-        margin-bottom: ($gutter * 2);
-
-        @include media-query(small) {
-            grid-column: 1 / span 2;
-            padding: 1px 1px 30px 1px;
-        }
-
-        @include media-query(medium) {
-            grid-template-columns: 1fr 1fr;
-            grid-column: 1 / span 2;
-        }
-
-        @include media-query(large) {
-            grid-column: 1 / span 9;
-            grid-template-columns: 1fr 1fr 1fr;
-        }
+    @include media-query(medium) {
+      grid-template-columns: 1fr 1fr;
+      grid-column: 1 / span 2;
     }
 
-    &__legal {
-        @include fs(xxs);
-        grid-column: 1 / span 4;
-
-        a {
-            color: $color--light-teal;
-            transition: color $transition;
-
-            &:hover,
-            &:focus {
-                text-decoration: underline;
-                color: $color--white;
-            }
-        }
+    @include media-query(large) {
+      grid-column: 1 / span 9;
+      grid-template-columns: 1fr 1fr 1fr;
     }
+  }
+
+  &__legal {
+    @include fs(xxs);
+    grid-column: 1 / span 4;
+
+    a {
+      color: $color--light-teal;
+      transition: color $transition;
+
+      &:hover,
+      &:focus {
+        text-decoration: underline;
+        color: $color--white;
+      }
+    }
+  }
 }
 
 .link-block {
-    @include media-query(small) {
-        padding: 10px;
-    }
+  @include media-query(small) {
+    padding: 10px;
+  }
 }

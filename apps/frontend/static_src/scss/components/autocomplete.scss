@@ -1,68 +1,68 @@
 .autocomplete {
-    $root: &;
-    $row-spacing: ($gutter * 2);
-    $meta-color: light-dark($color--grey, $color--light-teal);
+  $root: &;
+  $row-spacing: ($gutter * 2);
+  $meta-color: light-dark($color--grey, $color--light-teal);
 
-    &__count {
-        @include fs(s);
-        top: $gutter;
-        text-align: end;
-        color: $meta-color;
-        font-weight: 500;
-        padding: 0 $row-spacing;
-        margin-bottom: $gutter;
+  &__count {
+    @include fs(s);
+    top: $gutter;
+    text-align: end;
+    color: $meta-color;
+    font-weight: 500;
+    padding: 0 $row-spacing;
+    margin-bottom: $gutter;
+  }
+
+  &__row {
+    display: block;
+    padding: $gutter $row-spacing;
+    border-top: 1px solid light-dark($color--light-grey, $color--grey);
+    text-decoration: none;
+    transition:
+      background-color $transition,
+      opacity 0.25s ease-out,
+      transform 0.25s ease-out;
+    opacity: 0;
+    transform: translateY(8px);
+
+    &.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    &__row {
-        display: block;
-        padding: $gutter $row-spacing;
-        border-top: 1px solid light-dark($color--light-grey, $color--grey);
-        text-decoration: none;
-        transition:
-            background-color $transition,
-            opacity 0.25s ease-out,
-            transform 0.25s ease-out;
-        opacity: 0;
-        transform: translateY(8px);
+    &:hover,
+    &:focus {
+      background-color: light-dark($color--light-grey, $color--grey);
 
-        &.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        &:hover,
-        &:focus {
-            background-color: light-dark($color--light-grey, $color--grey);
-
-            #{$root}__heading {
-                color: light-dark($color--primary, $color--light-teal);
-                text-decoration: underline;
-            }
-        }
-
-        &:last-child {
-            margin-bottom: $gutter;
-        }
+      #{$root}__heading {
+        color: light-dark($color--primary, $color--light-teal);
+        text-decoration: underline;
+      }
     }
 
-    &__heading {
-        @include fs(s);
-        font-weight: 700;
-        margin-bottom: 5px;
-        color: light-dark($color--off-black, $color--light-grey);
-        transition: color $transition;
+    &:last-child {
+      margin-bottom: $gutter;
     }
+  }
 
-    &__meta {
-        @include fs(xxs);
-        // stylelint-disable-next-line property-disallowed-list
-        text-transform: uppercase;
-        color: $meta-color;
-    }
+  &__heading {
+    @include fs(s);
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: light-dark($color--off-black, $color--light-grey);
+    transition: color $transition;
+  }
 
-    &__description {
-        @include fs(xs);
-        color: $meta-color;
-        margin-bottom: 0;
-    }
+  &__meta {
+    @include fs(xxs);
+    // stylelint-disable-next-line property-disallowed-list
+    text-transform: uppercase;
+    color: $meta-color;
+  }
+
+  &__description {
+    @include fs(xs);
+    color: $meta-color;
+    margin-bottom: 0;
+  }
 }
