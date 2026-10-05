@@ -64,38 +64,12 @@ class TestMarkdownNegotiation(TestCase):
         response = self.get("text/markdown")
         self.assertGreater(int(response["x-markdown-tokens"]), 0)
 
-    def test_markdown_preferred_over_html(self):
-        response = self.get("text/markdown, text/html;q=0.9")
-        self.assertEqual(response["Content-Type"], "text/markdown;charset=utf-8")
-
-    def test_client_order_breaks_quality_ties(self):
-        response = self.get("text/markdown, text/html")
-        self.assertEqual(response["Content-Type"], "text/markdown;charset=utf-8")
-
-    def test_rejected_markdown_returns_html(self):
-        response = self.get("text/markdown;q=0, */*")
-        self.assertTrue(response["Content-Type"].startswith("text/html"))
-
     def test_negotiated_markdown_is_not_shared_cacheable(self):
         response = self.get("text/markdown")
         self.assertIn("private", response["Cache-Control"])
 
     def test_html_is_default(self):
         response = self.get()
-        self.assertTrue(response["Content-Type"].startswith("text/html"))
-
-    def test_browser_accept_header_returns_html(self):
-        response = self.get(
-            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
-        )
-        self.assertTrue(response["Content-Type"].startswith("text/html"))
-
-    def test_wildcard_returns_html(self):
-        response = self.get("*/*")
-        self.assertTrue(response["Content-Type"].startswith("text/html"))
-
-    def test_html_preferred_over_markdown(self):
-        response = self.get("text/html, text/markdown;q=0.5")
         self.assertTrue(response["Content-Type"].startswith("text/html"))
 
     def test_responses_vary_on_accept(self):

@@ -1,9 +1,12 @@
 from django.http import HttpResponse
 from django.template import loader
-from django.utils.cache import patch_cache_control, patch_vary_headers
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
-MARKDOWN_CONTENT_TYPE = "text/markdown;charset=utf-8"
+from .negotiation import (
+    MARKDOWN_CONTENT_TYPE,
+    patch_negotiated_response,
+    prefers_markdown,
+)
 
 
 def estimate_tokens(content):
@@ -13,17 +16,6 @@ def estimate_tokens(content):
     so an estimate avoids pulling in a tokenizer.
     """
     return max(1, round(len(content) / 4))
-
-
-def prefers_markdown(request):
-    """
-    Whether the client explicitly prefers Markdown over HTML.
-
-    HTML wins ties (e.g. `Accept: */*`), so browsers and generic clients keep
-    getting the HTML page.
-    """
-    preferred = request.get_preferred_type(["text/html", "text/markdown"])
-    return preferred == "text/markdown"
 
 
 class MarkdownRouteMixin(RoutablePageMixin):
@@ -66,14 +58,11 @@ class MarkdownRouteMixin(RoutablePageMixin):
         if view is not None and view != self.index_route:
             return super().serve(request, view, args, kwargs)
 
-        if prefers_markdown(request):
+        is_markdown = prefers_markdown(request)
+        if is_markdown:
             response = self.markdown_response(request)
-            # Cloudflare ignores `Vary: Accept`, so a shared cache could serve
-            # this Markdown to browsers. Keep it out of shared caches.
-            patch_cache_control(response, private=True)
         else:
             response = super().serve(request, view, args, kwargs)
 
-        # The same URL serves HTML or Markdown, so caches must key on Accept.
-        patch_vary_headers(response, ["Accept"])
+        patch_negotiated_response(response, is_markdown)
         return response
