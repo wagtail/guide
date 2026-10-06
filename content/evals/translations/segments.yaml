@@ -14,7 +14,7 @@
     id: manage-documents-intro
     source: content/en/how-to-guides/manage-documents.md
   vars:
-    text: "Documents such as PDFs can be managed from the Documents interface, available in the left-hand menu."
+    text: 'Documents such as PDFs can be managed from the Documents interface, available in the left-hand menu.'
 
 - description: Link with id — link text translated
   metadata:
@@ -35,14 +35,14 @@
     id: manage-documents-add
     source: content/en/how-to-guides/manage-documents.md
   vars:
-    text: "Add documents by clicking <b>Add documents</b> at the top right of the documents interface."
+    text: 'Add documents by clicking <b>Add documents</b> at the top right of the documents interface.'
 
 - description: Multi-sentence segment with one bold label (Collection)
   metadata:
     id: manage-documents-collection
     source: content/en/how-to-guides/manage-documents.md
   vars:
-    text: "Search for previously added documents by entering the title of the document in the search bar. The results automatically update as you type. You can also filter the results by Collection by selecting a collection from the <b>Collection</b> dropdown preceding the documents list."
+    text: 'Search for previously added documents by entering the title of the document in the search bar. The results automatically update as you type. You can also filter the results by Collection by selecting a collection from the <b>Collection</b> dropdown preceding the documents list.'
 
 - description: Bold label (Save) and link at end of a long sentence
   metadata:
@@ -56,7 +56,7 @@
     id: manage-documents-delete
     source: content/en/how-to-guides/manage-documents.md
   vars:
-    text: "Then click <b>Delete</b> from the action bar displayed at the bottom of the Documents interface."
+    text: 'Then click <b>Delete</b> from the action bar displayed at the bottom of the Documents interface.'
 
 - description: Repeated link text plus compound label (Delete document)
   metadata:
@@ -70,21 +70,21 @@
     id: manage-documents-warning
     source: content/en/how-to-guides/manage-documents.md
   vars:
-    text: "Warning: Deleted documents cannot be recovered."
+    text: 'Warning: Deleted documents cannot be recovered.'
 
 - description: Long plain prose with product terminology
   metadata:
     id: new-in-7-4-autosave
     source: content/en/releases/new-in-wagtail-7-4.md
   vars:
-    text: "The autosave and concurrent editing notifications introduced in Wagtail 7.3 have been refined based on user feedback. Race conditions and brief network outages are handled more gracefully, the indicator messaging and alignment have been polished, and you can now distinguish which other users are active or idle while looking at the same page or snippet."
+    text: 'The autosave and concurrent editing notifications introduced in Wagtail 7.3 have been refined based on user feedback. Race conditions and brief network outages are handled more gracefully, the indicator messaging and alignment have been polished, and you can now distinguish which other users are active or idle while looking at the same page or snippet.'
 
 - description: Bold label without an official translation — translated freely
   metadata:
     id: new-in-7-4-add-block
     source: content/en/releases/new-in-wagtail-7-4.md
   vars:
-    text: "Block-based content now lists block groups in the order developers defined them, making the <b>Add block</b> menu more predictable."
+    text: 'Block-based content now lists block groups in the order developers defined them, making the <b>Add block</b> menu more predictable.'
 
 - description: Bold multi-word label without an official translation
   metadata:
