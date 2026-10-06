@@ -1,0 +1,28 @@
+# git-blame ignored revisions
+# To configure, run
+#   git config blame.ignoreRevsFile .git-blame-ignore-revs
+# Requires Git > 2.23
+# See https://git-scm.com/docs/git-blame#Documentation/git-blame.txt---ignore-revs-fileltfilegt
+
+# Initial Prettier reformatting
+afc630fae88a3c91ea5f606b8773e4ad4bd9d08f
+# Fix docs formatting
+c6d7f425687287c960d7a7107b840bd6a8550ffb
+# Reformat mixin code
+38efd4c22adc4b5afa4ab51199ac1615f430a3bd
+# Fix formatting
+3b5b096b056ca2e93fecdebffd1d1eb8db2d9c1f
+# Fix formatting for demo access
+26d3e3371fe174f97849ce0d94e250dc2450402c
+# Fix Prettier formatting on SCSS and docker-compose
+7d1e3c663445ab67dceca7cf6b7264205bdb9126
+# Fix formatting
+86ba73c0a013403514f32df4a58d7f0510c0caf6
+# Fix formatting
+06d2d8408a9825ef7acff4e44b4e3996ea7b6069
+# Format TOML with Oxfmt
+209e39e0ac6f6b3f15d723a8e255cf06469d0895
+# Reformat Markdown files with Oxfmt
+3aa5453855d8ff1adec03c892409c1d274687442
+# Reformat with 2-space indents
+544587cb9fa9afee264c46269bcac6f9df684756

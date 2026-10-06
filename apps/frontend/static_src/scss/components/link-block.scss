@@ -1,35 +1,35 @@
 .link-block {
-    $root: &;
+  $root: &;
 
-    text-decoration: none;
-    color: inherit;
+  text-decoration: none;
+  color: inherit;
 
-    &__container {
-        display: flex;
-        align-items: center;
-        margin-inline-end: ($gutter * 2);
-    }
+  &__container {
+    display: flex;
+    align-items: center;
+    margin-inline-end: ($gutter * 2);
+  }
 
-    &__icon {
-        width: 50px;
-        margin-inline-end: ($gutter * 0.5);
-    }
+  &__icon {
+    width: 50px;
+    margin-inline-end: ($gutter * 0.5);
+  }
 
-    &__heading {
-        font-size: $base-font-size;
-        font-weight: 700;
-        line-height: 1.2;
-        margin-bottom: 5px;
-    }
+  &__heading {
+    font-size: $base-font-size;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 5px;
+  }
 
-    &__description {
-        @include fs(xxs);
-        line-height: 1.2;
-    }
+  &__description {
+    @include fs(xxs);
+    line-height: 1.2;
+  }
 
-    &:hover,
-    &:focus {
-        cursor: pointer;
-        color: $color--secondary;
-    }
+  &:hover,
+  &:focus {
+    cursor: pointer;
+    color: $color--secondary;
+  }
 }

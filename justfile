@@ -14,11 +14,18 @@ help:
 buildfixtures:
     uv run python manage.py buildfixtures
 
-# Run tests with the test settings.
-test:
+# Run all tests.
+test: test-backend test-frontend
+
+# Run the backend tests with the test settings.
+test-backend:
     DJANGO_SETTINGS_MODULE=apps.guide.settings.test uv run python manage.py test
 
-# Run tests with coverage.
+# Run the frontend tests with Vitest.
+test-frontend:
+    npm test
+
+# Run the backend tests with coverage.
 test-coverage:
     DJANGO_SETTINGS_MODULE=apps.guide.settings.test uv run coverage run manage.py test
     uv run coverage report
@@ -28,7 +35,7 @@ format-backend:
     uv run ruff check . --fix
     uv run ruff format .
 
-# Format the frontend code with Prettier.
+# Format the frontend code with Oxfmt.
 format-frontend:
     npm run format
 
@@ -40,7 +47,7 @@ lint-backend:
     uv run ruff check .
     uv run ruff format --check .
 
-# Lint the frontend code.
+# Lint the frontend code with Oxlint, Oxfmt, and Stylelint.
 lint-frontend:
     npm run lint
 
@@ -77,15 +84,15 @@ compilemessages:
 
 # Evaluate translation quality of candidate LLMs with Inspect AI (Scaleway).
 eval-translations *ARGS:
-    ./prompts/evals/translations-inspect_ai/translation_task.py "$@"
+    ./content/evals/translations-inspect_ai/translation_task.py "$@"
 
 # Export Wagtail admin UI translations as eval glossaries, per language code.
 eval-glossary *LANGS="ar":
-    uv run python prompts/evals/translations-inspect_ai/export_glossary.py {{ LANGS }}
+    uv run python content/evals/translations-inspect_ai/export_glossary.py {{ LANGS }}
 
 # Run the Promptfoo translation eval across all candidate models (Scaleway).
 eval-promptfoo *ARGS:
-    npx --yes promptfoo@latest eval -c prompts/evals/translations/translations.yaml "$@"
+    npx --yes promptfoo@latest eval -c content/evals/translations/translations.yaml "$@"
 
 # Browse Promptfoo translation eval results.
 eval-promptfoo-view:
@@ -93,4 +100,4 @@ eval-promptfoo-view:
 
 # Browse translation eval results in the Inspect viewer.
 eval-view:
-    uvx --from inspect-ai --python 3.12 inspect view --log-dir prompts/evals/translations-inspect_ai/logs
+    uvx --from inspect-ai --python 3.12 inspect view --log-dir content/evals/translations-inspect_ai/logs

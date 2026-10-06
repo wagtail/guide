@@ -3,6 +3,7 @@ import json
 from django import template
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
+from django.conf import settings
 from django.utils.translation import get_language
 from wagtail.models import Page
 
@@ -34,32 +35,38 @@ def header(context):
     }
 
 
-@register.simple_tag
-def get_translation_url(page, language_code):
-    return page.full_url.replace(
-        f"/{page.locale.language_code}/",
-        f"/{language_code}/",
-        1,
-    )
-
-
 @register.inclusion_tag("components/hreflangs.html", takes_context=True)
 def hreflangs(context):
     page = context.get("page")
     if not page:
         return {}
 
-    translation_language_codes = (
-        page.get_translations()
-        .live()
-        .public()
-        .values_list("locale__language_code", flat=True)
+    # Each language version must list itself as well as all other versions,
+    # using its own localised URL (slugs are translated per locale). A page can
+    # be live and public yet have no URL (full_url is None) when it isn't
+    # reachable through a site, so only list versions that resolve to a URL.
+    translations = [page, *page.get_translations().live().public()]
+
+    alternates = [
+        (translation.locale.language_code, translation.full_url)
+        for translation in translations
+        if translation.full_url
+    ]
+
+    # Fallback for users whose language doesn't match any version: prefer the
+    # default language, else fall back to this page's own URL when it has one.
+    x_default = next(
+        (
+            url
+            for language_code, url in alternates
+            if language_code == settings.LANGUAGE_CODE
+        ),
+        page.full_url,
     )
 
     return {
-        "translations": [
-            (lc, get_translation_url(page, lc)) for lc in translation_language_codes
-        ]
+        "translations": alternates,
+        "x_default": x_default,
     }
 
 

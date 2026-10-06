@@ -10,8 +10,9 @@ from wagtail.models import Site
 SKILL_NAME = "wagtail-guide-support"
 SKILL_DESCRIPTION = (
     "A professional support helper for Wagtail CMS users. "
-    "Use when answering Wagtail CMS user questions "
-    "with the Wagtail Guide as authoritative documentation."
+    "Use when answering questions about using the Wagtail CMS admin interface "
+    "as an editor, moderator, or administrator, with the Wagtail Guide as "
+    "authoritative documentation. Not for Wagtail developer questions."
 )
 SCHEMA_URI = "https://schemas.agentskills.io/discovery/0.2.0/schema.json"
 
@@ -41,15 +42,31 @@ def invalidate_cache():
             cache.delete(get_cache_key(site_pk, template_name))
 
 
-def _render_llms_txt(request, template_name):
-    sitemap = Sitemap(request)
+def _get_pages(site, defer_streamfields):
+    """Same pages as Sitemap.items(), with optional StreamField deferral.
+
+    llms-full.txt renders every page body, so deferring StreamFields there
+    would fetch each body with its own query.
+    """
+    pages = (
+        site.root_page.get_descendants(inclusive=True).live().public().order_by("path")
+    )
+    if defer_streamfields:
+        pages = pages.defer_streamfields()
+    return pages.specific()
+
+
+def _render_llms_txt(request, template_name, defer_streamfields=True):
     # Same site resolution as Sitemap.items(), so the cache key is in sync
     # with the pages being rendered.
-    site = sitemap.get_wagtail_site()
+    site = Sitemap(request).get_wagtail_site()
     key = get_cache_key(site.pk, template_name)
     content = cache.get(key)
     if content is None:
-        context = {"pages": sitemap.items()}
+        context = {
+            "pages": _get_pages(site, defer_streamfields),
+            "skill_name": SKILL_NAME,
+        }
         content = loader.get_template(template_name).render(context, request)
         cache.set(key, content, timeout=CACHE_TIMEOUT)
     return HttpResponse(content, content_type=RESPONSE_CONTENT_TYPE)
@@ -97,4 +114,4 @@ def llms_txt_view(request):
 
 @cache_control(max_age=3600)
 def llms_full_txt_view(request):
-    return _render_llms_txt(request, LLMS_FULL_TXT_TEMPLATE)
+    return _render_llms_txt(request, LLMS_FULL_TXT_TEMPLATE, defer_streamfields=False)

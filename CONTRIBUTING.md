@@ -22,10 +22,10 @@ We set up a separate translation team for each language, with their own Group ab
 
 For example, the _Translators: Icelandic (latest)_ group has access to:
 
--   Translation: Can submit translations
--   Can access Wagtail admin: Yes
--   Pages: Notendahandbók Wagtail (latest homepage): Add, Edit, Lock, Unlock
--   Images: "Icelandic (latest)": Add, Edit, Choose
+- Translation: Can submit translations
+- Can access Wagtail admin: Yes
+- Pages: Notendahandbók Wagtail (latest homepage): Add, Edit, Lock, Unlock
+- Images: "Icelandic (latest)": Add, Edit, Choose
 
 When working on changes to the "latest" source content in English, make sure to avoid unnecessarily removing and adding StreamField blocks, so block references are stable between revisions.
 

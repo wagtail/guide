@@ -46,6 +46,14 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 # https://docs.djangoproject.com/en/stable/ref/settings/#secure-content-type-nosniff
 SECURE_CONTENT_TYPE_NOSNIFF = True
 
+# Content Security Policy
+#
+# The policy is defined in `base.py`. The report URI is environment-specific,
+# and must be quoted as a list. https://docs.djangoproject.com/en/6.0/ref/middleware/#django.middleware.csp.ContentSecurityPolicyMiddleware
+SECURE_CSP["report-uri"] = [  # noqa: F405
+    "https://o4504043711037440.ingest.us.sentry.io/api/4504043711037440/security/?sentry_key=8660a4ef016e4bda918d7b1fe943daa3"
+]
+
 # Referrer-policy header settings.
 # https://django-referrer-policy.readthedocs.io/en/1.0/
 

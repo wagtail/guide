@@ -1,46 +1,46 @@
 html {
-    font-family: $font-family-base;
-    font-size: calc(($base-font-size / 16px) * 100%);
-    line-height: $base-line-height;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color-scheme: normal;
+  font-family: $font-family-base;
+  font-size: calc(($base-font-size / 16px) * 100%);
+  line-height: $base-line-height;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color-scheme: normal;
 }
 
 // Default to LTR if `dir` is not set.
 :root,
 :host,
 [dir='ltr'] {
-    // Flips the direction based on whether the UI is LTR or RTL. Used for:
-    // - `transform` / `background-position` declarations for layout
-    // - icons mirroring.
-    // - Any other styles built with physical properties or values to mirror for RTL languages.
-    --w-direction-factor: 1;
+  // Flips the direction based on whether the UI is LTR or RTL. Used for:
+  // - `transform` / `background-position` declarations for layout
+  // - icons mirroring.
+  // - Any other styles built with physical properties or values to mirror for RTL languages.
+  --w-direction-factor: 1;
 }
 
 [dir='rtl'] {
-    --w-direction-factor: -1;
+  --w-direction-factor: -1;
 }
 
 body {
-    background-color: light-dark($color--page-bg, $color--off-black);
-    color: light-dark($color--off-black, $color--light-grey);
+  background-color: light-dark($color--page-bg, $color--off-black);
+  color: light-dark($color--off-black, $color--light-grey);
 
-    &.no-scroll {
-        overflow: hidden;
-    }
+  &.no-scroll {
+    overflow: hidden;
+  }
 }
 
 a {
-    color: light-dark($color--primary, $color--light-teal);
-    transition: color $transition;
+  color: light-dark($color--primary, $color--light-teal);
+  transition: color $transition;
 
-    &:hover,
-    &:focus {
-        color: light-dark($color--black, $color--white);
-    }
+  &:hover,
+  &:focus {
+    color: light-dark($color--black, $color--white);
+  }
 }
 
 svg {
-    fill: currentColor;
+  fill: currentColor;
 }

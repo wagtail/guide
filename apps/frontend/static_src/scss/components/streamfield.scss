@@ -1,28 +1,28 @@
 .streamfield {
-    margin-bottom: ($gutter * 3);
-    max-width: 900px;
+  margin-bottom: ($gutter * 3);
+  max-width: 900px;
 
-    h2 {
-        @include fs(xl);
-        margin-top: ($gutter * 2);
-        margin-bottom: $gutter;
-        font-weight: 700;
-    }
+  h2 {
+    @include fs(xl);
+    margin-top: ($gutter * 2);
+    margin-bottom: $gutter;
+    font-weight: 700;
+  }
 
-    h3 {
-        @include fs(l);
-        margin-bottom: $gutter;
-        font-weight: 700;
-    }
+  h3 {
+    @include fs(l);
+    margin-bottom: $gutter;
+    font-weight: 700;
+  }
 
-    h4 {
-        font-size: $base-font-size;
-        margin-bottom: $gutter;
-        font-weight: 700;
-    }
+  h4 {
+    font-size: $base-font-size;
+    margin-bottom: $gutter;
+    font-weight: 700;
+  }
 
-    ul,
-    ol {
-        margin-bottom: ($gutter * 2);
-    }
+  ul,
+  ol {
+    margin-bottom: ($gutter * 2);
+  }
 }

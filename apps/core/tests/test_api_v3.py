@@ -7,6 +7,15 @@ class TestAPIV3(TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(res["content-type"], "application/json")
 
+    def test_openapi_schema_redirects_from_well_known_path(self):
+        res = self.client.get("/openapi.json")
+        self.assertRedirects(
+            res,
+            "https://guide.wagtail.org/api/v3-preview/openapi.json",
+            status_code=302,
+            fetch_redirect_response=False,
+        )
+
     def test_docs_page_is_available(self):
         res = self.client.get("/api/v3-preview/docs/")
         self.assertEqual(res.status_code, 200)

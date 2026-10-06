@@ -1,77 +1,78 @@
 .copy-button {
-    display: inline-flex;
-    margin-inline-end: ($gutter * 0.5);
-    min-width: 130px;
+  display: inline-flex;
+  margin-inline-end: ($gutter * 0.5);
+  min-width: 130px;
 
-    &__btn {
-        // Prevent shift when changing text.
-        min-width: 95px;
-        border-radius: 0;
-        border-start-start-radius: $border-radius--m;
-        border-end-start-radius: $border-radius--m;
-        // Prevent double border
-        margin-inline-end: -1px;
+  &__btn {
+    // Prevent shift when changing text.
+    min-width: 95px;
+    border-radius: 0;
+    border-start-start-radius: $border-radius--m;
+    border-end-start-radius: $border-radius--m;
+    // Prevent double border
+    margin-inline-end: -1px;
+  }
+
+  &__toggle {
+    border-radius: 0;
+    border-start-end-radius: $border-radius--m;
+    border-end-end-radius: $border-radius--m;
+    padding-inline-start: ($gutter * 0.4);
+    padding-inline-end: ($gutter * 0.4);
+    height: 100%;
+  }
+
+  &__btn,
+  &__toggle {
+    @include fs(xxs);
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    padding: 10px;
+    background-color: light-dark($color--white, $color--black);
+    border: 1px solid rgba($color--grey, 0.4);
+    color: light-dark($color--off-black, $color--light-grey);
+    cursor: pointer;
+    transition: color $transition;
+    position: relative;
+
+    @include media-query(large) {
+      @include fs(xs);
+      font-weight: 700;
     }
 
-    &__toggle {
-        border-radius: 0;
-        border-start-end-radius: $border-radius--m;
-        border-end-end-radius: $border-radius--m;
-        padding-inline-start: ($gutter * 0.4);
-        padding-inline-end: ($gutter * 0.4);
-        height: 100%;
+    &:hover,
+    &:focus {
+      color: light-dark($color--active, $color--light-teal);
+      border-color: light-dark($color--active, $color--light-teal);
+      // Show a full outline around the button.
+      z-index: 3;
+    }
+  }
+
+  .dropdown-menu {
+    --bs-dropdown-padding-y: 0.25rem;
+    --bs-dropdown-bg: light-dark(#{$color--white}, #{$color--black});
+    --bs-dropdown-border-radius: #{$border-radius--m};
+    border: 1px solid rgba($color--off-black, 0.15);
+    box-shadow: 0 0.5rem 1rem rgba($color--black, 0.15);
+    background-color: light-dark($color--white, $color--black);
+    color: light-dark(currentcolor, $color--white);
+  }
+
+  .dropdown-item {
+    --bs-dropdown-item-padding-y: 0.35rem;
+
+    @include fs(xs);
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+      color: light-dark($color--active, $color--light-teal);
+      background-color: light-dark(transparent, rgba($color--white, 0.1));
     }
 
-    &__btn,
-    &__toggle {
-        display: flex;
-        align-items: center;
-        @include fs(xxs);
-        font-weight: 500;
-        padding: 10px;
-        background-color: light-dark($color--white, $color--black);
-        border: 1px solid rgba($color--grey, 0.4);
-        color: light-dark($color--off-black, $color--light-grey);
-        cursor: pointer;
-        transition: color $transition;
-        position: relative;
-
-        @include media-query(large) {
-            @include fs(xs);
-            font-weight: 700;
-        }
-
-        &:hover,
-        &:focus {
-            color: light-dark($color--active, $color--light-teal);
-            border-color: light-dark($color--active, $color--light-teal);
-            // Show a full outline around the button.
-            z-index: 3;
-        }
-    }
-
-    .dropdown-menu {
-        --bs-dropdown-padding-y: 0.25rem;
-        --bs-dropdown-bg: light-dark(#{$color--white}, #{$color--black});
-        --bs-dropdown-border-radius: #{$border-radius--m};
-        border: 1px solid rgba($color--off-black, 0.15);
-        box-shadow: 0 0.5rem 1rem rgba($color--black, 0.15);
-        background-color: light-dark($color--white, $color--black);
-        color: light-dark(currentcolor, $color--white);
-    }
-
-    .dropdown-item {
-        @include fs(xs);
-        box-sizing: border-box;
-        cursor: pointer;
-        --bs-dropdown-item-padding-y: 0.35rem;
-
-        &:hover,
-        &:active {
-            color: light-dark($color--active, $color--light-teal);
-            background-color: light-dark(transparent, rgba($color--white, 0.1));
-        }
-
-        color: light-dark(currentcolor, $color--light-grey);
-    }
+    color: light-dark(currentcolor, $color--light-grey);
+  }
 }

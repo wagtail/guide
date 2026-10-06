@@ -13,57 +13,55 @@
  * @param {boolean?} options.isInitial - if true the current value will be resolved & set NOT toggled
  */
 function updateThemeMode(event, { isInitial = false } = {}) {
-    const DARK = 'dark';
-    const LIGHT = 'light';
-    const STORAGE_KEY = 'wagtail-theme';
+  const DARK = 'dark';
+  const LIGHT = 'light';
+  const STORAGE_KEY = 'wagtail-theme';
 
-    let currentMode;
-    let applyMode;
-    let savedThemeMode;
+  let currentMode;
+  let applyMode;
+  let savedThemeMode;
 
-    // safely request local storage - if cookies/storage is disabled it should not error
+  // safely request local storage - if cookies/storage is disabled it should not error
+  try {
+    savedThemeMode = localStorage.getItem(STORAGE_KEY);
+  } catch (error) {
+    console.warn('Unable to read theme from localStorage', error);
+  }
+
+  // find the current mode from existing storage or browser preference
+  if (savedThemeMode) {
+    // note - do not assume correct format of local storage
+    currentMode = savedThemeMode === LIGHT ? LIGHT : DARK;
+  } else {
+    // fall back on browser media for first toggle
+    const prefersDarkMode = window.matchMedia(
+      '(prefers-color-scheme:dark)',
+    ).matches;
+
+    currentMode = prefersDarkMode ? DARK : LIGHT;
+  }
+
+  // if running initially - do not 'flip' - instead apply current mode
+  if (isInitial) {
+    applyMode = currentMode === DARK ? DARK : LIGHT;
+  } else {
+    applyMode = currentMode === DARK ? LIGHT : DARK;
+  }
+
+  // set applied mode to the DOM
+  document.body.classList.toggle('theme-dark', applyMode === DARK);
+  document
+    .querySelector('[name="color-scheme"]')
+    .setAttribute('content', applyMode);
+
+  // only store value if already stored OR was triggered by an actual click
+  if (savedThemeMode || event) {
     try {
-        savedThemeMode = localStorage.getItem(STORAGE_KEY);
+      localStorage.setItem(STORAGE_KEY, applyMode);
     } catch (error) {
-        // eslint-disable-next-line no-console
-        console.warn('Unable to read theme from localStorage', error);
+      console.warn('Unable to store theme in localStorage', error);
     }
-
-    // find the current mode from existing storage or browser preference
-    if (savedThemeMode) {
-        // note - do not assume correct format of local storage
-        currentMode = savedThemeMode === LIGHT ? LIGHT : DARK;
-    } else {
-        // fall back on browser media for first toggle
-        const prefersDarkMode = window.matchMedia(
-            '(prefers-color-scheme:dark)',
-        ).matches;
-
-        currentMode = prefersDarkMode ? DARK : LIGHT;
-    }
-
-    // if running initially - do not 'flip' - instead apply current mode
-    if (isInitial) {
-        applyMode = currentMode === DARK ? DARK : LIGHT;
-    } else {
-        applyMode = currentMode === DARK ? LIGHT : DARK;
-    }
-
-    // set applied mode to the DOM
-    document.body.classList.toggle('theme-dark', applyMode === DARK);
-    document
-        .querySelector('[name="color-scheme"]')
-        .setAttribute('content', applyMode);
-
-    // only store value if already stored OR was triggered by an actual click
-    if (savedThemeMode || event) {
-        try {
-            localStorage.setItem(STORAGE_KEY, applyMode);
-        } catch (error) {
-            // eslint-disable-next-line no-console
-            console.warn('Unable to store theme in localStorage', error);
-        }
-    }
+  }
 }
 
 /**
@@ -77,5 +75,5 @@ updateThemeMode(null, { isInitial: true });
  * Set up event listener for other manual toggling.
  */
 document.addEventListener('theme:toggle-theme-mode', updateThemeMode, {
-    passive: true,
+  passive: true,
 });

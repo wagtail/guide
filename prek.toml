@@ -8,27 +8,26 @@ default_language_version = { python = "python3" }
 [[repos]]
 repo = "builtin"
 hooks = [
-    { id = "trailing-whitespace" },                  # Trim trailing whitespace
-    { id = "check-added-large-files" },              # Prevent committing large files
-    { id = "check-case-conflict" },                  # Check for files that would conflict in case-insensitive filesystems
-    { id = "check-illegal-windows-names" },          # Check for filenames invalid on Windows
-    { id = "end-of-file-fixer" },                    # Ensure newline at EOF
-    { id = "file-contents-sorter" },                 # Sort lines in explicitly targeted files
-    { id = "fix-byte-order-marker" },                # Remove UTF-8 byte order marker
-    { id = "check-json" },                           # Validate JSON files
-    { id = "check-json5" },                          # Validate JSON5 files
-    { id = "pretty-format-json" },                   # Pretty format JSON files
-    { id = "check-toml" },                           # Validate TOML files
-    { id = "check-vcs-permalinks" },                 # Check that VCS links are permalinks
-    { id = "check-yaml" },                           # Validate YAML files
-    { id = "check-xml" },                            # Validate XML files
-    { id = "mixed-line-ending" },                    # Normalize or check line endings
-    { id = "check-symlinks" },                       # Check for broken symlinks
-    { id = "destroyed-symlinks" },                   # Detect destroyed symlinks
-    { id = "check-merge-conflict" },                 # Check for merge conflicts
-    { id = "detect-private-key" },                   # Detect private keys
-    { id = "check-shebang-scripts-are-executable" }, # Ensures that" (non-binary) files with a shebang are executable
-    { id = "check-executables-have-shebangs" },      # Ensures that" (non-binary) executables have a shebang
+  { id = "trailing-whitespace" }, # Trim trailing whitespace
+  { id = "check-added-large-files" }, # Prevent committing large files
+  { id = "check-case-conflict" }, # Check for files that would conflict in case-insensitive filesystems
+  { id = "check-illegal-windows-names" }, # Check for filenames invalid on Windows
+  { id = "end-of-file-fixer" }, # Ensure newline at EOF
+  { id = "file-contents-sorter" }, # Sort lines in explicitly targeted files
+  { id = "fix-byte-order-marker" }, # Remove UTF-8 byte order marker
+  { id = "check-json" }, # Validate JSON files
+  { id = "check-json5" }, # Validate JSON5 files
+  { id = "check-toml" }, # Validate TOML files
+  { id = "check-vcs-permalinks" }, # Check that VCS links are permalinks
+  { id = "check-yaml" }, # Validate YAML files
+  { id = "check-xml" }, # Validate XML files
+  { id = "mixed-line-ending" }, # Normalize or check line endings
+  { id = "check-symlinks" }, # Check for broken symlinks
+  { id = "destroyed-symlinks" }, # Detect destroyed symlinks
+  { id = "check-merge-conflict" }, # Check for merge conflicts
+  { id = "detect-private-key" }, # Detect private keys
+  { id = "check-shebang-scripts-are-executable" }, # Ensures that" (non-binary) files with a shebang are executable
+  { id = "check-executables-have-shebangs" }, # Ensures that" (non-binary) executables have a shebang
 ]
 
 [[repos]]
@@ -40,22 +39,22 @@ hooks = [{ id = "ruff-check", args = ["--fix"] }, { id = "ruff-format" }]
 repo = "local"
 
 [[repos.hooks]]
-id = "prettier"
-name = "prettier"
-entry = "npx prettier --write"
+id = "oxfmt"
+name = "oxfmt"
+entry = "npx vp fmt"
 language = "system"
-types_or = ["css", "scss", "javascript", "json", "yaml", "markdown", "html"]
+types_or = ["css", "scss", "javascript", "json", "yaml", "toml", "markdown"]
 
 [[repos.hooks]]
-id = "eslint"
-name = "eslint"
-entry = "npx eslint --report-unused-disable-directives"
+id = "oxlint"
+name = "oxlint"
+entry = "npx vp lint --report-unused-disable-directives"
 language = "system"
 types_or = ["javascript"]
 
 [[repos.hooks]]
 id = "stylelint"
 name = "stylelint"
-entry = "stylelint"
+entry = "npx stylelint"
 language = "system"
 types_or = ["css", "scss"]

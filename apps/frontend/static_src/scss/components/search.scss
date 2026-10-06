@@ -1,62 +1,48 @@
 .search {
-    $root: &;
+  $root: &;
 
-    &__container {
-        display: flex;
-        flex-direction: row;
-        justify-content: stretch;
-        position: relative;
-    }
+  &__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    position: relative;
+  }
 
-    &__container:after {
-        content: '';
-        display: block;
-        position: absolute;
-        inset-inline-start: ($gutter * 1.6);
-        inset-block-start: 50%;
-        transform: translateY(-50%);
-        width: 21px;
-        height: 21px;
-        background-image: url('../images/search.svg');
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
-        pointer-events: none;
-        filter: light-dark(none, brightness(0) invert(1));
-    }
+  &__container.is-loading:after {
+    content: '';
+    display: block;
+    position: absolute;
+    inset-inline-end: ($gutter * 1.6);
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    width: 21px;
+    height: 21px;
+    border: 2px solid light-dark($color--light-grey, $color--grey);
+    border-top-color: light-dark($color--off-black, $color--light-grey);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    pointer-events: none;
+  }
 
-    &__container.is-loading:after {
-        background-image: none;
-        border: 2px solid light-dark($color--light-grey, $color--grey);
-        border-top-color: light-dark($color--off-black, $color--light-grey);
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-    }
-
-    &__input {
-        @include fs(m);
-        line-height: $base-line-height;
-        border: 1px solid $color--black;
-        width: 100%;
-        padding: $gutter;
-        padding-inline-start: ($gutter * 2);
-        border-radius: $border-radius--m;
-    }
-
-    &__button {
-        display: none; // only show if no js
-    }
+  &__input {
+    @include fs(m);
+    line-height: $base-line-height;
+    border: 1px solid $color--black;
+    width: 100%;
+    padding: $gutter;
+    border-radius: $border-radius--m;
+  }
 }
 
 @keyframes spin {
-    to {
-        transform: translateY(-50%) rotate(360deg);
-    }
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
 }
 
 .search .modal-content {
-    background-color: light-dark($color--white, $color--off-black);
-    color: light-dark($color--off-black, $color--light-grey);
-    border-radius: $border-radius--lg;
-    border: 1px solid light-dark($color--light-grey, $color--grey);
+  background-color: light-dark($color--white, $color--off-black);
+  color: light-dark($color--off-black, $color--light-grey);
+  border-radius: $border-radius--lg;
+  border: 1px solid light-dark($color--light-grey, $color--grey);
 }

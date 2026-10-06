@@ -21,7 +21,7 @@ ARG CI=true
 
 # Split from frontend-build so Dockerfile.dev can reuse node_modules without
 # needing to run the production build.
-COPY package.json package-lock.json webpack.config.js ./
+COPY package.json package-lock.json vite.config.ts ./
 RUN npm ci
 
 FROM frontend-deps AS frontend-build

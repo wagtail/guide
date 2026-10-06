@@ -12,11 +12,11 @@ wt --version          # CLI version, plus Wagtail/Django versions when detected
 wt --help             # CLI help, plus ./manage.py --help when present
 ```
 
--   Output is JSON when stdout is not a TTY, human tables otherwise; `--json`
-    / `--human` force it. `schema show` is always JSON.
--   `--dry-run` prints `METHOD url`, params, and the JSON body, sends nothing.
-    Path REFs are left unresolved in dry-run output.
--   `-v` logs `> METHOD url` and `< status` to stderr.
+- Output is JSON when stdout is not a TTY, human tables otherwise; `--json`
+  / `--human` force it. `schema show` is always JSON.
+- `--dry-run` prints `METHOD url`, params, and the JSON body, sends nothing.
+  Path REFs are left unresolved in dry-run output.
+- `-v` logs `> METHOD url` and `< status` to stderr.
 
 ## Auth and setup
 

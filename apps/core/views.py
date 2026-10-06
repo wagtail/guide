@@ -1,7 +1,55 @@
-from django.http import HttpResponseNotFound
+from django.http import HttpResponseNotFound, JsonResponse
 from django.http.response import Http404
 from django.template import loader
-from django.utils.cache import patch_cache_control, patch_vary_headers
+from django.urls import reverse
+
+from apps.llms_txt.negotiation import (
+    MARKDOWN_CONTENT_TYPE,
+    patch_negotiated_response,
+    prefers_markdown,
+)
+
+# The API catalog lists the site's public API endpoints, per RFC 9727. Only
+# anonymously-readable v3 API resources are advertised here: the write and
+# authenticated endpoints are intentionally left out, since agents browsing
+# the catalog can't use them without credentials.
+API_CATALOG_PROFILE = "https://www.rfc-editor.org/info/rfc9727"
+API_CATALOG_CONTENT_TYPE = f'application/linkset+json; profile="{API_CATALOG_PROFILE}"'
+OPENAPI_CONTENT_TYPE = "application/vnd.oai.openapi+json;version=3.1"
+
+
+def api_catalog(request):
+    """Serve the API catalog document (RFC 9727) for the public v3 API."""
+    root_url = request.build_absolute_uri("/").rstrip("/")
+
+    linkset = {
+        "linkset": [
+            {
+                "anchor": f"{root_url}{reverse('wagtailapi_v3:list_pages')}",
+                "item": [
+                    {"href": f"{root_url}{reverse('wagtailapi_v3:list_pages')}"},
+                ],
+                "service-desc": [
+                    {
+                        "href": f"{root_url}{reverse('wagtailapi_v3:openapi-json')}",
+                        "type": OPENAPI_CONTENT_TYPE,
+                    }
+                ],
+                "service-doc": [
+                    {
+                        "href": f"{root_url}{reverse('wagtailapi_v3:openapi-view')}",
+                        "type": "text/html",
+                    }
+                ],
+            },
+        ]
+    }
+    response = JsonResponse(
+        linkset,
+        content_type=API_CATALOG_CONTENT_TYPE,
+        json_dumps_params={"indent": 2},
+    )
+    return response
 
 
 class Custom404(Http404):
@@ -11,20 +59,14 @@ class Custom404(Http404):
 
 
 def page_not_found(request, exception):
-    # HTML is listed first so it wins ties, e.g. for `Accept: */*`.
-    preferred_type = request.get_preferred_type(["text/html", "text/markdown"])
-    if preferred_type == "text/markdown":
+    is_markdown = prefers_markdown(request)
+    if is_markdown:
         body = loader.get_template("llms_txt/404.md.jinja").render({}, request)
-        response = HttpResponseNotFound(
-            body, content_type="text/markdown;charset=utf-8"
-        )
-        # Cloudflare ignores `Vary: Accept`, so a shared cache could serve
-        # this Markdown to browsers. Keep it out of shared caches.
-        patch_cache_control(response, private=True)
+        response = HttpResponseNotFound(body, content_type=MARKDOWN_CONTENT_TYPE)
     else:
         context = {"fallback_pages": getattr(exception, "fallback_pages", None)}
         body = loader.get_template("404.html").render(context, request)
         response = HttpResponseNotFound(body)
 
-    patch_vary_headers(response, ["Accept"])
+    patch_negotiated_response(response, is_markdown)
     return response

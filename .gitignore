@@ -20,6 +20,6 @@ apps/guide/settings/local.py
 .idea/
 
 # Inspect AI eval logs (browse with `just eval-view`)
-prompts/evals/translations-inspect_ai/logs/
+content/evals/translations-inspect_ai/logs/
 # Generated glossaries (regenerate with `just eval-glossary <lang>`)
-prompts/evals/translations-inspect_ai/glossary/
+content/evals/translations-inspect_ai/glossary/

@@ -27,16 +27,16 @@ wt --json api schema show blog.BlogPage | jq '.create.required'
 wt --json api schema show blog.BlogPage | jq '.create.properties | to_entries[] | {key, type: .value.type}'
 ```
 
--   `read` is what `get` returns; `create` and `patch` are what you may send.
-    A field present in `read` but absent from `create`/`patch` is not writable
-    (the project did not declare `APIField(..., writable=True)`).
--   Schemas are generated from the project's models and panels, so the list is
-    site-specific. StreamFields appear as `list[Any]`: the schema tells you the
-    field exists but not the block types. Get block names from the project's
-    `blocks.py`/models, from an existing page (`pages get ID | jq .body`), or
-    from the developer.
--   Validation on write is the same as the admin edit form: required fields,
-    chooser IDs, block `clean()`, and permissions all apply.
+- `read` is what `get` returns; `create` and `patch` are what you may send.
+  A field present in `read` but absent from `create`/`patch` is not writable
+  (the project did not declare `APIField(..., writable=True)`).
+- Schemas are generated from the project's models and panels, so the list is
+  site-specific. StreamFields appear as `list[Any]`: the schema tells you the
+  field exists but not the block types. Get block names from the project's
+  `blocks.py`/models, from an existing page (`pages get ID | jq .body`), or
+  from the developer.
+- Validation on write is the same as the admin edit form: required fields,
+  chooser IDs, block `clean()`, and permissions all apply.
 
 ## 2. Page payload anatomy
 
@@ -96,27 +96,27 @@ A StreamField value is a JSON list of blocks:
 
 ```json
 [
-    { "type": "heading", "value": "Example" },
-    {
-        "type": "paragraph",
-        "value": "<p>Database HTML for a RichTextBlock.</p>"
-    },
-    { "type": "image", "value": 42 },
-    { "type": "quote", "value": { "text": "…", "attribution": "…" } },
-    { "type": "gallery", "value": [42, 43] }
+  { "type": "heading", "value": "Example" },
+  {
+    "type": "paragraph",
+    "value": "<p>Database HTML for a RichTextBlock.</p>"
+  },
+  { "type": "image", "value": 42 },
+  { "type": "quote", "value": { "text": "…", "attribution": "…" } },
+  { "type": "gallery", "value": [42, 43] }
 ]
 ```
 
--   `id` per block is optional on input (Wagtail generates UUIDs). Supply ids
-    when you want them stable across updates.
--   Block `value` by block kind: nested StreamBlock → list of `{type, value}`;
-    StructBlock → object keyed by child names; ListBlock → plain list of child
-    values; chooser blocks (image, page, document, snippet) → the object's id;
-    RichTextBlock → database HTML string; leaf blocks → scalar.
--   Unknown block type → 422.
--   **Update replaces the whole list.** To change one block: `pages get ID
+- `id` per block is optional on input (Wagtail generates UUIDs). Supply ids
+  when you want them stable across updates.
+- Block `value` by block kind: nested StreamBlock → list of `{type, value}`;
+  StructBlock → object keyed by child names; ListBlock → plain list of child
+  values; chooser blocks (image, page, document, snippet) → the object's id;
+  RichTextBlock → database HTML string; leaf blocks → scalar.
+- Unknown block type → 422.
+- **Update replaces the whole list.** To change one block: `pages get ID
 --version draft | jq .body > body.json`, edit, then
-    `pages update ID --field body:@body.json --yes`.
+  `pages update ID --field body:@body.json --yes`.
 
 Write it via a file to avoid shell quoting problems:
 
@@ -200,25 +200,25 @@ Redirect fields: `old_path`, `site_id` (nullable), `is_permanent`,
 
 ## 10. Drafts, publishing, revisions
 
--   Every save through the API creates a revision attributed to the token's
-    user. `revisions list` is newest first.
--   `publish` publishes the latest revision; if that revision has a future
-    `go_live_at`, it schedules instead. There is no API to set `go_live_at`
-    itself beyond writing it as a field if the type exposes it.
--   `revert --revision N` creates a new draft from revision N; follow with
-    `publish` to make it live.
--   `unpublish` keeps the page and its draft; `delete` removes it and its
-    descendants permanently.
--   Authenticated `list`/`get` see draft-only pages; anonymous requests do not.
+- Every save through the API creates a revision attributed to the token's
+  user. `revisions list` is newest first.
+- `publish` publishes the latest revision; if that revision has a future
+  `go_live_at`, it schedules instead. There is no API to set `go_live_at`
+  itself beyond writing it as a field if the type exposes it.
+- `revert --revision N` creates a new draft from revision N; follow with
+  `publish` to make it live.
+- `unpublish` keeps the page and its draft; `delete` removes it and its
+  descendants permanently.
+- Authenticated `list`/`get` see draft-only pages; anonymous requests do not.
 
 ## 11. Multi-site and translation
 
--   `pages list --site HOST|NAME|ID` scopes to a site; `pages find --site` too.
--   `copy-for-translation ID --locale fr` creates the initial translated copy
-    (the API also supports `copy_parents`, `alias`, `recursive`, which the CLI
-    does not expose yet; use `wt docs api "POST /pages/{page_id}/actions/copy_for_translation/"`
-    if you need them via another client).
--   `pages list --translation-of ID --locale fr` finds an existing translation.
+- `pages list --site HOST|NAME|ID` scopes to a site; `pages find --site` too.
+- `copy-for-translation ID --locale fr` creates the initial translated copy
+  (the API also supports `copy_parents`, `alias`, `recursive`, which the CLI
+  does not expose yet; use `wt docs api "POST /pages/{page_id}/actions/copy_for_translation/"`
+  if you need them via another client).
+- `pages list --translation-of ID --locale fr` finds an existing translation.
 
 ## 12. Recipes
 

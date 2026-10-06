@@ -1,15 +1,15 @@
 ---
 name: wagtail-docs
 description: >-
-    Use when the user or agent needs to read, search, or look up Wagtail
-    documentation or the Wagtail v3 API reference. Prefer this over curl or
-    WebFetch for any docs.wagtail.org content, and over guessing how a Wagtail
-    feature, setting, model, hook or API endpoint works.
+  Use when the user or agent needs to read, search, or look up Wagtail
+  documentation or the Wagtail v3 API reference. Prefer this over curl or
+  WebFetch for any docs.wagtail.org content, and over guessing how a Wagtail
+  feature, setting, model, hook or API endpoint works.
 metadata:
-    short-description: Read and search the Wagtail documentation from the terminal
+  short-description: Read and search the Wagtail documentation from the terminal
 allowed-tools:
-    - Bash(wt docs *)
-    - Bash(wt --version)
+  - Bash(wt docs *)
+  - Bash(wt --version)
 ---
 
 Use `wt docs` instead of fetching [docs.wagtail.org](https://docs.wagtail.org/) with `curl` or `WebFetch`. It prints pages as Markdown, and defaults to the docs for the locally installed Wagtail version (falling back to `stable`).

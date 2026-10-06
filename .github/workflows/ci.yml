@@ -44,6 +44,7 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run lint
+      - run: npm test
       - uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
       - uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
       - run: uv sync --frozen
