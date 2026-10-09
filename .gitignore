@@ -23,3 +23,11 @@ apps/guide/settings/local.py
 content/evals/translations-inspect_ai/logs/
 # Generated glossaries (regenerate with `just eval-glossary <lang>`)
 content/evals/translations-inspect_ai/glossary/
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+/db_e2e.sqlite3
