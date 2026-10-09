@@ -66,6 +66,45 @@ class TestContentPage(TestCase):
             '<ul><li><a href="#section&quot; onclick=&quot;alert(1)">Title</a></li></ul>',
         )
 
+    def test_create_table_of_contents_annotated_text(self):
+        self.content_page.body = json.dumps(
+            [
+                {
+                    "type": "text_annotated",
+                    "value": {
+                        "content": '<h2 id="new">New</h2><h3>Details</h3>',
+                        "version": "7.4",
+                        "change_type": "added",
+                    },
+                }
+            ]
+        )
+
+        self.assertEqual(
+            self.content_page.table_of_contents,
+            '<ul><li><a href="#new">New</a></li><li><a href="#details">Details</a></li></ul>',
+        )
+
+    def test_create_table_of_contents_makes_no_queries(self):
+        self.content_page.body = json.dumps(
+            [
+                {
+                    "type": "text",
+                    "value": (
+                        f'<h2 id="links">Links</h2><p><a linktype="page" '
+                        f'id="{self.content_page.pk}">A page</a></p>'
+                    ),
+                }
+            ]
+        )
+
+        with self.assertNumQueries(0):
+            table_of_contents = self.content_page.table_of_contents
+
+        self.assertEqual(
+            table_of_contents, '<ul><li><a href="#links">Links</a></li></ul>'
+        )
+
     def test_table_of_contents_is_cached_on_page_instance(self):
         with patch(
             "apps.core.models.content.create_table_of_contents",
