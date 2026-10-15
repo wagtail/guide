@@ -22,7 +22,7 @@ from ..blocks import CONTENT_BLOCKS
 def create_table_of_contents(body):
     template = Template("{% load wagtailcore_tags %}{% include_block body %}")
     content = template.render(Context({"body": body}))
-    soup = BeautifulSoup(content, "lxml")
+    soup = BeautifulSoup(content, "html.parser")
     headings = soup.select("h2,h3")
     toc = ""
     if headings:

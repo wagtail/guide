@@ -9,7 +9,6 @@ dependencies = [
   "django==6.1.*",
   "wagtail==8.0",
   "django-manifest-loader>=1.0.0,<2.0.0",
-  "lxml>=4.9,<7",
   "djangorestframework>=3.13.1,<4.0",
   "dj-database-url>=2.1,<2.2",
   "django-storages>=1.14,<1.15",

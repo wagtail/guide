@@ -8,7 +8,7 @@ from apps.core.factories import ContentPageFactory, HomePageFactory, LocaleFacto
 
 
 def get_graph(response):
-    soup = BeautifulSoup(response.content, "lxml")
+    soup = BeautifulSoup(response.content, "html.parser")
     scripts = soup.find_all("script", type="application/ld+json")
     assert len(scripts) == 1, f"Expected one JSON-LD script, found {len(scripts)}"
     data = json.loads(scripts[0].string)
