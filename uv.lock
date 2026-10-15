@@ -630,7 +630,7 @@ dev = [
     { name = "coverage", specifier = ">=7.3.2,<8.0.0" },
     { name = "django-extensions", specifier = ">=3.2.1,<4.0.0" },
     { name = "ruff", specifier = ">=0.16.2,<0.17.0" },
-    { name = "wagtail-cli", specifier = "==0.3.0" },
+    { name = "wagtail-cli", specifier = "==0.4.0" },
     { name = "wagtail-factories", specifier = ">=4.1.0,<5.0.0" },
 ]
 production = [
@@ -1481,16 +1481,16 @@ wheels = [
 
 [[package]]
 name = "wagtail-cli"
-version = "0.3.0"
+version = "0.4.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "httpx" },
     { name = "pydantic" },
     { name = "typer" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/3d/bd/382ddc3670929b0885b987e10962078d20204a662c6ad192f3268433d9e4/wagtail_cli-0.3.0.tar.gz", hash = "sha256:e6f4d3014829629157a9c539182b5e60e268944cb044e81af014b2944adca3a1", size = 34980, upload-time = "2026-09-22T09:09:19.909Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fe/58/74e23a6fc05fc0856bd0f4ef85141b29454f1ab66747d7e53bf225f3ad4c/wagtail_cli-0.4.0.tar.gz", hash = "sha256:c6cc6cb8b1b34f04c10bdf74638544182a432aa58c1c7e9ebec54e0bd47ea0fa", size = 62937, upload-time = "2026-10-08T14:18:22.915Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/f5/5a/7f7a11fa544667881149d2fc59b17a9f654eb329be7170a81869c5185df0/wagtail_cli-0.3.0-py3-none-any.whl", hash = "sha256:ed97d288936e1f962bbd2d7595fbdf0a3aafb23b67006790e1691bd0ad17ddef", size = 51838, upload-time = "2026-09-22T09:09:21.031Z" },
+    { url = "https://files.pythonhosted.org/packages/cd/53/ee5a81aeb1d4e68b02153ec4df2f2f6e892455096437502e3fa95632c087/wagtail_cli-0.4.0-py3-none-any.whl", hash = "sha256:11802f69ccf27fbb813b7355ec17730df5b15bee4d5b8c70eb4b79c73a9017aa", size = 86270, upload-time = "2026-10-08T14:18:21.217Z" },
 ]
 
 [[package]]

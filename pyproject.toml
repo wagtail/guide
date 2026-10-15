@@ -30,7 +30,7 @@ dev = [
   "django-extensions>=3.2.1,<4.0.0",
   "wagtail-factories>=4.1.0,<5.0.0",
   "coverage>=7.3.2,<8.0.0",
-  "wagtail-cli==0.3.0",
+  "wagtail-cli==0.4.0",
 ]
 production = [
   "gunicorn==21.2.0",
