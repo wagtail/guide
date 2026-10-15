@@ -24,7 +24,7 @@ We assume that you have basic knowledge of Node/Vite and Python/Django/Wagtail i
 #### Dependencies
 
 - Git
-- Python >= 3.14
+- Python >= 3.15
 - uv
 - just
 - Node (see `.nvmrc` for version)

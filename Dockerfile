@@ -34,7 +34,7 @@ RUN npm run build
 # Debian over alpine: it's considered more stable (different C compiler) and
 # ships with the packages commonly needed for image manipulation, at the
 # cost of a larger (~1.5GiB) image.
-FROM python:3.14 AS base
+FROM python:3.15 AS base
 
 # Keep this version in sync with the local `uv` used to generate uv.lock.
 COPY --from=ghcr.io/astral-sh/uv:0.11.19 /uv /uvx /bin/
@@ -62,7 +62,7 @@ WORKDIR /app
 #    project's default `.venv`, so it isn't clobbered by a bind mount in dev.
 #  * UV_LINK_MODE=copy - hardlinks break across Docker layers.
 #  * PYTHONUNBUFFERED - otherwise logs can be lost if the process crashes:
-#    https://docs.python.org/3.14/using/cmdline.html#envvar-PYTHONUNBUFFERED
+#    https://docs.python.org/3.15/using/cmdline.html#envvar-PYTHONUNBUFFERED
 #  * LD_PRELOAD / MALLOC_ARENA_MAX - use jemalloc (installed above) instead of
 #    glibc's malloc, and limit the number of memory arenas glibc would
 #    otherwise create per core, to keep memory use stable over time.
