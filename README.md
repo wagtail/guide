@@ -107,6 +107,7 @@ If you're a Python or Django developer, fork the repo and join us. You'll find a
 - Run formatting (Ruff & Oxfmt) `just format`
 - Run linting (Ruff, Oxlint, Oxfmt, Stylelint) `just lint`
 - Run tests `just test`
+- Run end-to-end tests `just e2e` (first-time setup: `just e2e-install`)
 
 # Other Notes
 
