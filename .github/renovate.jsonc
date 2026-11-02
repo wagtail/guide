@@ -31,9 +31,10 @@
       "groupName": "CI configuration dependencies",
     },
 
-    // Auto-merge npm package updates.
+    // Auto-merge npm package updates (dependencies are already pinned by the lockfile).
     {
       "matchManagers": ["npm"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true,
     },
 
@@ -43,9 +44,10 @@
       "automerge": true,
     },
 
-    // Auto-merge all Python dependencies…
+    // Auto-merge all Python dependencies (uv.lock makes every update reproducible)…
     {
       "matchManagers": ["pep621"],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true,
     },
 

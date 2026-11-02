@@ -35,7 +35,7 @@ Run:
 
     python -V
 
-Confirm that the output shows a Python version supported by the project — see the `requires-python` constraint in `pyproject.toml`, or `.python-version` for the exact version we develop with. If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
+Confirm that the output shows a Python version supported by the project. If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
 
 With the Python version output confirmed, [install uv](https://docs.astral.sh/uv/).
 
