@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-05 00:47+0000\n"
+"POT-Creation-Date: 2026-11-02 22:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,24 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+msgid "Enter a version in x.y format, e.g. 7.4 or 8.10."
+msgstr ""
+
+msgid "Wagtail version, in x.y format, e.g. 7.4 or 8.10."
+msgstr ""
+
+msgid "Added"
+msgstr ""
+
+msgid "Changed"
+msgstr ""
+
+msgid "Removed"
+msgstr ""
+
+msgid "Text (annotated)"
+msgstr ""
 
 msgid "Tutorial"
 msgstr ""
@@ -58,6 +76,36 @@ msgstr ""
 msgid "Sorry, this page could not be found."
 msgstr ""
 
+msgid "Try:"
+msgstr ""
+
+msgid "Content copy tools"
+msgstr ""
+
+msgid "Copied!"
+msgstr ""
+
+msgid "Copy page"
+msgstr ""
+
+msgid "Toggle options"
+msgstr ""
+
+msgid "Copy Markdown link"
+msgstr ""
+
+msgid "View page Markdown"
+msgstr ""
+
+msgid "View llms.txt"
+msgstr ""
+
+msgid "View llms-full.txt"
+msgstr ""
+
+msgid "Copy prompt"
+msgstr ""
+
 msgid "Was this page helpful?"
 msgstr ""
 
@@ -73,7 +121,7 @@ msgstr ""
 msgid "Unhappy"
 msgstr ""
 
-msgid "Help us improve by telling what you missed"
+msgid "Help us improve by leaving a comment below"
 msgstr ""
 
 msgid "Your feedback"
@@ -97,9 +145,6 @@ msgstr ""
 msgid "Skip to main content"
 msgstr ""
 
-msgid "JavaScript is required to toggle light/dark mode."
-msgstr ""
-
 msgid "Dark"
 msgstr ""
 
@@ -115,10 +160,26 @@ msgstr ""
 msgid "Light"
 msgstr ""
 
+msgid "Welcome to the editor guide CMS!"
+msgstr ""
+
 msgid "On this page"
 msgstr ""
 
+msgid "In this section"
+msgstr ""
+
+#, python-format
+msgid "Last updated: %(last_updated)s"
+msgstr ""
+
+msgid "LLM Translator"
+msgstr ""
+
 msgid "image"
+msgstr ""
+
+msgid "test"
 msgstr ""
 
 msgid "Previous"
