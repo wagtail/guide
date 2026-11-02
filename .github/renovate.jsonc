@@ -43,19 +43,5 @@
       "matchManagers": ["dockerfile"],
       "automerge": true,
     },
-
-    // Auto-merge all Python dependencies (uv.lock makes every update reproducible)…
-    {
-      "matchManagers": ["pep621"],
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true,
-    },
-
-    // …except for packages whose bounds are intentionally conservative.
-    {
-      "matchManagers": ["pep621"],
-      "matchPackageNames": ["django", "wagtail"],
-      "enabled": false,
-    },
   ],
 }
