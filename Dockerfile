@@ -13,7 +13,7 @@
 
 # frontend stages
 
-# Keep the Node version in sync with Dockerfile.dev and .nvmrc.
+# Keep the Node version in sync with Dockerfile.dev and .node-version.
 FROM node:26 AS frontend-deps
 
 # Make build & post-install scripts behave as if in CI (e.g. logging verbosity).

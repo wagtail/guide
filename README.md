@@ -27,7 +27,7 @@ We assume that you have basic knowledge of Node/Vite and Python/Django/Wagtail i
 - Python >= 3.15
 - uv
 - just
-- Node (see `.nvmrc` for version)
+- Node (see `.node-version` for version)
 
 ### Setting up Wagtail guide in a virtual environment
 
