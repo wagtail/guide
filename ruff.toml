@@ -1,4 +1,4 @@
-target-version = "py312"
+target-version = "py315"
 line-length = 88
 
 exclude = ["migrations", "node_modules", "venv", ".venv"]

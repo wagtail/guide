@@ -4,12 +4,11 @@ version = "0.1.0"
 description = "Wagtail User Guide"
 readme = "README.md"
 license = "BSD-3-Clause"
-requires-python = ">=3.14"
+requires-python = ">=3.15"
 dependencies = [
   "django==6.1.*",
-  "wagtail==8.0",
+  "wagtail==8.1rc1",
   "django-manifest-loader>=1.0.0,<2.0.0",
-  "lxml>=4.9,<7",
   "djangorestframework>=3.13.1,<4.0",
   "dj-database-url>=2.1,<2.2",
   "django-storages>=1.14,<1.15",
@@ -21,7 +20,7 @@ dependencies = [
   "draftjs-exporter>=7.1.0,<8.0",
   "jinja2>=3.1.6,<4.0.0",
   "wagtail-ai>=3.1.1,<4.0.0",
-  "scout-apm>=3.5.3,<4.0.0",
+  "scout-apm>=4.0.0,<5.0.0",
 ]
 
 [dependency-groups]
@@ -30,7 +29,7 @@ dev = [
   "django-extensions>=3.2.1,<4.0.0",
   "wagtail-factories>=4.1.0,<5.0.0",
   "coverage>=7.3.2,<8.0.0",
-  "wagtail-cli==0.3.0",
+  "wagtail-cli==0.4.0",
 ]
 production = [
   "gunicorn==21.2.0",

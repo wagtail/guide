@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 LLMS_URL = "https://guide.wagtail.org/llms.txt"
 BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "en"
-README_PATH = BASE_DIR.parent / "README.md"
+README_PATH = BASE_DIR / "README.md"
 URL_RE = re.compile(r"https?://[^\s]+")
 
 TOKENIZER_MODEL = "gpt-oss-120b"
@@ -60,7 +60,7 @@ def update_readme(token_counts: list[tuple[Path, int]]) -> None:
         "| --- | ---: |",
     ]
     for rel_path, tokens in token_counts:
-        link = f"[{rel_path}](content/en/{rel_path})"
+        link = f"[{rel_path}](en/{rel_path})"
         lines.append(f"| {link} | {tokens} |")
     lines += ["", end]
 

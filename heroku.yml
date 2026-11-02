@@ -6,4 +6,6 @@ build:
 release:
   image: web
   command:
-    - python manage.py migrate --noinput
+    # Disable Scout APM for the release command: it is a one-off, non-request
+    # workload, so it would only add noise to the APM data.
+    - SCOUT_MONITOR=false python manage.py migrate --noinput

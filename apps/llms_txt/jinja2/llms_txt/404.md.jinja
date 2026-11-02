@@ -1,5 +1,12 @@
+{%- set root_url = wagtail_site().root_url -%}
 # 404 Page not found
 
 The page you requested does not exist or has moved.
+{% if fallback_pages %}
+It is available in other languages:
 
-Browse the documentation via [llms.txt](/llms.txt).
+{% for page in fallback_pages -%}
+- [{{ page.title }} - {{ page.locale }}]({{ page.full_url }})
+{% endfor -%}
+{% endif %}
+Browse the documentation via [llms.txt]({{ root_url }}{{ url("llms_txt") }}).
