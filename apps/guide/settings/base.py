@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "manifest_loader",
     "wagtail_ai",
     "rest_framework",
+    "ninja",
     "wagtail_localize",
     "wagtail_localize.locales",
     "wagtail.contrib.forms",
@@ -241,7 +242,7 @@ SECURE_CSP = {
     "default-src": ["'self'"],
     # The nonce is added to the source lists so that our inline scripts and
     # styles are allowed. https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/style-src
-    "script-src": ["'self'", "'report-sample'", CSP.NONCE],
+    "script-src": ["'self'", "'unsafe-inline'", "'report-sample'", CSP.NONCE],
     "style-src": ["'self'", "'report-sample'", CSP.NONCE],
     "img-src": ["'self'", "data:", "www.gravatar.com", "guide-media.wagtail.org"],
     "connect-src": ["'self'", "releases.wagtail.org"],
