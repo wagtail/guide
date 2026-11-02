@@ -13,6 +13,21 @@
   },
   "environments": {
     "review": {
+      "env": {
+        "ALLOWED_HOSTS": {
+          "value": "*"
+        },
+        "DEBUG": {
+          "value": "true"
+        },
+        "SECRET_KEY": {
+          "generator": "secret"
+        },
+        "SCOUT_MONITOR": {
+          "description": "Disable Scout APM for review apps, which are throwaway environments.",
+          "value": "false"
+        }
+      },
       "scripts": {
         "postdeploy": "uv run --no-sync --with \"wagtail-factories>=4.1.0,<5.0.0\" python manage.py buildfixtures"
       }
