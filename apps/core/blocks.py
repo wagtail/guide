@@ -1,4 +1,7 @@
 from django.core.validators import RegexValidator
+from django.template import TemplateDoesNotExist
+from django.template.loader import get_template
+from django.utils.translation import get_language_bidi
 from django.utils.translation import gettext_lazy as _
 from wagtail import blocks
 from wagtail.blocks import RichTextBlock
@@ -43,7 +46,20 @@ class AnnotatedTextBlock(blocks.StructBlock):
 
 class SectionStructValue(blocks.StructValue):
     def icon(self):
-        return f"core/svg/{self.get('section')}.svg"
+        section = self.get("section")
+        # Some icons have a hand-tuned RTL variant, as mirroring the LTR icon
+        # with CSS alone gives a poor result. Fall back to the LTR icon when no
+        # RTL variant exists.
+        if get_language_bidi():
+            rtl_icon = f"core/svg/rtl/{section}.svg"
+            try:
+                get_template(rtl_icon)
+            except TemplateDoesNotExist:
+                pass
+            else:
+                return rtl_icon
+
+        return f"core/svg/{section}.svg"
 
 
 class SectionBlock(blocks.StructBlock):

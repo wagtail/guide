@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -11,7 +12,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: ar\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,4 +25,9 @@ msgstr "شكرًا على ملاحظاتك!"
 #, javascript-format
 msgid "%s result found."
 msgid_plural "%s results found."
-msgstr[0] "تم العثور على %s نتيجة."
+msgstr[0] "لم يتم العثور على نتائج (%s)."
+msgstr[1] "تم العثور على %s نتيجة."
+msgstr[2] "تم العثور على نتيجتين (%s)."
+msgstr[3] "تم العثور على %s نتائج."
+msgstr[4] "تم العثور على %s نتيجة."
+msgstr[5] "تم العثور على %s نتيجة."

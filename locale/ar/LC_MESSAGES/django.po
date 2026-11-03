@@ -19,22 +19,22 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 msgid "Enter a version in x.y format, e.g. 7.4 or 8.10."
-msgstr ""
+msgstr "أدخل رقم الإصدار بصيغة x.y، مثل 7.4 أو 8.10."
 
 msgid "Wagtail version, in x.y format, e.g. 7.4 or 8.10."
-msgstr ""
+msgstr "إصدار Wagtail بصيغة x.y، مثل 7.4 أو 8.10."
 
 msgid "Added"
-msgstr ""
+msgstr "تمت الإضافة"
 
 msgid "Changed"
-msgstr ""
+msgstr "تم التغيير"
 
 msgid "Removed"
-msgstr ""
+msgstr "تمت الإزالة"
 
 msgid "Text (annotated)"
-msgstr ""
+msgstr "نص (مع تعليقات توضيحية)"
 
 msgid "Tutorial"
 msgstr "البرنامج التعليمي"
@@ -76,34 +76,34 @@ msgid "Sorry, this page could not be found."
 msgstr "عذرًا، تعذر العثور على هذه الصفحة."
 
 msgid "Try:"
-msgstr ""
+msgstr "جرّب ما يلي:"
 
 msgid "Content copy tools"
-msgstr ""
+msgstr "أدوات نسخ المحتوى"
 
 msgid "Copied!"
-msgstr ""
+msgstr "تم النسخ!"
 
 msgid "Copy page"
-msgstr ""
+msgstr "نسخ الصفحة"
 
 msgid "Toggle options"
-msgstr ""
+msgstr "تبديل الخيارات"
 
 msgid "Copy Markdown link"
-msgstr ""
+msgstr "نسخ رابط Markdown"
 
 msgid "View page Markdown"
-msgstr ""
+msgstr "عرض Markdown للصفحة"
 
 msgid "View llms.txt"
-msgstr ""
+msgstr "عرض llms.txt"
 
 msgid "View llms-full.txt"
-msgstr ""
+msgstr "عرض llms-full.txt"
 
 msgid "Copy prompt"
-msgstr ""
+msgstr "نسخ نص الأمر"
 
 msgid "Was this page helpful?"
 msgstr "هل كانت هذه الصفحة مفيدة؟"
@@ -121,7 +121,7 @@ msgid "Unhappy"
 msgstr "غير راضٍ"
 
 msgid "Help us improve by leaving a comment below"
-msgstr ""
+msgstr "ساعدنا على التحسين بترك تعليق أدناه"
 
 
 msgid "Your feedback"
@@ -143,7 +143,7 @@ msgid "Search"
 msgstr "بحث"
 
 msgid "Skip to main content"
-msgstr "تخطَّ إلى المحتوى الرئيسي"
+msgstr "تخطَّ إلى المحتوى الرئيسي"
 
 msgid "Dark"
 msgstr "داكن"
@@ -161,26 +161,26 @@ msgid "Light"
 msgstr "فاتح"
 
 msgid "Welcome to the editor guide CMS!"
-msgstr ""
+msgstr "أهلًا بك في دليل استخدام نظام إدارة المحتوى!"
 
 msgid "On this page"
 msgstr "في هذه الصفحة"
 
 msgid "In this section"
-msgstr ""
+msgstr "في هذا القسم"
 
 #, python-format
 msgid "Last updated: %(last_updated)s"
-msgstr ""
+msgstr "آخر تحديث: %(last_updated)s"
 
 msgid "LLM Translator"
-msgstr ""
+msgstr "مترجم LLM"
 
 msgid "image"
 msgstr "صورة"
 
 msgid "test"
-msgstr ""
+msgstr "اختبار"
 
 msgid "Previous"
 msgstr "السابق"
