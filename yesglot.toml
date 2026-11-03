@@ -12,7 +12,6 @@ custom_prompt = "This is the Wagtail CMS \"guide\" onboarding/training site. Pre
 tag = "en"
 
 
-
 [[target_language]]
 tag = "fr"
 path = "locale/fr/LC_MESSAGES/django.po"
