@@ -19,9 +19,7 @@
       }
 
       .svg-icon__animated-path {
-        transform: rotate(8deg) scale(0.8, 0.8);
-        transform-origin: 50% 50%;
-        transition: transform 0.1s;
+        transform: rotate(var(--section-icon-rotation, 8deg)) scale(0.8, 0.8);
       }
     }
   }
@@ -34,6 +32,28 @@
 
     .svg-icon__original-path {
       fill: light-dark(currentcolor, $color--white);
+    }
+
+    .svg-icon__animated-path {
+      // Pivot on the centre of the icon's canvas rather than the centre of the
+      // path's own bounding box, which is off-centre and mirrored between the
+      // LTR and RTL artwork. Declared outside `:hover` so the icon animates
+      // back into place on mouse out too.
+      transform-origin: 50% 50%;
+      transform-box: view-box;
+      transition: transform 0.1s;
+    }
+
+    // The hand-tuned RTL tutorial variant is not CSS-mirrored, so its tilt
+    // direction must be reversed. This class only appears on the RTL variant
+    // file, which is only served in RTL contexts, so we can hardcode the angle.
+    .svg-icon--rtl-artwork {
+      // The digits sit close to the edge, so let their shadow overflow the canvas.
+      overflow: visible;
+    }
+
+    .svg-icon--rtl-artwork .svg-icon__animated-path {
+      --section-icon-rotation: -8deg;
     }
 
     .svg-icon--flip-rtl {
