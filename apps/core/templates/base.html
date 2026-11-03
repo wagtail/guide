@@ -46,6 +46,7 @@
             <link rel="canonical" href="{{ page.full_url }}">
         {% endif %}
 
+        <link rel="ard" href="/.well-known/ard.json">
         <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
         <link rel="api-catalog" href="/.well-known/api-catalog">
         <link rel="service-desc" type="application/vnd.oai.openapi+json;version=3.1" href="{% url 'wagtailapi_v3:openapi-json' %}">

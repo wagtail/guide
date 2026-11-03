@@ -5,4 +5,7 @@ Disallow: /admin/
 Disallow: /search/
 Disallow: /search_json/
 
+# Agentic Resource Discovery (ARD) entries for this site: https://agenticresourcediscovery.org/spec/
+Agentmap: https://guide.wagtail.org/.well-known/ard.json
+
 Sitemap: https://guide.wagtail.org/sitemap.xml
