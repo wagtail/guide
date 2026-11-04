@@ -1,98 +1,128 @@
-# (Keep the version in sync with the node install below)
-FROM node:24 as frontend
+# syntax=docker/dockerfile:1.10
+# check=error=true
 
-# Make build & post-install scripts behave as if we were in a CI environment (e.g. for logging verbosity purposes).
+# Opt into newer Dockerfile syntax, make `docker build .` fail on warnings
+# See https://docs.docker.com/reference/build-checks/.
+# Run `docker build --check .` for better error messages.
+
+# Keep this version in sync with the local `uv` used to generate uv.lock.
+ARG UV_VERSION=0.11.19
+
+# NOTE: Heroku builds this file with the legacy (non-BuildKit) Docker builder:
+#   - BuildKit-only features such as `RUN --mount=type=cache` aren't supported.
+#   - Every stage is built, even those unused by the final stage.
+# The development container is built from Dockerfile.dev instead, so this file
+# only contains stages needed for production.
+
+# frontend stages
+
+# Keep the Node version in sync with Dockerfile.dev and .node-version.
+FROM node:26 AS frontend-deps
+
+# Make build & post-install scripts behave as if in CI (e.g. logging verbosity).
 ARG CI=true
 
-# Install front-end dependencies.
-COPY package.json package-lock.json webpack.config.js ./
+# Split from frontend-build so Dockerfile.dev can reuse node_modules without
+# needing to run the production build.
+COPY package.json package-lock.json vite.config.ts ./
 RUN npm ci
 
-# Compile static files
+FROM frontend-deps AS frontend-build
+
 COPY ./apps/frontend/static_src/ ./apps/frontend/static_src/
 RUN npm run build
 
+# base stage
 
-# We use Debian images because they are considered more stable than the alpine
-# ones becase they use a different C compiler. Debian images also come with
-# all useful packages required for image manipulation out of the box. They
-# however weigh a lot, approx. up to 1.5GiB per built image.
-FROM python:3.14 as production
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv-binary
 
-ARG POETRY_HOME=/opt/poetry
-ARG POETRY_INSTALL_ARGS="--without dev"
+# Debian over alpine: it's considered more stable (different C compiler) and
+# ships with the packages commonly needed for image manipulation, at the
+# cost of a larger (~1.5GiB) image.
+FROM python:3.15 AS base
 
-# IMPORTANT: Remember to review this when upgrading
-ARG POETRY_VERSION=2.1.2
+COPY --from=uv-binary /uv /uvx /bin/
 
-# Install dependencies in a virtualenv
+# Use jemalloc as the system allocator: glibc's malloc fragments badly in
+# long-running Python processes, so memory use creeps up over time.
+# The symlink provides an architecture-independent path for LD_PRELOAD below,
+# which doesn't expand globs itself. The `test -e` check fails the build if
+# the glob ever stops matching: `ln -s` would otherwise silently create a
+# dangling symlink, and jemalloc would not be used.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends libjemalloc2 \
+    && rm -rf /var/lib/apt/lists/* \
+    && ln -s /usr/lib/*/libjemalloc.so.2 /usr/local/lib/libjemalloc.so \
+    && test -e /usr/local/lib/libjemalloc.so
+
 ENV VIRTUAL_ENV=/venv
 
 RUN useradd guide --create-home && mkdir /app $VIRTUAL_ENV && chown -R guide /app $VIRTUAL_ENV
 
 WORKDIR /app
 
-# Set default environment variables. They are used at build time and runtime.
-# If you specify your own environment variables on Heroku, they will
-# override the ones set here. The ones below serve as sane defaults only.
-#  * PATH - Make sure that Poetry is on the PATH, along with our venv
-#  * PYTHONUNBUFFERED - This is useful so Python does not hold any messages
-#    from being output.
-#    https://docs.python.org/3.14/using/cmdline.html#envvar-PYTHONUNBUFFERED
-#    https://docs.python.org/3.14/using/cmdline.html#cmdoption-u
-#  * DJANGO_SETTINGS_MODULE - default settings used in the container.
-#  * PORT - default port used. Please match with EXPOSE.
-#    Heroku will ignore EXPOSE and only set PORT variable. PORT variable is
-#    read/used by Gunicorn.
-#  * WEB_CONCURRENCY - number of workers used by Gunicorn. The variable is
-#    read by Gunicorn.
-#  * GUNICORN_CMD_ARGS - additional arguments to be passed to Gunicorn. This
-#    variable is read by Gunicorn
-ENV PATH=${POETRY_HOME}/bin:$VIRTUAL_ENV/bin:$PATH \
-    POETRY_INSTALL_ARGS=${POETRY_INSTALL_ARGS} \
+# Defaults only: any environment variables set on Heroku override these.
+#  * UV_PROJECT_ENVIRONMENT - installs into $VIRTUAL_ENV instead of the
+#    project's default `.venv`, so it isn't clobbered by a bind mount in dev.
+#  * UV_PYTHON_DOWNLOADS=never - use the interpreter from the base image rather
+#    than letting uv fetch one, so builds stay reproducible.
+#  * UV_LINK_MODE=copy - hardlinks break across Docker layers.
+#  * PYTHONUNBUFFERED - otherwise logs can be lost if the process crashes:
+#    https://docs.python.org/3.15/using/cmdline.html#envvar-PYTHONUNBUFFERED
+#  * LD_PRELOAD / MALLOC_ARENA_MAX - use jemalloc (installed above) instead of
+#    glibc's malloc, and limit the number of memory arenas glibc would
+#    otherwise create per core, to keep memory use stable over time.
+#  * PORT - read by Gunicorn; Heroku sets this itself and ignores EXPOSE.
+ENV PATH=$VIRTUAL_ENV/bin:$PATH \
+    UV_PROJECT_ENVIRONMENT=$VIRTUAL_ENV \
+    UV_COMPILE_BYTECODE=1 \
+    UV_PYTHON_DOWNLOADS=never \
+    UV_LINK_MODE=copy \
     PYTHONUNBUFFERED=1 \
-    DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
-    PORT=8000 \
-    WEB_CONCURRENCY=3 \
-    GUNICORN_CMD_ARGS="-c gunicorn-conf.py --max-requests 1200 --max-requests-jitter 50 --access-logfile - --timeout 25"
+    LD_PRELOAD=/usr/local/lib/libjemalloc.so \
+    MALLOC_ARENA_MAX=2 \
+    PORT=8000
 
-# Make $BUILD_ENV available at runtime
-ARG BUILD_ENV
-ENV BUILD_ENV=${BUILD_ENV}
-
-# Port exposed by this container. Should default to the port used by your WSGI
-# server (Gunicorn). Heroku will ignore this.
 EXPOSE 8000
 
-# Install poetry using the installer (keeps Poetry's dependencies isolated from the app's)
-# chown protects us against cases where files downloaded by poetry have invalid ownership
-# chmod ensures poetry dependencies are accessible when packages are installed
-RUN curl -sSL https://install.python-poetry.org | python3 -
-RUN chown -R root:root ${POETRY_HOME} && \
-    chmod -R 0755 ${POETRY_HOME}
-
-# Don't use the root user as it's an anti-pattern and Heroku does not run
-# containers as root either.
+# Heroku doesn't run containers as root either:
 # https://devcenter.heroku.com/articles/container-registry-and-runtime#dockerfile-commands-and-runtime
 USER guide
 
-# Install your app's Python requirements.
-RUN python -m venv $VIRTUAL_ENV
-COPY --chown=guide pyproject.toml poetry.lock ./
-RUN pip install --upgrade pip && poetry install ${POETRY_INSTALL_ARGS} --no-root
 
-COPY --chown=guide --from=frontend ./apps/frontend/static ./apps/frontend/static
+# production stage
 
-# Copy application code.
+# Runs in production on Heroku. Last stage so it's the default target for an untargeted `docker build .`
+FROM base AS production
+
+# Can be overridden at build time, e.g. by the dev stage above.
+ARG UV_SYNC_ARGS="--no-dev --group production"
+
+ENV DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
+    WEB_CONCURRENCY=1
+
+# ARGs aren't available at runtime, so re-declare as an ENV to pass it through.
+ARG BUILD_ENV
+ENV BUILD_ENV=${BUILD_ENV}
+
+COPY --chown=guide pyproject.toml uv.lock ./
+
+# Create the virtual environment and install dependencies in a single layer.
+# Splitting these apart means `python -m venv` seeds pip at its bundled version
+# and the later `uv sync` replaces it, so the intermediate pip is deleted in a
+# subsequent layer. Heroku's legacy Docker builder doesn't honour whiteout files
+# when extracting layers, leaving stray `.wh.<name>.dist-info` entries in
+# site-packages, which breaks tools that enumerate installed distributions.
+RUN python -m venv $VIRTUAL_ENV \
+    && uv sync --frozen ${UV_SYNC_ARGS}
+
+COPY --chown=guide --from=frontend-build ./apps/frontend/static ./apps/frontend/static
 COPY --chown=guide . .
 
-RUN poetry install ${POETRY_INSTALL_ARGS} --no-root
-
-# Collect static. This command will move static files from application
-# directories and "static_compiled" folder to the main static directory that
-# will be served by the WSGI server.
 RUN SECRET_KEY=none python manage.py collectstatic --noinput --clear
 
-# Run the WSGI server. It reads GUNICORN_CMD_ARGS, PORT and WEB_CONCURRENCY
-# environment variable hence we don't specify a lot options below.
-CMD gunicorn apps.guide.wsgi:application
+# Gunicorn config lives in gunicorn.conf.py (its default location), which
+# reads WEB_CONCURRENCY for the number of worker processes to spawn. Requests
+# are served by threads within each worker (see gunicorn.conf.py), so one
+# worker process is enough to serve many concurrent requests.
+CMD ["gunicorn"]

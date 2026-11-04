@@ -2,12 +2,12 @@
 
 The Wagtail Guide is a Dockerized Django application running on Heroku:
 
--   Persistent data is stored in Heroku Postgres
--   Heroku Data for Redis is used as a cache
--   Logs are archived to Papertrail for historical analysis
--   User-uploaded files are stored in AWS S3
--   Email is handled by Mailgun
--   Sentry is used for error monitoring
+- Persistent data is stored in Heroku Postgres
+- Heroku Data for Redis is used as a cache
+- Logs are archived to Papertrail for historical analysis
+- User-uploaded files are stored in AWS S3
+- Email is handled by Mailgun
+- Sentry is used for error monitoring
 
 The application itself runs in Heroku's Europe region (`eu-west-1` (Dublin, Ireland)).
 
@@ -15,7 +15,22 @@ The application itself runs in Heroku's Europe region (`eu-west-1` (Dublin, Irel
 
 Deployment is handled automatically by Heroku. When commits are pushed to `main`, Heroku automatically begins building and deploying the site. This deployment only occurs _after_ CI has run and passed.
 
-Currently, only a production environment exists, so `main` deploys to production.
+Currently, the project uses:
+
+- A production environment auto-deployed on commits to `main`.
+- [Review Apps](https://devcenter.heroku.com/articles/github-integration-review-apps) for first-party pull requests.
+
+## Database management
+
+Here are relevant comments to retrieve a copy of the production database from Heroku, and apply it to your local environment. Note: adapt the database hostname to your local environment.
+
+```bash
+heroku pg:backups:download --output=./database_dumps/YYYYMMDD-wagtail-guide-production.dump --app wagtail-guide-production
+dropdb --if-exists --host db.guide.orb.local --username=guide guide
+createdb --host db.guide.orb.local --username=guide guide
+psql -d guide -U guide --host db.guide.orb.local -c 'CREATE SCHEMA heroku_ext;'
+pg_restore --clean --no-acl --if-exists --no-owner --host db.guide.orb.local --username=guide -d guide database_dumps/YYYYMMDD-wagtail-guide-production.dump
+```
 
 ## Access
 
@@ -24,7 +39,3 @@ The guide is hosted and managed by Torchbox's sysadmin team. Access is given onl
 ## Support
 
 Whilst Torchbox's sysadmin team maintain and monitor the application's infrastructure, this does not imply [support](https://torchbox.com/wagtail-cms/hosting-application-support/).
-
-## Useful links
-
--   https://github.com/wagtail/guide/pull/47

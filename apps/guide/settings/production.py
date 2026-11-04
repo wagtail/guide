@@ -1,11 +1,18 @@
 from .base import *  # noqa: F403
 
-DEBUG = False
+# Allow enabling DEBUG (e.g. on review apps) via a `DEBUG` environment variable.
+# Defaults to False for safety.
+DEBUG = env.get("DEBUG", "false").lower() == "true"  # noqa: F405
 
 SECRET_KEY = env["SECRET_KEY"]  # noqa: F405
 
+# When DEBUG is enabled (e.g. on review apps), allow any host unless an
+# explicit ALLOWED_HOSTS is provided. This avoids 400 errors on the app's
+# dynamic hostname.
 if allowed_hosts := env.get("ALLOWED_HOSTS"):  # noqa: F405
     ALLOWED_HOSTS = allowed_hosts.split(",")
+elif DEBUG:
+    ALLOWED_HOSTS = ["*"]
 
 MANIFEST_LOADER["cache"] = True  # noqa: F405
 
@@ -38,6 +45,14 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = False
 
 # https://docs.djangoproject.com/en/stable/ref/settings/#secure-content-type-nosniff
 SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Content Security Policy
+#
+# The policy is defined in `base.py`. The report URI is environment-specific,
+# and must be quoted as a list. https://docs.djangoproject.com/en/6.0/ref/middleware/#django.middleware.csp.ContentSecurityPolicyMiddleware
+SECURE_CSP["report-uri"] = [  # noqa: F405
+    "https://o4504043711037440.ingest.us.sentry.io/api/4504043711037440/security/?sentry_key=8660a4ef016e4bda918d7b1fe943daa3"
+]
 
 # Referrer-policy header settings.
 # https://django-referrer-policy.readthedocs.io/en/1.0/

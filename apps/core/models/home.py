@@ -1,13 +1,13 @@
 from django.conf import settings
 from django.http.response import Http404
 from wagtail.admin.panels import FieldPanel
+from wagtail.api import APIField
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
 
 from apps.llms_txt.mixins import MarkdownRouteMixin
 
 from ..blocks import HOME_BLOCKS
-from ..views import Custom404
 
 
 class HomePage(MarkdownRouteMixin, Page):
@@ -27,13 +27,10 @@ class HomePage(MarkdownRouteMixin, Page):
         FieldPanel("sections"),
     ]
 
-    def route(self, request, path_components):
-        try:
-            return super().route(request, path_components)
-        except Http404:
-            raise Custom404(
-                fallback_pages=self.get_fallback_pages(request, path_components)
-            )
+    api_fields = [
+        APIField("introduction", writable=True),
+        APIField("sections", writable=True),
+    ]
 
     def get_fallback_pages(self, request, path_components):
         # No fallback for main locale.

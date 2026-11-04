@@ -4,12 +4,9 @@ import factory
 import wagtail_factories
 from django.conf import settings
 from django.utils import timezone
-from faker import Faker
 from wagtail.models import Locale, Page, Site
 
 from apps.core.models import ContentPage, HomePage
-
-fake = Faker()
 
 
 class LocaleFactory(factory.django.DjangoModelFactory):
@@ -65,7 +62,14 @@ class ContentPageFactory(wagtail_factories.PageFactory):
     def body(self):
         return json.dumps(
             [
-                {"type": "text", "value": f"<p>{fake.paragraph()}</p>"},
+                {
+                    "type": "text",
+                    "value": (
+                        "<p>This guide explains how to create and manage content in "
+                        "Wagtail, from your first page through to advanced "
+                        "workflows.</p>"
+                    ),
+                },
             ],
         )
 

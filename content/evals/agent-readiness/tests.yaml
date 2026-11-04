@@ -1,0 +1,681 @@
+# Test cases for `agent-readiness.yaml`.
+#
+# `metadata.task` is the kind of task: `information`, `troubleshooting`,
+# `releases`, `negative` (developer questions, which the developer docs answer
+# rather than the guide), or `bridge` (a developer question the guide answers
+# itself, with a link to the developer docs). `metadata.framing` is `site-named` when the
+# prompt points the agent at the guide, or `site-not-named` when it has to find
+# it, or `site-start` when it sends the agent to the site to look something up,
+# like the tasks in the ora.ai traces. `metadata.source` records where the
+# question came from.
+#
+# Every case has three kinds of checks:
+#
+# - Key facts and the URL of the page that answers it, checked as text. Keep
+#   the facts to words any correct answer uses, and leave nuance to the rubric.
+# - An `llm-rubric` for the nuance, graded by the judge in `agent-readiness.yaml`.
+# - `vars.reference`: a known-good answer, never sent to the model.
+#   `just eval-agents-check` checks that it passes the text checks, and that
+#   empty, refusing and URL-only answers fail them.
+#
+# No prompt contains the facts its checks look for, and none is a yes/no
+# question that could be answered by guessing.
+
+# Information gathering
+
+- description: info-schedule-page
+  metadata:
+    task: information
+    framing: site-named
+    source: llms-txt-eval
+  vars:
+    prompt: Using the Wagtail user guide at guide.wagtail.org, how do I schedule a page to be published at a later date? Include a link to the relevant guide page.
+    reference: Open the page's Status side panel and use Set schedule to fill in the go-live at date, then click Publish. Saving a draft doesn't schedule it. https://guide.wagtail.org/en/concepts/scheduled-publishing/
+  assert:
+    - type: icontains-all
+      value: [go-live, publish]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/concepts/scheduled-publishing'
+      metric: citation
+    - type: llm-rubric
+      value: Explains that you set a "go-live at" date (via Set schedule in the Status side panel) and must click Publish for the schedule to apply.
+      metric: judge
+
+- description: info-find-page-to-edit
+  metadata:
+    task: information
+    framing: site-named
+    source: user-suggestion
+  vars:
+    prompt: I'm new to the Wagtail admin. How do I find the page I want to edit? Use the user guide on guide.wagtail.org and link to it.
+    reference: Browse the page tree from the Explorer page, drilling down through child pages (the breadcrumb shows where you are), then click a page's title or Edit to open its edit screen. You can also use Search in the sidebar. https://guide.wagtail.org/en/how-to-guides/find-your-way-around/
+  assert:
+    - type: icontains-any
+      value: [explorer, page tree, pages menu]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/(how-to-guides/find-your-way-around|how-to-guides/manage-pages|concepts/pages)'
+      metric: citation
+    - type: llm-rubric
+      value: Describes finding the page by browsing the page tree in the Explorer (drilling down into child pages) and opening its edit screen, and mentions search as an alternative.
+      metric: judge
+
+- description: info-snippets-vs-pages
+  metadata:
+    task: information
+    framing: site-not-named
+    source: guide-content
+  vars:
+    prompt: In Wagtail, what is a snippet and when would I use one instead of a page? Link to official documentation for content editors.
+    reference: Snippets are pieces of content created once and reused in many places, such as a call to action or a person's details, that don't need a page of their own in the page tree. https://guide.wagtail.org/en/how-to-guides/manage-snippets/
+  assert:
+    - type: icontains-any
+      value: [reus, multiple places, many places, more than one place]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/how-to-guides/manage-snippets'
+      metric: citation
+    - type: llm-rubric
+      value: Explains that snippets are reusable pieces of content created once and used in several places. Contrasting them with pages is welcome but not required.
+      metric: judge
+
+- description: info-copy-vs-alias
+  metadata:
+    task: information
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: According to the Wagtail user guide (guide.wagtail.org), what's the difference between copying a page and creating an alias of it? Link to the guide page.
+    reference: A copy is independent, so you have to update it yourself. An alias stays in sync with the original, which updates it whenever the original is published. You create both from More > Copy on the Explorer page, ticking Alias for an alias. https://guide.wagtail.org/en/how-to-guides/manage-pages/
+  assert:
+    - type: icontains-any
+      value: [sync, automatically]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/how-to-guides/manage-pages'
+      metric: citation
+    - type: llm-rubric
+      value: States that an alias stays in sync with the original page while a copy is independent and has to be updated separately.
+      metric: judge
+
+- description: info-private-page
+  metadata:
+    task: information
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: How do I restrict a page on my Wagtail site so that not everyone can view it? Check guide.wagtail.org and link to the page you used.
+    reference: In the page's status panel, use Change privacy. Options are any logged-in users, a shared password, or users in specific groups. It also applies to child pages. Shared passwords aren't for sensitive content. https://guide.wagtail.org/en/how-to-guides/manage-pages/
+  assert:
+    - type: icontains-all
+      value: [privacy, password, group]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/how-to-guides/manage-pages'
+      metric: citation
+    - type: llm-rubric
+      value: Describes the Change privacy control and its three options (logged-in users, shared password, specific groups).
+      metric: judge
+
+- description: info-image-focal-area
+  metadata:
+    task: information
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: Images on my Wagtail site get cropped and sometimes cut off people's faces. What can I do as an editor? Use the Wagtail user guide at guide.wagtail.org and link to it.
+    reference: Edit the image in the Images interface and set its focal area. Cropping is centred on the focal area. https://guide.wagtail.org/en/how-to-guides/manage-images/
+  assert:
+    - type: icontains-any
+      value: [focal area, focal point]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/how-to-guides/manage-images'
+      metric: citation
+    - type: llm-rubric
+      value: Recommends setting the image's focal area from its edit screen in the Images interface, because cropping is centred on it.
+      metric: judge
+
+- description: info-bulk-redirects
+  metadata:
+    task: information
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: We're migrating to Wagtail and have hundreds of old URLs in a spreadsheet. How can I add redirects for all of them in the admin? Use guide.wagtail.org and link to the relevant page.
+    reference: Import them from a CSV file in the Redirects interface, with "from" and "to" columns. Redirects can also be exported as CSV or XLSX. https://guide.wagtail.org/en/how-to-guides/manage-redirects/
+  assert:
+    - type: icontains-all
+      value: [csv, import]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/how-to-guides/manage-redirects'
+      metric: citation
+    - type: llm-rubric
+      value: Explains that redirects can be imported from a CSV file (with from and to columns) in the Redirects interface.
+      metric: judge
+
+- description: info-moderator-vs-editor
+  metadata:
+    task: information
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: In a standard Wagtail setup, what can a moderator do that an editor can't? Answer from the Wagtail user guide on guide.wagtail.org, with a link.
+    reference: Moderators can publish pages, while editors can only create drafts. Neither can access Settings, which is for administrators. https://guide.wagtail.org/en/how-to-guides/manage-users-and-roles/
+  assert:
+    - type: icontains
+      value: publish
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/how-to-guides/manage-users-and-roles'
+      metric: citation
+    - type: llm-rubric
+      value: States that moderators can publish pages while editors can only create drafts.
+      metric: judge
+
+- description: info-stale-pages
+  metadata:
+    task: information
+    framing: site-not-named
+    source: guide-content
+  vars:
+    prompt: Our Wagtail site has hundreds of pages. How can I find the ones nobody has updated in a long time, from the admin? Link to official documentation.
+    reference: Use the Aging pages report under Reports, which lists pages from oldest to newest. https://guide.wagtail.org/en/concepts/reports/
+  assert:
+    - type: icontains
+      value: aging pages
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/concepts/reports'
+      metric: citation
+    - type: llm-rubric
+      value: Points to the Aging pages report in the Reports menu, which lists pages from oldest to newest.
+      metric: judge
+
+- description: info-keyboard-shortcuts
+  metadata:
+    task: information
+    framing: site-not-named
+    source: guide-content
+  vars:
+    prompt: Which keyboard shortcuts can I use in the Wagtail admin, and where do I find the full list? Link to official documentation.
+    reference: Open Help > Keyboard shortcuts, or press ?. On all screens, / focuses the search, [ expands or collapses the sidebar, and Esc closes dialogs. https://guide.wagtail.org/en/concepts/accessibility-features/
+  assert:
+    - type: icontains
+      value: help
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/concepts/accessibility-features'
+      metric: citation
+    - type: llm-rubric
+      value: Says the full list is under Help > Keyboard shortcuts (or the ? key), and gives at least two shortcuts such as / to focus search, [ to toggle the sidebar, or Esc to close dialogs.
+      metric: judge
+
+- description: info-multi-site-vs-multi-tenancy
+  metadata:
+    task: information
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: What's the difference between multi-site and multi-tenancy in Wagtail? Use the Wagtail user guide at guide.wagtail.org and link to it.
+    reference: Multi-site is one Wagtail instance serving several websites that share a database, media and user accounts, and it's supported out of the box. Multi-tenancy is one instance serving several tenants, each with a separate database, and it needs customizations. https://guide.wagtail.org/en/reference/multi-site/
+  assert:
+    - type: icontains-any
+      value: [separate database, separate databases, own database]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/reference/multi-site'
+      metric: citation
+    - type: llm-rubric
+      value: Explains that multi-site shares one database, media and users across sites (supported out of the box), while multi-tenancy gives each tenant a separate database and requires customizations.
+      metric: judge
+
+# Troubleshooting
+
+- description: troubleshoot-changes-not-published
+  metadata:
+    task: troubleshooting
+    framing: site-named
+    source: user-suggestion
+  vars:
+    prompt: I edited a page in Wagtail but my changes aren't showing on the website. What could be wrong? Check guide.wagtail.org and link to the pages you used.
+    reference: Check the page's status. Live + Draft means the edits were saved as a draft and need publishing. In moderation means they're waiting for approval in a workflow. Scheduled means they'll go live at the go-live date. https://guide.wagtail.org/en/concepts/page-status/
+  assert:
+    - type: icontains-all
+      value: [draft, publish]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/concepts/page-status'
+      metric: citation
+    - type: llm-rubric
+      value: Gives more than one possible cause based on page status, including that the edits were saved as a draft (Live + Draft) and need publishing, plus at least one of waiting for moderation/approval or being scheduled for later.
+      metric: judge
+
+- description: troubleshoot-scheduled-page-not-live
+  metadata:
+    task: troubleshooting
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: I set a go-live date on a page in Wagtail and saved it as a draft, but the page never went live. What went wrong? Check the Wagtail user guide (guide.wagtail.org) and link to the page you used.
+    reference: The schedule only applies when you click Publish, not Save draft. Publish with the go-live date set. The site also needs the publish_scheduled command running. https://guide.wagtail.org/en/concepts/scheduled-publishing/
+  assert:
+    # "Publish" as a word, so the page's URL (scheduled-publishing) doesn't count.
+    - type: regex
+      value: '\b[Pp]ublish\b'
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/concepts/scheduled-publishing'
+      metric: citation
+    - type: llm-rubric
+      value: Explains that saving a draft with a go-live date doesn't schedule it, and that you must click Publish with the go-live date set.
+      metric: judge
+
+- description: troubleshoot-recover-deleted-document
+  metadata:
+    task: troubleshooting
+    framing: site-not-named
+    source: llms-txt-eval
+  vars:
+    prompt: I accidentally deleted a PDF document in our Wagtail CMS admin. How do I get it back? Link to official documentation.
+    reference: Deleted documents can't be recovered from the Wagtail admin. You'd need to upload the file again, or ask your developers about backups. https://guide.wagtail.org/en/how-to-guides/manage-documents/
+  assert:
+    - type: icontains-any
+      value:
+        - cannot be recovered
+        - can't be recovered
+        - can not be recovered
+        - no way to recover
+        - not possible to recover
+        - permanently deleted
+        - permanently removed
+        - no recycle bin
+        - no trash
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/how-to-guides/manage-documents'
+      metric: citation
+    - type: llm-rubric
+      value: States clearly that deleted documents can't be recovered from the admin, without inventing a restore feature.
+      metric: judge
+
+- description: troubleshoot-no-publish-button
+  metadata:
+    task: troubleshooting
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: In Wagtail I can't find a Publish button for my page, only an option to submit it. Why, and how does the page get published? Check guide.wagtail.org and link to the page you used.
+    reference: Your account is probably an editor, who can create drafts but not publish, or the page is in a workflow. Submitting sends it to moderation, and a moderator or administrator approves it to publish it. https://guide.wagtail.org/en/how-to-guides/manage-users-and-roles/
+  assert:
+    - type: icontains-any
+      value: [moderator, approv]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/(how-to-guides/manage-users-and-roles|concepts/page-status|how-to-guides/configure-workflows-for-moderation)'
+      metric: citation
+    - type: llm-rubric
+      value: Explains that the user likely lacks publish permission (for example, an editor) or the page is in a workflow, and that a moderator or administrator approves it to publish it.
+      metric: judge
+
+- description: troubleshoot-concurrent-editing
+  metadata:
+    task: troubleshooting
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: While editing a page in Wagtail, I see other people's avatars in the header and get a warning about overwriting changes. What's going on? Use guide.wagtail.org and link to the relevant page.
+    reference: These are concurrent editing notifications. Other users are working on the same page, and Wagtail warns you before you overwrite their changes. https://guide.wagtail.org/en/how-to-guides/manage-pages/
+  assert:
+    - type: icontains-any
+      value: [concurrent, same time, same page, same content]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/(how-to-guides/manage-pages|releases/new-in-wagtail-6-2)'
+      metric: citation
+    - type: llm-rubric
+      value: Explains these are concurrent editing notifications showing other users working on the same content, and that the warning protects against overwriting their changes.
+      metric: judge
+
+- description: troubleshoot-image-upload-rejected
+  metadata:
+    task: troubleshooting
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: Wagtail won't let me upload a large photo. What are the default limits for image uploads? Check the user guide on guide.wagtail.org and link to it.
+    reference: By default, images can be up to 10MB and 128 megapixels, in AVIF, GIF, JPG, JPEG, PNG or WebP format. Developers can change these. https://guide.wagtail.org/en/how-to-guides/manage-images/
+  assert:
+    - type: icontains-any
+      value: [10mb, 10 mb]
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/how-to-guides/manage-images'
+      metric: citation
+    - type: llm-rubric
+      value: States the default limits of 10MB and 128 megapixels.
+      metric: judge
+
+- description: troubleshoot-locked-page
+  metadata:
+    task: troubleshooting
+    framing: site-not-named
+    source: guide-content
+  vars:
+    prompt: A page on our Wagtail site is locked and I can't edit it. How can I see which pages are locked and since when? Link to official documentation.
+    reference: Use the Locked pages report under Reports, which lists locked pages and when they were locked. It's usually only available to administrators. https://guide.wagtail.org/en/concepts/reports/
+  assert:
+    - type: icontains
+      value: locked pages
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/concepts/reports'
+      metric: citation
+    - type: llm-rubric
+      value: Points to the Locked pages report, which lists locked pages and when they were locked.
+      metric: judge
+
+- description: troubleshoot-user-cannot-log-in
+  metadata:
+    task: troubleshooting
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: A colleague can no longer log in to the Wagtail admin after our administrator changed their account. What's the likely reason? Use guide.wagtail.org and link to it.
+    reference: Their account was probably made inactive, which immediately prevents them from logging in while keeping their history. An administrator can make it active again. https://guide.wagtail.org/en/how-to-guides/manage-users-and-roles/
+  assert:
+    - type: icontains
+      value: inactive
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/(concepts/users-status|how-to-guides/manage-users-and-roles)'
+      metric: citation
+    - type: llm-rubric
+      value: Explains that the account was likely made inactive, which removes access to the admin.
+      metric: judge
+
+# Releases
+
+- description: releases-8-0-image-formats
+  metadata:
+    task: releases
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: According to the Wagtail user guide's release notes on guide.wagtail.org, what changed in Wagtail 8.0 about how AVIF and WebP images are handled? Link to your source.
+    reference: In Wagtail 8.0, modern formats such as AVIF and WebP are no longer converted to PNG by default, which keeps file sizes smaller. https://guide.wagtail.org/en/releases/new-in-wagtail-8-0/
+  assert:
+    - type: icontains
+      value: png
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/releases/new-in-wagtail-8-0'
+      metric: citation
+    - type: llm-rubric
+      value: States that AVIF and WebP images are no longer converted to PNG by default.
+      metric: judge
+
+- description: releases-8-0-api
+  metadata:
+    task: releases
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: What does the new API in Wagtail 8.0 mean for content teams? Answer from the release notes on guide.wagtail.org and link to them.
+    reference: Wagtail 8.0 adds the v3 API in preview, which lets integrations create, edit, publish, unpublish, move, copy and revert content, with access tied to user accounts and permissions. Developers have to enable it. https://guide.wagtail.org/en/releases/new-in-wagtail-8-0/
+  assert:
+    - type: icontains
+      value: v3
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/releases/new-in-wagtail-8-0'
+      metric: citation
+    - type: llm-rubric
+      value: Explains the v3 API (in preview) lets integrations create, edit and publish content, with authentication tied to user accounts and permissions, and that a developer must enable it.
+      metric: judge
+
+- description: releases-7-4-incomplete-blocks
+  metadata:
+    task: releases
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: Since which Wagtail version can I save a draft of a page while some required fields inside its StreamField blocks are still empty? Use the release notes on guide.wagtail.org and link to them.
+    reference: Since Wagtail 7.4, for fields inside StreamField blocks. Wagtail 7.0 already allowed it for ordinary fields. https://guide.wagtail.org/en/releases/new-in-wagtail-7-4/
+  assert:
+    - type: icontains
+      value: '7.4'
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/releases/new-in-wagtail-7-4'
+      metric: citation
+    - type: llm-rubric
+      value: Answers 7.4 for required fields inside blocks. Noting that 7.0 already allowed this for ordinary fields is fine. Answering 7.0 alone fails.
+      metric: judge
+
+- description: releases-autosave-version
+  metadata:
+    task: releases
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: Which Wagtail release added automatic saving while you edit pages and snippets? Use the release notes on guide.wagtail.org and link to them.
+    reference: Wagtail 7.3 added autosave for pages and snippets. https://guide.wagtail.org/en/releases/new-in-wagtail-7-3/
+  assert:
+    - type: icontains
+      value: '7.3'
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/releases/new-in-wagtail-7-3'
+      metric: citation
+    - type: llm-rubric
+      value: Answers Wagtail 7.3.
+      metric: judge
+
+- description: releases-7-3-to-8-0-overview
+  metadata:
+    task: releases
+    framing: site-named
+    source: guide-content
+  vars:
+    prompt: We're upgrading Wagtail from 7.2 to 8.0. What are the main changes our content editors will notice? Use the release notes on guide.wagtail.org and link to each one you used.
+    reference: 7.3 added autosave and custom content quality checks. 7.4 lets you save drafts with incomplete blocks and adds customizable page listings. 8.0 adds the v3 API in preview and no longer converts AVIF and WebP to PNG. https://guide.wagtail.org/en/releases/new-in-wagtail-7-3/ https://guide.wagtail.org/en/releases/new-in-wagtail-7-4/ https://guide.wagtail.org/en/releases/new-in-wagtail-8-0/
+  assert:
+    - type: icontains
+      value: autosave
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/releases/new-in-wagtail-7-3'
+      metric: citation
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/releases/new-in-wagtail-7-4'
+      metric: citation
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/releases/new-in-wagtail-8-0'
+      metric: citation
+    - type: llm-rubric
+      value: Covers all three releases (7.3, 7.4 and 8.0), with at least one correct editor-facing change for each, such as autosave (7.3), saving drafts with incomplete blocks (7.4), and the v3 API or AVIF/WebP handling (8.0).
+      metric: judge
+
+# Negative cases: developer questions
+
+- description: negative-dev-streamfield-block
+  metadata:
+    task: negative
+    framing: site-not-named
+    source: llms-txt-when-not-to-use
+  vars:
+    prompt: How do I define a custom StreamField block type in my Wagtail project's Python code? Link to official documentation.
+    reference: Subclass a block class such as blocks.StructBlock and use it in your StreamField. https://docs.wagtail.org/en/stable/topics/streamfield.html
+  assert:
+    - type: icontains
+      value: docs.wagtail.org
+      metric: citation
+    - type: icontains-any
+      value: [StructBlock, StreamBlock, CharBlock, blocks.]
+      metric: facts
+    - type: llm-rubric
+      value: Gives developer guidance (for example, subclassing StructBlock or another block class) and links to the developer documentation on docs.wagtail.org rather than the user guide.
+      metric: judge
+
+# The guide answers this developer question itself and links to the developer
+# docs, so it tests following that link rather than routing to the docs.
+- description: bridge-dev-run-scheduled-publishing
+  metadata:
+    task: bridge
+    framing: site-not-named
+    source: llms-txt-when-not-to-use
+  vars:
+    prompt: Scheduled pages on my Wagtail site never get published automatically. What do I need to set up on the server? Link to official documentation.
+    reference: Run the publish_scheduled management command regularly, for example once an hour, as the docs recommend. https://docs.wagtail.org/en/stable/reference/management_commands.html#publish-scheduled
+  assert:
+    - type: icontains
+      value: publish_scheduled
+      metric: facts
+    - type: icontains
+      value: docs.wagtail.org
+      metric: citation
+    - type: llm-rubric
+      value: Explains that the publish_scheduled management command must run on a schedule (for example with cron), and links to the developer documentation.
+      metric: judge
+
+- description: negative-dev-admin-base-url
+  metadata:
+    task: negative
+    framing: site-not-named
+    source: llms-txt-when-not-to-use
+  vars:
+    prompt: Links in Wagtail's notification emails point to the wrong domain. Which project setting fixes that? Link to official documentation.
+    reference: Set WAGTAILADMIN_BASE_URL in your Django settings to the admin's base URL. https://docs.wagtail.org/en/stable/reference/settings.html
+  assert:
+    - type: icontains
+      value: WAGTAILADMIN_BASE_URL
+      metric: facts
+    - type: icontains
+      value: docs.wagtail.org
+      metric: citation
+    - type: llm-rubric
+      value: Names the WAGTAILADMIN_BASE_URL setting and links to the developer documentation.
+      metric: judge
+
+- description: negative-dev-add-page-field
+  metadata:
+    task: negative
+    framing: site-not-named
+    source: llms-txt-when-not-to-use
+  vars:
+    prompt: How do I add a new field to an existing page type in my Wagtail project's code, so editors can fill it in? Link to official documentation.
+    reference: Add a model field to the page class, add it to content_panels with a FieldPanel, then make and run migrations. https://docs.wagtail.org/en/stable/topics/pages.html
+  assert:
+    - type: icontains
+      value: docs.wagtail.org
+      metric: citation
+    - type: icontains-any
+      value: [content_panels, FieldPanel, makemigrations]
+      metric: facts
+    - type: llm-rubric
+      value: Explains adding a model field, exposing it to editors with a panel (such as FieldPanel in content_panels), and running migrations, with a link to the developer documentation.
+      metric: judge
+
+# Start from the site: the agent is sent to the guide to look something up, as
+# in the ora.ai traces, rather than asked a question it can search for.
+
+- description: start-what-is-the-guide
+  metadata:
+    task: information
+    framing: site-start
+    source: ora-journey-task
+  vars:
+    prompt: Go to guide.wagtail.org and find out what the site is for and who it's for. Link to the page you used.
+    reference: It's the Wagtail user guide, which helps content editors, moderators, administrators and other users learn how to use the Wagtail CMS. https://guide.wagtail.org/en/
+  assert:
+    - type: icontains-any
+      value: [editor, moderator, administrator]
+      metric: facts
+    # The homepage, with or without a language and version prefix.
+    - type: regex
+      value: 'https://guide\.wagtail\.org(/en(-[\w.]+)?)?/?(?![\w/-])'
+      metric: citation
+    - type: llm-rubric
+      value: Explains that it's the Wagtail user guide, for people using the Wagtail CMS such as content editors, moderators and administrators.
+      metric: judge
+
+- description: start-ie11-support
+  metadata:
+    task: information
+    framing: site-start
+    source: guide-content
+  vars:
+    prompt: Go to guide.wagtail.org and find out since which Wagtail version Internet Explorer 11 is no longer supported. Link to the page you used.
+    reference: Wagtail 2.15 removed support for Internet Explorer 11. https://guide.wagtail.org/en/reference/browser-compatibility/
+  assert:
+    - type: icontains
+      value: '2.15'
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/reference/browser-compatibility'
+      metric: citation
+    - type: llm-rubric
+      value: Answers Wagtail 2.15.
+      metric: judge
+
+- description: start-content-checker
+  metadata:
+    task: information
+    framing: site-start
+    source: guide-content
+  vars:
+    prompt: Go to guide.wagtail.org and find out what the built-in content checker in the page editor looks for, and which tool it's based on. Link to the page you used.
+    reference: The Checks side panel runs automated checks focused on accessibility, based on the Axe testing engine, and projects can add custom rules. https://guide.wagtail.org/en/reference/content-checks/
+  assert:
+    - type: icontains
+      value: axe
+      metric: facts
+    # The short /content-checks/ URL redirects to the page, so it counts too.
+    - type: regex
+      value: 'guide\.wagtail\.org/(en(-[\w.]+)?/reference/)?content-checks'
+      metric: citation
+    - type: llm-rubric
+      value: Says the checker focuses on accessibility issues and is based on the Axe testing engine.
+      metric: judge
+
+- description: start-restrict-images
+  metadata:
+    task: information
+    framing: site-start
+    source: guide-content
+  vars:
+    prompt: Go to guide.wagtail.org and find out how to control which users can access a particular set of images. Link to the page you used.
+    reference: Put the images in a collection, created from Settings > Collections, and control access to that collection. https://guide.wagtail.org/en/how-to-guides/manage-collections/
+  assert:
+    # "Collection" as a word, so the page's URL (manage-collections) doesn't count.
+    - type: regex
+      value: '(?<![-/])\b[Cc]ollections?\b'
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/how-to-guides/manage-collections'
+      metric: citation
+    - type: llm-rubric
+      value: Explains that images are grouped into collections (from Settings > Collections), which control access to them.
+      metric: judge
+
+- description: start-latest-release
+  metadata:
+    task: releases
+    framing: site-start
+    source: guide-content
+  vars:
+    prompt: Go to guide.wagtail.org and find out what the most recent Wagtail release is, and its main highlight for content teams. Link to the page you used.
+    reference: Wagtail 8.0, whose highlight is the new v3 API to create, edit and publish content programmatically. https://guide.wagtail.org/en/releases/new-in-wagtail-8-0/
+  assert:
+    - type: icontains
+      value: '8.0'
+      metric: facts
+    - type: regex
+      value: 'guide\.wagtail\.org/en(-[\w.]+)?/releases/new-in-wagtail-8-0'
+      metric: citation
+    - type: llm-rubric
+      value: Names Wagtail 8.0 (or a patch release of it, such as 8.0.1) as the most recent release, with a highlight from its release notes such as the v3 API.
+      metric: judge

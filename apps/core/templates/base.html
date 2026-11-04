@@ -1,7 +1,8 @@
-{% load core_tags wagtailcore_tags wagtailroutablepage_tags wagtailuserbar manifest i18n %}
+{% load core_tags wagtailcore_tags wagtailroutablepage_tags wagtailuserbar wagtail_cache manifest i18n %}
 
 {% wagtail_site as current_site %}
 {% get_current_language_bidi as LANGUAGE_BIDI %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
 <html lang="{% block lang %}{{ self.locale.language_code }}{% endblock %}" dir="{% if LANGUAGE_BIDI %}rtl{% else %}ltr{% endif %}" class="no-js">
     <head>
@@ -19,9 +20,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="color-scheme" content="light dark">
 
+        {# WebMCP origin trial until Chrome 162 #}
+        <meta http-equiv="origin-trial" content="AmXV/Pu7QOW0gCV9tEZDFAQ9hcSd+Hw42EpnR6d23qfJE8SuVEI1H3GYjhPU16+GGfwgycjFJ3rFLbjKD9lK7gcAAABReyJvcmlnaW4iOiJodHRwczovL2d1aWRlLndhZ3RhaWwub3JnOjQ0MyIsImZlYXR1cmUiOiJXZWJNQ1AiLCJleHBpcnkiOjE4MDYzNjQ4MDB9">
+
         {% comment %}
-        We don’t want older versions of the documentation to show up in search results.
-        So we block all non-latest pages indexing with the robots=noindex meta tag.
+        Prevent specific views indexing, with the robots=noindex meta tag.
         {% endcomment %}
         {% if SEO_NOINDEX %}
         <meta name="robots" content="noindex">
@@ -40,8 +43,13 @@
         {% hreflangs %}
 
         {% if page %}
-            <link rel="canonical" href="{% get_translation_url page 'en' %}">
+            <link rel="canonical" href="{{ page.full_url }}">
         {% endif %}
+
+        <link rel="ard" href="/.well-known/ard.json">
+        <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
+        <link rel="api-catalog" href="/.well-known/api-catalog">
+        <link rel="service-desc" type="application/vnd.oai.openapi+json;version=3.1" href="{% url 'wagtailapi_v3:openapi-json' %}">
 
         {% if page.has_markdown_route %}
             <link rel="alternate" type="text/markdown;charset=utf-8" href="{{ page.get_site.root_url }}{% routablepageurl page 'markdown' %}" />
@@ -59,9 +67,9 @@
 
         {# facebook opengraph tags #}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="{{ site.root_url }}{{ page.url }}" />
+        <meta property="og:url" content="{{ page.full_url }}" />
         <meta property="og:title" content="{{ page.title }}" />
-        <meta name="og:image" content="{{ current_site.root_url }}{% manifest 'images/social-image.png' %}">
+        <meta property="og:image" content="{{ current_site.root_url }}{% manifest 'images/social-image.png' %}">
         <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% endif %}" />
         <meta property="og:site_name" content="{{ current_site.site_name }}" />
 
@@ -72,15 +80,7 @@
         {# Override this in templates to add extra stylesheets #}
         {% endblock %}
 
-        <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "WebPage",
-          "headline": "{{ page.title|escapejs }}",
-          "datePublished": "{{ page.first_published_at|date:'c' }}",
-          "dateModified": "{{ page.last_published_at|date:'c' }}"
-        }
-        </script>
+        {% structured_data current_site %}
     </head>
 
     <body class="app">
@@ -93,7 +93,10 @@
 
         <div class="grid">
             <div class="app__header">
-                {% header %}
+                {# The header only varies by language - the active menu item is highlighted client-side. #}
+                {% wagtailcache 86400 header LANGUAGE_CODE %}
+                    {% header %}
+                {% endwagtailcache %}
             </div>
 
             <div class="app__content">
@@ -102,7 +105,10 @@
                     {% if page.has_markdown_route %}
                         {% include "components/copy_button.html" %}
                     {% endif %}
-                    {% include "components/language_selector.html" %}
+                    {# The selector only changes when the page's translations do. #}
+                    {% wagtailcache 86400 language_selector LANGUAGE_CODE page.id %}
+                        {% language_selector %}
+                    {% endwagtailcache %}
                 </div>
                 <main id="main-content">
                     {% block content %}{% endblock %}

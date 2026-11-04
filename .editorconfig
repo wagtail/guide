@@ -1,27 +1,28 @@
+# Defines the coding style for different editors and IDEs.
+# https://editorconfig.org/
+
+# top-most EditorConfig file
 root = true
 
+# Rules for source code.
 [*]
+charset = utf-8
 end_of_line = lf
-insert_final_newline = true
 trim_trailing_whitespace = true
+insert_final_newline = true
 indent_style = space
-
-[Makefile]
-indent_style = tab
-
-[*.py]
-charset = utf-8
-indent_size = 4
-max_line_length = 88
-
-[*.js]
-charset = utf-8
-
-[*.{html,rst,md,js,ts,tsx,css,scss}]
-indent_size = 4
-
-[*.{json,yml,yaml}]
 indent_size = 2
+max_line_length = 80
 
+[*.{py,pyi}]
+indent_size = 4
+
+# Documentation.
 [*.md]
+max_line_length = 0
+trim_trailing_whitespace = false
+
+# Git commit messages.
+[COMMIT_EDITMSG]
+max_line_length = 0
 trim_trailing_whitespace = false

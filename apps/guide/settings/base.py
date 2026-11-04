@@ -16,6 +16,7 @@ from pathlib import Path
 
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.csp import CSP
 
 env = os.environ.copy()
 
@@ -29,6 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 # Application definition
 
 INSTALLED_APPS = [
+    # `scout_apm.django` must be the first entry so its middleware and
+    # instrumentation wrap the rest of the request stack.
+    "scout_apm.django",
     "apps.frontend",
     "apps.core",
     "apps.llms_txt",
@@ -38,10 +42,13 @@ INSTALLED_APPS = [
     "manifest_loader",
     "wagtail_ai",
     "rest_framework",
+    "ninja",
     "wagtail_localize",
     "wagtail_localize.locales",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.api.v2",
+    "wagtail.api.v3",
     "wagtail.contrib.routable_page",
     "wagtail.contrib.search_promotions",
     "wagtail.contrib.settings",
@@ -81,7 +88,6 @@ MIDDLEWARE = [
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "apps.core.middleware.VersionedUrlRedirectMiddleware",
     "django.middleware.locale.LocaleMiddleware",
-    "apps.core.middleware.ValidateLocaleMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -226,41 +232,22 @@ PERMISSIONS_POLICY = {
     "usb": [],
 }
 
-# Content Security Policy settings
+# Content Security Policy
 # https://docs.djangoproject.com/en/6.0/ref/middleware/#django.middleware.csp.ContentSecurityPolicyMiddleware
+#
+# The "special" source values of 'self', 'unsafe-inline', 'unsafe-eval', and
+# 'none' must be quoted, e.g. "'self'". The report URI is environment-specific,
+# see `production.py`.
+SECURE_CSP = {
+    "default-src": ["'self'"],
+    # The nonce is added to the source lists so that our inline scripts and
+    # styles are allowed. https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/style-src
+    "script-src": ["'self'", "'unsafe-inline'", "'report-sample'", CSP.NONCE],
+    "style-src": ["'self'", "'report-sample'", CSP.NONCE],
+    "img-src": ["'self'", "data:", "www.gravatar.com", "guide-media.wagtail.org"],
+    "connect-src": ["'self'", "releases.wagtail.org"],
+}
 
-if "CSP_DEFAULT_SRC" in env:
-    from django.utils.csp import CSP
-
-    # The "special" source values of
-    # 'self', 'unsafe-inline', 'unsafe-eval', and 'none' must be quoted!
-    # e.g.: CSP_DEFAULT_SRC="'self'" Without quotes they will not work as intended.
-
-    csp_policy = {
-        "default-src": env.get("CSP_DEFAULT_SRC").split(","),
-    }
-    if "CSP_SCRIPT_SRC" in env:
-        csp_policy["script-src"] = env.get("CSP_SCRIPT_SRC").split(",") + [CSP.NONCE]
-    if "CSP_STYLE_SRC" in env:
-        csp_policy["style-src"] = env.get("CSP_STYLE_SRC").split(",") + [CSP.NONCE]
-    if "CSP_IMG_SRC" in env:
-        csp_policy["img-src"] = env.get("CSP_IMG_SRC").split(",")
-    if "CSP_CONNECT_SRC" in env:
-        csp_policy["connect-src"] = env.get("CSP_CONNECT_SRC").split(",")
-    if "CSP_FONT_SRC" in env:
-        csp_policy["font-src"] = env.get("CSP_FONT_SRC").split(",")
-    if "CSP_BASE_URI" in env:
-        csp_policy["base-uri"] = env.get("CSP_BASE_URI").split(",")
-    if "CSP_OBJECT_SRC" in env:
-        csp_policy["object-src"] = env.get("CSP_OBJECT_SRC").split(",")
-    if "CSP_REPORT_URI" in env:
-        csp_policy["report-uri"] = [env.get("CSP_REPORT_URI")]
-
-    report_only = env.get("CSP_REPORT_ONLY", "false").lower() == "true"
-    if report_only:
-        SECURE_CSP_REPORT_ONLY = csp_policy
-    else:
-        SECURE_CSP = csp_policy
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
@@ -274,67 +261,69 @@ WAGTAIL_I18N_ENABLED = True
 
 USE_TZ = True
 
+# Languages supported by the guide. Locales with published content are listed
+# below. Locales we want to support but are not prepared for yet are commented
+# out: they are not routable and Django will fall back to the default language
+# for them. To enable one, uncomment it (ensuring its content is published) and
+# redeploy.
 WAGTAIL_GUIDE_LANGUAGES = [
-    ("af", "Afrikaans"),
+    # ("af", "Afrikaans"),
     ("ar", "Arabic"),
-    ("az", "Azerbaijani"),
-    ("be", "Belarusian"),
-    ("bg", "Bulgarian"),
-    ("bn", "Bengali"),
-    ("ca", "Catalan"),
-    ("cs", "Czech"),
-    ("cy", "Welsh"),
-    ("da", "Danish"),
+    # ("az", "Azerbaijani"),
+    # ("be", "Belarusian"),
+    # ("bg", "Bulgarian"),
+    # ("bn", "Bengali"),
+    # ("ca", "Catalan"),
+    # ("cs", "Czech"),
+    # ("cy", "Welsh"),
+    # ("da", "Danish"),
     ("de", "German"),
-    ("el", "Greek"),
     ("en", "English"),
-    ("es", "Spanish"),
-    ("et", "Estonian"),
-    ("eu", "Basque"),
-    ("fa", "Persian"),
-    ("fi", "Finnish"),
+    # ("es", "Spanish"),
+    # ("et", "Estonian"),
+    # ("eu", "Basque"),
+    # ("fa", "Persian"),
+    # ("fi", "Finnish"),
     ("fr", "French"),
-    ("gl", "Galician"),
-    ("he", "Hebrew"),
-    ("hr", "Croatian"),
+    # ("gl", "Galician"),
+    # ("he", "Hebrew"),
+    # ("hr", "Croatian"),
     # Exists in Wagtail's Transifex, but not supported by Django
     # ("ht", "Haitian (Haitian Creole)"),
-    ("hu", "Hungarian"),
-    ("hy", "Armenian"),
-    ("id", "Indonesian"),
+    # ("hu", "Hungarian"),
+    # ("hy", "Armenian"),
+    # ("id", "Indonesian"),
     ("is", "Icelandic"),
-    ("it", "Italian"),
-    ("ja", "Japanese"),
-    ("ka", "Georgian"),
-    ("ko", "Korean"),
-    ("lt", "Lithuanian"),
-    ("lv", "Latvian"),
+    # ("it", "Italian"),
+    # ("ja", "Japanese"),
+    # ("ka", "Georgian"),
+    # ("ko", "Korean"),
+    # ("lt", "Lithuanian"),
+    # ("lv", "Latvian"),
     # Exists in Wagtail's Transifex, but not supported by Django
     # ("mi", "Maori"),
-    ("mn", "Mongolian"),
-    ("my", "Burmese"),
-    ("nb", "Norwegian Bokmål"),
-    ("nl", "Dutch"),
-    ("pl", "Polish"),
-    ("pt", "Portuguese (Portugal)"),
+    # ("mn", "Mongolian"),
+    # ("my", "Burmese"),
+    # ("nb", "Norwegian Bokmål"),
+    # ("nl", "Dutch"),
+    # ("pl", "Polish"),
+    # ("pt", "Portuguese (Portugal)"),
     ("pt-br", "Portuguese (Brazil)"),
-    ("ro", "Romanian"),
-    ("ru", "Russian"),
-    ("sk", "Slovak"),
-    ("sl", "Slovenian"),
-    ("sr", "Serbian"),
-    ("sv", "Swedish"),
-    ("ta", "Tamil"),
-    # Exists in Wagtail's Transifex, but not supported by Django
-    # ("tet", "Tetum (Tetun)"),
-    ("th", "Thai"),
-    ("tr", "Turkish"),
-    ("uk", "Ukrainian"),
-    ("vi", "Vietnamese"),
+    # ("ro", "Romanian"),
+    # ("ru", "Russian"),
+    # ("sk", "Slovak"),
+    # ("sl", "Slovenian"),
+    # ("sr", "Serbian"),
+    # ("sv", "Swedish"),
+    # ("ta", "Tamil"),
+    # ("th", "Thai"),
+    # ("tr", "Turkish"),
+    # ("uk", "Ukrainian"),
+    # ("vi", "Vietnamese"),
     # Exists in Wagtail's Transifex, but not supported by Django
     # ("zh", "Chinese"),
-    ("zh-hans", "Chinese Simplified"),
-    ("zh-hant", "Chinese Traditional"),
+    # ("zh-hans", "Chinese Simplified"),
+    # ("zh-hant", "Chinese Traditional"),
 ]
 
 WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = WAGTAIL_GUIDE_LANGUAGES
@@ -507,6 +496,8 @@ if "SERVER_EMAIL" in env:
 # not Python exceptions.
 # We do not use default mail or file handlers because they are of no use for
 # us.
+# The console verbosity can be raised at runtime with the LOG_LEVEL and
+# DJANGO_LOG_LEVEL environment variables (e.g. on review apps).
 # https://docs.djangoproject.com/en/stable/topics/logging/
 LOGGING = {
     "version": 1,
@@ -524,10 +515,17 @@ LOGGING = {
             "format": "[%(asctime)s][%(process)d][%(levelname)s][%(name)s] %(message)s"
         }
     },
+    # Capture logs from our own code and third-party libraries that don't have
+    # a dedicated logger below, rather than letting them fall through to the
+    # default root logger (which only surfaces warnings and errors).
+    "root": {
+        "handlers": ["console"],
+        "level": env.get("LOG_LEVEL", "INFO"),
+    },
     "loggers": {
-        "wagtailkit_repo_name": {
+        "django": {
             "handlers": ["console"],
-            "level": "INFO",
+            "level": env.get("DJANGO_LOG_LEVEL", "INFO"),
             "propagate": False,
         },
         "wagtail": {
@@ -540,9 +538,12 @@ LOGGING = {
             "level": "WARNING",
             "propagate": False,
         },
+        # Security events (e.g. DisallowedHost, SuspiciousOperation, CSRF
+        # failures) are the most valuable signal in production logs, and are
+        # logged at INFO by some Django versions.
         "django.security": {
             "handlers": ["console"],
-            "level": "WARNING",
+            "level": "INFO",
             "propagate": False,
         },
     },
@@ -589,6 +590,9 @@ REST_FRAMEWORK = {
 }
 
 WAGTAILSNIPPETS_MENU_SHOW_ALL = True
+
+# Wagtail API pagination limit (default: 20)
+WAGTAILAPI_LIMIT_MAX = int(env.get("WAGTAILAPI_LIMIT_MAX", 100))
 
 # The Django default for the maximum number of GET or POST parameters is 1000. For
 # especially large Wagtail pages with many fields, we need to override this. See
@@ -653,6 +657,14 @@ WAGTAIL_AI = {
             "api_key": os.environ.get("WAGTAIL_AI_DEFAULT_API_KEY"),
             "api_base": os.environ.get("WAGTAIL_AI_DEFAULT_API_BASE"),
         },
+        "translator": {
+            "provider": os.environ.get("WAGTAIL_AI_TRANSLATOR_PROVIDER", "openai"),
+            "model": os.environ.get(
+                "WAGTAIL_AI_TRANSLATOR_MODEL", "mistral-small-3.2-24b-instruct-2506"
+            ),
+            "api_key": os.environ.get("WAGTAIL_AI_TRANSLATOR_API_KEY"),
+            "api_base": os.environ.get("WAGTAIL_AI_TRANSLATOR_API_BASE"),
+        },
         "vision": {
             "provider": os.environ.get("WAGTAIL_AI_VISION_PROVIDER", "openai"),
             "model": os.environ.get(
@@ -683,3 +695,7 @@ WAGTAIL_AI = {
 }
 
 WAGTAILIMAGES_IMAGE_FORM_BASE = "wagtail_ai.forms.DescribeImageForm"
+
+WAGTAILLOCALIZE_MACHINE_TRANSLATOR = {
+    "CLASS": "apps.core.translator.LLMTranslator",
+}

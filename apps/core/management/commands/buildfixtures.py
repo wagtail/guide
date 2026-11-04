@@ -2,16 +2,14 @@ import json
 import uuid
 
 from django.conf import settings
+from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 from django.template.defaultfilters import slugify
-from faker import Faker
 from wagtail.documents import get_document_model
 from wagtail.images import get_image_model
 from wagtail.models import Collection, Locale, Page
 
 from apps.core.factories import ContentPageFactory, HomePageFactory
-
-fake = Faker()
 
 
 class Command(BaseCommand):
@@ -36,7 +34,7 @@ class Command(BaseCommand):
         self.home = HomePageFactory(locale=self.locale)
         languages = [
             ("en", "English"),
-            ("nl", "Dutch"),
+            ("fr", "French"),
             # Make sure languages with region code is handled correctly
             ("pt-br", "Portuguese (Brazil)"),
         ]
@@ -162,6 +160,15 @@ class Command(BaseCommand):
         )
         self.home.save_revision().publish()
 
+    def create_superuser(self):
+        User = get_user_model()
+        if not User.objects.filter(username="admin").exists():
+            User.objects.create_superuser(
+                username="admin",
+                email="admin@example.com",
+                password="changeme",
+            )
+
     def handle(self, *args, **options):
         self.stdout.write("Deleting existing data.")
         self.cleanup_existing_data()
@@ -171,5 +178,8 @@ class Command(BaseCommand):
 
         self.create_home_pages()
         self.create_content_pages()
+
+        self.stdout.write("Creating admin superuser.")
+        self.create_superuser()
 
         self.stdout.write("Done building fixtures.")

@@ -1,0 +1,40 @@
+{
+  "entries": [
+    {
+      "@context": "https://agenticresourcediscovery.org/context/v1",
+      "identifier": "urn:air:guide.wagtail.org:skill:wagtail-guide-support",
+      "displayName": "Wagtail guide support",
+      "type": "application/agent-skills+md",
+      "url": "https://guide.wagtail.org/.well-known/agent-skills/wagtail-guide-support/SKILL.md",
+      "description": "A professional support helper for Wagtail CMS users. Use when answering questions about using the Wagtail CMS admin interface as an editor, moderator, or administrator, with the Wagtail Guide as authoritative documentation. Not for Wagtail developer questions.",
+      "version": "1.0.0",
+      "updatedAt": "2026-07-10T00:00:00Z",
+      "representativeQueries": [
+        "how do I schedule a page to publish next Monday",
+        "how do I give an editor permission to moderate changes",
+        "where do I find the redirects report in the Wagtail admin"
+      ],
+      "trustManifest": {
+        "identity": "did:web:guide.wagtail.org",
+        "identityType": "did"
+      }
+    },
+    {
+      "@context": "https://agenticresourcediscovery.org/context/v1",
+      "identifier": "urn:air:guide.wagtail.org:api:openapi",
+      "displayName": "Wagtail guide API (OpenAPI)",
+      "type": "application/vnd.oai.openapi+json;version=3.1",
+      "url": "https://guide.wagtail.org/api/v3-preview/openapi.json",
+      "description": "OpenAPI description for the guide's read-only Wagtail v3 API, which exposes its published pages.",
+      "tags": ["api", "rest", "openapi"],
+      "representativeQueries": [
+        "fetch every Wagtail guide page about image management via the API",
+        "is there an API to list the pages of the Wagtail user guide"
+      ],
+      "trustManifest": {
+        "identity": "did:web:guide.wagtail.org",
+        "identityType": "did"
+      }
+    }
+  ]
+}

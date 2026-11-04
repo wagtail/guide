@@ -1,124 +1,135 @@
 /* global ngettext, interpolate */
-import debounce from 'lodash.debounce';
+import { debounce } from './debounce';
+import '../scss/main.scss';
 import './theme-detect';
 import { initSectionLink } from './section-link';
+import { initActiveNavItem } from './active-nav-item';
 import { handleFeedback } from './feedback';
+import { initWebMcp } from './webmcp';
 import MobileMenu from './mobile-menu';
 import CopyButton from './copy-button';
 
 initSectionLink();
+initActiveNavItem();
 handleFeedback();
+initWebMcp();
 
 const searchInput = document.querySelector('[data-search-input]');
 const searchModal = document.getElementById('search-modal');
 const resultsDiv = document.querySelector('[data-results]');
 const resultsCountContainer = document.querySelector(
-    '[data-results-count-container]',
+  '[data-results-count-container]',
 );
 
 const removeExistingChildren = (parent) => {
-    // eslint-disable-next-line no-param-reassign
-    parent.innerHTML = '';
+  parent.innerHTML = '';
 };
 
 const injectResultsInHTML = (results) => {
-    removeExistingChildren(resultsDiv);
-    removeExistingChildren(resultsCountContainer);
+  removeExistingChildren(resultsDiv);
+  removeExistingChildren(resultsCountContainer);
 
-    const resultsCountHeading = document.createElement('h2');
-    resultsCountHeading.dir = 'auto';
-    const resultHeadingString = ngettext(
-        '%s result found.',
-        '%s results found.',
-        results.length,
-    );
-    resultsCountHeading.innerText = interpolate(resultHeadingString, [
-        results.length,
-    ]);
-    resultsCountHeading.classList.add('autocomplete__count');
-    resultsCountContainer.appendChild(resultsCountHeading);
+  const resultsCountHeading = document.createElement('h2');
+  resultsCountHeading.dir = 'auto';
+  const resultHeadingString = ngettext(
+    '%s result found.',
+    '%s results found.',
+    results.length,
+  );
+  resultsCountHeading.innerText = interpolate(resultHeadingString, [
+    results.length,
+  ]);
+  resultsCountHeading.classList.add('autocomplete__count');
+  resultsCountContainer.appendChild(resultsCountHeading);
 
-    results.forEach((result, index) => {
-        const resultDiv = document.createElement('a');
-        resultDiv.dir = 'auto';
-        const resultHeading = document.createElement('h3');
-        resultHeading.dir = 'auto';
-        const resultDescription = document.createElement('div');
-        resultDescription.dir = 'auto';
-        const resultParentSection = document.createElement('div');
-        resultParentSection.dir = 'auto';
-        resultHeading.innerText = result.title;
-        resultDescription.innerText = result.search_description;
-        resultParentSection.innerText = result.parent_section;
-        resultDiv.href = result.full_url;
-        resultDiv.appendChild(resultParentSection);
-        resultDiv.appendChild(resultHeading);
-        resultDiv.appendChild(resultDescription);
-        resultParentSection.classList.add('autocomplete__meta');
-        resultDescription.classList.add('autocomplete__description');
-        resultDiv.classList.add('autocomplete__row');
-        resultHeading.classList.add('autocomplete__heading');
-        resultsDiv.appendChild(resultDiv);
+  results.forEach((result, index) => {
+    const resultDiv = document.createElement('a');
+    resultDiv.dir = 'auto';
+    const resultHeading = document.createElement('h3');
+    resultHeading.dir = 'auto';
+    const resultDescription = document.createElement('div');
+    resultDescription.dir = 'auto';
+    const resultParentSection = document.createElement('div');
+    resultParentSection.dir = 'auto';
+    resultHeading.innerText = result.title;
+    resultDescription.innerText = result.search_description;
+    resultParentSection.innerText = result.parent_section;
+    resultDiv.href = result.full_url;
+    resultDiv.appendChild(resultParentSection);
+    resultDiv.appendChild(resultHeading);
+    resultDiv.appendChild(resultDescription);
+    resultParentSection.classList.add('autocomplete__meta');
+    resultDescription.classList.add('autocomplete__description');
+    resultDiv.classList.add('autocomplete__row');
+    resultHeading.classList.add('autocomplete__heading');
+    resultsDiv.appendChild(resultDiv);
 
-        requestAnimationFrame(() => {
-            setTimeout(() => {
-                resultDiv.classList.add('is-visible');
-            }, index * 400);
-        });
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        resultDiv.classList.add('is-visible');
+      }, index * 400);
     });
+  });
 };
 
 const onSearchInputChange = async (event) => {
-    const query = event.target.value;
+  const query = event.target.value.trim();
 
-    document.querySelector('.search__container').classList.add('is-loading');
+  if (!query) {
+    removeExistingChildren(resultsDiv);
+    removeExistingChildren(resultsCountContainer);
+    return;
+  }
 
-    const minDelay = new Promise((resolve) => {
-        setTimeout(resolve, 200);
-    });
+  document.querySelector('.search__container').classList.add('is-loading');
 
-    try {
-        const res = await fetch(
-            `${window.location.origin}${
-                window.languageCode ? `/${window.languageCode}` : ''
-            }/search_json/?${new URLSearchParams({
-                query,
-            }).toString()}`,
-        );
-        const data = await res.json();
-        injectResultsInHTML(data);
-    } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-        // eslint-disable-next-line no-alert
-        window.alert(`Error: ${err}`);
-    } finally {
-        await minDelay; // wait for 300ms to pass if fetch was faster
-        document
-            .querySelector('.search__container')
-            .classList.remove('is-loading');
-    }
+  const minDelay = new Promise((resolve) => {
+    setTimeout(resolve, 200);
+  });
+
+  try {
+    const res = await fetch(
+      `${window.location.origin}${
+        window.languageCode ? `/${window.languageCode}` : ''
+      }/search_json/?${new URLSearchParams({
+        query,
+      }).toString()}`,
+    );
+    const data = await res.json();
+    injectResultsInHTML(data);
+  } catch (err) {
+    console.log(err);
+    window.alert(`Error: ${err}`);
+  } finally {
+    await minDelay; // wait for 300ms to pass if fetch was faster
+    document.querySelector('.search__container').classList.remove('is-loading');
+  }
 };
-searchInput.addEventListener('keyup', debounce(onSearchInputChange, 150));
+const onSearchInputKeyUp = debounce(onSearchInputChange, 150);
+
+searchInput.addEventListener('keyup', (event) => {
+  if (event.key === 'Tab') return;
+  onSearchInputKeyUp(event);
+});
 
 searchModal.addEventListener('shown.bs.modal', () => {
-    searchInput.focus();
+  searchInput.focus();
 });
 
 searchModal.addEventListener('hidden.bs.modal', () => {
-    searchInput.value = '';
-    removeExistingChildren(resultsDiv);
-    removeExistingChildren(resultsCountContainer);
+  searchInput.value = '';
+  removeExistingChildren(resultsDiv);
+  removeExistingChildren(resultsCountContainer);
 });
 
 function initComponent(ComponentClass) {
-    const items = document.querySelectorAll(ComponentClass.selector());
-    items.forEach((item) => new ComponentClass(item));
+  const items = document.querySelectorAll(ComponentClass.selector());
+  items.forEach((item) => new ComponentClass(item));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Remove no-js class if JS is enabled
-    document.documentElement.classList.remove('no-js');
-    initComponent(MobileMenu);
-    initComponent(CopyButton);
+  // Remove no-js class if JS is enabled
+  document.documentElement.classList.remove('no-js');
+  initComponent(MobileMenu);
+  initComponent(CopyButton);
 });

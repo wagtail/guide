@@ -1,0 +1,62 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "Wagtail user guide 📚️",
+    "identifier": "did:web:guide.wagtail.org",
+    "documentationUrl": "https://guide.wagtail.org/en/about/"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:guide.wagtail.org:skill:wagtail-guide-support",
+      "displayName": "Wagtail guide support",
+      "type": "application/agent-skills+md",
+      "url": "https://guide.wagtail.org/.well-known/agent-skills/wagtail-guide-support/SKILL.md",
+      "description": "A professional support helper for Wagtail CMS users. Use when answering Wagtail CMS user questions with the Wagtail Guide as authoritative documentation.",
+      "version": "1.0.0",
+      "updatedAt": "2026-07-10T00:00:00Z",
+      "publisher": {
+        "identifier": "did:web:guide.wagtail.org",
+        "displayName": "Wagtail user guide 📚️"
+      }
+    },
+    {
+      "identifier": "urn:air:guide.wagtail.org:api:openapi",
+      "displayName": "Wagtail guide API (OpenAPI)",
+      "type": "application/vnd.oai.openapi+json;version=3.1",
+      "url": "https://guide.wagtail.org/api/v3-preview/openapi.json",
+      "description": "OpenAPI description for the guide's read-only Wagtail v3 API, which exposes its published pages.",
+      "tags": ["api", "rest", "openapi"],
+      "trustManifest": {
+        "identity": "did:web:guide.wagtail.org",
+        "identityType": "did"
+      },
+      "auth": {
+        "status": "none"
+      }
+    },
+    {
+      "identifier": "urn:air:guide.wagtail.org:llms:llms.txt",
+      "displayName": "Wagtail user guide llms.txt",
+      "type": "text/markdown",
+      "url": "https://guide.wagtail.org/llms.txt",
+      "description": "llms.txt index for the Wagtail user guide, listing every page in the guide as Markdown, with usage guidance for agents.",
+      "tags": ["llms.txt", "docs"],
+      "trustManifest": {
+        "identity": "did:web:guide.wagtail.org",
+        "identityType": "did"
+      }
+    },
+    {
+      "identifier": "urn:air:guide.wagtail.org:llms:llms-full.txt",
+      "displayName": "Wagtail user guide llms-full.txt",
+      "type": "text/markdown",
+      "url": "https://guide.wagtail.org/llms-full.txt",
+      "description": "The entire Wagtail user guide in a single Markdown file, for agents that need the full documentation in one fetch.",
+      "tags": ["llms.txt", "docs"],
+      "trustManifest": {
+        "identity": "did:web:guide.wagtail.org",
+        "identityType": "did"
+      }
+    }
+  ]
+}

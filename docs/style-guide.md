@@ -4,36 +4,36 @@ This style guide defines the standard we are aiming for across the Wagtail User 
 
 ## Design goals
 
--   Content is clear, concise, and easy to scan.
--   Guidance is inclusive, respectful, and accessible to non-technical audiences.
--   Terminology and structure stay consistent across the whole guide.
--   Where possible, strive for [timeless documentation](https://developers.google.com/style/timeless-documentation). Use wording that survives UI and product changes.
+- Content is clear, concise, and easy to scan.
+- Guidance is inclusive, respectful, and accessible to non-technical audiences.
+- Terminology and structure stay consistent across the whole guide.
+- Where possible, strive for [timeless documentation](https://developers.google.com/style/timeless-documentation). Use wording that survives UI and product changes.
 
 ## Tone of voice
 
 We write in a **conversational-instructional** tone: friendly and approachable, focused on helping the reader accomplish a task or understand a concept.
 
--   We address the reader directly as "you" and "your" (second person).
--   We use "we" to represent the Wagtail project or the documentation team, never the reader. For example: "We calculate the number of words present in the plain text content."
--   Contractions are used freely: "it's", "you'll", "don't", "won't", "can't".
--   We avoid overly formal or academic phrasing. Sentences stay direct and plain.
+- We address the reader directly as "you" and "your" (second person).
+- We use "we" to represent the Wagtail project or the documentation team, never the reader. For example: "We calculate the number of words present in the plain text content."
+- Contractions are used freely: "it's", "you'll", "don't", "won't", "can't".
+- We avoid overly formal or academic phrasing. Sentences stay direct and plain.
 
 ### Celebratory micro-copy
 
 Use a brief congratulatory line at the end of a complete multi-step procedure when it reinforces progress.
 
--   Keep it to one sentence.
--   Prefer warm, straightforward language.
--   Avoid jokes and pop-culture references in instructional content.
--   Release notes can be slightly more energetic, but clarity and factual accuracy come first.
+- Keep it to one sentence.
+- Prefer warm, straightforward language.
+- Avoid jokes and pop-culture references in instructional content.
+- Release notes can be slightly more energetic, but clarity and factual accuracy come first.
 
 ## Target audience
 
 The guide is written for **CMS users**: content editors, moderators, and administrators. People who use Wagtail but do not write code for it.
 
--   We do not assume technical knowledge. When a feature depends on developer configuration, we say so explicitly: "developers can configure available page types when building the site."
--   When a feature may look different due to site customization, we flag it: "It's also possible that features in the **Reports** section of your Admin interface are different from the default features. This is because Wagtail is highly customizable. If this is the case, contact your web developer for more information."
--   When we link to the Wagtail developer documentation, we frame it as a resource for a different audience or for the reader to pass along: "For developer documentation, see [Form builder in the developer docs](https://docs.wagtail.org/)."
+- We do not assume technical knowledge. When a feature depends on developer configuration, we say so explicitly: "developers can configure available page types when building the site."
+- When a feature may look different due to site customization, we flag it: "It's also possible that features in the **Reports** section of your Admin interface are different from the default features. This is because Wagtail is highly customizable. If this is the case, contact your web developer for more information."
+- When we link to the Wagtail developer documentation, we frame it as a resource for a different audience or for the reader to pass along: "For developer documentation, see [Form builder in the developer docs](https://docs.wagtail.org/)."
 
 ## Content structure
 
@@ -67,13 +67,13 @@ We use external links more sparingly, with a strong preference for official Wagt
 
 ## Headings and titles
 
--   **H1** is used exactly once per page, for the page title.
--   **H2** is the primary sectioning level within a page.
--   **H3** is used for sub-sections within an H2.
--   Headings use sentence case: "Manage page history", not "Manage Page History".
--   Heading text is plain. Do not apply extra emphasis styling inside heading text.
--   Avoid adding links inside headings, they are harder to identify for screen reader users.
--   How-to guides use H2 for each major task: "Create new pages", "Edit existing pages", "Copy pages". Verb-first phrasing is the norm for task headings.
+- **H1** is used exactly once per page, for the page title.
+- **H2** is the primary sectioning level within a page.
+- **H3** is used for sub-sections within an H2.
+- Headings use sentence case: "Manage page history", not "Manage Page History".
+- Heading text is plain. Do not apply extra emphasis styling inside heading text.
+- Avoid adding links inside headings, they are harder to identify for screen reader users.
+- How-to guides use H2 for each major task: "Create new pages", "Edit existing pages", "Copy pages". Verb-first phrasing is the norm for task headings.
 
 ## UI references and examples
 
@@ -97,8 +97,8 @@ CMS field names and status/state values are formatted in _italics_: _Draft_, _Li
 
 Keyboard shortcuts are presented with platform variants separated by a slash. Modifier keys use symbols for macOS and words for Windows:
 
--   **Ctrl + S** / **⌘ + S**
--   **Ctrl + Alt + M** / **⌘ + ⌥ + M**
+- **Ctrl + S** / **⌘ + S**
+- **Ctrl + Alt + M** / **⌘ + ⌥ + M**
 
 ## Terminology and language choices
 
@@ -120,10 +120,10 @@ Use these terms with consistent capitalization whenever they refer to these conc
 
 ### Modal verbs
 
--   Use **"can"** for capability: "You can access your settings by clicking on your username."
--   Use **"may"** for possibility or permission: "You may find that some fields are uneditable."
--   Reserve **"must"** for hard requirements.
--   Use **"should"** for recommendations.
+- Use **"can"** for capability: "You can access your settings by clicking on your username."
+- Use **"may"** for possibility or permission: "You may find that some fields are uneditable."
+- Reserve **"must"** for hard requirements.
+- Use **"should"** for recommendations.
 
 ### Referring to the reader
 
@@ -133,9 +133,9 @@ We say "you" and "your". We do not say "the user" when addressing the reader. "U
 
 When something depends on developer configuration, we use phrases like:
 
--   "Developers configure available page types when building the site."
--   "Contact your web developer for more information."
--   "For developer documentation, see [link]."
+- "Developers configure available page types when building the site."
+- "Contact your web developer for more information."
+- "For developer documentation, see [link]."
 
 ### Customizability caveat
 
@@ -145,14 +145,14 @@ We document Wagtail’s default configuration, with no customizations. When a fe
 
 We occasionally format text as a "Note" or "Warning" as standalone paragraphs, directly after the relevant section.
 
--   **Note:** for supplementary information, caveats, or things the reader should keep in mind.
--   **Warning:** for destructive or irreversible actions, or information about security/data-loss risks.
+- **Note:** for supplementary information, caveats, or things the reader should keep in mind.
+- **Warning:** for destructive or irreversible actions, or information about security/data-loss risks.
 
 Keep this special formatting to a minimum, when the noted information directly impacts task completion. For softer caveats, we introduce them with phrases like:
 
--   "It's also possible that…"
--   "Keep in mind that…"
--   "Note that…"
+- "It's also possible that…"
+- "Keep in mind that…"
+- "Note that…"
 
 ## Release notes guidance
 
@@ -164,12 +164,12 @@ Release notes should generally always come with updates to the rest of the docum
 
 ### Structure
 
--   Include screenshots or visual examples to illustrate every improvement.
--   Provide concise, user-friendly summaries (ideally one to two sentences per feature).
--   Link to full technical release notes where appropriate.
+- Include screenshots or visual examples to illustrate every improvement.
+- Provide concise, user-friendly summaries (ideally one to two sentences per feature).
+- Link to full technical release notes where appropriate.
 
 ### Content style
 
--   Replace technical jargon with plain language, using a neutral tone overall.
--   Describe functionality clearly from the user's perspective.
--   Clearly state how changes benefit or affect the user's workflow or experience.
+- Replace technical jargon with plain language, using a neutral tone overall.
+- Describe functionality clearly from the user's perspective.
+- Clearly state how changes benefit or affect the user's workflow or experience.

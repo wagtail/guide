@@ -1,57 +1,57 @@
 .section {
-    $root: &;
-    margin-bottom: ($gutter * 2);
-    max-width: $content-max-width;
+  $root: &;
+  margin-bottom: ($gutter * 2);
+  max-width: $content-max-width;
 
-    &__container {
-        display: flex;
-        text-decoration: none;
-        flex-direction: column;
+  &__container {
+    display: flex;
+    text-decoration: none;
+    flex-direction: column;
 
-        @include media-query(large) {
-            flex-direction: row;
-        }
-
-        &:hover,
-        &:focus {
-            #{$root}__heading {
-                color: $color--primary;
-            }
-
-            .svg_icon__animated_path {
-                transform: rotate(8deg) scale(0.8, 0.8);
-                transform-origin: 50% 50%;
-                transition: transform 0.1s;
-            }
-        }
+    @include media-query(large) {
+      flex-direction: row;
     }
 
-    &__icon {
-        flex-basis: 100px;
-        min-width: 100px;
-        max-width: 100px;
-        margin-inline-end: ($gutter * 2);
+    &:hover,
+    &:focus {
+      #{$root}__heading {
+        color: $color--primary;
+      }
 
-        .svg_icon__original_path {
-            fill: light-dark(currentcolor, $color--white);
-        }
+      .svg-icon__animated-path {
+        transform: rotate(8deg) scale(0.8, 0.8);
+        transform-origin: 50% 50%;
+        transition: transform 0.1s;
+      }
+    }
+  }
 
-        .svg_icon--flip-rtl {
-            transform: scaleX(var(--w-direction-factor));
-        }
+  &__icon {
+    flex-basis: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    margin-inline-end: ($gutter * 2);
+
+    .svg-icon__original-path {
+      fill: light-dark(currentcolor, $color--white);
     }
 
-    &__heading {
-        @include fs(xl);
-        color: light-dark($color--black, $color--white);
-        margin-bottom: ($gutter * 0.25);
-        font-weight: 700;
-        transition: color $transition;
+    .svg-icon--flip-rtl {
+      transform: scaleX(var(--w-direction-factor));
     }
+  }
 
-    &__description {
-        @include fs(xs);
-        color: light-dark($color--grey, $color--light-grey);
-        margin: 0;
-    }
+  &__heading {
+    @include fs(xl);
+    color: light-dark($color--black, $color--white);
+    margin-bottom: ($gutter * 0.25);
+    font-weight: 700;
+    transition: color $transition;
+  }
+
+  &__description {
+    @include fs(xs);
+    color: light-dark($color--grey, $color--light-grey);
+    margin: 0;
+  }
 }

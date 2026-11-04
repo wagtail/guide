@@ -9,7 +9,7 @@
         </button>
         {% spaceless %}
             <ul class="language-selector__dropdown dropdown-menu">
-            {% for translation in page.get_translations.live %}
+            {% for translation in translations %}
                 {% get_language_info for translation.locale.language_code as lang %}
                 <li>
                     <a href="{% pageurl translation %}" rel="alternate" hreflang="{{ translation.locale.language_code }}" class="language-selector__dropdown-item dropdown-item" dir="auto">

@@ -1,9 +1,13 @@
+from django.core.cache import cache
+from django.core.cache.utils import make_template_fragment_key
+from django.db import connection
 from django.template import Context, Template
 from django.test import TestCase
+from django.test.utils import CaptureQueriesContext
 from django.utils import translation
 from wagtail.models import Page, PageViewRestriction
 
-from apps.core.factories import HomePageFactory
+from apps.core.factories import ContentPageFactory, HomePageFactory
 
 
 class TestHeader(TestCase):
@@ -63,3 +67,69 @@ class TestHeader(TestCase):
         result = template.render(Context({}))
 
         self.assertNotIn('members"', result)
+
+
+class TestHeaderCache(TestCase):
+    def setUp(self):
+        self.home = HomePageFactory()
+        self.content_page = ContentPageFactory(parent=self.home)
+        self.url = self.content_page.url
+
+    @property
+    def cache_key(self):
+        return make_template_fragment_key("header", ["en"])
+
+    def test_header_populates_cache(self):
+        self.assertIsNone(cache.get(self.cache_key))
+
+        self.client.get(self.url)
+
+        self.assertIsNotNone(cache.get(self.cache_key))
+
+    def test_cached_header_is_reused(self):
+        self.client.get(self.url)
+        cache.set(self.cache_key, "cached header", 60)
+
+        response = self.client.get(self.url)
+
+        self.assertContains(response, "cached header")
+
+    def test_cached_requests_make_fewer_queries(self):
+        self.client.get(self.url)
+        with CaptureQueriesContext(connection) as warm:
+            self.client.get(self.url)
+        cache.delete(self.cache_key)
+        with CaptureQueriesContext(connection) as cold:
+            self.client.get(self.url)
+
+        self.assertLess(len(warm.captured_queries), len(cold.captured_queries))
+
+    def test_active_menu_item_not_rendered_server_side(self):
+        response = self.client.get(self.url)
+
+        self.assertNotIn("navigation__link active", response.rendered_content)
+
+    def test_publish_invalidates_cache(self):
+        self.client.get(self.url)
+        self.content_page.save_revision().publish()
+
+        self.assertIsNone(cache.get(self.cache_key))
+
+    def test_unpublish_invalidates_cache(self):
+        self.client.get(self.url)
+        self.content_page.unpublish()
+
+        self.assertIsNone(cache.get(self.cache_key))
+
+    def test_delete_invalidates_cache(self):
+        self.client.get(self.url)
+        self.content_page.delete()
+
+        self.assertIsNone(cache.get(self.cache_key))
+
+    def test_move_invalidates_cache(self):
+        other_page = ContentPageFactory(parent=self.home, title="Other page")
+        self.client.get(self.url)
+        self.content_page.move(other_page, pos="right")
+
+        self.assertIsNone(cache.get(self.cache_key))

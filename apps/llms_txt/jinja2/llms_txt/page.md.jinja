@@ -1,3 +1,15 @@
+{% if frontmatter -%}
+---
+title: {{ (page.seo_title if page.seo_title else page.title)|tojson }}
+{% if page.search_description -%}
+description: {{ page.search_description|tojson }}
+{% endif -%}
+{% if page.last_published_at -%}
+last_modified: {{ page.last_published_at.date().isoformat()|tojson }}
+{% endif -%}
+---
+
+{% endif -%}
 # {{ page.seo_title if page.seo_title else page.title }}
 
 Page URL: {{ page.full_url }}

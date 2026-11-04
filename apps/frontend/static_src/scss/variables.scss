@@ -19,9 +19,19 @@ $color--page-bg: $color--light-grey;
 
 // Typography
 // Wagtail's official system font stack (https://github.com/wagtail/wagtail/commit/f968aac)
-$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui,
-    Roboto, 'Helvetica Neue', Arial, sans-serif, Apple Color Emoji,
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+$font-family-base:
+  -apple-system,
+  BlinkMacSystemFont,
+  'Segoe UI',
+  system-ui,
+  Roboto,
+  'Helvetica Neue',
+  Arial,
+  sans-serif,
+  Apple Color Emoji,
+  'Segoe UI Emoji',
+  'Segoe UI Symbol',
+  'Noto Color Emoji';
 
 // scss-docs-start nav-variables
 $nav-link-padding-y: 0.25rem;
@@ -52,51 +62,51 @@ $focus-outline-width: 2px;
 $color-focus-outline: $color--light-blue;
 
 // Font sizes
-$base-font-size: 20px;
+$base-font-size: 18px;
 $base-line-height: 1.6;
 
 $large-font-sizes: (
-    xxxxl: 90px,
-    xxxl: 65px,
-    xxl: 40px,
-    xl: 30px,
-    l: 25px,
-    m: 22px,
-    s: 18px,
-    xs: 16px,
-    xxs: 14px,
-    xxxs: 12px,
+  xxxxl: 90px,
+  xxxl: 65px,
+  xxl: 40px,
+  xl: 30px,
+  l: 25px,
+  m: 22px,
+  s: 20px,
+  xs: 18px,
+  xxs: 16px,
+  xxxs: 14px,
 );
 
 $medium-font-sizes: (
-    xxxxl: 70px,
-    xxxl: 55px,
-    xxl: 35px,
-    xl: 28px,
-    l: 25px,
-    m: 22px,
-    s: 18px,
-    xs: 16px,
-    xxs: 14px,
-    xxxs: 12px,
+  xxxxl: 70px,
+  xxxl: 55px,
+  xxl: 35px,
+  xl: 28px,
+  l: 25px,
+  m: 22px,
+  s: 20px,
+  xs: 18px,
+  xxs: 16px,
+  xxxs: 14px,
 );
 
 $small-font-sizes: (
-    xxxxl: 40px,
-    xxxl: 35px,
-    xxl: 30px,
-    xl: 26px,
-    l: 24px,
-    m: 22px,
-    s: 18px,
-    xs: 16px,
-    xxs: 14px,
-    xxxs: 12px,
+  xxxxl: 40px,
+  xxxl: 35px,
+  xxl: 30px,
+  xl: 26px,
+  l: 24px,
+  m: 22px,
+  s: 20px,
+  xs: 18px,
+  xxs: 16px,
+  xxxs: 14px,
 );
 
 // Breakpoints - should match bootstrap
 $breakpoints: (
-    'small' '(max-width: 598px)',
-    'medium' '(min-width: 599px)',
-    'large' '(min-width: 1023px)'
+  'small' '(max-width: 598px)',
+  'medium' '(min-width: 599px)',
+  'large' '(min-width: 1023px)'
 );

@@ -6,6 +6,6 @@ class CoreConfig(AppConfig):
     name = "apps.core"
 
     def ready(self):
-        from .monkey_patches import patch_copy_for_translation_action
+        from . import signals
 
-        patch_copy_for_translation_action()
+        signals.register_signals()

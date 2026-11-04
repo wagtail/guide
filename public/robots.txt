@@ -1,4 +1,11 @@
 User-Agent: *
+# This guide is public domain — we want it read, indexed and used by AI. https://contentsignals.org/
+Content-Signal: ai-train=yes, search=yes, ai-input=yes
 Disallow: /admin/
 Disallow: /search/
 Disallow: /search_json/
+
+# Agentic Resource Discovery (ARD) entries for this site: https://agenticresourcediscovery.org/spec/
+Agentmap: https://guide.wagtail.org/.well-known/ard.json
+
+Sitemap: https://guide.wagtail.org/sitemap.xml

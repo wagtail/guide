@@ -1,4 +1,5 @@
 from django.db import models
+from wagtail.api import APIField
 from wagtail.models import Page
 
 
@@ -14,6 +15,12 @@ class Feedback(models.Model):
     page = models.ForeignKey(Page, on_delete=models.CASCADE)
 
     feedback_text = models.TextField(blank=True)
+
+    api_fields = [
+        APIField("feedback", writable=True),
+        APIField("page", writable=True),
+        APIField("feedback_text", writable=True),
+    ]
 
     class Meta:
         verbose_name = "Feedback"

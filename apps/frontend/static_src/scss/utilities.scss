@@ -5,25 +5,25 @@
 // Set global focus outline styles so they are consistent across the UI,
 // without individual components having to explicitly define focus styles.
 *:focus-visible {
-    outline: $focus-outline-width solid $color-focus-outline !important;
+  outline: $focus-outline-width solid $color-focus-outline !important;
 }
 
 *:focus {
-    outline: $focus-outline-width solid $color-focus-outline !important;
+  outline: $focus-outline-width solid $color-focus-outline !important;
 
-    &:not(:focus-visible) {
-        outline: none !important;
-    }
+  &:not(:focus-visible) {
+    outline: none !important;
+  }
 }
 
 .u-sr-only {
-    clip: rect(0, 0, 0, 0);
-    border-width: 0;
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
+  clip-path: inset(50%);
+  border-width: 0;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
 }
