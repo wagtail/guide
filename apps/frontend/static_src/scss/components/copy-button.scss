@@ -14,11 +14,13 @@
   }
 
   &__toggle {
+    min-width: $tap-target-size;
     border-radius: 0;
     border-start-end-radius: $border-radius--m;
     border-end-end-radius: $border-radius--m;
     padding-inline-start: ($gutter * 0.4);
     padding-inline-end: ($gutter * 0.4);
+    justify-content: center;
     height: 100%;
   }
 
@@ -27,6 +29,7 @@
     @include fs(xxs);
     display: flex;
     align-items: center;
+    min-height: $tap-target-size;
     font-weight: 500;
     padding: 10px;
     background-color: light-dark($color--white, $color--black);
@@ -64,6 +67,9 @@
     --bs-dropdown-item-padding-y: 0.35rem;
 
     @include fs(xs);
+    display: flex;
+    align-items: center;
+    min-height: $tap-target-size;
     box-sizing: border-box;
     cursor: pointer;
 

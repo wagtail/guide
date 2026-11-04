@@ -14,21 +14,29 @@
   }
 
   &__button {
-    padding: 0;
     width: 48px;
-    height: 28px;
+    height: $tap-target-size;
+    padding: 0;
     border: 0;
     outline: none;
+    margin: 0 ($gutter * 0.5);
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    background: transparent;
+  }
+
+  &__track {
+    width: 48px;
+    height: $tap-target-size;
+    display: block;
     overflow: hidden;
     position: relative;
-    border-radius: 14px;
-    margin: 0 ($gutter * 0.5);
-    display: inline-block;
-    cursor: pointer;
+    clip-path: inset(8px 0 round 14px);
     background: light-dark($color--grey, $color--light-grey);
 
     &::before {
-      top: 4px;
+      top: 12px;
       inset-inline-start: 24px;
       content: '';
       width: 20px;
@@ -42,7 +50,7 @@
 
     &::after {
       content: '';
-      top: 14px;
+      top: 22px;
       inset-inline-end: 2px;
       width: 1px;
       height: 1px;
@@ -66,13 +74,13 @@
       display: none;
     }
 
-    #{$root}__button {
+    #{$root}__track {
       &::before {
         inset-inline-start: 4px;
       }
 
       &::after {
-        top: -2px;
+        top: 6px;
         inset-inline-end: 2px;
         width: 32px;
         height: 32px;
