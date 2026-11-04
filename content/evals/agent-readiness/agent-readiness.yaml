@@ -1,0 +1,123 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+# Agent readiness benchmark for guide.wagtail.org: which of the guide's agent
+# readiness features (llms.txt, Markdown pages and content negotiation, MCP
+# server, agent skill) does Claude Code actually use, and how well does it
+# answer users' questions with them? See README.md for the method.
+#
+# Each arm is the same model with the default Claude Code system prompt,
+# differing in one thing only: its tools, or the version of the site it sees.
+# Arms run in an empty directory outside the
+# repository, with no user or project settings, so no arm sees the guide's
+# content copy, this config, or MCP servers configured on your machine.
+#
+# Run with `just eval-agents` while `just eval-agents-proxy` runs in another
+# terminal. Every guide request goes through that proxy, which logs it and, in
+# local mode, forwards it to the development server. The proxy serves the site
+# as it is on port 8899, and a plain site without agent readiness features on
+# port 8898 (see `proxy.py`).
+
+description: Agent readiness of guide.wagtail.org
+
+prompts:
+  - '{{prompt}}'
+
+providers:
+  - id: anthropic:claude-agent-sdk
+    label: web
+    config: &claude
+      model: '{{ env.EVAL_AGENTS_MODEL }}'
+      apiKeyRequired: false
+      working_dir: '{{ env.EVAL_AGENTS_FIXTURES }}/empty'
+      max_turns: 30
+      max_budget_usd: 1
+      setting_sources: []
+      tools: &web_tools [WebSearch, WebFetch]
+      custom_allowed_tools: *web_tools
+
+  - id: anthropic:claude-agent-sdk
+    label: baseline
+    config:
+      <<: *claude
+      tools: []
+      custom_allowed_tools: []
+      # The Claude Code system prompt describes tools this arm doesn't have, so
+      # without this, models sometimes write tool calls as text and stop.
+      append_system_prompt: >-
+        You have no tools in this session, so you can't browse or read files.
+        Answer from what you know.
+
+  # The same tools on the plain site, to measure what the features are worth.
+  - id: anthropic:claude-agent-sdk
+    label: web-plain
+    config:
+      <<: *claude
+      tools: *web_tools
+      custom_allowed_tools: *web_tools
+      env:
+        HTTPS_PROXY: http://127.0.0.1:8898
+
+  - id: anthropic:claude-agent-sdk
+    label: web+mcp
+    config:
+      <<: *claude
+      tools: *web_tools
+      custom_allowed_tools: [WebSearch, WebFetch, mcp__guide]
+      mcp:
+        servers:
+          - name: guide
+            url: https://guide.wagtail.org/mcp
+
+  # The same tools, plus curl: the one way Claude Code can read a page's raw
+  # HTML, <head> links included. Other shell commands aren't approved.
+  - id: anthropic:claude-agent-sdk
+    label: web+curl
+    config:
+      <<: *claude
+      tools: [WebSearch, WebFetch, Bash]
+      custom_allowed_tools: [WebSearch, WebFetch, 'Bash(curl:*)']
+      env:
+        # curl doesn't read NODE_EXTRA_CA_CERTS: trust the system certificates
+        # and the proxy's (see `just eval-agents`).
+        CURL_CA_BUNDLE: '{{ env.EVAL_AGENTS_FIXTURES }}/ca-bundle.pem'
+        https_proxy: http://127.0.0.1:8899
+
+evaluateOptions:
+  # Keep load on the guide low, as the prod runs hit the live site.
+  maxConcurrency: 3
+
+defaultTest:
+  options:
+    # The judge for `llm-rubric` checks. It runs through the Claude Agent SDK
+    # like the arms, so it works with a Claude Code login, with no tools.
+    provider:
+      id: anthropic:claude-agent-sdk
+      label: judge
+      config:
+        model: claude-sonnet-5-5
+        apiKeyRequired: false
+        working_dir: '{{ env.EVAL_AGENTS_FIXTURES }}/empty'
+        setting_sources: []
+        tools: []
+        custom_allowed_tools: []
+        max_turns: 1
+        custom_system_prompt: >-
+          You grade answers to questions about the Wagtail CMS against a
+          rubric. Judge only whether the answer meets the rubric, not its
+          style or length. If you can't tell from the answer whether it meets
+          the rubric, pass it and start your reason with "UNKNOWN:", rather
+          than guessing. Reply with JSON only.
+  assert:
+    # A provider failure can come back as empty output. Name it so it can't be
+    # mistaken for a wrong answer.
+    - type: javascript
+      value: "(output || '').trim().length > 0"
+    # Links to the old editor manual, or to .html pages that don't exist.
+    - type: not-regex
+      value: 'editor_manual|guide\.wagtail\.org\S*\.html'
+    # Which surfaces the run reached. Recorded only, never fails a test.
+    - type: python
+      value: file://graders/trace_columns.py
+      weight: 0
+
+tests: file://tests.yaml

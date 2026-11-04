@@ -98,6 +98,51 @@ eval-promptfoo *ARGS:
 eval-promptfoo-view:
     npx --yes promptfoo@latest view --yes
 
+# Where the agent readiness eval keeps its empty working directory and proxy log:
+# outside the repository, so that no arm can read the guide's content copy.
+eval_agents_cache := env("XDG_CACHE_HOME", env("HOME") / ".cache") / "guide-agent-eval"
+
+# Install the agent readiness eval tooling, without saving it to package.json.
+# promptfoo only resolves the Claude Agent SDK from the project's node_modules,
+# and a later `npm ci` prunes both.
+eval-agents-init:
+    npm install --no-save promptfoo@0.124.1 @anthropic-ai/claude-agent-sdk@0.3.296
+
+# Run the proxy that logs agents' guide requests, forwarding them to the local
+# development server (`local`) or to the live site (`prod`). Port 8899 serves
+# the site as it is, port 8898 a plain site without agent readiness features.
+eval-agents-proxy target="local":
+    mkdir -p "{{ eval_agents_cache }}"
+    EVAL_PROXY_LOG="{{ eval_agents_cache }}/requests.jsonl" \
+    uvx --from mitmproxy==12.2.3 mitmdump --mode regular@8899 --mode regular@8898 \
+        --allow-hosts '^guide\.wagtail\.org(:443)?$' \
+        {{ if target == "local" { "--map-remote '|https://guide\\.wagtail\\.org/|http://localhost:8000/'" } else { "" } }} \
+        -s content/evals/agent-readiness/proxy.py
+
+# Check the agent readiness eval's cases against their checks, without calling a model.
+eval-agents-check:
+    uv run python content/evals/agent-readiness/graders/check_cases.py
+
+# Run the agent readiness eval on a Claude model (like `just eval-agents claude-haiku-5-5 --repeat 3`).
+eval-agents model="claude-sonnet-5-5" *ARGS: eval-agents-check
+    @test -d node_modules/@anthropic-ai/claude-agent-sdk || { echo 'Claude Agent SDK not found - run `just eval-agents-init`'; exit 1; }
+    @curl -s -o /dev/null http://127.0.0.1:8899 || { echo 'Proxy not running - start `just eval-agents-proxy` in another terminal'; exit 1; }
+    mkdir -p "{{ eval_agents_cache }}/empty"
+    # The CA bundle curl uses in the web+curl arm: system certificates and the proxy's.
+    cat /etc/ssl/cert.pem "$HOME/.mitmproxy/mitmproxy-ca-cert.pem" > "{{ eval_agents_cache }}/ca-bundle.pem"
+    # `shift` drops the model, so "$@" passes the other arguments through quoted.
+    shift; \
+    HTTPS_PROXY=http://127.0.0.1:8899 \
+    NODE_EXTRA_CA_CERTS="$HOME/.mitmproxy/mitmproxy-ca-cert.pem" \
+    EVAL_AGENTS_MODEL="{{ model }}" \
+    EVAL_AGENTS_FIXTURES="{{ eval_agents_cache }}" \
+    PROMPTFOO_PYTHON="$PWD/.venv/bin/python" \
+    npx promptfoo eval -c content/evals/agent-readiness/agent-readiness.yaml --no-cache "$@"
+
+# Browse agent readiness eval results.
+eval-agents-view:
+    npx promptfoo view --yes
+
 # Browse translation eval results in the Inspect viewer.
 eval-view:
     uvx --from inspect-ai --python 3.12 inspect view --log-dir content/evals/translations-inspect_ai/logs
