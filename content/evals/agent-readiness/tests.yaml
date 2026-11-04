@@ -32,8 +32,10 @@
     prompt: Using the Wagtail user guide at guide.wagtail.org, how do I schedule a page to be published at a later date? Include a link to the relevant guide page.
     reference: Open the page's Status side panel and use Set schedule to fill in the go-live at date, then click Publish. Saving a draft doesn't schedule it. https://guide.wagtail.org/en/concepts/scheduled-publishing/
   assert:
-    - type: icontains-all
-      value: [go-live, publish]
+    # The admin labels the field "Go-live at", but answers often write "go live".
+    # The prompt says "published", so the judge checks for Publish instead.
+    - type: regex
+      value: '[Gg]o[- ][Ll]ive'
       metric: facts
     - type: regex
       value: 'guide\.wagtail\.org/en(-[\w.]+)?/concepts/scheduled-publishing'
@@ -426,8 +428,9 @@
     prompt: What does the new API in Wagtail 8.0 mean for content teams? Answer from the release notes on guide.wagtail.org and link to them.
     reference: Wagtail 8.0 adds the v3 API in preview, which lets integrations create, edit, publish, unpublish, move, copy and revert content, with access tied to user accounts and permissions. Developers have to enable it. https://guide.wagtail.org/en/releases/new-in-wagtail-8-0/
   assert:
-    - type: icontains
-      value: v3
+    # Answers about what it means for teams don't always name the version.
+    - type: icontains-any
+      value: [v3, preview]
       metric: facts
     - type: regex
       value: 'guide\.wagtail\.org/en(-[\w.]+)?/releases/new-in-wagtail-8-0'
@@ -594,9 +597,9 @@
     - type: icontains-any
       value: [editor, moderator, administrator]
       metric: facts
-    # The homepage, with or without a language and version prefix.
+    # The homepage or the About page, which both say who the guide is for.
     - type: regex
-      value: 'https://guide\.wagtail\.org(/en(-[\w.]+)?)?/?(?![\w/-])'
+      value: 'https://guide\.wagtail\.org((/en(-[\w.]+)?)?/?|/en(-[\w.]+)?/about/?)(?![\w/-])'
       metric: citation
     - type: llm-rubric
       value: Explains that it's the Wagtail user guide, for people using the Wagtail CMS such as content editors, moderators and administrators.
