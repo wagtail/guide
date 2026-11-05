@@ -11,7 +11,7 @@
 
 # frontend stages
 
-# Keep the Node version in sync with Dockerfile and .nvmrc.
+# Keep the Node version in sync with Dockerfile and .node-version.
 FROM node:26 AS frontend-deps
 
 # Make build & post-install scripts behave as if in CI (e.g. logging verbosity).
@@ -69,7 +69,7 @@ FROM base AS dev
 
 USER root
 
-# Node's major version is kept in sync with frontend-deps above and .nvmrc.
+# Node's major version is kept in sync with frontend-deps above and .node-version.
 # `just` is installed too, so the recipes in ./justfile also work from a
 # shell in this container, the same way they do on the host.
 RUN --mount=type=cache,target=/var/lib/apt/lists,sharing=locked \

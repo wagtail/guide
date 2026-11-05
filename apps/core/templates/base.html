@@ -46,6 +46,7 @@
             <link rel="canonical" href="{{ page.full_url }}">
         {% endif %}
 
+        <link rel="ard" href="/.well-known/ard.json">
         <link rel="ai-catalog" href="/.well-known/ai-catalog.json">
         <link rel="api-catalog" href="/.well-known/api-catalog">
         <link rel="service-desc" type="application/vnd.oai.openapi+json;version=3.1" href="{% url 'wagtailapi_v3:openapi-json' %}">
@@ -66,9 +67,9 @@
 
         {# facebook opengraph tags #}
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="{{ site.root_url }}{{ page.url }}" />
+        <meta property="og:url" content="{{ page.full_url }}" />
         <meta property="og:title" content="{{ page.title }}" />
-        <meta name="og:image" content="{{ current_site.root_url }}{% manifest 'images/social-image.png' %}">
+        <meta property="og:image" content="{{ current_site.root_url }}{% manifest 'images/social-image.png' %}">
         <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% endif %}" />
         <meta property="og:site_name" content="{{ current_site.site_name }}" />
 

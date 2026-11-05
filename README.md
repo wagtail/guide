@@ -27,7 +27,7 @@ We assume that you have basic knowledge of Node/Vite and Python/Django/Wagtail i
 - Python >= 3.15
 - uv
 - just
-- Node (see `.nvmrc` for version)
+- Node (see `.node-version` for version)
 
 ### Setting up Wagtail guide in a virtual environment
 
@@ -35,7 +35,7 @@ Run:
 
     python -V
 
-Confirm that the output is showing version Python 3.14 (or higher). If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
+Confirm that the output shows a Python version supported by the project. If not, you may have multiple versions of Python installed on your system and will need to switch to the appropriate version when creating the virtual environment.
 
 With the Python version output confirmed, [install uv](https://docs.astral.sh/uv/).
 

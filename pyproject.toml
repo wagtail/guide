@@ -7,7 +7,7 @@ license = "BSD-3-Clause"
 requires-python = ">=3.15"
 dependencies = [
   "django==6.1.*",
-  "wagtail==8.0",
+  "wagtail==8.1",
   "django-manifest-loader>=1.0.0,<2.0.0",
   "djangorestframework>=3.13.1,<4.0",
   "dj-database-url>=2.1,<2.2",
@@ -20,9 +20,8 @@ dependencies = [
   "draftjs-exporter>=7.1.0,<8.0",
   "jinja2>=3.1.6,<4.0.0",
   "wagtail-ai>=3.1.1,<4.0.0",
-  "scout-apm>=3.5.3,<4.0.0",
-  # Pinned to a minor version: `apps.mcp_server.views` relies on undocumented
-  # SDK behaviour.
+  "scout-apm>=4.0.0,<5.0.0",
+  # Pinned to a minor version: `apps.mcp_server.views` uses undocumented SDK behaviour.
   "mcp>=2.3,<2.4",
   "anyio>=4.10,<5.0",
 ]

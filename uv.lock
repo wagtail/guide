@@ -612,11 +612,11 @@ wheels = [
 
 [[package]]
 name = "draftjs-exporter"
-version = "7.1.0"
+version = "7.3.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/9e/ac/18fe333830cfaab6fceb760fcfd0db9f5c08a8ae53605f7c5b3e194d4f0c/draftjs_exporter-7.1.0.tar.gz", hash = "sha256:ad27634d514f8bcfb828b19cfc84a8fee7cb1f0fd706d249f70633436272d687", size = 45259, upload-time = "2026-08-13T12:03:54.418Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a5/cd/f6e8e34690eccd80e551b39a64e81ce22a1b82422a4384d346ba8c1d5b45/draftjs_exporter-7.3.1.tar.gz", hash = "sha256:557e2afb861f9447c8d503089ec140e45e1bbfb4acdce745e589291f117dac93", size = 60638, upload-time = "2026-10-20T07:03:58.069Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/05/83/7bb024971238052574eb6e4479f2c80339784be533268a60559fa544bca9/draftjs_exporter-7.1.0-py3-none-any.whl", hash = "sha256:4a9397751aae7e66b25cba538a4a0421801c5dcfee2e75e9f664bd9cb37e90fd", size = 62604, upload-time = "2026-08-13T12:03:53.368Z" },
+    { url = "https://files.pythonhosted.org/packages/5e/b3/91c4b92c67afbc70856911467ec6d239e5f0fa0f91974b7a415f168f29fb/draftjs_exporter-7.3.1-py3-none-any.whl", hash = "sha256:eddd07ee418c5f85c6a2900887fa1eb50de0c5f6533193497b1fe063803210e9", size = 75306, upload-time = "2026-10-20T07:03:56.69Z" },
 ]
 
 [[package]]
@@ -713,9 +713,9 @@ requires-dist = [
     { name = "jinja2", specifier = ">=3.1.6,<4.0.0" },
     { name = "mcp", specifier = ">=2.3,<2.4" },
     { name = "psycopg", specifier = ">=3.2.10,<3.3" },
-    { name = "scout-apm", specifier = ">=3.5.3,<4.0.0" },
+    { name = "scout-apm", specifier = ">=4.0.0,<5.0.0" },
     { name = "sentry-sdk", extras = ["django"], specifier = ">=2.45.0,<3.0.0" },
-    { name = "wagtail", specifier = "==8.0" },
+    { name = "wagtail", specifier = "==8.1" },
     { name = "wagtail-ai", specifier = ">=3.1.1,<4.0.0" },
     { name = "wagtail-localize", specifier = ">=1.13,<2.0" },
     { name = "whitenoise", specifier = ">=6.6,<6.7" },
@@ -1494,7 +1494,7 @@ wheels = [
 
 [[package]]
 name = "scout-apm"
-version = "3.5.3"
+version = "4.1.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "asgiref" },
@@ -1503,9 +1503,25 @@ dependencies = [
     { name = "urllib3" },
     { name = "wrapt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f6/64/ec6cca7b5e50c1e82ba9a0cf77ec6a4e189a7c2318240d5ed56973254bd5/scout_apm-3.5.3.tar.gz", hash = "sha256:54e575e95f5f9a98c09598a092ec03fc8d7576907c53c5e20632a3f05e103479", size = 64226, upload-time = "2026-02-12T23:12:21.559Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/69/6f/928de78085ac2d6eb6c373d41eebd746b5d70dc935fa20690e01dc17cacc/scout_apm-4.1.0.tar.gz", hash = "sha256:c042f449018b50870700064f47d5b8b3f27fda2d9ef202a2496efb13d24fa395", size = 66107, upload-time = "2026-10-29T21:44:12.633Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3e/2b/4fc8611a9ef29475ce24ae88260253bc5bb370ad00c4a9552a4c4447622b/scout_apm-3.5.3-py3-none-any.whl", hash = "sha256:da5931c90decdf620ebaf7ab9325433e376d30fcdc3a74cea97f6fd26ac51085", size = 67991, upload-time = "2026-02-12T23:12:20.515Z" },
+    { url = "https://files.pythonhosted.org/packages/25/36/2971063f0f9a32b42f905ad7c41ce50d059e8f160eb97c174f2ca7f79921/scout_apm-4.1.0-cp315-cp315-macosx_10_15_x86_64.whl", hash = "sha256:3683af6017e917a2dd099aa75cd26d51933c876a223369b999732e77eb6e7f19", size = 73245, upload-time = "2026-10-29T21:43:53.143Z" },
+    { url = "https://files.pythonhosted.org/packages/b1/1d/f6fd0f19c94ff840c1a9d701249545935e65bdcf735b44d7467096de4842/scout_apm-4.1.0-cp315-cp315-macosx_11_0_arm64.whl", hash = "sha256:275a4a246554d08103dabbf4c4e5fa4bce51c2203f233758cfb2a6b863150918", size = 73673, upload-time = "2026-10-29T21:43:54.243Z" },
+    { url = "https://files.pythonhosted.org/packages/19/94/bf985be0a99f56ee689b06d89e0a8fb590f8d50bc7197fad7474cb7ff276/scout_apm-4.1.0-cp315-cp315-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:7bbe82ee89a19569bdc79599d051283bf857a50843592423101416647e498c6b", size = 81182, upload-time = "2026-10-29T21:43:55.396Z" },
+    { url = "https://files.pythonhosted.org/packages/04/72/483064b1c513fdd738f59c608cf6fc0edc22ad48b5399464d4e92969d659/scout_apm-4.1.0-cp315-cp315-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:3087919ec36878a1f0a4a098d6e380d39ed9feed2ef18e543c1e10aed9f86d78", size = 81143, upload-time = "2026-10-29T21:43:56.466Z" },
+    { url = "https://files.pythonhosted.org/packages/9e/8f/07d52b8e3cb3d1df50d730023136f4c25ecc87755b28a70d805a9632ea33/scout_apm-4.1.0-cp315-cp315-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:0566a4c935bb7f2a35a6f6b60bc9e8a69bac49c0719ca9acde61a213bdaaa6de", size = 82166, upload-time = "2026-10-29T21:43:57.622Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/54/48f705747cb09a9bf809563886728e27304b8e14c318189ecf391c5d1d2e/scout_apm-4.1.0-cp315-cp315-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:bfee64812eda41721cc840f7b26857c55bfca018c4d9e6d0b1585bba3c0357be", size = 81634, upload-time = "2026-10-29T21:43:58.686Z" },
+    { url = "https://files.pythonhosted.org/packages/07/69/dd2cdd5abe5b3faadf9c1e623ff3e51e25cfd646f94b9146a3d74cbadee7/scout_apm-4.1.0-cp315-cp315-musllinux_1_2_aarch64.whl", hash = "sha256:c5d05bcc0e3e04ac5911e07153a162e9e28073dd6487648a80becf79c71c1fcf", size = 81806, upload-time = "2026-10-29T21:43:59.877Z" },
+    { url = "https://files.pythonhosted.org/packages/f1/b3/8df8071eff2ea96d7d2930eee5b3b5f47cea8369d32a64af4985a5e1d971/scout_apm-4.1.0-cp315-cp315-musllinux_1_2_x86_64.whl", hash = "sha256:0ef70543d90f26d783109c01d43ba7833376c1127e78aa055355aa66d22d2add", size = 81235, upload-time = "2026-10-29T21:44:01.036Z" },
+    { url = "https://files.pythonhosted.org/packages/39/0b/a5ef71687c873e73321de847d7d66e0d41810780f40e2845ce0e164417ba/scout_apm-4.1.0-cp315-cp315t-macosx_10_15_x86_64.whl", hash = "sha256:edeeaec533b8624db25b9d79b72f399964572437d0354dfce18e1db8b687af27", size = 73249, upload-time = "2026-10-29T21:44:02.101Z" },
+    { url = "https://files.pythonhosted.org/packages/30/b3/4e73c84f209638b9dd2a65f56affdb4657a501ed55c36748fcb906ec5a40/scout_apm-4.1.0-cp315-cp315t-macosx_11_0_arm64.whl", hash = "sha256:f111f69145fee4e44c91c6ca431d861e0e21e0919139ae6a90be20ded014d36c", size = 73672, upload-time = "2026-10-29T21:44:03.205Z" },
+    { url = "https://files.pythonhosted.org/packages/91/22/56c649021d34d42a115792e805ef9f492f531c2fa9445904ee446de160ea/scout_apm-4.1.0-cp315-cp315t-manylinux1_x86_64.manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:4dc5f60a9807578d46a9667867e363b6cc93148935f70ffb1a952700d24d26f5", size = 81227, upload-time = "2026-10-29T21:44:04.593Z" },
+    { url = "https://files.pythonhosted.org/packages/18/6e/c6e2cedea7aebd099891a3d4726fec5dde102f5343b7ae38ebc05cd999e6/scout_apm-4.1.0-cp315-cp315t-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl", hash = "sha256:88d3a109644b5d38d68734be111194e62162639c7656eabb91506abd68f66088", size = 81183, upload-time = "2026-10-29T21:44:05.926Z" },
+    { url = "https://files.pythonhosted.org/packages/72/26/1a5777a93a572af9006ed8d29330ed391ae0b24af31228d2ff3a10e8a015/scout_apm-4.1.0-cp315-cp315t-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:339171409bc4151e0395dfdd3ac491f0cab4002b8d09a9412c717f8c805370a0", size = 82204, upload-time = "2026-10-29T21:44:07.06Z" },
+    { url = "https://files.pythonhosted.org/packages/04/84/ef6d8c21da6607c6bf0e438f828a2a5fd735fbd21a37981a3177e6902907/scout_apm-4.1.0-cp315-cp315t-manylinux2014_aarch64.manylinux_2_17_aarch64.whl", hash = "sha256:2e57c009792a8944428c64bb6d47d8ea8ea2255628e22d469143d6bbf9fe8bb3", size = 81672, upload-time = "2026-10-29T21:44:08.224Z" },
+    { url = "https://files.pythonhosted.org/packages/41/a3/ecfd20c662550f3fc270b0e45f047c682f4e27407da38de08fc392999cce/scout_apm-4.1.0-cp315-cp315t-musllinux_1_2_aarch64.whl", hash = "sha256:9bd012f29e2b75aa18c772865ed5251d680061a301550309a43fc0e1752ec423", size = 81830, upload-time = "2026-10-29T21:44:09.393Z" },
+    { url = "https://files.pythonhosted.org/packages/4f/37/59f66b89e80c3246731e691d188fd742be523b2cd3b491e429dbeba05ae6/scout_apm-4.1.0-cp315-cp315t-musllinux_1_2_x86_64.whl", hash = "sha256:c057d12d5dfbe6e6cc512478234d3b02313bc5b8f227588ccf6992bc72b59c31", size = 81264, upload-time = "2026-10-29T21:44:10.485Z" },
+    { url = "https://files.pythonhosted.org/packages/8f/f1/1dd7ecba597c710c84801c2a0578a5f4d643c6394acb1653b40529b1ecce/scout_apm-4.1.0-py3-none-any.whl", hash = "sha256:6e9010ee1d0051be9b910b2a7c4ed1c43bcbc74f2660df7745260092526885a9", size = 69239, upload-time = "2026-10-29T21:44:11.57Z" },
 ]
 
 [[package]]
@@ -1749,7 +1765,7 @@ wheels = [
 
 [[package]]
 name = "wagtail"
-version = "8.0"
+version = "8.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "anyascii" },
@@ -1774,9 +1790,9 @@ dependencies = [
     { name = "telepath" },
     { name = "willow", extra = ["heif"] },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/01/ef/d600737c0687fca22ef14b905bd37f72e264b03be03318ae3157466a09b8/wagtail-8.0.tar.gz", hash = "sha256:8fb2aa39bb8ff9e7709ba848a1bba2fea332ce32368c7ba4820008c0cfcc0019", size = 7131769, upload-time = "2026-08-25T12:37:38.568Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/7f/f4/b610c5f9e26b43fc404045800a2a3d167e2b055e69837f4ebf3331f78c07/wagtail-8.1.tar.gz", hash = "sha256:5c1abb0e11efc31454db0b5312d6786b5d8fdfbef5c815b7d8bacb2ad6bd486c", size = 7073619, upload-time = "2026-11-02T15:58:35.52Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8f/a5/59476b1fa6151a0dcb2cb65bf724b8b8ca11a03f94327262bc3339e0b01e/wagtail-8.0-py3-none-any.whl", hash = "sha256:34dde727917ace7e4ab182054f78f01c2cc24d85ccc402932d3d5c6315a7cd00", size = 9835863, upload-time = "2026-08-25T12:37:31.063Z" },
+    { url = "https://files.pythonhosted.org/packages/15/9d/76d9a648ae7fe34425b474be23d9e0bef43f2f332d848a0d2e865c042564/wagtail-8.1-py3-none-any.whl", hash = "sha256:dd7c988377ec6b8fcbd9ea8b5e36d34d800706bb70f927711ff4575619752d42", size = 9756355, upload-time = "2026-11-02T15:57:51.495Z" },
 ]
 
 [[package]]

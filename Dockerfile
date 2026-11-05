@@ -5,6 +5,9 @@
 # See https://docs.docker.com/reference/build-checks/.
 # Run `docker build --check .` for better error messages.
 
+# Keep this version in sync with the local `uv` used to generate uv.lock.
+ARG UV_VERSION=0.11.19
+
 # NOTE: Heroku builds this file with the legacy (non-BuildKit) Docker builder:
 #   - BuildKit-only features such as `RUN --mount=type=cache` aren't supported.
 #   - Every stage is built, even those unused by the final stage.
@@ -13,7 +16,7 @@
 
 # frontend stages
 
-# Keep the Node version in sync with Dockerfile.dev and .nvmrc.
+# Keep the Node version in sync with Dockerfile.dev and .node-version.
 FROM node:26 AS frontend-deps
 
 # Make build & post-install scripts behave as if in CI (e.g. logging verbosity).
@@ -31,13 +34,14 @@ RUN npm run build
 
 # base stage
 
+FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv-binary
+
 # Debian over alpine: it's considered more stable (different C compiler) and
 # ships with the packages commonly needed for image manipulation, at the
 # cost of a larger (~1.5GiB) image.
 FROM python:3.15 AS base
 
-# Keep this version in sync with the local `uv` used to generate uv.lock.
-COPY --from=ghcr.io/astral-sh/uv:0.11.19 /uv /uvx /bin/
+COPY --from=uv-binary /uv /uvx /bin/
 
 # Use jemalloc as the system allocator: glibc's malloc fragments badly in
 # long-running Python processes, so memory use creeps up over time.
@@ -60,6 +64,8 @@ WORKDIR /app
 # Defaults only: any environment variables set on Heroku override these.
 #  * UV_PROJECT_ENVIRONMENT - installs into $VIRTUAL_ENV instead of the
 #    project's default `.venv`, so it isn't clobbered by a bind mount in dev.
+#  * UV_PYTHON_DOWNLOADS=never - use the interpreter from the base image rather
+#    than letting uv fetch one, so builds stay reproducible.
 #  * UV_LINK_MODE=copy - hardlinks break across Docker layers.
 #  * PYTHONUNBUFFERED - otherwise logs can be lost if the process crashes:
 #    https://docs.python.org/3.15/using/cmdline.html#envvar-PYTHONUNBUFFERED
@@ -70,6 +76,7 @@ WORKDIR /app
 ENV PATH=$VIRTUAL_ENV/bin:$PATH \
     UV_PROJECT_ENVIRONMENT=$VIRTUAL_ENV \
     UV_COMPILE_BYTECODE=1 \
+    UV_PYTHON_DOWNLOADS=never \
     UV_LINK_MODE=copy \
     PYTHONUNBUFFERED=1 \
     LD_PRELOAD=/usr/local/lib/libjemalloc.so \
@@ -81,9 +88,6 @@ EXPOSE 8000
 # Heroku doesn't run containers as root either:
 # https://devcenter.heroku.com/articles/container-registry-and-runtime#dockerfile-commands-and-runtime
 USER guide
-
-RUN python -m venv $VIRTUAL_ENV
-COPY --chown=guide pyproject.toml uv.lock ./
 
 
 # production stage
@@ -101,7 +105,16 @@ ENV DJANGO_SETTINGS_MODULE=apps.guide.settings.production \
 ARG BUILD_ENV
 ENV BUILD_ENV=${BUILD_ENV}
 
-RUN uv sync --frozen ${UV_SYNC_ARGS}
+COPY --chown=guide pyproject.toml uv.lock ./
+
+# Create the virtual environment and install dependencies in a single layer.
+# Splitting these apart means `python -m venv` seeds pip at its bundled version
+# and the later `uv sync` replaces it, so the intermediate pip is deleted in a
+# subsequent layer. Heroku's legacy Docker builder doesn't honour whiteout files
+# when extracting layers, leaving stray `.wh.<name>.dist-info` entries in
+# site-packages, which breaks tools that enumerate installed distributions.
+RUN python -m venv $VIRTUAL_ENV \
+    && uv sync --frozen ${UV_SYNC_ARGS}
 
 COPY --chown=guide --from=frontend-build ./apps/frontend/static ./apps/frontend/static
 COPY --chown=guide . .
