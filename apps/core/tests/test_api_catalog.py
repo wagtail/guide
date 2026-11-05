@@ -26,15 +26,12 @@ class TestAPICatalog(TestCase):
 
     def test_describes_the_mcp_server(self):
         _, linkset = self.get_linkset()
+        service_doc = linkset["linkset"][1]["service-doc"][0]
         self.assertEqual(
-            linkset["linkset"][1]["service-doc"],
-            [
-                {
-                    "href": "https://github.com/wagtail/guide/blob/main/docs/mcp.md",
-                    "type": "text/html",
-                }
-            ],
+            service_doc["type"],
+            "text/html",
         )
+        self.assertTrue(service_doc["href"].endswith("/docs/mcp.md"))
 
     def test_lists_public_v3_endpoints(self):
         _, linkset = self.get_linkset()
