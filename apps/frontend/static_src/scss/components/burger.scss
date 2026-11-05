@@ -3,8 +3,8 @@
   $root: &;
   display: inline-block;
   position: relative;
-  width: 42px;
-  height: 40px;
+  width: $tap-target-size;
+  height: $tap-target-size;
   background: transparent;
   border: 0;
   transform: rotate(0deg);

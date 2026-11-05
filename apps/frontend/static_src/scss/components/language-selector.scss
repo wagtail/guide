@@ -3,6 +3,9 @@
 
   &__toggle {
     @include fs(xxs);
+    min-height: $tap-target-size;
+    display: inline-flex;
+    align-items: center;
     font-weight: 500;
     padding: 10px;
     background-color: light-dark($color--white, $color--black);
@@ -37,6 +40,9 @@
 
   &__dropdown-item {
     @include fs(xxs);
+    display: flex;
+    align-items: center;
+    min-height: $tap-target-size;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
