@@ -18,7 +18,7 @@ API_CATALOG_CONTENT_TYPE = f'application/linkset+json; profile="{API_CATALOG_PRO
 OPENAPI_CONTENT_TYPE = "application/vnd.oai.openapi+json;version=3.1"
 # MCP has no machine-readable service description yet (server cards are still
 # a draft), so the MCP entry only links to its human-readable documentation.
-MCP_DOCS_URL = "https://github.com/wagtail/guide/blob/main/docs/mcp.md"
+MCP_DOCS_URL = "https://raw.githubusercontent.com/wagtail/guide/refs/heads/main/docs/mcp.md"
 
 
 def api_catalog(request):
