@@ -12,8 +12,8 @@ The assertion always passes: it measures what the agent did, not whether the
 path was right. Give it `weight: 0` in the config so it doesn't affect scores.
 
 Each agent harness names its tools differently. `normalize_claude` turns the
-Claude Agent SDK's `toolCalls` into plain `Call`s; other harnesses only need
-their own adapter.
+Claude Agent SDK's `toolCalls` into plain `Call`s, and `normalize_opencode`
+those of `providers/opencode.py`.
 """
 
 from __future__ import annotations
@@ -70,6 +70,42 @@ def normalize_claude(tool_calls: list[dict[str, Any]]) -> list[Call]:
                 url = f"https://{GUIDE_HOST}{url}"
             calls.append(Call("mcp_fetch", url, output, error=error))
         elif name == "Bash":
+            command = tool_input.get("command", "")
+            markdown = "text/markdown" in command
+            calls.extend(
+                Call("fetch", url, output, markdown_requested=markdown)
+                for url in URL_PATTERN.findall(command)
+            )
+        else:
+            calls.append(Call("other", output=output))
+    return calls
+
+
+def normalize_opencode(tool_calls: list[dict[str, Any]]) -> list[Call]:
+    """Turn OpenCode tool calls (see `providers/opencode.py`) into `Call`s."""
+    calls = []
+    for tool_call in tool_calls:
+        name = tool_call.get("name", "")
+        tool_input = tool_call.get("input") or {}
+        output = str(tool_call.get("output") or "")
+        error = bool(tool_call.get("is_error"))
+        if name == "webfetch":
+            # OpenCode asks for Markdown first unless the model asks for HTML or text.
+            markdown = tool_input.get("format", "markdown") == "markdown"
+            calls.append(
+                Call("fetch", tool_input.get("url", ""), output, markdown, error)
+            )
+        elif name == "websearch":
+            calls.append(Call("search", output=output))
+        # MCP tools are named after their server: `guide_search_docs`.
+        elif name.endswith("_search_docs"):
+            calls.append(Call("mcp_search", output=output))
+        elif name.endswith("_fetch_docs_page"):
+            url = tool_input.get("url", "")
+            if url.startswith("/"):
+                url = f"https://{GUIDE_HOST}{url}"
+            calls.append(Call("mcp_fetch", url, output, error=error))
+        elif name == "bash":
             command = tool_input.get("command", "")
             markdown = "text/markdown" in command
             calls.extend(
@@ -216,13 +252,15 @@ def analyze(calls: list[Call], answer: str) -> dict[str, float]:
 def get_assert(output: str, context: dict[str, Any]) -> dict[str, Any]:
     metadata = (context.get("providerResponse") or {}).get("metadata") or {}
     tool_calls = metadata.get("toolCalls") or []
-    calls = normalize_claude(tool_calls)
+    opencode = metadata.get("harness") == "opencode"
+    calls = (normalize_opencode if opencode else normalize_claude)(tool_calls)
     columns = analyze(calls, output or "")
     # Shell use, for arms that allow curl: commands run, and commands refused
     # because they weren't plain curl.
+    shell = "bash" if opencode else "Bash"
     columns["curl_calls"] = float(
         sum(
-            t.get("name") == "Bash"
+            t.get("name") == shell
             and "curl" in (t.get("input") or {}).get("command", "")
             for t in tool_calls
         )

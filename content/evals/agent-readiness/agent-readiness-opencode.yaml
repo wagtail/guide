@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+# The agent readiness benchmark on OpenCode (https://opencode.ai), with the
+# same cases, checks and judge as `agent-readiness.yaml`. See README.md.
+#
+# OpenCode reads pages differently from Claude Code: its webfetch tool asks for
+# Markdown first, like Claude Code, but gives the whole page to the model,
+# rather than a summary. Its websearch tool uses Exa, which returns text from
+# the pages it finds, crawled by Exa from the live site.
+#
+# Each arm runs `providers/opencode.py`: a fresh OpenCode session in an empty
+# directory, with only the arm's tools allowed, and none of your own OpenCode
+# config, sessions or plugins. Run with `just eval-agents-opencode`.
+
+description: Agent readiness of guide.wagtail.org (OpenCode)
+
+prompts:
+  - '{{prompt}}'
+
+providers:
+  - id: file://providers/opencode.py
+    label: web
+    config: &opencode
+      model: '{{ env.EVAL_AGENTS_MODEL }}'
+      tools: [webfetch, websearch]
+      # promptfoo's timeout for the Python worker, in milliseconds: longer than
+      # the provider's own `run_timeout`, so the provider can stop OpenCode.
+      timeout: 600000
+
+  - id: file://providers/opencode.py
+    label: baseline
+    config:
+      <<: *opencode
+      tools: []
+
+  # The same tools on the plain site, to measure what the features are worth.
+  - id: file://providers/opencode.py
+    label: web-plain
+    config:
+      <<: *opencode
+      env:
+        HTTPS_PROXY: http://127.0.0.1:8898
+
+  - id: file://providers/opencode.py
+    label: web+mcp
+    config:
+      <<: *opencode
+      tools: [webfetch, websearch, 'guide_*']
+      mcp:
+        guide:
+          type: remote
+          url: https://guide.wagtail.org/mcp
+
+evaluateOptions:
+  # Keep load on the guide low, as the prod runs hit the live site.
+  maxConcurrency: 3
+
+defaultTest: file://default-test.yaml
+
+tests: file://tests.yaml

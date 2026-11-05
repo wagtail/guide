@@ -63,6 +63,29 @@ The first run creates a mitmproxy certificate authority in `~/.mitmproxy`. Only 
 
 promptfoo exits with code 100 when any test fails, which is expected for the `baseline` arm.
 
+### Other agents: OpenCode
+
+`agent-readiness-opencode.yaml` runs the same cases, checks and judge on [OpenCode](https://opencode.ai), with any model OpenCode supports. It has the `baseline`, `web`, `web-plain` and `web+mcp` arms. OpenCode reads pages differently from Claude Code:
+
+- Its `webfetch` tool asks for Markdown first, like Claude Code, but gives the model the whole page rather than a summary. It can also ask for raw HTML, so there's no separate curl arm.
+- Its `websearch` tool uses Exa, which returns text from the pages it finds. That text comes from Exa's copy of the live site, not through the proxy.
+- It sends a browser `User-Agent`, so the guide can't tell it's an agent.
+
+`providers/opencode.py` runs `opencode run --format json` once per test in an empty directory, with only the arm's tools allowed and none of your own OpenCode config, sessions or plugins. The judge is still Claude Sonnet 5.5, so you need a Claude Code login too.
+
+```sh
+just eval-agents-init                 # installs OpenCode in the eval cache, once
+
+# The model provider's API key, read by `just eval-agents-opencode`:
+read -rs "k?OpenAI key: " && print -r "OPENAI_API_KEY=$k" \
+    > ~/.cache/guide-agent-eval/opencode/.env && chmod 600 ~/.cache/guide-agent-eval/opencode/.env; unset k
+
+just eval-agents-proxy local          # in another terminal, as for Claude Code
+just eval-agents-opencode openai/gpt-5.4-mini --repeat 3 --output opencode.json
+```
+
+Models use OpenCode's `provider/model` names. List them with `opencode models openai`, from the eval cache's `opencode/node_modules/.bin`. OpenCode's free models stop after a few requests ("Free usage limit reached"), which isn't enough for a run.
+
 ### Running one arm, or testing a site change
 
 To rerun one arm, filter providers by label, like `--filter-providers '^web$'`, and `--filter-pattern '^start-'` to run some cases only. To measure a change to the site, rerun the `web` arm against the changed local site, relabel its results (`jq '.results.results[].provider.label = "web-md"' run.json > web-md.json`), and pass them to `summarize.py` next to the earlier runs, which reports each label as its own arm. `--override` replaces an arm's results with a rerun of it:

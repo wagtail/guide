@@ -107,6 +107,8 @@ eval_agents_cache := env("XDG_CACHE_HOME", env("HOME") / ".cache") / "guide-agen
 # and a later `npm ci` prunes both.
 eval-agents-init:
     npm install --no-save promptfoo@0.124.1 @anthropic-ai/claude-agent-sdk@0.3.296
+    # OpenCode, for `just eval-agents-opencode`: in the eval cache, as it's a CLI.
+    npm install --prefix "{{ eval_agents_cache }}/opencode" --no-save opencode-ai@1.19.3
 
 # Run the proxy that logs agents' guide requests, forwarding them to the local
 # development server (`local`) or to the live site (`prod`). Port 8899 serves
@@ -138,6 +140,24 @@ eval-agents model="claude-sonnet-5-5" *ARGS: eval-agents-check
     EVAL_AGENTS_FIXTURES="{{ eval_agents_cache }}" \
     PROMPTFOO_PYTHON="$PWD/.venv/bin/python" \
     npx promptfoo eval -c content/evals/agent-readiness/agent-readiness.yaml --no-cache "$@"
+
+# Run the agent readiness eval on OpenCode, with a model in OpenCode's
+# `provider/model` format (like `just eval-agents-opencode openai/gpt-5.4-mini`).
+# OpenCode reads the provider's API key from your environment, like
+# OPENAI_API_KEY, or from `.env` in the eval cache's `opencode` directory.
+eval-agents-opencode model *ARGS: eval-agents-check
+    @test -x "{{ eval_agents_cache }}/opencode/node_modules/.bin/opencode" || { echo 'OpenCode not found - run `just eval-agents-init`'; exit 1; }
+    @curl -s -o /dev/null http://127.0.0.1:8899 || { echo 'Proxy not running - start `just eval-agents-proxy` in another terminal'; exit 1; }
+    mkdir -p "{{ eval_agents_cache }}/empty"
+    shift; \
+    if [ -f "{{ eval_agents_cache }}/opencode/.env" ]; then set -a; . "{{ eval_agents_cache }}/opencode/.env"; set +a; fi; \
+    HTTPS_PROXY=http://127.0.0.1:8899 \
+    NODE_EXTRA_CA_CERTS="$HOME/.mitmproxy/mitmproxy-ca-cert.pem" \
+    EVAL_AGENTS_MODEL="{{ model }}" \
+    EVAL_AGENTS_FIXTURES="{{ eval_agents_cache }}" \
+    EVAL_AGENTS_OPENCODE="{{ eval_agents_cache }}/opencode/node_modules/.bin/opencode" \
+    PROMPTFOO_PYTHON="$PWD/.venv/bin/python" \
+    npx promptfoo eval -c content/evals/agent-readiness/agent-readiness-opencode.yaml --no-cache "$@"
 
 # Browse agent readiness eval results.
 eval-agents-view:

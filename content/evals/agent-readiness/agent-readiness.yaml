@@ -86,38 +86,6 @@ evaluateOptions:
   # Keep load on the guide low, as the prod runs hit the live site.
   maxConcurrency: 3
 
-defaultTest:
-  options:
-    # The judge for `llm-rubric` checks. It runs through the Claude Agent SDK
-    # like the arms, so it works with a Claude Code login, with no tools.
-    provider:
-      id: anthropic:claude-agent-sdk
-      label: judge
-      config:
-        model: claude-sonnet-5-5
-        apiKeyRequired: false
-        working_dir: '{{ env.EVAL_AGENTS_FIXTURES }}/empty'
-        setting_sources: []
-        tools: []
-        custom_allowed_tools: []
-        max_turns: 1
-        custom_system_prompt: >-
-          You grade answers to questions about the Wagtail CMS against a
-          rubric. Judge only whether the answer meets the rubric, not its
-          style or length. If you can't tell from the answer whether it meets
-          the rubric, pass it and start your reason with "UNKNOWN:", rather
-          than guessing. Reply with JSON only.
-  assert:
-    # A provider failure can come back as empty output. Name it so it can't be
-    # mistaken for a wrong answer.
-    - type: javascript
-      value: "(output || '').trim().length > 0"
-    # Links to the old editor manual, or to .html pages that don't exist.
-    - type: not-regex
-      value: 'editor_manual|guide\.wagtail\.org\S*\.html'
-    # Which surfaces the run reached. Recorded only, never fails a test.
-    - type: python
-      value: file://graders/trace_columns.py
-      weight: 0
+defaultTest: file://default-test.yaml
 
 tests: file://tests.yaml
