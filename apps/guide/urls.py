@@ -48,6 +48,7 @@ urlpatterns = [
         llms_txt_views.agent_skill_view,
         name="agent_skill",
     ),
+    path("", include("apps.mcp_server.urls")),
 ]
 
 

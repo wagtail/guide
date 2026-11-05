@@ -10,16 +10,21 @@ from apps.llms_txt.negotiation import (
 )
 
 # The API catalog lists the site's public API endpoints, per RFC 9727. Only
-# anonymously-readable v3 API resources are advertised here: the write and
-# authenticated endpoints are intentionally left out, since agents browsing
-# the catalog can't use them without credentials.
+# anonymously-readable v3 API resources and the MCP server are advertised
+# here: the write and authenticated endpoints are intentionally left out,
+# since agents browsing the catalog can't use them without credentials.
 API_CATALOG_PROFILE = "https://www.rfc-editor.org/info/rfc9727"
 API_CATALOG_CONTENT_TYPE = f'application/linkset+json; profile="{API_CATALOG_PROFILE}"'
 OPENAPI_CONTENT_TYPE = "application/vnd.oai.openapi+json;version=3.1"
+# MCP has no machine-readable service description yet (server cards are still
+# a draft), so the MCP entry only links to its human-readable documentation.
+MCP_DOCS_URL = (
+    "https://raw.githubusercontent.com/wagtail/guide/refs/heads/main/docs/mcp.md"
+)
 
 
 def api_catalog(request):
-    """Serve the API catalog document (RFC 9727) for the public v3 API."""
+    """Serve the API catalog document (RFC 9727) for the public APIs."""
     root_url = request.build_absolute_uri("/").rstrip("/")
 
     linkset = {
@@ -41,6 +46,10 @@ def api_catalog(request):
                         "type": "text/html",
                     }
                 ],
+            },
+            {
+                "anchor": f"{root_url}{reverse('mcp')}",
+                "service-doc": [{"href": MCP_DOCS_URL, "type": "text/html"}],
             },
         ]
     }

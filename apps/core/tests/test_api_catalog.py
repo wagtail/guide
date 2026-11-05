@@ -17,11 +17,23 @@ class TestAPICatalog(TestCase):
             'application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"',
         )
 
-    def test_anchor_is_the_v3_api(self):
+    def test_anchors_are_the_v3_api_and_mcp_server(self):
         _, linkset = self.get_linkset()
         self.assertEqual(
             [entry["anchor"] for entry in linkset["linkset"]],
-            ["http://testserver/api/v3-preview/pages/"],
+            ["http://testserver/api/v3-preview/pages/", "http://testserver/mcp"],
+        )
+
+    def test_describes_the_mcp_server(self):
+        _, linkset = self.get_linkset()
+        self.assertEqual(
+            linkset["linkset"][1]["service-doc"],
+            [
+                {
+                    "href": "https://github.com/wagtail/guide/blob/main/docs/mcp.md",
+                    "type": "text/html",
+                }
+            ],
         )
 
     def test_lists_public_v3_endpoints(self):

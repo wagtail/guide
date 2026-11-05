@@ -70,9 +70,10 @@ async function main(event) {
 function requestIsCachable(request) {
   /*
    * Given a Request, determine if it should be cached.
-   * Currently the only factor here is whether a private cookie is present.
+   * Only GET and HEAD requests can be cached (the Cache API rejects others,
+   * such as MCP and feedback POSTs), and only without a private cookie.
    */
-  return !hasPrivateCookie(request);
+  return ['GET', 'HEAD'].includes(request.method) && !hasPrivateCookie(request);
 }
 
 function responseIsCachable(response) {

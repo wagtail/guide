@@ -41,7 +41,7 @@ class TestLLMsTxtViews(TestCase):
     def test_llms_txt_links_to_optional_resources(self):
         response = self.client.get(reverse("llms_txt"))
         root_url = self.site.root_url
-        for name in ("llms_full_txt", "agent_skill", "agent_skills_index"):
+        for name in ("llms_full_txt", "agent_skill", "agent_skills_index", "mcp"):
             with self.subTest(name=name):
                 self.assertContains(response, f"]({root_url}{reverse(name)})")
 
@@ -65,6 +65,10 @@ class TestLLMsTxtViews(TestCase):
         response = self.client.get(reverse("agent_skills_index"))
         skill = response.json()["skills"][0]
         self.assertEqual(skill["description"], SKILL_DESCRIPTION)
+
+    def test_agent_skill_mentions_mcp_server(self):
+        response = self.client.get(reverse("agent_skill"))
+        self.assertContains(response, f"MCP server at {self.site.root_url}/mcp")
 
     def test_llms_full_txt_renders_pages(self):
         response = self.client.get("/llms-full.txt")

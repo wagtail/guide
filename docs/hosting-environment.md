@@ -11,6 +11,8 @@ The Wagtail Guide is a Dockerized Django application running on Heroku:
 
 The application itself runs in Heroku's Europe region (`eu-west-1` (Dublin, Ireland)).
 
+See [MCP server](mcp.md) for the operational requirements of the `/mcp` endpoint.
+
 ## Deployment
 
 Deployment is handled automatically by Heroku. When commits are pushed to `main`, Heroku automatically begins building and deploying the site. This deployment only occurs _after_ CI has run and passed.

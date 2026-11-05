@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "apps.frontend",
     "apps.core",
     "apps.llms_txt",
+    "apps.mcp_server",
     "apps.search",
     "apps.custom_user",
     "apps.custom_media",
@@ -544,6 +545,13 @@ LOGGING = {
         "django.security": {
             "handlers": ["console"],
             "level": "INFO",
+            "propagate": False,
+        },
+        # The MCP SDK logs every stateless request's session lifecycle at
+        # INFO. `apps.mcp_server` logs one line per request instead.
+        "mcp": {
+            "handlers": ["console"],
+            "level": "WARNING",
             "propagate": False,
         },
     },
