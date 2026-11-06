@@ -15,7 +15,6 @@
     @include fs(xxs);
     display: flex;
     align-items: center;
-    min-height: $tap-target-size;
     padding: 5px 10px;
     border-radius: $border-radius;
     text-decoration: none;
