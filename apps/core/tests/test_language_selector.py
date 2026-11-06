@@ -5,6 +5,7 @@ from django.template import Context, Template
 from django.test import TestCase
 from django.test.utils import CaptureQueriesContext
 from django.utils import translation as translation_utils
+from wagtail.models import Page
 
 from apps.core.factories import ContentPageFactory, HomePageFactory, LocaleFactory
 
@@ -64,6 +65,24 @@ class TestLanguageSelector(TestCase):
             if "wagtailcore_locale" in query["sql"]
         ]
         self.assertEqual(len(joined_queries), 1)
+
+    def test_translation_without_url_is_omitted(self):
+        self.add_translation("nl")
+        ar_page = self.add_translation("ar")
+
+        # Move the live translation out from under the site root so it
+        # resolves to no URL, while staying live.
+        ar_page.move(Page.get_first_root_node(), pos="last-child")
+        ar_page.refresh_from_db()
+        self.assertIsNone(ar_page.url)
+        self.assertTrue(ar_page.live)
+
+        result = self.render_selector({"page": self.page})
+
+        self.assertNotIn('href="None"', result)
+        self.assertNotIn('hreflang="ar"', result)
+        self.assertIn('hreflang="nl"', result)
+        self.assertIn('href="/nl/', result)
 
     def test_without_page_renders_no_dropdown(self):
         result = self.render_selector()

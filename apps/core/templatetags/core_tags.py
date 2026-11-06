@@ -78,10 +78,17 @@ def language_selector(context):
     if not page:
         return {"page": None, "translations": []}
 
-    translations = page.get_translations().live().select_related("locale")
+    request = context.get("request")
+    # Like hreflangs, skip translations with no URL: they are live but not
+    # reachable through a site, and {% pageurl %} would render href="None".
+    translations = [
+        translation
+        for translation in page.get_translations().live().select_related("locale")
+        if translation.get_url(request)
+    ]
     return {
         "page": page,
-        "request": context.get("request"),
+        "request": request,
         "translations": translations,
         "LANGUAGE_CODE": get_language(),
     }
