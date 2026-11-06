@@ -28,12 +28,16 @@ def header(context):
         .public()
         .in_menu()
     )
+    page = context.get("page")
     return {
         "site_title": home.title,
-        "current_page": context.get("page"),
+        "current_page": page,
         "annotated_list": Page.get_annotated_list_qs(pages),
-        "page": context.get("page"),
+        "page": page,
         "request": context.get("request"),
+        "translations": (
+            page.get_translations().live().select_related("locale") if page else []
+        ),
     }
 
 
