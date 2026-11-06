@@ -32,6 +32,11 @@
     width: $tap-target-size;
   }
 
+  &__status {
+    text-align: center;
+    margin-bottom: $gutter;
+  }
+
   &__form {
     visibility: hidden;
     opacity: 0;
