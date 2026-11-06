@@ -47,17 +47,36 @@ def search(request):
     )
 
 
+# Sections are the children of each locale's homepage, under the tree root.
+SECTION_DEPTH = 3
+
+
+def get_section_path(page):
+    return page.path[: Page.steplen * SECTION_DEPTH]
+
+
+def get_section_titles(pages):
+    """Titles of the sections the pages are in, keyed by section path."""
+    paths = {get_section_path(page) for page in pages if page.depth > SECTION_DEPTH}
+    return dict(Page.objects.filter(path__in=paths).values_list("path", "title"))
+
+
 class PageSerializer(serializers.ModelSerializer):
+    full_url = serializers.SerializerMethodField("get_full_url")
     parent_section = serializers.SerializerMethodField("get_parent_section")
 
     class Meta:
         model = Page
         fields = ["id", "title", "search_description", "full_url", "parent_section"]
 
+    def get_full_url(self, page):
+        # With the request, Wagtail looks up the site root paths once for all
+        # results, rather than once per result.
+        return page.get_full_url(self.context["request"])
+
     def get_parent_section(self, page):
-        ancestors = page.get_ancestors()
-        if len(ancestors) >= 3:
-            return ancestors[2].title
+        if page.depth > SECTION_DEPTH:
+            return self.context["section_titles"][get_section_path(page)]
         else:
             return _("Home")
 
@@ -77,5 +96,14 @@ def search_json(request):
         query.add_hit()
     else:
         search_results = Page.objects.none()
-    serializer = PageSerializer(search_results, many=True)
+    # Look up all the parent sections at once, rather than once per result.
+    search_results = list(search_results)
+    serializer = PageSerializer(
+        search_results,
+        many=True,
+        context={
+            "request": request,
+            "section_titles": get_section_titles(search_results),
+        },
+    )
     return Response(serializer.data)
