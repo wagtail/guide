@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div class="feedback">
+<div class="feedback" data-markdown-ignore>
     {% csrf_token %}
     <div class="feedback__container" data-feedback-container>
         <h2 class="feedback__heading" dir="auto">{% trans 'Was this page helpful?' %}</h2>

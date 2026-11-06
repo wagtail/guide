@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from apps.core.factories import ContentPageFactory
+from apps.core.factories import ContentPageFactory, HomePageFactory
 
 
 class TestMarkdownRouteMixin(TestCase):
@@ -89,3 +89,52 @@ class TestMarkdownNegotiation(TestCase):
         home = self.content_page.get_parent().specific
         response = self.get("text/markdown", path=home.url)
         self.assertEqual(response["Content-Type"], "text/markdown;charset=utf-8")
+
+
+class TestMarkdownFromHtml(TestCase):
+    """
+    Page Markdown responses are converted from the page's rendered HTML, so
+    agents see what visitors see around the content.
+    """
+
+    def setUp(self):
+        self.home_page = HomePageFactory()
+        self.section = ContentPageFactory(parent=self.home_page, title="Releases")
+        self.child = ContentPageFactory(parent=self.section, title="New in Wagtail 8.1")
+        self.menu_page = ContentPageFactory(
+            parent=self.home_page, title="Manage images", show_in_menus=True
+        )
+
+    def get_markdown(self, page):
+        response = self.client.get(page.url, headers={"accept": "text/markdown"})
+        return response.content.decode()
+
+    def test_section_pages_list_their_pages(self):
+        markdown = self.get_markdown(self.section)
+        self.assertIn("## In this section", markdown)
+        self.assertIn(f"[New in Wagtail 8.1]({self.child.full_url})", markdown)
+
+    def test_links_to_llms_txt(self):
+        markdown = self.get_markdown(self.section)
+        self.assertIn("[View llms.txt](http://localhost/llms.txt)", markdown)
+
+    def test_keeps_the_header(self):
+        markdown = self.get_markdown(self.section)
+        self.assertTrue(markdown.startswith("---\n"))
+        self.assertIn(f"Page URL: {self.section.full_url}", markdown)
+
+    def test_leaves_out_the_feedback_form(self):
+        markdown = self.get_markdown(self.section)
+        self.assertNotIn("Was this page helpful?", markdown)
+
+    def test_leaves_out_the_menu(self):
+        html = self.client.get(self.section.url).content.decode()
+        self.assertIn(f'href="{self.menu_page.url}"', html)
+        markdown = self.get_markdown(self.section)
+        self.assertNotIn(self.menu_page.full_url, markdown)
+
+    def test_to_markdown_is_unchanged(self):
+        """llms-full.txt and the MCP server keep using the page's content only."""
+        markdown = self.section.to_markdown()
+        self.assertNotIn("In this section", markdown)
+        self.assertNotIn("llms.txt", markdown)

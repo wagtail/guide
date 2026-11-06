@@ -43,8 +43,34 @@ class MarkdownRouteMixin(RoutablePageMixin):
         }
         return template.render(context, request)
 
+    def to_markdown_from_html(self, request):
+        """
+        Render this page as Markdown, converted from the page's own HTML.
+
+        Unlike `to_markdown`, this keeps everything visitors see around the
+        content, like the "In this section" lists of section pages and links
+        to llms.txt. The navigation menu is left out by the converter, and
+        elements with `data-markdown-ignore` are too.
+        """
+        # Wagtail's converter imports rich text features, which need the app
+        # registry, and models import this module before it's ready.
+        from wagtail.admin.rich_text.converters.html_markdown import (
+            HTMLToMarkdownConverter,
+        )
+
+        response = RoutablePageMixin.serve(self, request)
+        if hasattr(response, "render"):
+            response.render()
+        converter = HTMLToMarkdownConverter(
+            base_url=self.full_url, content_selector="body"
+        )
+        body = converter.convert(response.content.decode(response.charset))
+        template = loader.get_template("llms_txt/page_from_html.md.jinja")
+        context = {"page": self, "request": request, "frontmatter": True, "body": body}
+        return template.render(context, request)
+
     def markdown_response(self, request):
-        content = self.to_markdown(request, frontmatter=True)
+        content = self.to_markdown_from_html(request)
         response = HttpResponse(content, content_type=MARKDOWN_CONTENT_TYPE)
         response["x-markdown-tokens"] = estimate_tokens(content)
         return response
