@@ -163,6 +163,18 @@ eval-agents-opencode model *ARGS: eval-agents-check
 eval-agents-view:
     npx promptfoo view --yes
 
+# Run the cross-harness benchmark in isolated Harbor containers.
+eval-agents-harbor *ARGS:
+    uv run --project content/evals/agent-readiness-harbor python content/evals/agent-readiness-harbor/runner.py "$@"
+
+# Offline checks for the Harbor adapter and reporting.
+eval-agents-harbor-test:
+    uv run --project content/evals/agent-readiness-harbor python -m unittest discover -s content/evals/agent-readiness-harbor -p 'test_*.py'
+
+# Access Harbor's own viewer, job management and analysis commands.
+eval-agents-harbor-cli *ARGS:
+    PYTHONPATH=content/evals/agent-readiness-harbor uv run --project content/evals/agent-readiness-harbor harbor "$@"
+
 # Browse translation eval results in the Inspect viewer.
 eval-view:
     uvx --from inspect-ai --python 3.12 inspect view --log-dir content/evals/translations-inspect_ai/logs
