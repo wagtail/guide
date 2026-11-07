@@ -50,6 +50,7 @@ codex:
         image_generation: false
       tools:
         update_plan: { enabled: false }
+  # web unavailable: the 0.166.0 pilot attempted exec with code-mode host disabled.
 cursor-cli:
   native: {}
   # baseline unavailable: deny-all hooks still allowed server-side web calls in pilot.

@@ -150,7 +150,7 @@ class TestAdapter(unittest.TestCase):
         self.assertEqual(auth, {"NEURALWATT_API_KEY": "test-secret"})
         self.assertNotIn("test-secret", json.dumps(agent_config(entry, "native", {})))
 
-    def replay(self, steps, arm="native", exception=None):
+    def replay(self, steps, arm="native", exception=None, harness="opencode"):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory)
             (path / "agent").mkdir()
@@ -158,7 +158,7 @@ class TestAdapter(unittest.TestCase):
             (path / "result.json").write_text(
                 json.dumps(
                     {
-                        "agent_info": {"name": "opencode"},
+                        "agent_info": {"name": harness},
                         "exception_info": exception,
                         "agent_result": {"cost_usd": None},
                     }
@@ -193,6 +193,24 @@ class TestAdapter(unittest.TestCase):
         self.assertEqual(response["metadata"]["toolCalls"][0]["output"], "page content")
         self.assertNotIn("cost", response)
         self.assertIn("Invalid no-tools arm", self.replay(steps, "baseline")["error"])
+
+    def test_codex_web_rejects_non_web_tools(self):
+        for name in ("web_search_call", "exec", "exec_command", "js_repl"):
+            steps = [
+                {
+                    "source": "agent",
+                    "message": "",
+                    "tool_calls": [
+                        {"tool_call_id": "a", "function_name": name, "arguments": {}}
+                    ],
+                },
+                {"source": "agent", "message": "Final answer"},
+            ]
+            response = self.replay(steps, "web", harness="codex")
+            if name == "web_search_call":
+                self.assertEqual(response["output"], "Final answer")
+            else:
+                self.assertIn("Invalid Codex web-only arm", response["error"])
 
     def test_failed_run_does_not_grade_partial_answer(self):
         response = self.replay(

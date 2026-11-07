@@ -120,6 +120,12 @@ def call_api(prompt, options, context):
         return {"error": f"Invalid no-tools arm: observed {len(calls)} tool calls"}
     if harness != "opencode":
         calls = [normalize(c) for c in calls]
+    if (
+        harness == "codex"
+        and context["vars"].get("arm") == "web"
+        and any(c["name"] not in ("WebSearch", "WebFetch") for c in calls)
+    ):
+        return {"error": "Invalid Codex web-only arm: observed non-web tool calls"}
     usage = result.get("agent_result") or {}
     response = {"output": answer, "metadata": {"harness": harness, "toolCalls": calls}}
     if usage.get("cost_usd") is not None:
