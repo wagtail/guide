@@ -4,7 +4,7 @@ Run the [existing agent readiness cases](../agent-readiness/README.md) through H
 
 The [completed full results](RESULTS.md) cover all 4,356 trials across 17 model/harness pairs, with [per-arm data](RESULTS.csv) for success, speed, cost and errors. The [Claude comparison](CLAUDE_COMPARISON.md) compares its 1,188 answers with the published Promptfoo results. The [paid pilots](PILOT.md) document integration checks, credential selection and unsupported or invalid tool controls.
 
-The [7 November follow-up runs](RETRIES.md) retry all 1,761 non-passing trials once and repeat the Kimi K3.1 Pro preview check. Retry outcomes are reported separately from the original benchmark.
+The [combined comparison](COMBINED.md) and [combined CSV](COMBINED.csv) include one retry for every original failure: 2,757/4,356 trials pass with that second chance, versus 2,595/4,356 initially. Every arm retains 99 scored trials, and cumulative time and cost include both attempts when retried. The [follow-up notes](RETRIES.md) document all 1,761 completed retries and the separate Kimi K3.1 Pro preview check.
 
 ## What the 33 questions test
 

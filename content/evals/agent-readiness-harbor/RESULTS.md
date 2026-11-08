@@ -1,5 +1,7 @@
 # Harbor agent readiness results
 
+This report retains the initial-run results. The [combined comparison](COMBINED.md) and [combined CSV](COMBINED.csv) add one grading-triggered retry for every failure, including both attempts' time and cost.
+
 **All 4,356 planned candidate trials and their grades completed on 7 November 2026.** This covers 17 model/harness pairs, 44 supported model/tool-arm combinations, 33 questions and three repeats per arm. The last candidate finished at 04:12 UTC. The final audit found exactly three results per question per arm, one grade per trial, and the same source-case/grader hash across all three batches.
 
 Harbor ran the installed agents; Promptfoo graded saved answers using the original assertions and Sonnet 5.5 rubric. See the [method and question breakdown](README.md), [historical Claude comparison](CLAUDE_COMPARISON.md), and [all 44 result rows](RESULTS.csv). The original 3,168-run matrix and subsequent 1,188-run Neuralwatt expansion are combined here; integration pilots and credential probes are excluded.
@@ -93,7 +95,7 @@ There were **38 Harbor execution failures**: 31 agent timeouts at the existing 3
 | opencode-qwen--web          |                       2 | Two timeouts.                                                                                                                      |
 | opencode-gemma--native      |                       2 | Two timeouts.                                                                                                                      |
 
-The strict baseline audit rejects attempted calls even when the harness blocks execution. A rejection therefore does not automatically mean the model successfully fetched information. No control or grader was relaxed during these runs. Failed trials were preserved, not selectively rerun to improve scores.
+The strict baseline audit rejects attempted calls even when the harness blocks execution. A rejection therefore does not automatically mean the model successfully fetched information. No control or grader was relaxed during these runs. Failed trials remain in these first-attempt scores; the subsequent retry comparison is reported separately.
 
 The original rubric allows a passing `UNKNOWN:` judgment. There were 277 such rubric judgments, but only three answers containing them passed all other assertions: Luna native and Terra native on `releases-7-3-to-8-0-overview`, and Vibe native on `info-stale-pages`. These remain included in the published scores, matching the original grading rules. Most UNKNOWN judgments occurred in baseline answers that still failed fact/citation assertions.
 

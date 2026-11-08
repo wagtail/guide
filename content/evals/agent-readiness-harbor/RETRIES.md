@@ -2,6 +2,8 @@
 
 The user requested one retry of every failed full-suite trial, another Kimi K3.1 Pro preview trial, and an investigation of Codex web-only tools.
 
+**All 1,761 retries are complete and graded.** Candidates finished on 7 November at 22:20 UTC; grading finished on 8 November. There were 162 recovered failures, 194 execution/replay errors and zero grading-system errors. Known retry candidate usage was $47.83, plus $6.45 of judging; two candidate costs are missing. The [combined comparison](COMBINED.md) and [CSV](COMBINED.csv) join these retries to their original trials while retaining a denominator of 99 per arm and including both attempts' time and cost.
+
 ## Failed-trial retries
 
 The retry queue contains **1,761 trials across 44 model/arm jobs**. This includes failed assertions and all 233 execution/audit errors. Each original failed attempt gets one retry, including multiple failures of the same question. Passing original trials are excluded.
@@ -26,7 +28,7 @@ Artifacts are under `~/.cache/guide-agent-eval/harbor/failed-retries-2026-11-07/
 - `outcomes.json`: original-to-retry links and whether each retry passed.
 - `recovery.csv`: per-arm recovery, speed, cost and errors, updated after each job is graded.
 
-Two user services run the candidate queue and grade completed jobs independently:
+Two user services ran the candidate queue and graded completed jobs independently. Both queues are now finished:
 
 ```sh
 systemctl --user status agent-readiness-failed-retries-candidates-20261107.service
@@ -36,6 +38,8 @@ systemctl --user status agent-readiness-failed-retries-grades-20261107.service
 Logs are `candidates.log` and `grades.log` in the batch directory. Completed jobs have `candidates.done` markers; the entire queues create `candidates.done` and `grades.done` at the batch root. If interrupted, the local queue script uses Harbor's native job resume, retaining completed failures instead of repeatedly retrying them.
 
 The first eight candidate retries completed, but Harbor's terminal summary crashed because original trial paths contain its `__` grouping delimiter. Those eight results were preserved. Unstarted jobs now use delimiter-safe source IDs with the same original-trial mapping; this changes bookkeeping only.
+
+The queue also stopped at Cursor because its service had not inherited `CURSOR_API_KEY`; explicitly inheriting the existing key fixed this. After 1,288 grades were aggregated, the reporting queue rejected a valid JSON character while using a YAML reader. Switching the queue's JSON reads to `json.loads` allowed it to reuse the saved grades and finish. Neither fix required repeating completed candidate attempts or changing any assertions.
 
 The services unset inherited `NEURALWATT_API_KEY` so file-key selection takes effect. Direct requests on 7 November returned HTTP 200 for the matching DeepSeek, GLM Flash, MiMo, GLM 5.3 and Qwen keys. Gemma and Kimi retain the validated GLM 5.3 fallback. This credential selection differs from older jobs where the inherited key took precedence; model IDs and provider endpoint are unchanged.
 
