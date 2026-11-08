@@ -6,6 +6,8 @@ The [completed full results](RESULTS.md) cover all 4,356 trials across 17 model/
 
 The [combined comparison](COMBINED.md) and [combined CSV](COMBINED.csv) include one retry for every original failure: 2,757/4,356 trials pass with that second chance, versus 2,595/4,356 initially. Every arm retains 99 scored trials, and cumulative time and cost include both attempts when retried. The [follow-up notes](RETRIES.md) document all 1,761 completed retries and the separate Kimi K3.1 Pro preview check.
 
+The [trace-analysis pipeline](TRACE_ANALYSIS.md) combines offline technique counts for all 6,117 attempts with Harbor's native rubric review. The [trace findings](TRACE_RESULTS.md) compare navigation, workspace inspection and explicit instructions, keeping retries and visibility limitations separate.
+
 ## What the 33 questions test
 
 These are documentation-answering tasks from [the original cases](../agent-readiness/tests.yaml), not tasks that modify a CMS or codebase. Each run asks one question and expects an answer with official citations.

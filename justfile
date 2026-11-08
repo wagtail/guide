@@ -175,6 +175,14 @@ eval-agents-harbor-test:
 eval-agents-harbor-cli *ARGS:
     PYTHONPATH=content/evals/agent-readiness-harbor uv run --project content/evals/agent-readiness-harbor harbor "$@"
 
+# Extract technique evidence from saved benchmark traces without paid calls.
+eval-agents-traces *ARGS:
+    uv run --project content/evals/agent-readiness-harbor python content/evals/agent-readiness-harbor/trace_analysis.py "$@"
+
+# Review whitelisted trace evidence using Harbor's native analyzer (paid).
+eval-agents-trace-review *ARGS:
+    uv run --project content/evals/agent-readiness-harbor python content/evals/agent-readiness-harbor/trace_review.py "$@"
+
 # Browse translation eval results in the Inspect viewer.
 eval-view:
     uvx --from inspect-ai --python 3.12 inspect view --log-dir content/evals/translations-inspect_ai/logs

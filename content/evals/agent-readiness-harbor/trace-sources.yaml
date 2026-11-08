@@ -1,0 +1,11 @@
+# Published benchmark scope. Add other prepared exports explicitly; do not mix
+# integration pilots into benchmark rates.
+sources:
+  - path: ~/.cache/guide-agent-eval/harbor/claude-comparison-2026-11-05
+    phase: initial
+  - path: ~/.cache/guide-agent-eval/harbor/remaining-comparison-2026-11-05
+    phase: initial
+  - path: ~/.cache/guide-agent-eval/harbor/neuralwatt-expansion-comparison-2026-11-06
+    phase: initial
+  - path: ~/.cache/guide-agent-eval/harbor/failed-retries-2026-11-07
+    phase: retry
