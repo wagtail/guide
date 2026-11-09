@@ -5,10 +5,10 @@ import threading
 import anyio
 from asgiref.sync import async_to_sync
 from django.http import HttpResponse, JsonResponse
-from django.templatetags.static import static
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_GET, require_POST
+from manifest_loader.utils import manifest
 from mcp.server.transport_security import TransportSecuritySettings
 from mcp_types import CLIENT_INFO_META_KEY, LATEST_PROTOCOL_VERSION
 
@@ -205,8 +205,8 @@ def server_card(request):
             "websiteUrl": "https://guide.wagtail.org/en/about/documentation-formats/",
             "icons": [
                 {
-                    "src": f"{root_url}{static('favicon.ico')}",
-                    "mimeType": "image/x-icon",
+                    "src": f"{root_url}{manifest('images/favicon-32x32.png')}",
+                    "mimeType": "image/png",
                 }
             ],
             "remotes": [
