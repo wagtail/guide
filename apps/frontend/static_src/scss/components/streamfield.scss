@@ -3,7 +3,7 @@
   max-width: 900px;
 
   h2 {
-    @include fs(xl);
+    @include fs(xxl);
     margin-top: ($gutter * 2);
     margin-bottom: $gutter;
     font-weight: 700;
