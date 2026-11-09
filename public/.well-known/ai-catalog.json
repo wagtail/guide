@@ -35,6 +35,16 @@
       }
     },
     {
+      "identifier": "urn:air:guide.wagtail.org:mcp:wagtail-guide",
+      "type": "application/mcp-server-card+json",
+      "url": "https://guide.wagtail.org/mcp/server-card",
+      "tags": ["mcp", "docs", "search"],
+      "publisher": {
+        "identifier": "did:web:guide.wagtail.org",
+        "displayName": "Wagtail user guide 📚️"
+      }
+    },
+    {
       "identifier": "urn:air:guide.wagtail.org:llms:llms.txt",
       "displayName": "Wagtail user guide llms.txt",
       "type": "text/markdown",

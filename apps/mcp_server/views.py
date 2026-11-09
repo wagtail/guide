@@ -4,11 +4,13 @@ import threading
 
 import anyio
 from asgiref.sync import async_to_sync
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+from django.templatetags.static import static
+from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_GET, require_POST
 from mcp.server.transport_security import TransportSecuritySettings
-from mcp_types import CLIENT_INFO_META_KEY
+from mcp_types import CLIENT_INFO_META_KEY, LATEST_PROTOCOL_VERSION
 
 from .server import current_request, server
 
@@ -27,6 +29,16 @@ REQUEST_TIMEOUT = 20
 # Building the manager directly would avoid the lock and the unused Starlette
 # app, but needs the SDK's private `server._lowlevel_server`.
 session_manager_lock = threading.Lock()
+
+# Protocol versions the server accepts, negotiated by the SDK.
+PROTOCOL_VERSIONS = (
+    "2024-11-05",
+    "2025-03-26",
+    "2025-06-18",
+    "2025-11-25",
+    "2026-07-28",
+)
+assert LATEST_PROTOCOL_VERSION in PROTOCOL_VERSIONS
 
 
 def get_session_manager(request):
@@ -167,3 +179,49 @@ def mcp_view(request):
         if name.lower() not in SKIPPED_RESPONSE_HEADERS:
             response[name.decode("latin-1")] = value.decode("latin-1")
     return response
+
+
+@require_GET
+def server_card(request):
+    """
+    MCP Server Card (SEP-2127), describing the server before clients connect.
+
+    It has no tools: those are dynamic, so clients list them on the connection.
+    """
+    root_url = request.build_absolute_uri("/").rstrip("/")
+    return JsonResponse(
+        {
+            "$schema": (
+                "https://static.modelcontextprotocol.io/schemas/v1/"
+                "server-card.schema.json"
+            ),
+            "name": "org.wagtail/guide",
+            "title": server.title,
+            "description": (
+                "Search and read the Wagtail user guide, for people using the "
+                "Wagtail CMS."
+            ),
+            "version": server.version,
+            "websiteUrl": "https://guide.wagtail.org/en/about/documentation-formats/",
+            "icons": [
+                {
+                    "src": f"{root_url}{static('favicon.ico')}",
+                    "mimeType": "image/x-icon",
+                }
+            ],
+            "remotes": [
+                {
+                    "type": "streamable-http",
+                    "url": f"{root_url}{reverse('mcp')}",
+                    "supportedProtocolVersions": list(PROTOCOL_VERSIONS),
+                }
+            ],
+            "repository": {
+                "source": "github",
+                "url": "https://github.com/wagtail/guide",
+                "subfolder": "apps/mcp_server",
+            },
+        },
+        content_type="application/mcp-server-card+json",
+        json_dumps_params={"indent": 2},
+    )

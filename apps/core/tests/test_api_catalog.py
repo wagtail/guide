@@ -31,7 +31,10 @@ class TestAPICatalog(TestCase):
             service_doc["type"],
             "text/html",
         )
-        self.assertTrue(service_doc["href"].endswith("/docs/mcp.md"))
+        self.assertEqual(
+            service_doc["href"],
+            "https://guide.wagtail.org/en/about/documentation-formats/",
+        )
 
     def test_lists_public_v3_endpoints(self):
         _, linkset = self.get_linkset()

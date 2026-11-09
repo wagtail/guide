@@ -37,6 +37,7 @@ class SearchResult(TypedDict):
 server = MCPServer(
     name="wagtail-guide",
     title="Wagtail Guide",
+    version="1.0.0",
     instructions=(
         "The Wagtail user guide, for editors, moderators and administrators of "
         "Wagtail CMS sites. Search it with search_docs, then read pages with "

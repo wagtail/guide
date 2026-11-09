@@ -16,11 +16,9 @@ from apps.llms_txt.negotiation import (
 API_CATALOG_PROFILE = "https://www.rfc-editor.org/info/rfc9727"
 API_CATALOG_CONTENT_TYPE = f'application/linkset+json; profile="{API_CATALOG_PROFILE}"'
 OPENAPI_CONTENT_TYPE = "application/vnd.oai.openapi+json;version=3.1"
-# MCP has no machine-readable service description yet (server cards are still
-# a draft), so the MCP entry only links to its human-readable documentation.
-MCP_DOCS_URL = (
-    "https://raw.githubusercontent.com/wagtail/guide/refs/heads/main/docs/mcp.md"
-)
+# MCP has no machine-readable service description in this catalog, so the MCP
+# entry only links to the guide page documenting it.
+MCP_DOCS_URL = "https://guide.wagtail.org/en/about/documentation-formats/"
 
 
 def api_catalog(request):

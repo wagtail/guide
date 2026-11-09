@@ -4,4 +4,5 @@ from . import views
 
 urlpatterns = [
     path("mcp", views.mcp_view, name="mcp"),
+    path("mcp/server-card", views.server_card, name="mcp_server_card"),
 ]

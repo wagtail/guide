@@ -21,6 +21,10 @@ Add `https://guide.wagtail.org/mcp` to your MCP client as a remote server, using
 claude mcp add --transport http wagtail-guide https://guide.wagtail.org/mcp
 ```
 
+## Server card
+
+The server has a [MCP Server Card](https://modelcontextprotocol.io/seps/2127-mcp-server-cards) at `https://guide.wagtail.org/mcp/server-card`, advertised in the [AI catalog](https://guide.wagtail.org/.well-known/ai-catalog.json) and the [API catalog](https://guide.wagtail.org/.well-known/api-catalog).
+
 ## Development
 
 The server lives in `apps/mcp_server`:
