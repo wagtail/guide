@@ -8,6 +8,8 @@ The [combined comparison](COMBINED.md) and [combined CSV](COMBINED.csv) include 
 
 The [trace-analysis pipeline](TRACE_ANALYSIS.md) combines offline technique counts for all 6,117 attempts with Harbor's native rubric review. The [trace findings](TRACE_RESULTS.md) compare navigation, workspace inspection and explicit instructions, keeping retries and visibility limitations separate.
 
+The [guide MCP pilot](MCP_PILOT.md) adds a `native+mcp` arm through Harbor's built-in server configuration, starting with the Kimi K3.1 Pro preview. It is separate from the completed benchmark and its retries.
+
 ## What the 33 questions test
 
 These are documentation-answering tasks from [the original cases](../agent-readiness/tests.yaml), not tasks that modify a CMS or codebase. Each run asks one question and expects an answer with official citations.
@@ -44,17 +46,20 @@ The four additional Neuralwatt models use OpenCode 1.19.5, matching the existing
 
 [arms.yaml](arms.yaml) contains native Harbor kwargs:
 
-| Arm        | Behavior                                                                                                                                                                          |
-| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `native`   | The installed harness's default tools and system prompt, in an empty container.                                                                                                   |
-| `baseline` | No usable tools. Claude removes tools; OpenCode disables them in config; Codex disables tool features; Vibe disables tools, connectors, MCP and subagents. Cursor is unavailable. |
-| `web`      | Web fetch/search only, currently for Claude Code and OpenCode.                                                                                                                    |
+| Arm          | Behavior                                                                                                                                                                          |
+| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `native`     | The installed harness's default tools and system prompt, in an empty container.                                                                                                   |
+| `native+mcp` | Native tools plus the public guide MCP server, for Claude Code, Codex, Cursor and OpenCode. The question is unchanged and does not instruct the agent to use MCP.                 |
+| `baseline`   | No usable tools. Claude removes tools; OpenCode disables them in config; Codex disables tool features; Vibe disables tools, connectors, MCP and subagents. Cursor is unavailable. |
+| `web`        | Web fetch/search only, currently for Claude Code and OpenCode.                                                                                                                    |
 
 [tool_controls.py](tool_controls.py) supplies flags/config settings that Harbor doesn't expose as kwargs and maps Vibe 3's new JSON export into Harbor's existing trajectory converter. The installed-agent implementations still handle installation and execution. Replay rejects baseline tool calls, except Vibe's retained discovery operation when it returns zero tools and zero connector notices. Those empty discovery calls remain in the trace and timing. This is a no-usable-tools baseline, not an identical tool-free API request across harnesses. A failed control is an execution error, not an incorrect answer.
 
 **Cursor's no-tools arm is not supported by this version.** The paid pilot found that deny-all `preToolUse` hooks still allowed server-side web search/fetch. `prepare` reports this combination as unavailable. Adding a custom agent loop or proxy to force it would undermine the aim of using the native harness with minimal glue. See [pilot findings](PILOT.md).
 
 **Codex web-only remains unvalidated with CLI 0.166.0.** The follow-up pilot enabled live search while disabling non-web tools, but the models attempted browsing through `exec`, which returned `code-mode host is disabled`. Enabling the native standalone-search flag did not resolve this for Sol. Replay rejects these attempts as invalid web-only controls. See the [follow-up investigation](RETRIES.md); the full matrix still has two Codex arms.
+
+The separate `native+mcp` pilot retains Codex's native tools and code mode; it does not use those web-only restrictions. MCP servers are registered through `AgentConfig.mcp_servers` with explicit `streamable-http` transport. No new agent adapter is needed.
 
 **OpenClaw is deferred.** A DeepSeek smoke test for the proposed Neuralwatt pairs used Harbor upstream revision `539c1175b3276ef3e8a8c47fd95db5562147e970`. Its adapter failed before inference because `openclaw.upload.json` was written on the host but unavailable inside Docker. No custom adapter or patch was added, and the released Harbor pin and existing matrix were retained. The diagnostic artifacts are under `~/.cache/guide-agent-eval/harbor/openclaw-pilot-2026-11-05/`.
 

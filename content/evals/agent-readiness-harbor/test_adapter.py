@@ -3,18 +3,34 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from harbor.agents.factory import AgentFactory
 from harbor.models.trial.config import AgentConfig
 
-from replay import call_api, empty_vibe_discovery
+from replay import call_api, empty_vibe_discovery, normalize
 from report import report
-from runner import HERE, agent_config, credentials, read
+from runner import HERE, SOURCE, agent_config, credentials, prepare, read
 from tool_controls import CurrentVibe
 
 
 class TestAdapter(unittest.TestCase):
+    def test_cursor_mcp_wrapper_uses_recorded_identifiers(self):
+        call = {
+            "name": "mcpToolCall",
+            "input": {
+                "serverIdentifier": "wagtail-guide",
+                "toolName": "search_docs",
+                "args": {"query": "locked pages"},
+            },
+        }
+        self.assertEqual(normalize(call)["name"], "mcp__wagtail-guide__search_docs")
+        self.assertEqual(normalize(call)["input"], {"query": "locked pages"})
+        self.assertEqual(call["name"], "mcpToolCall")
+        call["input"]["serverIdentifier"] = "other-server"
+        self.assertEqual(normalize(call)["name"], "mcpToolCall")
+
     def test_only_empty_vibe_discovery_is_allowed(self):
         call = {
             "name": "search_tool_functions",
@@ -149,6 +165,77 @@ class TestAdapter(unittest.TestCase):
             )
         self.assertEqual(auth, {"NEURALWATT_API_KEY": "test-secret"})
         self.assertNotIn("test-secret", json.dumps(agent_config(entry, "native", {})))
+
+    def test_mcp_arm_adds_server_without_changing_native_tools(self):
+        for entry in read(HERE / "matrix.yaml")["entries"]:
+            if "native+mcp" not in read(HERE / "arms.yaml")[entry["harness"]]:
+                continue
+            native = agent_config(entry, "native", {})
+            mcp = agent_config(entry, "native+mcp", {})
+            servers = mcp.pop("mcp_servers")
+            self.assertEqual(native, mcp)
+            self.assertEqual(servers[0]["transport"], "streamable-http")
+            self.assertEqual(servers[0]["url"], "https://guide.wagtail.org/mcp")
+            config = AgentConfig.model_validate({**mcp, "mcp_servers": servers})
+            self.assertTrue(
+                AgentFactory.get_agent_class_from_config(
+                    config
+                ).capabilities.mcp_servers
+            )
+
+    def test_unknown_preview_price_is_not_zero(self):
+        entry = read(HERE / "matrix-kimi-preview.yaml")["entries"][0]
+        config = agent_config(entry, "native+mcp", None)
+        model = config["kwargs"]["opencode_config"]["provider"]["neuralwatt"]["models"][
+            "kimi-k3.1-pro"
+        ]
+        self.assertNotIn("cost", model)
+
+    def test_preview_prepare_requires_opt_in_and_preserves_selected_prompts(self):
+        entry = read(HERE / "matrix-kimi-preview.yaml")["entries"][0]
+        names = {"info-schedule-page", "start-content-checker"}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            matrix = root / "matrix.json"
+            for allowed in (False, True):
+                entry["allow_unlisted_model"] = allowed
+                matrix.write_text(json.dumps({"entries": [entry]}))
+                args = SimpleNamespace(
+                    matrix=matrix,
+                    entry="*",
+                    case=",".join(sorted(names)),
+                    directory=root / str(allowed),
+                    arms="native+mcp",
+                    repeat=1,
+                    timeout=30,
+                    concurrency=1,
+                )
+                with patch("runner.catalog", return_value={}), patch("builtins.print"):
+                    if not allowed:
+                        with self.assertRaisesRegex(ValueError, "not in Neuralwatt"):
+                            prepare(args)
+                        continue
+                    prepare(args)
+                manifest = json.loads((args.directory / "manifest.json").read_text())
+                self.assertIsNone(manifest["jobs"][0]["pricing"])
+                self.assertEqual(
+                    manifest["cases"],
+                    [
+                        c
+                        for c in read(SOURCE / "tests.yaml")
+                        if c["description"] in names
+                    ],
+                )
+                for case in manifest["cases"]:
+                    self.assertEqual(
+                        (
+                            args.directory
+                            / "tasks"
+                            / case["description"]
+                            / "instruction.md"
+                        ).read_text(),
+                        case["vars"]["prompt"],
+                    )
 
     def replay(self, steps, arm="native", exception=None, harness="opencode"):
         with tempfile.TemporaryDirectory() as directory:

@@ -91,6 +91,14 @@ def agent_config(entry, arm, pricing):
         "kwargs": kwargs,
     }
     agent["env"].update(entry.get("env", {}))
+    if arm == "native+mcp":
+        agent["mcp_servers"] = [
+            {
+                "name": "wagtail-guide",
+                "transport": "streamable-http",
+                "url": "https://guide.wagtail.org/mcp",
+            }
+        ]
     extension = {
         ("claude-code", "baseline"): "NoToolsClaude",
         ("claude-code", "web"): "WebClaude",
@@ -116,7 +124,12 @@ def agent_config(entry, arm, pricing):
                     "baseURL": "https://api.neuralwatt.com/v1",
                     "apiKey": "{env:NEURALWATT_API_KEY}",
                 },
-                "models": {model: {"name": model, "cost": pricing}},
+                "models": {
+                    model: {
+                        "name": model,
+                        **({"cost": pricing} if pricing is not None else {}),
+                    }
+                },
             }
         }
         agent["env"]["OPENCODE_ENABLE_EXA"] = "1"
@@ -129,7 +142,9 @@ def prepare(args):
         raise ValueError("\n".join(problems))
     entries = [e for e in read(args.matrix)["entries"] if fnmatch(e["id"], args.entry)]
     cases = [
-        c for c in read(SOURCE / "tests.yaml") if fnmatch(c["description"], args.case)
+        c
+        for c in read(SOURCE / "tests.yaml")
+        if any(fnmatch(c["description"], pattern) for pattern in args.case.split(","))
     ]
     if not entries or not cases:
         raise ValueError("No matching entries or cases")
@@ -164,12 +179,17 @@ def prepare(args):
         pricing = None
         if entry["harness"] == "opencode":
             model = entry["model"].split("/", 1)[1]
-            price = remote[model]["metadata"]["pricing"]
-            pricing = {
-                "input": price["input_per_million"],
-                "output": price["output_per_million"],
-                "cache_read": price["cached_input_per_million"],
-            }
+            if model not in remote:
+                if not entry.get("allow_unlisted_model"):
+                    raise ValueError(f"Model not in Neuralwatt catalog: {model}")
+                print(f"Preview model {model}: candidate pricing is unknown")
+            else:
+                price = remote[model]["metadata"]["pricing"]
+                pricing = {
+                    "input": price["input_per_million"],
+                    "output": price["output_per_million"],
+                    "cache_read": price["cached_input_per_million"],
+                }
         for arm in args.arms.split(","):
             if arm not in read(HERE / "arms.yaml")[entry["harness"]]:
                 unavailable.append(
@@ -340,7 +360,7 @@ def main():
     parser.add_argument("--keys", type=Path, default=Path.home() / "dev/.keys.yml")
     parser.add_argument("--matrix", type=Path, default=HERE / "matrix.yaml")
     parser.add_argument("--entry", default="*")
-    parser.add_argument("--case", default="*")
+    parser.add_argument("--case", default="*", help="Comma-separated case name globs")
     parser.add_argument("--job", default="*")
     parser.add_argument("--arms", default="native,baseline")
     parser.add_argument("--repeat", type=int, default=3)

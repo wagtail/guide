@@ -4,6 +4,7 @@ import unittest
 from pathlib import Path
 
 from trace_analysis import (
+    controls,
     curl_targets,
     extract_events,
     local_command,
@@ -16,6 +17,71 @@ from trace_review import CONTEXT, stage
 
 
 class TestTraceAnalysis(unittest.TestCase):
+    def test_cursor_mcp_keeps_wrapper_identity_and_extracts_target(self):
+        events = extract_events(
+            [
+                {
+                    "step_id": 1,
+                    "tool_calls": [
+                        {
+                            "tool_call_id": "wrapper",
+                            "function_name": "mcpToolCall",
+                            "arguments": {
+                                "serverIdentifier": "wagtail-guide",
+                                "toolName": "fetch_docs_page",
+                                "args": {"url": "/en/concepts/scheduled-publishing/"},
+                            },
+                        }
+                    ],
+                }
+            ],
+            "trial",
+        )
+        self.assertEqual(events[0]["tool"], "mcpToolCall")
+        self.assertEqual(events[0]["kind"], "mcp_fetch")
+        self.assertEqual(
+            events[0]["urls"],
+            ["https://guide.wagtail.org/en/concepts/scheduled-publishing/"],
+        )
+
+    def test_guide_mcp_relative_targets_and_recorded_configuration(self):
+        events = extract_events(
+            [
+                {
+                    "step_id": 1,
+                    "tool_calls": [
+                        {
+                            "tool_call_id": "mcp",
+                            "function_name": "wagtail-guide_fetch_docs_page",
+                            "arguments": {"url": "/en/how-to-guides/manage-pages/"},
+                        }
+                    ],
+                }
+            ],
+            "trial",
+        )
+        self.assertEqual(events[0]["kind"], "mcp_fetch")
+        self.assertEqual(
+            events[0]["urls"],
+            ["https://guide.wagtail.org/en/how-to-guides/manage-pages/"],
+        )
+        recorded = controls(
+            {
+                "agent": {
+                    "mcp_servers": [
+                        {
+                            "name": "wagtail-guide",
+                            "transport": "streamable-http",
+                            "url": "https://guide.wagtail.org/mcp",
+                            "headers": {"Authorization": "secret"},
+                        }
+                    ]
+                }
+            }
+        )
+        self.assertNotIn("secret", json.dumps(recorded))
+        self.assertEqual(recorded["mcp_servers"][0]["name"], "wagtail-guide")
+
     def test_shell_url_is_not_a_fetch_without_network_command(self):
         steps = [
             {

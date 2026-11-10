@@ -31,6 +31,18 @@ def text(content):
     )
 
 
+def guide_mcp_call(name, arguments):
+    """Resolve Cursor's wrapper using its recorded server/tool identifiers."""
+    if (
+        name == "mcpToolCall"
+        and arguments.get("serverIdentifier") == "wagtail-guide"
+        and arguments.get("toolName") in ("search_docs", "fetch_docs_page")
+        and isinstance(arguments.get("args"), dict)
+    ):
+        return f"mcp__wagtail-guide__{arguments['toolName']}", arguments["args"]
+    return name, arguments
+
+
 def normalize(call):
     """Use the existing Claude trace vocabulary for other Harbor agents."""
     aliases = {
@@ -46,6 +58,7 @@ def normalize(call):
         "connector_web_search.web_search": "WebSearch",
     }
     call = {**call, "input": dict(call["input"])}
+    call["name"], call["input"] = guide_mcp_call(call["name"], call["input"])
     call["name"] = aliases.get(call["name"], call["name"])
     if call["name"] == "web_search_call":
         call["name"] = "WebFetch" if call["input"].get("url") else "WebSearch"

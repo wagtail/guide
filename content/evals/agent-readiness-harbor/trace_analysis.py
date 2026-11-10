@@ -12,6 +12,7 @@ from pathlib import Path
 from statistics import median
 from urllib.parse import urlsplit, urlunsplit
 
+from replay import guide_mcp_call
 from report import seconds
 from runner import CACHE, HERE, read
 
@@ -310,12 +311,13 @@ def extract_events(steps, trial_id, native=None):
             if not isinstance(args, dict):
                 args = {"unparsed": text(args)}
             name = call["function_name"]
+            resolved_name, args = guide_mcp_call(name, args)
             kind = ALIASES.get(name, "other")
             if name == "web_search_call":
                 kind = "fetch" if args.get("url") else "search"
-            if name.endswith(("__search_docs", "_search_docs")):
+            if resolved_name.endswith(("__search_docs", "_search_docs")):
                 kind = "mcp_search"
-            if name.endswith(("__fetch_docs_page", "_fetch_docs_page")):
+            if resolved_name.endswith(("__fetch_docs_page", "_fetch_docs_page")):
                 kind = "mcp_fetch"
             obs = observations.get(cid)
             state = status(obs, (native or {}).get(cid))
@@ -326,6 +328,14 @@ def extract_events(steps, trial_id, native=None):
             targets = (
                 urls(args.get("url", "")) if kind in ("fetch", "mcp_fetch") else []
             )
+            if (
+                kind == "mcp_fetch"
+                and resolved_name.removeprefix("mcp__").startswith(
+                    ("wagtail-guide_", "wagtail_guide_")
+                )
+                and str(args.get("url", "")).startswith("/")
+            ):
+                targets = urls("https://guide.wagtail.org" + args["url"])
             if kind == "shell":
                 targets = shell_targets
             body = text((obs or {}).get("content"))
@@ -500,6 +510,11 @@ def controls(config):
         "web_search",
     )
     result = {k: kwargs[k] for k in allowed if k in kwargs}
+    if config["agent"].get("mcp_servers"):
+        result["mcp_servers"] = [
+            {k: server[k] for k in ("name", "transport", "url") if k in server}
+            for server in config["agent"]["mcp_servers"]
+        ]
     for name, keys in [
         ("config", ("developer_instructions", "features", "tools")),
         ("opencode_config", ("permission", "tools")),

@@ -1,6 +1,7 @@
 # Harbor kwargs, not replacement agent implementations.
 claude-code:
   native: {}
+  native+mcp: {}
   baseline:
     disallowed_tools: '*'
     permission_mode: dontAsk
@@ -13,6 +14,7 @@ claude-code:
     disallowed_tools: Bash,Read,Write,Edit,Glob,Grep,Agent,Task,Skill,NotebookEdit
 opencode:
   native: {}
+  native+mcp: {}
   baseline:
     opencode_config:
       tools: { '*': false }
@@ -23,6 +25,7 @@ opencode:
       permission: { '*': deny, webfetch: allow, websearch: allow }
 codex:
   native: {}
+  native+mcp: {}
   baseline:
     web_search: disabled
     config:
@@ -53,6 +56,7 @@ codex:
   # web unavailable: the 0.166.0 pilot attempted exec with code-mode host disabled.
 cursor-cli:
   native: {}
+  native+mcp: {}
   # baseline unavailable: deny-all hooks still allowed server-side web calls in pilot.
 vibe:
   native: {}
