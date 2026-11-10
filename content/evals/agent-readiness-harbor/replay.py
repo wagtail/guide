@@ -12,10 +12,31 @@ def get_assert(output, context):
     )
     from trace_columns import get_assert as original
 
+    response = context.get("providerResponse") or {}
+    metadata = response.get("metadata") or {}
+    calls = metadata.get("toolCalls", [])
+    tavily = any(c.get("name") == "tavily_tavily_search" for c in calls)
+    if tavily:
+        # Keep raw call identities in the saved replay; translate only the
+        # existing trace grader's input. Answer assertions remain unchanged.
+        context = {
+            **context,
+            "providerResponse": {
+                **response,
+                "metadata": {
+                    **metadata,
+                    "toolCalls": [
+                        {**c, "name": "websearch"}
+                        if c.get("name") == "tavily_tavily_search"
+                        else c
+                        for c in calls
+                    ],
+                },
+            },
+        }
     result = original(output, context)
-    calls = ((context.get("providerResponse") or {}).get("metadata") or {}).get(
-        "toolCalls", []
-    )
+    if tavily:
+        result["named_scores"]["mcp_used"] = 1.0
     # Code-mode scripts can hide nested actions; don't imply full trace coverage.
     result["named_scores"]["opaque_tool_calls"] = sum(
         c.get("name") in ("exec", "js_repl") for c in calls

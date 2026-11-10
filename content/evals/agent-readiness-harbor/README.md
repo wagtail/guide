@@ -10,6 +10,8 @@ The [trace-analysis pipeline](TRACE_ANALYSIS.md) combines offline technique coun
 
 The [guide MCP pilot](MCP_PILOT.md) adds a `native+mcp` arm through Harbor's built-in server configuration, starting with the Kimi K3.1 Pro preview. It is separate from the completed benchmark and its retries.
 
+The [Tavily follow-up](SEARCH_RERUNS.md) replaces rate-limited OpenCode search through native MCP configuration, with 862 affected slots scheduled once each. Claude Fable 5.2 follows with 396 trials across all four supported Claude arms. These are separate interventions, preserving the original results.
+
 ## What the 33 questions test
 
 These are documentation-answering tasks from [the original cases](../agent-readiness/tests.yaml), not tasks that modify a CMS or codebase. Each run asks one question and expects an answer with official citations.

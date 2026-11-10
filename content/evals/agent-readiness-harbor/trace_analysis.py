@@ -315,7 +315,10 @@ def extract_events(steps, trial_id, native=None):
             kind = ALIASES.get(name, "other")
             if name == "web_search_call":
                 kind = "fetch" if args.get("url") else "search"
-            if resolved_name.endswith(("__search_docs", "_search_docs")):
+            if (
+                resolved_name.endswith(("__search_docs", "_search_docs"))
+                or name == "tavily_tavily_search"
+            ):
                 kind = "mcp_search"
             if resolved_name.endswith(("__fetch_docs_page", "_fetch_docs_page")):
                 kind = "mcp_fetch"

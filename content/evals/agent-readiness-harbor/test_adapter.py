@@ -9,13 +9,90 @@ from unittest.mock import patch
 from harbor.agents.factory import AgentFactory
 from harbor.models.trial.config import AgentConfig
 
-from replay import call_api, empty_vibe_discovery, normalize
+from replay import call_api, empty_vibe_discovery, get_assert, normalize
 from report import report
 from runner import HERE, SOURCE, agent_config, credentials, prepare, read
 from tool_controls import CurrentVibe
 
 
 class TestAdapter(unittest.TestCase):
+    def test_tavily_trace_metrics_preserve_raw_tool_identity(self):
+        context = {
+            "providerResponse": {
+                "metadata": {
+                    "harness": "opencode",
+                    "toolCalls": [
+                        {
+                            "name": "tavily_tavily_search",
+                            "input": {"query": "Wagtail"},
+                            "output": "Search results",
+                        }
+                    ],
+                }
+            }
+        }
+        scores = get_assert("Answer", context)["named_scores"]
+        self.assertEqual(scores["web_search_used"], 1)
+        self.assertEqual(scores["mcp_used"], 1)
+        self.assertEqual(scores["tool_calls"], 1)
+        self.assertEqual(
+            context["providerResponse"]["metadata"]["toolCalls"][0]["name"],
+            "tavily_tavily_search",
+        )
+
+    def test_tavily_replaces_search_without_enabling_other_web_arm_tools(self):
+        entry = {
+            "id": "opencode-test",
+            "harness": "opencode",
+            "model": "neuralwatt/kimi-k3",
+            "search_provider": "tavily",
+            "credentials": {
+                "NEURALWATT_API_KEY": ["model"],
+                "TAVILY_API_KEY": ["search"],
+            },
+        }
+        for arm in ("native", "web"):
+            config = agent_config(entry, arm, None)
+            self.assertEqual(config["name"], "opencode")
+            settings = config["kwargs"]["opencode_config"]
+            self.assertFalse(settings["tools"]["websearch"])
+            self.assertEqual(settings["permission"]["websearch"], "deny")
+            self.assertTrue(settings["tools"]["tavily_tavily_search"])
+            self.assertEqual(settings["permission"]["tavily_tavily_search"], "allow")
+            self.assertFalse(settings["tools"]["tavily_tavily_research"])
+            self.assertEqual(
+                settings["mcp"]["tavily"]["headers"]["Authorization"],
+                "Bearer {env:TAVILY_API_KEY}",
+            )
+            self.assertNotIn("OPENCODE_ENABLE_EXA", config["env"])
+            if arm == "web":
+                self.assertEqual(settings["permission"]["*"], "deny")
+                self.assertEqual(settings["permission"]["webfetch"], "allow")
+        with self.assertRaisesRegex(ValueError, "no-tools"):
+            agent_config(entry, "baseline", None)
+
+    def test_tavily_key_file_is_read_without_shell_execution(self):
+        entry = {"id": "search", "credentials": {"TAVILY_API_KEY": ["TAVILY_API_KEY"]}}
+        with (
+            tempfile.TemporaryDirectory() as directory,
+            patch.dict("os.environ", {}, clear=True),
+            patch("runner.Path.home", return_value=Path(directory)),
+        ):
+            extra = Path(directory) / ".extra"
+            extra.write_text(
+                "unrelated shell code\nexport TAVILY_API_KEY='test-only' # comment\n"
+            )
+            self.assertEqual(credentials(entry, {})["TAVILY_API_KEY"], "test-only")
+            self.assertEqual(
+                credentials(entry, {"TAVILY_API_KEY": "file-precedence"})[
+                    "TAVILY_API_KEY"
+                ],
+                "file-precedence",
+            )
+            extra.write_text('export TAVILY_API_KEY="$(must-not-execute)"\n')
+            with self.assertRaisesRegex(ValueError, "literal assignment"):
+                credentials(entry, {})
+
     def test_cursor_mcp_wrapper_uses_recorded_identifiers(self):
         call = {
             "name": "mcpToolCall",

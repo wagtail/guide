@@ -17,6 +17,33 @@ from trace_review import CONTEXT, stage
 
 
 class TestTraceAnalysis(unittest.TestCase):
+    def test_tavily_search_is_recognized_without_relabeling_raw_call(self):
+        events = extract_events(
+            [
+                {
+                    "step_id": 1,
+                    "tool_calls": [
+                        {
+                            "tool_call_id": "tavily",
+                            "function_name": "tavily_tavily_search",
+                            "arguments": {"query": "Wagtail scheduling"},
+                        }
+                    ],
+                    "observation": {
+                        "results": [
+                            {"source_call_id": "tavily", "content": "Search results"}
+                        ]
+                    },
+                }
+            ],
+            "trial",
+            {"tavily": "completed"},
+        )
+        self.assertEqual(events[0]["tool"], "tavily_tavily_search")
+        self.assertEqual(events[0]["kind"], "mcp_search")
+        self.assertEqual(events[0]["status"], "returned")
+        self.assertEqual(events[0]["query"], "Wagtail scheduling")
+
     def test_cursor_mcp_keeps_wrapper_identity_and_extracts_target(self):
         events = extract_events(
             [

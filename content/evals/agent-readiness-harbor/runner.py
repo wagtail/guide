@@ -5,6 +5,7 @@ import copy
 import hashlib
 import json
 import os
+import shlex
 import shutil
 import subprocess
 import sys
@@ -46,6 +47,16 @@ def credentials(entry, keys):
         for component in path:
             value = value.get(component, {}) if isinstance(value, dict) else None
         value = os.environ.get(name) or value
+        if name == "TAVILY_API_KEY" and not value:
+            # Read only a literal assignment, without executing the shell file.
+            extra = Path.home() / ".extra"
+            for line in extra.read_text().splitlines() if extra.exists() else []:
+                line = line.strip().removeprefix("export ").strip()
+                if line.startswith("TAVILY_API_KEY="):
+                    parts = shlex.split(line, comments=True)
+                    if len(parts) != 1 or any(c in parts[0] for c in ("$", "`")):
+                        raise ValueError("TAVILY_API_KEY must be a literal assignment")
+                    value = parts[0].split("=", 1)[1]
         if not isinstance(value, str) or not value.strip():
             raise ValueError(f"Missing {name} for {entry['id']}")
         result[name] = value
@@ -134,6 +145,35 @@ def agent_config(entry, arm, pricing):
         }
         agent["env"]["OPENCODE_ENABLE_EXA"] = "1"
         agent["env"]["OPENCODE_WEBSEARCH_PROVIDER"] = "exa"
+        if entry.get("search_provider") == "tavily":
+            if "TAVILY_API_KEY" not in entry["credentials"]:
+                raise ValueError("Tavily search requires a TAVILY_API_KEY credential")
+            if arm == "baseline":
+                raise ValueError("Tavily search cannot be enabled in a no-tools arm")
+            # OpenCode v1 has no built-in Tavily provider. Use its native remote
+            # MCP configuration; Harbor 0.25 drops MCP headers at the top level.
+            config.setdefault("mcp", {})["tavily"] = {
+                "type": "remote",
+                "url": "https://mcp.tavily.com/mcp/",
+                "oauth": False,
+                "headers": {"Authorization": "Bearer {env:TAVILY_API_KEY}"},
+            }
+            permissions = {"websearch": False}
+            permissions.update(
+                {
+                    f"tavily_tavily_{tool}": tool == "search"
+                    for tool in ("search", "extract", "crawl", "map", "research")
+                }
+            )
+            config.setdefault("tools", {}).update(permissions)
+            config.setdefault("permission", {}).update(
+                {
+                    tool: "allow" if enabled else "deny"
+                    for tool, enabled in permissions.items()
+                }
+            )
+            agent["env"].pop("OPENCODE_ENABLE_EXA")
+            agent["env"].pop("OPENCODE_WEBSEARCH_PROVIDER")
     return agent
 
 
