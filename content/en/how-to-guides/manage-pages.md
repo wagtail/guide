@@ -128,7 +128,7 @@ Warning: Shared passwords should not be used to protect sensitive content, as th
 
 Wagtail allows you to retrieve the version of the content you previously saved as a draft or published. You can do this by hovering over a page on the [Explorer page](/en/how-to-guides/find-your-way-around/) and clicking **More** from the resulting dropdown options. Alternatively, you can access the page history screen by clicking the **History** icon in the top-right corner when editing a page.
 
-On the page's history screen, you can see all the actions previously done on that particular page and the users that carried out the actions. Also, you can see the date or time that the action occurred.
+On the page's history screen, you can see all the actions previously done on that particular page and the users that carried out the actions. Also, you can see the date or time that the action occurred. Changes made by integrations through the [Wagtail API](/en/concepts/wagtail-api/) also appear here, under the user account the integration's API token belongs to.
 
 You can also search for specific versions of your content on the page history screen by applying a filter.
 

@@ -56,6 +56,12 @@ The Workflow interface is the screen from which you set and manage your Workflow
 
 To learn about Workflow tasks and how to set them up, go to [Configure workflows for the moderation](/en/how-to-guides/configure-workflows-for-moderation/) guide of this User guide documentation.
 
+## API tokens interface
+
+The API tokens interface is the screen from which you manage the tokens that integrations use to connect to the [Wagtail API](/en/concepts/wagtail-api/). Go to **Settings > API tokens** from the [Sidebar](/en/how-to-guides/find-your-way-around/) to access it. This interface is only available when developers have enabled the Wagtail API on your site.
+
+To learn how to create and revoke tokens, go to the [Manage API tokens](/en/how-to-guides/manage-api-tokens/) guide of this User guide documentation.
+
 ## Edit screen
 
 An edit screen is any screen in the admin interface, from which you can edit your pages, snippets, images, documents, and other items related to the management of your content.

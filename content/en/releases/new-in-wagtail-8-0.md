@@ -18,7 +18,7 @@ Here are highlights from Wagtail 8.0. For full technical details, view the compl
 
 Wagtail now offers new v3 API in preview, that lets applications and integrations create, edit, publish, unpublish, move, copy, and revert content. It covers pages, sites, locales, redirects, images, documents, and snippets, with authentication tied to user accounts and permissions.
 
-This opens up new ways to automate content operations, such as site-wide content improvements, automated imports from external systems, or external LLM feedback on site content. Once enabled by a developer according to the [v3 API developer documentation](https://docs.wagtail.org/en/latest/advanced_topics/api/v3/index.html), integrations can interact with your content through it.
+This opens up new ways to automate content operations, such as site-wide content improvements, automated imports from external systems, or external LLM feedback on site content. Once enabled by a developer according to the [v3 API developer documentation](https://docs.wagtail.org/en/latest/advanced_topics/api/v3/index.html), integrations can interact with your content through it. To learn more, read about the [Wagtail API](/en/concepts/wagtail-api/) and how to [manage API tokens](/en/how-to-guides/manage-api-tokens/).
 
 ## Permission policies
 
