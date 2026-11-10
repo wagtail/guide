@@ -34,6 +34,28 @@ psql -d guide -U guide --host db.guide.orb.local -c 'CREATE SCHEMA heroku_ext;'
 pg_restore --clean --no-acl --if-exists --no-owner --host db.guide.orb.local --username=guide -d guide database_dumps/YYYYMMDD-wagtail-guide-production.dump
 ```
 
+## Logs
+
+### Application logs
+
+Production logs are archived to [Papertrail](https://www.papertrail.com/) via a Heroku log drain. Logs can be retrieved from the terminal with the [SolarWinds Observability CLI](https://github.com/solarwinds/swo-cli) (`swo`), which queries the same log service as the Papertrail web interface. Configure access via environment variables:
+
+```bash
+export SWO_API_TOKEN=...
+export SWO_API_URL=https://api.na-01.cloud.solarwinds.com
+```
+
+Common commands, filtering on the `wagtail-guide-production` system:
+
+```bash
+# Search the last hour for a phrase.
+swo logs get -s wagtail-guide-production --min-time '1 hour ago' error
+# Raw JSON output, for piping to jq.
+swo logs get -s wagtail-guide-production --json | jq
+# Live tail.
+swo logs get -s wagtail-guide-production -f
+```
+
 ## Access
 
 The guide is hosted and managed by Torchbox's sysadmin team. Access is given only when needed following the [principle of least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege). If you need access to Heroku, a project maintainer can contact Torchbox's sysadmin team who can provide access.
