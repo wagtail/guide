@@ -83,6 +83,40 @@ class TestContentPage(TestCase):
             '<ul><li><a href="#one">One</a></li><li><a href="#two">Two</a></li></ul>',
         )
 
+    def test_create_table_of_contents_heading_back_to_skipped_level(self):
+        # h2 → h4 → h3: the h3 is a sibling of the h4 (both children of the
+        # h2), and a following h4 nests under the h3.
+        self.content_page.body = json.dumps(
+            [
+                {
+                    "type": "text",
+                    "value": "<h2>One</h2><h4>Two</h4><h3>Three</h3><h4>Four</h4>",
+                }
+            ]
+        )
+
+        self.assertEqual(
+            self.content_page.table_of_contents,
+            '<ul><li><a href="#one">One</a>'
+            '<ul><li><a href="#two">Two</a></li>'
+            '<li><a href="#three">Three</a>'
+            '<ul><li><a href="#four">Four</a></li></ul></li></ul></li></ul>',
+        )
+
+    def test_create_table_of_contents_shallower_heading_mid_page(self):
+        # h3 → h2 → h3: the h2 becomes a top-level item, and the following
+        # h3 nests under it rather than staying flat.
+        self.content_page.body = json.dumps(
+            [{"type": "text", "value": "<h3>One</h3><h2>Two</h2><h3>Three</h3>"}]
+        )
+
+        self.assertEqual(
+            self.content_page.table_of_contents,
+            '<ul><li><a href="#one">One</a></li>'
+            '<li><a href="#two">Two</a>'
+            '<ul><li><a href="#three">Three</a></li></ul></li></ul>',
+        )
+
     def test_escapes_heading_text(self):
         self.content_page.body = json.dumps(
             [

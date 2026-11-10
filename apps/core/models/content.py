@@ -47,6 +47,9 @@ def create_table_of_contents(body):
                     open_items.pop()
                     toc += "</li></ul>"
                 toc += "</li>"
+                # The new item replaces the current one, so record its level
+                # for the next heading’s comparison.
+                open_items[-1] = level
         else:
             open_items.append(level)
         anchor = heading.attrs.get("id", slugify(heading.text))

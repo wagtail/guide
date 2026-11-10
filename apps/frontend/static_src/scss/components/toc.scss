@@ -46,6 +46,10 @@
       }
 
       a {
+        // Fill the row next to the arrow so long headings wrap their text
+        // beside it, rather than moving to their own flex line below.
+        flex: 1 1 0;
+        min-width: 0;
         text-decoration: none;
         font-weight: 700;
       }
