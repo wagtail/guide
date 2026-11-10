@@ -20,9 +20,18 @@
       margin: 0;
     }
 
+    // h3 within h2, h4 within h3.
+    ul ul {
+      box-sizing: border-box;
+      flex-basis: 100%; // wrap onto its own line below the parent item’s link
+      margin-top: ($gutter * 0.25);
+      padding-inline-start: 33px; // 20px icon + 13px icon margin, to align with the parent item’s text
+    }
+
     li {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
       margin-bottom: ($gutter * 0.5);
 
       &::before {

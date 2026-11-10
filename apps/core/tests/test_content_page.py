@@ -36,6 +36,53 @@ class TestContentPage(TestCase):
             '<ul><li><a href="#something">ekkie</a></li></ul>',
         )
 
+    def test_create_table_of_contents_nests_h3_and_h4(self):
+        self.content_page.body = json.dumps(
+            [
+                {
+                    "type": "text",
+                    "value": (
+                        "<h2>One</h2><h3>One one</h3><h4>One one one</h4>"
+                        "<h3>One two</h3><h2>Two</h2>"
+                    ),
+                }
+            ]
+        )
+
+        self.assertEqual(
+            self.content_page.table_of_contents,
+            '<ul><li><a href="#one">One</a>'
+            '<ul><li><a href="#one-one">One one</a>'
+            '<ul><li><a href="#one-one-one">One one one</a></li></ul></li>'
+            '<li><a href="#one-two">One two</a></li></ul></li>'
+            '<li><a href="#two">Two</a></li></ul>',
+        )
+
+    def test_create_table_of_contents_skipped_heading_level(self):
+        # A heading can only nest one level deeper than the previous one, so
+        # content skipping levels (h2 to h4) still gets a well-formed list.
+        self.content_page.body = json.dumps(
+            [{"type": "text", "value": "<h2>One</h2><h4>Deep</h4><h2>Two</h2>"}]
+        )
+
+        self.assertEqual(
+            self.content_page.table_of_contents,
+            '<ul><li><a href="#one">One</a>'
+            '<ul><li><a href="#deep">Deep</a></li></ul></li>'
+            '<li><a href="#two">Two</a></li></ul>',
+        )
+
+    def test_create_table_of_contents_without_h2(self):
+        # The first heading is the top level, whatever it is.
+        self.content_page.body = json.dumps(
+            [{"type": "text", "value": "<h3>One</h3><h3>Two</h3>"}]
+        )
+
+        self.assertEqual(
+            self.content_page.table_of_contents,
+            '<ul><li><a href="#one">One</a></li><li><a href="#two">Two</a></li></ul>',
+        )
+
     def test_escapes_heading_text(self):
         self.content_page.body = json.dumps(
             [

@@ -23,7 +23,7 @@ def header(context):
 
     pages = (
         Page.objects.descendant_of(home)
-        .filter(depth__gt=2, depth__lte=4)
+        .filter(depth__gt=2, depth__lte=5)
         .live()
         .public()
         .in_menu()

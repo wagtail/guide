@@ -17,6 +17,8 @@ class TestHeader(TestCase):
         self.home.add_child(instance=self.a)
         self.ab = Page(title="ab", slug="ab", show_in_menus=True)
         self.a.add_child(instance=self.ab)
+        self.aba = Page(title="aba", slug="aba", show_in_menus=True)
+        self.ab.add_child(instance=self.aba)
         self.ac = Page(title="ac", slug="ac", show_in_menus=True)
         self.a.add_child(instance=self.ac)
         self.b = Page(title="b", slug="b", show_in_menus=True)
@@ -25,7 +27,7 @@ class TestHeader(TestCase):
     def test_get_annotated_list_qs(self):
         pages = (
             Page.objects.descendant_of(self.home)
-            .filter(depth__gt=2, depth__lte=4)
+            .filter(depth__gt=2, depth__lte=5)
             .live()
             .in_menu()
         )
@@ -33,6 +35,7 @@ class TestHeader(TestCase):
         expected = [
             (self.a, {"close": [], "level": 0, "open": True}),
             (self.ab, {"close": [], "level": 1, "open": True}),
+            (self.aba, {"close": [0], "level": 2, "open": True}),
             (self.ac, {"close": [0], "level": 1, "open": False}),
             (self.b, {"close": [0], "level": 0, "open": False}),
         ]
@@ -47,6 +50,7 @@ class TestHeader(TestCase):
         self.assertIn('<nav class="primary-nav" data-mobile-menu>', result)
         self.assertIn('href="/en/a/"', result)
         self.assertIn('href="/en/a/ab/"', result)
+        self.assertIn('href="/en/a/ab/aba/"', result)
         self.assertIn('href="/en/a/ac/"', result)
         self.assertIn('href="/en/b/"', result)
 

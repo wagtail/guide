@@ -23,14 +23,38 @@ def create_table_of_contents(body):
     template = Template("{% load wagtailcore_tags %}{% include_block body %}")
     content = template.render(Context({"body": body}))
     soup = BeautifulSoup(content, "html.parser")
-    headings = soup.select("h2,h3")
-    toc = ""
-    if headings:
-        toc += "<ul>"
-        for heading in headings:
-            anchor = heading.attrs.get("id", slugify(heading.text))
-            toc += format_html('<li><a href="#{}">{}</a></li>', anchor, heading.text)
-        toc += "</ul>"
+    headings = soup.select("h2,h3,h4")
+    if not headings:
+        return ""
+
+    # Nest h3 within h2, and h4 within h3. The first heading is always the
+    # top level, and a heading can only be one level deeper than the previous
+    # one, so content skipping levels (e.g. h2 to h4) nests a single level
+    # rather than leaving an empty list item.
+    toc = "<ul>"
+    open_items = []  # Heading levels of the <li> elements still open, deepest last.
+    for heading in headings:
+        level = int(heading.name[1])
+        if open_items:
+            if level > open_items[-1]:
+                # Deeper heading: nest a new list within the previous item.
+                open_items.append(level)
+                toc += "<ul>"
+            else:
+                # Same or shallower heading: close the lists of the deeper
+                # items, up to the closest ancestor shallower than this one.
+                while len(open_items) > 1 and level <= open_items[-2]:
+                    open_items.pop()
+                    toc += "</li></ul>"
+                toc += "</li>"
+        else:
+            open_items.append(level)
+        anchor = heading.attrs.get("id", slugify(heading.text))
+        toc += format_html('<li><a href="#{}">{}</a>', anchor, heading.text)
+    toc += "</li>"
+    for _ in open_items[1:]:
+        toc += "</ul></li>"
+    toc += "</ul>"
     return toc
 
 
