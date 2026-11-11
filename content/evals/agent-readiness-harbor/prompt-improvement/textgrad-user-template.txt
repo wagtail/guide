@@ -1,0 +1,12 @@
+You will give feedback to a variable with the following role: <ROLE> {variable_desc} </ROLE>. Here is a conversation with a language model (LM):
+
+{conversation}This conversation is part of a larger system. The <LM_OUTPUT> was later used as {response_desc}.
+
+<OBJECTIVE_FUNCTION>Your goal is to give feedback to the variable to address the following feedback on the LM_OUTPUT: {response_gradient} </OBJECTIVE_FUNCTION>
+
+We are interested in giving feedback to the {variable_desc} for this conversation. Specifically, give feedback to the following span of text:
+
+<VARIABLE> {variable_short} </VARIABLE>
+
+Given the above history, describe how the {variable_desc} could be improved to improve the <OBJECTIVE_FUNCTION>. Be very creative, critical, and intelligent.
+

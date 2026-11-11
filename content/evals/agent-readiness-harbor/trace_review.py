@@ -1,6 +1,7 @@
 """Stage whitelisted trace evidence and invoke Harbor's native analyzer."""
 
 import argparse
+import copy
 import json
 import os
 import re
@@ -101,7 +102,7 @@ def stage(root, records, events, population=None):
     )
 
 
-def stage_citation_evidence(root, records, events):
+def stage_citation_evidence(root, records, events, full_context=False):
     """Bounded historical evidence for Jev triage; no current-page substitutions."""
     from replay import call_api
     from trace_analysis import text
@@ -122,12 +123,20 @@ def stage_citation_evidence(root, records, events):
             for o in (step.get("observation") or {}).get("results", [])
             if o.get("source_call_id")
         }
+        fetch_prompts = {
+            call["tool_call_id"]: call["arguments"].get("prompt", "")
+            for step in steps
+            for call in step.get("tool_calls") or []
+            if isinstance(call.get("arguments"), dict)
+        }
         answer = call_api(
             "", {}, {"vars": {"trial_path": str(path), "arm": record["arm"]}}
         ).get("output", "")
         calls = by_trial[record["id"]]
         # Both beginning and end of long attempts; never imply omitted middle is empty.
         selected = calls if len(calls) <= 12 else calls[:6] + calls[-6:]
+        selected_ids = {event["id"] for event in selected}
+        included = calls if full_context else selected
         retrieval = [
             {
                 **{
@@ -135,11 +144,24 @@ def stage_citation_evidence(root, records, events):
                     for k in ("id", "kind", "tool", "status", "query", "urls")
                 },
                 "observation_present": event["observation_present"],
-                "returned_excerpt": outputs.get(event["call_id"], "")[:4000],
+                "returned_excerpt": outputs.get(event["call_id"], "")[:4000]
+                if event["id"] in selected_ids
+                else "",
                 "excerpt_truncated": len(outputs.get(event["call_id"], "")) > 4000,
                 "error_signal": event["error_signal"],
+                **(
+                    {
+                        "excerpt_omitted": event["id"] not in selected_ids,
+                        "argument_excerpt": event["argument_excerpt"],
+                        "fetch_prompt": str(fetch_prompts.get(event["call_id"], ""))[
+                            :1000
+                        ],
+                    }
+                    if full_context
+                    else {}
+                ),
             }
-            for event in selected
+            for event in included
         ]
         staged.append(
             sanitized(
@@ -152,9 +174,26 @@ def stage_citation_evidence(root, records, events):
                     "answer_truncated": len(answer) > 12000,
                     "answer_present": bool(answer),
                     "retrieval": retrieval,
-                    "calls_omitted": len(calls) - len(selected),
+                    "calls_omitted": len(calls) - len(included),
                     "native_calls_without_atif": record["native_calls_without_atif"],
                     "trace_present": record["trace_present"],
+                    **(
+                        {
+                            "evidence_version": 3,
+                            "instruction_context": {
+                                k: record[k]
+                                for k in (
+                                    "controls",
+                                    "system_visibility",
+                                    "recorded_system_excerpt",
+                                    "system_excerpt_truncated",
+                                )
+                            },
+                            "observation_excerpts_omitted": len(calls) - len(selected),
+                        }
+                        if full_context
+                        else {}
+                    ),
                 }
             )
         )
@@ -164,13 +203,59 @@ def stage_citation_evidence(root, records, events):
         root / "selection.json",
         {
             "ids": [r["id"] for r in records],
-            "selection": "Diagnostic sample using the existing technique-enriched harness/arm selector; not prevalence.",
-            "max_calls": 12,
+            "selection": "Caller-selected records; see caller manifest for population and sampling.",
+            "max_calls": None if full_context else 12,
+            "max_observation_excerpts": 12,
             "max_characters_per_observation": 4000,
             "max_answer_characters": 12000,
             "source": "Saved ATIF observations and replayed final answers; no live web fetches.",
         },
     )
+
+
+def compact_citation_evidence(record):
+    """Explicit fallback for context-limit failures; retain every call ID."""
+    result = copy.deepcopy(record)
+    limits = {
+        "returned_excerpt": 1000,
+        "argument_excerpt": 200,
+        "fetch_prompt": 300,
+        "query": 200,
+        "tool": 256,
+    }
+    for event in result["retrieval"]:
+        for field, limit in limits.items():
+            if len(event.get(field, "")) > limit:
+                event[field] = event[field][:limit]
+                event[field + "_truncated"] = True
+                if field == "returned_excerpt":
+                    event["excerpt_truncated"] = True
+        for field in list(event):
+            if event[field] in ("", [], False):
+                del event[field]
+    result["context_reduction"] = {
+        "reason": "Jev context limit; reduced excerpts, not omitted attempts",
+        "character_limits": limits,
+        "removed_call_keys": "Only empty strings, empty lists and false flags; missing keys retain these defaults.",
+        "all_call_ids_retained": True,
+    }
+    if len(json.dumps(result)) > 32000:
+        result["retrieval"][6:-6] = [
+            {
+                "id": event["id"],
+                "summary": " ".join(
+                    [
+                        event["kind"],
+                        event["tool"],
+                        event["status"],
+                        *event.get("urls", []),
+                    ]
+                ),
+            }
+            for event in result["retrieval"][6:-6]
+        ]
+        result["context_reduction"]["middle_request_details_omitted"] = True
+    return result
 
 
 def main():
@@ -180,6 +265,11 @@ def main():
     )
     parser.add_argument("--limit", type=int, default=12)
     parser.add_argument("--all", action="store_true")
+    parser.add_argument(
+        "--full-call-context",
+        action="store_true",
+        help="Keep every call summary and recorded instructions in citation-review staging",
+    )
     parser.add_argument("--stage-only", action="store_true")
     parser.add_argument(
         "--citation-review-stage",
@@ -224,7 +314,10 @@ def main():
     if args.citation_review_stage:
         staging = args.directory / "citation-review-inputs" / run
         stage_citation_evidence(
-            staging, records, lines(args.directory / "events.jsonl")
+            staging,
+            records,
+            lines(args.directory / "events.jsonl"),
+            full_context=args.full_call_context,
         )
         print(f"Staged {len(records)} citation/retrieval review records at {staging}")
         return

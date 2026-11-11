@@ -1,0 +1,13 @@
+review,claim,disposition,trace_ids,evidence,implication
+gepa,evidence_honesty,Worth testing,6965a0c277b10802,Baseline already disclosed inability to browse; uncertain URL provenance remains.,"Grade factual accuracy, attribution and link validity separately."
+gepa,domain_fact_prefix,Reject for benchmark,multiple,Generated Domain facts section contains answers and release-specific information from examples.,Exclude answers from prefix; use held-out case families.
+gepa,universal_guide_domain,Reject for original comparison,multiple,Generated prefix always names guide.wagtail.org.,Would erase site-not-named discovery framing.
+gepa,url_path_rewriting,Revise before testing,27145ad5cea5f3e8,A failed legacy URL was followed by a current URL; blanket reciprocal path rewriting is not established.,Follow observed URLs or redirects instead.
+textgrad,failure_fallback,Worth testing,30079b324c58f114;0491ca55c0f95e16,Repeated denial or quota failure is visible; both have empty final answers.,Prompt cannot remove tool/provider limits or guarantee completion.
+textgrad,editor_scope,Worth testing,0a64774c4d8dea93,Editor answer includes code-level deletion mechanics and source citations.,Prefer editor-first guidance without banning relevant developer evidence.
+textgrad,latest_release_caveat,Inspect grader first,27145ad5cea5f3e8,Answer already reports retrieval date/version and release-index limits; aggregate grade is false.,Per-criterion feedback needed before attributing failure.
+textgrad,incorrect_pass_label,Incorrect,42383817403a7fe0,Reviewer says passing; original_grader_passed is false.,Use structured grade fields.
+textgrad,incorrect_search_count,Incorrect,3e49675d44f7f2b0,Reviewer says one search; complete supplied evidence has two searches and one fetch.,Use deterministic event counts.
+textgrad,final_answer_vs_tool_field,Incorrect,01ee2acc8198192f,Answer is empty; answer-like prose occurs inside malformed tool name.,Separate final answer from tool arguments/names and outputs.
+textgrad,missing_dedicated_page_claim,Misleading,0a64774c4d8dea93,Final guide fetch contains deletion warning and final answer quotes its substance.,Check cited example against final answer and event.
+both,effectiveness,Not measured,all 16,Only proposal/feedback calls were run.,"No prompt deployment, candidate reruns or success-rate claim."

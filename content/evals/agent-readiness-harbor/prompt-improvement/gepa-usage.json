@@ -1,0 +1,62 @@
+{
+  "name": "gepa",
+  "exit_code": 0,
+  "elapsed_seconds": 16.356,
+  "is_error": false,
+  "subtype": "success",
+  "total_cost_usd": 0.07417325,
+  "duration_api_ms": 14703,
+  "num_turns": 1,
+  "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 106414,
+    "cache_read_input_tokens": 0,
+    "output_tokens": 3065,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
+    "server_tool_use": {
+      "web_search_requests": 0,
+      "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+      "ephemeral_1h_input_tokens": 0,
+      "ephemeral_5m_input_tokens": 106414
+    },
+    "inference_geo": "global",
+    "iterations": [
+      {
+        "input_tokens": 4,
+        "output_tokens": 3065,
+        "cache_read_input_tokens": 0,
+        "cache_creation_input_tokens": 106414,
+        "cache_creation": {
+          "ephemeral_5m_input_tokens": 106414,
+          "ephemeral_1h_input_tokens": 0
+        },
+        "type": "message"
+      }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+  },
+  "modelUsage": {
+    "claude-haiku-5-5": {
+      "inputTokens": 4,
+      "outputTokens": 3065,
+      "cacheReadInputTokens": 0,
+      "cacheCreationInputTokens": 106414,
+      "webSearchRequests": 0,
+      "costUSD": 0.07417325,
+      "contextWindow": 1000000,
+      "maxOutputTokens": 128000,
+      "thinkingTokens": 0,
+      "cacheCreationEphemeral5mInputTokens": 106414,
+      "cacheCreationEphemeral1hInputTokens": 0,
+      "canonicalModel": "claude-haiku-5-5",
+      "provider": "firstParty",
+      "costBasis": "list"
+    }
+  }
+}

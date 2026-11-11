@@ -2,6 +2,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from trace_analysis import (
     controls,
@@ -15,10 +16,110 @@ from trace_analysis import (
     urls,
 )
 from trace_report import statistics_exports
-from trace_review import CONTEXT, stage
+from trace_review import (
+    CONTEXT,
+    compact_citation_evidence,
+    stage,
+    stage_citation_evidence,
+)
 
 
 class TestTraceAnalysis(unittest.TestCase):
+    def test_context_limit_fallback_preserves_call_identity_and_original_evidence(self):
+        original = {
+            "retrieval": [
+                {
+                    "id": f"trace:s{i}:0",
+                    "kind": "other",
+                    "tool": "malformed tool name " * 1000,
+                    "status": "failed",
+                    "urls": [],
+                    "returned_excerpt": "evidence " * 1000,
+                    "query": "",
+                }
+                for i in range(170)
+            ]
+        }
+        reduced = compact_citation_evidence(original)
+        self.assertEqual(
+            [e["id"] for e in reduced["retrieval"]],
+            [e["id"] for e in original["retrieval"]],
+        )
+        self.assertTrue(reduced["context_reduction"]["middle_request_details_omitted"])
+        self.assertIn("summary", reduced["retrieval"][20])
+        self.assertTrue(reduced["retrieval"][0]["tool_truncated"])
+        self.assertGreater(len(original["retrieval"][0]["tool"]), 10000)
+        self.assertNotIn("context_reduction", original)
+
+    def test_full_citation_staging_retains_calls_but_bounds_and_sanitizes_bodies(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "agent").mkdir()
+            (root / "agent/trajectory.json").write_text(
+                json.dumps(
+                    {
+                        "steps": [
+                            {
+                                "observation": {
+                                    "results": [
+                                        {
+                                            "source_call_id": str(i),
+                                            "content": "Bearer secret-test-credential "
+                                            + "x" * 5000,
+                                        }
+                                        for i in range(16)
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                )
+            )
+            record = {
+                "trial_path": str(root / "result.json"),
+                "id": "test",
+                "prompt": "Question",
+                "harness": "test",
+                "arm": "native",
+                "native_calls_without_atif": 0,
+                "trace_present": True,
+                "controls": {},
+                "system_visibility": "not_recorded",
+                "recorded_system_excerpt": "",
+                "system_excerpt_truncated": False,
+            }
+            events = [
+                {
+                    "id": f"test:s{i}:0",
+                    "trial_id": "test",
+                    "call_id": str(i),
+                    "kind": "fetch",
+                    "tool": "fetch",
+                    "status": "returned",
+                    "query": "",
+                    "urls": [],
+                    "observation_present": True,
+                    "error_signal": "",
+                    "argument_excerpt": "",
+                }
+                for i in range(16)
+            ]
+            with patch("replay.call_api", return_value={"output": "Answer"}):
+                stage_citation_evidence(root / "staged", [record], events, True)
+            payload = (root / "staged/evidence.jsonl").read_text()
+            self.assertNotIn("secret-test-credential", payload)
+            self.assertNotIn(str(root), payload)
+            evidence = json.loads(payload)
+            self.assertEqual(len(evidence["retrieval"]), 16)
+            self.assertEqual(evidence["calls_omitted"], 0)
+            self.assertEqual(evidence["observation_excerpts_omitted"], 4)
+            self.assertEqual(
+                sum(bool(e["returned_excerpt"]) for e in evidence["retrieval"]), 12
+            )
+            self.assertTrue(
+                all(len(e["returned_excerpt"]) <= 4000 for e in evidence["retrieval"])
+            )
+
     def test_retry_changes_require_evidence_for_each_measure(self):
         original = {"trace_present": True, "answer_present": False, "techniques": {}}
         retry = {

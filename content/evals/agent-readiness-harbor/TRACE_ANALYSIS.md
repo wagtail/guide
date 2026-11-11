@@ -1,10 +1,13 @@
 # Analyze execution techniques
 
 The [retrieval and citation analysis](TRACE_RETRIEVAL.md) adds full-inventory
-friction counts, citation provenance, checked claim examples and a completed
-16-trace Jevotron pilot. Its raw CSVs preserve unknowns and do not label all
-repeated or uncited retrieval as waste. [Energy feasibility](ENERGY_ANALYSIS.md)
-documents the available Neuralwatt APIs and the unresolved attribution work.
+friction counts, citation provenance and checked claim examples. The
+[full Jevotron review](TRACE_JEV_RESULTS.md) assesses all 7,432 attempts with
+explicit uncertainty and critical checks of its flags. Raw CSVs preserve unknowns
+and do not label all repeated or uncited retrieval as waste.
+[Neuralwatt energy results](ENERGY_ANALYSIS.md) add illustrative task medians
+and batch means; [published prompt-improvement trials](PROMPT_IMPROVEMENT.md)
+test GEPA and TextGrad templates without changing benchmark instructions.
 
 This pipeline extracts deterministic measures from saved executions and optionally uses **Harbor's native `analyze` command** with a technique rubric for semantic review. It adds no agent adapters and does not rerun candidates or change Promptfoo grades. The [trace results](TRACE_RESULTS.md) cover 7,432 graded attempts: 4,356 initial attempts, 1,761 retries, 862 Tavily interventions, 396 Fable 5.2 runs and 57 pilots. Cohorts remain separate. [Interpreted findings](TRACE_FINDINGS.md), [per-arm data](TRACE_BY_ARM.csv), [question-framing data](TRACE_BY_FRAMING.csv) and the [external-method review](TRACE_RESEARCH.md) share these definitions.
 
@@ -30,7 +33,7 @@ Prefix each abbreviated step above with the trace ID and a colon to find the ful
 
 On 8 November 2026, **12/12 selected traces received schema-valid native Harbor analyses**, covering all 11 harness/arm combinations plus one additional diagnostic example. The first job, `20261108T151100Z`, completed eight reviews and had four infrastructure failures: three missing verifier directories and one setup timeout. Job `20261108T153434Z` successfully retried those four with the log-directory workaround and longer setup timeout.
 
-Reported agent cost across both jobs was **$0.07863**. Cost was recorded for 15 of 16 analysis attempts; the remaining attempt failed during setup before the agent ran. This is reviewer cost, separate from candidate execution and Promptfoo judging. The pilot validated orchestration and exposed citation/detail errors requiring manual review; it does not validate every semantic judgment. Full paid semantic review of the original 6,117 attempts or the expanded 7,432-attempt inventory has not been launched. The follow-up interpretation uses deterministic counts plus bounded inspection of original evidence.
+Reported agent cost across both jobs was **$0.07863**. Cost was recorded for 15 of 16 analysis attempts; the remaining attempt failed during setup before the agent ran. This is reviewer cost, separate from candidate execution and Promptfoo judging. The pilot validated orchestration and exposed citation/detail errors requiring manual review; it does not validate every semantic judgment. The native Harbor reviewer remains a diagnostic pilot. The separate [Jevotron review](TRACE_JEV_RESULTS.md) now covers all 7,432 attempts; deterministic counts and bounded inspection of original evidence remain necessary to assess its flags.
 
 Both native reports and staged inputs remain under the local output directory described below. They preserve the earlier extraction snapshots used by the pilot; subsequent extraction refinements distinguish normalized-page matches and expose implementation names more explicitly. The published aggregate snapshot uses the final extractor.
 

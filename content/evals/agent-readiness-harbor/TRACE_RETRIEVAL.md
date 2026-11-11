@@ -2,9 +2,10 @@
 
 This analysis uses the existing 7,432 attempts and 7,402 saved trajectories.
 It makes no candidate or search requests and leaves all published grades intact.
-The deterministic pass covers every trace; a separate Jevotron pilot reviews
-16 deliberately selected traces. Neither repeated retrieval nor uncited retrieval
-is automatically classified as waste.
+The deterministic pass covers every trace. The original 16-trace Jevotron pilot
+below was subsequently expanded to a [full-inventory review](TRACE_JEV_RESULTS.md),
+which retains separate uncertainty labels and critical review notes. Neither
+repeated retrieval nor uncited retrieval is automatically classified as waste.
 
 ## Raw statistics
 
@@ -145,7 +146,8 @@ Jev is useful as a review queue over prepared evidence. It cannot perform the
 cross-record joins, reconstruct missing HTTP data, or certify factual support
 without passages. A larger review should first annotate a balanced validation
 set with supported, contradicted and unknown claims, then measure reviewer
-agreement. No full-corpus paid semantic scan has been launched.
+agreement. The later [full-corpus Jevotron scan](TRACE_JEV_RESULTS.md) is complete;
+its flags remain unverified review priorities rather than support or waste rates.
 
 ## Reproduce
 

@@ -1,5 +1,10 @@
 # What the execution traces show
 
+New follow-ups provide a [full Jevotron review](TRACE_JEV_RESULTS.md),
+[illustrative energy results](ENERGY_ANALYSIS.md), and
+[GEPA/TextGrad prompt-improvement trials](PROMPT_IMPROVEMENT.md). They preserve
+historical grading and distinguish automated suggestions from verified findings.
+
 The follow-up [retrieval and citation analysis](TRACE_RETRIEVAL.md) quantifies
 friction and separates source provenance from factual support. It includes
 per-attempt statistics, a Jevotron review pilot and checked passages. The
@@ -89,4 +94,4 @@ Two OpenCode native calls are absent from ATIF. They contribute to call totals t
 
 For an example event, join the trace ID to `trials.jsonl` and append `:sSTEP:INDEX` to locate it in `events.jsonl`. Both are generated locally by [the pipeline](TRACE_ANALYSIS.md). Examples here were selected for diagnosis; their frequency comes from the aggregate tables, not from the examples themselves.
 
-The [external-method review](TRACE_RESEARCH.md) separates further checks feasible from these saved outputs from experiments that need new instrumentation. Full paid semantic review was not run; these findings combine whole-inventory deterministic measurements with bounded inspection of original evidence.
+The [external-method review](TRACE_RESEARCH.md) separates further checks feasible from these saved outputs from experiments that need new instrumentation. These findings combine whole-inventory deterministic measurements with bounded inspection of original evidence. The subsequent [full Jevotron review](TRACE_JEV_RESULTS.md) adds semantic triage across all attempts, with separate critical review and explicit evidence limitations.

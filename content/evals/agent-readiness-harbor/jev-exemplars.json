@@ -1,0 +1,62 @@
+[
+  {
+    "entry": {
+      "question": "How do I schedule a page?",
+      "answer": "Set the go-live date and click Publish. Developers must configure the scheduling command. Source: /scheduling/.",
+      "retrieval": [
+        {
+          "id": "example:s1:0",
+          "urls": ["/scheduling/"],
+          "status": "returned",
+          "returned_excerpt": "Set the go-live date and click Publish. Saving a draft alone will not schedule it.",
+          "excerpt_truncated": true
+        }
+      ]
+    },
+    "assessment": { "/answer": "UNKNOWN", "/retrieval": "NORMAL" }
+  },
+  {
+    "entry": {
+      "question": "Compare multi-site and multi-tenancy using the guide.",
+      "answer": "The guide's multi-site page does not cover multi-tenancy. Source: /multi-site/.",
+      "retrieval": [
+        {
+          "id": "example:s1:0",
+          "urls": ["/multi-site/"],
+          "status": "returned",
+          "returned_excerpt": "This page compares three hosting arrangements: multi-site, multi-instance, and multi-tenancy.",
+          "excerpt_truncated": false
+        }
+      ]
+    },
+    "assessment": { "/answer": "ANOMALY", "/retrieval": "NORMAL" }
+  },
+  {
+    "entry": {
+      "question": "Find release details.",
+      "answer": "",
+      "answer_present": false,
+      "retrieval": [
+        {
+          "id": "example:s1:0",
+          "tool": "WebFetch",
+          "urls": ["/changelog/"],
+          "fetch_prompt": "Which release added the feature?",
+          "status": "returned",
+          "returned_excerpt": "Release A added the feature.",
+          "excerpt_truncated": false
+        },
+        {
+          "id": "example:s2:0",
+          "tool": "WebFetch",
+          "urls": ["/changelog/"],
+          "fetch_prompt": "What limitations did the feature have at introduction?",
+          "status": "returned",
+          "returned_excerpt": "Initially it applied only to pages.",
+          "excerpt_truncated": false
+        }
+      ]
+    },
+    "assessment": { "/answer": "UNKNOWN", "/retrieval": "NORMAL" }
+  }
+]

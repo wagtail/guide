@@ -20,9 +20,12 @@ question with a fixed-release task and accept equivalent multi-tenancy wording.
 Those new evaluations must be distinguished by source hash/revision.
 
 The [retrieval and citation analysis](TRACE_RETRIEVAL.md) adds raw friction
-statistics, citation provenance and a small Jevotron pilot. The
-[energy feasibility note](ENERGY_ANALYSIS.md) confirms historical Neuralwatt
-request data is accessible; per-task energy attribution is not yet calculated.
+statistics and citation provenance. The [full Jevotron review](TRACE_JEV_RESULTS.md)
+covers all 7,432 attempts, with explicit unknowns and critically reviewed flags.
+[Neuralwatt energy results](ENERGY_ANALYSIS.md) provide per-task attributed energy,
+arm medians and supplemental batch means for 3,858 attempts.
+[GEPA and TextGrad prompt trials](PROMPT_IMPROVEMENT.md) produce reviewed
+suggestions without altering the benchmark or claiming measured improvements.
 
 These are documentation-answering tasks from [the original cases](../agent-readiness/tests.yaml), not tasks that modify a CMS or codebase. Each run asks one question and expects an answer with official citations.
 

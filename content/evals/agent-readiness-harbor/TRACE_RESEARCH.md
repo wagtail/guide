@@ -1,5 +1,11 @@
 # External methods and what to check next
 
+Subsequent work implements parts of these recommendations:
+[retrieval/citation measurements](TRACE_RETRIEVAL.md),
+[full Jevotron triage](TRACE_JEV_RESULTS.md),
+[illustrative task energy](ENERGY_ANALYSIS.md), and
+[published prompt-improvement trials](PROMPT_IMPROVEMENT.md).
+
 Research checked on **11 November 2026**, split across three agents and reconciled against the current [trace findings](TRACE_FINDINGS.md). These are design recommendations, not additional benchmark results. No new paid evaluations or third-party audits were launched.
 
 ## Different evaluations measure different outcomes
