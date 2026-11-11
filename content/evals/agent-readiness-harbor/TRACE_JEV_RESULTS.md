@@ -6,6 +6,27 @@ input ID has exactly one completed result. Candidate answers and benchmark
 grades were not rerun or changed. These are model-generated review priorities,
 not a new success metric or verified counts of hallucination and waste.
 
+## Assessment and recommended use
+
+**Jevotron is useful as a cheap triage layer, but its flags are not reliable
+enough to count as errors or wasted retrieval.** At approximately $2.06 for
+the scan and calibration, it surfaced concrete attribution contradictions,
+unnecessary fetches and repeated attempts to use denied tools. Critical review
+also found false alarms and insufficient caution when execution was opaque.
+
+Retain the scores and evidence links as a review queue. Use deterministic
+counts to establish repetition and failures, then inspect the original tool
+arguments and returned evidence to judge whether the work was unnecessary.
+Keep confirmed problems, plausible problems, insufficient evidence and rejected
+flags separate. A NORMAL label does not certify efficiency or citation support.
+
+Before using these judgments to compare models, independently review a
+stratified sample across harnesses, arms and evidence-visibility levels,
+including flagged, unflagged and UNKNOWN results. Reviewing unflagged traces
+is necessary to measure missed problems as well as false alarms. The existing
+diagnostic review does not provide that validation; this is a recommendation
+for a further study, not a completed accuracy assessment.
+
 ## Results and denominators
 
 | Field               | Eligible attempts | NORMAL label | ANOMALY label | UNKNOWN label | Anomaly probability ≥ 0.5 |
@@ -98,6 +119,10 @@ Flags that require restraint include:
   then fetches passages supporting document deletion. The revised reviewer
   does not flag that retrieval. Its legacy-editor citation still violates a
   separate benchmark source rule.
+- **Friction versus avoidable effort:** GLM's `3b963949db3fa304` encounters
+  rate limits and missing pages, then uses sitemap/llms discovery to find the
+  correct page. The failures and recovery are observable; the retrieval flag
+  does not establish that the recovery work was wasteful.
 
 Low-score controls included MiMo's content-checks answer and Vibe's privacy
 answer. Checked claims have support in the saved passages; this is not a
