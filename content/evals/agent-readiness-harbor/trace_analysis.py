@@ -738,6 +738,7 @@ def extract(args):
                     "framing": case["metadata"]["framing"],
                     "task_type": case["metadata"]["task"],
                     "prompt": case["vars"]["prompt"],
+                    "reference_urls": urls(case["vars"].get("reference", "")),
                     "passed": bool(grade["success"]),
                     "grade_error": clean(
                         (grade.get("response") or {}).get("error", "")
@@ -746,6 +747,7 @@ def extract(args):
                         "exception_type"
                     ),
                     "agent_seconds": seconds(result.get("agent_execution")),
+                    "agent_execution": result.get("agent_execution"),
                     "candidate_cost_usd": (result.get("agent_result") or {}).get(
                         "cost_usd"
                     ),
@@ -770,6 +772,7 @@ def extract(args):
                     "system_excerpt_truncated": len(system_excerpt) > 4000,
                     "answer_excerpt": clean(answer, 1200),
                     "answer_present": bool(answer),
+                    "answer_urls": answer_urls if answer else None,
                     "techniques": flags,
                     "tool_counts": dict(Counter(e["tool"] for e in events)),
                     "status_counts": dict(Counter(e["status"] for e in events)),
@@ -837,6 +840,9 @@ def extract(args):
     from trace_report import summarize
 
     summarize(args.output)
+    from trace_retrieval import summarize_retrieval
+
+    summarize_retrieval(args.output, records, all_events)
 
 
 def main():

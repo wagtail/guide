@@ -1,5 +1,11 @@
 # Analyze execution techniques
 
+The [retrieval and citation analysis](TRACE_RETRIEVAL.md) adds full-inventory
+friction counts, citation provenance, checked claim examples and a completed
+16-trace Jevotron pilot. Its raw CSVs preserve unknowns and do not label all
+repeated or uncited retrieval as waste. [Energy feasibility](ENERGY_ANALYSIS.md)
+documents the available Neuralwatt APIs and the unresolved attribution work.
+
 This pipeline extracts deterministic measures from saved executions and optionally uses **Harbor's native `analyze` command** with a technique rubric for semantic review. It adds no agent adapters and does not rerun candidates or change Promptfoo grades. The [trace results](TRACE_RESULTS.md) cover 7,432 graded attempts: 4,356 initial attempts, 1,761 retries, 862 Tavily interventions, 396 Fable 5.2 runs and 57 pilots. Cohorts remain separate. [Interpreted findings](TRACE_FINDINGS.md), [per-arm data](TRACE_BY_ARM.csv), [question-framing data](TRACE_BY_FRAMING.csv) and the [external-method review](TRACE_RESEARCH.md) share these definitions.
 
 It extends the [previous Promptfoo analysis](../agent-readiness/RESULTS.md): search versus site navigation, agent-readiness files, local workspace inspection, retrieval errors, and the relationship to explicit instructions. The original URL surface classifier is reused. New measures describe requests and visible sequences; they do not inherit the old classifier's assumption that a requested URL was successfully reached.

@@ -220,12 +220,15 @@
     task: information
     framing: site-named
     source: guide-content
+    grading_revision: 2
   vars:
     prompt: What's the difference between multi-site and multi-tenancy in Wagtail? Use the Wagtail user guide at guide.wagtail.org and link to it.
     reference: Multi-site is one Wagtail instance serving several websites that share a database, media and user accounts, and it's supported out of the box. Multi-tenancy is one instance serving several tenants, each with a separate database, and it needs customizations. https://guide.wagtail.org/en/reference/multi-site/
   assert:
-    - type: icontains-any
-      value: [separate database, separate databases, own database]
+    # Tables may put "Database" in a heading and "Separate per tenant" in a cell.
+    # Check the topic here; the rubric checks the shared/separate distinction.
+    - type: icontains
+      value: database
       metric: facts
     - type: regex
       value: 'guide\.wagtail\.org/en(-[\w.]+)?/reference/multi-site'
@@ -664,21 +667,23 @@
       value: Explains that images are grouped into collections (from Settings > Collections), which control access to them.
       metric: judge
 
-- description: start-latest-release
+- description: start-release-8-0
   metadata:
     task: releases
     framing: site-start
     source: guide-content
+    grading_revision: 2
   vars:
-    prompt: Go to guide.wagtail.org and find out what the most recent Wagtail release is, and its main highlight for content teams. Link to the page you used.
-    reference: Wagtail 8.0, whose highlight is the new v3 API to create, edit and publish content programmatically. https://guide.wagtail.org/en/releases/new-in-wagtail-8-0/
+    prompt: Go to guide.wagtail.org and find the release notes for Wagtail 8.0. What is the main highlight for content teams, and what does it let them do? Link to the page you used.
+    reference: Wagtail 8.0 introduces the v3 API to create, edit and publish content programmatically. https://guide.wagtail.org/en/releases/new-in-wagtail-8-0/
   assert:
-    - type: icontains
-      value: '8.0'
+    # The version is supplied in the prompt, so it is not a checked answer fact.
+    - type: icontains-any
+      value: [v3, version 3]
       metric: facts
     - type: regex
       value: 'guide\.wagtail\.org/en(-[\w.]+)?/releases/new-in-wagtail-8-0'
       metric: citation
     - type: llm-rubric
-      value: Names Wagtail 8.0 (or a patch release of it, such as 8.0.1) as the most recent release, with a highlight from its release notes such as the v3 API.
+      value: Identifies the new v3 API as the main highlight of Wagtail 8.0 and explains that it lets applications or integrations create, edit and publish content programmatically. Do not require or reward a claim that 8.0 is the latest release.
       metric: judge

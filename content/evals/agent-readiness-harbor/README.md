@@ -14,6 +14,16 @@ The [Tavily follow-up](SEARCH_RERUNS.md) replaces rate-limited OpenCode search t
 
 ## What the 33 questions test
 
+For the existing results, the cases and grading remain the original version.
+[Future grading fixes](GRADING_NOTES.md) replace the moving latest-release
+question with a fixed-release task and accept equivalent multi-tenancy wording.
+Those new evaluations must be distinguished by source hash/revision.
+
+The [retrieval and citation analysis](TRACE_RETRIEVAL.md) adds raw friction
+statistics, citation provenance and a small Jevotron pilot. The
+[energy feasibility note](ENERGY_ANALYSIS.md) confirms historical Neuralwatt
+request data is accessible; per-task energy attribution is not yet calculated.
+
 These are documentation-answering tasks from [the original cases](../agent-readiness/tests.yaml), not tasks that modify a CMS or codebase. Each run asks one question and expects an answer with official citations.
 
 | Type                      | Count | Coverage                                                                                                                                                                                                  |

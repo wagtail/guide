@@ -1,5 +1,11 @@
 # What the execution traces show
 
+The follow-up [retrieval and citation analysis](TRACE_RETRIEVAL.md) quantifies
+friction and separates source provenance from factual support. It includes
+per-attempt statistics, a Jevotron review pilot and checked passages. The
+[grading notes](GRADING_NOTES.md) explain the future-only fixes for two grading
+artefacts identified in these traces; the scores below remain historical.
+
 This analysis covers the **7,432 graded attempts** enumerated in [trace-sources.yaml](trace-sources.yaml): the original 4,356 runs, 1,761 failure-selected retries, 862 Tavily interventions, 396 Fable 5.2 runs, and 57 integration pilots. Cohorts are kept separate throughout. The ungraded Codex connectivity diagnostic is described in [the MCP pilot](MCP_PILOT.md); older setup/debugging exports are outside this inventory.
 
 The [generated report](TRACE_RESULTS.md) and [raw statistics](TRACE_PATTERNS.csv) are the numeric source of truth. They contain **47 detected patterns**, with counts, percentages, eligible denominators and unknown counts. This page interprets selected patterns and documents counterexamples. No candidates or judges were rerun for this analysis, and no saved grades were changed.

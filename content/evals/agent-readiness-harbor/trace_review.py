@@ -101,6 +101,78 @@ def stage(root, records, events, population=None):
     )
 
 
+def stage_citation_evidence(root, records, events):
+    """Bounded historical evidence for Jev triage; no current-page substitutions."""
+    from replay import call_api
+    from trace_analysis import text
+
+    by_trial = defaultdict(list)
+    for event in events:
+        by_trial[event["trial_id"]].append(event)
+    staged = []
+    for record in records:
+        path = Path(record["trial_path"])
+        trajectory = path.parent / "agent/trajectory.json"
+        steps = (
+            json.loads(trajectory.read_text())["steps"] if trajectory.exists() else []
+        )
+        outputs = {
+            o["source_call_id"]: text(o.get("content"))
+            for step in steps
+            for o in (step.get("observation") or {}).get("results", [])
+            if o.get("source_call_id")
+        }
+        answer = call_api(
+            "", {}, {"vars": {"trial_path": str(path), "arm": record["arm"]}}
+        ).get("output", "")
+        calls = by_trial[record["id"]]
+        # Both beginning and end of long attempts; never imply omitted middle is empty.
+        selected = calls if len(calls) <= 12 else calls[:6] + calls[-6:]
+        retrieval = [
+            {
+                **{
+                    k: event[k]
+                    for k in ("id", "kind", "tool", "status", "query", "urls")
+                },
+                "observation_present": event["observation_present"],
+                "returned_excerpt": outputs.get(event["call_id"], "")[:4000],
+                "excerpt_truncated": len(outputs.get(event["call_id"], "")) > 4000,
+                "error_signal": event["error_signal"],
+            }
+            for event in selected
+        ]
+        staged.append(
+            sanitized(
+                {
+                    "id": record["id"],
+                    "question": record["prompt"],
+                    "harness": record["harness"],
+                    "arm": record["arm"],
+                    "answer": answer[:12000],
+                    "answer_truncated": len(answer) > 12000,
+                    "answer_present": bool(answer),
+                    "retrieval": retrieval,
+                    "calls_omitted": len(calls) - len(selected),
+                    "native_calls_without_atif": record["native_calls_without_atif"],
+                    "trace_present": record["trace_present"],
+                }
+            )
+        )
+    root.mkdir(parents=True, exist_ok=False)
+    jsonl(root / "evidence.jsonl", staged)
+    dump(
+        root / "selection.json",
+        {
+            "ids": [r["id"] for r in records],
+            "selection": "Diagnostic sample using the existing technique-enriched harness/arm selector; not prevalence.",
+            "max_calls": 12,
+            "max_characters_per_observation": 4000,
+            "max_answer_characters": 12000,
+            "source": "Saved ATIF observations and replayed final answers; no live web fetches.",
+        },
+    )
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
@@ -109,6 +181,11 @@ def main():
     parser.add_argument("--limit", type=int, default=12)
     parser.add_argument("--all", action="store_true")
     parser.add_argument("--stage-only", action="store_true")
+    parser.add_argument(
+        "--citation-review-stage",
+        action="store_true",
+        help="Stage bounded saved passages and answers for Jevotron; no paid calls",
+    )
     parser.add_argument(
         "--resume-report",
         type=Path,
@@ -144,6 +221,13 @@ def main():
         print("No missing semantic analyses to run.")
         return
     run = datetime.now(UTC).strftime("%Y%m%dT%H%M%SZ")
+    if args.citation_review_stage:
+        staging = args.directory / "citation-review-inputs" / run
+        stage_citation_evidence(
+            staging, records, lines(args.directory / "events.jsonl")
+        )
+        print(f"Staged {len(records)} citation/retrieval review records at {staging}")
+        return
     staging = args.directory / "semantic-inputs" / run
     stage(staging, records, lines(args.directory / "events.jsonl"), len(population))
     selection_path = staging / "selection.json"
