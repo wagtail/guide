@@ -80,3 +80,47 @@ The queue stops on missing/invalid candidate outputs, new Tavily access/rate-lim
 On 10 November at 16:45 UTC, the queue stopped after Qwen native completed all 84 attempts with three `AgentTimeoutError` results. Two were `info-stale-pages` and one was `troubleshoot-locked-page`; their traces showed continued source-code investigation at the unchanged 300-second limit. On 11 November these three exact result paths were recorded in the cache's `reviewed-timeouts-2026-11-11.json`, accepted as failed attempts, and the queue resumed at grading. No attempts were rerun, no timeout was extended and no partial answer was salvaged. Other execution, tool-access and grading checks remain active. At recovery, 770/862 Tavily attempts had finished and all 1,313 recorded Tavily searches had succeeded; Fable had not started.
 
 The durable user service is `agent-readiness-tavily-fable-20261110`. Live stage and stop details are recorded in `tavily-fable-queue-2026-11-10.json`; each export has `queue.log`. Scheduling is conditional on successful completion of the preceding stages, not a wall-clock estimate. Read those artifacts for current progress; planned counts are not completed results.
+
+## Completed results — 11 November 2026
+
+The queue completed at **14:45 UTC on 11 November**. All 862 Tavily attempts and all 396 Fable comparison trials were executed, graded and reported. The integration pilots remain separate.
+
+### OpenCode with Tavily
+
+**750/862 attempts passed (87.0%)**. Four Qwen attempts hit the unchanged 300-second timeout and remain failures: three native and one web-only. There were no grading errors. The user's later instruction to accept partial Qwen results after reaching the Tavily quota was applied; no failed searches or timed-out attempts were rerun and no provider was substituted. All 1,442 recorded Tavily search calls had native status `completed`; no native search error states were recorded. This is trace evidence, not a billing/quota reconciliation.
+
+| Model/arm                 | Passed | Planned |
+| ------------------------- | -----: | ------: |
+| opencode-deepseek--native |      3 |       4 |
+| opencode-deepseek--web    |      3 |       3 |
+| opencode-gemma--native    |     48 |      80 |
+| opencode-gemma--web       |      4 |      17 |
+| opencode-glm--native      |     41 |      46 |
+| opencode-glm--web         |     81 |      86 |
+| opencode-glm-full--native |     76 |      81 |
+| opencode-glm-full--web    |     85 |      90 |
+| opencode-kimi--native     |     11 |      13 |
+| opencode-kimi--web        |     85 |      87 |
+| opencode-mimo--native     |     81 |      86 |
+| opencode-mimo--web        |     89 |      93 |
+| opencode-qwen--native     |     67 |      84 |
+| opencode-qwen--web        |     76 |      92 |
+
+Known candidate-token cost totaled **$20.73**, with coverage for all 862 attempts; judging cost **$3.49**. Search credits are excluded. [Tavily results CSV](TAVILY_RESULTS.csv) includes model/arm timing, costs, errors and uncertain judge decisions. This selected subset is not comparable to the original whole-suite rate without pairing the affected slots.
+
+### Claude Fable 5.2
+
+**321/396 passed (81.1%)**, with no execution or grading errors. Every arm contains all 33 original cases and three repeats. One baseline judgment was `UNKNOWN`, which remains passing under the original rules. The four-trial control pilot passed 3/4, with only the baseline answer failing; it is excluded below.
+
+| Arm        | Passed | Success | Median agent time | Candidate-token cost |
+| ---------- | -----: | ------: | ----------------: | -------------------: |
+| native     |  96/99 |   97.0% |            33.3 s |               $24.42 |
+| baseline   |  34/99 |   34.3% |            13.0 s |                $4.82 |
+| web        |  96/99 |   97.0% |            32.7 s |               $22.62 |
+| native+mcp |  95/99 |   96.0% |            12.5 s |               $13.55 |
+
+Trace checks found guide MCP calls in 87/99 native+MCP trials. The baseline contained no tool calls, and web-only calls were limited to `WebSearch` and `WebFetch`.
+
+The native+MCP arm had a similar observed pass rate to the other tool-enabled arms and lower median time and candidate-token cost. This does not establish statistical equivalence or isolate MCP availability from its supplied descriptions/instructions. These trials use the live site and fixed original release expectations.
+
+Known candidate-token cost totaled **$65.40**, plus **$1.81** for judging, excluding the pilot. [Fable 5.2 results CSV](FABLE_5_2_RESULTS.csv) provides full accounting and setup timings. Agent timing excludes container/CLI installation; the median setup time was approximately 91–99 seconds per arm.
