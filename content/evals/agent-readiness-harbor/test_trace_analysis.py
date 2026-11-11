@@ -7,16 +7,135 @@ from trace_analysis import (
     controls,
     curl_targets,
     extract_events,
+    feature_changes,
     local_command,
     sanitized,
     status,
     techniques,
     urls,
 )
+from trace_report import statistics_exports
 from trace_review import CONTEXT, stage
 
 
 class TestTraceAnalysis(unittest.TestCase):
+    def test_retry_changes_require_evidence_for_each_measure(self):
+        original = {"trace_present": True, "answer_present": False, "techniques": {}}
+        retry = {
+            "trace_present": True,
+            "answer_present": True,
+            "techniques": {
+                "search_requested": True,
+                "answer_cites_en_latest": True,
+            },
+        }
+        features = ["search_requested", "answer_cites_en_latest"]
+        self.assertEqual(
+            feature_changes(original, retry, features), (["search_requested"], [])
+        )
+        original["trace_present"] = False
+        self.assertEqual(feature_changes(original, retry, features), (None, None))
+
+    def test_statistics_distinguish_missing_zero_and_answer_denominators(self):
+        base = {
+            "phase": "test",
+            "harness": "test",
+            "model": "test",
+            "agent_version": "1",
+            "arm": "native",
+            "case": "question",
+            "framing": "site-named",
+            "passed": False,
+            "execution_error": None,
+            "native_tool_call_count": None,
+            "native_calls_without_atif": 0,
+            "agent_seconds": None,
+        }
+        records = [
+            dict(
+                base,
+                id="zero",
+                trace_present=True,
+                answer_present=True,
+                event_count=0,
+                recorded_tool_call_count=0,
+                techniques={"search_requested": False, "answer_cites_en_latest": True},
+            ),
+            dict(
+                base,
+                id="ten",
+                trace_present=True,
+                answer_present=False,
+                event_count=10,
+                recorded_tool_call_count=10,
+                techniques={"search_requested": True},
+            ),
+            dict(
+                base,
+                id="missing",
+                trace_present=False,
+                answer_present=False,
+                event_count=0,
+                recorded_tool_call_count=None,
+                techniques={},
+            ),
+        ]
+        with tempfile.TemporaryDirectory() as directory:
+            patterns, tools = statistics_exports(Path(directory), records)
+        search = next(
+            r
+            for r in patterns
+            if r["scope"] == "all-recorded" and r["pattern"] == "search_requested"
+        )
+        self.assertEqual(
+            (
+                search["present"],
+                search["eligible"],
+                search["unknown"],
+                search["observed_rate"],
+            ),
+            (1, 2, 1, 0.5),
+        )
+        answer = next(
+            r
+            for r in patterns
+            if r["scope"] == "all-recorded" and r["pattern"] == "answer_cites_en_latest"
+        )
+        self.assertEqual(
+            (answer["present"], answer["eligible"], answer["unknown"]), (1, 1, 2)
+        )
+        calls = next(r for r in tools if r["scope"] == "all-recorded")
+        self.assertEqual(
+            (
+                calls["count_coverage"],
+                calls["zero_call_traces"],
+                calls["median_calls"],
+                calls["p90_calls"],
+            ),
+            (2, 1, 5, 10),
+        )
+
+    def test_native_error_evidence_is_retained_and_redacted(self):
+        events = extract_events(
+            [
+                {
+                    "step_id": 1,
+                    "tool_calls": [
+                        {
+                            "tool_call_id": "failed",
+                            "function_name": "webfetch",
+                            "arguments": {"url": "https://guide.wagtail.org/missing/"},
+                        }
+                    ],
+                }
+            ],
+            "trial",
+            {"failed": {"status": "error", "error": "HTTP 404 Bearer secret-value"}},
+        )
+        self.assertEqual(events[0]["status"], "failed")
+        self.assertNotIn("secret-value", events[0]["error_signal"])
+        self.assertIn("HTTP 404", events[0]["error_signal"])
+
     def test_tavily_search_is_recognized_without_relabeling_raw_call(self):
         events = extract_events(
             [

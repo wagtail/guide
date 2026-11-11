@@ -27,6 +27,9 @@ CONTEXT = (
     "execution_error",
     "trace_present",
     "event_count",
+    "recorded_tool_call_count",
+    "native_calls_without_atif",
+    "answer_present",
     "instruction_hash",
     "system_visibility",
     "agent_implementation",
@@ -75,7 +78,7 @@ def stage(root, records, events, population=None):
         trial = root / record["id"]
         trial.mkdir()
         (trial / "trial.log").touch()
-        context = {key: record[key] for key in CONTEXT}
+        context = {key: record.get(key) for key in CONTEXT}
         context = sanitized(context)
         dump(trial / "context.json", context)
         jsonl(trial / "events.jsonl", sanitized(by_trial[record["id"]]))

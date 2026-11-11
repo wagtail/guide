@@ -124,3 +124,5 @@ Trace checks found guide MCP calls in 87/99 native+MCP trials. The baseline cont
 The native+MCP arm had a similar observed pass rate to the other tool-enabled arms and lower median time and candidate-token cost. This does not establish statistical equivalence or isolate MCP availability from its supplied descriptions/instructions. These trials use the live site and fixed original release expectations.
 
 Known candidate-token cost totaled **$65.40**, plus **$1.81** for judging, excluding the pilot. [Fable 5.2 results CSV](FABLE_5_2_RESULTS.csv) provides full accounting and setup timings. Agent timing excludes container/CLI installation; the median setup time was approximately 91–99 seconds per arm.
+
+The completed [trace-pattern analysis](TRACE_FINDINGS.md) uses consistent cohort definitions and distinguishes guide MCP from Tavily web search. [Raw pattern statistics](TRACE_PATTERNS.csv) and [per-trace tool-call counts](TRACE_TRIALS.csv) retain absolute counts, relative rates and missing evidence. See the [external-method review](TRACE_RESEARCH.md) for proposed next checks.

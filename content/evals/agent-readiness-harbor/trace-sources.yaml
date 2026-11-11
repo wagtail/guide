@@ -1,5 +1,4 @@
-# Published benchmark scope. Add other prepared exports explicitly; do not mix
-# integration pilots into benchmark rates.
+# Keep every cohort separate: initial benchmark, retries, interventions and pilots.
 sources:
   - path: ~/.cache/guide-agent-eval/harbor/claude-comparison-2026-11-05
     phase: initial
@@ -9,3 +8,15 @@ sources:
     phase: initial
   - path: ~/.cache/guide-agent-eval/harbor/failed-retries-2026-11-07
     phase: retry
+  - path: ~/.cache/guide-agent-eval/harbor/tavily-reruns-2026-11-10
+    phase: tavily
+  - path: ~/.cache/guide-agent-eval/harbor/fable-5-2-comparison-2026-11-10
+    phase: fable-5-2
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-pilot-2026-11-10-preview
+    phase: mcp-pilot
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-pilot-2026-11-10-rest
+    phase: mcp-pilot
+  - path: ~/.cache/guide-agent-eval/harbor/tavily-pilot-2026-11-10
+    phase: tavily-pilot
+  - path: ~/.cache/guide-agent-eval/harbor/fable-5-2-pilot-2026-11-10
+    phase: fable-pilot

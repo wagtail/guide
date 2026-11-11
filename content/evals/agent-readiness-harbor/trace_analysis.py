@@ -241,6 +241,8 @@ def urls(value):
 
 
 def status(observation, native=None):
+    if isinstance(native, dict):
+        native = native.get("status")
     if native:
         return (
             "failed"
@@ -289,7 +291,11 @@ def opencode_statuses(trial):
             if event.get("type") == "tool_use":
                 part = event.get("part") or {}
                 if part.get("callID"):
-                    result[part["callID"]] = (part.get("state") or {}).get("status")
+                    state = part.get("state") or {}
+                    result[part["callID"]] = {
+                        "status": state.get("status"),
+                        "error": clean(state.get("error", ""), 180),
+                    }
     return result
 
 
@@ -323,7 +329,8 @@ def extract_events(steps, trial_id, native=None):
             if resolved_name.endswith(("__fetch_docs_page", "_fetch_docs_page")):
                 kind = "mcp_fetch"
             obs = observations.get(cid)
-            state = status(obs, (native or {}).get(cid))
+            native_state = (native or {}).get(cid)
+            state = status(obs, native_state)
             command = text(args.get("command") or args.get("cmd") or args.get("input"))
             shell_targets, is_curl = (
                 curl_targets(command) if kind == "shell" else ([], False)
@@ -363,6 +370,10 @@ def extract_events(steps, trial_id, native=None):
                     "call_id": cid,
                     "tool": name,
                     "kind": kind,
+                    "guide_mcp": kind.startswith("mcp_")
+                    and resolved_name.removeprefix("mcp__").startswith(
+                        ("wagtail-guide_", "wagtail_guide_")
+                    ),
                     "status": state,
                     "observation_present": obs is not None,
                     "query": clean(query, 500),
@@ -393,7 +404,15 @@ def extract_events(steps, trial_id, native=None):
                     "argument_excerpt": clean(command, 800)
                     if kind in ("shell", "opaque")
                     else "",
-                    "error_signal": clean(body, 180)
+                    "error_signal": clean(
+                        (
+                            native_state.get("error")
+                            if isinstance(native_state, dict)
+                            else ""
+                        )
+                        or body,
+                        180,
+                    )
                     if state in ("failed", "denied", "error_text")
                     else "",
                 }
@@ -427,6 +446,14 @@ def techniques(events, prompt):
             flags["markdown_requested"] |= e["markdown_requested"]
             flags["delegation_requested"] |= e["kind"] == "delegate"
             flags["mcp_requested"] |= e["kind"].startswith("mcp_")
+            flags["guide_mcp_requested"] |= e.get("guide_mcp", False)
+            flags["guide_search_requested"] |= (
+                e.get("guide_mcp", False) and e["kind"] == "mcp_search"
+            )
+            flags["tavily_search_requested"] |= e["tool"] == "tavily_tavily_search"
+            flags["web_search_requested"] |= (
+                e["kind"] == "search" or e["tool"] == "tavily_tavily_search"
+            )
             flags["tool_error"] |= e["status"] in ("failed", "denied", "error_text")
             flags["missing_observations"] |= not e["observation_present"]
             flags["continued_after_error"] |= previous_failure
@@ -435,6 +462,13 @@ def techniques(events, prompt):
                 flags["repeated_query"] |= q in queries
                 queries.add(q)
             for u in e["urls"]:
+                flags["legacy_editor_manual_requested"] |= (
+                    "docs.wagtail.org" == urlsplit(u).hostname
+                    and "editor_manual" in urlsplit(u).path
+                )
+                flags["en_latest_requested"] |= "guide.wagtail.org" == urlsplit(
+                    u
+                ).hostname and urlsplit(u).path.startswith("/en-latest/")
                 key = normalize_url(u)
                 source_id = search_origins.get(key) or origins.get(key)
                 source_urls = (
@@ -524,6 +558,16 @@ def controls(config):
     ]:
         if isinstance(kwargs.get(name), dict):
             result[name] = {k: kwargs[name][k] for k in keys if k in kwargs[name]}
+    mcp = (kwargs.get("opencode_config") or {}).get("mcp") or {}
+    if mcp:
+        result["opencode_mcp_servers"] = [
+            {
+                "name": name,
+                "type": server.get("type"),
+                "urls": urls(server.get("url", "")),
+            }
+            for name, server in mcp.items()
+        ]
     return result
 
 
@@ -549,15 +593,53 @@ def grouped(records, fields, features):
                 **dict(zip(fields, key, strict=True)),
                 "attempts": len(group),
                 "traces_present": len(visible),
+                "answers_present": sum(r.get("answer_present", False) for r in group),
                 "passes": sum(r["passed"] for r in group),
                 "median_agent_seconds": median(timings) if timings else None,
                 **{
                     f: sum(r["techniques"].get(f, False) for r in visible)
                     for f in features
                 },
+                **{
+                    f + "_rate": (
+                        sum(r["techniques"].get(f, False) for r in group) / denominator
+                        if (
+                            denominator := sum(
+                                r.get("answer_present", False) for r in group
+                            )
+                            if f.startswith("answer_")
+                            else len(visible)
+                        )
+                        else None
+                    )
+                    for f in features
+                },
             }
         )
     return result
+
+
+def feature_changes(original, record, features):
+    if not original["trace_present"] or not record["trace_present"]:
+        return None, None
+    eligible = [
+        f
+        for f in features
+        if not f.startswith("answer_")
+        or (original["answer_present"] and record["answer_present"])
+    ]
+    return (
+        [
+            f
+            for f in eligible
+            if record["techniques"].get(f) and not original["techniques"].get(f)
+        ],
+        [
+            f
+            for f in eligible
+            if original["techniques"].get(f) and not record["techniques"].get(f)
+        ],
+    )
 
 
 def extract(args):
@@ -585,12 +667,15 @@ def extract(args):
                 job, case = jobs[name], cases[result["task_name"]]
                 trace = path.parent / "agent/trajectory.json"
                 steps = load(trace)["steps"] if trace.exists() else []
+                native_statuses = (
+                    opencode_statuses(path.parent)
+                    if job["entry"]["harness"] == "opencode"
+                    else {}
+                )
                 events = extract_events(
                     steps,
                     trial_id,
-                    opencode_statuses(path.parent)
-                    if job["entry"]["harness"] == "opencode"
-                    else None,
+                    native_statuses,
                 )
                 flags = (
                     techniques(events, case["vars"]["prompt"]) if trace.exists() else {}
@@ -619,16 +704,24 @@ def extract(args):
                 source_path = manifest.get("retry_sources", {}).get(
                     result["config"]["task"]["source"]
                 )
-                answer = next(
-                    (
-                        text(s["message"])
-                        for s in reversed(steps)
-                        if s["source"] == "agent"
-                        and not s.get("tool_calls")
-                        and text(s["message"])
-                    ),
-                    "",
+                response = grade.get("response") or {}
+                answer = (
+                    text(response.get("output", ""))
+                    if not response.get("error")
+                    else ""
                 )
+                answer_urls = urls(answer)
+                if answer:
+                    flags["answer_cites_legacy_editor_manual"] = any(
+                        urlsplit(u).hostname == "docs.wagtail.org"
+                        and "editor_manual" in urlsplit(u).path
+                        for u in answer_urls
+                    )
+                    flags["answer_cites_en_latest"] = any(
+                        urlsplit(u).hostname == "guide.wagtail.org"
+                        and urlsplit(u).path.startswith("/en-latest/")
+                        for u in answer_urls
+                    )
                 record = {
                     "id": trial_id,
                     "trial_path": str(path),
@@ -639,6 +732,7 @@ def extract(args):
                     "job": name,
                     "harness": job["entry"]["harness"],
                     "model": job["entry"]["model"],
+                    "agent_version": (result.get("agent_info") or {}).get("version"),
                     "arm": job["arm"],
                     "case": result["task_name"],
                     "framing": case["metadata"]["framing"],
@@ -657,6 +751,17 @@ def extract(args):
                     ),
                     "trace_present": trace.exists(),
                     "event_count": len(events),
+                    "native_tool_call_count": len(native_statuses)
+                    if job["entry"]["harness"] == "opencode"
+                    else None,
+                    "native_calls_without_atif": len(
+                        set(native_statuses) - {e["call_id"] for e in events}
+                    ),
+                    "recorded_tool_call_count": len(
+                        set(native_statuses) | {e["call_id"] for e in events}
+                    )
+                    if trace.exists() or native_statuses
+                    else None,
                     "instruction_hash": ihash,
                     "system_visibility": instruction["system_visibility"],
                     "agent_implementation": instruction["agent_implementation"],
@@ -664,6 +769,7 @@ def extract(args):
                     "recorded_system_excerpt": clean(system_excerpt, 4000),
                     "system_excerpt_truncated": len(system_excerpt) > 4000,
                     "answer_excerpt": clean(answer, 1200),
+                    "answer_present": bool(answer),
                     "techniques": flags,
                     "tool_counts": dict(Counter(e["tool"] for e in events)),
                     "status_counts": dict(Counter(e["status"] for e in events)),
@@ -697,6 +803,7 @@ def extract(args):
             and original["prompt"] == record["prompt"]
             and original["model"] == record["model"]
         )
+        added, removed = feature_changes(original, record, features)
         pairs.append(
             {
                 "initial_id": original["id"],
@@ -705,16 +812,8 @@ def extract(args):
                 "recovered": record["passed"],
                 "both_traces_present": original["trace_present"]
                 and record["trace_present"],
-                "added_techniques": [
-                    f
-                    for f in features
-                    if record["techniques"].get(f) and not original["techniques"].get(f)
-                ],
-                "removed_techniques": [
-                    f
-                    for f in features
-                    if original["techniques"].get(f) and not record["techniques"].get(f)
-                ],
+                "added_techniques": added,
+                "removed_techniques": removed,
             }
         )
     assert len({p["initial_id"] for p in pairs}) == len(pairs)

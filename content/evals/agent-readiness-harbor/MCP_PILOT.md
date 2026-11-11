@@ -86,3 +86,5 @@ A separate Sol connectivity diagnostic explicitly asked it to discover and use t
 Cursor wraps calls as `mcpToolCall` with server and tool identifiers. Offline normalization now recognizes that wrapper; native logs confirm discovery status `ready` and successful search/fetch calls. The archived Promptfoo grades predate this normalization and retain their old zero MCP metric for Cursor. The CSV audit corrects MCP usage without rejudging answers or changing pass/fail outcomes.
 
 The aggregate audit and per-trial records are saved as `mcp-pilot-audit-2026-11-10.json`. This pilot and the connectivity diagnostic remain separate from the original benchmark and its retries.
+
+The completed [trace-pattern analysis](TRACE_FINDINGS.md) uses consistent cohort definitions and distinguishes guide MCP from Tavily web search. [Raw pattern statistics](TRACE_PATTERNS.csv) and [per-trace tool-call counts](TRACE_TRIALS.csv) retain absolute counts, relative rates and missing evidence. See the [external-method review](TRACE_RESEARCH.md) for proposed next checks.

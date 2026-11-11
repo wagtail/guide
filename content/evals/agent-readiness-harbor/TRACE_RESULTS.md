@@ -1,12 +1,12 @@
 # Techniques in the saved agent traces
 
-Analyzed **6,117 benchmark attempts**: 4,356 initial runs and 1,761 failure-selected retries. **6,087 trajectories** contain 16,865 distinct recorded tool calls; 30 attempts have no saved trajectory. Missing traces are not classified as no-tool answers.
+Analyzed **7,432 graded attempts across separate cohorts**: 4,356 original initial runs, 1,761 failure-selected retries, and 1,315 follow-up/pilot attempts. **7,402 trajectories** contain 22,896 distinct recorded tool calls; 30 attempts have no saved trajectory. Missing traces are not classified as no-tool answers.
 
 The analysis reuses the original Promptfoo URL surface classifier, but measures **requests**, not successful access. It retains failed/blocked calls and exposes missing observations. Codex script contents establish requested intent, not confirmed nested execution. The old reports’ “reached” and “grounded” counts should not be treated as equivalent to these measures.
 
 Visible-link flags use the original normalized-page matcher: guide-version, Markdown suffix, query and fragment differences are ignored. Events distinguish exact sanitized URLs from normalized-page matches. These establish visible source candidates, not proof that the model followed a particular link.
 
-## Native-tool techniques by model
+## Original benchmark: native-tool techniques by model
 
 Fractions use recorded trajectories as the denominator. Script search is included in search requests but also shown separately. “Opaque” means the wrapper prevents a direct absence claim. Positive direct counts remain lower bounds where observations are incomplete.
 
@@ -30,7 +30,7 @@ Fractions use recorded trajectories as the denominator. Script search is include
 | opencode    | qwen-3.8-27b        | 99       | 99     | 84/99           | 0                    | 9/99           | 42/99            | 3/99              | 29/99            |
 | vibe        | mistral-large-4     | 99       | 99     | 86/99           | 0                    | 4/99           | 1/99             | 0/99              | 1/99             |
 
-## Question framing
+## Original benchmark: question framing
 
 These are **different questions**, not randomized paraphrases. “Site-named” has 19 questions, “site-not-named” nine, and “site-start” five. The table describes associations with wording; it does not isolate the causal effect of an instruction. Native arms only; each harness includes all its tested models.
 
@@ -90,3 +90,42 @@ retry-pairs.jsonl links every retry to its original failure and lists added/remo
 - semantic-inputs/ and analysis-jobs/: whitelisted inputs and Harbor-native rubric review; keep model assessments separate from deterministic observations.
 
 No new candidate executions or grading changes are made by this pipeline. No proxy headers were captured in these runs, so HTTP Accept negotiation, redirect success and browser-only capabilities cannot be inferred from requests. Explicit Markdown formats are requests, not proof of served content. A URL with no visible earlier source is not automatically a guess. Shell analysis recognizes a conservative subset of literal curl and local commands; unrecognized shell constructs are not interpreted or executed.
+
+## Completed follow-ups
+
+Each cohort stays separate from the original benchmark. Pattern fractions use available trajectories; tool counts include unique native OpenCode calls omitted from ATIF. No-tool traces contribute zero; missing counts are blank. Codex wrappers count as one outer call, not all nested operations.
+
+| Cohort       | Attempts | Count coverage | Total calls | Mean | Median | P90 | Max | Zero-call traces |
+| ------------ | -------- | -------------- | ----------- | ---- | ------ | --- | --- | ---------------- |
+| fable-5-2    | 396      | 396            | 1031        | 2.60 | 3.0    | 5   | 9   | 126              |
+| fable-pilot  | 4        | 4              | 10          | 2.50 | 3.0    | 4   | 4   | 1                |
+| initial      | 4356     | 4328           | 13565       | 3.13 | 2.0    | 8   | 177 | 1446             |
+| mcp-pilot    | 51       | 51             | 152         | 2.98 | 3      | 5   | 7   | 0                |
+| retry        | 1761     | 1759           | 3302        | 1.88 | 0      | 6   | 168 | 1192             |
+| tavily       | 862      | 862            | 4830        | 5.60 | 4.0    | 12  | 48  | 6                |
+| tavily-pilot | 2        | 2              | 8           | 4.00 | 4.0    | 6   | 6   | 0                |
+
+### Fable 5.2: same questions, different tool arms
+
+| Arm        | Passes | Web search | Guide MCP | Homepage first | Local inspection | Any tool error | Median calls | Median seconds |
+| ---------- | ------ | ---------- | --------- | -------------- | ---------------- | -------------- | ------------ | -------------- |
+| native     | 96/99  | 72/99      | 0/99      | 3/99           | 0/99             | 0/99           | 4            | 33.3           |
+| baseline   | 34/99  | 0/99       | 0/99      | 0/99           | 0/99             | 0/99           | 0            | 13.0           |
+| web        | 96/99  | 80/99      | 0/99      | 6/99           | 0/99             | 0/99           | 2            | 32.7           |
+| native+mcp | 95/99  | 0/99       | 87/99     | 1/99           | 0/99             | 4/99           | 4            | 12.5           |
+
+### Tavily: exact affected slots
+
+Each Tavily attempt is paired to its exact original slot. The previous outcome is the existing failure retry when present, otherwise the initial attempt. Previously passing slots are retained. Search provider, tool interface and run date changed; improvements and regressions are descriptive, not a causal estimate. The four timeouts remain failures.
+
+| Slots | Initial passes | Previous passes | Tavily passes | Improved vs previous | Regressed vs previous |
+| ----- | -------------- | --------------- | ------------- | -------------------- | --------------------- |
+| 862   | 669            | 736             | 750           | 57                   | 43                    |
+
+### Raw statistics and pattern definitions
+
+[Pattern statistics](TRACE_PATTERNS.csv) gives present/not-observed/unknown counts and rates for every detected pattern, by cohort and model/arm, plus an explicitly pooled inventory row. Answer-citation rates use available replayed answers; other rates use available trajectories. Not observed is not proof of absence, especially for opaque wrappers or incomplete observations.
+
+[Tool-call statistics](TRACE_TOOL_CALLS.csv) gives totals, mean, median, nearest-rank p90, maximum and zero-call counts. [Per-trace statistics](TRACE_TRIALS.csv) gives each trace ID, case, result, call counts and every pattern (1/0; blank when unknown). It contains no prompts, responses, credentials or absolute local paths. [Tavily pairs](TRACE_TAVILY_PAIRS.csv) exposes both improvements and regressions without double-counting retries.
+
+Any-search includes public web search, guide MCP search and recognizable Codex scripted search intent. Web-search excludes guide MCP and opaque scripted intent; guide-MCP excludes Tavily. MCP is a transport label, not a synonym for guide access. Per-pattern definitions are in [the data dictionary](TRACE_PATTERN_DEFINITIONS.csv). Initial benchmark tables above retain their original cohorts.
