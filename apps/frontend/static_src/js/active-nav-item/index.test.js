@@ -17,4 +17,12 @@ describe('initActiveNavItem', () => {
     expect(concepts.classList.contains('active')).toBe(false);
     expect(guides.classList.contains('active')).toBe(true);
   });
+
+  it('marks only the link matching the current path as the current page', () => {
+    initActiveNavItem();
+
+    const [concepts, guides] = document.querySelectorAll('.navigation__link');
+    expect(concepts.hasAttribute('aria-current')).toBe(false);
+    expect(guides.getAttribute('aria-current')).toBe('page');
+  });
 });

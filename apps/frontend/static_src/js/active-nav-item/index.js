@@ -3,6 +3,7 @@ export const initActiveNavItem = () => {
   links.forEach((link) => {
     if (new URL(link.href).pathname === window.location.pathname) {
       link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
     }
   });
 };
