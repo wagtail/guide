@@ -18,7 +18,7 @@ class VersionedUrlRedirectMiddleware:
             return self.get_response(request)
 
         path = request.path_info
-        query = dict(parse_qsl(request.META["QUERY_STRING"]))
+        query = dict(parse_qsl(request.META.get("QUERY_STRING", "")))
 
         match = PATTERN.match(path)
         if match:
