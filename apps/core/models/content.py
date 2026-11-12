@@ -2,6 +2,7 @@ import json
 
 from bs4 import BeautifulSoup
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 from django.template import Context, Template
 from django.utils.functional import cached_property
 from django.utils.html import format_html
@@ -97,18 +98,18 @@ class ContentPage(MarkdownRouteMixin, Page):
     def serve(self, request, *args, **kwargs):
         if request.method == "POST":
             data = json.loads(request.body)
-            if "pk" in data:
-                feedback = Feedback.objects.get(pk=data["pk"])
+            if "token" in data:
+                feedback = get_object_or_404(Feedback, token=data["token"], page=self)
                 feedback.feedback_text = data["feedback_text"]
                 feedback.save()
-                data = {"pk": feedback.pk}
+                data = {"token": str(feedback.token)}
             else:
                 new_feedback = Feedback(
                     feedback=data["feedback"],
                     page=self,
                 )
                 new_feedback.save()
-                data = {"pk": new_feedback.pk}
+                data = {"token": str(new_feedback.token)}
 
             return HttpResponse(json.dumps(data))
         else:
