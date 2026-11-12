@@ -37,3 +37,9 @@ A moderator has the next level of access after an administrator. A moderator has
 ## Editor
 
 An editor has the least level of access to the [Admin interface](/en/concepts/wagtail-interfaces/). An editor can only create drafts but not publish them. Also, as in the case of a moderator, an editor can't access the [Settings](/en/how-to-guides/find-your-way-around/) section of the [Admin interface](/en/concepts/wagtail-interfaces/).
+
+## Accounts for integrations
+
+If your site uses the [Wagtail API](/en/concepts/wagtail-api/), integrations connect to it with an API token that belongs to a user account. The integration has exactly the same permissions as that user.
+
+Consider creating a dedicated user account for each integration, with only the permissions it needs, rather than using someone's personal account. To learn how to create tokens and who can manage them, see [Manage API tokens](/en/how-to-guides/manage-api-tokens/).
