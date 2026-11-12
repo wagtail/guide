@@ -31,7 +31,13 @@ class TestMarkdownIsNotHtmlEscaped(TestCase):
         response = self.client.get(
             self.content_page.url, headers={"accept": "text/markdown"}
         )
-        self.assertNotEscaped(response.content.decode())
+        content = response.content.decode()
+        # Converted from the page's HTML, the title gets Markdown escaping,
+        # where `\<` reads as `<`, but no HTML entities.
+        self.assertIn("# Bread & Butter \\<3", content)
+        self.assertIn(DESCRIPTION, content)
+        for entity in ("&amp;", "&lt;", "&#39;", "&#34;", "&quot;"):
+            self.assertNotIn(entity, content)
 
     def test_llms_txt(self):
         response = self.client.get("/llms.txt")
