@@ -1,5 +1,0 @@
-job,model,versions,expected,finished,graded,passed,success_rate,errors,grading_errors,unknown_judgments,median_agent_seconds,timing_coverage,median_setup_seconds,known_judge_cost_usd,known_agent_cost_usd,cost_coverage,cost_per_success_usd
-claude-fable-5-2--native,anthropic/claude-fable-5-2,2.1.322,99,99,99,96,0.9696969696969697,0,0,0,33.250693,99,94.46325999999999,0.4469618,24.416606100000003,99,0.25433964687500005
-claude-fable-5-2--baseline,anthropic/claude-fable-5-2,2.1.322,99,99,99,34,0.3434343434343434,0,0,1,12.988477,99,95.895234,0.470804,4.8177484,99,0.1416984823529412
-claude-fable-5-2--web,anthropic/claude-fable-5-2,2.1.322,99,99,99,96,0.9696969696969697,0,0,0,32.700636,99,90.750271,0.4556436,22.618082700000002,99,0.23560502812500003
-claude-fable-5-2--native+mcp,anthropic/claude-fable-5-2,2.1.322,99,99,99,95,0.9595959595959596,0,0,0,12.465403,99,99.242756,0.4373398,13.55173,99,0.1426497894736842

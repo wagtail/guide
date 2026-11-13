@@ -1,9 +1,0 @@
-# Separate from the main benchmark matrix: this preview may be unlisted or unstable.
-entries:
-  - id: opencode-kimi-preview
-    harness: opencode
-    model: neuralwatt/kimi-k3.1-pro
-    version: '1.19.5'
-    allow_unlisted_model: true
-    # Verified fallback for this preview in the earlier pilots.
-    credentials: { NEURALWATT_API_KEY: [neuralwatt_keys, glm-5.3] }

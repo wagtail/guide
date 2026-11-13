@@ -1,8 +1,0 @@
-# Released 2026-11-09; requires Claude Code >=2.1.321.
-# https://platform.claude.com/docs/en/models/fable-5-2/overview
-entries:
-  - id: claude-fable-5-2
-    harness: claude-code
-    model: anthropic/claude-fable-5-2
-    version: '2.1.322'
-    credentials: { ANTHROPIC_API_KEY: [ANTHROPIC_API_KEY] }

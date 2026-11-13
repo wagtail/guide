@@ -1,0 +1,94 @@
+# Model IDs checked 2026-11-05. Explicit IDs keep reruns comparable.
+# Versions are resolved once by `prepare` and saved in the experiment manifest.
+entries:
+  - id: claude-haiku
+    harness: claude-code
+    model: anthropic/claude-haiku-5-5
+    credentials: { ANTHROPIC_API_KEY: [ANTHROPIC_API_KEY] }
+  - id: claude-sonnet
+    harness: claude-code
+    model: anthropic/claude-sonnet-5-5
+    credentials: { ANTHROPIC_API_KEY: [ANTHROPIC_API_KEY] }
+  - id: claude-opus
+    harness: claude-code
+    model: anthropic/claude-opus-5-5
+    credentials: { ANTHROPIC_API_KEY: [ANTHROPIC_API_KEY] }
+  - id: claude-fable
+    harness: claude-code
+    model: anthropic/claude-fable-5-1
+    credentials: { ANTHROPIC_API_KEY: [ANTHROPIC_API_KEY] }
+  - id: codex-sol
+    harness: codex
+    model: openai/gpt-6.1-sol
+    credentials: { OPENAI_API_KEY: [OPENAI_API_KEY] }
+  - id: codex-luna
+    harness: codex
+    model: openai/gpt-6-luna
+    credentials: { OPENAI_API_KEY: [OPENAI_API_KEY] }
+  - id: codex-terra
+    harness: codex
+    model: openai/gpt-6.1-terra
+    credentials: { OPENAI_API_KEY: [OPENAI_API_KEY] }
+  - id: codex-astra
+    harness: codex
+    model: openai/gpt-6-astra
+    credentials: { OPENAI_API_KEY: [OPENAI_API_KEY] }
+  - id: cursor-grok
+    harness: cursor-cli
+    model: cursor/grok-4.7-medium
+    credentials: { CURSOR_API_KEY: [CURSOR_API_KEY] }
+    # Standard-context, non-Fast list rates: cursor.com/docs/models-and-pricing.
+    kwargs:
+      pricing: { input: 2, output: 6, cache_read: 0.5 }
+  - id: opencode-deepseek
+    harness: opencode
+    model: neuralwatt/deepseek-v4.1-flash
+    credentials: { NEURALWATT_API_KEY: [neuralwatt_keys, deepseek-v4.1-flash] }
+  - id: opencode-glm
+    harness: opencode
+    model: neuralwatt/glm-5.3-flash
+    credentials: { NEURALWATT_API_KEY: [neuralwatt_keys, glm-5.3-flash] }
+  - id: opencode-mimo
+    harness: opencode
+    model: neuralwatt/mimo-v2.6-pro
+    credentials: { NEURALWATT_API_KEY: [neuralwatt_keys, mimo-v2.6-pro] }
+  # Additional Neuralwatt models checked 2026-11-06.
+  - id: opencode-glm-full
+    harness: opencode
+    model: neuralwatt/glm-5.3
+    credentials: { NEURALWATT_API_KEY: [neuralwatt_keys, glm-5.3] }
+  - id: opencode-qwen
+    harness: opencode
+    model: neuralwatt/qwen-3.8-27b
+    credentials: { NEURALWATT_API_KEY: [neuralwatt_keys, qwen-3.8-27b] }
+  - id: opencode-gemma
+    harness: opencode
+    model: neuralwatt/gemma-4-31b
+    # Its matching key returned 401 on 2026-11-06; this fallback was verified.
+    credentials: { NEURALWATT_API_KEY: [neuralwatt_keys, glm-5.3] }
+  - id: opencode-kimi
+    harness: opencode
+    model: neuralwatt/kimi-k3
+    # Its matching key returned 401 on 2026-11-06; this fallback was verified.
+    credentials: { NEURALWATT_API_KEY: [neuralwatt_keys, glm-5.3] }
+  - id: vibe-large
+    harness: vibe
+    model: mistral/mistral-large-4
+    credentials: { MISTRAL_API_KEY: [MISTRAL_API_KEY] }
+    # Promotional token prices on docs.mistral.ai/models/mistral-large, 2026-11-05.
+    env: { VIBE_INPUT_PRICE: '0.68', VIBE_OUTPUT_PRICE: '2.09' }
+
+  - id: claude-fable-5-2
+    harness: claude-code
+    model: anthropic/claude-fable-5-2
+    version: '2.1.322'
+    credentials: { ANTHROPIC_API_KEY: [ANTHROPIC_API_KEY] }
+
+  - id: opencode-kimi-preview
+    harness: opencode
+    model: neuralwatt/kimi-k3.1-pro
+    version: '1.19.5'
+    default: false
+    allow_unlisted_model: true
+    # Verified fallback for this preview in the earlier pilots.
+    credentials: { NEURALWATT_API_KEY: [neuralwatt_keys, glm-5.3] }
