@@ -60,4 +60,5 @@ cursor-cli:
   # baseline unavailable: deny-all hooks still allowed server-side web calls in pilot.
 vibe:
   native: {}
+  native+mcp: {}
   baseline: {} # tool_controls.NoToolsVibe adds --disabled-tools '*'.

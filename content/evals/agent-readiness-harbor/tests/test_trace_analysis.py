@@ -190,6 +190,37 @@ class TestTraceAnalysis(unittest.TestCase):
             ["https://guide.wagtail.org/en/concepts/scheduled-publishing/"],
         )
 
+    def test_vibe_mcp_names_preserve_identity_and_resolve_retrieval(self):
+        events = extract_events(
+            [
+                {
+                    "step_id": 1,
+                    "tool_calls": [
+                        {
+                            "tool_call_id": "search",
+                            "function_name": "mcp_wagtail_guide.search_docs",
+                            "arguments": {"query": "Scheduling pages"},
+                        },
+                        {
+                            "tool_call_id": "fetch",
+                            "function_name": "mcp_wagtail_guide.fetch_docs_page",
+                            "arguments": {"url": "/en/concepts/scheduled-publishing/"},
+                        },
+                    ],
+                }
+            ],
+            "trial",
+        )
+        self.assertTrue(all(e["guide_mcp"] for e in events))
+        self.assertEqual(events[0]["kind"], "mcp_search")
+        self.assertEqual(events[0]["query"], "Scheduling pages")
+        self.assertEqual(events[1]["kind"], "mcp_fetch")
+        self.assertEqual(events[1]["tool"], "mcp_wagtail_guide.fetch_docs_page")
+        self.assertEqual(
+            events[1]["urls"],
+            ["https://guide.wagtail.org/en/concepts/scheduled-publishing/"],
+        )
+
     def test_guide_mcp_relative_targets_and_recorded_configuration(self):
         events = extract_events(
             [

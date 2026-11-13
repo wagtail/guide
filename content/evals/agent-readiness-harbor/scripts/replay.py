@@ -53,7 +53,12 @@ def text(content):
 
 
 def guide_mcp_call(name, arguments):
-    """Resolve Cursor's wrapper using its recorded server/tool identifiers."""
+    """Resolve harness-specific names using recorded server/tool identifiers."""
+    if name in (
+        "mcp_wagtail_guide.search_docs",
+        "mcp_wagtail_guide.fetch_docs_page",
+    ):
+        return f"mcp__wagtail-guide__{name.split('.')[-1]}", arguments
     if (
         name == "mcpToolCall"
         and arguments.get("serverIdentifier") == "wagtail-guide"

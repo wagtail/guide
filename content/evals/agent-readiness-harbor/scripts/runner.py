@@ -119,6 +119,7 @@ def agent_config(entry, arm, pricing):
         ("claude-code", "web"): "WebClaude",
         ("vibe", "baseline"): "NoToolsVibe",
         ("vibe", "native"): "CurrentVibe",
+        ("vibe", "native+mcp"): "CurrentVibe",
     }.get((entry["harness"], arm))
     if extension:
         agent.pop("name")

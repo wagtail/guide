@@ -23,7 +23,7 @@ The [matrix](config/matrix.yaml) contains 18 full-suite model/harness pairs and 
 | Claude Code, OpenCode | `native`, `baseline`, `web`, `native+mcp` |
 | Codex                 | `native`, `baseline`, `native+mcp`        |
 | Cursor                | `native`, `native+mcp`                    |
-| Mistral Vibe          | `native`, `baseline`                      |
+| Mistral Vibe          | `native`, `baseline`, `native+mcp`        |
 
 - `native`: default harness tools.
 - `baseline`: no usable tools; attempted tool calls fail the audit.
