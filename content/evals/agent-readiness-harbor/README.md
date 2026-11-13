@@ -1,121 +1,84 @@
 # Agent readiness with Harbor
 
-Run the [existing 33 agent-readiness questions](../agent-readiness/README.md)
-through Harbor's installed agents, then grade saved answers with the original
-Promptfoo assertions and rubric. Harbor supplies containers, agent installation,
-execution, trajectories and accounting; no custom agent loops are added.
+Harbor runs the [33 agent-readiness questions](../agent-readiness/README.md) through native coding agents. Promptfoo grades saved answers with the shared assertions and Sonnet 5.5 rubric.
 
-## Read the results
+**[Results and findings](results/README.md)** covers success, speed, cost, retries, MCP, search, traces and energy.
 
-- [Benchmark results](results/README.md): success, speed and cost for all 18
-  full-suite model/harness pairs, including Fable 5.2; [48 result rows](results/benchmark.csv).
-- [Retries](results/retries.md): one retry per original failure, with cumulative
-  time and cost. [Tavily search](results/search.md) and [MCP pilots](results/mcp-pilot.md)
-  retain their own denominators.
-- [Trace findings](analysis/README.md): retrieval techniques, instruction effects,
-  citation support and useful automated-review highlights. [Raw statistics](analysis/statistics.md)
-  and [retrieval measurements](analysis/retrieval.md) include counts, rates and unknowns.
-- [Energy results](results/energy.md): illustrative Neuralwatt medians and totals.
-- [Claude versus Promptfoo](results/claude-comparison.md): the historical comparison.
+## Files
 
-## Folder guide
+| Path             | Contents                                                |
+| ---------------- | ------------------------------------------------------- |
+| `results/`       | Consolidated report and benchmark CSVs.                 |
+| `analysis/data/` | Trace statistics, definitions and evidence coverage.    |
+| `config/`        | Model matrix, tool arms, run sources and review rubric. |
+| `scripts/`       | Runner, answer replay and trace analysis.               |
+| `tests/`         | Offline regression tests.                               |
 
-| Folder         | Contents                                                                    |
-| -------------- | --------------------------------------------------------------------------- |
-| `results/`     | Final benchmark and follow-up results, including energy.                    |
-| `analysis/`    | Trace findings, research context and numeric tables in `data/`.             |
-| `config/`      | One model matrix, tool arms, trace sources and native-review configuration. |
-| `scripts/`     | Harbor orchestration, answer replay and trace analysis.                     |
-| `tests/`       | Offline regression tests.                                                   |
-| `methodology/` | Control validation, grading notes and analysis reproduction.                |
+## Configuration
 
-Raw runs remain under `~/.cache/guide-agent-eval/harbor/`; they are not committed.
+The [matrix](config/matrix.yaml) contains 18 full-suite model/harness pairs and an opt-in Kimi K3.1 Pro preview. Select models with `--entry`; use [arms.yaml](config/arms.yaml) for tool controls.
 
-## Models and tool arms
+| Harness               | Supported arms                            |
+| --------------------- | ----------------------------------------- |
+| Claude Code, OpenCode | `native`, `baseline`, `web`, `native+mcp` |
+| Codex                 | `native`, `baseline`, `native+mcp`        |
+| Cursor                | `native`, `native+mcp`                    |
+| Mistral Vibe          | `native`, `baseline`                      |
 
-The single [matrix](config/matrix.yaml) contains 18 full-suite model/harness
-pairs and the opt-in Kimi preview used in pilots. Model IDs and recorded CLI
-versions are explicit; update them deliberately for new experiments.
-
-| Harness      | Models                                                                                                                |
-| ------------ | --------------------------------------------------------------------------------------------------------------------- |
-| Claude Code  | Haiku 5.5, Sonnet 5.5, Opus 5.5, Fable 5.1 and 5.2                                                                    |
-| Codex        | GPT-6.1 Sol, GPT-6 Luna, GPT-6.1 Terra, GPT-6 Astra                                                                   |
-| Cursor       | Grok 4.7 Medium                                                                                                       |
-| OpenCode     | DeepSeek V4.1 Flash, GLM 5.3 Flash, MiMo v2.6 Pro, GLM 5.3, Qwen 3.8 27B, Gemma 4 31B, Kimi K3; Kimi K3.1 Pro preview |
-| Mistral Vibe | Mistral Large 4                                                                                                       |
-
-[Tool arms](config/arms.yaml) are `native`, `baseline` (no usable tools), `web`
-(search/fetch only), and `native+mcp` (native tools plus the guide MCP server).
-Cursor supports only native and MCP. Codex web-only failed validation; it is
-excluded. Vibe supports native and baseline. OpenClaw is deferred because the
-upstream adapter failed before inference. See [pilot findings](methodology/pilots.md),
-[MCP validation](results/mcp-pilot.md) and [retry/control investigations](methodology/retries.md).
-
-Baseline replay rejects attempted tool use, including blocked attempts. Vibe's
-empty discovery operation is allowed only when it exposes no usable tools.
-[Compatibility wrappers](scripts/tool_controls.py) apply native CLI controls and
-normalize Vibe exports; Harbor still implements agent execution.
-
-## Questions and grading
-
-The cases cover 15 information questions, eight troubleshooting questions, six
-release questions, three developer-routing questions and one guide-to-developer
-bridge. Nineteen name the guide, nine ask for official documentation, and five
-ask the agent to start at the site. These are different questions, not randomized
-wording variants. Each arm runs all 33 questions three times.
-
-Candidates see only the question. Promptfoo reuses deterministic checks and the
-Sonnet 5.5 rubric judge; passing `UNKNOWN:` judgments retain the original behavior.
-Historical grades are unchanged. [Future grading fixes](methodology/grading.md)
-address the stale latest-release expectation and overly literal multi-tenancy
-wording. Source hashes prevent accidentally mixing grading revisions.
+- `native`: default harness tools.
+- `baseline`: no usable tools; attempted tool calls fail the audit.
+- `web`: search and fetch.
+- `native+mcp`: native tools plus `https://guide.wagtail.org/mcp`.
+- OpenCode search follow-ups used the Tavily MCP (`search_provider: tavily`).
 
 ## Run
 
-Requires Docker, Node, `just`, `uv` and provider credentials. Harbor 0.25.0 is
-pinned in a separate environment. Credentials come from environment variables,
-then `~/dev/.keys.yml` (override with `--keys`); only the selected provider's key
-is passed to each job. Generated configs use environment references.
+Requirements: Docker, Node, `just`, `uv` and provider credentials. Harbor 0.25.0 is pinned.
+
+- Keys: environment variables, then `~/dev/.keys.yml`; override with `--keys`.
+- Tavily also reads a literal `TAVILY_API_KEY` assignment from `~/.extra`.
+- Use a fresh output directory for each experiment.
+- Preparation is offline except for version/catalog lookups. Execution and grading make paid calls.
 
 ```sh
 just eval-agents-init
 just eval-agents-harbor doctor
-
-# Preparation makes no model calls. Start with one case.
 just eval-agents-harbor prepare ~/.cache/guide-agent-eval/harbor/pilot \
-  --entry opencode-deepseek --case info-schedule-page \
-  --arms native,baseline,web --repeat 1 --timeout 90
-
-# Candidate execution, then paid grading of saved answers.
+  --entry claude-fable-5-2 --case info-schedule-page \
+  --arms native,baseline,web,native+mcp --repeat 1
 just eval-agents-harbor run ~/.cache/guide-agent-eval/harbor/pilot
 just eval-agents-harbor grade ~/.cache/guide-agent-eval/harbor/pilot
 just eval-agents-harbor report ~/.cache/guide-agent-eval/harbor/pilot
 just eval-agents-harbor-cli view ~/.cache/guide-agent-eval/harbor/pilot/jobs
 ```
 
-Use `--entry claude-fable-5-2` or `--entry opencode-kimi-preview` to select those
-entries from the same matrix. The preview has `default: false`: an unfiltered
-preparation excludes it. All default entries with `--arms native,baseline,web
---repeat 3` produce 47 jobs × 99 = **4,653 candidate runs**, plus judging.
-Adding MCP changes that count. Unsupported combinations are reported explicitly.
-Use a fresh export directory; resume interrupted jobs through Harbor's native
-commands. There is no aggregate spending cap.
+All default models with `--arms native,baseline,web --repeat 3` produce **4,653 candidate runs**, plus grading. The preview requires an explicit `--entry` selection. Default limits are 300 seconds per attempt and one concurrent trial per job; spending scales with selected jobs and repeats.
 
-## Accounting and interpretation
+## Grading and reruns
 
-Success denominators include failed attempts. Agent time excludes installation
-and grading; setup is recorded separately. Costs are reported or token-price
-estimates with explicit coverage, not invoices; missing costs stay unknown.
-Search fees and subscriptions are excluded. Retry comparisons include both
-attempts' time and cost. Original runs, retries and interventions retain their
-identities in the data.
+- Cases: 15 information, eight troubleshooting, six release, three developer-routing and one guide-to-developer question.
+- Framing: 19 name the guide, nine ask for official documentation, five start at the site.
+- Success requires all checks to pass. The original rubric accepts passing `UNKNOWN:` judgments.
+- Historical results retain their original grades.
+- New evaluations pin the release question to 8.0 and accept broader multi-tenancy database wording. Both cases carry grading revision 2.
+- Manifests record cases, source hashes and CLI versions; grading enforces the source hash.
+- For before/after runs, match grading, model/CLI versions, tools, timeouts and repeats; record the site revision and deployment time.
+- Fresh preparation resolves unpinned CLI versions. Cursor installs the current version.
+- Compare within matching arms and phases. Each pair measures the model together with its harness.
 
-The live-site benchmark compares model plus harness, with different reasoning
-defaults and tool visibility. It does not isolate harness effects or reproduce
-the old proxy/site-feature ablation. No HTTP headers were captured. Opaque nested
-tools can limit trace counts. MCP configuration tests assisted access, not
-organic endpoint discovery. See [analysis methodology](methodology/trace-analysis.md).
+## Analyze saved traces
+
+```sh
+just eval-agents-traces --output ~/.cache/guide-agent-eval/harbor/trace-analysis
+just eval-agents-trace-review ~/.cache/guide-agent-eval/harbor/trace-analysis --stage-only --limit 16
+```
+
+- Extraction reads the runs in [trace-sources.yaml](config/trace-sources.yaml).
+- Outputs include `trials.jsonl`, `events.jsonl`, `instructions.jsonl`, retry links and CSV statistics.
+- IDs derive from original trial paths; retain those IDs when moving data.
+- Event exports contain tool metadata; original trajectories contain full returned observations.
+- Optional paid Harbor review: omit `--stage-only`. Inspect its evidence-linked findings against the saved traces.
+- Metrics retain missing/opaque coverage. Source-support review uses the original returned passages.
 
 ## Verify
 
