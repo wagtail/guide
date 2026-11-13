@@ -1,5 +1,5 @@
 {
-  "attempts": 7432,
+  "attempts": 7927,
   "phases": {
     "initial": 4356,
     "retry": 1761,
@@ -7,12 +7,13 @@
     "fable-5-2": 396,
     "mcp-pilot": 51,
     "tavily-pilot": 2,
-    "fable-pilot": 4
+    "fable-pilot": 4,
+    "mcp-full": 495
   },
-  "traces_present": 7402,
-  "events": 22896,
+  "traces_present": 7894,
+  "events": 24290,
   "instruction_profiles": 25,
-  "source_config": "trace-sources.yaml",
+  "source_config": "config/trace-sources.yaml",
   "retry_pairs": 1761,
   "features": [
     "answer_cites_en_latest",

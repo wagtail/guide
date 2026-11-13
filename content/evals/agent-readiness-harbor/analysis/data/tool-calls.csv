@@ -1,5 +1,5 @@
 scope,phase,harness,model,arm,attempts,count_coverage,missing_counts,total_calls,zero_call_traces,mean_calls,median_calls,p90_calls,max_calls,atif_calls,native_calls_without_atif,opaque_traces
-all-recorded,all,all,all,all,7432,7402,30,22898,2771,3.0934882464198865,1.0,8,177,22896,2,489
+all-recorded,all,all,all,all,7927,7894,33,24292,2777,3.0772738788953635,2.0,8,177,24290,2,687
 arm,fable-5-2,claude-code,anthropic/claude-fable-5-2,baseline,99,99,0,0,99,0,0,0,0,0,0,0
 arm,fable-5-2,claude-code,anthropic/claude-fable-5-2,native,99,99,0,345,13,3.484848484848485,4,6,8,345,0,0
 arm,fable-5-2,claude-code,anthropic/claude-fable-5-2,native+mcp,99,99,0,403,11,4.070707070707071,4,6,9,403,0,0
@@ -52,6 +52,11 @@ arm,initial,opencode,neuralwatt/qwen-3.8-27b,native,99,99,0,1108,0,11.1919191919
 arm,initial,opencode,neuralwatt/qwen-3.8-27b,web,99,99,0,805,0,8.131313131313131,6,15,41,805,0,0
 arm,initial,vibe,mistral/mistral-large-4,baseline,99,99,0,395,22,3.98989898989899,5,8,11,395,0,0
 arm,initial,vibe,mistral/mistral-large-4,native,99,99,0,334,8,3.3737373737373737,3,6,11,334,0,0
+arm,mcp-full,claude-code,anthropic/claude-haiku-5-5,native+mcp,99,98,1,373,5,3.806122448979592,4.0,6,7,373,0,0
+arm,mcp-full,claude-code,anthropic/claude-opus-5-5,native+mcp,99,97,2,358,1,3.6907216494845363,3,6,7,358,0,0
+arm,mcp-full,codex,openai/gpt-6-astra,native+mcp,99,99,0,134,0,1.3535353535353536,1,2,4,134,0,99
+arm,mcp-full,codex,openai/gpt-6-luna,native+mcp,99,99,0,206,0,2.080808080808081,2,4,7,206,0,99
+arm,mcp-full,opencode,neuralwatt/deepseek-v4.1-flash,native+mcp,99,99,0,323,0,3.2626262626262625,3,6,8,323,0,0
 arm,mcp-pilot,claude-code,anthropic/claude-fable-5-1,native+mcp,3,3,0,12,0,4,4,5,5,12,0,0
 arm,mcp-pilot,claude-code,anthropic/claude-haiku-5-5,native+mcp,3,3,0,12,0,4,4,5,5,12,0,0
 arm,mcp-pilot,claude-code,anthropic/claude-opus-5-5,native+mcp,3,3,0,12,0,4,3,6,6,12,0,0
@@ -132,6 +137,7 @@ arm,tavily-pilot,opencode,neuralwatt/glm-5.3-flash,web,1,1,0,2,0,2,2,2,2,2,0,0
 cohort,fable-5-2,all,all,all,396,396,0,1031,126,2.6035353535353534,3.0,5,9,1031,0,0
 cohort,fable-pilot,all,all,all,4,4,0,10,1,2.5,3.0,4,4,10,0,0
 cohort,initial,all,all,all,4356,4328,28,13565,1446,3.134242144177449,2.0,8,177,13564,1,418
+cohort,mcp-full,all,all,all,495,492,3,1394,6,2.8333333333333335,3.0,5,8,1394,0,198
 cohort,mcp-pilot,all,all,all,51,51,0,152,0,2.980392156862745,3,5,7,152,0,12
 cohort,retry,all,all,all,1761,1759,2,3302,1192,1.877202956225128,0,6,168,3301,1,59
 cohort,tavily,all,all,all,862,862,0,4830,6,5.603248259860789,4.0,12,48,4830,0,0

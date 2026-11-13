@@ -20,3 +20,13 @@ sources:
     phase: tavily-pilot
   - path: ~/.cache/guide-agent-eval/harbor/fable-5-2-pilot-2026-11-10
     phase: fable-pilot
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-full-2026-11-13/opencode-deepseek
+    phase: mcp-full
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-full-2026-11-13/claude-opus
+    phase: mcp-full
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-full-2026-11-13/claude-haiku
+    phase: mcp-full
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-full-2026-11-13/codex-astra
+    phase: mcp-full
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-full-2026-11-13/codex-luna
+    phase: mcp-full

@@ -1,9 +1,9 @@
 # Results and findings
 
-- **Benchmark:** 4,752 first attempts; 18 model/harness pairs; 33 questions × three repeats per arm.
-- **Dates:** original batches completed 7 November 2026; Fable 5.2 completed 11 November.
+- **Benchmark:** 5,247 first attempts; 18 model/harness pairs; 33 questions × three repeats per arm.
+- **Dates:** original batches completed 7 November 2026; Fable 5.2 completed 11 November; five further MCP suites completed 13 November.
 - **Follow-ups:** 1,761 failure retries, 862 Tavily reruns and 57 integration-pilot attempts.
-- **Trace inventory:** 7,432 attempts, with 7,402 saved trajectories.
+- **Trace inventory:** 7,927 attempts, with 7,894 saved trajectories.
 
 ## Benchmark
 
@@ -13,17 +13,17 @@ Each cell counts passes out of 99 planned answers, including failed attempts.
 
 | Harness / model                |  Native | No tools | Web-only | Native + MCP |
 | ------------------------------ | ------: | -------: | -------: | -----------: |
-| Claude Code / Haiku 5.5        |   78/99 |     9/99 |    82/99 |            — |
+| Claude Code / Haiku 5.5        |   78/99 |     9/99 |    82/99 |      93/99 † |
 | Claude Code / Sonnet 5.5       |   83/99 |    15/99 |    84/99 |            — |
-| Claude Code / Opus 5.5         |   89/99 |    34/99 |    87/99 |            — |
+| Claude Code / Opus 5.5         |   89/99 |    34/99 |    87/99 |      94/99 † |
 | Claude Code / Fable 5.1        |   91/99 |    37/99 |    93/99 |            — |
 | Claude Code / Fable 5.2        |   96/99 |    34/99 |    96/99 |        95/99 |
 | Codex / Sol                    |   95/99 |    26/99 |        — |            — |
-| Codex / Luna                   |   86/99 |  16/99 † |        — |            — |
+| Codex / Luna                   |   86/99 |  16/99 † |        — |        88/99 |
 | Codex / Terra                  |   88/99 |    12/99 |        — |            — |
-| Codex / Astra                  | 93/99 † |  23/99 † |        — |            — |
+| Codex / Astra                  | 93/99 † |  23/99 † |        — |        96/99 |
 | Cursor / Grok 4.7 Medium       |   96/99 |        — |        — |            — |
-| OpenCode / DeepSeek V4.1 Flash |   93/99 |     9/99 |    93/99 |            — |
+| OpenCode / DeepSeek V4.1 Flash |   93/99 |     9/99 |    93/99 |      95/99 † |
 | OpenCode / GLM 5.3 Flash       |   90/99 |  12/99 † |    87/99 |            — |
 | OpenCode / MiMo v2.6 Pro       |   95/99 |     1/99 |    92/99 |            — |
 | OpenCode / GLM 5.3             |   87/99 |   7/99 † |  76/99 † |            — |
@@ -38,8 +38,8 @@ Each cell counts passes out of 99 planned answers, including failed attempts.
 
 - Time: median agent execution, with setup and grading recorded separately.
 - Cost: mean estimated candidate API usage per attempt, shown with complete coverage.
-- Total: **$263.56** candidate usage, covering 4,723/4,752 attempts; **$19.37** judge usage.
-- [Benchmark CSV](benchmark.csv): all 48 rows, including baseline/MCP timing, versions and errors.
+- Total: **$297.66** candidate usage, covering 5,215/5,247 attempts; **$21.42** judge usage.
+- [Benchmark CSV](benchmark.csv): all 53 rows, including baseline/MCP timing, versions and errors.
 
 | Harness / model                | Native median seconds |          Native mean USD | Web median seconds |             Web mean USD |
 | ------------------------------ | --------------------: | -----------------------: | -----------------: | -----------------------: |
@@ -86,11 +86,21 @@ We used the **Tavily MCP** for OpenCode search.
 
 We configured `https://guide.wagtail.org/mcp` alongside each harness's native tools.
 
-- **Fable 5.2 full run:** 99 attempts, 95 passes; guide MCP used in 87 attempts.
-- **Other models' pilot:** 17 model/harness pairs × three questions; **49/51 passed**.
-- OpenCode, Claude and Cursor used MCP in every pilot attempt.
-- Codex's 12 pilot attempts recorded zero guide MCP calls. An explicit-use diagnostic confirmed connectivity.
-- [Pilot results](mcp-pilot.csv).
+- **Full suites:** six model/harness pairs × 99 attempts, including Fable 5.2.
+- The five 13 November suites passed **466/495**, using the original grading snapshot and CLI versions.
+- Four execution failures remain in the scores: three Claude setup timeouts and one DeepSeek agent exit.
+- **Integration pilot:** 17 model/harness pairs × three questions; **49/51 passed**. [Pilot results](mcp-pilot.csv).
+
+| Model                          | Passes | Median agent seconds | Mean candidate USD | Guide MCP / available traces |
+| ------------------------------ | -----: | -------------------: | -----------------: | ---------------------------: |
+| OpenCode / DeepSeek V4.1 Flash |  95/99 |                  9.4 |          $0.001290 |                        93/99 |
+| Claude Code / Opus 5.5         |  94/99 |                 13.9 |    Partial (97/99) |                        85/97 |
+| Claude Code / Haiku 5.5        |  93/99 |                 10.1 |    Partial (98/99) |                        83/98 |
+| Codex / Astra                  |  96/99 |                 12.2 |          $0.263735 |                         0/99 |
+| Codex / Luna                   |  88/99 |                 10.9 |          $0.003323 |                         0/99 |
+| Claude Code / Fable 5.2        |  95/99 |                 12.5 |          $0.136886 |                        87/99 |
+
+Codex used web tools through `exec`; the saved calls contain no guide MCP invocations. Claude setup failures account for the three missing trajectories.
 
 Fable 5.2's tool-enabled arms:
 
@@ -138,9 +148,9 @@ Web-only timing and cost use means:
 
 ### Retrieval and navigation
 
-- **22,898 recorded outer tool calls:** median 1, mean 3.09, p90 8, maximum 177.
-- **2,771 traces have zero calls**; 30 attempts have missing trajectories.
-- **19,437 visible retrieval calls**, including 5,741 failures.
+- **24,292 recorded outer tool calls:** median 2, mean 3.08, p90 8, maximum 177.
+- **2,777 traces have zero calls**; 33 attempts have missing trajectories.
+- **20,302 visible retrieval calls**, including 5,744 failures.
 - **346 calls revisit a returned page**, across 247 traces.
 - Native workspace inspection appears in Qwen 42/99, GLM 5.3 38/99 and Cursor 30/99; Fable 5.2 has zero detected cases.
 - Fable's site-start questions begin at the homepage in 3/15 native and 6/15 web-only attempts; its MCP arm uses the guide server in 15/15.
@@ -182,17 +192,17 @@ Four Qwen reruns timed out with 29–34 calls. Trace `0491ca55c0f95e16` expanded
 
 - **Jevotron** surfaced a source contradiction: Haiku denied guide coverage of multi-tenancy despite its retrieved summary (`071700dfc25d0ddb:s3:0`).
 - It also found an unrelated fetch whose own prompt said “Not needed; skip” (`6b9dac8fd2388c3e:s2:1`).
-- Reviewing full passages overturned some flags caused by truncated excerpts. All 489 opaque-wrapper traces received NORMAL for retrieval, limiting confidence in negative judgments.
+- Reviewing full passages overturned some flags caused by truncated excerpts. The earlier review labeled all 489 opaque-wrapper traces NORMAL for retrieval, limiting confidence in negative judgments.
 - Use its flags as a review queue, with original evidence and separate confirmed/plausible/unknown dispositions.
 - **GEPA/TextGrad** suggested clearer source attribution and fallback after repeated access failures. Their outputs also copied benchmark answers and misread traces; suggestions remain untested.
 
 ## Energy
 
-Illustrative Neuralwatt inference energy across 3,858 attempts:
+Illustrative Neuralwatt inference energy across 3,957 attempts:
 
-- **3,097.048 Wh** from strictly matched requests, covering 3,828 attempts.
-- **129.520 Wh** added through execution-window attribution.
-- **3.227 kWh** combined total.
+- **3,102.848 Wh** from strictly matched requests, covering 3,927 attempts.
+- **129.712 Wh** added through execution-window attribution.
+- **3.233 kWh** combined total.
 
 ### Initial OpenCode arms: median Wh per attempt
 
@@ -210,11 +220,18 @@ Illustrative Neuralwatt inference energy across 3,858 attempts:
 - These are partial attributed medians, including failed attempts with known energy.
 - Shared cohort energy contributes to batch means only.
 
+### DeepSeek MCP comparison
+
+- **MCP median: 0.0325 Wh/attempt**, versus native 0.0445 Wh and web-only 0.0291 Wh.
+- MCP strict mean: **0.0586 Wh/attempt**, with energy attributed to all 99 attempts.
+- MCP total including time-window attribution: **5.992 Wh**; batch mean **0.0605 Wh/attempt**.
+- Comparisons span different run dates and the provider's reporting change.
+
 ### All phases: illustrative totals
 
 | Model               | Attempts / strict energy rows | Strict mean Wh | Strict median Wh | Window total Wh | Window mean Wh | Strict share of window Wh |
 | ------------------- | ----------------------------- | -------------- | ---------------- | --------------- | -------------- | ------------------------- |
-| deepseek-v4.1-flash | 409 / 409                     | 0.0538         | 0.0152           | 25.4242         | 0.0622         | 86.57%                    |
+| deepseek-v4.1-flash | 508 / 508                     | 0.0547         | 0.0184           | 31.4166         | 0.0618         | 88.52%                    |
 | gemma-4-31b         | 593 / 585                     | 0.1590         | 0.0744           | 99.2911         | 0.1674         | 93.69%                    |
 | glm-5.3             | 598 / 576                     | 1.3098         | 0.3515           | 780.2683        | 1.3048         | 96.69%                    |
 | glm-5.3-flash       | 542 / 542                     | 0.2941         | 0.1258           | 164.9717        | 0.3044         | 96.62%                    |
@@ -234,9 +251,9 @@ Illustrative Neuralwatt inference energy across 3,858 attempts:
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | [Benchmark](benchmark.csv), [retries](retries.csv), [search](search.csv), [MCP pilot](mcp-pilot.csv)                                                                                  | Success, timing, cost and coverage.                                          |
 | [Patterns](../analysis/data/patterns.csv), [definitions](../analysis/data/pattern-definitions.csv)                                                                                    | 47 patterns: absolute counts, percentages and eligible/unknown denominators. |
-| [Tool calls](../analysis/data/tool-calls.csv), [per-trace statistics](../analysis/data/trials.csv)                                                                                    | Call distributions and all 7,432 attempt rows.                               |
+| [Tool calls](../analysis/data/tool-calls.csv), [per-trace statistics](../analysis/data/trials.csv)                                                                                    | Call distributions and all 7,927 attempt rows.                               |
 | [Retrieval statistics](../analysis/data/retrieval-statistics.csv), [definitions](../analysis/data/retrieval-definitions.csv), [per-trace rows](../analysis/data/retrieval-trials.csv) | 20 retrieval/friction measures.                                              |
-| [Citation provenance](../analysis/data/citation-provenance.csv)                                                                                                                       | 10,589 trace/page pairs with evidence event IDs.                             |
+| [Citation provenance](../analysis/data/citation-provenance.csv)                                                                                                                       | 11,444 trace/page pairs with evidence event IDs.                             |
 | [By arm](../analysis/data/by-arm.csv), [by framing](../analysis/data/by-framing.csv), [Tavily pairs](../analysis/data/tavily-pairs.csv)                                               | Grouped patterns and paired intervention outcomes.                           |
 | [Inventory](../analysis/data/inventory.json), [coverage](../analysis/data/data-coverage.csv)                                                                                          | Cohort counts and available evidence.                                        |
 
