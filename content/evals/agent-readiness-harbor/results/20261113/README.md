@@ -1,4 +1,4 @@
-# Results and findings
+# Results and findings: 20261113
 
 - **Benchmark:** 6,534 first attempts; 19 model/harness pairs; 33 questions × three repeats per arm.
 - **Dates:** original batches completed 7 November 2026; Fable 5.2 completed 11 November; 18 further MCP suites completed 13–14 November.
@@ -81,7 +81,7 @@ We used the **Tavily MCP** for OpenCode search.
 - Four Qwen timeouts remain failures.
 - All 1,442 recorded Tavily searches completed.
 - Candidate cost: **$20.73**; judging: **$3.49**; search credits billed separately.
-- [Search results](search.csv) · [Paired outcomes](../analysis/data/tavily-pairs.csv).
+- [Search results](search.csv).
 
 ### Guide MCP
 
@@ -90,7 +90,7 @@ We configured `https://guide.wagtail.org/mcp` alongside each harness's native to
 - **Full suites:** 19 model/harness pairs × 99 attempts; **1,768/1,881 passed**.
 - The latest 13 suites passed **1,207/1,287 (93.8%)** using the original grading snapshot. CLI versions are recorded in the benchmark CSV.
 - Five execution failures remain: three Claude setup timeouts, one DeepSeek agent exit and one Qwen network error.
-- **Integration pilot:** 49/51 passed. **Additional preflight:** 5/5 passed. [Pilot results](mcp-pilot.csv).
+- **Integration pilot:** 49/51 passed. **Additional preflight:** 5/5 passed.
 
 | Model                          | Passes | Median agent seconds | Mean candidate USD | Direct guide MCP / available traces |
 | ------------------------------ | -----: | -------------------: | -----------------: | ----------------------------------: |
@@ -135,7 +135,7 @@ The baseline passed 34/99 with zero tool calls. MCP's 12.5-second median accompa
 
 ### Historical Promptfoo comparison
 
-Compared with [October's Promptfoo results](../../agent-readiness/RESULTS.md):
+Compared with [October's Promptfoo results](../../../agent-readiness/RESULTS.md):
 
 - Baseline and web-only arms share question coverage.
 - Opus uses the 28 shared questions: 84 answers per arm. Other models use 99.
@@ -271,17 +271,19 @@ Illustrative Neuralwatt inference energy across 4,650 attempts:
 
 ## Data
 
-| Dataset                                                                                                                                                                               | Contents                                                                     |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
-| [Benchmark](benchmark.csv), [retries](retries.csv), [search](search.csv), [MCP pilot](mcp-pilot.csv)                                                                                  | Success, timing, cost and coverage.                                          |
-| [Patterns](../analysis/data/patterns.csv), [definitions](../analysis/data/pattern-definitions.csv)                                                                                    | 47 patterns: absolute counts, percentages and eligible/unknown denominators. |
-| [Tool calls](../analysis/data/tool-calls.csv), [per-trace statistics](../analysis/data/trials.csv)                                                                                    | Call distributions and all 9,219 attempt rows.                               |
-| [Retrieval statistics](../analysis/data/retrieval-statistics.csv), [definitions](../analysis/data/retrieval-definitions.csv), [per-trace rows](../analysis/data/retrieval-trials.csv) | 20 retrieval/friction measures.                                              |
-| [Citation provenance](../analysis/data/citation-provenance.csv)                                                                                                                       | 13,534 trace/page pairs with evidence event IDs.                             |
-| [By arm](../analysis/data/by-arm.csv), [by framing](../analysis/data/by-framing.csv), [Tavily pairs](../analysis/data/tavily-pairs.csv)                                               | Grouped patterns and paired intervention outcomes.                           |
-| [Inventory](../analysis/data/inventory.json), [coverage](../analysis/data/data-coverage.csv)                                                                                          | Cohort counts and available evidence.                                        |
+| Dataset                                                                                                  | Contents                                                                           |
+| -------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| [Benchmark](benchmark.csv), [retries](retries.csv), [search](search.csv)                                 | Success, timing, cost and coverage.                                                |
+| [Per-trace data](traces/trials.csv)                                                                      | All 9,219 attempts: outcomes, framing, tool calls, patterns and retrieval metrics. |
+| [Patterns](traces/patterns.csv), [definitions](traces/pattern-definitions.csv)                           | 47 patterns: counts, percentages and eligible/unknown denominators.                |
+| [Tool calls](traces/tool-calls.csv)                                                                      | Totals, medians, means, p90 and maxima by cohort and arm.                          |
+| [Retrieval statistics](traces/retrieval-statistics.csv), [definitions](traces/retrieval-definitions.csv) | 20 retrieval/friction measures.                                                    |
+| [Citation provenance](traces/citation-provenance.csv)                                                    | 13,534 trace/page pairs with evidence event IDs.                                   |
+| [Inventory](traces/inventory.json)                                                                       | Cohort sizes and available trajectories.                                           |
 
-Raw runs live in `~/.cache/guide-agent-eval/harbor/`. [Source configuration](../config/trace-sources.yaml) lists their directories. Join trace IDs through the extracted `trials.jsonl` and `events.jsonl`; original trajectories contain the returned passages.
+In per-trace data, pattern columns use 1/0, with blanks for unknown. `opaque_calls` indicates presence; `opaque_call_count` counts wrapper calls. Join citation rows using `id`.
+
+Raw runs live in `~/.cache/guide-agent-eval/harbor/`. [Source configuration](../../config/trace-sources.yaml) lists their directories. Join trace IDs through the extracted `trials.jsonl` and `events.jsonl`; original trajectories contain the returned passages.
 
 ## Research informing the analysis
 

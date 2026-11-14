@@ -2,17 +2,17 @@
 
 Harbor runs the [33 agent-readiness questions](../agent-readiness/README.md) through native coding agents. Promptfoo grades saved answers with the shared assertions and Sonnet 5.5 rubric.
 
-**[Results and findings](results/README.md)** covers success, speed, cost, retries, MCP, search, traces and energy.
+**[Results and findings](results/20261113/README.md)** covers success, speed, cost, retries, MCP, search, traces and energy.
 
 ## Files
 
-| Path             | Contents                                                |
-| ---------------- | ------------------------------------------------------- |
-| `results/`       | Consolidated report and benchmark CSVs.                 |
-| `analysis/data/` | Trace statistics, definitions and evidence coverage.    |
-| `config/`        | Model matrix, tool arms, run sources and review rubric. |
-| `scripts/`       | Runner, answer replay and trace analysis.               |
-| `tests/`         | Offline regression tests.                               |
+| Path                       | Contents                                                         |
+| -------------------------- | ---------------------------------------------------------------- |
+| `results/20261113/`        | Dated report and benchmark comparisons.                          |
+| `results/20261113/traces/` | Per-trace data, statistics, definitions and citation provenance. |
+| `config/`                  | Model matrix, tool arms, run sources and review rubric.          |
+| `scripts/`                 | Runner, answer replay and trace analysis.                        |
+| `tests/`                   | Offline regression tests.                                        |
 
 ## Configuration
 
