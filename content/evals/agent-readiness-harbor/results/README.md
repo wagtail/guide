@@ -1,9 +1,9 @@
 # Results and findings
 
-- **Benchmark:** 5,247 first attempts; 18 model/harness pairs; 33 questions × three repeats per arm.
-- **Dates:** original batches completed 7 November 2026; Fable 5.2 completed 11 November; five further MCP suites completed 13 November.
-- **Follow-ups:** 1,761 failure retries, 862 Tavily reruns and 57 integration-pilot attempts.
-- **Trace inventory:** 7,927 attempts, with 7,894 saved trajectories.
+- **Benchmark:** 6,534 first attempts; 19 model/harness pairs; 33 questions × three repeats per arm.
+- **Dates:** original batches completed 7 November 2026; Fable 5.2 completed 11 November; 18 further MCP suites completed 13–14 November.
+- **Follow-ups:** 1,761 failure retries, 862 Tavily reruns and 62 integration/preflight attempts.
+- **Trace inventory:** 9,219 attempts, with 9,185 saved trajectories.
 
 ## Benchmark
 
@@ -14,23 +14,24 @@ Each cell counts passes out of 99 planned answers, including failed attempts.
 | Harness / model                |  Native | No tools | Web-only | Native + MCP |
 | ------------------------------ | ------: | -------: | -------: | -----------: |
 | Claude Code / Haiku 5.5        |   78/99 |     9/99 |    82/99 |      93/99 † |
-| Claude Code / Sonnet 5.5       |   83/99 |    15/99 |    84/99 |            — |
+| Claude Code / Sonnet 5.5       |   83/99 |    15/99 |    84/99 |        96/99 |
 | Claude Code / Opus 5.5         |   89/99 |    34/99 |    87/99 |      94/99 † |
-| Claude Code / Fable 5.1        |   91/99 |    37/99 |    93/99 |            — |
+| Claude Code / Fable 5.1        |   91/99 |    37/99 |    93/99 |        96/99 |
 | Claude Code / Fable 5.2        |   96/99 |    34/99 |    96/99 |        95/99 |
-| Codex / Sol                    |   95/99 |    26/99 |        — |            — |
+| Codex / Sol                    |   95/99 |    26/99 |        — |        96/99 |
 | Codex / Luna                   |   86/99 |  16/99 † |        — |        88/99 |
-| Codex / Terra                  |   88/99 |    12/99 |        — |            — |
+| Codex / Terra                  |   88/99 |    12/99 |        — |        81/99 |
 | Codex / Astra                  | 93/99 † |  23/99 † |        — |        96/99 |
-| Cursor / Grok 4.7 Medium       |   96/99 |        — |        — |            — |
+| Cursor / Grok 4.7 Medium       |   96/99 |        — |        — |        96/99 |
 | OpenCode / DeepSeek V4.1 Flash |   93/99 |     9/99 |    93/99 |      95/99 † |
-| OpenCode / GLM 5.3 Flash       |   90/99 |  12/99 † |    87/99 |            — |
-| OpenCode / MiMo v2.6 Pro       |   95/99 |     1/99 |    92/99 |            — |
-| OpenCode / GLM 5.3             |   87/99 |   7/99 † |  76/99 † |            — |
-| OpenCode / Qwen 3.8 27B        | 75/99 † |     0/99 |  85/99 † |            — |
-| OpenCode / Gemma 4 31B         | 24/99 † |     1/99 |    76/99 |            — |
-| OpenCode / Kimi K3             |   93/99 |     2/99 |    90/99 |            — |
-| Mistral Vibe / Large 4         |   78/99 |  12/99 † |        — |            — |
+| OpenCode / GLM 5.3 Flash       |   90/99 |  12/99 † |    87/99 |        94/99 |
+| OpenCode / MiMo v2.6 Pro       |   95/99 |     1/99 |    92/99 |        96/99 |
+| OpenCode / GLM 5.3             |   87/99 |   7/99 † |  76/99 † |        96/99 |
+| OpenCode / Qwen 3.8 27B        | 75/99 † |     0/99 |  85/99 † |      94/99 † |
+| OpenCode / Gemma 4 31B         | 24/99 † |     1/99 |    76/99 |        77/99 |
+| OpenCode / Kimi K3             |   93/99 |     2/99 |    90/99 |        96/99 |
+| OpenCode / Kimi K3.1 Pro       |       — |        — |        — |        96/99 |
+| Mistral Vibe / Large 4         |   78/99 |  12/99 † |        — |        93/99 |
 
 † Includes execution or tool-control errors. Baseline audits reject attempted tool use, including blocked calls. — indicates an arm without a full-suite run.
 
@@ -38,8 +39,8 @@ Each cell counts passes out of 99 planned answers, including failed attempts.
 
 - Time: median agent execution, with setup and grading recorded separately.
 - Cost: mean estimated candidate API usage per attempt, shown with complete coverage.
-- Total: **$297.66** candidate usage, covering 5,215/5,247 attempts; **$21.42** judge usage.
-- [Benchmark CSV](benchmark.csv): all 53 rows, including baseline/MCP timing, versions and errors.
+- Total: **$347.65** candidate usage, covering 6,501/6,534 attempts; **$26.62** judge usage.
+- [Benchmark CSV](benchmark.csv): all 66 rows, including baseline/MCP timing, versions and errors.
 
 | Harness / model                | Native median seconds |          Native mean USD | Web median seconds |             Web mean USD |
 | ------------------------------ | --------------------: | -----------------------: | -----------------: | -----------------------: |
@@ -86,21 +87,37 @@ We used the **Tavily MCP** for OpenCode search.
 
 We configured `https://guide.wagtail.org/mcp` alongside each harness's native tools.
 
-- **Full suites:** six model/harness pairs × 99 attempts, including Fable 5.2.
-- The five 13 November suites passed **466/495**, using the original grading snapshot and CLI versions.
-- Four execution failures remain in the scores: three Claude setup timeouts and one DeepSeek agent exit.
-- **Integration pilot:** 17 model/harness pairs × three questions; **49/51 passed**. [Pilot results](mcp-pilot.csv).
+- **Full suites:** 19 model/harness pairs × 99 attempts; **1,768/1,881 passed**.
+- The latest 13 suites passed **1,207/1,287 (93.8%)** using the original grading snapshot. CLI versions are recorded in the benchmark CSV.
+- Five execution failures remain: three Claude setup timeouts, one DeepSeek agent exit and one Qwen network error.
+- **Integration pilot:** 49/51 passed. **Additional preflight:** 5/5 passed. [Pilot results](mcp-pilot.csv).
 
-| Model                          | Passes | Median agent seconds | Mean candidate USD | Guide MCP / available traces |
-| ------------------------------ | -----: | -------------------: | -----------------: | ---------------------------: |
-| OpenCode / DeepSeek V4.1 Flash |  95/99 |                  9.4 |          $0.001290 |                        93/99 |
-| Claude Code / Opus 5.5         |  94/99 |                 13.9 |    Partial (97/99) |                        85/97 |
-| Claude Code / Haiku 5.5        |  93/99 |                 10.1 |    Partial (98/99) |                        83/98 |
-| Codex / Astra                  |  96/99 |                 12.2 |          $0.263735 |                         0/99 |
-| Codex / Luna                   |  88/99 |                 10.9 |          $0.003323 |                         0/99 |
-| Claude Code / Fable 5.2        |  95/99 |                 12.5 |          $0.136886 |                        87/99 |
+| Model                          | Passes | Median agent seconds | Mean candidate USD | Direct guide MCP / available traces |
+| ------------------------------ | -----: | -------------------: | -----------------: | ----------------------------------: |
+| Claude Code / Fable 5.1        |  96/99 |                 17.0 |          $0.191899 |                               90/99 |
+| Claude Code / Fable 5.2        |  95/99 |                 12.5 |          $0.136886 |                               87/99 |
+| Claude Code / Haiku 5.5        |  93/99 |                 10.1 |    Partial (98/99) |                               83/98 |
+| Claude Code / Opus 5.5         |  94/99 |                 13.9 |    Partial (97/99) |                               85/97 |
+| Claude Code / Sonnet 5.5       |  96/99 |                 10.7 |          $0.034339 |                               85/99 |
+| Codex / Astra                  |  96/99 |                 12.2 |          $0.263735 |                                0/99 |
+| Codex / Luna                   |  88/99 |                 10.9 |          $0.003323 |                                0/99 |
+| Codex / Sol                    |  96/99 |                 11.2 |          $0.051752 |                                0/99 |
+| Codex / Terra                  |  81/99 |                  9.0 |          $0.027630 |                                0/99 |
+| Cursor / Grok 4.7 Medium       |  96/99 |                 20.7 |          $0.057538 |                               95/99 |
+| Mistral Vibe / Large 4         |  93/99 |                 32.2 |          $0.026458 |                               98/99 |
+| OpenCode / DeepSeek V4.1 Flash |  95/99 |                  9.4 |          $0.001290 |                               93/99 |
+| OpenCode / GLM 5.3             |  96/99 |                 12.5 |          $0.012632 |                               93/99 |
+| OpenCode / GLM 5.3 Flash       |  94/99 |                 12.9 |          $0.001780 |                               90/99 |
+| OpenCode / Gemma 4 31B         |  77/99 |                 14.2 |          $0.001021 |                               93/99 |
+| OpenCode / Kimi K3             |  96/99 |                 19.0 |          $0.051273 |                               92/99 |
+| OpenCode / Kimi K3.1 Pro       |  96/99 |                 18.4 |          $0.034144 |                               89/99 |
+| OpenCode / MiMo v2.6 Pro       |  96/99 |                 15.9 |          $0.002525 |                               91/99 |
+| OpenCode / Qwen 3.8 27B        |  94/99 |                 17.1 |    Partial (98/99) |                               89/98 |
 
-Codex used web tools through `exec`; the saved calls contain no guide MCP invocations. Claude setup failures account for the three missing trajectories.
+- Codex uses `exec` wrappers, excluded from the direct-call counts. Sol trace `071117ae5c45a41d` fetched guide content through MCP; Astra, Luna and Terra have no observed guide MCP calls.
+- Four execution failures lack trajectories.
+- Gemma improved from **24/99 native to 77/99 MCP**, Qwen from **75/99 to 94/99**, and Mistral from **78/99 to 93/99**.
+- Of the latest 1,286 saved traces, one Sonnet answer cites `/en-latest/`; five Terra answers and one GLM Flash answer cite the legacy editor manual.
 
 Fable 5.2's tool-enabled arms:
 
@@ -148,10 +165,10 @@ Web-only timing and cost use means:
 
 ### Retrieval and navigation
 
-- **24,292 recorded outer tool calls:** median 2, mean 3.08, p90 8, maximum 177.
-- **2,777 traces have zero calls**; 33 attempts have missing trajectories.
-- **20,302 visible retrieval calls**, including 5,744 failures.
-- **346 calls revisit a returned page**, across 247 traces.
+- **28,574 recorded outer tool calls:** median 2, mean 3.11, p90 7, maximum 177.
+- **2,794 traces have zero calls**; 34 attempts have missing trajectories.
+- **23,751 visible retrieval calls**, including 5,771 failures.
+- **353 calls revisit a returned page**, across 252 traces.
 - Native workspace inspection appears in Qwen 42/99, GLM 5.3 38/99 and Cursor 30/99; Fable 5.2 has zero detected cases.
 - Fable's site-start questions begin at the homepage in 3/15 native and 6/15 web-only attempts; its MCP arm uses the guide server in 15/15.
 - The 12 Fable MCP-arm answers without guide MCP calls concern developer/server questions; all pass.
@@ -198,51 +215,58 @@ Four Qwen reruns timed out with 29–34 calls. Trace `0491ca55c0f95e16` expanded
 
 ## Energy
 
-Illustrative Neuralwatt inference energy across 3,957 attempts:
+Illustrative Neuralwatt inference energy across 4,650 attempts:
 
-- **3,102.848 Wh** from strictly matched requests, covering 3,927 attempts.
-- **129.712 Wh** added through execution-window attribution.
-- **3.233 kWh** combined total.
+- **3,424.491 Wh** from strictly matched requests, covering 4,619 attempts.
+- **155.628 Wh** added through execution-window attribution.
+- **3.580 kWh** combined total.
 
-### Initial OpenCode arms: median Wh per attempt
+### OpenCode arms: median Wh per attempt
 
-| Model               | No tools | Native | Web-only |
-| ------------------- | -------: | -----: | -------: |
-| DeepSeek V4.1 Flash |   0.0051 | 0.0445 |   0.0291 |
-| Gemma 4 31B         |   0.0166 | 0.1457 |   0.0751 |
-| GLM 5.3             |   0.0598 | 0.7619 |   0.6425 |
-| GLM 5.3 Flash       |   0.0228 | 0.2081 |   0.1647 |
-| Kimi K3             |   0.6623 | 1.5794 |   3.9117 |
-| MiMo v2.6 Pro       |   0.0214 | 0.4437 |   0.4413 |
-| Qwen 3.8 27B        |   0.0319 | 0.4201 |   0.2024 |
+| Model               | No tools | Native | Web-only | Native + MCP |
+| ------------------- | -------: | -----: | -------: | -----------: |
+| DeepSeek V4.1 Flash |   0.0051 | 0.0445 |   0.0291 |       0.0325 |
+| Gemma 4 31B         |   0.0166 | 0.1457 |   0.0751 |       0.2105 |
+| GLM 5.3             |   0.0598 | 0.7619 |   0.6425 |       0.3150 |
+| GLM 5.3 Flash       |   0.0228 | 0.2081 |   0.1647 |       0.1489 |
+| Kimi K3             |   0.6623 | 1.5794 |   3.9117 |       0.4897 |
+| Kimi K3.1 Pro       |        — |      — |        — |       0.3635 |
+| MiMo v2.6 Pro       |   0.0214 | 0.4437 |   0.4413 |       0.1618 |
+| Qwen 3.8 27B        |   0.0319 | 0.4201 |   0.2024 |       0.2792 |
 
-- Each cell includes 99 attempts with attributed energy, except GLM 5.3 baseline (96) and web-only (81).
-- These are partial attributed medians, including failed attempts with known energy.
-- Shared cohort energy contributes to batch means only.
+- Each cell includes 99 attempts with attributed energy, except GLM baseline (96), GLM web-only (81) and Qwen MCP (98).
+- These are partial attributed medians, including failed attempts with known energy. Shared cohort energy contributes to batch means only.
+- MCP medians are below native for six of seven comparable models; Gemma is higher. Comparisons span run dates and the provider’s reporting change.
 
-### DeepSeek MCP comparison
+### MCP energy totals
 
-- **MCP median: 0.0325 Wh/attempt**, versus native 0.0445 Wh and web-only 0.0291 Wh.
-- MCP strict mean: **0.0586 Wh/attempt**, with energy attributed to all 99 attempts.
-- MCP total including time-window attribution: **5.992 Wh**; batch mean **0.0605 Wh/attempt**.
-- Comparisons span different run dates and the provider's reporting change.
+| Model               | Strict mean Wh | Window total Wh | Window mean Wh |
+| ------------------- | -------------: | --------------: | -------------: |
+| DeepSeek V4.1 Flash |         0.0586 |           5.992 |         0.0605 |
+| Gemma 4 31B         |         0.2308 |          24.644 |         0.2489 |
+| GLM 5.3             |         0.5865 |          61.880 |         0.6250 |
+| GLM 5.3 Flash       |         0.2218 |          23.396 |         0.2363 |
+| Kimi K3             |         0.8663 |          95.929 |         0.9690 |
+| Kimi K3.1 Pro       |         0.8093 |          86.357 |         0.8723 |
+| MiMo v2.6 Pro       |         0.1973 |          20.228 |         0.2043 |
+| Qwen 3.8 27B        |         0.3403 |          35.126 |         0.3548 |
 
 ### All phases: illustrative totals
 
 | Model               | Attempts / strict energy rows | Strict mean Wh | Strict median Wh | Window total Wh | Window mean Wh | Strict share of window Wh |
-| ------------------- | ----------------------------- | -------------- | ---------------- | --------------- | -------------- | ------------------------- |
-| deepseek-v4.1-flash | 508 / 508                     | 0.0547         | 0.0184           | 31.4166         | 0.0618         | 88.52%                    |
-| gemma-4-31b         | 593 / 585                     | 0.1590         | 0.0744           | 99.2911         | 0.1674         | 93.69%                    |
-| glm-5.3             | 598 / 576                     | 1.3098         | 0.3515           | 780.2683        | 1.3048         | 96.69%                    |
-| glm-5.3-flash       | 542 / 542                     | 0.2941         | 0.1258           | 164.9717        | 0.3044         | 96.62%                    |
-| kimi-k3             | 512 / 512                     | 2.2173         | 0.9627           | 1184.5928       | 2.3137         | 95.84%                    |
-| kimi-k3.1-pro       | 3 / 3                         | 0.1204         | 0.1194           | 0.3857          | 0.1286         | 93.66%                    |
-| mimo-v2.6-pro       | 588 / 588                     | 0.7489         | 0.3667           | 466.1023        | 0.7927         | 94.47%                    |
-| qwen-3.8-27b        | 613 / 613                     | 0.8029         | 0.2625           | 505.5317        | 0.8247         | 97.36%                    |
+| ------------------- | ----------------------------- | -------------: | ---------------: | --------------: | -------------: | ------------------------: |
+| deepseek-v4.1-flash | 508 / 508                     |         0.0547 |           0.0184 |         31.4166 |         0.0618 |                    88.52% |
+| gemma-4-31b         | 692 / 684                     |         0.1694 |           0.0899 |        123.9354 |         0.1791 |                    93.50% |
+| glm-5.3             | 697 / 675                     |         1.2037 |           0.3453 |        842.1480 |         1.2082 |                    96.48% |
+| glm-5.3-flash       | 641 / 641                     |         0.2829 |           0.1282 |        188.3673 |         0.2939 |                    96.28% |
+| kimi-k3             | 611 / 611                     |         1.9984 |           0.8487 |       1280.5214 |         2.0958 |                    95.36% |
+| kimi-k3.1-pro       | 102 / 102                     |         0.7891 |           0.3501 |         86.7428 |         0.8504 |                    92.79% |
+| mimo-v2.6-pro       | 687 / 687                     |         0.6694 |           0.2919 |        486.3308 |         0.7079 |                    94.56% |
+| qwen-3.8-27b        | 712 / 711                     |         0.7392 |           0.2635 |        540.6572 |         0.7593 |                    97.20% |
 
 - Strict means/medians use attempts with matched energy; window means use all attempts.
-- Totals combine original runs, selected retries and follow-ups.
-- Figures span Neuralwatt's [6 November reporting change](https://neuralwatt.com/changelog?area=energy).
+- Totals combine original runs, selected retries and follow-ups; the latest two Kimi preflight attempts are excluded.
+- Figures span Neuralwatt’s [6 November reporting change](https://neuralwatt.com/changelog?area=energy).
 - Coverage is provider-attributed inference energy; local execution, search and MCP services have separate resource use.
 
 ## Data
@@ -251,9 +275,9 @@ Illustrative Neuralwatt inference energy across 3,957 attempts:
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | [Benchmark](benchmark.csv), [retries](retries.csv), [search](search.csv), [MCP pilot](mcp-pilot.csv)                                                                                  | Success, timing, cost and coverage.                                          |
 | [Patterns](../analysis/data/patterns.csv), [definitions](../analysis/data/pattern-definitions.csv)                                                                                    | 47 patterns: absolute counts, percentages and eligible/unknown denominators. |
-| [Tool calls](../analysis/data/tool-calls.csv), [per-trace statistics](../analysis/data/trials.csv)                                                                                    | Call distributions and all 7,927 attempt rows.                               |
+| [Tool calls](../analysis/data/tool-calls.csv), [per-trace statistics](../analysis/data/trials.csv)                                                                                    | Call distributions and all 9,219 attempt rows.                               |
 | [Retrieval statistics](../analysis/data/retrieval-statistics.csv), [definitions](../analysis/data/retrieval-definitions.csv), [per-trace rows](../analysis/data/retrieval-trials.csv) | 20 retrieval/friction measures.                                              |
-| [Citation provenance](../analysis/data/citation-provenance.csv)                                                                                                                       | 11,444 trace/page pairs with evidence event IDs.                             |
+| [Citation provenance](../analysis/data/citation-provenance.csv)                                                                                                                       | 13,534 trace/page pairs with evidence event IDs.                             |
 | [By arm](../analysis/data/by-arm.csv), [by framing](../analysis/data/by-framing.csv), [Tavily pairs](../analysis/data/tavily-pairs.csv)                                               | Grouped patterns and paired intervention outcomes.                           |
 | [Inventory](../analysis/data/inventory.json), [coverage](../analysis/data/data-coverage.csv)                                                                                          | Cohort counts and available evidence.                                        |
 

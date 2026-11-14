@@ -13,6 +13,13 @@ mcp-pilot,claude-code,12,12,12,12,12,12,0,12,12,0,0
 mcp-pilot,codex,12,12,12,12,12,12,12,12,12,0,12
 mcp-pilot,cursor-cli,3,3,3,3,3,3,0,3,3,0,0
 mcp-pilot,opencode,24,24,24,24,24,24,0,24,21,0,0
+mcp-preflight,opencode,2,2,2,2,2,2,0,2,2,0,0
+mcp-preflight,vibe,3,3,3,3,3,3,0,3,3,0,0
+mcp-remaining,claude-code,198,198,198,198,198,198,0,198,198,0,0
+mcp-remaining,codex,198,198,198,198,198,198,198,198,198,0,198
+mcp-remaining,cursor-cli,99,99,99,99,99,99,0,99,99,0,0
+mcp-remaining,opencode,693,692,692,693,693,692,0,692,692,16,0
+mcp-remaining,vibe,99,99,99,99,99,99,0,99,99,0,0
 retry,claude-code,406,406,406,406,406,406,0,406,406,0,0
 retry,codex,353,352,352,353,353,327,352,352,352,0,59
 retry,cursor-cli,3,3,3,3,3,3,0,3,3,0,0
