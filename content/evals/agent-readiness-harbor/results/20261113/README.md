@@ -283,7 +283,9 @@ Illustrative Neuralwatt inference energy across 4,650 attempts:
 
 In per-trace data, pattern columns use 1/0, with blanks for unknown. `opaque_calls` indicates presence; `opaque_call_count` counts wrapper calls. Join citation rows using `id`.
 
-Raw runs live in `~/.cache/guide-agent-eval/harbor/`. [Source configuration](../../config/trace-sources.yaml) lists their directories. Join trace IDs through the extracted `trials.jsonl` and `events.jsonl`; original trajectories contain the returned passages.
+[Download the analysis evidence](https://github.com/thi-bot/agent-runs-traces/tree/main/projects/wagtail/guide/agent-readiness/20261113): an 81.9 MB Git LFS archive with trajectories, run results, extracted events and checksums. Join trace IDs through `analysis/trials.jsonl` and `analysis/events.jsonl`; trajectories contain the returned passages.
+
+Local raw runs live in `~/.cache/guide-agent-eval/harbor/`. [Source configuration](../../config/trace-sources.yaml) lists their directories.
 
 ## Research informing the analysis
 
