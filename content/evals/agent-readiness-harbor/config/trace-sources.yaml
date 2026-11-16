@@ -1,0 +1,64 @@
+# Keep every cohort separate: initial benchmark, retries, interventions and pilots.
+sources:
+  - path: ~/.cache/guide-agent-eval/harbor/claude-comparison-2026-11-05
+    phase: initial
+  - path: ~/.cache/guide-agent-eval/harbor/remaining-comparison-2026-11-05
+    phase: initial
+  - path: ~/.cache/guide-agent-eval/harbor/neuralwatt-expansion-comparison-2026-11-06
+    phase: initial
+  - path: ~/.cache/guide-agent-eval/harbor/failed-retries-2026-11-07
+    phase: retry
+  - path: ~/.cache/guide-agent-eval/harbor/tavily-reruns-2026-11-10
+    phase: tavily
+  - path: ~/.cache/guide-agent-eval/harbor/fable-5-2-comparison-2026-11-10
+    phase: fable-5-2
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-pilot-2026-11-10-preview
+    phase: mcp-pilot
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-pilot-2026-11-10-rest
+    phase: mcp-pilot
+  - path: ~/.cache/guide-agent-eval/harbor/tavily-pilot-2026-11-10
+    phase: tavily-pilot
+  - path: ~/.cache/guide-agent-eval/harbor/fable-5-2-pilot-2026-11-10
+    phase: fable-pilot
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-full-2026-11-13/opencode-deepseek
+    phase: mcp-full
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-full-2026-11-13/claude-opus
+    phase: mcp-full
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-full-2026-11-13/claude-haiku
+    phase: mcp-full
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-full-2026-11-13/codex-astra
+    phase: mcp-full
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-full-2026-11-13/codex-luna
+    phase: mcp-full
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/opencode-kimi
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/opencode-kimi-preview
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/vibe-large
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/claude-sonnet
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/claude-fable
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/cursor-grok
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/codex-sol
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/codex-terra
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/opencode-glm
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/opencode-mimo
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/opencode-glm-full
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/opencode-gemma
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/opencode-qwen
+    phase: mcp-remaining
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/vibe-large-pilot
+    phase: mcp-preflight
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/opencode-kimi-pilot
+    phase: mcp-preflight
+  - path: ~/.cache/guide-agent-eval/harbor/mcp-remaining-2026-11-13/opencode-kimi-preview-pilot
+    phase: mcp-preflight

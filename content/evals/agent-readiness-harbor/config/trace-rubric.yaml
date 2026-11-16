@@ -1,0 +1,65 @@
+criteria:
+  - name: search_led_navigation
+    description: A search result guided a later retrieval.
+    guidance: >-
+      PASS if a later direct fetch targets a URL present in an earlier search output;
+      cite both event IDs. FAIL if a sufficiently visible trace shows no such chain.
+      NOT_APPLICABLE for opaque scripts or missing observations that prevent checking.
+      Calls in the same step do not establish chronological link following.
+  - name: index_led_navigation
+    description: Site indexes or agent-readiness files guided retrieval.
+    guidance: >-
+      PASS if a homepage, sitemap, llms.txt or llms-full.txt request is followed by
+      retrieval of a link visible in that output; cite the index and later fetch.
+      Distinguish attempted index requests from returned results. FAIL for visible
+      traces without this technique; NOT_APPLICABLE when relevant outputs are missing.
+  - name: direct_url_without_visible_source
+    description: A URL was requested without a visible prior source.
+    guidance: >-
+      PASS if direct URL requests have not_visible provenance. This establishes only
+      absence from earlier recorded outputs and the user prompt, not that the model
+      guessed it or used memory. Cite events and qualify incomplete observations.
+      FAIL when all requests have visible provenance; NOT_APPLICABLE for absent traces
+      or scripts whose internal order and branches are not visible.
+  - name: retrieval_adaptation
+    description: Retrieval changed after an observed failure.
+    guidance: >-
+      PASS if a failed/denied/error_text event is followed in a later step by a changed
+      search query, changed target, or changed retrieval tool. Explain the specific
+      change and cite before/after IDs. A repeated identical request is not adaptation.
+      FAIL for visible traces with no such change; NOT_APPLICABLE when events are absent
+      or opaque. Do not claim the change caused success.
+  - name: workspace_inspection
+    description: The model inspected the local coding workspace.
+    guidance: >-
+      PASS for local read/search/listing tools or explicit shell inspection commands.
+      Explain whether the user asked a documentation question, site-navigation task,
+      or server/developer question, without presuming local files were useful. Cite IDs.
+      FAIL for visible traces without inspection; NOT_APPLICABLE when visibility is absent.
+  - name: instruction_sensitive_strategy
+    description: Observable behavior specifically matches an explicit instruction.
+    guidance: >-
+      PASS only when you can quote a short phrase from the user question or recorded
+      arm/system instruction excerpt and connect it to a specific action or explicit
+      final-answer statement. For example site-start wording followed by opening the
+      homepage, or explicit no-tools instructions followed by a stated memory-only
+      answer. Mere success or absence of calls is insufficient evidence. Cite IDs or
+      the supplied answer excerpt. NOT_APPLICABLE when instructions or behavior are
+      unavailable. This is alignment evidence, never proof of instruction causality.
+  - name: tool_restriction_conflict
+    description: An attempted action conflicts with the configured tool arm.
+    guidance: >-
+      PASS when a no-tools baseline attempts usable tools, or a web-only arm attempts
+      non-web tools. Empty Vibe tool discovery with zero tools and zero connector notices
+      is permitted. A blocked attempt is still an attempted conflict, not successful
+      tool access. Cite IDs and the restriction. FAIL when sufficiently visible behavior
+      respects restrictions. Native arms have no comparable no-tools/web-only rule and
+      should be NOT_APPLICABLE. Missing trajectories are NOT_APPLICABLE.
+  - name: visibility_limits
+    description: The trace cannot support complete strategy claims.
+    guidance: >-
+      PASS for missing trajectories, missing tool observations, opaque exec/js_repl
+      scripts, or unavailable system instructions relevant to a proposed explanation.
+      Name exactly which claims are limited. A script indicates requested intent, not
+      confirmed internal execution. Never classify the absence of recorded system
+      messages as no system instructions. FAIL only when the relevant evidence is complete.

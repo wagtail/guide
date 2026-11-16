@@ -1,0 +1,64 @@
+# Harbor kwargs, not replacement agent implementations.
+claude-code:
+  native: {}
+  native+mcp: {}
+  baseline:
+    disallowed_tools: '*'
+    permission_mode: dontAsk
+    append_system_prompt: >-
+      You have no tools in this session, so you can't browse or read files.
+      Answer from what you know.
+  web:
+    permission_mode: dontAsk
+    allowed_tools: WebSearch,WebFetch
+    disallowed_tools: Bash,Read,Write,Edit,Glob,Grep,Agent,Task,Skill,NotebookEdit
+opencode:
+  native: {}
+  native+mcp: {}
+  baseline:
+    opencode_config:
+      tools: { '*': false }
+      permission: { '*': deny }
+  web:
+    opencode_config:
+      tools: { '*': false, webfetch: true, websearch: true }
+      permission: { '*': deny, webfetch: allow, websearch: allow }
+codex:
+  native: {}
+  native+mcp: {}
+  baseline:
+    web_search: disabled
+    config:
+      developer_instructions: >-
+        You have no tools in this session, so you can't browse or read files.
+        Answer from what you know.
+      features:
+        shell_tool: false
+        multi_agent: false
+        multi_agent_v2: false
+        apply_patch_freeform: false
+        code_mode: false
+        code_mode_only: false
+        code_mode_host: false
+        code_mode_tool_search: false
+        js_repl: false
+        unified_exec: false
+        tool_search: false
+        search_tool: false
+        web_search: false
+        web_search_request: false
+        view_image: false
+        apps: false
+        plugins: false
+        image_generation: false
+      tools:
+        update_plan: { enabled: false }
+  # web unavailable: the 0.166.0 pilot attempted exec with code-mode host disabled.
+cursor-cli:
+  native: {}
+  native+mcp: {}
+  # baseline unavailable: deny-all hooks still allowed server-side web calls in pilot.
+vibe:
+  native: {}
+  native+mcp: {}
+  baseline: {} # tool_controls.NoToolsVibe adds --disabled-tools '*'.

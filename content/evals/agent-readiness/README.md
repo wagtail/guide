@@ -4,6 +4,8 @@ Which of the guide's agent readiness features do agents actually use, and do the
 
 The method borrows from the [draftjs_exporter skill evals](https://github.com/wagtail/draftjs_exporter/blob/main/docs/contributing/evals.md) and Anthropic's [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents). The trace columns follow the [ora.ai / Vercel agent readiness dataset](https://github.com/agentready-org/standard/blob/main/data/traces.csv), so the results can be compared.
 
+For comparisons across Claude Code, Codex, Cursor, OpenCode and Mistral Vibe, see the [Harbor runner](../agent-readiness-harbor/README.md). It reuses these cases and graders, with native-tools and supported no-tools arms.
+
 ## Arms
 
 Each arm is a variant of the same experiment: the same questions, the same model with the default Claude Code system prompt, run in an empty directory outside the repository with no user or project settings. Arms differ in one thing only:

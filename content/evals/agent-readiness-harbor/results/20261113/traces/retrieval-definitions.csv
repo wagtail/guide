@@ -1,0 +1,21 @@
+metric,definition
+retrieval_calls,Visible direct search/fetch or literal curl calls; not nested opaque actions.
+failed_retrieval_calls,"Retrieval calls with recorded failure, denial or recognized error text."
+unresolved_retrieval_calls,Retrieval calls without a recognized return/error state.
+repeated_query_calls,Search calls repeating the same tool and visible query from an earlier step; query truncated at 500 characters.
+repeated_target_calls,"Calls requesting at least one identical page from an earlier step, regardless of result."
+repeat_after_return_calls,Calls requesting a page with an earlier returned fetch; not proof of redundancy.
+retry_after_error_calls,"Calls requesting a page with an earlier failed fetch; a recovery attempt, not necessarily waste."
+search_output_pages,"Unique URLs visible in returned search output, including snippets/navigation; not all necessarily ranked results."
+requested_pages,"Unique literal requested pages, regardless of status."
+returned_pages,Unique page targets of returned calls; not proof of usable page content or HTTP success.
+returned_pages_not_cited,Returned page targets absent from the final answer's URLs; useful background retrieval may be uncited.
+search_pages_requested_later,Search-output pages requested in a strictly later step.
+search_pages_cited,Search-output pages also named in the final answer.
+citation_pages,Unique explicit HTTP(S) URL pages in the complete replayed answer.
+citations_returned,"Answer URL pages matching a returned fetch target; provenance only, not entailment."
+citations_search_only,"Answer URL pages visible in search output, with no matching returned fetch target."
+citations_other_output_only,"Answer URL pages visible only in other tool output, with no returned fetch or search match."
+citations_prompt_only,Answer URL pages visible only in the prompt.
+citations_not_observed,Answer URL pages absent from visible successful retrieval and prompt; not necessarily hallucinated.
+calls_before_reference_return,"Outer calls in steps before first returned fetch matching a frozen reference URL; URL-only proxy, null when no match."
