@@ -1,4 +1,6 @@
 from django.test import TestCase
+from django.urls import reverse
+from wagtail.models import Site
 
 from apps.core.factories import ContentPageFactory
 
@@ -42,6 +44,50 @@ class TestMarkdownRouteMixin(TestCase):
         markdown = self.content_page.to_markdown()
         self.assertFalse(markdown.startswith("---"))
         self.assertNotIn("lang:", markdown)
+
+    def test_to_markdown_points_to_documentation_index(self):
+        markdown = self.content_page.to_markdown(frontmatter=True)
+        site = Site.objects.get(is_default_site=True)
+        self.assertIn(
+            "---\n"
+            "> Documentation Index\n"
+            f"> Fetch the complete documentation index at: {site.root_url}"
+            f"{reverse('llms_txt')}\n"
+            "> Use this file to discover all available pages before exploring "
+            "further.\n"
+            "\n"
+            f"# {self.content_page.title}\n",
+            markdown,
+        )
+
+    def test_to_markdown_index_url_without_request(self):
+        """
+        Callers that render pages without a request (llms-full.txt, the MCP
+        server) must still link to the full llms.txt URL, not a bare path.
+        """
+        markdown = self.content_page.to_markdown(frontmatter=True)
+        site = Site.objects.get(is_default_site=True)
+        self.assertIn(
+            f"> Fetch the complete documentation index at: {site.root_url}"
+            f"{reverse('llms_txt')}\n",
+            markdown,
+        )
+
+    def test_markdown_response_points_to_documentation_index(self):
+        response = self.client.get(
+            self.content_page.url + self.content_page.reverse_subpage("markdown")
+        )
+        content = response.content.decode("utf-8")
+        self.assertIn("> Documentation Index\n", content)
+        # After the frontmatter, before the page heading.
+        self.assertLess(content.index("> Documentation Index"), content.index("\n# "))
+        self.assertLess(content.index("\n# "), content.index("Page URL:"))
+
+    def test_llms_full_txt_omits_documentation_index(self):
+        """The index callout would be wrong in llms-full.txt: llms.txt already
+        contains it, referenced as the table of contents."""
+        response = self.client.get("/llms-full.txt")
+        self.assertNotIn(b"> Documentation Index", response.content)
 
 
 class TestMarkdownNegotiation(TestCase):

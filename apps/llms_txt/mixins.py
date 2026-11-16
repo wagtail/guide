@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import loader
+from django.test import RequestFactory
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
 
 from .negotiation import (
@@ -30,15 +31,15 @@ class MarkdownRouteMixin(RoutablePageMixin):
         """
         Render this page as Markdown.
 
-        `frontmatter` prepends a YAML metadata block. It is only wanted when a
-        page is served on its own: llms-full.txt concatenates every page into
-        one document, where repeated `---` blocks partway down would be
-        malformed.
+        `frontmatter` prepends extra information when rendering pages standalone.
         """
         template = loader.get_template("llms_txt/page.md.jinja")
+        # Resolve the site for rendering without a request object.
+        if request is None:
+            request = RequestFactory().get("/")
+            request.site = self.get_site()
         context = {
             "page": self,
-            "request": request,
             "frontmatter": frontmatter,
         }
         return template.render(context, request)
