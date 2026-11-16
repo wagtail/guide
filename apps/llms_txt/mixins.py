@@ -27,6 +27,12 @@ class MarkdownRouteMixin(RoutablePageMixin):
         """Check if this page has a markdown route."""
         return True
 
+    def get_cached_paths(self):
+        """
+        Purge the markdown route along with the page, when the page changes.
+        """
+        return super().get_cached_paths() + ["/markdown/"]
+
     def to_markdown(self, request=None, frontmatter=False):
         """
         Render this page as Markdown.

@@ -1,3 +1,5 @@
+from unittest import mock
+
 from django.test import TestCase
 from django.urls import reverse
 from wagtail.models import Site
@@ -88,6 +90,34 @@ class TestMarkdownRouteMixin(TestCase):
         contains it, referenced as the table of contents."""
         response = self.client.get("/llms-full.txt")
         self.assertNotIn(b"> Documentation Index", response.content)
+
+
+class TestMarkdownFrontendCachePurging(TestCase):
+    def setUp(self):
+        self.content_page = ContentPageFactory()
+
+    def test_get_cached_paths_includes_markdown_route(self):
+        paths = self.content_page.get_cached_paths()
+        self.assertIn("/", paths)
+        self.assertIn("/markdown/", paths)
+
+    def test_publishing_purges_the_markdown_url(self):
+        """
+        Wagtail's frontend cache handler purges every cached path on publish,
+        which now includes the markdown route.
+        """
+        markdown_url = self.content_page.full_url + self.content_page.reverse_subpage(
+            "markdown"
+        )
+        with mock.patch(
+            "wagtail.contrib.frontend_cache.backends.CloudflareBackend.purge_batch"
+        ) as purge_batch:
+            self.content_page.save_revision().publish()
+
+        purged_urls = {
+            url for call in purge_batch.call_args_list for url in call.args[0]
+        }
+        self.assertIn(markdown_url, purged_urls)
 
 
 class TestMarkdownNegotiation(TestCase):

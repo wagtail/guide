@@ -13,6 +13,8 @@ The application itself runs in Heroku's Europe region (`eu-west-1` (Dublin, Irel
 
 See [MCP server](mcp.md) for the operational requirements of the `/mcp` endpoint.
 
+The front-end cache (`wagtail.contrib.frontend_cache`, backed by Cloudflare) is enabled when `FRONTEND_CACHE_CLOUDFLARE_BEARER_TOKEN` or `FRONTEND_CACHE_CLOUDFLARE_TOKEN` is set. See the "Front-end cache" section of `apps/guide/settings/base.py`.
+
 ## Deployment
 
 Deployment is handled automatically by Heroku. When commits are pushed to `main`, Heroku automatically begins building and deploying the site. This deployment only occurs _after_ CI has run and passed.
