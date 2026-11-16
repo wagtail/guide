@@ -1,0 +1,121 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+# A snapshot of how well agents answer questions with guide.wagtail.org in
+# production, across models and harnesses: Claude Code, Codex and OpenCode,
+# each with its own native tools. Same cases, checks and judge as
+# `agent-readiness.yaml`. See README.md.
+#
+# Each harness runs as it does out of the box, with as few changes as
+# possible: no tool restrictions, no proxy, and none of your own settings.
+# Every run starts in a fresh copy of an empty directory, outside the
+# repository. The changes, and why:
+#
+# - Claude Code skips permission prompts, as nobody is there to answer them.
+#   Its shell isn't sandboxed.
+# - Codex never asks for approval, and its sandbox allows the network, so it
+#   can fetch pages with its shell. Writes stay in the run's directory.
+#   `CODEX_HOME` and `HOME` keep your own Codex config, instructions, auth
+#   and skills out: Codex also reads skills from ~/.agents.
+# - OpenCode searches with Exa, authenticated with `EXA_API_KEY`, as its
+#   search tool is off for providers other than OpenCode's own. Its shell
+#   isn't sandboxed. Models run on TensorX, an OpenAI-compatible API.
+#   `providers/opencode.py` keeps your own OpenCode config and skills out.
+#
+# Run with `just eval-agents-snapshot`, which runs every case five times.
+
+description: Agent readiness snapshot of guide.wagtail.org
+
+prompts:
+  - '{{prompt}}'
+
+providers:
+  # Claude Code, through the Claude Agent SDK.
+  - id: anthropic:claude-agent-sdk
+    label: claude-code/haiku-5.5
+    config: &claude
+      model: claude-haiku-5-5
+      apiKeyRequired: false
+      working_dir: '{{ env.EVAL_AGENTS_FIXTURES }}/empty'
+      copy_working_dir: copy
+      setting_sources: []
+      allow_all_tools: true
+      permission_mode: bypassPermissions
+      allow_dangerously_skip_permissions: true
+      # Guards against runaway runs, well above what any run used in the
+      # Harbor benchmark.
+      max_turns: 50
+      max_budget_usd: 3
+
+  - id: anthropic:claude-agent-sdk
+    label: claude-code/sonnet-5.5
+    config:
+      <<: *claude
+      model: claude-sonnet-5-5
+
+  - id: anthropic:claude-agent-sdk
+    label: claude-code/opus-5.5
+    config:
+      <<: *claude
+      model: claude-opus-5-5
+
+  - id: anthropic:claude-agent-sdk
+    label: claude-code/fable-5.2
+    config:
+      <<: *claude
+      model: claude-fable-5-2
+
+  # Codex, through the Codex SDK, with OPENAI_API_KEY.
+  - id: openai:codex-sdk
+    label: codex/luna-6
+    config: &codex
+      model: gpt-6-luna
+      working_dir: '{{ env.EVAL_AGENTS_FIXTURES }}/empty'
+      copy_working_dir: copy
+      skip_git_repo_check: true
+      sandbox_mode: workspace-write
+      network_access_enabled: true
+      approval_policy: never
+      cli_env:
+        CODEX_HOME: '{{ env.EVAL_AGENTS_FIXTURES }}/codex-home'
+        HOME: '{{ env.EVAL_AGENTS_FIXTURES }}/home'
+
+  - id: openai:codex-sdk
+    label: codex/sol-6.1
+    config:
+      <<: *codex
+      model: gpt-6.1-sol
+
+  # OpenCode, with OpenCode's default tools and permissions (no `tools` list).
+  - id: file://providers/opencode.py
+    label: opencode/qwen-3.8-27b
+    config: &opencode
+      model: tensorx/qwen/qwen3.8-27b
+      provider:
+        tensorx:
+          npm: '@ai-sdk/openai-compatible'
+          name: TensorX
+          options:
+            baseURL: '{env:TENSORX_BASE_URL}'
+            apiKey: '{env:TENSORX_API_KEY}'
+          models:
+            qwen/qwen3.8-27b: { name: Qwen 3.8 27B }
+            deepseek/deepseek-v4.1-flash-1017: { name: DeepSeek V4.1 Flash }
+      # promptfoo's timeout for the Python worker, in milliseconds: longer than
+      # the provider's own `run_timeout`, so the provider can stop OpenCode.
+      timeout: 600000
+
+  - id: file://providers/opencode.py
+    label: opencode/deepseek-v4.1-flash
+    config:
+      <<: *opencode
+      model: tensorx/deepseek/deepseek-v4.1-flash-1017
+
+evaluateOptions:
+  # Keep load on the guide low: this runs against the live site.
+  maxConcurrency: 3
+  # Stop a run that hangs, after twice the OpenCode run timeout.
+  timeoutMs: 600000
+
+defaultTest: file://default-test.yaml
+
+tests: file://tests.yaml

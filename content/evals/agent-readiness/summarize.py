@@ -8,13 +8,17 @@ formats agents asked the guide for.
 
     uv run python content/evals/agent-readiness/summarize.py run.json \
         --proxy-log ~/.cache/guide-agent-eval/requests.jsonl
+
+`--csv runs.csv` also writes one row per run, small enough to keep with the
+results when promptfoo's JSON output isn't.
 """
 
 import argparse
+import csv
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
-from statistics import mean, stdev
+from statistics import mean, median, stdev
 from urllib.parse import urlsplit
 
 # What each kind of check in `tests.yaml` tests: the facts in the answer, the
@@ -146,11 +150,61 @@ def print_versus(by_arm):
     )
 
 
+def print_medians(by_arm, repeats):
+    """
+    Each case's median over its repeats: a case passes when most of its runs
+    pass, and its duration and cost are its middle run's. Less sensitive to
+    the odd flaky run than the means. Suite totals add up the cases' medians:
+    what one typical run of every case takes.
+    """
+    rows = []
+    for name, runs in by_arm.items():
+        by_case = defaultdict(list)
+        for run in runs:
+            by_case[run.get("testCase", {}).get("description")].append(run)
+        passed = sum(
+            median(bool(run.get("success")) for run in case_runs) > 0.5
+            for case_runs in by_case.values()
+        )
+        durations = [
+            median((run.get("latencyMs") or 0) / 1000 for run in case_runs)
+            for case_runs in by_case.values()
+        ]
+        costs = [
+            median(run.get("cost") or 0 for run in case_runs)
+            for case_runs in by_case.values()
+        ]
+        rows.append(
+            [
+                name,
+                f"{passed}/{len(by_case)}",
+                f"{median(durations):.0f}s",
+                f"{sum(durations) / 60:.1f} min",
+                f"{100 * median(costs):.2f}¢" if any(costs) else "-",
+                f"${sum(costs):.2f}" if any(costs) else "-",
+            ]
+        )
+    print(f"\n## Median of {repeats} runs per case\n")
+    print(
+        table(
+            [
+                "Arm",
+                "Cases passed",
+                "Median duration",
+                "Suite duration",
+                "Median cost",
+                "Suite cost",
+            ],
+            rows,
+        )
+    )
+
+
 def summarize(results):
     number_repeats(results)
     repeats = len({run["repeat"] for run in results})
     by_arm = defaultdict(list)
-    for result in results:
+    for result in sorted(results, key=arm):
         by_arm[arm(result)].append(result)
 
     overview = []
@@ -185,6 +239,9 @@ def summarize(results):
             overview,
         )
     )
+
+    if repeats >= 3:
+        print_medians(by_arm, repeats)
 
     if REFERENCE_ARM in by_arm:
         print_versus(by_arm)
@@ -272,6 +329,54 @@ def summarize_proxy_log(path):
     )
 
 
+def write_csv(results, path):
+    """One row per run: its case, outcome, duration, cost and trace columns."""
+    number_repeats(results)
+    fields = [
+        "arm",
+        "case",
+        "task",
+        "framing",
+        "repeat",
+        "success",
+        "error",
+        *CHECK_METRICS,
+        "duration_s",
+        "cost_usd",
+        "prompt_tokens",
+        "completion_tokens",
+        "tool_calls",
+        *REACH_COLUMNS,
+    ]
+    rows = []
+    for run in sorted(results, key=lambda run: (arm(run), run.get("testIdx", 0))):
+        scores = run.get("namedScores") or {}
+        tokens = (run.get("response") or {}).get("tokenUsage") or {}
+        rows.append(
+            {
+                "arm": arm(run),
+                "case": run.get("testCase", {}).get("description", "?"),
+                "task": task(run),
+                "framing": framing(run),
+                "repeat": run["repeat"],
+                "success": int(bool(run.get("success"))),
+                # promptfoo's failure reason 2 is a provider error, like a timeout.
+                "error": int(run.get("failureReason") == 2),
+                **{metric: scores.get(metric, "") for metric in CHECK_METRICS},
+                "duration_s": round((run.get("latencyMs") or 0) / 1000, 1),
+                "cost_usd": round(run.get("cost") or 0, 6),
+                "prompt_tokens": tokens.get("prompt", ""),
+                "completion_tokens": tokens.get("completion", ""),
+                "tool_calls": scores.get("tool_calls", ""),
+                **{column: scores.get(column, "") for column in REACH_COLUMNS},
+            }
+        )
+    with open(path, "w", newline="") as file:
+        writer = csv.DictWriter(file, fieldnames=fields)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def main():
     parser = argparse.ArgumentParser(description="Summarize an agent readiness run.")
     parser.add_argument(
@@ -280,6 +385,7 @@ def main():
     parser.add_argument(
         "--proxy-log", action="append", help="the proxy's requests.jsonl"
     )
+    parser.add_argument("--csv", help="write one row per run to this CSV file")
     parser.add_argument(
         "--override",
         action="append",
@@ -297,6 +403,8 @@ def main():
         if arm(result) not in replaced
     ]
     summarize(results + overrides)
+    if args.csv:
+        write_csv(results + overrides, args.csv)
     for path in args.proxy_log or []:
         summarize_proxy_log(path)
 

@@ -12,8 +12,11 @@ columns need, so this one runs the CLI directly.
 Provider config:
 - `model`: `provider/model`, like `openai/gpt-5.4-mini`.
 - `tools`: OpenCode tool names to allow, like `[webfetch, websearch]`.
-  Everything else is denied.
+  Everything else is denied. Leave it out to keep OpenCode's default tools and
+  permissions, as in `agent-readiness-snapshot.yaml`.
 - `mcp`: OpenCode `mcp` config, for arms with an MCP server.
+- `provider`: OpenCode `provider` config, for model providers OpenCode doesn't
+  know, like an OpenAI-compatible API.
 - `env`: extra environment variables, like `HTTPS_PROXY` for the plain site.
 - `run_timeout`: seconds before the run is stopped (default 300). OpenCode
   retries some provider errors without giving up, like a used-up free model
@@ -35,18 +38,23 @@ DEFAULT_TIMEOUT = 300
 
 
 def opencode_config(config: dict[str, Any]) -> dict[str, Any]:
-    """The OpenCode config for one run: deny everything but the arm's tools."""
-    permission: dict[str, str] = {"*": "deny"}
-    for tool in config.get("tools") or []:
-        permission[tool] = "allow"
+    """
+    The OpenCode config for one run: deny everything but the arm's tools, or
+    keep OpenCode's defaults when the arm doesn't list any.
+    """
     result: dict[str, Any] = {
         "$schema": "https://opencode.ai/config.json",
         "autoupdate": False,
         "share": "disabled",
-        "permission": permission,
     }
-    if config.get("mcp"):
-        result["mcp"] = config["mcp"]
+    if "tools" in config:
+        permission: dict[str, str] = {"*": "deny"}
+        for tool in config["tools"] or []:
+            permission[tool] = "allow"
+        result["permission"] = permission
+    for key in ("mcp", "provider"):
+        if config.get(key):
+            result[key] = config[key]
     return result
 
 
@@ -119,12 +127,17 @@ def call_api(
         run_dir = Path(run_dir)
         workdir = run_dir / "empty"
         workdir.mkdir()
+        (run_dir / "home").mkdir()
         config_path = run_dir / "opencode.json"
         config_path.write_text(json.dumps(opencode_config(config)))
         env = {
             **os.environ,
-            # Keep OpenCode away from your own config, sessions and plugins.
+            # Keep OpenCode away from your own config, sessions, plugins and
+            # skills: it also reads skills from ~/.agents and ~/.claude.
             # The model list cache is shared between runs.
+            "HOME": str(run_dir / "home"),
+            "OPENCODE_DISABLE_CLAUDE_CODE": "1",
+            "OPENCODE_DISABLE_EXTERNAL_SKILLS": "1",
             "XDG_CONFIG_HOME": str(run_dir / "config"),
             "XDG_DATA_HOME": str(run_dir / "data"),
             "XDG_STATE_HOME": str(run_dir / "state"),

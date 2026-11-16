@@ -103,12 +103,14 @@ eval-promptfoo-view:
 eval_agents_cache := env("XDG_CACHE_HOME", env("HOME") / ".cache") / "guide-agent-eval"
 
 # Install the agent readiness eval tooling, without saving it to package.json.
-# promptfoo only resolves the Claude Agent SDK from the project's node_modules,
-# and a later `npm ci` prunes both.
+# promptfoo only resolves the Claude Agent SDK and Codex SDK from the project's
+# node_modules, and a later `npm ci` prunes them.
 eval-agents-init:
-    npm install --no-save promptfoo@0.124.1 @anthropic-ai/claude-agent-sdk@0.3.296
+    npm install --no-save promptfoo@0.124.1 @anthropic-ai/claude-agent-sdk@0.3.325 @openai/codex-sdk@0.169.0
     # OpenCode, for `just eval-agents-opencode`: in the eval cache, as it's a CLI.
-    npm install --prefix "{{ eval_agents_cache }}/opencode" --no-save opencode-ai@1.19.3
+    npm install --prefix "{{ eval_agents_cache }}/opencode" --no-save opencode-ai@1.19.5
+    # npm doesn't run install scripts by default: this one links OpenCode's binary.
+    cd "{{ eval_agents_cache }}/opencode/node_modules/opencode-ai" && node postinstall.mjs
 
 # Run the proxy that logs agents' guide requests, forwarding them to the local
 # development server (`local`) or to the live site (`prod`). Port 8899 serves
@@ -158,6 +160,22 @@ eval-agents-opencode model *ARGS: eval-agents-check
     EVAL_AGENTS_OPENCODE="{{ eval_agents_cache }}/opencode/node_modules/.bin/opencode" \
     PROMPTFOO_PYTHON="$PWD/.venv/bin/python" \
     npx promptfoo eval -c content/evals/agent-readiness/agent-readiness-opencode.yaml --no-cache "$@"
+
+# Take a snapshot of agents answering with the live guide: Claude Code, Codex and
+# OpenCode with their native tools, every case five times. Needs a Claude Code
+# login, and OPENAI_API_KEY, TENSORX_API_KEY, TENSORX_BASE_URL and EXA_API_KEY.
+# Pass promptfoo arguments, like `--filter-providers '^codex/'`.
+eval-agents-snapshot *ARGS: eval-agents-check
+    @test -d node_modules/@openai/codex-sdk || { echo 'Codex SDK not found - run `just eval-agents-init`'; exit 1; }
+    @test -x "{{ eval_agents_cache }}/opencode/node_modules/.bin/opencode" || { echo 'OpenCode not found - run `just eval-agents-init`'; exit 1; }
+    @for key in OPENAI_API_KEY TENSORX_API_KEY TENSORX_BASE_URL EXA_API_KEY; do \
+        printenv "$key" > /dev/null || { echo "$key is not set"; exit 1; }; \
+    done
+    mkdir -p "{{ eval_agents_cache }}/empty" "{{ eval_agents_cache }}/codex-home" "{{ eval_agents_cache }}/home"
+    EVAL_AGENTS_FIXTURES="{{ eval_agents_cache }}" \
+    EVAL_AGENTS_OPENCODE="{{ eval_agents_cache }}/opencode/node_modules/.bin/opencode" \
+    PROMPTFOO_PYTHON="$PWD/.venv/bin/python" \
+    npx promptfoo eval -c content/evals/agent-readiness/agent-readiness-snapshot.yaml --no-cache --repeat 5 "$@"
 
 # Browse agent readiness eval results.
 eval-agents-view:

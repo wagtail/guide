@@ -12,12 +12,14 @@ The assertion always passes: it measures what the agent did, not whether the
 path was right. Give it `weight: 0` in the config so it doesn't affect scores.
 
 Each agent harness names its tools differently. `normalize_claude` turns the
-Claude Agent SDK's `toolCalls` into plain `Call`s, and `normalize_opencode`
-those of `providers/opencode.py`.
+Claude Agent SDK's `toolCalls` into plain `Call`s, `normalize_opencode` those
+of `providers/opencode.py`, and `normalize_codex` those of the Codex SDK, which
+promptfoo only returns in the raw turn (see `codex_tool_calls`).
 """
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass
 from pathlib import Path
@@ -115,6 +117,99 @@ def normalize_opencode(tool_calls: list[dict[str, Any]]) -> list[Call]:
         else:
             calls.append(Call("other", output=output))
     return calls
+
+
+def codex_tool_calls(raw: Any) -> list[dict[str, Any]] | None:
+    """
+    Tool calls from a Codex SDK turn, which promptfoo's Codex provider returns
+    as JSON in `raw`, or None if `raw` isn't a Codex turn. Codex searches and
+    opens pages on OpenAI's servers, with its `web_search` tool: when it opens
+    a page, the item's query is the page's URL.
+    """
+    try:
+        turn = json.loads(raw) if isinstance(raw, str) else raw
+    except ValueError:
+        return None
+    if not isinstance(turn, dict) or "items" not in turn or "finalResponse" not in turn:
+        return None
+    tool_calls = []
+    for item in turn["items"] or []:
+        kind = item.get("type")
+        if kind == "command_execution":
+            failed = item.get("status") == "failed" or item.get("exit_code") not in (
+                None,
+                0,
+            )
+            tool_calls.append(
+                {
+                    "name": "shell",
+                    "input": {"command": item.get("command", "")},
+                    "output": item.get("aggregated_output", ""),
+                    "is_error": failed,
+                }
+            )
+        elif kind == "web_search":
+            tool_calls.append(
+                {"name": "web_search", "input": {"query": item.get("query", "")}}
+            )
+        elif kind == "mcp_tool_call":
+            result = item.get("result") or {}
+            output = "\n".join(
+                block.get("text", "")
+                for block in result.get("content") or []
+                if isinstance(block, dict)
+            )
+            error = item.get("error") or {}
+            tool_calls.append(
+                {
+                    "name": f"{item.get('server', '')}__{item.get('tool', '')}",
+                    "input": item.get("arguments") or {},
+                    "output": output or error.get("message", ""),
+                    "is_error": bool(error) or item.get("status") == "failed",
+                }
+            )
+    return tool_calls
+
+
+def normalize_codex(tool_calls: list[dict[str, Any]]) -> list[Call]:
+    """Turn the tool calls from `codex_tool_calls` into `Call`s."""
+    calls = []
+    for tool_call in tool_calls:
+        name = tool_call.get("name", "")
+        tool_input = tool_call.get("input") or {}
+        output = str(tool_call.get("output") or "")
+        error = bool(tool_call.get("is_error"))
+        if name == "web_search":
+            query = tool_input.get("query", "").strip()
+            if re.fullmatch(r"https?://\S+", query):
+                calls.append(Call("fetch", query))
+            else:
+                calls.append(Call("search"))
+        elif name.endswith("__search_docs"):
+            calls.append(Call("mcp_search", output=output))
+        elif name.endswith("__fetch_docs_page"):
+            url = tool_input.get("url", "")
+            if url.startswith("/"):
+                url = f"https://{GUIDE_HOST}{url}"
+            calls.append(Call("mcp_fetch", url, output, error=error))
+        elif name == "shell":
+            command = tool_input.get("command", "")
+            markdown = "text/markdown" in command
+            calls.extend(
+                Call("fetch", url, output, markdown, error)
+                for url in URL_PATTERN.findall(command)
+            )
+        else:
+            calls.append(Call("other", output=output))
+    return calls
+
+
+NORMALIZERS = {
+    "claude": normalize_claude,
+    "opencode": normalize_opencode,
+    "codex": normalize_codex,
+}
+SHELL_TOOLS = {"claude": "Bash", "opencode": "bash", "codex": "shell"}
 
 
 def normalize_url(url: str) -> str:
@@ -250,14 +345,18 @@ def analyze(calls: list[Call], answer: str) -> dict[str, float]:
 
 
 def get_assert(output: str, context: dict[str, Any]) -> dict[str, Any]:
-    metadata = (context.get("providerResponse") or {}).get("metadata") or {}
+    response = context.get("providerResponse") or {}
+    metadata = response.get("metadata") or {}
+    harness = metadata.get("harness") or "claude"
     tool_calls = metadata.get("toolCalls") or []
-    opencode = metadata.get("harness") == "opencode"
-    calls = (normalize_opencode if opencode else normalize_claude)(tool_calls)
+    codex_calls = None if tool_calls else codex_tool_calls(response.get("raw"))
+    if codex_calls is not None:
+        harness, tool_calls = "codex", codex_calls
+    calls = NORMALIZERS[harness](tool_calls)
     columns = analyze(calls, output or "")
     # Shell use, for arms that allow curl: commands run, and commands refused
     # because they weren't plain curl.
-    shell = "bash" if opencode else "Bash"
+    shell = SHELL_TOOLS[harness]
     columns["curl_calls"] = float(
         sum(
             t.get("name") == shell
@@ -274,6 +373,6 @@ def get_assert(output: str, context: dict[str, Any]) -> dict[str, Any]:
     return {
         "pass": True,
         "score": 1,
-        "reason": f"{len(calls)} tool calls; reached: {', '.join(reached) or 'none'}",
+        "reason": f"{harness}: {len(calls)} tool calls; reached: {', '.join(reached) or 'none'}",
         "named_scores": columns,
     }

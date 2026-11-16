@@ -4,7 +4,7 @@ Which of the guide's agent readiness features do agents actually use, and do the
 
 The method borrows from the [draftjs_exporter skill evals](https://github.com/wagtail/draftjs_exporter/blob/main/docs/contributing/evals.md) and Anthropic's [Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents). The trace columns follow the [ora.ai / Vercel agent readiness dataset](https://github.com/agentready-org/standard/blob/main/data/traces.csv), so the results can be compared.
 
-For comparisons across Claude Code, Codex, Cursor, OpenCode and Mistral Vibe, see the [Harbor runner](../agent-readiness-harbor/README.md). It reuses these cases and graders, with native-tools and supported no-tools arms.
+For comparisons across Claude Code, Codex, Cursor, OpenCode and Mistral Vibe, see the [Harbor runner](../agent-readiness-harbor/README.md). It reuses these cases and graders, with native-tools and supported no-tools arms. For a quicker snapshot of the live site across Claude Code, Codex and OpenCode, see [Production snapshot](#production-snapshot-claude-code-codex-and-opencode).
 
 ## Arms
 
@@ -87,6 +87,28 @@ just eval-agents-opencode openai/gpt-5.4-mini --repeat 3 --output opencode.json
 ```
 
 Models use OpenCode's `provider/model` names. List them with `opencode models openai`, from the eval cache's `opencode/node_modules/.bin`. OpenCode's free models stop after a few requests ("Free usage limit reached"), which isn't enough for a run.
+
+### Production snapshot: Claude Code, Codex and OpenCode
+
+`agent-readiness-snapshot.yaml` takes a snapshot of how well agents answer the same cases with the live site, across models and harnesses. The latest is in [results/20261115](results/20261115/README.md). Each harness runs with its native tools, as it does out of the box, and every case runs five times, so `summarize.py` can report each case's median. The config's comments list what differs from each harness's defaults, and why:
+
+- Claude Code (Haiku, Sonnet, Opus and Fable), through the Claude Agent SDK, with all its tools and no permission prompts.
+- Codex (Luna and Sol), through the Codex SDK, with `OPENAI_API_KEY`. Its sandbox allows the network, so its shell can fetch pages, and its own home directories keep your Codex config, instructions and skills out.
+- OpenCode with open models on TensorX, with OpenCode's default tools and permissions. Its search tool uses Exa, authenticated with `EXA_API_KEY`.
+
+There's no proxy, and no plain site: requests go straight to guide.wagtail.org. Claude Code's and OpenCode's shells aren't sandboxed, and run in a fresh empty directory each time.
+
+```sh
+just eval-agents-init                 # promptfoo, the Claude Agent SDK, Codex SDK and OpenCode, once
+
+# Needs a Claude Code login, and OPENAI_API_KEY, TENSORX_API_KEY, TENSORX_BASE_URL
+# and EXA_API_KEY in your environment.
+just eval-agents-snapshot --filter-providers '^codex/' --output codex.json
+
+uv run python content/evals/agent-readiness/summarize.py claude-code.json codex.json opencode.json
+```
+
+Codex searches and opens pages on OpenAI's servers, so its trace columns only see the pages it opens by URL, or fetches with its shell. OpenCode only reports costs for models it has prices for.
 
 ### Running one arm, or testing a site change
 
