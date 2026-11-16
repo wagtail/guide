@@ -222,11 +222,13 @@ class TestMarkdownFromHtml(TestCase):
         self.assertIn("## In this section", markdown)
         self.assertIn(f"[New in Wagtail 8.1]({self.child.full_url})", markdown)
 
-    def test_links_to_llms_txt(self):
+    def test_leaves_out_page_tools(self):
         markdown = self.get_markdown(self.section)
         site = self.section.get_site()
-        self.assertIn(f"[View llms.txt]({site.root_url}/llms.txt)", markdown)
-        self.assertIn(f"[View llms-full.txt]({site.root_url}/llms-full.txt)", markdown)
+        self.assertNotIn("View page Markdown", markdown)
+        self.assertNotIn("View llms.txt", markdown)
+        # The documentation index callout still links to llms.txt.
+        self.assertIn(f"{site.root_url}/llms.txt", markdown)
 
     def test_explicit_route_matches_negotiated_markdown(self):
         response = self.client.get(
