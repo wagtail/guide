@@ -31,7 +31,13 @@ class TestMarkdownIsNotHtmlEscaped(TestCase):
         response = self.client.get(
             self.content_page.url, headers={"accept": "text/markdown"}
         )
-        self.assertNotEscaped(response.content.decode())
+        content = response.content.decode()
+        # Converted from the page's HTML, the title gets Markdown escaping,
+        # where `\<` reads as `<`, but no HTML entities.
+        self.assertIn("# Bread & Butter \\<3", content)
+        self.assertIn(DESCRIPTION, content)
+        for entity in ("&amp;", "&lt;", "&#39;", "&#34;", "&quot;"):
+            self.assertNotIn(entity, content)
 
     def test_llms_txt(self):
         response = self.client.get("/llms.txt")
@@ -54,7 +60,12 @@ class TestAutoescapeSelection(TestCase):
         self.autoescape = engines["jinja2"].env.autoescape
 
     def test_markdown_and_text_templates_are_not_escaped(self):
-        for name in ("llms_txt/page.md.jinja", "llms_txt/llms.txt.jinja"):
+        for name in (
+            "llms_txt/page.md.jinja",
+            "llms_txt/page_from_html.md.jinja",
+            "llms_txt/frontmatter.md.jinja",
+            "llms_txt/llms.txt.jinja",
+        ):
             with self.subTest(name=name):
                 self.assertFalse(self.autoescape(name))
 

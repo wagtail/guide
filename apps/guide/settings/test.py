@@ -4,6 +4,13 @@ DEBUG = False
 
 SECRET_KEY = "testing-secret-key"
 
+# Exercise frontend cache signals without requiring Cloudflare credentials.
+if "wagtail.contrib.frontend_cache" not in INSTALLED_APPS:  # noqa: F405
+    INSTALLED_APPS = [*INSTALLED_APPS, "wagtail.contrib.frontend_cache"]  # noqa: F405
+WAGTAILFRONTENDCACHE = {
+    "default": {"BACKEND": "wagtail.contrib.frontend_cache.backends.dummy.DummyBackend"}
+}
+
 # Don't redirect to HTTPS in tests.
 SECURE_SSL_REDIRECT = False
 # Don't send the HSTS header

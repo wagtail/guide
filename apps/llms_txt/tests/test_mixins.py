@@ -1,10 +1,10 @@
 from unittest import mock
 
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 from wagtail.models import Site
 
-from apps.core.factories import ContentPageFactory
+from apps.core.factories import ContentPageFactory, HomePageFactory
 
 
 class TestMarkdownRouteMixin(TestCase):
@@ -81,9 +81,12 @@ class TestMarkdownRouteMixin(TestCase):
         )
         content = response.content.decode("utf-8")
         self.assertIn("> Documentation Index\n", content)
-        # After the frontmatter, before the page heading.
+        # The metadata precedes the converted HTML, including the page heading.
         self.assertLess(content.index("> Documentation Index"), content.index("\n# "))
-        self.assertLess(content.index("\n# "), content.index("Page URL:"))
+        self.assertLess(
+            content.index("> Documentation Index"), content.index("Page URL:")
+        )
+        self.assertLess(content.index("Page URL:"), content.index("\n# "))
 
     def test_llms_full_txt_omits_documentation_index(self):
         """The index callout would be wrong in llms-full.txt: llms.txt already
@@ -101,6 +104,15 @@ class TestMarkdownFrontendCachePurging(TestCase):
         self.assertIn("/", paths)
         self.assertIn("/markdown/", paths)
 
+    @override_settings(
+        WAGTAILFRONTENDCACHE={
+            "default": {
+                "BACKEND": "wagtail.contrib.frontend_cache.backends.CloudflareBackend",
+                "ZONEID": "test-zone",
+                "BEARER_TOKEN": "test-token",
+            }
+        }
+    )
     def test_publishing_purges_the_markdown_url(self):
         """
         Wagtail's frontend cache handler purges every cached path on publish,
@@ -145,8 +157,28 @@ class TestMarkdownNegotiation(TestCase):
         self.assertIn("private", response["Cache-Control"])
 
     def test_html_is_default(self):
-        response = self.get()
-        self.assertTrue(response["Content-Type"].startswith("text/html"))
+        for accept in (
+            None,
+            "*/*",
+            "text/*",
+            "application/json",
+            "text/html, text/markdown;q=0.5",
+            "text/markdown;q=0, */*",
+        ):
+            with self.subTest(accept=accept):
+                response = self.get(accept)
+                self.assertTrue(response["Content-Type"].startswith("text/html"))
+
+    def test_markdown_preferences(self):
+        for accept in (
+            "text/markdown, text/html;q=0.9",
+            "text/markdown, text/html",
+        ):
+            with self.subTest(accept=accept):
+                response = self.get(accept)
+                self.assertEqual(
+                    response["Content-Type"], "text/markdown;charset=utf-8"
+                )
 
     def test_responses_vary_on_accept(self):
         for accept in ("text/markdown", "text/html"):
@@ -165,3 +197,105 @@ class TestMarkdownNegotiation(TestCase):
         home = self.content_page.get_parent().specific
         response = self.get("text/markdown", path=home.url)
         self.assertEqual(response["Content-Type"], "text/markdown;charset=utf-8")
+
+
+class TestMarkdownFromHtml(TestCase):
+    """
+    Page Markdown responses are converted from the page's rendered HTML, so
+    agents see what visitors see around the content.
+    """
+
+    def setUp(self):
+        self.home_page = HomePageFactory()
+        self.section = ContentPageFactory(parent=self.home_page, title="Releases")
+        self.child = ContentPageFactory(parent=self.section, title="New in Wagtail 8.1")
+        self.menu_page = ContentPageFactory(
+            parent=self.home_page, title="Manage images", show_in_menus=True
+        )
+
+    def get_markdown(self, page):
+        response = self.client.get(page.url, headers={"accept": "text/markdown"})
+        return response.content.decode()
+
+    def test_section_pages_list_their_pages(self):
+        markdown = self.get_markdown(self.section)
+        self.assertIn("## In this section", markdown)
+        self.assertIn(f"[New in Wagtail 8.1]({self.child.full_url})", markdown)
+
+    def test_links_to_llms_txt(self):
+        markdown = self.get_markdown(self.section)
+        site = self.section.get_site()
+        self.assertIn(f"[View llms.txt]({site.root_url}/llms.txt)", markdown)
+        self.assertIn(f"[View llms-full.txt]({site.root_url}/llms-full.txt)", markdown)
+
+    def test_explicit_route_matches_negotiated_markdown(self):
+        response = self.client.get(
+            self.section.url + self.section.reverse_subpage("markdown")
+        )
+        self.assertEqual(response.content.decode(), self.get_markdown(self.section))
+
+    def test_homepage_includes_introduction_and_sections(self):
+        self.home_page.introduction = "<p>Welcome to the guide.</p>"
+        self.home_page.sections = [
+            (
+                "section_grid",
+                [
+                    {
+                        "section": "reference",
+                        "title": "Explore releases",
+                        "text": "Changes in each Wagtail version.",
+                        "page": self.section,
+                    }
+                ],
+            )
+        ]
+        self.home_page.save()
+        markdown = self.get_markdown(self.home_page)
+        self.assertIn("Welcome to the guide.", markdown)
+        self.assertIn(f"[Explore releases]({self.section.full_url})", markdown)
+        self.assertIn("Changes in each Wagtail version.", markdown)
+
+    def test_body_preserves_annotations_alerts_and_absolute_links(self):
+        self.section.body = [
+            (
+                "text_annotated",
+                {
+                    "version": "8.1",
+                    "change_type": "added",
+                    "content": '<p>Read <a href="details/">the details</a>.</p>',
+                },
+            ),
+            ("alert", {"alert_type": "Warning", "alert_body": "<p>Save first.</p>"}),
+        ]
+        self.section.save()
+        markdown = self.get_markdown(self.section)
+        self.assertIn("Added in Wagtail 8.1", markdown)
+        self.assertIn(f"[the details]({self.section.full_url}details/)", markdown)
+        self.assertIn("Warning", markdown)
+        self.assertIn("Save first.", markdown)
+
+    def test_keeps_the_header(self):
+        markdown = self.get_markdown(self.section)
+        self.assertTrue(markdown.startswith("---\n"))
+        self.assertIn(f"Page URL: {self.section.full_url}", markdown)
+
+    def test_leaves_out_the_feedback_form(self):
+        markdown = self.get_markdown(self.section)
+        self.assertNotIn("Was this page helpful?", markdown)
+
+    def test_leaves_out_the_theme_labels(self):
+        markdown = self.get_markdown(self.section)
+        self.assertNotIn("Dark", markdown)
+        self.assertNotIn("Light", markdown)
+
+    def test_leaves_out_the_menu(self):
+        html = self.client.get(self.section.url).content.decode()
+        self.assertIn(f'href="{self.menu_page.url}"', html)
+        markdown = self.get_markdown(self.section)
+        self.assertNotIn(self.menu_page.full_url, markdown)
+
+    def test_to_markdown_is_unchanged(self):
+        """llms-full.txt and the MCP server keep using the page's content only."""
+        markdown = self.section.to_markdown()
+        self.assertNotIn("In this section", markdown)
+        self.assertNotIn("llms.txt", markdown)

@@ -1,0 +1,6 @@
+{#- A page converted from its rendered HTML: see MarkdownRouteMixin.to_markdown_from_html. -#}
+{% include "llms_txt/frontmatter.md.jinja" %}Page URL: {{ page.full_url }}
+{% if page.search_description %}
+> {{ page.search_description }}
+{% endif %}
+{{ body }}
