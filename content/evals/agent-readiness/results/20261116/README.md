@@ -1,6 +1,6 @@
 # Production snapshot: 20261116
 
-The same snapshot as [20261115](../20261115/README.md), rerun after page Markdown changed: same config, cases, versions and judge. See [Reading production snapshot results](../README.md) for what the tables and columns mean.
+The same snapshot as [20261115](../20261115/README.md), rerun after page Markdown changed: same config, cases, versions and judge. [20261117](../20261117/README.md) is the rerun after the site map was added. See [Reading production snapshot results](../README.md) for what the tables and columns mean.
 
 - **Runs:** 1,320: eight models, 33 cases, five repeats each. Every run produced an answer, except one OpenCode timeout (Qwen 3.8 27B, 300 seconds).
 - **When:** 16 November 2026, 16:25 to 17:51 GMT, against the live site.

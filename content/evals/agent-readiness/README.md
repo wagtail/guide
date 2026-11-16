@@ -90,7 +90,7 @@ Models use OpenCode's `provider/model` names. List them with `opencode models op
 
 ### Production snapshot: Claude Code, Codex and OpenCode
 
-`agent-readiness-snapshot.yaml` takes a snapshot of how well agents answer the same cases with the live site, across models and harnesses. The latest is in [results/20261116](results/20261116/README.md), and [Reading production snapshot results](results/README.md) explains the tables and what to look for in them. Each harness runs with its native tools, as it does out of the box, and every case runs five times, so `summarize.py` can report each case's median. The config's comments list what differs from each harness's defaults, and why:
+`agent-readiness-snapshot.yaml` takes a snapshot of how well agents answer the same cases with the live site, across models and harnesses. The latest is in [results/20261117](results/20261117/README.md), and [Reading production snapshot results](results/README.md) explains the tables and what to look for in them. Each harness runs with its native tools, as it does out of the box, and every case runs five times, so `summarize.py` can report each case's median. The config's comments list what differs from each harness's defaults, and why:
 
 - Claude Code (Haiku, Sonnet, Opus and Fable), through the Claude Agent SDK, with all its tools and no permission prompts.
 - Codex (Luna and Sol), through the Codex SDK, with `OPENAI_API_KEY`. Its sandbox allows the network, so its shell can fetch pages, and its own home directories keep your Codex config, instructions and skills out.
