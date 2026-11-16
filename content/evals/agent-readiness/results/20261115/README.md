@@ -4,7 +4,7 @@ How well Claude Code, Codex and OpenCode answer the [33 agent readiness cases](.
 
 - **Runs:** 1,320: eight models, 33 cases, five repeats each. Every run produced an answer, except one OpenCode timeout (DeepSeek V4.1 Flash, 300 seconds).
 - **When:** 16 November 2026, 13:59 to 15:31 GMT, against the live site.
-- **Site:** `main` at `c63f3df`, before [#509](https://github.com/wagtail/guide/pull/509) (page Markdown converted from rendered HTML), which merged after the run. A rerun shows what #509 changes for agents.
+- **Site:** `main` at `c63f3df`, before [#509](https://github.com/wagtail/guide/pull/509) (page Markdown converted from rendered HTML), which merged after the run. [20261116](../20261116/README.md) is the rerun after it.
 - **Versions:** promptfoo 0.124.1, Claude Agent SDK 0.3.325 (Claude Code 2.1.325), Codex SDK and CLI 0.169.0, OpenCode 1.19.5. Judge: Claude Sonnet 5.5.
 - **Search:** Claude Code and Codex use their providers' server-side search. OpenCode uses Exa, authenticated.
 
@@ -23,7 +23,7 @@ A case passes when at least three of its five runs pass. Duration and cost are e
 | OpenCode / Qwen 3.8 27B        |        33/33 |         96% |             34s |        0.8¢ |
 | OpenCode / DeepSeek V4.1 Flash |        28/33 |         82% |             14s |           — |
 
-[summary.md](summary.md) has the full tables from `summarize.py`: checks, pass rates by task and framing, surfaces reached, and failed runs per case. [runs.csv](runs.csv) has one row per run.
+[summary.md](summary.md) has the full tables from `summarize.py`: checks, pass rates by task and framing, surfaces reached, and failed runs per case. [runs.csv](runs.csv) has one row per run. [Reading production snapshot results](../README.md) explains every table and column.
 
 ## Findings
 
