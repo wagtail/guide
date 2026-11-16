@@ -1,4 +1,6 @@
+import importlib.util
 import json
+import unittest
 
 from django.core.cache import cache
 from django.db import connection
@@ -59,7 +61,50 @@ class TestLLMsTxtViews(TestCase):
         for line in lines[start:]:
             if line and not line.startswith("## "):
                 with self.subTest(line=line):
-                    self.assertTrue(line.startswith("- ["))
+                    # Nested pages are indented, and the indentation must be a
+                    # multiple of 4 for Markdown to read the item as nested.
+                    self.assertRegex(line, r"^(?:    )*- \[")
+
+    def test_llms_txt_nests_pages_by_depth(self):
+        # Section pages are one level below the site root, and their children
+        # one level below them, so the table of contents mirrors the page tree.
+        section = ContentPageFactory(parent=self.home_page, title="Tutorial")
+        child = ContentPageFactory(parent=section, title="Getting started")
+        cache.clear()
+        response = self.client.get(reverse("llms_txt"))
+        lines = response.content.decode().splitlines()
+        self.assertIn(
+            f"    - [{section.title}]({section.full_url}"
+            f"{section.reverse_subpage('markdown')})",
+            lines,
+        )
+        self.assertIn(
+            f"        - [{child.title}]({child.full_url}"
+            f"{child.reverse_subpage('markdown')})",
+            lines,
+        )
+
+    @unittest.skipUnless(
+        importlib.util.find_spec("markdown_it"),
+        "needs markdown-it-py, a Wagtail dependency",
+    )
+    def test_llms_txt_table_of_contents_parses_as_a_nested_list(self):
+        """A CommonMark parser reads section pages as parents of their pages."""
+        section = ContentPageFactory(parent=self.home_page, title="Tutorial")
+        ContentPageFactory(parent=section, title="Getting started")
+        cache.clear()
+        content = self.client.get(reverse("llms_txt")).content.decode()
+        toc = content.split("## Table of Contents\n")[1].split("\n## Optional")[0]
+        from markdown_it import MarkdownIt
+
+        html = MarkdownIt().render(toc)
+        # One nested list per level below the site root: the home page, then
+        # its section pages, then their child pages.
+        self.assertEqual(html.count("<ul>"), 3)
+        self.assertIn(
+            f'<a href="{section.full_url}{section.reverse_subpage("markdown")}">', html
+        )
+        self.assertNotIn("<p>", html)
 
     def test_agent_skills_index_description(self):
         response = self.client.get(reverse("agent_skills_index"))

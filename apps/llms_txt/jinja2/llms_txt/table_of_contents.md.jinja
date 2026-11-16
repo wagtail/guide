@@ -1,0 +1,4 @@
+{#- A full sitemap for llms.txt and other Markdown responses, with nested list items and nice-looking whitespace rendering. -#}
+{{ "\n" }}{%- for listed_page in pages %}
+{% for _ in range(listed_page.depth - 2) %}    {% endfor %}- [{{ listed_page.seo_title if listed_page.seo_title else listed_page.title }}]({{ listed_page.full_url }}{{ listed_page.reverse_subpage("markdown") }}){% if listed_page.search_description %}: {{ listed_page.search_description.split()|join(" ")|safe }}{% endif %}
+{%- endfor -%}

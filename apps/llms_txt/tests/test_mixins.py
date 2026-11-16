@@ -294,10 +294,72 @@ class TestMarkdownFromHtml(TestCase):
         html = self.client.get(self.section.url).content.decode()
         self.assertIn(f'href="{self.menu_page.url}"', html)
         markdown = self.get_markdown(self.section)
-        self.assertNotIn(self.menu_page.full_url, markdown)
+        # The menu's page is still in the site sitemap, but its label is not.
+        self.assertNotIn(f"Manage images]({self.menu_page.full_url})", markdown)
 
     def test_to_markdown_is_unchanged(self):
         """llms-full.txt and the MCP server keep using the page's content only."""
         markdown = self.section.to_markdown()
         self.assertNotIn("In this section", markdown)
         self.assertNotIn("llms.txt", markdown)
+
+    def sitemap_lines(self, markdown):
+        return [
+            line
+            for line in markdown.split("\n## Site Map\n")[1].splitlines()
+            if line.lstrip().startswith("- ")
+        ]
+
+    @staticmethod
+    def page_link(page):
+        return f"[{page.title}]({page.full_url}{page.reverse_subpage('markdown')})"
+
+    def test_appends_site_sitemap(self):
+        markdown = self.get_markdown(self.section)
+        self.assertIn("\n## Site Map\n", markdown)
+        self.assertLess(
+            markdown.index("## In this section"), markdown.index("## Site Map")
+        )
+        self.assertIn(
+            f"        - {self.page_link(self.child)}",
+            self.sitemap_lines(markdown),
+        )
+
+    def test_site_sitemap_is_nested_by_page_depth(self):
+        # Each page is a list item, nested under its parent, with a 4-space
+        # indent per level of the page tree. The site root is the top item.
+        markdown = self.get_markdown(self.home_page)
+        self.assertEqual(
+            self.sitemap_lines(markdown),
+            [
+                f"    - {self.page_link(self.section)}",
+                f"        - {self.page_link(self.child)}",
+                f"    - {self.page_link(self.menu_page)}",
+            ],
+        )
+
+    def test_site_sitemap_matches_llms_txt_table_of_contents(self):
+        """
+        The sitemap is the llms.txt table of contents, so both stay in sync
+        and neither lists the page that the agent is already reading.
+        """
+        markdown = self.get_markdown(self.section)
+        llms_txt = self.client.get("/llms.txt").content.decode()
+        toc = llms_txt.split("## Table of Contents\n")[1].split("\n## Optional")[0]
+        # Both link to every page in sitemap order, with the same nesting, which
+        # is absolute: leaving out the section page must not shift its child.
+        expected = [
+            line
+            for line in toc.splitlines()
+            if line.lstrip().startswith("- ")
+            and self.page_link(self.section) not in line
+        ]
+        self.assertEqual(self.sitemap_lines(markdown), expected)
+
+    def test_homepage_sitemap_lists_every_page_but_itself(self):
+        markdown = self.get_markdown(self.home_page)
+        self.assertIn(
+            f"    - {self.page_link(self.section)}",
+            self.sitemap_lines(markdown),
+        )
+        self.assertNotIn(reverse("llms_txt"), markdown.split("## Site Map\n")[1])

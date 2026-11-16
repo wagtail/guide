@@ -3,6 +3,7 @@ from django.template import loader
 from django.test import RequestFactory
 from django.utils.cache import patch_cache_control
 from wagtail.contrib.routable_page.models import RoutablePageMixin, route
+from wagtail.models import Site
 
 from .negotiation import MARKDOWN_CONTENT_TYPE
 
@@ -79,8 +80,34 @@ class MarkdownRouteMixin(RoutablePageMixin):
         )
         body = converter.convert(response.content.decode(response.charset))
         template = loader.get_template("llms_txt/page_from_html.md.jinja")
-        context = {"page": self, "request": request, "frontmatter": True, "body": body}
+        context = {
+            "page": self,
+            "request": request,
+            "frontmatter": True,
+            "body": body,
+            "sitemap_pages": self.get_sitemap_pages(request),
+        }
         return template.render(context, request)
+
+    def get_sitemap_pages(self, request):
+        """
+        The other pages of the site, listed after the page in its Markdown.
+
+        Same pages and order as llms.txt, so agents crawling from any page can
+        discover the rest of the site without fetching llms.txt first.
+        """
+        site = Site.find_for_request(request)
+        pages = (
+            site.root_page.get_descendants(inclusive=True)
+            .live()
+            .public()
+            .exclude(pk=self.pk)
+            .order_by("path")
+        )
+        # Fetch specific page models last: `exclude()` and a `Site.root_page`
+        # that is the base Page (as when a site object is cached in memory)
+        # both yield pages without their subclass methods.
+        return pages.specific()
 
     def markdown_response(self, request):
         content = self.to_markdown_from_html(request)
