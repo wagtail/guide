@@ -1,15 +1,9 @@
 import json
-import unittest
 
-from django.conf import settings
 from django.template import engines
 from django.test import TestCase
 
 from apps.core.factories import ContentPageFactory, HomePageFactory
-
-skip_if_markdown_disabled = unittest.skipUnless(
-    settings.PAGE_MARKDOWN_ENABLED, "page Markdown is disabled"
-)
 
 TITLE = "Bread & Butter <3"
 DESCRIPTION = 'If you\'re new to Wagtail, read "Getting started" first.'
@@ -33,7 +27,6 @@ class TestMarkdownIsNotHtmlEscaped(TestCase):
         for entity in ("&amp;", "&lt;", "&#39;", "&#34;", "&quot;"):
             self.assertNotIn(entity, content)
 
-    @skip_if_markdown_disabled
     def test_page_markdown(self):
         response = self.client.get(
             self.content_page.url, headers={"accept": "text/markdown"}

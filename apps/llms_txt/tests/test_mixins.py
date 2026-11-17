@@ -1,23 +1,16 @@
-import unittest
 from unittest import mock
 
-from django.conf import settings
 from django.test import TestCase, override_settings
 from django.urls import reverse
 from wagtail.models import Site
 
 from apps.core.factories import ContentPageFactory, HomePageFactory
 
-skip_if_markdown_disabled = unittest.skipUnless(
-    settings.PAGE_MARKDOWN_ENABLED, "page Markdown is disabled"
-)
-
 
 class TestMarkdownRouteMixin(TestCase):
     def setUp(self):
         self.content_page = ContentPageFactory()
 
-    @skip_if_markdown_disabled
     def test_has_markdown_route_property(self):
         self.assertTrue(self.content_page.has_markdown_route)
 
@@ -26,7 +19,6 @@ class TestMarkdownRouteMixin(TestCase):
         markdown = self.content_page.to_markdown()
         self.assertIn("Page URL:", markdown)
 
-    @skip_if_markdown_disabled
     def test_markdown_view_route_accessible(self):
         """Test that the markdown route is accessible via URL."""
         response = self.client.get(
@@ -37,7 +29,6 @@ class TestMarkdownRouteMixin(TestCase):
         content = response.content.decode("utf-8")
         self.assertIn(self.content_page.title, content)
 
-    @skip_if_markdown_disabled
     def test_markdown_view_includes_frontmatter(self):
         """The standalone Markdown route leads with a YAML metadata block."""
         response = self.client.get(
@@ -84,7 +75,6 @@ class TestMarkdownRouteMixin(TestCase):
             markdown,
         )
 
-    @skip_if_markdown_disabled
     def test_markdown_response_points_to_documentation_index(self):
         response = self.client.get(
             self.content_page.url + self.content_page.reverse_subpage("markdown")
@@ -109,7 +99,6 @@ class TestMarkdownFrontendCachePurging(TestCase):
     def setUp(self):
         self.content_page = ContentPageFactory()
 
-    @skip_if_markdown_disabled
     def test_get_cached_paths_includes_markdown_route(self):
         paths = self.content_page.get_cached_paths()
         self.assertIn("/", paths)
@@ -124,7 +113,6 @@ class TestMarkdownFrontendCachePurging(TestCase):
             }
         }
     )
-    @skip_if_markdown_disabled
     def test_publishing_purges_the_markdown_url(self):
         """
         Wagtail's frontend cache handler purges every cached path on publish,
@@ -152,7 +140,6 @@ class TestMarkdownNegotiation(TestCase):
         headers = {"accept": accept} if accept else {}
         return self.client.get(path or self.content_page.url, headers=headers)
 
-    @skip_if_markdown_disabled
     def test_accept_markdown_returns_markdown(self):
         response = self.get("text/markdown")
         self.assertEqual(response.status_code, 200)
@@ -161,12 +148,10 @@ class TestMarkdownNegotiation(TestCase):
         self.assertTrue(content.startswith("---\n"))
         self.assertIn(self.content_page.title, content)
 
-    @skip_if_markdown_disabled
     def test_markdown_response_includes_token_estimate(self):
         response = self.get("text/markdown")
         self.assertGreater(int(response["x-markdown-tokens"]), 0)
 
-    @skip_if_markdown_disabled
     def test_negotiated_markdown_is_not_shared_cacheable(self):
         response = self.get("text/markdown")
         self.assertIn("private", response["Cache-Control"])
@@ -184,7 +169,6 @@ class TestMarkdownNegotiation(TestCase):
                 response = self.get(accept)
                 self.assertTrue(response["Content-Type"].startswith("text/html"))
 
-    @skip_if_markdown_disabled
     def test_markdown_preferences(self):
         for accept in (
             "text/markdown, text/html;q=0.9",
@@ -202,7 +186,6 @@ class TestMarkdownNegotiation(TestCase):
                 response = self.get(accept)
                 self.assertIn("Accept", response["Vary"])
 
-    @skip_if_markdown_disabled
     def test_other_routes_are_not_negotiated(self):
         path = self.content_page.url + self.content_page.reverse_subpage("markdown")
         response = self.get("text/html", path=path)
@@ -210,7 +193,6 @@ class TestMarkdownNegotiation(TestCase):
         self.assertIn("x-markdown-tokens", response)
         self.assertNotIn("Accept", response.get("Vary", ""))
 
-    @skip_if_markdown_disabled
     def test_homepage_supports_markdown(self):
         home = self.content_page.get_parent().specific
         response = self.get("text/markdown", path=home.url)
@@ -235,13 +217,11 @@ class TestMarkdownFromHtml(TestCase):
         response = self.client.get(page.url, headers={"accept": "text/markdown"})
         return response.content.decode()
 
-    @skip_if_markdown_disabled
     def test_section_pages_list_their_pages(self):
         markdown = self.get_markdown(self.section)
         self.assertIn("## In this section", markdown)
         self.assertIn(f"[New in Wagtail 8.1]({self.child.full_url})", markdown)
 
-    @skip_if_markdown_disabled
     def test_leaves_out_page_tools(self):
         markdown = self.get_markdown(self.section)
         site = self.section.get_site()
@@ -250,14 +230,12 @@ class TestMarkdownFromHtml(TestCase):
         # The documentation index callout still links to llms.txt.
         self.assertIn(f"{site.root_url}/llms.txt", markdown)
 
-    @skip_if_markdown_disabled
     def test_explicit_route_matches_negotiated_markdown(self):
         response = self.client.get(
             self.section.url + self.section.reverse_subpage("markdown")
         )
         self.assertEqual(response.content.decode(), self.get_markdown(self.section))
 
-    @skip_if_markdown_disabled
     def test_homepage_includes_introduction_and_sections(self):
         self.home_page.introduction = "<p>Welcome to the guide.</p>"
         self.home_page.sections = [
@@ -279,7 +257,6 @@ class TestMarkdownFromHtml(TestCase):
         self.assertIn(f"[Explore releases]({self.section.full_url})", markdown)
         self.assertIn("Changes in each Wagtail version.", markdown)
 
-    @skip_if_markdown_disabled
     def test_body_preserves_annotations_alerts_and_absolute_links(self):
         self.section.body = [
             (
@@ -299,24 +276,20 @@ class TestMarkdownFromHtml(TestCase):
         self.assertIn("Warning", markdown)
         self.assertIn("Save first.", markdown)
 
-    @skip_if_markdown_disabled
     def test_keeps_the_header(self):
         markdown = self.get_markdown(self.section)
         self.assertTrue(markdown.startswith("---\n"))
         self.assertIn(f"Page URL: {self.section.full_url}", markdown)
 
-    @skip_if_markdown_disabled
     def test_leaves_out_the_feedback_form(self):
         markdown = self.get_markdown(self.section)
         self.assertNotIn("Was this page helpful?", markdown)
 
-    @skip_if_markdown_disabled
     def test_leaves_out_the_theme_labels(self):
         markdown = self.get_markdown(self.section)
         self.assertNotIn("Dark", markdown)
         self.assertNotIn("Light", markdown)
 
-    @skip_if_markdown_disabled
     def test_leaves_out_the_menu(self):
         html = self.client.get(self.section.url).content.decode()
         self.assertIn(f'href="{self.menu_page.url}"', html)
@@ -341,7 +314,6 @@ class TestMarkdownFromHtml(TestCase):
     def page_link(page):
         return f"[{page.title}]({page.full_url}{page.reverse_subpage('markdown')})"
 
-    @skip_if_markdown_disabled
     def test_appends_site_sitemap(self):
         markdown = self.get_markdown(self.section)
         self.assertIn("\n## Site Map\n", markdown)
@@ -353,7 +325,6 @@ class TestMarkdownFromHtml(TestCase):
             self.sitemap_lines(markdown),
         )
 
-    @skip_if_markdown_disabled
     def test_site_sitemap_is_nested_by_page_depth(self):
         # Each page is a list item, nested under its parent, with a 4-space
         # indent per level of the page tree. The site root is the top item.
@@ -367,7 +338,6 @@ class TestMarkdownFromHtml(TestCase):
             ],
         )
 
-    @skip_if_markdown_disabled
     def test_site_sitemap_matches_llms_txt_table_of_contents(self):
         """
         The sitemap is the llms.txt table of contents, so both stay in sync
@@ -386,7 +356,6 @@ class TestMarkdownFromHtml(TestCase):
         ]
         self.assertEqual(self.sitemap_lines(markdown), expected)
 
-    @skip_if_markdown_disabled
     def test_homepage_sitemap_lists_every_page_but_itself(self):
         markdown = self.get_markdown(self.home_page)
         self.assertIn(
@@ -394,44 +363,3 @@ class TestMarkdownFromHtml(TestCase):
             self.sitemap_lines(markdown),
         )
         self.assertNotIn(reverse("llms_txt"), markdown.split("## Site Map\n")[1])
-
-
-@override_settings(PAGE_MARKDOWN_ENABLED=False)
-class TestPageMarkdownDisabled(TestCase):
-    def setUp(self):
-        self.home_page = HomePageFactory()
-        self.content_page = ContentPageFactory(parent=self.home_page)
-
-    def test_pages_have_no_markdown_route(self):
-        self.assertFalse(self.content_page.has_markdown_route)
-
-    def test_markdown_route_is_not_found(self):
-        response = self.client.get(
-            self.content_page.url + self.content_page.reverse_subpage("markdown")
-        )
-        self.assertEqual(response.status_code, 404)
-
-    def test_markdown_is_not_negotiated(self):
-        response = self.client.get(
-            self.content_page.url, headers={"accept": "text/markdown"}
-        )
-        self.assertTrue(response["Content-Type"].startswith("text/html"))
-
-    def test_cached_paths_leave_out_markdown_route(self):
-        self.assertNotIn("/markdown/", self.content_page.get_cached_paths())
-
-    def test_page_links_to_itself_not_markdown(self):
-        html = self.client.get(self.content_page.url).content.decode()
-        self.assertNotIn('type="text/markdown;charset=utf-8"', html)
-        self.assertNotIn("View page Markdown", html)
-
-    def test_llms_txt_links_to_pages_not_markdown(self):
-        llms_txt = self.client.get("/llms.txt").content.decode()
-        self.assertIn(f"]({self.content_page.full_url})", llms_txt)
-        self.assertNotIn("/markdown/)", llms_txt)
-
-    def test_llms_txt_and_llms_full_txt_are_unaffected(self):
-        self.assertEqual(self.client.get("/llms.txt").status_code, 200)
-        full = self.client.get("/llms-full.txt")
-        self.assertEqual(full.status_code, 200)
-        self.assertIn(self.content_page.title, full.content.decode())

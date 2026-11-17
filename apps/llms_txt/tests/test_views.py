@@ -2,7 +2,6 @@ import importlib.util
 import json
 import unittest
 
-from django.conf import settings
 from django.core.cache import cache
 from django.db import connection
 from django.test import TestCase
@@ -66,12 +65,6 @@ class TestLLMsTxtViews(TestCase):
                     # multiple of 4 for Markdown to read the item as nested.
                     self.assertRegex(line, r"^(?:    )*- \[")
 
-    def page_markdown_url(self, page):
-        """The page URL as linked from the table of contents."""
-        if settings.PAGE_MARKDOWN_ENABLED:
-            return page.full_url + page.reverse_subpage("markdown")
-        return page.full_url
-
     def test_llms_txt_nests_pages_by_depth(self):
         # Section pages are one level below the site root, and their children
         # one level below them, so the table of contents mirrors the page tree.
@@ -81,11 +74,13 @@ class TestLLMsTxtViews(TestCase):
         response = self.client.get(reverse("llms_txt"))
         lines = response.content.decode().splitlines()
         self.assertIn(
-            f"    - [{section.title}]({self.page_markdown_url(section)})",
+            f"    - [{section.title}]({section.full_url}"
+            f"{section.reverse_subpage('markdown')})",
             lines,
         )
         self.assertIn(
-            f"        - [{child.title}]({self.page_markdown_url(child)})",
+            f"        - [{child.title}]({child.full_url}"
+            f"{child.reverse_subpage('markdown')})",
             lines,
         )
 
@@ -106,7 +101,9 @@ class TestLLMsTxtViews(TestCase):
         # One nested list per level below the site root: the home page, then
         # its section pages, then their child pages.
         self.assertEqual(html.count("<ul>"), 3)
-        self.assertIn(f'<a href="{self.page_markdown_url(section)}">', html)
+        self.assertIn(
+            f'<a href="{section.full_url}{section.reverse_subpage("markdown")}">', html
+        )
         self.assertNotIn("<p>", html)
 
     def test_agent_skills_index_description(self):

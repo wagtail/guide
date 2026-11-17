@@ -333,11 +333,6 @@ LOCALE_PATHS = [
     BASE_DIR / "locale",
 ]
 
-# Serve individual pages as Markdown, on a `/markdown/` subroute and through
-# `Accept: text/markdown` content negotiation. llms.txt and llms-full.txt are
-# not affected.
-PAGE_MARKDOWN_ENABLED = False
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/

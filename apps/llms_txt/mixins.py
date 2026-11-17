@@ -1,5 +1,4 @@
-from django.conf import settings
-from django.http import Http404, HttpResponse
+from django.http import HttpResponse
 from django.template import loader
 from django.test import RequestFactory
 from django.utils.cache import patch_cache_control
@@ -34,16 +33,13 @@ class MarkdownRouteMixin(RoutablePageMixin):
     @property
     def has_markdown_route(self):
         """Check if this page has a markdown route."""
-        return settings.PAGE_MARKDOWN_ENABLED
+        return True
 
     def get_cached_paths(self):
         """
         Purge the markdown route along with the page, when the page changes.
         """
-        paths = super().get_cached_paths()
-        if not settings.PAGE_MARKDOWN_ENABLED:
-            return paths
-        return paths + ["/markdown/"]
+        return super().get_cached_paths() + ["/markdown/"]
 
     def to_markdown(self, request=None, frontmatter=False):
         """
@@ -121,16 +117,11 @@ class MarkdownRouteMixin(RoutablePageMixin):
 
     @route(r"^markdown/$", name="markdown")
     def markdown_view(self, request):
-        if not settings.PAGE_MARKDOWN_ENABLED:
-            raise Http404
         return self.markdown_response(request)
 
     @route(r"^$", name="index_route")
     def index_route(self, request, *args, **kwargs):
-        if (
-            settings.PAGE_MARKDOWN_ENABLED
-            and self.get_response_media_type(request) == "text/markdown"
-        ):
+        if self.get_response_media_type(request) == "text/markdown":
             response = self.markdown_response(request)
             # Cloudflare ignores Vary: Accept by default. Keep negotiated
             # Markdown out of shared caches, as on the 404 page.
