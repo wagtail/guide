@@ -2,26 +2,29 @@
 
 How well Claude Code, Codex and OpenCode answer the [33 agent readiness cases](../../tests.yaml) with guide.wagtail.org as it was in production, each harness with its native tools. Config: [`agent-readiness-snapshot.yaml`](../../agent-readiness-snapshot.yaml), method in the [README](../../README.md#production-snapshot-claude-code-codex-and-opencode).
 
-- **Runs:** 1,320: eight models, 33 cases, five repeats each. Every run produced an answer, except one OpenCode timeout (DeepSeek V4.1 Flash, 300 seconds).
+- **Runs:** 1,320: eight models, 33 cases, five repeats each. Every run produced an answer, except one OpenCode timeout (DeepSeek V4.1 Flash 1017, 300 seconds).
 - **When:** 16 November 2026, 13:59 to 15:31 GMT, against the live site.
 - **Site:** `main` at `c63f3df`, before [#509](https://github.com/wagtail/guide/pull/509) (page Markdown converted from rendered HTML), which merged after the run. [20261116](../20261116/README.md) is the rerun after it.
 - **Versions:** promptfoo 0.124.1, Claude Agent SDK 0.3.325 (Claude Code 2.1.325), Codex SDK and CLI 0.169.0, OpenCode 1.19.5. Judge: Claude Sonnet 5.5.
+- **DeepSeek:** DeepSeek V4.1 Flash 1017 (`deepseek/deepseek-v4.1-flash-1017` on TensorX), with thinking off: it reports 0 reasoning tokens. That's TensorX's default, and the config doesn't change it.
 - **Search:** Claude Code and Codex use their providers' server-side search. OpenCode uses Exa, authenticated.
 
 ## Results
 
-A case passes when at least three of its five runs pass. Duration and cost are each case's median run, then the median across cases. Costs are at API list prices, without the judge: $73.20 for all runs. OpenCode has no price for DeepSeek V4.1 Flash on TensorX.
+A case passes when at least three of its five runs pass. Duration and cost are each case's median run, then the median across cases. Costs are at API list prices, without the judge: $73.20 for all runs, plus an estimated $0.83 to $2.96 for DeepSeek.
 
-| Harness / model                | Cases passed | Runs passed | Median duration | Median cost |
-| ------------------------------ | -----------: | ----------: | --------------: | ----------: |
-| Claude Code / Fable 5.2        |        33/33 |         98% |             29s |       20.7¢ |
-| Claude Code / Opus 5.5         |        33/33 |         96% |             26s |        9.5¢ |
-| Claude Code / Sonnet 5.5       |        32/33 |         96% |             25s |        4.8¢ |
-| Claude Code / Haiku 5.5        |        27/33 |         83% |             27s |        1.5¢ |
-| Codex / Sol 6.1                |        33/33 |         99% |             11s |        4.8¢ |
-| Codex / Luna 6                 |        31/33 |         92% |             10s |        0.3¢ |
-| OpenCode / Qwen 3.8 27B        |        33/33 |         96% |             34s |        0.8¢ |
-| OpenCode / DeepSeek V4.1 Flash |        28/33 |         82% |             14s |           — |
+| Harness / model                     | Cases passed | Runs passed | Median duration | Median cost |
+| ----------------------------------- | -----------: | ----------: | --------------: | ----------: |
+| Claude Code / Fable 5.2             |        33/33 |         98% |             29s |       20.7¢ |
+| Claude Code / Opus 5.5              |        33/33 |         96% |             26s |        9.5¢ |
+| Claude Code / Sonnet 5.5            |        32/33 |         96% |             25s |        4.8¢ |
+| Claude Code / Haiku 5.5             |        27/33 |         83% |             27s |        1.5¢ |
+| Codex / Sol 6.1                     |        33/33 |         99% |             11s |        4.8¢ |
+| Codex / Luna 6                      |        31/33 |         92% |             10s |        0.3¢ |
+| OpenCode / Qwen 3.8 27B             |        33/33 |         96% |             34s |        0.8¢ |
+| OpenCode / DeepSeek V4.1 Flash 1017 |        28/33 |         82% |             14s |    0.4–1.5¢ |
+
+DeepSeek's costs are estimates: OpenCode reports none for DeepSeek V4.1 Flash 1017, as its price list only has the undated DeepSeek V4.1 Flash, at $0.50 per million input tokens, $0.13 per million cached input tokens and $1.50 per million output tokens. TensorX doesn't publish a separate price for the 1017 version. Each range goes from all input cached to none, as OpenCode's results don't say how much was cached.
 
 [summary.md](summary.md) has the full tables from `summarize.py`: checks, pass rates by task and framing, surfaces reached, and failed runs per case. [runs.csv](runs.csv) has one row per run. [Reading production snapshot results](../README.md) explains every table and column.
 
@@ -51,6 +54,7 @@ Getting the developer docs' old editor manual pages to point to the guide would 
 - **Not comparable with the [Harbor 20261113 results](../../../agent-readiness-harbor/results/20261113/README.md).** Harbor runs harnesses in containers, with other versions and settings, and OpenCode searched there with Exa's anonymous, rate-limited endpoint.
 - **Five repeats per case.** Differences of a case or two between models are within run-to-run variation: see the spread in [summary.md](summary.md).
 - **Claude Code ran with a subscription login.** Its costs are what the same tokens would cost through the API.
+- **Claude Code's tokens and costs include Haiku summarizing pages.** `WebFetch` sends each page to Claude Haiku 5.5 and gives the model its summary. For Fable, Opus and Sonnet, 60–70% of the reported completion tokens are Haiku's: in 20261117, Fable's median run reported 2,766, of which 933 were Fable's own. For Haiku, both are the same model.
 - **Trace columns undercount server-side reads**: Codex's and Claude Code's searches, and pages Codex opens without a URL in its search item.
 - **The judge passed eight answers as `UNKNOWN:`**, listed in [summary.md](summary.md) for review by hand.
 - **Raw promptfoo output isn't in the repository** (92 MB). It has every answer and trace, and stays with whoever ran the snapshot.

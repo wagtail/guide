@@ -1,6 +1,6 @@
 # Reading production snapshot results
 
-Each folder here is one run of [`agent-readiness-snapshot.yaml`](../agent-readiness-snapshot.yaml), named after the day it ran. This page explains what the numbers in each folder mean, how much they move between runs, and the patterns worth looking for. Examples come from [20261115](20261115/README.md).
+Each folder here is one run of [`agent-readiness-snapshot.yaml`](../agent-readiness-snapshot.yaml), named after the day it ran, except [20261114](20261114/README.md), the HTML-only run. This page explains what the numbers in each folder mean, how much they move between runs, and the patterns worth looking for. Examples come from [20261115](20261115/README.md).
 
 ## What's in a folder
 
@@ -129,16 +129,16 @@ The heading says "outside the baseline" because `summarize.py` is shared with co
 
 One row per run, with the same values as `summary.md`, so you can slice the data your own way, for example by case and arm together.
 
-| Column                                     | Value                                                                                    |
-| ------------------------------------------ | ---------------------------------------------------------------------------------------- |
-| `arm`, `case`, `task`, `framing`, `repeat` | Which run this is                                                                        |
-| `success`                                  | 1 if the run passed every check                                                          |
-| `error`                                    | 1 if the harness failed to produce an answer, like a timeout. These are also `success` 0 |
-| `facts`, `citation`, `judge`               | Score for each kind of check, from 0 to 1                                                |
-| `duration_s`, `cost_usd`                   | Time and cost of the run. `cost_usd` is 0 when the harness has no price for the model    |
-| `prompt_tokens`, `completion_tokens`       | Tokens, as the harness reports them                                                      |
-| `tool_calls`                               | Tool calls in the trace                                                                  |
-| `web_search_used` to `permission_denials`  | The trace columns above, as 0 or 1, or a count                                           |
+| Column                                     | Value                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `arm`, `case`, `task`, `framing`, `repeat` | Which run this is                                                                                                                                                                                                                                                                                                                                                                               |
+| `success`                                  | 1 if the run passed every check                                                                                                                                                                                                                                                                                                                                                                 |
+| `error`                                    | 1 if the harness failed to produce an answer, like a timeout. These are also `success` 0                                                                                                                                                                                                                                                                                                        |
+| `facts`, `citation`, `judge`               | Score for each kind of check, from 0 to 1                                                                                                                                                                                                                                                                                                                                                       |
+| `duration_s`, `cost_usd`                   | Time and cost of the run. `cost_usd` is 0 when the harness has no price for the model, like DeepSeek V4.1 Flash 1017 in OpenCode                                                                                                                                                                                                                                                                |
+| `prompt_tokens`, `completion_tokens`       | Tokens, as the harness reports them. Claude Code's token counts and costs include Haiku summarizing pages: `WebFetch` sends each page to Claude Haiku 5.5 and gives the model its summary. For Fable, Opus and Sonnet, 60–70% of the reported completion tokens are Haiku's: in 20261117, Fable's median run reported 2,766, of which 933 were Fable's own. For Haiku, both are the same model. |
+| `tool_calls`                               | Tool calls in the trace                                                                                                                                                                                                                                                                                                                                                                         |
+| `web_search_used` to `permission_denials`  | The trace columns above, as 0 or 1, or a count                                                                                                                                                                                                                                                                                                                                                  |
 
 To open it in a spreadsheet, or with `uv run python`:
 
