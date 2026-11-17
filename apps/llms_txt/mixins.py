@@ -76,7 +76,7 @@ class MarkdownRouteMixin(RoutablePageMixin):
         response = self.render(request)
         response.render()
         converter = HTMLToMarkdownConverter(
-            base_url=self.full_url, content_selector="body"
+            base_url=self.full_url, content_selector="main"
         )
         body = converter.convert(response.content.decode(response.charset))
         template = loader.get_template("llms_txt/page_from_html.md.jinja")

@@ -35,7 +35,13 @@ class TestMarkdownIsNotHtmlEscaped(TestCase):
         # Converted from the page's HTML, the title gets Markdown escaping,
         # where `\<` reads as `<`, but no HTML entities.
         self.assertIn("# Bread & Butter \\<3", content)
-        self.assertIn(DESCRIPTION, content)
+        # The description is only in the front matter, as JSON.
+        description_line = next(
+            line for line in content.splitlines() if line.startswith("description: ")
+        )
+        self.assertEqual(
+            json.loads(description_line.removeprefix("description: ")), DESCRIPTION
+        )
         for entity in ("&amp;", "&lt;", "&#39;", "&#34;", "&quot;"):
             self.assertNotIn(entity, content)
 
