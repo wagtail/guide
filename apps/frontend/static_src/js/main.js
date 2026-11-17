@@ -6,6 +6,7 @@ import { initSectionLink } from './section-link';
 import { initActiveNavItem } from './active-nav-item';
 import { handleFeedback } from './feedback';
 import { initWebMcp } from './webmcp';
+import { initContentMetrics } from './content-metrics';
 import MobileMenu from './mobile-menu';
 import CopyButton from './copy-button';
 
@@ -13,6 +14,7 @@ initSectionLink();
 initActiveNavItem();
 handleFeedback();
 initWebMcp();
+initContentMetrics();
 
 const searchInput = document.querySelector('[data-search-input]');
 const searchModal = document.getElementById('search-modal');
