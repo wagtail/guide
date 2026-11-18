@@ -17,6 +17,7 @@ export const handleFeedback = () => {
   const happyButton = document.querySelector('[data-happy-button]');
   const unhappyButton = document.querySelector('[data-unhappy-button]');
   const feedbackContainer = document.querySelector('[data-feedback-container]');
+  const feedbackStatus = document.querySelector('[data-feedback-status]');
   const additionalFeedbackContainer = document.querySelector(
     '[data-additional-feedback-container]',
   );
@@ -41,9 +42,11 @@ export const handleFeedback = () => {
       tooltipList.forEach((tooltip) => {
         tooltip.dispose();
       });
-      feedbackContainer.innerHTML = `<span dir="auto">${gettext(
-        'Thanks for your feedback!',
-      )}</span>`;
+      // Announce the confirmation in the live region, and move focus to it
+      // before removing the buttons so focus isn't lost to the page body.
+      feedbackStatus.textContent = gettext('Thanks for your feedback!');
+      feedbackStatus.focus();
+      feedbackContainer.remove();
       feedbackPk = data.pk;
       additionalFeedbackContainer.classList.add('active');
     } catch (err) {
@@ -64,6 +67,7 @@ export const handleFeedback = () => {
           'Content-type': 'application/json; charset=UTF-8',
         },
       });
+      feedbackStatus.focus();
       additionalFeedbackContainer.innerHTML = '';
     } catch (err) {
       console.log(err);

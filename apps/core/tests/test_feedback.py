@@ -88,6 +88,16 @@ class TestFeedback(TestCase):
         self.assertEqual(feedback_obj.feedback, "happy")
         self.assertEqual(feedback_obj.page.specific, self.target_page)
 
+    def test_status_region_rendered_before_feedback(self):
+        # The confirmation message is announced through this live region, so it
+        # needs to be on the page before the feedback buttons are used.
+        res = self.client.get(self.target_page.url)
+        self.assertContains(
+            res,
+            '<div class="feedback__status" role="status" tabindex="-1" dir="auto" data-feedback-status></div>',
+            html=True,
+        )
+
     def test_csrf_token_exists(self):
         cookie = self.client.cookies.get(settings.CSRF_COOKIE_NAME)
         self.assertIsNone(cookie)
