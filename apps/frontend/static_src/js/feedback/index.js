@@ -23,7 +23,7 @@ export const handleFeedback = () => {
   const submitButton = document.querySelector('[data-submit-button]');
   const feedbackText = document.querySelector('[data-feedback-text]');
 
-  let feedbackPk = null;
+  let feedbackToken = null;
 
   const postFeedback = async (feedback) => {
     try {
@@ -44,19 +44,19 @@ export const handleFeedback = () => {
       feedbackContainer.innerHTML = `<span dir="auto">${gettext(
         'Thanks for your feedback!',
       )}</span>`;
-      feedbackPk = data.pk;
+      feedbackToken = data.token;
       additionalFeedbackContainer.classList.add('active');
     } catch (err) {
       console.log(err);
     }
   };
 
-  const updateFeedback = async (pk) => {
+  const updateFeedback = async (token) => {
     try {
       await fetch(window.location.pathname, {
         method: 'POST',
         body: JSON.stringify({
-          pk,
+          token,
           feedback_text: feedbackText.value,
         }),
         headers: {
@@ -76,6 +76,6 @@ export const handleFeedback = () => {
     unhappyButton.addEventListener('click', () => postFeedback('unhappy'));
   }
   if (submitButton) {
-    submitButton.addEventListener('click', () => updateFeedback(feedbackPk));
+    submitButton.addEventListener('click', () => updateFeedback(feedbackToken));
   }
 };

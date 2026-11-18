@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 from wagtail.api import APIField
 from wagtail.models import Page
@@ -15,6 +17,8 @@ class Feedback(models.Model):
     page = models.ForeignKey(Page, on_delete=models.CASCADE)
 
     feedback_text = models.TextField(blank=True)
+
+    token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
 
     api_fields = [
         APIField("feedback", writable=True),
