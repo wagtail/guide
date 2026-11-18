@@ -1,0 +1,106 @@
+{% extends 'wagtailadmin/reports/base_page_report_results.html' %}
+{% load i18n wagtailadmin_tags %}
+
+{% block results %}
+    {% if current_version %}
+        <p class="help-block help-info">
+            {% blocktrans with version=current_version %}
+                The guide currently covers Wagtail {{ version }}.
+            {% endblocktrans %}
+        </p>
+    {% endif %}
+    <table class="listing block-usage-report">
+        <col width="25%" />
+        <col width="8%" />
+        <col width="10%" />
+        <col width="10%" />
+        <col width="8%" />
+        <col />
+        <col width="10%" />
+        <thead>
+            <tr>
+                <th class="title">{% trans 'Title' %}</th>
+                <th class="status">{% trans 'Status' %}</th>
+                <th class="type block-usage-col-type">{% trans 'Type' %}</th>
+                <th class="block-usage-col-change-type">{% trans 'Change type' %}</th>
+                <th>{% trans 'Version' %}</th>
+                <th>{% trans 'Content' %}</th>
+                <th>{% trans 'Review' %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for page in object_list %}
+                <tr class="{% if not page.live %}unpublished{% endif %}{% if page.block_usage_flagged %}serious{% endif %}">
+                    <td class="title" valign="top">
+                        <a href="{% url 'wagtailadmin_pages:edit' page.id %}">
+                            {{ page.specific_deferred.get_admin_display_title }}
+                        </a>
+                        {% if page.live %}
+                            <a href="{{ page.url }}" target="_blank" rel="noopener noreferrer" class="u-link is-live">{% trans 'View' %}</a>
+                        {% endif %}
+                    </td>
+                    <td class="status" valign="top">
+                        {% include "wagtailadmin/shared/page_status_tag.html" with page=page %}
+                    </td>
+                    <td class="type block-usage-col-type" valign="top">{{ page.page_type_display_name }}</td>
+                    <td class="block-usage-col-change-type" valign="top">
+                        <ul class="block-usage__change-types" role="list">
+                            {% for block in page.block_usage_blocks %}
+                                <li class="block-usage__change-type" data-block-index="{{ page.id }}-{{ block.block_index }}">
+                                    {% if block.change_type %}
+                                        <span class="status-tag status-tag--{% if block.change_type == 'removed' %}danger{% elif block.change_type == 'changed' %}warning{% else %}primary{% endif %}">
+                                            {{ block.change_type|title }}
+                                        </span>
+                                    {% else %}
+                                        —
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td valign="top">
+                        <ul class="block-usage__versions" role="list">
+                            {% for block in page.block_usage_blocks %}
+                                <li class="block-usage__version" data-block-index="{{ page.id }}-{{ block.block_index }}">
+                                    {% if block.version %}
+                                        <a href="{% url 'wagtailadmin_pages:edit' page.id %}#block-index-{{ block.block_index }}"
+                                           class="block-usage__block-link"
+                                           aria-label="{% blocktrans with index=block.block_index|add:1 %}Edit block {{ index }}{% endblocktrans %}{% if block.change_type %}: {{ block.change_type|title }}{% endif %} (Wagtail {{ block.version }})">
+                                            {{ block.version }}
+                                        </a>
+                                    {% else %}
+                                        —
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td valign="top">
+                        <ul class="block-usage__blocks" role="list">
+                            {% for block in page.block_usage_blocks %}
+                                <li class="block-usage__block{% if block.outdated %} block-usage__block--flagged{% endif %}" data-block-index="{{ page.id }}-{{ block.block_index }}">
+                                    <a href="{% url 'wagtailadmin_pages:edit' page.id %}#block-index-{{ block.block_index }}"
+                                       class="block-usage__block-link"
+                                       aria-label="{% blocktrans with index=block.block_index|add:1 %}Edit block {{ index }}{% endblocktrans %}{% if block.change_type %}: {{ block.change_type|title }}{% endif %}{% if block.version %} (Wagtail {{ block.version }}){% endif %}">
+                                        {{ block.content_preview }}
+                                    </a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td valign="top">
+                        {% if page.block_usage_flagged %}
+                            <span class="status-tag status-tag--danger">{% trans 'Needs update' %}</span>
+                        {% else %}
+                            <span class="status-tag status-tag--primary">{% trans 'Up to date' %}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block no_results_message %}
+    <p>{% trans 'No pages with versioned blocks found.' %}</p>
+{% endblock %}
