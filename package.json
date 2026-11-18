@@ -12,13 +12,19 @@
     "lint:js": "vp lint --report-unused-disable-directives",
     "lint:format": "vp fmt --check",
     "lint": "npm run lint:js && npm run lint:css && npm run lint:format",
-    "test": "vp test run"
+    "test": "vp test run",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "e2e:report": "playwright show-report",
+    "e2e:install": "playwright install --with-deps chromium firefox msedge"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.5",
     "bootstrap": "^5.3.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0",
     "@wagtail/stylelint-config-wagtail": "^2.0.1",
     "browserslist": "^4.29.3",
     "happy-dom": "^20.14.5",
