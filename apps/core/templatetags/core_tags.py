@@ -44,7 +44,8 @@ def header(context):
 @register.inclusion_tag("components/hreflangs.html", takes_context=True)
 def hreflangs(context):
     page = context.get("page")
-    if not page:
+    request = context.get("request")
+    if not page or (request and "target_version" in request.GET):
         return {}
 
     # Each language version must list itself as well as all other versions,
