@@ -48,7 +48,8 @@ SOFTWARE = {
 
 # Not Site.site_name: Google takes the name shown in results from here, and the
 # site name carries an emoji.
-WEBSITE_NAME = "Wagtail user guide"
+WEBSITE_NAME = "Wagtail Guide"
+WEBSITE_ALTERNATE_NAME = "Wagtail user guide"
 WEBSITE_DESCRIPTION = (
     "Official user guide for Wagtail CMS: how to create, edit, publish and manage "
     "content in the Wagtail admin."
@@ -65,6 +66,7 @@ def build_graph(site, page=None, request=None):
             "@type": "WebSite",
             "@id": website_id,
             "name": WEBSITE_NAME,
+            "alternateName": WEBSITE_ALTERNATE_NAME,
             "description": WEBSITE_DESCRIPTION,
             "url": f"{root_url}/",
             "publisher": {"@id": ORGANIZATION_ID},
@@ -73,12 +75,12 @@ def build_graph(site, page=None, request=None):
     ]
 
     if page is not None:
-        graph.extend(page_nodes(page, website_id, request))
+        graph.extend(page_nodes(page, website_id, root_url, request))
 
     return {"@context": "https://schema.org", "@graph": graph}
 
 
-def page_nodes(page, website_id, request=None):
+def page_nodes(page, website_id, root_url, request=None):
     is_article = isinstance(page, ContentPage)
     url = page.get_full_url(request)
     node = {
@@ -86,6 +88,7 @@ def page_nodes(page, website_id, request=None):
         "@id": f"{url}#webpage",
         "url": url,
         "headline": page.seo_title or page.title,
+        "image": root_url + manifest("images/social-image.png"),
         "inLanguage": page.locale.language_code,
         "isPartOf": {"@id": website_id},
         "about": {"@id": SOFTWARE_ID},

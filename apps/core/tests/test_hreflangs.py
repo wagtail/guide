@@ -76,6 +76,24 @@ class TestHreflangs(TestCase):
                 lines,
             )
 
+    def test_target_version_query_omits_hreflangs_but_keeps_canonical(self):
+        for version in ("latest", "6.0.x"):
+            with self.subTest(version=version):
+                lines = self.get_hreflangs(
+                    f"{self.en_page.url}?target_version={version}"
+                )
+
+                self.assertFalse(
+                    any(
+                        'rel="alternate"' in line and "hreflang" in line
+                        for line in lines
+                    )
+                )
+                self.assertIn(
+                    f'<link rel="canonical" href="{self.en_page.full_url}">',
+                    lines,
+                )
+
     def test_x_default_points_to_english(self):
         for page in (self.en_page, self.fr_page):
             lines = self.get_hreflangs(page.url)
