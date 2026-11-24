@@ -163,4 +163,10 @@ describe('initContentMetrics', () => {
       registered[1].compute({ innerHTML: document.body.innerHTML }),
     ).toMatch(/^\d+\.\d{2} (\(.+\)|Unknown)$/);
   });
+
+  it('does nothing when the userbar is not rendered', () => {
+    delete window.wagtail;
+
+    expect(() => initContentMetrics()).not.toThrow();
+  });
 });
