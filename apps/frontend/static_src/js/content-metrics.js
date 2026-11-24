@@ -155,6 +155,14 @@ export const formatPageEmissions = (bytes) =>
  * loads before our main script and defines `window.wagtail.userbar`.
  */
 export const initContentMetrics = () => {
+  /**
+   * The userbar only renders for logged-in editors. Without it, skip
+   * registration
+   */
+  if (!window.wagtail?.userbar) {
+    return;
+  }
+
   window.wagtail.userbar.registerMetric({
     id: 'internal-links',
     getLabel: () => 'Internal links',
