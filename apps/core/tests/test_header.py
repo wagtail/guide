@@ -81,7 +81,7 @@ class TestHeaderCache(TestCase):
 
     @property
     def cache_key(self):
-        return make_template_fragment_key("header", ["en"])
+        return make_template_fragment_key("navigation_menu", ["en"])
 
     def test_header_populates_cache(self):
         self.assertIsNone(cache.get(self.cache_key))
@@ -97,6 +97,15 @@ class TestHeaderCache(TestCase):
         response = self.client.get(self.url)
 
         self.assertContains(response, "cached header")
+
+    def test_mobile_markdown_link_matches_current_page_when_cached(self):
+        other_page = ContentPageFactory(parent=self.home)
+        self.client.get(self.url)  # warms the menu cache for another page
+
+        response = self.client.get(other_page.url)
+
+        self.assertContains(response, f'href="{other_page.url}markdown/"')
+        self.assertNotContains(response, f'href="{self.url}markdown/"')
 
     def test_cached_requests_make_fewer_queries(self):
         self.client.get(self.url)

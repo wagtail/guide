@@ -93,10 +93,7 @@
 
         <div class="grid">
             <div class="app__header">
-                {# The header only varies by language - the active menu item is highlighted client-side. #}
-                {% wagtailcache 86400 header LANGUAGE_CODE %}
-                    {% header %}
-                {% endwagtailcache %}
+                {% header %}
             </div>
 
             <div class="app__content">

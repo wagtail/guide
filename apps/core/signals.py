@@ -1,9 +1,9 @@
 """Invalidate template fragment caches when page content changes.
 
-Two fragments are cached via {% wagtailcache %} (see base.html):
+Two fragments are cached via {% wagtailcache %} (see components/navigation.html):
 
-- The header is cached per language. Its content depends on the live page
-  tree: which pages are in the menu, their URLs, and their titles. Those only
+- The header's menu list is cached per language. Its content depends on the
+  live page tree: which pages are in the menu, their URLs, and their titles. Those only
   change through publishing, unpublishing, slug changes, moves, or deletions,
   and any of those can affect any language, so all languages are invalidated
   whenever any of those happens.
@@ -27,13 +27,15 @@ from wagtail.signals import (
     post_page_move,
 )
 
-HEADER_CACHE_FRAGMENT = "header"
+NAVIGATION_MENU_CACHE_FRAGMENT = "navigation_menu"
 LANGUAGE_SELECTOR_CACHE_FRAGMENT = "language_selector"
 
 
 def invalidate_header_cache():
     for language_code, _name in settings.WAGTAIL_CONTENT_LANGUAGES:
-        key = make_template_fragment_key(HEADER_CACHE_FRAGMENT, [language_code])
+        key = make_template_fragment_key(
+            NAVIGATION_MENU_CACHE_FRAGMENT, [language_code]
+        )
         cache.delete(key)
 
 
