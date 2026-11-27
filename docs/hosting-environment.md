@@ -63,13 +63,7 @@ DNS and CDN: Cloudflare, managed by Torchbox sysadmins.
 
 ## Database
 
-Heroku Postgres `standard-0` via `DATABASE_URL`, persistent connections (`conn_max_age`).
-
-| Concern          | Detail                                                                   |
-| ---------------- | ------------------------------------------------------------------------ |
-| Search           | Postgres backend (`wagtail.search.backends.database`); no Elasticsearch. |
-| Backups          | Heroku daily, retention per plan. **TODO** verify, and test restores.    |
-| Restore to local | Below.                                                                   |
+Heroku Postgres `standard-0` with daily overnight backups. Also used for search.
 
 ```bash
 heroku pg:backups:download --output=./database_dumps/YYYYMMDD-wagtail-guide-production.dump --app wagtail-guide-production
@@ -94,20 +88,9 @@ AWS S3 via `django-storages` (`S3Boto3Storage`), `boto3` env credentials. Settin
 
 No `AWS_STORAGE_BUCKET_NAME` → local FS in the dyno (review apps / dev), lost on restart. Bucket versioning is set up in S3.
 
-## Operations checks
-
-Those are only needed when changing hosting providers / setting up a new environment.
-
-| Check                    | Command                                                                         |
-| ------------------------ | ------------------------------------------------------------------------------- |
-| Database backup schedule | `heroku pg:backups:schedules -a wagtail-guide-production`                       |
-| Log drain present        | `heroku addons -a wagtail-guide-production`                                     |
-| Slack alerting routed    | Papertrail search → "Save & Setup an Alert", targeting the Papertrail Slack app |
-| Media backed up          | S3 bucket Properties → versioning                                               |
-
 ## Cache
 
-Two databases on one Heroku Redis `mini` instance: `/0` default, `/1` renditions. `django-redis` with `IGNORE_EXCEPTIONS`; TLS cert validation disabled (self-signed). No `REDIS_URL` → database cache backend.
+Two databases on one Heroku Redis `mini` instance: `/0` default, `/1` renditions. Requires TLS, maxmemory: 25MB, `volatile-lru` eviction policy.
 
 Not used for sessions or jobs — no Celery or worker process.
 
@@ -139,6 +122,18 @@ Heroku Scheduler set up for:
 | `publish_scheduled` | Every 10 minutes |
 | `clearsessions`     | Daily, overnight |
 
+## Operations checks
+
+Only needed when changing hosting providers or setting up a new environment.
+
+| Check                    | Command                                                   |
+| ------------------------ | --------------------------------------------------------- |
+| Database backup schedule | `heroku pg:backups:schedules -a wagtail-guide-production` |
+| Log drain present        | `heroku addons -a wagtail-guide-production`               |
+| Slack alerting routed    | Papertrail search → "Save & Setup an Alert"               |
+| Media backed up          | S3 bucket Properties → versioning                         |
+| Redis eviction policy    | `heroku redis:maxmemory -a wagtail-guide-production`      |
+
 ## Rollbacks
 
 ```bash
@@ -147,7 +142,7 @@ heroku rollback --app wagtail-guide-production     # previous eligible release
 heroku rollback v42 --app wagtail-guide-production # specific release
 ```
 
-Reverts code, not migrations. **TODO** confirm supported procedure for releases with migrations.
+Reverts code, not migrations. See also [Releases](#releases) for what a deploy does to the database.
 
 ## SSH access
 
@@ -167,7 +162,7 @@ Auto-deployed by Heroku on push to `main`, only after CI passes.
 
 ### Releases
 
-The `release` phase in [`heroku.yml`](../heroku.yml) runs `migrate` only.
+The `release` phase in [`heroku.yml`](../heroku.yml) runs `migrate` only. See [Rollbacks](#rollbacks) for what that means when a migration needs undoing.
 
 ### Continuous integration
 
