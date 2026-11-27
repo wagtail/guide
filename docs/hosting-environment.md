@@ -116,12 +116,12 @@ Both [`wagtail-ai`](https://github.com/wagtail/wagtail-ai) and `LLMTranslator` c
 
 Heroku Scheduler set up for:
 
-| Job                         | Schedule         |
-| --------------------------- | ---------------- |
-| `update_index`              | Daily, overnight |
-| `rebuild_references_index`  | Daily, overnight |
-| `publish_scheduled`         | Every 10 minutes |
-| `clearsessions`             | Daily, overnight |
+| Job                        | Schedule         |
+| -------------------------- | ---------------- |
+| `update_index`             | Daily, overnight |
+| `rebuild_references_index` | Daily, overnight |
+| `publish_scheduled`        | Every 10 minutes |
+| `clearsessions`            | Daily, overnight |
 
 ## Operations checks
 
