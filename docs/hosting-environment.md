@@ -17,7 +17,7 @@ See [MCP server](mcp.md) for `/mcp` operational requirements.
 
 ## Web process
 
-Gunicorn, configured in [`gunicorn.conf.py`](../gunicorn.conf.py) and sized by `WEB_CONCURRENCY`.
+Gunicorn, configured in [`gunicorn.conf.py`](../gunicorn.conf.py) and sized by `WEB_CONCURRENCY`. Can be overridden per app via a Config Var.
 
 |        |                                                                           |
 | ------ | ------------------------------------------------------------------------- |
@@ -25,7 +25,20 @@ Gunicorn, configured in [`gunicorn.conf.py`](../gunicorn.conf.py) and sized by `
 | Static | Whitenoise `CompressedManifestStaticFilesStorage`; `public/` at site root |
 | User   | non-root `guide`                                                          |
 
-Concurrency values, worker recycling rates, and base image versions live in `gunicorn.conf.py` and `Dockerfile`.
+### Dyno type and scale
+
+One `basic` dyno, contrary to default infrastructure recommendations to use 2x `Standard-1x`. Key differences:
+
+|                  | Basic                         | Standard-1x           |
+| ---------------- | ----------------------------- | --------------------- |
+| Cost             | $7/month                      | $25/month             |
+| Web dynos        | 1 per process type            | Scalable horizontally |
+| Metrics          | 24 hours, 10-minute intervals | Up to 7 days          |
+| Threshold alerts | None                          | Error and performance |
+
+## Maintenance mode
+
+In special circumstances, use `heroku maintenance:on -a wagtail-guide-production` to serve a static 503 page and block access.
 
 ## Container registry
 
@@ -79,7 +92,18 @@ AWS S3 via `django-storages` (`S3Boto3Storage`), `boto3` env credentials. Settin
 | `AWS_S3_FILE_OVERWRITE` off | Wagtail guidance.                                             |
 | `AWS_S3_CUSTOM_DOMAIN`      | Serves via `guide-media.wagtail.org`.                         |
 
-No `AWS_STORAGE_BUCKET_NAME` → local FS in the dyno (review apps / dev), lost on restart. Bucket versioning, lifecycle, backups: unknown.
+No `AWS_STORAGE_BUCKET_NAME` → local FS in the dyno (review apps / dev), lost on restart. Bucket versioning is set up in S3.
+
+## Operations checks
+
+Those are only needed when changing hosting providers / setting up a new environment.
+
+| Check                    | Command                                                                         |
+| ------------------------ | ------------------------------------------------------------------------------- |
+| Database backup schedule | `heroku pg:backups:schedules -a wagtail-guide-production`                       |
+| Log drain present        | `heroku addons -a wagtail-guide-production`                                     |
+| Slack alerting routed    | Papertrail search → "Save & Setup an Alert", targeting the Papertrail Slack app |
+| Media backed up          | S3 bucket Properties → versioning                                               |
 
 ## Cache
 
@@ -101,25 +125,19 @@ Not used for sessions or jobs — no Celery or worker process.
 
 Mailgun SMTP over TLS. Admin notifications and password resets only. No inbound handling.
 
-## Error tracking and performance monitoring
-
-| Component | Configuration                                                                                                                                                     |
-| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sentry    | On when `SENTRY_DSN` set, `DjangoIntegration`, `SENTRY_ENVIRONMENT=production`. Release from `HEROKU_RELEASE_VERSION` (requires the `runtime-dyno-metadata` lab). |
-| Scout     | `scout_apm.django` first installed app. `SCOUT_MONITOR=false` for `release` and review apps.                                                                      |
-| Alerts    | None set up.                                                                                                                                                      |
-
 ## AI providers
 
-Both [`wagtail-ai`](https://github.com/wagtail/wagtail-ai) and `LLMTranslator` currently use DeepSeek V4.1 Flash 1017 in [Scaleway Generative APIs](https://www.scaleway.com/en/generative-apis/).
+Both [`wagtail-ai`](https://github.com/wagtail/wagtail-ai) and `LLMTranslator` currently use [Scaleway Generative APIs](https://www.scaleway.com/en/generative-apis/).
 
 ## Scheduled tasks
 
-Heroku scheduler set up for 3 jobs:
+Heroku Scheduler set up for:
 
-- `update_index`, daily overnight
-- `publish_scheduled_pages`, every 10 minutes
-- `clearsessions`, daily overnight
+| Job                 | Schedule         |
+| ------------------- | ---------------- |
+| `update_index`      | Daily, overnight |
+| `publish_scheduled` | Every 10 minutes |
+| `clearsessions`     | Daily, overnight |
 
 ## Rollbacks
 
@@ -165,11 +183,21 @@ Hosted and managed by Torchbox's sysadmin team, on [least privilege](https://en.
 
 Sysadmins also hold: Cloudflare, AWS (S3), Mailgun, Sentry, Scout, Papertrail/SolarWinds.
 
-## Logs
+## Logs and monitoring
+
+| Component                                                                            | Configuration                                                                                                                                                     |
+| ------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Application logs                                                                     | stdout → Heroku logplex → Papertrail (log drain)                                                                                                                  |
+| Sentry                                                                               | On when `SENTRY_DSN` set, `DjangoIntegration`, `SENTRY_ENVIRONMENT=production`. Release from `HEROKU_RELEASE_VERSION` (requires the `runtime-dyno-metadata` lab). |
+| Scout                                                                                | `scout_apm.django` first installed app. `SCOUT_MONITOR=false` for `release` and review apps.                                                                      |
+| [DebugBear](https://www.debugbear.com/project/30072?share=7MSntGvPGbNE45exbh2iskTHv) | Web performance (Core Web Vitals, page weight). Public read-only dashboard, no credentials needed.                                                                |
+| Heroku metrics                                                                       | Dyno CPU/memory, throughput/latency.                                                                                                                              |
+
+Only Heroku's built-in metrics and the Papertrail drain are configured through this repository; everything else is set up and managed outside it, by Torchbox's sysadmin team.
 
 ### Application logs
 
-stdout → Heroku logplex → Papertrail (log drain). Query with the [SolarWinds Observability CLI](https://github.com/solarwinds/swo-cli).
+Query Papertrail with the [SolarWinds Observability CLI](https://github.com/solarwinds/swo-cli).
 
 ```bash
 export SWO_API_TOKEN=...
@@ -184,13 +212,16 @@ swo logs get -s wagtail-guide-production -f
 
 |                 |                                                                           |
 | --------------- | ------------------------------------------------------------------------- |
-| Retention       | Heroku: short-lived. Papertrail: per plan.                                |
+| Retention       | Heroku: short-lived. Papertrail: 2 weeks live, archives on S3.            |
 | Format          | `[timestamp][pid][level][logger] message`.                                |
 | Notable loggers | `django.security` INFO; `mcp` WARNING (avoids per-request session noise). |
+| Heroku router   | Filter on `router` for router lines, `status=5` for 5xx responses.        |
 
-### Heroku metrics
+### Alerts
 
-Heroku metrics dashboard: dyno CPU/memory, throughput/latency. No alerting.
+| Alert                                                               | Routed to             |
+| ------------------------------------------------------------------- | --------------------- |
+| [Checkly](https://www.checklyhq.com/) root-path monitor, production | Project Slack channel |
 
 ## Search
 
